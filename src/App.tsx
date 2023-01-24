@@ -13,15 +13,7 @@ function App() {
 
       </Row>
       <Row>
-        <Footer
-          companyName={EnvironmentKeys.companyName}
-          companyUrl={EnvironmentKeys.companyUrl}
-          telephoneNumber={EnvironmentKeys.telephoneNumber}
-          facebookUrl={EnvironmentKeys.facebookUrl}
-          instagramUrl={EnvironmentKeys.instagramUrl}
-          backgroundColor={EnvironmentKeys.groenlundGreenColor}
-          textColor={EnvironmentKeys.groenlundGoldColor}
-        />
+        <Footer />
       </Row>
     </div>
   );
