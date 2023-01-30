@@ -1,76 +1,50 @@
-import { Col, Container, Row } from "react-bootstrap";
-import { Instagram, Facebook, CodeSlash } from "react-bootstrap-icons";
+import { EnvelopeFill, Facebook, Instagram, TelephoneFill } from "react-bootstrap-icons";
 import { EnvironmentKeys } from "../../utils/EnvironmentKeys";
-import { footerBody, footerIcons, footerStyle, h3Style, socialIcons, textStyle } from "../FooterStyles";
+import "./footer.scss";
 
-
-// export interface IFooterProps {
-//     companyName: string;
-//     companyUrl: string;
-//     instagramUrl: string;
-//     facebookUrl: string;
-//     telephoneNumber: string;
-//     backgroundColor: string;
-//     textColor: string;
-// }
-
-// const Footer: React.FC<IFooterProps> = function Footer(props: IFooterProps) {
 const Footer: React.FC = function Footer() {
 
-  
-    let date = new Date();
-    let year = date.getFullYear();
+  let year = new Date().getFullYear();
 
+  return (
+    <>
+      <footer className="footer">
+        <div className="footer-container">
 
-    return (
-        <Container style={footerStyle}>
-            <Row>
-                <Col md="4" className="footer-copywright">
+          <h3>Grønlund&<span>Lefort</span></h3>
+          <div className="contact-info">
+            <p>Gl. Kongevej 94a st tv</p>
+            <p>1850 Frederiksberg</p>
+          </div>
 
-                </Col>
-                <Col md="4" className="footer-copywright">
-                    <h3 style={h3Style}>Copyright © {year} {EnvironmentKeys.companyName}</h3>
-                </Col>
-                <Col md="4" style={footerBody}>
-                    <ul style={footerIcons}>
+          <p className="footer-links">
+            <a href={EnvironmentKeys.companyUrl} className="link-1">Home</a>
 
-                        <li style={socialIcons}>
-                            <a
-                                href={EnvironmentKeys.companyUrl}
-                                style={textStyle}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <CodeSlash size={24} />
-                            </a>
-                        </li>
+            <a href={EnvironmentKeys.companyUrl}>Blog</a>
 
-                        <li style={socialIcons}>
-                            <a
-                                href={EnvironmentKeys.instagramUrl}
-                                style={textStyle}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Instagram size={24} />
-                            </a>
-                        </li>
-                        <li style={socialIcons}>
-                            <a
-                                href={EnvironmentKeys.facebookUrl}
-                                style={textStyle}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <Facebook size={24} />
-                            </a>
-                        </li>
-                    </ul>
-                </Col>
-            </Row>
-        </Container>
-    );
+            <a href={EnvironmentKeys.companyUrl}>Pricing</a>
 
+            <a href={EnvironmentKeys.companyUrl}>About</a>
+
+            <a href={EnvironmentKeys.companyUrl}>Faq</a>
+
+            <a href={EnvironmentKeys.companyUrl}>Contact</a>
+          </p>
+
+          <div className="footer-icons">
+
+            <a href={EnvironmentKeys.facebookUrl} target="_blank" rel="noreferrer"> <Facebook size={20} /> </a>
+            <a href={EnvironmentKeys.instagramUrl} target="_blank" rel="noreferrer"><Instagram size={20} /></a>
+            <a href={`tel: ${EnvironmentKeys.companyTelephoneNumber}`} ><TelephoneFill size={20} /></a>
+            <a href={`mailto:${EnvironmentKeys.companyEmail}`} > <EnvelopeFill size={24} /> </a>
+
+          </div>
+          <p className="footer-company-name">© {year}</p>
+
+        </div>
+
+      </footer></>
+  )
 }
 
 export default Footer;

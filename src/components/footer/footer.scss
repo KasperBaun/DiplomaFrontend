@@ -1,0 +1,146 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
+// $primaryColor: rgba(255, 215, 0, 1);
+$primaryColor: lightseagreen;
+$secondaryColor: rgba(18, 84, 70, 1);
+$primaryTextColor: rgba(255, 255, 255, 1);
+
+* {
+    font-family: Open Sans;
+}
+
+.footer {
+    background: $secondaryColor;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    font: bold 16px sans-serif;
+    padding: 55px 50px;
+    margin-bottom: 0;
+
+    @mixin blockStyle {
+        display: inline-block;
+        vertical-align: bottom;
+    }
+
+
+    /* Footer container */
+    .footer-container {
+        width: 100%;
+        @include blockStyle;
+        margin: auto;
+    }
+
+    /* The company logo */
+    h3 {
+        color: $primaryTextColor;
+        font: normal 36px 'Open Sans', cursive;
+        margin: 0;
+
+        span {
+            color: lightseagreen;
+        }
+    }
+
+    .footer-company-name {
+        color: $primaryTextColor;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+
+    }
+
+    /* Contact info */
+    .contact-info {
+        color: $primaryTextColor;
+        font-size: 14px;
+        font-weight: normal;
+        margin: 0;
+    }
+
+
+    /* Social icons */
+    .footer-icons {
+        margin-top: 25px;
+        transition: transform .7s ease-in-out;
+
+        a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            cursor: pointer;
+            border-radius: 2px;
+            font-size: 20px;
+            color: $primaryTextColor;
+            text-align: center;
+            line-height: 35px;
+            margin-right: 3px;
+            margin-bottom: 5px;
+            transition: all 0.5s ease-in-out;
+
+            &:hover {
+                color: $primaryColor;
+                transform: rotate(360deg);
+
+            }
+        }
+    }
+
+    /* Footer links */
+    .footer-links {
+        color: $primaryTextColor;
+        margin: 20px 0 12px;
+        padding: 0;
+
+        a:before {
+            content: "|";
+            font-weight: 300;
+            font-size: 20px;
+            left: 0;
+            color: $primaryTextColor;
+            display: inline-block;
+            padding-right: 5px;
+        }
+
+        a {
+            display: inline-block;
+            line-height: 1.8;
+            font-weight: 400;
+            text-decoration: none;
+            color: inherit;
+
+            &:hover {
+                color: $primaryColor;
+                font-size: large;
+            }
+        }
+
+        .link-1:before {
+            content: none;
+        }
+    }
+}
+
+
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 880px) {
+
+    .footer-distributed {
+        font: bold 14px sans-serif;
+    }
+
+    .footer-distributed .footer-left,
+    .footer-distributed .footer-center,
+    .footer-distributed .footer-right {
+        display: block;
+        width: 100%;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .footer-distributed .footer-center i {
+        margin-left: 0;
+    }
+}
