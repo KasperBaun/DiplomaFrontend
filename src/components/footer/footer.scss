@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 // $primaryColor: rgba(255, 215, 0, 1);
-$primaryColor: lightseagreen;
-$secondaryColor: rgba(18, 84, 70, 1);
+$primaryColor: rgba(220, 134, 101, 1);
+$secondaryColor: rgba(19, 128, 134, 1);
 $primaryTextColor: rgba(255, 255, 255, 1);
 
 * {
@@ -38,7 +38,7 @@ $primaryTextColor: rgba(255, 255, 255, 1);
         margin: 0;
 
         span {
-            color: lightseagreen;
+            color: $primaryColor;
         }
     }
 
@@ -71,7 +71,7 @@ $primaryTextColor: rgba(255, 255, 255, 1);
             cursor: pointer;
             border-radius: 2px;
             font-size: 20px;
-            color: $primaryTextColor;
+            color: $primaryColor;
             text-align: center;
             line-height: 35px;
             margin-right: 3px;

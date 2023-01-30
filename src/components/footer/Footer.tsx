@@ -13,7 +13,7 @@ const Footer: React.FC = function Footer() {
 
           <h3>Grønlund&<span>Lefort</span></h3>
           <div className="contact-info">
-            <p>Gl. Kongevej 94a st tv</p>
+            <p>Gl. Kongevej 94a, st tv</p>
             <p>1850 Frederiksberg</p>
           </div>
 
