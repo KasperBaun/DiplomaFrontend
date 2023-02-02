@@ -41,4 +41,6 @@ jobs:
 
     - name: Deploy
       run: |
-        mv build/* /var/www/html
+        cp -r build/* /var/www/html
+        rm -r build
+
