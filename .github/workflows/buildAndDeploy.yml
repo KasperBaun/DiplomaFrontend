@@ -18,8 +18,8 @@ jobs:
       run:
         #shell: '/home/baun/actions-runner/DiplomaFrontend'
         working-directory: '/home/baun/actions-runner/DiplomaFrontend'
-    #   run:
-    #     working-directory: ~/actions-runner/DiplomaFrontend
+
+
 
     steps:
     - name: Checkout code
@@ -31,7 +31,10 @@ jobs:
     #     node-version: 17.9.1
 
     - name: Install dependencies
-      run: npm ci
+      run: 
+        export NVM_DIR=~/.nvm
+        source ~/.nvm/nvm.sh
+        npm ci
 
     - name: Run tests
       run: npm test
