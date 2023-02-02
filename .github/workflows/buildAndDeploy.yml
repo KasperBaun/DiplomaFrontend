@@ -15,8 +15,8 @@ jobs:
   build:
     runs-on: self-hosted
     defaults:
-      env:
         GITHUB_WORKSPACE: '/home/baun/actions-runner/DiplomaFrontend'
+        working-directory: '/home/baun/actions-runner/DiplomaFrontend'
     #   run:
     #     working-directory: ~/actions-runner/DiplomaFrontend
 
