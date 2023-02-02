@@ -2,7 +2,7 @@
 
 export abstract class EnvironmentKeys {
     public static readonly loggingEnabled = true;
-    public static readonly groenlundGreenColor = "#125446";
+    public static readonly groenlundGreenColor ="#09473f";// "rgb(9, 71, 63)"
     public static readonly groenlundGoldColor = "#FFD700";
     public static readonly companyName = "Grønlund & Lefort";
     public static readonly companyUrl = "https://www.gl-antik.dk/";
