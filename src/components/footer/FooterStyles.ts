@@ -1,4 +1,4 @@
-import { EnvironmentKeys } from "../utils/EnvironmentKeys";
+import { EnvironmentKeys } from "../../utils/EnvironmentKeys";
 
 /* --------- */
 /* Footer */
