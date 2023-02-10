@@ -1,13 +1,13 @@
 import './styling/scss/custom.scss';
 import Footer from './components/footer/Footer';
 import Routing from './routes/Routes';
-import Header2 from './components/header/Header2';
+import Header from './components/header/Header';
 
 
 function App() {
   return (
     <div>
-      <Header2 />
+      <Header />
       <Routing />
       <Footer />
     </div>

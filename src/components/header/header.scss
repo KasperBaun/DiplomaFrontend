@@ -1,0 +1,52 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
+// $primaryColor: rgba(255, 215, 0, 1);
+$primaryColor: rgb(37, 6, 121);
+$secondaryColor: rgb(128, 143, 141); // rgba(19, 128, 134, 1);
+$primaryTextColor: rgba(255, 255, 255, 1);
+$bgColor: rgb(128, 143, 141);
+
+* {
+    font-family: Open Sans;
+}
+
+.header {
+    background: $bgColor;
+}
+
+.header-links {
+    color: $primaryTextColor;
+    padding-right: 10px;
+    display: inline-block;
+    line-height: 1.8;
+    font-weight: 400;
+    font-size: 18;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.active {
+    //font-size: 20px;
+    color: $primaryColor;
+    text-decoration: line;
+
+    &:hover {
+        color: $primaryColor;
+    }
+}
+
+.inactive {
+    &:hover {
+        color: $primaryColor;
+        font-size: large;
+    }
+}
+
+.nav-brand {
+    color: $primaryTextColor;
+    font-size: 24;
+    text-decoration: none;
+
+    &:hover {
+        color: $primaryTextColor;
+    }
+}

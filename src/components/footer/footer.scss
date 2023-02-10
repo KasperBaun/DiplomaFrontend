@@ -1,8 +1,9 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 // $primaryColor: rgba(255, 215, 0, 1);
-$primaryColor: rgb(199, 136, 1);
-$secondaryColor: rgb(9, 71, 63); // rgba(19, 128, 134, 1);
+$primaryColor: rgb(37, 6, 121);
+$secondaryColor: rgb(128, 143, 141); // rgba(19, 128, 134, 1);
 $primaryTextColor: rgba(255, 255, 255, 1);
+$bgColor: rgb(128, 143, 141);
 
 * {
     font-family: Open Sans;
@@ -19,7 +20,7 @@ $primaryTextColor: rgba(255, 255, 255, 1);
     width: 100%;
     /* Footer container */
     .footer-container {
-        background: $secondaryColor;
+        background: $bgColor;
         box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
         box-sizing: border-box;
         text-align: center;
