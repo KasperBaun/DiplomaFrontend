@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { ComponentLoggingConfig } from "../utils/ComponentLoggingConfig";
 import { IMobXContext } from "./MobXContext";
-import { EnvironmentKeys } from "../utils/EnvironmentKeys";
+import { Constants } from "../utils/Constants";
 
 export class RootStore implements IMobXContext {
 
@@ -12,7 +12,7 @@ export class RootStore implements IMobXContext {
     rootStore: RootStore = this;
 
     constructor() {
-        if (EnvironmentKeys.loggingEnabled) {
+        if (Constants.loggingEnabled) {
             console.log(`${this.prefix} constructor called`, this.color)
         }
         // TODO : Instantiate stores here
@@ -22,14 +22,14 @@ export class RootStore implements IMobXContext {
 
     public async init(): Promise<void> {
         const t1 = performance.now();
-        if (EnvironmentKeys.loggingEnabled) {
+        if (Constants.loggingEnabled) {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
         // TODO: Init stores here
         runInAction(() => {
             // this.loaded = userResult && documentResult;
         })
-        if (EnvironmentKeys.loggingEnabled) {
+        if (Constants.loggingEnabled) {
             const t2 = performance.now();
             ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} finished constructing stores`, t1, t2, this.color);
         }

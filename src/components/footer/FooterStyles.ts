@@ -1,4 +1,4 @@
-import { EnvironmentKeys } from "../../utils/EnvironmentKeys";
+import { Constants } from "../../utils/Constants";
 
 /* --------- */
 /* Footer */
@@ -7,24 +7,24 @@ import { EnvironmentKeys } from "../../utils/EnvironmentKeys";
 
 
 export const textStyle: React.CSSProperties = {
-    color: EnvironmentKeys.groenlundGoldColor,
+    color: Constants.groenlundGoldColor,
     fontSize: 14
 }
 
 export const headingStyle: React.CSSProperties = {
-    color: EnvironmentKeys.groenlundGoldColor,
+    color: Constants.groenlundGoldColor,
     fontSize: 20,
 }
 
 export const footerStyle: React.CSSProperties = {
-    backgroundColor: EnvironmentKeys.groenlundGreenColor,
+    backgroundColor: Constants.groenlundGreenColor,
     bottom: '0 !important',
     paddingTop: '10px !important',
     paddingBottom: '10px !important',
 }
 
 export const h3Style: React.CSSProperties = {
-    color: EnvironmentKeys.groenlundGoldColor,
+    color: Constants.groenlundGoldColor,
     fontSize: '1em',
     marginTop: '0.5em !important',
     marginBottom: '0.5em !important',

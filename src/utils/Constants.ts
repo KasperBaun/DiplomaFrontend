@@ -1,6 +1,6 @@
 // Icons: https://icons.getbootstrap.com/#usage
 
-export abstract class EnvironmentKeys {
+export abstract class Constants {
     public static readonly loggingEnabled = true;
     public static readonly groenlundGreenColor ="#09473f";// "rgb(9, 71, 63)"
     public static readonly groenlundGoldColor = "#FFD700";

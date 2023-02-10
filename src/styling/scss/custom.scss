@@ -1,0 +1,16 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+// Default variable overrides
+$body-bg: #FFF;
+$body-color: #111;
+
+$primary: #09473f; // Groenlund Green Color
+$secondary: #FFD700; //Groenlund Gold Color
+$danger: #ff4136;
+
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
