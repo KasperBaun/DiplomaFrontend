@@ -41,6 +41,6 @@ jobs:
 
     - name: Deploy
       run: |
-        cp -r build/* /var/www/html
-        rm -r build
+        sudo cp -r build/* /var/www/html
+        sudo rm -r build
 
