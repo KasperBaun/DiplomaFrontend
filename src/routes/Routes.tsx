@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import ErrorPage from "../pages/webshop/error/ErrorPage"
 import Webshop from "../pages/webshop/Webshop"
 import CategoriesPage from "../pages/webshop/categories/CategoriesPage"
