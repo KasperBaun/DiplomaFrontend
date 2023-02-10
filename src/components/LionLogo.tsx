@@ -1,10 +1,30 @@
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="393.000000pt" height="231.000000pt" viewBox="0 0 393.000000 231.000000"
- preserveAspectRatio="xMidYMid meet">
+interface ILionLogoProps {
+    width?: number;
+    color?: string;
+}
 
-<g transform="translate(0.000000,231.000000) scale(0.100000,-0.100000)"
-fill="#000000" stroke="none">
-<path d="M1435 2231 c-94 -13 -142 -29 -181 -63 -70 -62 -80 -122 -40 -237 35
+const LionLogo: React.FC<ILionLogoProps> = (props: ILionLogoProps) => {
+
+    const width = props.width ? props.width : 393;
+    const height = props.width ? (props.width / 1.7012987) : 231;
+    const color = props.color ? props.color : 'white';
+    return (
+        <svg
+            style={{ width: `${width}`, height: `${height}`, color: `${color}` }}
+            version="1.0"
+            xmlns="http://www.w3.org/2000/svg"
+            width={`393pt`}
+            height={`231pt`}
+            viewBox={`0 0 393 231`}
+            preserveAspectRatio="xMidYMid meet"
+        >
+
+            <g
+                transform={`translate(0.000000,231) scale(0.100000,-0.100000)`}
+                fill={color}
+                stroke="none">
+                <path
+                    d="M1435 2231 c-94 -13 -142 -29 -181 -63 -70 -62 -80 -122 -40 -237 35
 -101 41 -178 21 -261 -9 -38 -22 -76 -29 -86 -11 -14 -14 -7 -19 49 -11 117
 -62 215 -193 368 -106 124 -196 173 -340 186 -76 6 -201 -8 -285 -33 l-51 -15
 26 -28 c49 -51 31 -86 -68 -132 -64 -30 -68 -33 -64 -61 4 -25 0 -32 -26 -45
@@ -86,5 +106,10 @@ l18 -48 -32 -29 c-17 -16 -54 -57 -81 -90 -28 -34 -76 -81 -108 -106 l-59 -44
 -28 -160 -17 -113 -47 -198 -87 -245 l-35 -40 -144 0 -145 0 61 80 61 80 28
 -21 c24 -18 32 -19 51 -9 33 18 23 68 -44 206 -31 64 -56 120 -56 124 0 19
 273 200 302 200 4 0 19 -16 34 -35z"/>
-</g>
-</svg>
+            </g>
+        </svg>
+
+    )
+}
+
+export default LionLogo;

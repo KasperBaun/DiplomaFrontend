@@ -5,18 +5,19 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import './header.scss';
+import LionLogo from '../LionLogo';
 
 function Header() {
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
-    if(isActive){
+    if (isActive) {
       result += ' active';
 
-    }else{
+    } else {
       result += ' inactive';
-    } 
-        //if(isPending) result += ' pending';
+    }
+    //if(isPending) result += ' pending';
     return result;
     //return  isActive ? "active" : isPending ? "inactive" : "header-links";
   }
@@ -26,14 +27,14 @@ function Header() {
       <Container fluid >
         <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
-            Grønlund&Lefort
+            <LionLogo width={70} />
           </NavLink>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle aria-controls="navbarScrolls" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
             className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
-            style={{ maxHeight: '100px', width:'100%'  }}
+            style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
             {navPaths.map((navItem) => {
@@ -59,15 +60,14 @@ function Header() {
               className="me-2"
               aria-label="Search"
             />
-            <Button variant="outline-success">
+            <Button className='search-button'>
               <NavLink
-              to={"/search"}
-              className={({ isActive, isPending }) => {
-                return isActive ? "active" : isPending ? "pending" : "";
-              }}
-            >
-              Search
-            </NavLink></Button>
+                to={"/search"}
+                className={'search-button'}
+              >
+                Search
+              </NavLink>
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>
