@@ -30,6 +30,9 @@ jobs:
       with:
         node-version: '17.x'
 
+    - name: Git pull
+      run: git pull
+      
     - name: Install dependencies
       run: npm ci
 
