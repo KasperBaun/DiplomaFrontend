@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import ErrorPage from "../pages/webshop/error/ErrorPage"
 import Webshop from "../pages/webshop/Webshop"
 import CategoriesPage from "../pages/webshop/categories/CategoriesPage"
@@ -24,7 +24,7 @@ const Routing: FunctionComponent = () => {
                 <Route path="basket" element={<BasketPage />} />
                 <Route path="confirmation" element={<ConfirmationPage />} />
                 <Route path="payment" element={<PaymentPage />} />
-                <Route path="product" element={<ProductPage />} />
+                <Route path="product" element={<ProductPage productId={1} />} />
                 <Route path="search" element={<SearchPage />} />
             </Route>
         </Routes>
