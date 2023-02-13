@@ -4,6 +4,7 @@ import { IMobXContext } from "./MobXContext";
 import { Constants } from "../utils/Constants";
 import { ProductStore } from "./ProductStore";
 import { MockupService } from "../services/MockupService";
+import { CategoryStore } from "./CategoryStore";
 
 export class RootStore implements IMobXContext {
 
@@ -12,6 +13,7 @@ export class RootStore implements IMobXContext {
     private loaded: boolean = false;
     private _mockupService: MockupService = new MockupService();
     productStore: ProductStore;
+    categoryStore : CategoryStore;
 
     rootStore: RootStore = this;
 
@@ -21,6 +23,7 @@ export class RootStore implements IMobXContext {
         }
         // TODO : Instantiate stores here
         this.productStore = ProductStore.GetInstance(this, this._mockupService);
+        this.categoryStore = CategoryStore.GetInstance(this , this._mockupService);
         makeAutoObservable(this);
         void this.init();
     }
@@ -32,6 +35,7 @@ export class RootStore implements IMobXContext {
         }
         // TODO: Init stores here
         this.productStore.init();
+        this.categoryStore.init();
         runInAction(() => {
             // this.loaded = userResult && documentResult;
         })
