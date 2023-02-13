@@ -5,7 +5,7 @@ export const antiqueCategories: any[] = [
 ]
 
 export const productMockupData: Product[] = [
-    {
+    {   id:1,
         name: "Elegant Vase",
         modelNumber: 101,
         material: materialType.porcelain,
@@ -13,9 +13,17 @@ export const productMockupData: Product[] = [
         condition: conditionType["No shards"],
         quality: qualityType["1. Quality"],
         dimension: "9 inches x 5 inches",
-        customText: "This beautiful vase is perfect for any room in your home."
+        customText: "This beautiful vase is perfect for any room in your home.",
+        imageUrls: [
+            "https://via.placeholder.com/160", 
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+            "https://via.placeholder.com/200",
+        ],
     },
     {
+        id:2,
         name: "Delicate Teapot",
         modelNumber: 102,
         material: materialType.porcelain,
@@ -23,9 +31,17 @@ export const productMockupData: Product[] = [
         condition: conditionType["No shards"],
         quality: qualityType["2. Quality"],
         dimension: "7 inches x 4 inches",
-        customText: "Enjoy a warm cup of tea with this exquisite teapot."
+        customText: "Enjoy a warm cup of tea with this exquisite teapot.",
+        imageUrls: [
+            "https://via.placeholder.com/160", 
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+            "https://via.placeholder.com/200",
+        ],
     },
     {
+        id:3,
         name: "Ornate Bowl",
         modelNumber: 103,
         material: materialType.porcelain,
@@ -33,10 +49,18 @@ export const productMockupData: Product[] = [
         condition: conditionType["Few shards"],
         quality: qualityType["3. Quality"],
         dimension: "10 inches x 6 inches",
-        customText: "This intricately designed bowl is perfect for serving salads or fruit."
+        customText: "This intricately designed bowl is perfect for serving salads or fruit.",
+        imageUrls: [
+            "https://via.placeholder.com/160", 
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+            "https://via.placeholder.com/200",
+        ],
     },
 
     {
+        id:4,
         name: "Fine Plate",
         modelNumber: 248,
         material: materialType.porcelain,
@@ -44,9 +68,17 @@ export const productMockupData: Product[] = [
         condition: conditionType["Many shards"],
         quality: qualityType["1. Quality"],
         dimension: "8 inches x 8 inches",
-        customText: "This beautiful plate is perfect for special occasions."
+        customText: "This beautiful plate is perfect for special occasions.",
+        imageUrls: [
+            "https://via.placeholder.com/160", 
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+            "https://via.placeholder.com/200",
+        ],
     },
     {
+        id:5,
         name: "Elegant Cup",
         modelNumber: 249,
         material: materialType.porcelain,
@@ -54,9 +86,17 @@ export const productMockupData: Product[] = [
         condition: conditionType["No shards"],
         quality: qualityType["2. Quality"],
         dimension: "3 inches x 3 inches",
-        customText: "Enjoy a warm beverage with this delicate cup."
+        customText: "Enjoy a warm beverage with this delicate cup.",
+        imageUrls: [
+            "https://via.placeholder.com/160", 
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+            "https://via.placeholder.com/200",
+        ],
     },
     {
+        id:6,
         name: "Ornate Teacup",
         modelNumber: 250,
         material: materialType.porcelain,
@@ -64,6 +104,13 @@ export const productMockupData: Product[] = [
         condition: conditionType["Few shards"],
         quality: qualityType["3. Quality"],
         dimension: "2 inches x 2 inches",
-        customText: "This intricately designed teacup is perfect for a special tea time."
+        customText: "This intricately designed teacup is perfect for a special tea time.",
+        imageUrls: [
+            "https://via.placeholder.com/160", 
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+            "https://via.placeholder.com/200",
+        ],
     }
 ];
