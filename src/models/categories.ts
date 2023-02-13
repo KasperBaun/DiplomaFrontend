@@ -1,4 +1,4 @@
-export default class categories{
+export default class category{
     title : string = ""; 
     picture : string = "";  
 
