@@ -1,5 +1,5 @@
 export default class Product {
-
+    id: number;
     name: string;
     modelNumber: number;
     material: materialType;
@@ -8,6 +8,7 @@ export default class Product {
     quality: qualityType;
     dimension: string;
     customText: string;
+    imageUrls: string[];
 
 }
 
