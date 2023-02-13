@@ -24,7 +24,7 @@ const Routing: FunctionComponent = () => {
                 <Route path="basket" element={<BasketPage />} />
                 <Route path="confirmation" element={<ConfirmationPage />} />
                 <Route path="payment" element={<PaymentPage />} />
-                <Route path="product" element={<ProductPage />} />
+                <Route path="product" element={<ProductPage productId={1} />} />
                 <Route path="search" element={<SearchPage />} />
             </Route>
         </Routes>

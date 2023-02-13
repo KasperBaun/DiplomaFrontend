@@ -2,12 +2,16 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { ComponentLoggingConfig } from "../utils/ComponentLoggingConfig";
 import { IMobXContext } from "./MobXContext";
 import { Constants } from "../utils/Constants";
+import { ProductStore } from "./ProductStore";
+import { MockupService } from "../services/MockupService";
 
 export class RootStore implements IMobXContext {
 
     private prefix: string = `%c[RootStore]`;
     private color: string = ComponentLoggingConfig.DarkBlueviolet;
     private loaded: boolean = false;
+    private _mockupService: MockupService = new MockupService();
+    productStore: ProductStore;
 
     rootStore: RootStore = this;
 
@@ -16,6 +20,7 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructor called`, this.color)
         }
         // TODO : Instantiate stores here
+        this.productStore = ProductStore.GetInstance(this, this._mockupService);
         makeAutoObservable(this);
         void this.init();
     }
@@ -26,6 +31,7 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
         // TODO: Init stores here
+        this.productStore.init();
         runInAction(() => {
             // this.loaded = userResult && documentResult;
         })
