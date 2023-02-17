@@ -10,6 +10,8 @@ import ConfirmationPage from "../pages/webshop/confirmation/ConfirmationPage"
 import PaymentPage from "../pages/webshop/payment/PaymentPage"
 import ProductPage from "../pages/webshop/product/ProductPage"
 import SearchPage from "../pages/webshop/search/SearchPage"
+import BackOffice from "../pages/backoffice/BackOffice"
+import BOCategories from "../pages/backoffice/category/List"
 
 
 
@@ -26,6 +28,8 @@ const Routing: FunctionComponent = () => {
                 <Route path="payment" element={<PaymentPage />} />
                 <Route path="product" element={<ProductPage productId={1} />} />
                 <Route path="search" element={<SearchPage />} />
+                <Route path="backoffice" element={<BackOffice />} />
+                <Route path="backoffice/categories" element={<BOCategories />} />
             </Route>
         </Routes>
     );
