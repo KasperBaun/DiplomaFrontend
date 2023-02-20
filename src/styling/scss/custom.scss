@@ -11,11 +11,17 @@ $body-color: #111;
 :root {
     --primary-color: #09473f;
     --secondary-color: #FFD700;
+    --text-color: #dc8665;
 }
 
 $primary: #09473f; // Groenlund Green Color
 $secondary: #FFD700; //Groenlund Gold Color
 $danger: #ff4136;
+$textColor: #dc8665;
+
+.btn-outline-primary:hover {
+    color: var(--text-color);
+}
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 

@@ -1,5 +1,17 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@styles/*": ["./src/styling/scss/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@services/*": ["./src/services/*"],
+      "@models/*": ["./src/models/*"],
+      "@components/*": ["./src/components/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@webshop/*": ["./src/pages/webshop/*"],
+      "@backoffice/*": ["./src/pages/backoffice/*"],
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -23,5 +35,5 @@
   },
   "include": [
     "src"
-  ]
+  ],
 }
