@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ComponentLoggingConfig } from "../utils/ComponentLoggingConfig";
+import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { IMobXContext } from "./MobXContext";
-import { Constants } from "../utils/Constants";
+import { Constants } from "@utils/Constants";
 import { ProductStore } from "./ProductStore";
-import { MockupService } from "../services/MockupService";
+import { MockupService } from "@services/MockupService";
 import { CategoryStore } from "./CategoryStore";
 
 export class RootStore implements IMobXContext {

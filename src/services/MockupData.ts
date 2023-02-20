@@ -1,5 +1,5 @@
-import Category from "../models/Category";
-import Product, { conditionType, materialType, qualityType } from "../models/Product";
+import Category from "@models/Category";
+import Product, { conditionType, materialType, qualityType } from "@models/Product";
 
 export const categories: Category[] = [
 

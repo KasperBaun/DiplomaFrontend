@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import { Constants } from "../../../utils/Constants";
+import { Constants } from "@utils/Constants";
 import  "./ErrorPage.scss";
 
 export default function ErrorPage() {
