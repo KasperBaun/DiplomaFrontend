@@ -5,6 +5,7 @@ import { Constants } from "@utils/Constants";
 import { ProductStore } from "./ProductStore";
 import { MockupService } from "@services/MockupService";
 import { CategoryStore } from "./CategoryStore";
+import APIService from "@services/APIService";
 
 export class RootStore implements IMobXContext {
 
@@ -12,6 +13,7 @@ export class RootStore implements IMobXContext {
     private color: string = ComponentLoggingConfig.DarkBlueviolet;
     private loaded: boolean = false;
     private _mockupService: MockupService = new MockupService();
+    private apiService: APIService;
     productStore: ProductStore;
     categoryStore : CategoryStore;
 
@@ -21,9 +23,11 @@ export class RootStore implements IMobXContext {
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} constructor called`, this.color)
         }
+        // Create API with baseUrl from constants
+        this.apiService = new APIService(Constants.apiBaseUrl);
         // TODO : Instantiate stores here
         this.productStore = ProductStore.GetInstance(this, this._mockupService);
-        this.categoryStore = CategoryStore.GetInstance(this , this._mockupService);
+        this.categoryStore = CategoryStore.GetInstance(this , this._mockupService, this.apiService);
         makeAutoObservable(this);
         void this.init();
     }

@@ -11,4 +11,5 @@ export abstract class Constants {
     public static readonly companyEmail = "gl-antik@mail.com";
     public static readonly instagramUrl = "https://www.instagram.com/gl_antik.dk/";
     public static readonly facebookUrl = "https://www.facebook.com/Gr%C3%B8nlund-Lefort-102748237947390/";
+    public static readonly apiBaseUrl = "localhost:7003";
 }

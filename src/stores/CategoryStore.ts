@@ -4,6 +4,7 @@ import { RootStore } from './RootStore';
 import Category from '@models/Category';
 import { Constants } from '@utils/Constants';
 import { MockupService } from '@services/MockupService'; 
+import APIService from '@services/APIService';
 
 export class CategoryStore{
     private static _Instance: CategoryStore;
@@ -12,9 +13,11 @@ export class CategoryStore{
     private color: string = ComponentLoggingConfig.DarkChocolate;
     private loaded: boolean = false;
     private mockupService: MockupService;
+    private apiService: APIService;
     private categories: Category[] = [];
 
-    constructor(_rootStore: RootStore, _mockupService: MockupService) {
+    constructor(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService) {
+        this.apiService = _apiService;
         this.mockupService = _mockupService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
@@ -33,9 +36,9 @@ export class CategoryStore{
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService): CategoryStore {
+    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService): CategoryStore {
         if (!CategoryStore._Instance) {
-            CategoryStore._Instance = new CategoryStore(_rootStore, _mockupService);
+            CategoryStore._Instance = new CategoryStore(_rootStore, _mockupService, _apiService);
         }
         return CategoryStore._Instance;
     }
@@ -50,5 +53,9 @@ export class CategoryStore{
 
     public async getCategory(id: number): Promise<Category> {
         return await this.mockupService.getCategory(id);
+    }
+
+    public async createCategory(category: Category): Promise<void>{
+        return await this.apiService.createCategory(category);
     }
 }
