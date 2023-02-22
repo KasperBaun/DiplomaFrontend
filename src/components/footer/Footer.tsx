@@ -1,6 +1,7 @@
 import { EnvelopeFill, Facebook, Instagram, TelephoneFill } from "react-bootstrap-icons";
 import { Constants } from "@utils/Constants";
 import "./footer.scss";
+import React from "react";
 
 const Footer: React.FC = function Footer() {
 

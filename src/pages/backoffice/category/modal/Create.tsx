@@ -8,6 +8,8 @@ interface IProps {
 
 const CreateCategory = ({onClose, visible} : IProps) => {
 
+    
+
     return (
         <Modal show={visible} onHide={onClose}>
             <Modal.Header closeButton>

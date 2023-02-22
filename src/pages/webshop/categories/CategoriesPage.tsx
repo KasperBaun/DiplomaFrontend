@@ -18,8 +18,10 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
 
     const category: Category = {
         id: 1,
-        picture: "https://via.placeholder.com/150",
-        title: "Test placeholder"
+        imageUrl: "https://via.placeholder.com/150",
+        name: "Test placeholder",
+        order:1,
+        description: "test"
     };
 
     function createCategory(category: Category) {
@@ -50,7 +52,7 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
         return (
             <div>
                 {categories.map((index) => (
-                    <h2> {index.title.toString()}</h2>
+                    <h2> {index.name.toString()}</h2>
                 ))}
                 <Button onClick={() => createCategory(category)}></Button>
             </div>

@@ -1,17 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@styles/*": ["./src/styling/scss/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@stores/*": ["./src/stores/*"],
-      "@services/*": ["./src/services/*"],
-      "@models/*": ["./src/models/*"],
-      "@components/*": ["./src/components/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@webshop/*": ["./src/pages/webshop/*"],
-      "@backoffice/*": ["./src/pages/backoffice/*"],
-    },
     "target": "es5",
     "lib": [
       "dom",
@@ -32,8 +20,19 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strictNullChecks": false,
+    "baseUrl": "./src",
+    "paths": {
+      "@styles/*": ["styling/scss/*"],
+      "@routes/*": ["routes/*"],
+      "@stores/*": ["stores/*"],
+      "@services/*": ["services/*"],
+      "@models/*": ["models/*"],
+      "@components/*": ["components/*"],
+      "@utils/*": ["utils/*"],
+      "@webshop/*": ["pages/webshop/*"],
+      "@backoffice/*": ["pages/backoffice/*"]
+    }
   },
-  "include": [
-    "src"
-  ],
+  "include": ["next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"],
 }
