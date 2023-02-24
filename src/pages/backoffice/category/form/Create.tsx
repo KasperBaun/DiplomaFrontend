@@ -2,6 +2,8 @@ import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import Localization from '@utils/Localization';
+
 
 const CreateForm = () => {
 
@@ -76,7 +78,7 @@ const CreateForm = () => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Products</Form.Label>
-                <Form.Control type="text" placeholder="Tallerken, Kopper" onChange={(event) => {
+                <Form.Control type="text" placeholder={Localization.Handler("ProductCommaSeperatedText", localStorage.getItem('locale'))} onChange={(event) => {
                     let temp = event.target.value;
                     setUrl(temp);
                 }} />

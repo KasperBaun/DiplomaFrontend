@@ -4,7 +4,6 @@ import Routing from './routes/Routes';
 import Header from './components/header/Header';
 import MobXContext from './stores/MobXContext';
 import { RootStore } from './stores/RootStore';
-import React from 'react';
 
 
 function App() {

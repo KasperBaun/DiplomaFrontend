@@ -6,8 +6,20 @@ import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
 import './header.scss';
 import LionLogo from '../LionLogo';
+import { Dk, Us } from "react-flags-select";
+import { useState } from 'react';
 
 function Header() {
+  //Localization Functions
+  const defaultLocale = localStorage['locale'] ? localStorage['locale'] : 'Dansk'
+  const [ currentLocale, setCurrentLocale ] = useState(defaultLocale);
+
+  const handleOnLanguageChange = (lang : string) => {
+    if(lang !== currentLocale) {
+      setCurrentLocale(lang);
+      localStorage.setItem('locale', lang);
+    }
+  }
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
@@ -54,6 +66,16 @@ function Header() {
 
           </Nav>
           <Form className="d-flex">
+            <Button onClick={() => {
+                handleOnLanguageChange("Dansk")
+              }}>
+              <Dk/>
+            </Button>
+            <Button onClick={() => {
+                handleOnLanguageChange("English")
+              }}>
+              <Us/>
+            </Button>
             <Form.Control
               type="search"
               placeholder="Search"
