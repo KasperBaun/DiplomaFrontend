@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import Category from '../models/Category';
-import APIService from '../services/APIService';
-import { MockupService } from '../services/MockupService';
-import { ComponentLoggingConfig } from '../utils/ComponentLoggingConfig';
-import { Constants } from '../utils/Constants';
+import Category from '@models/Category';
+import APIService from '@services/APIService';
+import { MockupService } from '@services/MockupService';
+import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
+import { Constants } from '@utils/Constants';
 
 import { RootStore } from './RootStore';
 

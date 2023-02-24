@@ -12,9 +12,6 @@ import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
 import BackOffice from "@backoffice/BackOffice"
 import BOCategories from "@backoffice/category/List"
-import React from "react"
-
-
 
 const Routing: FunctionComponent = () => {
     return (

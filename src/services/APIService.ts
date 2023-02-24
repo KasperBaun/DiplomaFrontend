@@ -1,7 +1,7 @@
 
-import Category from "../models/Category";
-import { ComponentLoggingConfig } from "../utils/ComponentLoggingConfig";
-import { Constants } from "../utils/Constants";
+import Category from "@models/Category";
+import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
+import { Constants } from "@utils/Constants";
 import IAPIService from "./IAPIService";
 
 class APIService implements IAPIService {
