@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+import MobXContext from "@stores/MobXContext";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { Container, Nav } from "react-bootstrap";
 
 interface vertNavProps {
@@ -6,19 +7,22 @@ interface vertNavProps {
 }
 
 const VertNavBackOffice = (props : vertNavProps) => {
+
+    const {languageStore} = useContext(MobXContext);
+
     return (
         <Container className="VertNavContainer">
             <Nav defaultActiveKey="/backoffice" className="flex-column VertNav">
-                <NavTitleDivider title="General" />
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>Backoffice</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>Analytics</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>Sales</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>Inventory</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>Product Sniper</Nav.Link>
-                <NavTitleDivider title="Management" />
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>Category</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>Subcategory</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>Product</Nav.Link>
+                <NavTitleDivider title={languageStore.currentLanguage.GeneralHeaderAdmin} />
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.BackOfficeTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.AnalyticsTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.SalesTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.InventoryTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.ProductSniperTabText}</Nav.Link>
+                <NavTitleDivider title={languageStore.currentLanguage.ManagementTabText} />
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>{languageStore.currentLanguage.CategoriesTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>{languageStore.currentLanguage.SubCategoriesTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>{languageStore.currentLanguage.ProductTabText}</Nav.Link>
             </Nav>
         </Container>
     )

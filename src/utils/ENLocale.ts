@@ -8,6 +8,17 @@ export default class ENLocale implements ILocale {
     // Category Admin
     ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
 
+    // Admin Header 
+    GeneralHeaderAdmin = "General"; 
+
+
+    // Admin Tabs 
+    AnalyticsTabText = "Analytics"
+    SalesTabText = "Sales"
+    InventoryTabText  = "Inventory"
+    ProductSniperTabText = "Product Sniper"
+      ManagementTabText = "Management"
+
       // Header tabs
       HomeTabText = "Home"
       ProductTabText = "Products"
@@ -18,6 +29,7 @@ export default class ENLocale implements ILocale {
       ConfirmationTabText = "Confirmation"
       BackOfficeTabText = "BackOffice"
       SearchBarText = "Search"
+
 
   
       // Footer tabs
