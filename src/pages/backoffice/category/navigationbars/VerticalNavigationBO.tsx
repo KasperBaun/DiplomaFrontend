@@ -7,11 +7,12 @@ interface vertNavProps {
 
 const VertNavBackOffice = (props : vertNavProps) => {
     return (
-        <Container className="VertNav">
-            <Nav defaultActiveKey="/backoffice" className="flex-column">
+        <Container className="VertNavContainer">
+            <Nav defaultActiveKey="/backoffice" className="flex-column VertNav">
                 <NavTitleDivider title="General" />
                 <Nav.Link onClick={() => props.setNavKey(0)}>Home</Nav.Link>
                 <Nav.Link onClick={() => props.setNavKey(1)}>Categories</Nav.Link>
+                <NavTitleDivider title="Management" />
             </Nav>
         </Container>
     )
