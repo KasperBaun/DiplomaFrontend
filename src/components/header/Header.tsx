@@ -29,6 +29,7 @@ const Header: React.FC = observer(function Header() {
   navPaths.push({ path: "/basket", text: `${languageStore.currentLanguage.BasketTabText}` });
   navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
   navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
+  navPaths.push({path: "/backOffice", text: `${languageStore.currentLanguage.BackOfficeTabText}`})
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
@@ -86,7 +87,7 @@ const Header: React.FC = observer(function Header() {
             </Button>
             <Form.Control
               type="search"
-              placeholder="Search"
+              placeholder={languageStore.currentLanguage.SearchBarText}
               className="me-2"
               aria-label="Search"
             />
@@ -95,7 +96,7 @@ const Header: React.FC = observer(function Header() {
                 to={"/search"}
                 className={'search-button'}
               >
-                Search
+                {languageStore.currentLanguage.SearchBarText}
               </NavLink>
             </Button>
           </Form>

@@ -10,13 +10,14 @@ export default class ENLocale implements ILocale {
 
       // Header tabs
       HomeTabText = "Home"
-      ProductTabText = "Produkter"
-      CategoriesTabText = "Kategorier"
-      SubCategoriesTabText = "Under kategorier"
-      BasketTabText = "Kurv"
-      PaymentTabText = "Betaling"
-      ConfirmationTabText = "Bekræftelse"
+      ProductTabText = "Products"
+      CategoriesTabText = "Categories"
+      SubCategoriesTabText = "Sub categories"
+      BasketTabText = "Basket"
+      PaymentTabText = "Payment"
+      ConfirmationTabText = "Confirmation"
       BackOfficeTabText = "BackOffice"
+      SearchBarText = "Search"
 
   
       // Footer tabs

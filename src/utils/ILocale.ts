@@ -15,8 +15,8 @@ export interface ILocale {
       PaymentTabText: string;
       ConfirmationTabText: string;
       BackOfficeTabText: string;
+      SearchBarText: string;
 
-  
       // Footer tabs
       BlogTabText: string;
       PricingTabText: string;

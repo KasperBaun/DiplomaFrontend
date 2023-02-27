@@ -15,6 +15,7 @@ export default class DKLocale {
     PaymentTabText = "Betaling"
     ConfirmationTabText = "Bekræftelse"
     BackOfficeTabText = "BackOffice"
+    SearchBarText = "Søg"
 
     // Footer tabs
     BlogTabText = "Blog"
