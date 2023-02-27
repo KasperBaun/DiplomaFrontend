@@ -1,17 +1,31 @@
 
+import { Col, Container, Row } from 'react-bootstrap';
+import VertNavBackOffice from './category/navigationbars/VerticalNavigationBO';
+import "./css/category.scss"
+import BOCategories from "@backoffice/category/Categories"
+import BackOfficeDashboard from './Dashboard/dashboard';
 import { useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
-import CreateCategory from './category/modal/Create'
 
 const BackOfficeMain = () => {
-    const [visible, setVisibility] = useState(false);
-    const onOpen = () => setVisibility(true);
-    const onClose = () => setVisibility(false);
-    
+    const [activeNavKey, setActiveNavKey] = useState<number>(0);
+
+    const navSwitch = () => {
+        switch(activeNavKey) {
+            case 0 : return (<BackOfficeDashboard />)
+//            case 1 : return (<BOCategories />)
+        }
+    }
+
     return (
-        <Container>
-            <Button variant='outline-primary' onClick={onOpen}>Create new Category</Button>
-            <CreateCategory visible={visible} onClose={onClose} /> 
+        <Container fluid>
+            <Row>
+                <Col md="2">
+                    <VertNavBackOffice setNavKey={setActiveNavKey} />
+                </Col>
+                <Col>
+                    { navSwitch() }
+                </Col>
+            </Row>
         </Container>
     )
 }
