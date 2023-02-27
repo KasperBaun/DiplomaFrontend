@@ -1,0 +1,26 @@
+
+.VertNav {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.VertNavTitle {
+    font-size: small;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.VertNavTitle::after {
+    width: 100%;
+    height: 1px;
+    display: block;
+    border: 0;
+    border-top: 1 solid var(--text-color);
+    margin: 0.5em 0;
+    padding: 0;
+}
+
+
+.VertNavItem {
+    text-align: center;
+}

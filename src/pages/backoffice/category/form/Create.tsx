@@ -71,14 +71,14 @@ const CreateForm = () => {
                 <Form.Label>Description</Form.Label>
                 <Form.Control type="textarea" onChange={(event) => {
                     let temp = event.target.value;
-                    setUrl(temp);
+                    setDescription(temp);
                 }} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Products</Form.Label>
                 <Form.Control type="text" placeholder="Tallerken, Kopper" onChange={(event) => {
                     let temp = event.target.value;
-                    setUrl(temp);
+                    setProducts(temp.trim().split(","));
                 }} />
                 <Form.Text muted>
                 </Form.Text>
