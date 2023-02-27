@@ -7,6 +7,7 @@ import Category from "../../../models/Category";
 import category from "../../../models/Category";
 import { categories } from "../../../services/MockupData";
 import MobXContext from "../../../stores/MobXContext";
+import './CategoriesPage.scss';
 
 interface ICategoriesPageProps {
 }
@@ -51,20 +52,22 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
 
     if (categories) {
         return (
-        
-                <div>
-                    {categories.map((index) => (
-                        <div>
-                            <Card border="primary" style={{ width: '18rem' }}>
-                                <Card.Body>
-                                <img src={index.picture} className='img-fluid shadow-4' alt='...' />
-                                </Card.Body>
-                                <Card.Footer> {index.title.toString()}</Card.Footer>
-                            </Card>
-                        </div>
-                    ))}
-                </div>
-    if (categories) {
+
+            <div className="container">
+            {categories.map((index) => (
+              <div className="col-20">
+                <Card border="primary">
+                  <Card.Body>
+                    <img src={index.imageUrl} className='img-fluid shadow-4' alt='...'/>
+                  </Card.Body>
+                  <Card.Footer> {index.name.toString()}</Card.Footer>
+                </Card>
+              </div>
+            ))}
+          </div>
+        ) }
+
+   /* if (categories) {
         return (
             <div>
                 {categories.map((index) => (
@@ -73,7 +76,8 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
                 <Button onClick={() => createCategory(category)}></Button>
             </div>
         );
-    }
+    } */ 
+
     else {
         return (
             <h1>Loading...</h1>
