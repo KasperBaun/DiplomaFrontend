@@ -8,7 +8,7 @@ import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
 
 
-export class CategoryStore{
+export class CategoryStore {
     private static _Instance: CategoryStore;
     private rootStore: RootStore;
     private prefix: string = `%c[CategoryStore]`;
@@ -18,10 +18,10 @@ export class CategoryStore{
     private apiService: APIService;
     private categories: Category[] = [];
 
-    constructor(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService) {
+    constructor(_rootStore: RootStore, _apiService: APIService, _mockupService: MockupService) {
+        this.rootStore = _rootStore;
         this.apiService = _apiService;
         this.mockupService = _mockupService;
-        this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
 
@@ -38,9 +38,9 @@ export class CategoryStore{
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService): CategoryStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService, _mockupService: MockupService): CategoryStore {
         if (!CategoryStore._Instance) {
-            CategoryStore._Instance = new CategoryStore(_rootStore, _mockupService, _apiService);
+            CategoryStore._Instance = new CategoryStore(_rootStore, _apiService, _mockupService);
         }
         return CategoryStore._Instance;
     }
@@ -49,7 +49,7 @@ export class CategoryStore{
         return this.loaded;
     }
 
-    public  getCategories(): Category[] {
+    public getCategories(): Category[] {
         return this.categories;
     }
 
@@ -57,7 +57,7 @@ export class CategoryStore{
         return await this.mockupService.getCategory(id);
     }
 
-    public async createCategory(category: Category): Promise<void>{
+    public async createCategory(category: Category): Promise<void> {
         return await this.apiService.createCategory(category);
     }
 }

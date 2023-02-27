@@ -5,4 +5,9 @@ export interface ILocale {
 
     // Category Admin
     ProductCommaSeperatedText: string;
+
+    /* ProductPage.tsx */
+    productName: string;
+    productCondition: string;
+    
 }

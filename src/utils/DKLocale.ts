@@ -5,4 +5,8 @@ export default class DKLocale {
 
     // Category Admin
     ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
+
+     /* ProductPage.tsx */
+     productName = "Navn";
+     productCondition = "Stand";
 }

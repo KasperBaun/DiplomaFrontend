@@ -28,8 +28,8 @@ export class RootStore implements IMobXContext {
         // Create API with baseUrl from constants
         this.apiService = new APIService(Constants.apiBaseUrl);
         // TODO : Instantiate stores here
-        this.productStore = ProductStore.GetInstance(this, this._mockupService);
-        this.categoryStore = CategoryStore.GetInstance(this, this._mockupService, this.apiService);
+        this.productStore = ProductStore.GetInstance(this, this.apiService, this._mockupService);
+        this.categoryStore = CategoryStore.GetInstance(this, this.apiService, this._mockupService,);
         this.languageStore = LanguageStore.GetInstance(this);
         makeAutoObservable(this);
         void this.init();

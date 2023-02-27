@@ -4,22 +4,26 @@ import { useContext, useEffect, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import ImageGallery from "./ImageGallery";
 import "./productStyles.scss";
+import { useParams } from "react-router";
 
-interface IProductPageProps {
-    productId: number;
-}
+const ProductPage: React.FC = observer(function ProductPage() {
 
-const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(props: IProductPageProps) {
-
-    const { productStore } = useContext(MobXContext);
-
+    const { productStore, languageStore } = useContext(MobXContext);
+    const { productID } = useParams();
     const [product, setProduct] = useState<Product>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         // make store->api call here.. await fetch
         const getProductModel = async () => {
             try {
-                setProduct(await productStore.getProduct(props.productId));
+                const response = await productStore.getProduct(productID ? Number.parseInt(productID) : 1)
+                if (response === null) {
+                    setLoading(false);
+                } else {
+                    setProduct(response);
+                    setLoading(false);
+                }
 
             }
             catch (err) {
@@ -29,30 +33,35 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
 
         // update setProduct
         getProductModel();
-    }, [productStore, props.productId])
+    }, [])
 
-    if (product) {
+    if (loading) {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+    else if (!loading && !product) {
+        return (
+            <h1>Error loading product.. please try again</h1>
+        )
+    }
+    else if (!loading && product) {
         return (
             <div>
-            {/* // Små billeder (mulighed for at browse) */}
+                {/* // Små billeder (mulighed for at browse) */}
 
-            {/* // Stort billede */}
-            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} />
+                {/* // Stort billede */}
+                <ImageGallery key={"productImgGal" + product.id} imageURLs={product.imageUrls} />
 
-            {/* // Beskrivelseskomponent */}
+                {/* // Beskrivelseskomponent */}
                 <h1>ProductPage</h1>
-                <p>Name: {product.name}</p>
-                <p>Condition: {product.condition}</p>
+                <p>{languageStore.currentLanguage.productName}: {product.name}</p>
+                <p>{languageStore.currentLanguage.productCondition}: {product.condition}</p>
             </div >
 
         )
 
-    } else {
-    return (
-        <h1>Loading...</h1>
-    )
-}
-
+    }
 });
 
 export default ProductPage;

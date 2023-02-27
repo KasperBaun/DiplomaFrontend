@@ -4,6 +4,7 @@ import { RootStore } from './RootStore';
 import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import { MockupService } from '@services/MockupService';
+import APIService from '@services/APIService';
 
 export class ProductStore {
 
@@ -13,11 +14,14 @@ export class ProductStore {
     private color: string = ComponentLoggingConfig.DarkCrimson;
     private loaded: boolean = false;
     private mockupService: MockupService;
+    private apiService: APIService;
     private products: Product[] = [];
+    private productMap: Map<number, Product> = new Map<number, Product>();
 
-    constructor(_rootStore: RootStore, _mockupService: MockupService) {
-        this.mockupService = _mockupService;
+    constructor(_rootStore: RootStore, _apiService: APIService, _mockupService: MockupService) {
         this.rootStore = _rootStore;
+        this.apiService = _apiService;
+        this.mockupService = _mockupService;
         makeAutoObservable(this);
     }
 
@@ -34,9 +38,9 @@ export class ProductStore {
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService): ProductStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService, _mockupService: MockupService): ProductStore {
         if (!ProductStore._Instance) {
-            ProductStore._Instance = new ProductStore(_rootStore, _mockupService);
+            ProductStore._Instance = new ProductStore(_rootStore, _apiService, _mockupService);
         }
         return ProductStore._Instance;
     }
@@ -50,7 +54,16 @@ export class ProductStore {
     }
 
     public async getProduct(id: number): Promise<Product> {
-        return await this.mockupService.getProduct(id);
+        let product = this.productMap.get(id);
+        if (!product) {
+            try {
+                product = await this.apiService.getProduct(id);
+            }
+            catch (err) {
+                console.error(err);
+            }
+        }
+        return product;
     }
 
 }
