@@ -1,4 +1,7 @@
-export default class ENLocale  {
+import { ILocale } from "./ILocale";
+
+export default class ENLocale implements ILocale {
+    id = "en_US";
     aboutUs = "About Us";
     aboutUsText = "We sell porcelain";
 

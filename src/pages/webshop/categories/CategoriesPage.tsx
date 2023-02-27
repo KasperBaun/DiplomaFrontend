@@ -1,10 +1,7 @@
 import { observer } from "mobx-react-lite"
 import { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import Category from "../../../models/Category";
-import category from "../../../models/Category";
-import { categories } from "../../../services/MockupData";
 import MobXContext from "../../../stores/MobXContext";
 
 interface ICategoriesPageProps {
@@ -14,7 +11,7 @@ interface ICategoriesPageProps {
 const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categories(props: ICategoriesPageProps) {
 
     const { categoryStore } = useContext(MobXContext);
-    const [Categories, setCategories] = useState<Category[]>(null);
+    const [categories, setCategories] = useState<Category[]>(null);
 
     const category: Category = {
         id: 1,

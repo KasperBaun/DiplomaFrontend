@@ -7,19 +7,12 @@ import { NavLink } from 'react-router-dom';
 import './header.scss';
 import LionLogo from '../LionLogo';
 import { Dk, Us } from "react-flags-select";
-import { useState } from 'react';
+import { useContext } from "react";
+import MobXContext from "@stores/MobXContext";
 
 function Header() {
-  //Localization Functions
-  const defaultLocale = localStorage['locale'] ? localStorage['locale'] : 'Dansk'
-  const [ currentLocale, setCurrentLocale ] = useState(defaultLocale);
 
-  const handleOnLanguageChange = (lang : string) => {
-    if(lang !== currentLocale) {
-      setCurrentLocale(lang);
-      localStorage.setItem('locale', lang);
-    }
-  }
+  const { languageStore } = useContext(MobXContext);
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
@@ -39,7 +32,7 @@ function Header() {
       <Container fluid >
         <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
-            <LionLogo width={70}/>
+            <LionLogo width={70} />
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScrolls" />
@@ -67,14 +60,14 @@ function Header() {
           </Nav>
           <Form className="d-flex">
             <Button onClick={() => {
-                handleOnLanguageChange("Dansk")
-              }}>
-              <Dk/>
+              languageStore.changeLanguage("da_DK");
+            }}>
+              <Dk />
             </Button>
             <Button onClick={() => {
-                handleOnLanguageChange("English")
-              }}>
-              <Us/>
+              languageStore.changeLanguage("en_US")
+            }}>
+              <Us />
             </Button>
             <Form.Control
               type="search"

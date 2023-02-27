@@ -1,4 +1,5 @@
 export default class DKLocale {
+    id = "da_DK";
     aboutUs = "Om os";
     aboutUsText = "Vi sælger porcelæn .....";
 
