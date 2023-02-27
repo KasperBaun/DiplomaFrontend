@@ -2,7 +2,7 @@ import DKLocale from "./DKLocale";
 import ENLocale from "./ENLocale";
 
 export default class Localization {
-
+// NOT In use: 
     static Handler(textItem : string, locale : string) : string {
         let retVal = ""
         if(locale === "Dansk") {
