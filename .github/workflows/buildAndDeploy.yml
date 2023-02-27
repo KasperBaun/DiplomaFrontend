@@ -40,7 +40,7 @@ jobs:
         git pull https://${{ secrets.GH_TOKEN }}@github.com/${{github.repository}}.git
       
     - name: Install dependencies
-      run: npm ci
+      run: npm install
 
     #- name: Run tests
     #  run: npm test
