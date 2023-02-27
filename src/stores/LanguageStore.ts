@@ -13,7 +13,7 @@ export class LanguageStore {
     private prefix: string = `%c[LanguageStore]`;
     private color: string = ComponentLoggingConfig.DarkSalmon;
     private loaded: boolean = false;
-    private locales: Map<string, ILocale> = new Map<string, ILocale>
+    private locales: Map<string, ILocale> = new Map<string, ILocale>();
     private _currentLanguage: string;
 
     constructor(_rootStore: RootStore) {
