@@ -1,0 +1,24 @@
+.image-gallery {
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+  
+    .big-image {
+      width: 60%;
+      margin-right: 30px;
+    }
+  
+    .small-images {
+      width: 40%;
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: hidden;
+  
+      div {
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }

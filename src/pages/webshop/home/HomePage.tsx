@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import GroendlundLogo from "../../../components/GroenlundLogoTextAndLion"
+import GroendlundLogo from "@components/GroenlundLogoTextAndLion"
 
 interface IHomePageProps {
 

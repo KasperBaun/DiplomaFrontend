@@ -1,14 +1,9 @@
 export default class Category{
-    title : string = ""; 
-    picture : string = "";  
-    id : number = null; 
-
-    constructor(
-        id : number,
-        title : string, 
-        picture : string){
-            this.id = id;
-            this.title = title;
-            this.picture = picture;
-    }
+    id: number;
+    name: string;
+    order?: number;
+    imageUrl?: string;
+    description?: string;
+    products?: string[];
+    subCategories?: string[];
 }

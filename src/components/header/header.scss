@@ -15,7 +15,7 @@ $bgColor: rgba(19, 128, 134, 1);
 }
 
 .header {
-    background: $bgColor;
+    background: var(--primary-color);
 }
 
 .header-links {

@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { ComponentLoggingConfig } from '../utils/ComponentLoggingConfig';
+import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { RootStore } from './RootStore';
-import Product from '../models/Product';
-import { Constants } from '../utils/Constants';
-import { MockupService } from '../services/MockupService';
+import Product from '@models/Product';
+import { Constants } from '@utils/Constants';
+import { MockupService } from '@services/MockupService';
 
 export class ProductStore {
 

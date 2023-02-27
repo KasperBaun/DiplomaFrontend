@@ -27,7 +27,7 @@ function Header() {
       <Container fluid >
         <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
-            <LionLogo width={70} />
+            <LionLogo width={70}/>
           </NavLink>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScrolls" />

@@ -1,7 +1,9 @@
 import { observer } from "mobx-react-lite"
-import Product from "../../../models/Product";
+import Product from "@models/Product";
 import { useContext, useEffect, useState } from "react";
-import MobXContext from "../../../stores/MobXContext";
+import MobXContext from "@stores/MobXContext";
+import ImageGallery from "./ImageGallery";
+import "./productStyles.scss";
 
 interface IProductPageProps {
     productId: number;
@@ -10,7 +12,7 @@ interface IProductPageProps {
 const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(props: IProductPageProps) {
 
     const { productStore } = useContext(MobXContext);
-    
+
     const [product, setProduct] = useState<Product>(null);
 
     useEffect(() => {
@@ -27,27 +29,29 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
 
         // update setProduct
         getProductModel();
-    }, [])
+    }, [productStore, props.productId])
 
     if (product) {
         return (
-            // Små billeder (mulighed for at browse)
-
-            // Stort billede
-
-            // Beskrivelseskomponent
             <div>
+            {/* // Små billeder (mulighed for at browse) */}
+
+            {/* // Stort billede */}
+            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} />
+
+            {/* // Beskrivelseskomponent */}
                 <h1>ProductPage</h1>
                 <p>Name: {product.name}</p>
                 <p>Condition: {product.condition}</p>
-            </div>
+            </div >
+
         )
 
     } else {
-        return (
-            <h1>Loading...</h1>
-        )
-    }
+    return (
+        <h1>Loading...</h1>
+    )
+}
 
 });
 

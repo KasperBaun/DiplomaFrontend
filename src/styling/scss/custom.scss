@@ -7,9 +7,21 @@
 $body-bg: #FFF;
 $body-color: #111;
 
+// Søborg (Jeg ved ikke om linje 16 bliver brugt nogle steder) Linje 11-14 kan fjernes, hvis 16+ er globalt
+:root {
+    --primary-color: #09473f;
+    --secondary-color: #FFD700;
+    --text-color: #dc8665;
+}
+
 $primary: #09473f; // Groenlund Green Color
 $secondary: #FFD700; //Groenlund Gold Color
 $danger: #ff4136;
+$textColor: #dc8665;
+
+.btn-outline-primary:hover {
+    color: var(--text-color);
+}
 
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 
