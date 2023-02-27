@@ -30,7 +30,6 @@ export class LanguageStore {
         // If no preffered language was set by user -> default to da-DK locale
         this.setCurrentLanguage(localStorage['locale'] ? localStorage['locale'] : 'da_DK');
 
-
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }

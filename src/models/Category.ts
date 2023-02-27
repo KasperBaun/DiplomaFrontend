@@ -4,6 +4,4 @@ export default class Category{
     order?: number;
     imageUrl?: string;
     description?: string;
-    products?: string[];
-    subCategories?: string[];
 }

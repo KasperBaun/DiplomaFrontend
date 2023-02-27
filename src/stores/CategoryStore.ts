@@ -27,7 +27,7 @@ export class CategoryStore{
 
     public async init(): Promise<boolean> {
         // Fetch categories
-        this.categories = await this.mockupService.getCategories();
+        this.categories = await this.apiService.getCategories()
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
