@@ -9,11 +9,12 @@ import LionLogo from '../LionLogo';
 import { Dk, Us } from "react-flags-select";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
+import { observer } from 'mobx-react-lite';
 
 function Header() {
 
   const { languageStore } = useContext(MobXContext);
-
+  
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
     if (isActive) {
@@ -42,8 +43,17 @@ function Header() {
             style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
-            {navPaths.map((navItem) => {
-
+            <NavLink
+                  to={"/backoffice"}
+                  className={({ isActive, isPending }) => {
+                    return navLinkStyling(isActive, isPending)
+                  }}
+                >
+                {"languageStore.currentLanguage.BackOfficeTabText"}
+             </NavLink>
+            
+           
+            {/* {navPaths.map((navItem) => {
               return (
                 <NavLink
                   to={navItem.path}
@@ -55,7 +65,7 @@ function Header() {
                 </NavLink>
               )
 
-            })}
+            })} */}
 
           </Nav>
           <Form className="d-flex">
@@ -90,7 +100,8 @@ function Header() {
   );
 }
 
-export default Header;
+export default  observer (Header);
+
 
 
 export const navPaths: { path: string, text: string }[] = [
