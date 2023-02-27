@@ -11,10 +11,25 @@ import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 
-function Header() {
+interface INavModel {
+  path: string;
+  text: string;
+}
+
+const Header: React.FC = observer(function Header() {
 
   const { languageStore } = useContext(MobXContext);
-  
+
+
+  const navPaths: INavModel[] = [];
+  navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
+  navPaths.push({ path: "/product", text: `${languageStore.currentLanguage.ProductTabText}` });
+  navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
+  navPaths.push({ path: "/subcategories", text: `${languageStore.currentLanguage.SubCategoriesTabText}` });
+  navPaths.push({ path: "/basket", text: `${languageStore.currentLanguage.BasketTabText}` });
+  navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
+  navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
+
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
     if (isActive) {
@@ -43,17 +58,7 @@ function Header() {
             style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
-            <NavLink
-                  to={"/backoffice"}
-                  className={({ isActive, isPending }) => {
-                    return navLinkStyling(isActive, isPending)
-                  }}
-                >
-                {"languageStore.currentLanguage.BackOfficeTabText"}
-             </NavLink>
-            
-           
-            {/* {navPaths.map((navItem) => {
+            {navPaths.map((navItem) => {
               return (
                 <NavLink
                   to={navItem.path}
@@ -65,7 +70,7 @@ function Header() {
                 </NavLink>
               )
 
-            })} */}
+            })}
 
           </Nav>
           <Form className="d-flex">
@@ -98,39 +103,6 @@ function Header() {
       </Container>
     </Navbar>
   );
-}
+});
 
-export default  observer (Header);
-
-
-
-export const navPaths: { path: string, text: string }[] = [
-  {
-    path: "/",
-    text: "Home"
-  },
-  {
-    path: "/product",
-    text: "Product"
-  },
-  {
-    path: "/categories",
-    text: "Categories"
-  },
-  {
-    path: "/subcategories",
-    text: "Subcategories"
-  },
-  {
-    path: "/basket",
-    text: "Basket"
-  },
-  {
-    path: "/payment",
-    text: "Payment"
-  },
-  {
-    path: "/confirmation",
-    text: "Confirmation"
-  },
-];
+export default Header;
