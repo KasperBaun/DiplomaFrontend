@@ -11,7 +11,6 @@ import PaymentPage from "@webshop/payment/PaymentPage"
 import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
 import BackOffice from "@backoffice/BackOffice"
-import BOCategories from "@backoffice/category/List"
 
 const Routing: FunctionComponent = () => {
     return (

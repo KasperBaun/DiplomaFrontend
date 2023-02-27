@@ -1,0 +1,28 @@
+
+.VertNavContainer {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.VertNavTitle {
+    font-size: small;
+    font-style: normal;
+    color: var(--text-color);
+}
+
+.NavTitleDividerHR {
+    color: var(--text-color);
+}
+
+.VertNavItem {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.NavLinkText {
+    font-size: 14px;
+}
+
+.NavLinkText:hover {
+    color: var(--text-color);
+}
