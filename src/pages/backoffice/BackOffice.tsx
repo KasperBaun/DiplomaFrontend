@@ -12,7 +12,7 @@ const BackOfficeMain = () => {
     const navSwitch = () => {
         switch(activeNavKey) {
             case 0 : return (<BackOfficeDashboard />)
-            case 1 : return (<BOCategories />)
+//            case 1 : return (<BOCategories />)
         }
     }
 

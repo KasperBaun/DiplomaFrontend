@@ -27,7 +27,6 @@ const Routing: FunctionComponent = () => {
                 <Route path="search" element={<SearchPage />} />
             </Route>
             <Route path="/backoffice" element={<BackOffice />}>
-                <Route path="backoffice/categories" element={<BOCategories />} />
             </Route>
         </Routes>
     );
