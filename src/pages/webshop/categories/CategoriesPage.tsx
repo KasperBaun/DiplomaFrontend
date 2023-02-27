@@ -1,8 +1,6 @@
 import { observer } from "mobx-react-lite"
 import { useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 import { Card } from "react-bootstrap";
-import { useParams } from "react-router-dom";
 import Category from "../../../models/Category";
 import MobXContext from "../../../stores/MobXContext";
 import './CategoriesPage.scss';
@@ -15,26 +13,6 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
 
     const { categoryStore } = useContext(MobXContext);
     const [categories, setCategories] = useState<Category[]>(null);
-
-    const category: Category = {
-        id: 1,
-        imageUrl: "https://via.placeholder.com/150",
-        name: "Test placeholder",
-        order:1,
-        description: "test"
-    };
-
-    function createCategory(category: Category) {
-        const createCategoryAsync = async () => {
-            try {
-                await categoryStore.createCategory(category)
-            }
-            catch (err) {
-                console.log(err);
-            }
-        }
-        createCategoryAsync();
-    }
 
     useEffect(() => {
         const getCategoryModel = async () => {
