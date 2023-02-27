@@ -10,18 +10,19 @@
     color: var(--text-color);
 }
 
-.VertNavItem::after {
-    width: 100%;
-    height: 1px;
-    display: block;
-    border: 0;
-    border-top: 1 solid var(--text-color);
-    margin: 0.5em 0;
-    padding: 0;
+.NavTitleDividerHR {
+    color: var(--text-color);
 }
-
 
 .VertNavItem {
     text-align: center;
     margin-top: 0.5rem;
+}
+
+.NavLinkText {
+    font-size: 14px;
+}
+
+.NavLinkText:hover {
+    color: var(--text-color);
 }
