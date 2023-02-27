@@ -1,12 +1,16 @@
 import * as React from "react";
 import { RootStore } from "./RootStore";
+import { ProductStore } from "./ProductStore";
+import { CategoryStore } from "./CategoryStore";
+import { LanguageStore } from "./LanguageStore";
 
 export interface IMobXContext {
-    // documentStore: DocumentStore;
-    // userStore: UserStore;
+    productStore: ProductStore;
     rootStore: RootStore;
+    categoryStore : CategoryStore;
+    languageStore: LanguageStore;
 }
 
-export const MobXContext = React.createContext<IMobXContext>(undefined);
+const MobXContext = React.createContext<IMobXContext>(undefined);
 MobXContext.displayName = "MobXContext";
 export default MobXContext;

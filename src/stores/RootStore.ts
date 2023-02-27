@@ -1,21 +1,36 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ComponentLoggingConfig } from "../utils/ComponentLoggingConfig";
+import { ProductStore } from "./ProductStore";
+import { CategoryStore } from "./CategoryStore";
 import { IMobXContext } from "./MobXContext";
-import { Constants } from "../utils/Constants";
+import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
+import { MockupService } from "@services/MockupService";
+import APIService from "@services/APIService";
+import { Constants } from "@utils/Constants";
+import { LanguageStore } from "./LanguageStore";
+
 
 export class RootStore implements IMobXContext {
 
     private prefix: string = `%c[RootStore]`;
     private color: string = ComponentLoggingConfig.DarkBlueviolet;
     private loaded: boolean = false;
-
+    private _mockupService: MockupService = new MockupService();
+    private apiService: APIService;
+    productStore: ProductStore;
+    categoryStore: CategoryStore;
+    languageStore: LanguageStore;
     rootStore: RootStore = this;
 
     constructor() {
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} constructor called`, this.color)
         }
+        // Create API with baseUrl from constants
+        this.apiService = new APIService(Constants.apiBaseUrl);
         // TODO : Instantiate stores here
+        this.productStore = ProductStore.GetInstance(this, this._mockupService);
+        this.categoryStore = CategoryStore.GetInstance(this, this._mockupService, this.apiService);
+        this.languageStore = LanguageStore.GetInstance(this);
         makeAutoObservable(this);
         void this.init();
     }
@@ -26,6 +41,10 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
         // TODO: Init stores here
+        this.productStore.init();
+        this.categoryStore.init();
+        this.languageStore.init();
+
         runInAction(() => {
             // this.loaded = userResult && documentResult;
         })

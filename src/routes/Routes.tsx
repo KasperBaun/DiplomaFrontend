@@ -1,17 +1,16 @@
 import { Routes, Route } from "react-router-dom"
-import ErrorPage from "../pages/webshop/error/ErrorPage"
-import Webshop from "../pages/webshop/Webshop"
-import CategoriesPage from "../pages/webshop/categories/CategoriesPage"
+import ErrorPage from "@webshop/error/ErrorPage"
+import Webshop from "@webshop/Webshop"
+import CategoriesPage from "@webshop/categories/CategoriesPage"
 import { FunctionComponent } from "react"
-import HomePage from "../pages/webshop/home/HomePage"
-import SubcategoriesPage from "../pages/webshop/subcategory/SubcategoriesPage"
-import BasketPage from "../pages/webshop/basket/BasketPage"
-import ConfirmationPage from "../pages/webshop/confirmation/ConfirmationPage"
-import PaymentPage from "../pages/webshop/payment/PaymentPage"
-import ProductPage from "../pages/webshop/product/ProductPage"
-import SearchPage from "../pages/webshop/search/SearchPage"
-
-
+import HomePage from "@webshop/home/HomePage"
+import SubcategoriesPage from "@webshop/subcategory/SubcategoriesPage"
+import BasketPage from "@webshop/basket/BasketPage"
+import ConfirmationPage from "@webshop/confirmation/ConfirmationPage"
+import PaymentPage from "@webshop/payment/PaymentPage"
+import ProductPage from "@webshop/product/ProductPage"
+import SearchPage from "@webshop/search/SearchPage"
+import BackOffice from "@backoffice/BackOffice"
 
 const Routing: FunctionComponent = () => {
     return (
@@ -24,8 +23,10 @@ const Routing: FunctionComponent = () => {
                 <Route path="basket" element={<BasketPage />} />
                 <Route path="confirmation" element={<ConfirmationPage />} />
                 <Route path="payment" element={<PaymentPage />} />
-                <Route path="product" element={<ProductPage />} />
+                <Route path="product" element={<ProductPage productId={1} />} />
                 <Route path="search" element={<SearchPage />} />
+            </Route>
+            <Route path="/backoffice" element={<BackOffice />}>
             </Route>
         </Routes>
     );
