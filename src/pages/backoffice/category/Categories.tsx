@@ -39,7 +39,6 @@ const ListCategories = () => {
     const handleOnUpdateCategory = (cat : Category) => {
         setSelectedCategory(cat);
         onOpenUpdate();
-    }
 
     if (categoryStore.Categories)
         return (
