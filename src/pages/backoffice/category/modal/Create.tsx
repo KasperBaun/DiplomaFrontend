@@ -3,7 +3,7 @@ import CreateForm from "../form/Create";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 
-interface IProps {
+export interface IProps {
     visible: boolean
     onClose: () => void;
 }

@@ -35,7 +35,7 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
             </div>
         )
     }
-    else {
+       else {
         return (
             <h1>Loading...</h1>
         )

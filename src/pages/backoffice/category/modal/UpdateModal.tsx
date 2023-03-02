@@ -1,5 +1,5 @@
 import Category from "@models/Category";
-import { Container, Modal, Spinner } from "react-bootstrap";
+import { Container, Modal } from "react-bootstrap";
 import UpdateForm from "../form/Update";
 
 interface IProps {
