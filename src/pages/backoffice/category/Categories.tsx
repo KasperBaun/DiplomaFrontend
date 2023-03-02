@@ -8,15 +8,21 @@ import Category from "@models/Category";
 import "./css/category.scss";
 import { XLg } from "react-bootstrap-icons";
 import { Pencil } from "react-bootstrap-icons";
+import UpdateCategory from "./modal/UpdateModal";
 
 const ListCategories = () => {
-    const [visible, setVisibility] = useState(false);
-    const onOpen = () => setVisibility(true);
-    const onClose = () => setVisibility(false);
+    const [visibleCreate, setVisibilityCreate] = useState(false);
+    const [visibleUpdate, setVisibilityUpdate] = useState(false);
+    const onOpenCreate = () => setVisibilityCreate(true);
+    const onCloseCreate = () => setVisibilityCreate(false);
+    const onOpenUpdate = () => setVisibilityUpdate(true);
+    const onCloseUpdate = () => setVisibilityUpdate(false);
     
     const [categories, setCategories] = useState<Category[]>(null);
 
     const { categoryStore } = useContext(MobXContext)
+
+    const [selectedCategory, setSelectedCategory] = useState<Category>();
 
     useEffect(() => {
         const getCategoryModel = async () => {
@@ -35,11 +41,16 @@ const ListCategories = () => {
         categoryStore.deleteCategory(id);
     }
 
+    const handleOnUpdateCategory = (cat : Category) => {
+        setSelectedCategory(cat);
+        onOpenUpdate();
+    }
+
     if(categories)
         return (
             <Container className="CategoryListContainer">
                 <Row style={{ width: "100%", justifyContent: "end" }}>
-                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpen}>Create new Category</Button>
+                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpenCreate}>Create new Category</Button>
                 </Row>
                 <Row style={{ width: "100%", marginTop: "1rem"}}>
                 <Table striped bordered hover>
@@ -53,13 +64,13 @@ const ListCategories = () => {
                     </thead>
                     <tbody>
                         { categories.map((category) => (
-                            <tr key={"item_" + category.id}>
+                            <tr id={"listId_"+category.id} key={"item_" + category.id}>
                                 <td style={{ width: "12rem" }}>{category.name}</td>
                                 <td>{category.description ? category.description : null}</td>
                                 <td style={{ width: "8rem" }}>{category.order ? category.order : null }</td>
                                 <td style={{ width: "10rem" }}>
                                     <Container>
-                                        <Button variant="outline-secondary"><Pencil /></Button>
+                                        <Button variant="outline-secondary" onClick={() => handleOnUpdateCategory(category)}><Pencil /></Button>
                                         <Button variant="outline-danger" onClick={() => handleOnDeleteCategory(category.id)}><XLg /></Button>
                                     </Container>
                                 </td>
@@ -68,7 +79,8 @@ const ListCategories = () => {
                     </tbody>
                 </Table>
                 </Row>
-                <CreateCategory visible={visible} onClose={onClose} /> 
+                <CreateCategory visible={visibleCreate} onClose={onCloseCreate} /> 
+                <UpdateCategory visible={visibleUpdate} onClose={onCloseUpdate} category={selectedCategory}/> 
             </Container>
         )
     else
