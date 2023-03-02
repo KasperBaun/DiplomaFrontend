@@ -55,13 +55,6 @@ export class LanguageStore {
             this.setCurrentLanguage(lang);
             localStorage.setItem('locale', lang);
         }
-
-        // if (lang === "Dansk") {
-        //     this._currentLanguage = this.locales[0];
-        // }
-        // if (lang === "Engelsk") {
-        //     this._currentLanguage = this.locales[1];
-        // }
     }
 
     public get isLoaded(): boolean {

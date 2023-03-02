@@ -6,6 +6,14 @@ export default class ENLocale implements ILocale {
   aboutUsText = "We sell porcelain";
 
   // Category Admin
+  createCategoryModalTitle = "Create Category";
+  createCategoryTitle = "Title";
+  createCategoryOrder = "Order";
+  createCategoryImgUrl = "Image Url";
+  createCategoryDescription = "Description";
+  createCategorySubmit = "Submit";
+  createCategorySuccessMessage = "Created category successfully";
+  createCategoryFailedMessage = "Failed creating category";
   ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
 
   // Admin Header 

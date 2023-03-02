@@ -4,6 +4,14 @@ export default class DKLocale {
   aboutUsText = "Vi sælger porcelæn .....";
 
   // Category Admin
+  createCategoryModalTitle = "Opret ny kategori";
+  createCategoryTitle = "Titel";
+  createCategoryOrder = "Rækkefølge";
+  createCategoryImgUrl = "Billede Url";
+  createCategoryDescription = "Beskrivelse";
+  createCategorySubmit = "Opret";
+  createCategorySuccessMessage = "Kategory oprettet";
+  createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori";
   ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
 
   // Admin Header 

@@ -8,7 +8,7 @@ import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
 
 
-export class CategoryStore{
+export class CategoryStore {
     private static _Instance: CategoryStore;
     private rootStore: RootStore;
     private prefix: string = `%c[CategoryStore]`;
@@ -16,7 +16,7 @@ export class CategoryStore{
     private loaded: boolean = false;
     private mockupService: MockupService;
     private apiService: APIService;
-    private categories: Category[] = [];
+    private _categories: Category[] = [];
 
     constructor(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService) {
         this.apiService = _apiService;
@@ -27,7 +27,7 @@ export class CategoryStore{
 
     public async init(): Promise<boolean> {
         // Fetch categories
-        this.categories = await this.apiService.getCategories()
+        this._categories = await this.apiService.getCategories()
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -49,19 +49,28 @@ export class CategoryStore{
         return this.loaded;
     }
 
-    public  getCategories(): Category[] {
-        return this.categories;
+    public get Categories(): Category[] {
+        return this._categories;
     }
 
-    public async getCategory(id: number): Promise<Category> {
-        return await this.mockupService.getCategory(id);
+    public getCategory(id: number): Category {
+        return this._categories.find(c => c.id === id);
     }
 
-    public async createCategory(category: Category): Promise<void>{
+    public async createCategory(category: Category): Promise<void> {
         return await this.apiService.createCategory(category);
     }
 
-    public async deleteCategory(id: number): Promise<void>{
-        return await this.apiService.deleteCategory(id);
+    public async deleteCategory(id: number): Promise<boolean> {
+        const deleteResult = await this.apiService.deleteCategory(id);
+        if (deleteResult.success) {
+            runInAction(() => {
+                this._categories = this._categories.filter(c => c.id !== id);
+            })
+            return true;
+        }
+        if (!deleteResult.success) {
+            return false;
+        }
     }
 }
