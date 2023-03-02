@@ -72,6 +72,30 @@ class APIService implements IAPIService {
         })
     }
 
+    async deleteCategory(id : number): Promise<void> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} deleting category with id: ${id} `, this.color);
+        }
+
+        // DO API stuff
+        console.log("apiUrl", this.apiBaseUrl);
+        await fetch(this.apiBaseUrl + "/Category/" + id, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        }).then(result => {
+            if (result.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted category with id: ${id} `, t1, t2, this.color);
+                }
+                return;
+            } else {
+                console.log(`${this.prefix} failed to delete category with id: ${id}. Status: ${result.status} ${result.statusText} `, this.color);
+            }
+        })
+    }
+
 
 }
 

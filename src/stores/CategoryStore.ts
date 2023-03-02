@@ -60,4 +60,8 @@ export class CategoryStore{
     public async createCategory(category: Category): Promise<void>{
         return await this.apiService.createCategory(category);
     }
+
+    public async deleteCategory(id: number): Promise<void>{
+        return await this.apiService.deleteCategory(id);
+    }
 }
