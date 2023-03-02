@@ -24,6 +24,19 @@ export default class ENLocale implements ILocale {
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
 
+  // Subcategory
+  createSubcategoryModalTitle = "Create subcategory";
+  createSubcategoryCategoryTitle = "Choose subcategory";
+  createSubcategoryTitle = "Title";
+  createSubcategoryOrder = "Order";
+  createSubcategoryImgUrl = "Image Url";
+  createSubcategoryDescription = "Description";
+  createSubcategorySubmit = "Create";
+  createSubcategorySuccessMessage = "Subcategory created";
+  createSubcategoryFailedMessage = "Error. Could not create subcategory";
+  createSubcategorySelectCategoryTitle = "Choose category";
+  createSubcategorySelectCategoryFailedMessage ="You have to choose a category to create a subcategory";
+
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
