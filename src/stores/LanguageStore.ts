@@ -30,7 +30,6 @@ export class LanguageStore {
         // If no preffered language was set by user -> default to da-DK locale
         this.setCurrentLanguage(localStorage['locale'] ? localStorage['locale'] : 'da_DK');
 
-
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
@@ -56,13 +55,6 @@ export class LanguageStore {
             this.setCurrentLanguage(lang);
             localStorage.setItem('locale', lang);
         }
-
-        // if (lang === "Dansk") {
-        //     this._currentLanguage = this.locales[0];
-        // }
-        // if (lang === "Engelsk") {
-        //     this._currentLanguage = this.locales[1];
-        // }
     }
 
     public get isLoaded(): boolean {

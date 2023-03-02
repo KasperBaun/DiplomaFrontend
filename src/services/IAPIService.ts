@@ -2,7 +2,7 @@ import Category from "@models/Category";
 
 
 interface IAPIService {
-    getCategories: () => Category[]
+    getCategories: () => Promise<Category[]>
     createCategory(category:Category): Promise<void>;
 }
 

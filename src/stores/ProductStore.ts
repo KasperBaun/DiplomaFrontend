@@ -3,7 +3,7 @@ import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { RootStore } from './RootStore';
 import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
-import { MockupService } from '@services/MockupService';
+import APIService from '@services/APIService';
 
 export class ProductStore {
 
@@ -12,11 +12,11 @@ export class ProductStore {
     private prefix: string = `%c[ProductStore]`;
     private color: string = ComponentLoggingConfig.DarkCrimson;
     private loaded: boolean = false;
-    private mockupService: MockupService;
+    private apiService: APIService;
     private products: Product[] = [];
 
-    constructor(_rootStore: RootStore, _mockupService: MockupService) {
-        this.mockupService = _mockupService;
+    constructor(_rootStore: RootStore, _mockupService: APIService) {
+        this.apiService = _mockupService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
@@ -34,9 +34,9 @@ export class ProductStore {
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService): ProductStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService): ProductStore {
         if (!ProductStore._Instance) {
-            ProductStore._Instance = new ProductStore(_rootStore, _mockupService);
+            ProductStore._Instance = new ProductStore(_rootStore, _apiService);
         }
         return ProductStore._Instance;
     }
@@ -50,7 +50,7 @@ export class ProductStore {
     }
 
     public async getProduct(id: number): Promise<Product> {
-        return await this.mockupService.getProduct(id);
+        return null;
     }
 
 }

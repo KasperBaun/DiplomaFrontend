@@ -45,7 +45,7 @@ const Header: React.FC = observer(function Header() {
   }
 
   return (
-    <Navbar expand="lg" className='header'>
+    <Navbar expand="lg" className='header' key="navbar">
       <Container fluid >
         <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
@@ -59,10 +59,11 @@ const Header: React.FC = observer(function Header() {
             style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
-            {navPaths.map((navItem) => {
+            {navPaths.map((navItem, index) => {
               return (
                 <NavLink
                   to={navItem.path}
+                  key={navItem.text+index}
                   className={({ isActive, isPending }) => {
                     return navLinkStyling(isActive, isPending)
                   }}
