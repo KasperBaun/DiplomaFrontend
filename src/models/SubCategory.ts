@@ -6,4 +6,3 @@ export default class SubCategory{
     description?: string;
     Category: string; 
 }
-

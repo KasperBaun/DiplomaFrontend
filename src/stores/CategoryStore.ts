@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import Category from '@models/Category';
 import APIService from '@services/APIService';
-import { MockupService } from '@services/MockupService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 
@@ -14,13 +13,11 @@ export class CategoryStore {
     private prefix: string = `%c[CategoryStore]`;
     private color: string = ComponentLoggingConfig.DarkChocolate;
     private loaded: boolean = false;
-    private mockupService: MockupService;
     private apiService: APIService;
     private _categories: Category[] = [];
 
-    constructor(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService) {
+    constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
-        this.mockupService = _mockupService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
@@ -38,9 +35,9 @@ export class CategoryStore {
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService): CategoryStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService): CategoryStore {
         if (!CategoryStore._Instance) {
-            CategoryStore._Instance = new CategoryStore(_rootStore, _mockupService, _apiService);
+            CategoryStore._Instance = new CategoryStore(_rootStore, _apiService);
         }
         return CategoryStore._Instance;
     }

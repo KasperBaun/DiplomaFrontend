@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import SubCategory from '@models/SubCategory';
 import APIService from '@services/APIService';
-import { MockupService } from '@services/MockupService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 
@@ -12,15 +11,13 @@ export class SubCategoryStore{
     private static _Instance: SubCategoryStore;
     private rootStore: RootStore;
     private prefix: string = `%c[SubCategoryStore]`;
-    private color: string = ComponentLoggingConfig.DarkChocolate;
+    private color: string = ComponentLoggingConfig.Lightcyan;
     private loaded: boolean = false;
-    private mockupService: MockupService;
     private apiService: APIService;
     private subCategories: SubCategory[] = [];
 
-    constructor(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService) {
+    constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
-        this.mockupService = _mockupService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
@@ -38,9 +35,9 @@ export class SubCategoryStore{
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _mockupService: MockupService, _apiService: APIService): SubCategoryStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService): SubCategoryStore {
         if (!SubCategoryStore._Instance) {
-            SubCategoryStore._Instance = new SubCategoryStore(_rootStore, _mockupService, _apiService);
+            SubCategoryStore._Instance = new SubCategoryStore(_rootStore, _apiService);
         }
         return SubCategoryStore._Instance;
     }

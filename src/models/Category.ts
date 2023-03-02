@@ -5,4 +5,3 @@ export default class Category{
     imageUrl?: string;
     description?: string;
 }
-

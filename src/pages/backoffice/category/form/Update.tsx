@@ -2,13 +2,12 @@ import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { Button, Form, Image } from "react-bootstrap";
-import Localization from '@utils/Localization';
 
 interface IProps {
-    category : Category
+    category: Category
 }
 
-const UpdateForm = ( {category} : IProps) => {
+const UpdateForm = ({ category }: IProps) => {
 
     const { categoryStore } = useContext(MobXContext);
 
@@ -17,8 +16,8 @@ const UpdateForm = ( {category} : IProps) => {
     const [order, setOrder] = useState<number>(category.order ? category.order : 0);
     const [description, setDescription] = useState<string>(category.description ? category.description : "");
 
-    function updateCategory(updatedCategory : Category) {
-        
+    function updateCategory(updatedCategory: Category) {
+
     }
 
     return (
@@ -28,35 +27,35 @@ const UpdateForm = ( {category} : IProps) => {
             </Form.Group>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
-                <Form.Control value={category.name ? 
-                category.name : ""} type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setTitle(temp);
-                }} />
+                <Form.Control value={category.name ?
+                    category.name : ""} type="text" onChange={(event) => {
+                        let temp = event.target.value;
+                        setTitle(temp);
+                    }} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Order</Form.Label>
-                <Form.Control value={category.order ? 
-                category.order : ""} type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setOrder(parseInt(temp));
-                }} />
+                <Form.Control value={category.order ?
+                    category.order : ""} type="text" onChange={(event) => {
+                        let temp = event.target.value;
+                        setOrder(parseInt(temp));
+                    }} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Image Url</Form.Label>
-                <Form.Control value={category.imageUrl ? 
-                category.imageUrl : ""} type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setUrl(temp);
-                }} />
+                <Form.Control value={category.imageUrl ?
+                    category.imageUrl : ""} type="text" onChange={(event) => {
+                        let temp = event.target.value;
+                        setUrl(temp);
+                    }} />
             </Form.Group>
             <Form.Group>
                 <Form.Label>Description</Form.Label>
-                <Form.Control value={category.description ? 
-                category.description : ""} type="textarea" onChange={(event) => {
-                    let temp = event.target.value;
-                    setDescription(temp);
-                }} />
+                <Form.Control value={category.description ?
+                    category.description : ""} type="textarea" onChange={(event) => {
+                        let temp = event.target.value;
+                        setDescription(temp);
+                    }} />
             </Form.Group>
             <Button variant="primary" type="submit" style={{ marginTop: "0.5rem" }} >
                 Submit
