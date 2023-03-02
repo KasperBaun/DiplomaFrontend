@@ -4,6 +4,14 @@ export interface ILocale {
     aboutUsText: string;
 
     // Category Admin
+    createCategoryModalTitle: string;
+    createCategoryTitle: string;
+    createCategoryOrder: string;
+    createCategoryImgUrl: string;
+    createCategoryDescription: string;
+    createCategorySubmit: string;
+    createCategorySuccessMessage: string;
+    createCategoryFailedMessage: string;
     ProductCommaSeperatedText: string;
 
     // Admin Header 
