@@ -12,6 +12,7 @@ import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
 import BackOffice from "@backoffice/BackOffice"
 
+
 const Routing: FunctionComponent = () => {
     return (
         <Routes>
@@ -19,6 +20,7 @@ const Routing: FunctionComponent = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="categories" element={<CategoriesPage />} />
                 <Route path="categories/:number" element={<CategoriesPage />} />
+                <Route path="subcategories/:id" element={<SubcategoriesPage />} />
                 <Route path="subcategories" element={<SubcategoriesPage />} />
                 <Route path="basket" element={<BasketPage />} />
                 <Route path="confirmation" element={<ConfirmationPage />} />
