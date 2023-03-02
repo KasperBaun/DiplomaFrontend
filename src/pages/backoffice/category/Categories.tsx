@@ -1,6 +1,6 @@
 import { Container, Table, Button, Spinner, Row } from "react-bootstrap";
 import CreateCategory from './modal/Create'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react"
@@ -8,6 +8,7 @@ import "./css/category.scss";
 import { XLg } from "react-bootstrap-icons";
 import { Pencil } from "react-bootstrap-icons";
 import UpdateCategory from "./modal/UpdateModal";
+import Category from "@models/Category";
 
 const ListCategories = () => {
     const [visibleCreate, setVisibilityCreate] = useState(false);
@@ -17,40 +18,38 @@ const ListCategories = () => {
     const onOpenUpdate = () => setVisibilityUpdate(true);
     const onCloseUpdate = () => setVisibilityUpdate(false);
     
-    const [categories, setCategories] = useState<Category[]>(null);
     const { categoryStore, languageStore } = useContext(MobXContext)
 
     const [selectedCategory, setSelectedCategory] = useState<Category>();
 
-    useEffect(() => {
-        const getCategoryModel = async () => {
-            try {
-                setCategories(await categoryStore.getCategories())
-            }
-        } else {
-            alert("Could not find category with id: " + id);
-        }
+    const handleOnUpdateCategory = (cat : Category) => {
+        setSelectedCategory(cat);
+        onOpenUpdate();
     }
 
+    const handleOnDeleteCategory = (id : number) => {
+        // Pop Modal to confirm?
+        categoryStore.deleteCategory(id);
+    }
 
     if (categoryStore.Categories)
         return (
             <Container className="CategoryListContainer">
                 <Row style={{ width: "100%", justifyContent: "end" }}>
-                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpen}>{languageStore.currentLanguage.createCategoryModalTitle}</Button>
+                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpenCreate}>{languageStore.currentLanguage.createCategoryModalTitle}</Button>
                 </Row>
                 <Row style={{ width: "100%", marginTop: "1rem"}}>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                        <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryOrder}</th>
-                                <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryDescription}</th>
-                                <th></th>
-                                <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryTitle}</th>
+                            <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryTitle}</th>
+                            <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryDescription}</th>
+                            <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryOrder}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        { categories.map((category) => (
+                        { categoryStore.Categories.map((category) => (
                             <tr id={"listId_"+category.id} key={"item_" + category.id}>
                                 <td style={{ width: "12rem" }}>{category.name}</td>
                                 <td>{category.description ? category.description : null}</td>
@@ -62,20 +61,6 @@ const ListCategories = () => {
                                     </Container>
                                 </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            {categoryStore.Categories.map((category) => (
-                                <tr key={"item_" + category.id}>
-                                    <td style={{ width: "12rem" }}>{category.name}</td>
-                                    <td>{category.description ? category.description : null}</td>
-                                    <td style={{ width: "8rem" }}>{category.order ? category.order : null}</td>
-                                    <td style={{ width: "10rem" }}>
-                                        <Container>
-                                            <Button variant="outline-secondary"><Pencil /></Button>
-                                            <Button variant="outline-danger" onClick={() => handleOnDeleteCategory(category.id)}><XLg /></Button>
-                                        </Container>
-                                    </td>
-                                </tr>
                             ))}
                         </tbody>
                     </Table>
