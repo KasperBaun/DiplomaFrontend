@@ -12,4 +12,5 @@ export abstract class Constants {
     public static readonly instagramUrl = "https://www.instagram.com/gl_antik.dk/";
     public static readonly facebookUrl = "https://www.facebook.com/Gr%C3%B8nlund-Lefort-102748237947390/";
     public static readonly apiBaseUrl = "https://api.uglyrage.com/api"; //"https://localhost:7003";
+    // public static readonly apiBaseUrl = "https://localhost:7003";
 }

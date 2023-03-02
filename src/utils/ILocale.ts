@@ -13,6 +13,12 @@ export interface ILocale {
     createCategorySuccessMessage: string;
     createCategoryFailedMessage: string;
     ProductCommaSeperatedText: string;
+    updateCategoryFormTitle : string;
+    updateCategoryFormOrder : string;
+    updateCategoryFormDescription : string;
+    updateCategoryFormImgURL : string;
+    updateCategoryFormOrderDesc : string;
+    updateCategoryFormDescriptionDesc : string;
 
     // Admin Header 
     GeneralHeaderAdmin: string; 

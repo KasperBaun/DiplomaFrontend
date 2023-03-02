@@ -87,6 +87,33 @@ class APIService implements IAPIService {
         }
     }
 
+    async updateCategory(category: Category, id : number): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} updating category with id: ${category.id} `, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Category/${id}`, {
+                method: 'PUT',
+                body: JSON.stringify(category),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            console.log(response.statusText)
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated category. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return;
+
+            } else {
+                console.log(`${this.prefix} failed to update category with id: ${category.id}. Status: ${response.status} ${response.statusText} `, this.color);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     async deleteCategory(id: number): Promise<WebAPIResponse> {
         const t1 = performance.now();
