@@ -12,15 +12,21 @@ const ListCategories = () => {
     const [visible, setVisibility] = useState(false);
     const onOpen = () => setVisibility(true);
     const onClose = () => setVisibility(false);
-    const { categoryStore } = useContext(MobXContext)
+    const { categoryStore, languageStore } = useContext(MobXContext)
 
     const handleOnDeleteCategory = async (id: number) => {
         // Pop Modal to confirm?
-        const deleted = await categoryStore.deleteCategory(id);
-        if (deleted) {
-            // Alt er godt
+        const catToBeDeleted = categoryStore.getCategory(id);
+        if (catToBeDeleted !== null) {
+            const deleted = await categoryStore.deleteCategory(id);
+            if (deleted) {
+                // Alt er godt
+                alert("Successfully deleted category: " + catToBeDeleted.name)
+            } else {
+                // Alt er lort
+            }
         } else {
-            // Alt er lort
+            alert("Could not find category with id: " + id);
         }
     }
 
@@ -29,15 +35,15 @@ const ListCategories = () => {
         return (
             <Container className="CategoryListContainer">
                 <Row style={{ width: "100%", justifyContent: "end" }}>
-                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpen}>Create new Category</Button>
+                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpen}>{languageStore.currentLanguage.createCategoryModalTitle}</Button>
                 </Row>
                 <Row style={{ width: "100%", marginTop: "1rem" }}>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
-                                <th className="CenterAligned_th">Name</th>
-                                <th className="CenterAligned_th">Description</th>
-                                <th className="CenterAligned_th">Order</th>
+                                <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryTitle}</th>
+                                <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryDescription}</th>
+                                <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryOrder}</th>
                                 <th></th>
                             </tr>
                         </thead>

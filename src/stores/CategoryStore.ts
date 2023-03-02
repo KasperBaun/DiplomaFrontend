@@ -53,8 +53,8 @@ export class CategoryStore {
         return this._categories;
     }
 
-    public async getCategory(id: number): Promise<Category> {
-        return await this.mockupService.getCategory(id);
+    public getCategory(id: number): Category {
+        return this._categories.find(c => c.id === id);
     }
 
     public async createCategory(category: Category): Promise<void> {
