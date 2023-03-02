@@ -1,8 +1,10 @@
-export default class SubCategory{
+import Category from "./Category";
+
+export default class Subcategory{
     id: number;
     name: string;
     order?: number;
     imageUrl?: string;
     description?: string;
-    Category: string; 
+    category: Category; 
 }

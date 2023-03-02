@@ -14,6 +14,19 @@ export default class DKLocale {
   createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori";
   ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
 
+  // Subcategory
+  createSubcategoryCategoryTitle = "Vælg kategori";
+  createSubcategoryModalTitle = "Opret underkategori";
+  createSubcategoryTitle = "Titel";
+  createSubcategoryOrder = "Rækkefølge";
+  createSubcategoryImgUrl = "Billede Url";
+  createSubcategoryDescription = "Beskrivelse";
+  createSubcategorySubmit = "Opret";
+  createSubcategorySuccessMessage = "Underkategory oprettet";
+  createSubcategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
+  createSubcategorySelectCategoryTitle = "Vælg kategori";
+  createSubcategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
+
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";
 

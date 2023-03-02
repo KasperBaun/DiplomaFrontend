@@ -16,6 +16,19 @@ export default class ENLocale implements ILocale {
   createCategoryFailedMessage = "Failed creating category";
   ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
 
+  // Subcategory
+  createSubcategoryModalTitle = "Create subcategory";
+  createSubcategoryCategoryTitle = "Choose subcategory";
+  createSubcategoryTitle = "Title";
+  createSubcategoryOrder = "Order";
+  createSubcategoryImgUrl = "Image Url";
+  createSubcategoryDescription = "Description";
+  createSubcategorySubmit = "Create";
+  createSubcategorySuccessMessage = "Subcategory created";
+  createSubcategoryFailedMessage = "Error. Could not create subcategory";
+  createSubcategorySelectCategoryTitle = "Choose category";
+  createSubcategorySelectCategoryFailedMessage ="You have to choose a category to create a subcategory";
+
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
