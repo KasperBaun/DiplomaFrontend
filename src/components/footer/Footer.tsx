@@ -1,11 +1,15 @@
 import { EnvelopeFill, Facebook, Instagram, TelephoneFill } from "react-bootstrap-icons";
 import { Constants } from "@utils/Constants";
 import "./footer.scss";
-import React from "react";
+import React, { useContext } from "react";
+import MobXContext from "@stores/MobXContext";
+import { observer } from "mobx-react-lite";
 
-const Footer: React.FC = function Footer() {
+const Footer: React.FC = observer(function Footer() {
 
   let year = new Date().getFullYear();
+
+  const {languageStore} = useContext(MobXContext);
 
   return (
     <>
@@ -19,17 +23,17 @@ const Footer: React.FC = function Footer() {
           </div>
 
           <p className="footer-links">
-            <a href={Constants.companyUrl} className="link-1">Home</a>
+            <a href={Constants.companyUrl} className="link-1">{languageStore.currentLanguage.HomeTabText}</a>
 
-            <a href={Constants.companyUrl}>Blog</a>
+            <a href={Constants.companyUrl}>{languageStore.currentLanguage.BlogTabText}</a>
 
-            <a href={Constants.companyUrl}>Pricing</a>
+            <a href={Constants.companyUrl}>{languageStore.currentLanguage.PricingTabText}</a>
 
-            <a href={Constants.companyUrl}>About</a>
+            <a href={Constants.companyUrl}>{languageStore.currentLanguage.AboutUsTabText}</a>
 
-            <a href={Constants.companyUrl}>Faq</a>
+            <a href={Constants.companyUrl}>{languageStore.currentLanguage.FAQTabText}</a>
 
-            <a href={Constants.companyUrl}>Contact</a>
+            <a href={Constants.companyUrl}>{languageStore.currentLanguage.ContactTabText}</a>
           </p>
 
           <div className="footer-icons">
@@ -46,6 +50,6 @@ const Footer: React.FC = function Footer() {
 
       </footer></>
   )
-}
+})
 
 export default Footer;
