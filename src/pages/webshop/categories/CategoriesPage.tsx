@@ -35,6 +35,12 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
             </div>
         )
     }
+    else {
+        return (
+            <h1>Loading...</h1>
+        )
+    }
+
 });
 
 export default CategoriesPage;
