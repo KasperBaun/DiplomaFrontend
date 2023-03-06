@@ -1,3 +1,4 @@
+import Category from "@models/Category";
 import { observer } from "mobx-react-lite"
 import { useContext } from "react";
 import { Card } from "react-bootstrap";
@@ -15,8 +16,8 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
     const { categoryStore } = useContext(MobXContext);
     const navigate = useNavigate();
 
-    function handleClick(categoryId: number) {
-        navigate('/subcategories/' + categoryId);
+    function handleClick(category: Category, name : String) {
+        navigate('/subcategories/' + category.id , { state: { name } })
     }
 
     if (categoryStore.Categories) {
@@ -24,7 +25,7 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
             <div className="container">
                 {categoryStore.Categories.map((category) => (
                     <div className="col-20">
-                        <Card border="primary" onClick={() => handleClick(category.id)}>
+                        <Card border="primary" onClick={() => handleClick(category, category.name)}>
                             <Card.Body>
                                 <img src={category.imageUrl} className='img-fluid shadow-4' alt='...' />
                             </Card.Body>
