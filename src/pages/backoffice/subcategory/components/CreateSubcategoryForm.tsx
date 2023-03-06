@@ -1,7 +1,7 @@
 import Category from "@models/Category";
-import Subcategory from "@models/SubCategory";
+import Subcategory from "@models/Subcategory";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
@@ -15,8 +15,24 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
 
     async function createSubcategory() {
-        const subCategory: Subcategory = ({ id: 0, name: title, imageUrl: url, order, description, category: selectedCategory })
-        console.log("subCat", subCategory);
+        const subCategory: Subcategory = {
+            id: 0,
+            name: title,
+            imageUrl: url,
+            order: order,
+            description: description,
+            categoryId: selectedCategory.id,
+            category: selectedCategory
+        };
+
+        if (!emptyValueCheck(subCategory)) {
+            alert(`${languageStore.currentLanguage.createSubcategoryMissingFieldsMessage}
+            ${languageStore.currentLanguage.createSubcategoryCategoryTitle}
+            ${languageStore.currentLanguage.createSubcategoryTitle}
+            ${languageStore.currentLanguage.createSubcategoryOrder}
+           `)
+            return;
+        }
 
         try {
             await subCategoryStore.createSubcategory(subCategory)
@@ -28,7 +44,23 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
         }
     }
 
-    const handleOptionChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+    function emptyValueCheck(subcategory: Subcategory): boolean {
+        if (!subcategory.name || subcategory.name === "") {
+            return false;
+        }
+        if (!subcategory.order || subcategory.order === 0) {
+            return false;
+        }
+        if (!subcategory.category || subcategory.category === null) {
+            return false;
+        }
+        if (!subcategory.categoryId || subcategory.categoryId === 0) {
+            return false;
+        }
+        return true;
+    }
+
+    function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
         if (event.currentTarget.value === "initValue") {
             alert(languageStore.currentLanguage.createSubcategorySelectCategoryFailedMessage);
             return;
@@ -38,9 +70,9 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
         }
     };
 
-    useEffect(() => {
-        console.log("selectedCategory", selectedCategory);
-    }, [selectedCategory]);
+    // useEffect(() => {
+    //     console.log("selectedCategory", selectedCategory);
+    // }, [selectedCategory]);
 
 
     return (

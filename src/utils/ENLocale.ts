@@ -24,10 +24,12 @@ export default class ENLocale implements ILocale {
   createSubcategoryImgUrl = "Image Url";
   createSubcategoryDescription = "Description";
   createSubcategorySubmit = "Create";
+  createSubcategoryUpdate = "Update";
   createSubcategorySuccessMessage = "Subcategory created";
   createSubcategoryFailedMessage = "Error. Could not create subcategory";
   createSubcategorySelectCategoryTitle = "Choose category";
-  createSubcategorySelectCategoryFailedMessage ="You have to choose a category to create a subcategory";
+  createSubcategorySelectCategoryFailedMessage = "You have to choose a category to create a subcategory";
+  createSubcategoryMissingFieldsMessage = "The following fields are required:";
 
   // Admin Header 
   GeneralHeaderAdmin = "General";

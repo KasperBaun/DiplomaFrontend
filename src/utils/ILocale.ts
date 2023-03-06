@@ -25,10 +25,12 @@ export interface ILocale {
   createSubcategoryImgUrl: string;
   createSubcategoryDescription: string;
   createSubcategorySubmit: string;
+  createSubcategoryUpdate: string;
   createSubcategorySuccessMessage: string;
   createSubcategoryFailedMessage: string;
   createSubcategorySelectCategoryTitle: string;
   createSubcategorySelectCategoryFailedMessage: string;
+  createSubcategoryMissingFieldsMessage: string;
 
   // Admin Header 
   GeneralHeaderAdmin: string;

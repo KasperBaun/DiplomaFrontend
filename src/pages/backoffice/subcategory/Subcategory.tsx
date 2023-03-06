@@ -6,7 +6,7 @@ import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/esm/Table";
 import { Spinner } from "react-bootstrap";
-import Subcategory from "@models/SubCategory";
+import Subcategory from "@models/Subcategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
 import CreateSubcategoryModal from "./components/CreateSubcategoryModal";
 import UpdateSubcategoryModal from "./components/UpdateSubcategoryModal";
@@ -77,7 +77,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
                     </Table>
                 </Row>
                 <CreateSubcategoryModal visible={visibleCreate} onClose={onCloseCreate} />
-                <UpdateSubcategoryModal visible={visibleUpdate} onClose={onCloseUpdate} category={selectedSubcategory} />
+                <UpdateSubcategoryModal visible={visibleUpdate} onClose={onCloseUpdate} subcategory={selectedSubcategory} />
             </Container>
         )
     else
