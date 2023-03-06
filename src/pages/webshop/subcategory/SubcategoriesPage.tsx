@@ -14,14 +14,15 @@ const SubcategoriesPage: React.FC<ISubcategoriesPageProps> = observer(function S
     let {id} = useParams();
     const location = useLocation(); 
     const {name} = location.state; 
+    const subCategories = (subCategoryStore.subCategoriesByCategoryID(Number(id)))
 
-    if (subCategoryStore.SubCategories) {
+   
         return (
             <div>
                 <h1>{id} + {name}</h1>
 
             <div className="container">
-                {subCategoryStore.SubCategories.map((subCategory) => (
+                {subCategories.map((subCategory) => (
                     <div className="col-20">
                         <Card border="primary">
                             <Card.Body>
@@ -34,7 +35,6 @@ const SubcategoriesPage: React.FC<ISubcategoriesPageProps> = observer(function S
             </div>
         </div>
         )
-    }
 });
 
 export default SubcategoriesPage;

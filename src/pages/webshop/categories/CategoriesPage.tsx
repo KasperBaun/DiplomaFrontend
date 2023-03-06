@@ -24,7 +24,7 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
         return (
             <div className="container">
                 {categoryStore.Categories.map((category) => (
-                    <div className="col-20">
+                    <div className="col-20" key={category.id + "Component"}>
                         <Card border="primary" onClick={() => handleClick(category, category.name)}>
                             <Card.Body>
                                 <img src={category.imageUrl} className='img-fluid shadow-4' alt='...' />
