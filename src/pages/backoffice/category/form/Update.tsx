@@ -2,6 +2,7 @@ import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { Button, Form, Image } from "react-bootstrap";
+import CategoryFormGroup from "../components/CategoryFormGroup";
 
 interface IProps {
     category : Category
@@ -9,56 +10,76 @@ interface IProps {
 
 const UpdateForm = ( {category} : IProps) => {
 
-    const { categoryStore } = useContext(MobXContext);
+    const { languageStore, categoryStore } = useContext(MobXContext);
 
     const [title, setTitle] = useState<string>(category.name);
     const [url, setUrl] = useState<string>(category.imageUrl ? category.imageUrl : "");
     const [order, setOrder] = useState<number>(category.order ? category.order : 0);
     const [description, setDescription] = useState<string>(category.description ? category.description : "");
 
-    function updateCategory(updatedCategory : Category) {
-        
+    async function handleOnUpdateCategory() {
+        console.log(title);
+        console.log(url);
+        console.log(order);
+        console.log(description);
+
+        const updateAction : Category = {
+            id: category.id,
+            name: title,
+            imageUrl: url,
+            order: order,
+            description: description,
+        };
+
+        try {
+            await categoryStore.updateCategory(updateAction, category.id);
+            alert(languageStore.currentLanguage.createCategorySuccessMessage);
+        }
+        catch (err) {
+            console.log(err);
+            alert(languageStore.currentLanguage.createCategoryFailedMessage);
+        }
+
     }
 
     return (
         <Form>
             <Form.Group className="UpdateFormImageFormGroup">
-                <Image className="UpdateFormImage" src={category.imageUrl ? category.imageUrl : ""} alt="No image" />
+                <Image className="UpdateFormImage" src={url ? url : category.imageUrl} alt="No image" />
             </Form.Group>
-            <Form.Group>
-                <Form.Label>Title</Form.Label>
-                <Form.Control value={category.name ? 
-                category.name : ""} type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setTitle(temp);
-                }} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Order</Form.Label>
-                <Form.Control value={category.order ? 
-                category.order : ""} type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setOrder(parseInt(temp));
-                }} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Image Url</Form.Label>
-                <Form.Control value={category.imageUrl ? 
-                category.imageUrl : ""} type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setUrl(temp);
-                }} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>Description</Form.Label>
-                <Form.Control value={category.description ? 
-                category.description : ""} type="textarea" onChange={(event) => {
-                    let temp = event.target.value;
-                    setDescription(temp);
-                }} />
-            </Form.Group>
-            <Button variant="primary" type="submit" style={{ marginTop: "0.5rem" }} >
-                Submit
+
+            <CategoryFormGroup type="TextForm_NoDesc"
+            stateVal={title}
+            stateFunc={setTitle} 
+            index={0}
+            formName={"Update_Cat_Title"}
+            title={languageStore.currentLanguage.updateCategoryFormTitle} />
+
+            <CategoryFormGroup type="TextForm_Desc" 
+            stateVal={order}
+            stateFuncNumber={setOrder}
+            index={1}
+            formName="Update_Cat_Order"
+            descText={languageStore.currentLanguage.updateCategoryFormOrderDesc}
+            title={languageStore.currentLanguage.updateCategoryFormOrder} />
+
+            <CategoryFormGroup type="TextForm_NoDesc"
+            stateVal={url}
+            stateFunc={setUrl} 
+            index={2}
+            formName={"Update_Cat_ImgURL"}
+            title={languageStore.currentLanguage.updateCategoryFormImgURL} />
+
+            <CategoryFormGroup type="TextForm_Area_Desc" 
+            stateVal={description} 
+            stateFunc={setDescription} 
+            index={3} 
+            formName={"Update_Cat_Desc"} 
+            descText={languageStore.currentLanguage.updateCategoryFormDescriptionDesc}
+            title={languageStore.currentLanguage.updateCategoryFormDescription} />
+
+            <Button variant="primary" type="submit" style={{ marginTop: "0.5rem" }} onClick={handleOnUpdateCategory}>
+                {languageStore.currentLanguage.createCategorySubmit}
             </Button>
         </Form>
     )

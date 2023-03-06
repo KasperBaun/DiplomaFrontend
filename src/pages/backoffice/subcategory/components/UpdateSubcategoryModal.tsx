@@ -1,14 +1,14 @@
 import { Container, Modal } from "react-bootstrap";
 import UpdateForm from "./UpdateSubcategoryForm";
 import { observer } from "mobx-react-lite";
-import Subcategory from "@models/Subcategory";
+import SubCategory from "@models/SubCategory";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 
 interface IUpdateSubCategoryModalProps {
     visible: boolean;
     onClose: () => void;
-    subcategory?: Subcategory;
+    subcategory?: SubCategory;
 }
 
 const UpdateSubcategoryModal: React.FC<IUpdateSubCategoryModalProps> = observer(function UpdateSubcategoryModal(props: IUpdateSubCategoryModalProps) {
