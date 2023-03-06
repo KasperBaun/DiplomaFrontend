@@ -36,6 +36,7 @@ export default class DKLocale {
   createSubcategorySelectCategoryTitle = "Vælg kategori";
   createSubcategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
   createSubcategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
+  noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side"; 
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";

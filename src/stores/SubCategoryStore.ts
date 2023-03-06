@@ -14,8 +14,10 @@ export class SubCategoryStore {
     private color: string = ComponentLoggingConfig.Lightcyan;
     private loaded: boolean = false;
     private apiService: APIService;
-    private _subCategories: SubCategory[] = [];
-
+    private _subCategories: Subcategory[] = [];
+    private subcategoryMapping : Map<Number, Subcategory[]> = new Map(); 
+    
+    
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
         this.rootStore = _rootStore;

@@ -7,18 +7,19 @@ import { Card } from "react-bootstrap";
 interface ISubcategoriesPageProps {
 }
 
-const SubcategoriesPage: React.FC<ISubcategoriesPageProps> = observer(function SubcategoriesPage(props: ISubcategoriesPageProps) {
+const SubcategoriesPage: React.FC<ISubcategoriesPageProps> = observer(function SubcategoriesPage(this: any, props: ISubcategoriesPageProps) {
     const { subCategoryStore } = useContext(MobXContext);   
     // const navigate = useNavigate();
-        
+    const { languageStore } = useContext(MobXContext);
+
     let {id} = useParams();
     const location = useLocation(); 
     const {name} = location.state; 
 
-    if (subCategoryStore.SubCategories) {
+    if (subCategories.length > 0){
         return (
             <div>
-                <h1>{id} + {name}</h1>
+                <h1>{name}</h1>
 
             <div className="container">
                 {subCategoryStore.SubCategories.map((subCategory) => (
@@ -33,6 +34,14 @@ const SubcategoriesPage: React.FC<ISubcategoriesPageProps> = observer(function S
                 ))}
             </div>
         </div>
+        )
+    }
+    else {
+        return(
+            <div>
+                <h1>{name}</h1>
+                <h3>{languageStore.currentLanguage.noSubCategoriesToShow} </h3>
+            </div>
         )
     }
 });
