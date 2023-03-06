@@ -1,7 +1,7 @@
 export interface ILocale {
-    id: string;
-    aboutUs: string;
-    aboutUsText: string;
+  id: string;
+  aboutUs: string;
+  aboutUsText: string;
 
     // Category Admin
     createCategoryModalTitle: string;
@@ -19,32 +19,52 @@ export interface ILocale {
     updateCategoryFormImgURL : string;
     updateCategoryFormOrderDesc : string;
     updateCategoryFormDescriptionDesc : string;
+  ///////////////////////////////////////////////////////////////////////////////
+  // BACKOFFICE
 
-    // Admin Header 
-    GeneralHeaderAdmin: string; 
+  // Subcategory
+  createSubcategoryCategoryTitle: string;
+  createSubcategoryModalTitle: string;
+  createSubcategoryTitle: string;
+  createSubcategoryOrder: string;
+  createSubcategoryImgUrl: string;
+  createSubcategoryDescription: string;
+  createSubcategorySubmit: string;
+  createSubcategoryUpdate: string;
+  createSubcategorySuccessMessage: string;
+  createSubcategoryFailedMessage: string;
+  createSubcategorySelectCategoryTitle: string;
+  createSubcategorySelectCategoryFailedMessage: string;
+  createSubcategoryMissingFieldsMessage: string;
+  noSubCategoriesToShow: string; 
 
-    //Admin Tabs
-    AnalyticsTabText: string; 
-    SalesTabText: string; 
-    InventoryTabText: string; 
-    ProductSniperTabText: string; 
-      ManagementTabText: string; 
+  // Admin Header 
+  GeneralHeaderAdmin: string;
 
-      // Header tabs
-      HomeTabText: string;
-      ProductTabText: string; 
-      CategoriesTabText: string;
-      SubCategoriesTabText: string;
-      BasketTabText: string;
-      PaymentTabText: string;
-      ConfirmationTabText: string;
-      BackOfficeTabText: string;
-      SearchBarText: string;
+  //Admin Tabs
+  AnalyticsTabText: string;
+  SalesTabText: string;
+  InventoryTabText: string;
+  ProductSniperTabText: string;
+  ManagementTabText: string;
 
-      // Footer tabs
-      BlogTabText: string;
-      PricingTabText: string;
-      AboutUsTabText: string;
-      FAQTabText: string;
-      ContactTabText: string;
+  ///////////////////////////////////////////////////////////////////////////////
+
+  // Header tabs
+  HomeTabText: string;
+  ProductTabText: string;
+  CategoriesTabText: string;
+  SubCategoriesTabText: string;
+  BasketTabText: string;
+  PaymentTabText: string;
+  ConfirmationTabText: string;
+  BackOfficeTabText: string;
+  SearchBarText: string;
+
+  // Footer tabs
+  BlogTabText: string;
+  PricingTabText: string;
+  AboutUsTabText: string;
+  FAQTabText: string;
+  ContactTabText: string;
 }

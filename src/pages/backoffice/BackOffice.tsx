@@ -5,6 +5,7 @@ import "./css/backoffice.scss"
 import BOCategories from "@backoffice/category/Categories"
 import BackOfficeDashboard from './Dashboard/dashboard';
 import { useState } from 'react';
+import Subcategories from './subcategory/Subcategory';
 
 const BackOfficeMain = () => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
@@ -13,6 +14,7 @@ const BackOfficeMain = () => {
         switch(activeNavKey) {
             case 0 : return (<BackOfficeDashboard />)
             case 1 : return (<BOCategories />)
+            case 2 : return (<Subcategories />)
         }
     }
 

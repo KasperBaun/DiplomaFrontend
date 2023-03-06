@@ -23,6 +23,21 @@ export default class ENLocale implements ILocale {
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
 
+  // Subcategory
+  createSubcategoryModalTitle = "Create subcategory";
+  createSubcategoryCategoryTitle = "Choose subcategory";
+  createSubcategoryTitle = "Title";
+  createSubcategoryOrder = "Order";
+  createSubcategoryImgUrl = "Image Url";
+  createSubcategoryDescription = "Description";
+  createSubcategorySubmit = "Create";
+  createSubcategoryUpdate = "Update";
+  createSubcategorySuccessMessage = "Subcategory created";
+  createSubcategoryFailedMessage = "Error. Could not create subcategory";
+  createSubcategorySelectCategoryTitle = "Choose category";
+  createSubcategorySelectCategoryFailedMessage = "You have to choose a category to create a subcategory";
+  createSubcategoryMissingFieldsMessage = "The following fields are required:";
+  noSubCategoriesToShow = "There are currently no subcategories on this page";
   // Admin Header 
   GeneralHeaderAdmin = "General";
 

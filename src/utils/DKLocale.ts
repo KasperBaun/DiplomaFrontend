@@ -21,6 +21,22 @@ export default class DKLocale {
     updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
     updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
 
+  // Subcategory
+  createSubcategoryCategoryTitle = "Vælg kategori";
+  createSubcategoryModalTitle = "Opret underkategori";
+  createSubcategoryTitle = "Titel";
+  createSubcategoryOrder = "Rækkefølge";
+  createSubcategoryImgUrl = "Billede Url";
+  createSubcategoryDescription = "Beskrivelse";
+  createSubcategorySubmit = "Opret";
+  createSubcategoryUpdate = "Opdater";
+  createSubcategorySuccessMessage = "Underkategory oprettet";
+  createSubcategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
+  createSubcategorySelectCategoryTitle = "Vælg kategori";
+  createSubcategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
+  createSubcategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
+  noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side"; 
+
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";
 
