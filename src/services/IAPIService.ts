@@ -9,7 +9,8 @@ interface IAPIService {
     deleteCategory(id: number): Promise<WebAPIResponse>;
 
     getSubcategories(): Promise<SubCategory[]>;
-    createSubcategory(subCategory:SubCategory): Promise<WebAPIResponse>;
+    createSubcategory(subcategory:SubCategory): Promise<WebAPIResponse>;
+    updateSubcategory(subcategory:SubCategory): Promise<WebAPIResponse>;
     deleteSubcategory(id: number): Promise<WebAPIResponse>;
 }
 

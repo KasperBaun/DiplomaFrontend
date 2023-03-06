@@ -27,6 +27,7 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
+
     async getSubcategories(): Promise<SubCategory[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
@@ -87,6 +88,42 @@ class APIService implements IAPIService {
                 }
             } else {
                 console.log(`${this.prefix} failed creating subcategory with name ${subcategory.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
+    }
+    async updateSubcategory(subcategory: SubCategory): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to update subcategory with name ${subcategory.name}`, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Subcategory/${subcategory.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(subcategory),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated subcategory with name ${subcategory.name}. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
+            } else {
+                console.log(`${this.prefix} failed updating subcategory with name ${subcategory.name}. Status: ${response.status} ${response.statusText}`, this.color);
                 return {
                     success: false,
                     statusCode: response.status,
@@ -162,7 +199,7 @@ class APIService implements IAPIService {
         }
     }
 
-    async updateCategory(category: Category, id : number): Promise<WebAPIResponse> {
+    async updateCategory(category: Category, id: number): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} updating category with id: ${category.id} `, this.color);

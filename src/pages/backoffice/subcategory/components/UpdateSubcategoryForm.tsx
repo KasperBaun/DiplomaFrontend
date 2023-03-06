@@ -18,9 +18,9 @@ const UpdateForm = ({ subcategory }: IProps) => {
     const [description, setDescription] = useState<string>(subcategory.description ? subcategory.description : "");
     const [selectedCategory, setSelectedCategory] = useState<Category>(subcategory.category ? subcategory.category : null);
 
-    async function updateSubcategory() {
+    async function updateSubcategory(): Promise<void> {
         const subCategory: SubCategory = {
-            id: 0,
+            id: subcategory.id,
             name: title,
             imageUrl: url,
             order: order,
@@ -39,7 +39,7 @@ const UpdateForm = ({ subcategory }: IProps) => {
         }
 
         try {
-            await subCategoryStore.createSubcategory(subCategory)
+            await subCategoryStore.updateSubcategory(subCategory)
             alert(languageStore.currentLanguage.createSubcategoryUpdateSuccessMessage);
         }
         catch (err) {
@@ -67,7 +67,10 @@ const UpdateForm = ({ subcategory }: IProps) => {
     function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
 
         const categoryId: number = parseInt(event.currentTarget.value);
-        setSelectedCategory(categoryStore.getCategory(categoryId));
+        const category = categoryStore.getCategory(categoryId);
+        subcategory.category = category;
+        subcategory.categoryId = categoryId;
+        setSelectedCategory(category);
         return;
 
     };
@@ -100,34 +103,31 @@ const UpdateForm = ({ subcategory }: IProps) => {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>{languageStore.currentLanguage.createSubcategoryTitle}</Form.Label>
-                    <Form.Control type="text" onChange={(event) => {
+                    <Form.Control value={title} type="text" onChange={(event) => {
                         let temp = event.target.value;
                         setTitle(temp);
                     }} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>{languageStore.currentLanguage.createSubcategoryOrder}</Form.Label>
-                    <Form.Control value={subcategory.order ?
-                        subcategory.order : ""} type="text" onChange={(event) => {
-                            let temp = event.target.value;
-                            setOrder(parseInt(temp));
-                        }} />
+                    <Form.Control value={order} type="text" onChange={(event) => {
+                        let temp = event.target.value;
+                        setOrder(parseInt(temp));
+                    }} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>{languageStore.currentLanguage.createSubcategoryImgUrl}</Form.Label>
-                    <Form.Control value={subcategory.imageUrl ?
-                        subcategory.imageUrl : ""} type="text" onChange={(event) => {
-                            let temp = event.target.value;
-                            setUrl(temp);
-                        }} />
+                    <Form.Control value={url} type="text" onChange={(event) => {
+                        let temp = event.target.value;
+                        setUrl(temp);
+                    }} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>{languageStore.currentLanguage.createSubcategoryDescription}</Form.Label>
-                    <Form.Control value={subcategory.description ?
-                        subcategory.description : ""} type="textarea" onChange={(event) => {
-                            let temp = event.target.value;
-                            setDescription(temp);
-                        }} />
+                    <Form.Control value={description} type="textarea" onChange={(event) => {
+                        let temp = event.target.value;
+                        setDescription(temp);
+                    }} />
                 </Form.Group>
                 <Button variant="primary" type="submit" onClick={updateSubcategory} style={{ marginTop: "0.5rem" }} >
                     {languageStore.currentLanguage.createSubcategoryUpdate}
