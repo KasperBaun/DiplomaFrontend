@@ -1,4 +1,3 @@
-import Category from "@models/Category";
 import { Container, Modal } from "react-bootstrap";
 import UpdateForm from "./UpdateSubcategoryForm";
 import { observer } from "mobx-react-lite";

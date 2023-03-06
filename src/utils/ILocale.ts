@@ -28,6 +28,8 @@ export interface ILocale {
   createSubcategoryUpdate: string;
   createSubcategorySuccessMessage: string;
   createSubcategoryFailedMessage: string;
+  createSubcategoryUpdateSuccessMessage: string;
+  createSubcategoryUpdateFailedMessage: string;
   createSubcategorySelectCategoryTitle: string;
   createSubcategorySelectCategoryFailedMessage: string;
   createSubcategoryMissingFieldsMessage: string;

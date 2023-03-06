@@ -40,11 +40,11 @@ const UpdateForm = ({ subcategory }: IProps) => {
 
         try {
             await subCategoryStore.createSubcategory(subCategory)
-            alert(languageStore.currentLanguage.createSubcategorySuccessMessage);
+            alert(languageStore.currentLanguage.createSubcategoryUpdateSuccessMessage);
         }
         catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createSubcategoryFailedMessage);
+            alert(languageStore.currentLanguage.createSubcategoryUpdateFailedMessage);
         }
     }
 
@@ -65,68 +65,76 @@ const UpdateForm = ({ subcategory }: IProps) => {
     }
 
     function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
-        if (event.currentTarget.value === "initValue") {
-            alert(languageStore.currentLanguage.createSubcategorySelectCategoryFailedMessage);
-            return;
-        } else {
-            const categoryId: number = parseInt(event.currentTarget.value);
-            setSelectedCategory(categoryStore.getCategory(categoryId));
-        }
+
+        const categoryId: number = parseInt(event.currentTarget.value);
+        setSelectedCategory(categoryStore.getCategory(categoryId));
+        return;
+
     };
 
-    return (
-        <Form>
-            <Form.Group className="UpdateFormImageFormGroup">
-                <Image className="UpdateFormImage" src={subcategory.imageUrl ? subcategory.imageUrl : ""} alt="No image" />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryCategoryTitle}</Form.Label>
-                <Form.Select aria-label="Select category" onChange={handleOptionChange}>
-                    <option key="initKey" value="initValue" >{subcategory.category.name}</option>
-                    {categoryStore.Categories.map((category, index) => {
-                        return (
-                            <option key={"option" + category.name + index} value={category.id}>{category.name}</option>
-                        )
-                    })}
+    if (!subcategory) {
+        return (
+            <div>
+                <h1>Loading...</h1>
+            </div>
+        )
+    } else {
 
-                </Form.Select>
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryTitle}</Form.Label>
-                <Form.Control type="text" onChange={(event) => {
-                    let temp = event.target.value;
-                    setTitle(temp);
-                }} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryOrder}</Form.Label>
-                <Form.Control value={subcategory.order ?
-                    subcategory.order : ""} type="text" onChange={(event) => {
+
+        return (
+            <Form>
+                <Form.Group className="UpdateFormImageFormGroup">
+                    <Image className="UpdateFormImage" src={subcategory.imageUrl ? subcategory.imageUrl : ""} alt="No image" />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>{languageStore.currentLanguage.createSubcategoryCategoryTitle}</Form.Label>
+                    <Form.Select aria-label="Select category" onChange={handleOptionChange}>
+                        <option key="initKey" value={subcategory.categoryId} >{subcategory.category.name}</option>
+                        {categoryStore.Categories.map((category, index) => {
+                            return (
+                                <option key={"option" + category.name + index} value={category.id}>{category.name}</option>
+                            )
+                        })}
+
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>{languageStore.currentLanguage.createSubcategoryTitle}</Form.Label>
+                    <Form.Control type="text" onChange={(event) => {
                         let temp = event.target.value;
-                        setOrder(parseInt(temp));
+                        setTitle(temp);
                     }} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryImgUrl}</Form.Label>
-                <Form.Control value={subcategory.imageUrl ?
-                    subcategory.imageUrl : ""} type="text" onChange={(event) => {
-                        let temp = event.target.value;
-                        setUrl(temp);
-                    }} />
-            </Form.Group>
-            <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryDescription}</Form.Label>
-                <Form.Control value={subcategory.description ?
-                    subcategory.description : ""} type="textarea" onChange={(event) => {
-                        let temp = event.target.value;
-                        setDescription(temp);
-                    }} />
-            </Form.Group>
-            <Button variant="primary" type="submit" onClick={updateSubcategory} style={{ marginTop: "0.5rem" }} >
-                {languageStore.currentLanguage.createSubcategoryUpdate}
-            </Button>
-        </Form>
-    )
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>{languageStore.currentLanguage.createSubcategoryOrder}</Form.Label>
+                    <Form.Control value={subcategory.order ?
+                        subcategory.order : ""} type="text" onChange={(event) => {
+                            let temp = event.target.value;
+                            setOrder(parseInt(temp));
+                        }} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>{languageStore.currentLanguage.createSubcategoryImgUrl}</Form.Label>
+                    <Form.Control value={subcategory.imageUrl ?
+                        subcategory.imageUrl : ""} type="text" onChange={(event) => {
+                            let temp = event.target.value;
+                            setUrl(temp);
+                        }} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>{languageStore.currentLanguage.createSubcategoryDescription}</Form.Label>
+                    <Form.Control value={subcategory.description ?
+                        subcategory.description : ""} type="textarea" onChange={(event) => {
+                            let temp = event.target.value;
+                            setDescription(temp);
+                        }} />
+                </Form.Group>
+                <Button variant="primary" type="submit" onClick={updateSubcategory} style={{ marginTop: "0.5rem" }} >
+                    {languageStore.currentLanguage.createSubcategoryUpdate}
+                </Button>
+            </Form>
+        )
+    }
 }
 
 export default UpdateForm;

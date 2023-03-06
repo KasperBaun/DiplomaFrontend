@@ -25,6 +25,8 @@ export default class DKLocale {
   createSubcategoryUpdate = "Opdater";
   createSubcategorySuccessMessage = "Underkategory oprettet";
   createSubcategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
+  createSubcategoryUpdateSuccessMessage = "Opdatering gennemført";
+  createSubcategoryUpdateFailedMessage: "Kunne ikke gennemføre opdatering";
   createSubcategorySelectCategoryTitle = "Vælg kategori";
   createSubcategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
   createSubcategoryMissingFieldsMessage = "Følgende felter er påkrævede:";

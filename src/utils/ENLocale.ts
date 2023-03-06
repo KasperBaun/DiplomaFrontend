@@ -27,6 +27,8 @@ export default class ENLocale implements ILocale {
   createSubcategoryUpdate = "Update";
   createSubcategorySuccessMessage = "Subcategory created";
   createSubcategoryFailedMessage = "Error. Could not create subcategory";
+  createSubcategoryUpdateSuccessMessage = "Successfully updated subcategory";
+  createSubcategoryUpdateFailedMessage = "Error. Could not update subcategory";
   createSubcategorySelectCategoryTitle = "Choose category";
   createSubcategorySelectCategoryFailedMessage = "You have to choose a category to create a subcategory";
   createSubcategoryMissingFieldsMessage = "The following fields are required:";
