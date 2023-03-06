@@ -14,7 +14,7 @@ export class SubCategoryStore{
     private color: string = ComponentLoggingConfig.Lightcyan;
     private loaded: boolean = false;
     private apiService: APIService;
-    private subCategories: SubCategory[] = [];
+    private _subCategories: SubCategory[] = [];
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -23,8 +23,8 @@ export class SubCategoryStore{
     }
 
     public async init(): Promise<boolean> {
-        // Fetch categories
-        //this.subCategories = await this.mockupService.getSubCategories();
+
+        this._subCategories = await this.apiService.getSubCategories(); 
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -47,8 +47,13 @@ export class SubCategoryStore{
     }
 
     public  getSubCategories(): SubCategory[] {
-        return this.subCategories;
+        return this._subCategories;
     }
+
+    public get SubCategories(): SubCategory[] {
+        return this._subCategories;
+    }
+
 
     /*public async getSubCategory(id: number): Promise<SubCategory> {
         return await this.mockupService.getSubCategory(id);
