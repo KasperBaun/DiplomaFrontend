@@ -30,7 +30,7 @@ export default class ENLocale implements ILocale {
   createSubcategorySelectCategoryTitle = "Choose category";
   createSubcategorySelectCategoryFailedMessage = "You have to choose a category to create a subcategory";
   createSubcategoryMissingFieldsMessage = "The following fields are required:";
-
+  noSubCategoriesToShow = "There are currently no subcategories on this page";
   // Admin Header 
   GeneralHeaderAdmin = "General";
 

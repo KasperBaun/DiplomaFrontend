@@ -18,6 +18,7 @@ export class SubCategoryStore {
     private _subCategories: Subcategory[] = [];
     private subcategoryMapping : Map<Number, Subcategory[]> = new Map(); 
     
+    
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
         this.rootStore = _rootStore;

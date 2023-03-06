@@ -31,6 +31,7 @@ export interface ILocale {
   createSubcategorySelectCategoryTitle: string;
   createSubcategorySelectCategoryFailedMessage: string;
   createSubcategoryMissingFieldsMessage: string;
+  noSubCategoriesToShow: string; 
 
   // Admin Header 
   GeneralHeaderAdmin: string;
