@@ -1,6 +1,6 @@
 import Category from "@models/Category";
 import { WebAPIResponse } from "./APIService";
-import Subcategory from "@models/Subcategory";
+import SubCategory from "@models/SubCategory";
 
 
 interface IAPIService {
@@ -8,8 +8,8 @@ interface IAPIService {
     createCategory(category:Category): Promise<void>;
     deleteCategory(id: number): Promise<WebAPIResponse>;
 
-    getSubcategories(): Promise<Subcategory[]>;
-    createSubcategory(subCategory:Subcategory): Promise<WebAPIResponse>;
+    getSubcategories(): Promise<SubCategory[]>;
+    createSubcategory(subCategory:SubCategory): Promise<WebAPIResponse>;
     deleteSubcategory(id: number): Promise<WebAPIResponse>;
 }
 

@@ -6,7 +6,7 @@ import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/esm/Table";
 import { Spinner } from "react-bootstrap";
-import Subcategory from "@models/Subcategory";
+import SubCategory from "@models/SubCategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
 import CreateSubcategoryModal from "./components/CreateSubcategoryModal";
 import UpdateSubcategoryModal from "./components/UpdateSubcategoryModal";
@@ -21,7 +21,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
     const onCloseCreate = () => setVisibilityCreate(false);
     const onOpenUpdate = () => setVisibilityUpdate(true);
     const onCloseUpdate = () => setVisibilityUpdate(false);
-    const [selectedSubcategory, setSelectedSubcategory] = useState<Subcategory>();
+    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>();
 
     const handleOnDeleteCategory = async (id: number) => {
         // Pop Modal to confirm?
@@ -38,7 +38,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
         }
     }
 
-    const handleOnUpdateCategory = (subCat: Subcategory) => {
+    const handleOnUpdateCategory = (subCat: SubCategory) => {
         setSelectedSubcategory(subCat);
         onOpenUpdate();
     }

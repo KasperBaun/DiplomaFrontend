@@ -15,10 +15,14 @@
 
 .UpdateFormImage {
     object-fit: fill;
-    width: 25rem;
+    width: 20rem;
 }
 
 .UpdateFormImageFormGroup {
     padding: 1rem;
     text-align: center;
+}
+
+.ModalFormLabel {
+    color: var(--text-color);
 }

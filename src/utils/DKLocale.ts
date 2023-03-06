@@ -13,6 +13,13 @@ export default class DKLocale {
   createCategorySuccessMessage = "Kategory oprettet";
   createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori";
   ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
+    // Update Form
+    updateCategoryFormTitle = "Titel";
+    updateCategoryFormOrder = "Rækkefølge";
+    updateCategoryFormDescription = "Beskrivelse";
+    updateCategoryFormImgURL = "Billede URL"; 
+    updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
+    updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
 
   // Subcategory
   createSubcategoryCategoryTitle = "Vælg kategori";

@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import Subcategory from '@models/Subcategory';
+import SubCategory from '@models/SubCategory';
 import APIService from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
@@ -15,8 +15,8 @@ export class SubCategoryStore {
     private color: string = ComponentLoggingConfig.Lightcyan;
     private loaded: boolean = false;
     private apiService: APIService;
-    private _subCategories: Subcategory[] = [];
-    private subcategoryMapping : Map<Number, Subcategory[]> = new Map(); 
+    private _subCategories: SubCategory[] = [];
+    private subcategoryMapping : Map<Number, SubCategory[]> = new Map(); 
     
     
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -39,7 +39,7 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public mapSubCategoriesToId(subCategories : Subcategory[]){
+    public mapSubCategoriesToId(subCategories : SubCategory[]){
         const categories = this.rootStore.categoryStore.Categories
 
         for (const cat of categories){
@@ -56,7 +56,7 @@ export class SubCategoryStore {
         }
         return SubCategoryStore._Instance;
     }
-    public get subCategories(): Subcategory[] {
+    public get subCategories(): SubCategory[] {
         return this._subCategories;
     }
 
@@ -64,20 +64,20 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public getSubcategories(): Subcategory[] {
+    public getSubcategories(): SubCategory[] {
         return this._subCategories;
     }
 
-    public get SubCategories(): Subcategory[] {
+    public get SubCategories(): SubCategory[] {
         return this._subCategories;
     }
 
-    public subCategoriesByCategoryID(categoryId : Number) : Subcategory[]{
+    public subCategoriesByCategoryID(categoryId : Number) : SubCategory[]{
 
         return this.subcategoryMapping.get(categoryId);
     }
 
-    public async getSubcategory(id: number): Promise<Subcategory> {
+    public async getSubcategory(id: number): Promise<SubCategory> {
         return null;
     }
 
@@ -85,7 +85,7 @@ export class SubCategoryStore {
         return null;
     }
 
-    public async createSubcategory(subCategory: Subcategory): Promise<boolean> {
+    public async createSubcategory(subCategory: SubCategory): Promise<boolean> {
         const response = await this.apiService.createSubcategory(subCategory);
         if (response.success) {
             return true;

@@ -70,4 +70,17 @@ export class CategoryStore {
             return false;
         }
     }
+
+    public async updateCategory(category: Category, id : number): Promise<boolean> {
+        const updateResult = await this.apiService.updateCategory(category, id);
+        if(updateResult.success) {
+            runInAction(() => {
+                this._categories = this._categories.filter(c => c.id !== id);
+            })
+            return true;
+        }
+        if (!updateResult.success) {
+            return false;
+        }
+    }
 }
