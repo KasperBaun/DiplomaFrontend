@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import Subcategory from '@models/SubCategory';
+import Subcategory from '@models/Subcategory';
 import APIService from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
@@ -61,8 +61,13 @@ export class SubCategoryStore {
         return null;
     }
 
-    public async createSubcategory(subCategory: Subcategory): Promise<boolean>{
-        return null;
+    public async createSubcategory(subCategory: Subcategory): Promise<boolean> {
+        const response = await this.apiService.createSubcategory(subCategory);
+        if (response.success) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

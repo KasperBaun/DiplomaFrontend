@@ -1,6 +1,6 @@
 import Category from "@models/Category";
 import { WebAPIResponse } from "./APIService";
-import Subcategory from "@models/SubCategory";
+import Subcategory from "@models/Subcategory";
 
 
 interface IAPIService {

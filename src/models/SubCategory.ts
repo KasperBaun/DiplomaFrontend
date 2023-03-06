@@ -6,5 +6,6 @@ export default class Subcategory{
     order?: number;
     imageUrl?: string;
     description?: string;
+    categoryId: number;
     category: Category; 
 }

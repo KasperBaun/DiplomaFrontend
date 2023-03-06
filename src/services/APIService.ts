@@ -3,7 +3,7 @@ import Category from "@models/Category";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
 import IAPIService from "./IAPIService";
-import Subcategory from "@models/SubCategory";
+import Subcategory from "@models/Subcategory";
 
 export interface WebAPIResponse {
     success: boolean;
@@ -59,9 +59,45 @@ class APIService implements IAPIService {
             console.error(error);
         }
     }
-    async createSubcategory(subCategory: Subcategory): Promise<WebAPIResponse> {
-        throw new Error("Method not implemented.");
+
+    async createSubcategory(subcategory: Subcategory): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to create subcategory with name ${subcategory.name}`, this.color);
+        }
+
+        try {
+            console.log("we here");
+            const response = await fetch(`${this.apiBaseUrl}/Subcategory`, {
+                method: 'POST',
+                body: JSON.stringify(subcategory),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created subcategory with name ${subcategory.name}. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
+            } else {
+                console.log(`${this.prefix} failed creating subcategory with name ${subcategory.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
     }
+
     async deleteSubcategory(id: number): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");
     }
