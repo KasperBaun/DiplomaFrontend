@@ -19,7 +19,7 @@ const UpdateSubcategoryModal: React.FC<IUpdateSubCategoryModalProps> = observer(
         return (
             <Modal show={props.visible} onHide={props.onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{languageStore.currentLanguage.createSubcategoryUpdate} {props.subcategory.name ? props.subcategory.name : ""}</Modal.Title>
+                    <Modal.Title>{languageStore.currentLanguage.createSubCategoryUpdate} {props.subcategory.name ? props.subcategory.name : ""}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <UpdateForm subcategory={props.subcategory} />

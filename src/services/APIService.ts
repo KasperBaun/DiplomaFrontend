@@ -1,6 +1,5 @@
 
 import Category from "@models/Category";
-import SubCategory from "@models/SubCategory";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
 import IAPIService from "./IAPIService";
@@ -28,7 +27,7 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-    async getSubcategories(): Promise<SubCategory[]> {
+    async getSubCategories(): Promise<SubCategory[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} fetching categories`, this.color);
@@ -61,7 +60,7 @@ class APIService implements IAPIService {
         }
     }
 
-    async createSubcategory(subcategory: SubCategory): Promise<WebAPIResponse> {
+    async createSubCategory(subcategory: SubCategory): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} attempting to create subcategory with name ${subcategory.name}`, this.color);
@@ -99,7 +98,7 @@ class APIService implements IAPIService {
         }
     }
 
-    async deleteSubcategory(id: number): Promise<WebAPIResponse> {
+    async deleteSubCategory(id: number): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");
     }
 

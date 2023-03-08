@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import Subcategory from '@models/Subcategory';
+import SubCategory from '@models/SubCategory';
 import APIService from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
@@ -27,10 +27,8 @@ export class SubCategoryStore {
 
     public async init(): Promise<boolean> {
         // Fetch subcategories
-        this._subCategories = await this.apiService.getSubcategories();
+        this._subCategories = await this.apiService.getSubCategories();
         this.mapSubCategoriesToId(this._subCategories);
-
-        this._subCategories = await this.apiService.getSubCategories(); 
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -66,7 +64,7 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public getSubcategories(): SubCategory[] {
+    public getSubCategories(): SubCategory[] {
         return this._subCategories;
     }
 
@@ -79,16 +77,16 @@ export class SubCategoryStore {
         return this.subcategoryMapping.get(categoryId);
     }
 
-    public async getSubcategory(id: number): Promise<SubCategory> {
+    public async getSubCategory(id: number): Promise<SubCategory> {
         return null;
     }
 
-    public async deleteSubcategory(id: number): Promise<boolean> {
+    public async deleteSubCategory(id: number): Promise<boolean> {
         return null;
     }
 
-    public async createSubcategory(subCategory: SubCategory): Promise<boolean> {
-        const response = await this.apiService.createSubcategory(subCategory);
+    public async createSubCategory(subCategory: SubCategory): Promise<boolean> {
+        const response = await this.apiService.createSubCategory(subCategory);
         if (response.success) {
             return true;
         } else {

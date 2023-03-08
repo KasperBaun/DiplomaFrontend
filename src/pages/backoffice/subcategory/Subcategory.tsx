@@ -25,9 +25,9 @@ const Subcategories: React.FC = observer(function Subcategories() {
 
     const handleOnDeleteCategory = async (id: number) => {
         // Pop Modal to confirm?
-        const subCatToBeDeleted = await subCategoryStore.getSubcategory(id);
+        const subCatToBeDeleted = await subCategoryStore.getSubCategory(id);
         if (subCatToBeDeleted !== null) {
-            const deleted = await subCategoryStore.deleteSubcategory(id);
+            const deleted = await subCategoryStore.deleteSubCategory(id);
             if (deleted) {
                 alert("Successfully deleted category: " + subCatToBeDeleted.name)
             } else {
@@ -47,7 +47,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
         return (
             <Container className="CategoryListContainer">
                 <Row style={{ width: "100%", justifyContent: "end" }}>
-                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpenCreate}>{languageStore.currentLanguage.createSubcategoryModalTitle}</Button>
+                    <Button style={{ width: "12rem" }} variant='outline-primary' onClick={onOpenCreate}>{languageStore.currentLanguage.createSubCategoryModalTitle}</Button>
                 </Row>
                 <Row style={{ width: "100%", marginTop: "1rem" }}>
                     <Table striped bordered hover>
