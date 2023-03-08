@@ -34,7 +34,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
                 alert("Failed to delete category: " + subCatToBeDeleted.name)
             }
         } else {
-            alert("Could not find category with id: " + id);
+            alert("Could not find subcategory with id: " + id);
         }
     }
 

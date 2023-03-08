@@ -1,4 +1,6 @@
-export default class DKLocale {
+import { ILocale } from "./ILocale";
+
+export default class DKLocale implements ILocale {
   id = "da_DK";
   aboutUs = "Om os";
   aboutUsText = "Vi sælger porcelæn .....";
