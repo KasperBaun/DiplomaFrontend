@@ -25,6 +25,12 @@ const BackOfficeDashboard = () => {
                 <Col>
                     <Cards url="https://www.w3schools.com/python/img_matplotlib_pie1.png" /> 
                 </Col>
+                <Col>
+                    <Cards url="https://www.w3schools.com/python/img_matplotlib_pie1.png" /> 
+                </Col>
+                <Col>
+                    <Cards url="https://www.w3schools.com/python/img_matplotlib_pie1.png" /> 
+                </Col>
             </Row>
         </Container>
     )

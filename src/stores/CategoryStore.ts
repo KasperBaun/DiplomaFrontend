@@ -1,7 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import Category from '@models/Category';
 import APIService from '@services/APIService';
-import { MockupService } from '@services/MockupService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 
@@ -14,20 +13,18 @@ export class CategoryStore {
     private prefix: string = `%c[CategoryStore]`;
     private color: string = ComponentLoggingConfig.DarkChocolate;
     private loaded: boolean = false;
-    private mockupService: MockupService;
     private apiService: APIService;
-    private categories: Category[] = [];
+    private _categories: Category[] = [];
 
-    constructor(_rootStore: RootStore, _apiService: APIService, _mockupService: MockupService) {
-        this.rootStore = _rootStore;
+    constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
-        this.mockupService = _mockupService;
+        this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
 
     public async init(): Promise<boolean> {
         // Fetch categories
-        this.categories = await this.mockupService.getCategories();
+        this._categories = await this.apiService.getCategories()
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -38,9 +35,9 @@ export class CategoryStore {
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _apiService: APIService, _mockupService: MockupService): CategoryStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService): CategoryStore {
         if (!CategoryStore._Instance) {
-            CategoryStore._Instance = new CategoryStore(_rootStore, _apiService, _mockupService);
+            CategoryStore._Instance = new CategoryStore(_rootStore, _apiService);
         }
         return CategoryStore._Instance;
     }
@@ -49,15 +46,41 @@ export class CategoryStore {
         return this.loaded;
     }
 
-    public getCategories(): Category[] {
-        return this.categories;
+    public get Categories(): Category[] {
+        return this._categories;
     }
 
-    public async getCategory(id: number): Promise<Category> {
-        return await this.mockupService.getCategory(id);
+    public getCategory(id: number): Category {
+        return this._categories.find(c => c.id === id);
     }
 
     public async createCategory(category: Category): Promise<void> {
         return await this.apiService.createCategory(category);
+    }
+
+    public async deleteCategory(id: number): Promise<boolean> {
+        const deleteResult = await this.apiService.deleteCategory(id);
+        if (deleteResult.success) {
+            runInAction(() => {
+                this._categories = this._categories.filter(c => c.id !== id);
+            })
+            return true;
+        }
+        if (!deleteResult.success) {
+            return false;
+        }
+    }
+
+    public async updateCategory(category: Category, id : number): Promise<boolean> {
+        const updateResult = await this.apiService.updateCategory(category, id);
+        if(updateResult.success) {
+            runInAction(() => {
+                this._categories = this._categories.filter(c => c.id !== id);
+            })
+            return true;
+        }
+        if (!updateResult.success) {
+            return false;
+        }
     }
 }

@@ -13,7 +13,7 @@ export class LanguageStore {
     private prefix: string = `%c[LanguageStore]`;
     private color: string = ComponentLoggingConfig.DarkSalmon;
     private loaded: boolean = false;
-    private locales: Map<string, ILocale> = new Map<string, ILocale>
+    private locales: Map<string, ILocale> = new Map<string, ILocale>();
     private _currentLanguage: string;
 
     constructor(_rootStore: RootStore) {
@@ -29,7 +29,6 @@ export class LanguageStore {
         // Create a method that reads values from localstorage to determine previously set preffered language by user ->
         // If no preffered language was set by user -> default to da-DK locale
         this.setCurrentLanguage(localStorage['locale'] ? localStorage['locale'] : 'da_DK');
-
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -56,13 +55,6 @@ export class LanguageStore {
             this.setCurrentLanguage(lang);
             localStorage.setItem('locale', lang);
         }
-
-        // if (lang === "Dansk") {
-        //     this._currentLanguage = this.locales[0];
-        // }
-        // if (lang === "Engelsk") {
-        //     this._currentLanguage = this.locales[1];
-        // }
     }
 
     public get isLoaded(): boolean {

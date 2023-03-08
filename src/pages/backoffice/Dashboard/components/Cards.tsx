@@ -10,7 +10,8 @@ interface IProps {
 const Cards = (props : IProps) => {
     return (
         <Card className="DashBoardCards">
-            <Card.Img src={props.url}></Card.Img>
+            <Card.Img className="DashBoardCards_image" src={props.url}></Card.Img>
+            <hr />
             { 
                 props.var1 ? (
                     <CardWithText1 title={props.var1} text={props.var2} />

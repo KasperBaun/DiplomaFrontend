@@ -1,13 +1,17 @@
 import Category from "@models/Category";
-import Product from "@models/Product";
+import { WebAPIResponse } from "./APIService";
+import SubCategory from "@models/SubCategory";
 
 
 interface IAPIService {
-    getCategories: () => Category[]
+    getCategories: () => Promise<Category[]>
     createCategory(category:Category): Promise<void>;
-    createProduct(product:Product): Promise<void>;
-    getProduct(productId: number): Promise<Product>;
-    getProducts(): Promise<Product[]>;
+    deleteCategory(id: number): Promise<WebAPIResponse>;
+
+    getSubCategories(): Promise<SubCategory[]>;
+    createSubCategory(subcategory:SubCategory): Promise<WebAPIResponse>;
+    updateSubCategory(subcategory:SubCategory): Promise<WebAPIResponse>;
+    deleteSubCategory(id: number): Promise<WebAPIResponse>;
 }
 
 export default IAPIService;

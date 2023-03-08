@@ -1,9 +1,16 @@
 
 .DashBoardCards {
-    padding: 1rem;
+    padding: 2rem;
     margin: 0.5rem;
     max-width: 15rem;
     max-height: 15rem;
     height: 15rem;
     width: 15rem;
+}
+
+.DashBoardCards_image {
+    justify-content: center;
+    width: 10rem;
+    height: 6rem;
+    object-fit: fill;
 }

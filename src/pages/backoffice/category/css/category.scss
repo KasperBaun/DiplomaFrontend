@@ -1,0 +1,28 @@
+.CategoryTableImage {
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    object-fit: fill;
+}
+
+.CategoryListContainer {
+    padding: 3rem;
+}
+
+.CenterAligned_th {
+    text-align: center;
+}
+
+.UpdateFormImage {
+    object-fit: fill;
+    width: 20rem;
+}
+
+.UpdateFormImageFormGroup {
+    padding: 1rem;
+    text-align: center;
+}
+
+.ModalFormLabel {
+    color: var(--text-color);
+}

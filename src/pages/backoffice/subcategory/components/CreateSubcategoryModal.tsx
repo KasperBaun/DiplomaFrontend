@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import CreateForm from "../form/Create";
+import CreateSubcategoryForm from "./CreateSubcategoryForm";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 
@@ -8,20 +8,20 @@ export interface IProps {
     onClose: () => void;
 }
 
-const CreateCategory = ({ onClose, visible }: IProps) => {
+const CreateSubcategoryModal = ({ onClose, visible }: IProps) => {
 
     const { languageStore } = useContext(MobXContext);
 
     return (
         <Modal show={visible} onHide={onClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{languageStore.currentLanguage.createCategoryModalTitle}</Modal.Title>
+                <Modal.Title>{languageStore.currentLanguage.createSubCategoryModalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <CreateForm />
+                <CreateSubcategoryForm />
             </Modal.Body>
         </Modal>
     )
 }
 
-export default CreateCategory;
+export default CreateSubcategoryModal;
