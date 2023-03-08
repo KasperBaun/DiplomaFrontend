@@ -1,11 +1,11 @@
 import Category from "@models/Category";
-import Subcategory from "@models/Subcategory";
+import SubCategory from "@models/SubCategory";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { Button, Form, Image } from "react-bootstrap";
 
 interface IProps {
-    subcategory: Subcategory
+    subcategory: SubCategory
 }
 
 const UpdateForm = ({ subcategory }: IProps) => {
@@ -19,7 +19,7 @@ const UpdateForm = ({ subcategory }: IProps) => {
     const [selectedCategory, setSelectedCategory] = useState<Category>(subcategory.category ? subcategory.category : null);
 
     async function updateSubcategory() {
-        const subCategory: Subcategory = {
+        const subCategory: SubCategory = {
             id: 0,
             name: title,
             imageUrl: url,
@@ -48,7 +48,7 @@ const UpdateForm = ({ subcategory }: IProps) => {
         }
     }
 
-    function emptyValueCheck(subcategory: Subcategory): boolean {
+    function emptyValueCheck(subcategory: SubCategory): boolean {
         if (!subcategory.name || subcategory.name === "") {
             return false;
         }

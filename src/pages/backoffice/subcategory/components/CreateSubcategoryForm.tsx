@@ -1,5 +1,5 @@
 import Category from "@models/Category";
-import Subcategory from "@models/Subcategory";
+import SubCategory from "@models/SubCategory";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
@@ -15,7 +15,7 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
 
     async function createSubcategory() {
-        const subCategory: Subcategory = {
+        const subCategory: SubCategory = {
             id: 0,
             name: title,
             imageUrl: url,
@@ -44,7 +44,7 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
         }
     }
 
-    function emptyValueCheck(subcategory: Subcategory): boolean {
+    function emptyValueCheck(subcategory: SubCategory): boolean {
         if (!subcategory.name || subcategory.name === "") {
             return false;
         }

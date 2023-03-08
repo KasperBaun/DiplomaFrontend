@@ -2,10 +2,7 @@ export interface ILocale {
   id: string;
   aboutUs: string;
   aboutUsText: string;
-  
-  ///////////////////////////////////////////////////////////////////////////////
-  // BACKOFFICE
-  
+
     // Category Admin
     createCategoryModalTitle: string;
     createCategoryTitle: string;
@@ -22,19 +19,8 @@ export interface ILocale {
     updateCategoryFormImgURL : string;
     updateCategoryFormOrderDesc : string;
     updateCategoryFormDescriptionDesc : string;
-    updateCategorySubmit : string;
-
-
-  // Category
-  createCategoryModalTitle: string;
-  createCategoryTitle: string;
-  createCategoryOrder: string;
-  createCategoryImgUrl: string;
-  createCategoryDescription: string;
-  createCategorySubmit: string;
-  createCategorySuccessMessage: string;
-  createCategoryFailedMessage: string;
-  ProductCommaSeperatedText: string;
+  ///////////////////////////////////////////////////////////////////////////////
+  // BACKOFFICE
 
   // Subcategory
   createSubcategoryCategoryTitle: string;

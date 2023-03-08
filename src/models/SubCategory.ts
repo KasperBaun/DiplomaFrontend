@@ -1,6 +1,6 @@
 import Category from "./Category";
 
-export default class Subcategory{
+export default class SubCategory{
     id: number;
     name: string;
     order?: number;
