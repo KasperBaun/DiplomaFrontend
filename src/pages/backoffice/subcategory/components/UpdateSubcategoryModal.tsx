@@ -13,7 +13,7 @@ interface IUpdateSubCategoryModalProps {
 
 const UpdateSubcategoryModal: React.FC<IUpdateSubCategoryModalProps> = observer(function UpdateSubcategoryModal(props: IUpdateSubCategoryModalProps) {
     const { languageStore } = useContext(MobXContext);
-    
+
     if (props.subcategory) {
         return (
             <Modal show={props.visible} onHide={props.onClose}>
@@ -21,7 +21,7 @@ const UpdateSubcategoryModal: React.FC<IUpdateSubCategoryModalProps> = observer(
                     <Modal.Title>{languageStore.currentLanguage.createSubcategoryUpdate} {props.subcategory.name ? props.subcategory.name : ""}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UpdateForm subcategory={props.subcategory} />
+                    <UpdateForm subcategory={props.subcategory} onSubmitClicked={props.onClose} />
                 </Modal.Body>
             </Modal>
         )

@@ -5,10 +5,11 @@ import { useContext, useState } from "react";
 import { Button, Form, Image } from "react-bootstrap";
 
 interface IProps {
-    subcategory: SubCategory
+    subcategory: SubCategory;
+    onSubmitClicked: () => void;
 }
 
-const UpdateForm = ({ subcategory }: IProps) => {
+const UpdateForm = ({ subcategory, onSubmitClicked }: IProps) => {
 
     const { subCategoryStore, categoryStore, languageStore } = useContext(MobXContext);
 
@@ -40,7 +41,9 @@ const UpdateForm = ({ subcategory }: IProps) => {
 
         try {
             await subCategoryStore.updateSubcategory(subCategory)
+            // TODO: Change this notification to a toast or something that does not require the user to click a button to confirm.
             alert(languageStore.currentLanguage.createSubcategoryUpdateSuccessMessage);
+            onSubmitClicked();
         }
         catch (err) {
             console.log(err);
@@ -129,7 +132,7 @@ const UpdateForm = ({ subcategory }: IProps) => {
                         setDescription(temp);
                     }} />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={updateSubcategory} style={{ marginTop: "0.5rem" }} >
+                <Button variant="primary" onClick={updateSubcategory} style={{ marginTop: "0.5rem" }} >
                     {languageStore.currentLanguage.createSubcategoryUpdate}
                 </Button>
             </Form>

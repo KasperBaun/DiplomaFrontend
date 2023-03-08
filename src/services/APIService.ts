@@ -27,7 +27,7 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-
+    //////////////////////////////// Subcategory
     async getSubcategories(): Promise<SubCategory[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
@@ -136,8 +136,39 @@ class APIService implements IAPIService {
     }
 
     async deleteSubcategory(id: number): Promise<WebAPIResponse> {
-        throw new Error("Method not implemented.");
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to delete subcategory with id: ${id} `, this.color);
+        }
+
+        try {
+            const response = await fetch(this.apiBaseUrl + "/Subcategory/" + id, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted subcategory with id: ${id} `, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    message: `successfully deleted category with id: ${id}`,
+                    statusCode: response.status,
+                };
+            } else {
+                console.log(`${this.prefix} failed to delete subcategory with id: ${id}. Status: ${response.status} ${response.statusText} `, this.color);
+                return {
+                    success: false,
+                    message: `failed to delete category with id: ${id}. Status: ${response.status} ${response.statusText} `,
+                    statusCode: response.status,
+                };
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
+    //////////////////////////// Category
 
     async getCategories(): Promise<Category[]> {
         const t1 = performance.now();
