@@ -39,6 +39,8 @@ export default class DKLocale implements ILocale {
   createSubCategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
   createSubCategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
   noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side"; 
+  createSubCategoryUpdateSuccessMessage = "Opdatering gennemført";
+  createSubCategoryUpdateFailedMessage = "Kunne ikke gennemføre opdatering";
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";

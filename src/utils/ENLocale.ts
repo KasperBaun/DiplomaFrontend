@@ -40,6 +40,8 @@ export default class ENLocale implements ILocale {
   createSubCategorySelectCategoryFailedMessage = "You have to choose a category to create a SubCategory";
   createSubCategoryMissingFieldsMessage = "The following fields are required:";
   noSubCategoriesToShow = "There are currently no subcategories on this page";
+  createSubCategoryUpdateSuccessMessage = "Successfully updated subcategory";
+  createSubCategoryUpdateFailedMessage = "Error. Could not update subcategory";
 
   // Admin Header 
   GeneralHeaderAdmin = "General";

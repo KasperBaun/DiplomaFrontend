@@ -40,14 +40,14 @@ const UpdateForm = ({ subcategory, onSubmitClicked }: IProps) => {
         }
 
         try {
-            await subCategoryStore.updateSubcategory(subCategory)
+            await subCategoryStore.updateSubCategory(subCategory)
             // TODO: Change this notification to a toast or something that does not require the user to click a button to confirm.
-            alert(languageStore.currentLanguage.createSubcategoryUpdateSuccessMessage);
+            alert(languageStore.currentLanguage.createSubCategoryUpdateSuccessMessage);
             onSubmitClicked();
         }
         catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createSubcategoryUpdateFailedMessage);
+            alert(languageStore.currentLanguage.createSubCategoryUpdateFailedMessage);
         }
     }
 
@@ -85,18 +85,13 @@ const UpdateForm = ({ subcategory, onSubmitClicked }: IProps) => {
             </div>
         )
     } else {
-
-                <Form.Group>
-                    <Form.Label>{languageStore.currentLanguage.createSubCategoryTitle}</Form.Label>
-                    <Form.Control value={title} type="text" onChange={(event) => {
-
         return (
             <Form>
                 <Form.Group className="UpdateFormImageFormGroup">
                     <Image className="UpdateFormImage" src={subcategory.imageUrl ? subcategory.imageUrl : ""} alt="No image" />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>{languageStore.currentLanguage.createSubcategoryCategoryTitle}</Form.Label>
+                    <Form.Label>{languageStore.currentLanguage.createSubCategoryCategoryTitle}</Form.Label>
                     <Form.Select aria-label="Select category" onChange={handleOptionChange}>
                         <option key="initKey" value={subcategory.categoryId} >{subcategory.category.name}</option>
                         {categoryStore.Categories.map((category, index) => {
@@ -108,35 +103,35 @@ const UpdateForm = ({ subcategory, onSubmitClicked }: IProps) => {
                     </Form.Select>
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>{languageStore.currentLanguage.createSubcategoryTitle}</Form.Label>
+                    <Form.Label>{languageStore.currentLanguage.createSubCategoryTitle}</Form.Label>
                     <Form.Control value={title} type="text" onChange={(event) => {
                         let temp = event.target.value;
                         setTitle(temp);
                     }} />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>{languageStore.currentLanguage.createSubcategoryOrder}</Form.Label>
+                    <Form.Label>{languageStore.currentLanguage.createSubCategoryOrder}</Form.Label>
                     <Form.Control value={order} type="text" onChange={(event) => {
                         let temp = event.target.value;
                         setOrder(parseInt(temp));
                     }} />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>{languageStore.currentLanguage.createSubcategoryImgUrl}</Form.Label>
+                    <Form.Label>{languageStore.currentLanguage.createSubCategoryImgUrl}</Form.Label>
                     <Form.Control value={url} type="text" onChange={(event) => {
                         let temp = event.target.value;
                         setUrl(temp);
                     }} />
                 </Form.Group>
                 <Form.Group>
-                    <Form.Label>{languageStore.currentLanguage.createSubcategoryDescription}</Form.Label>
+                    <Form.Label>{languageStore.currentLanguage.createSubCategoryDescription}</Form.Label>
                     <Form.Control value={description} type="textarea" onChange={(event) => {
                         let temp = event.target.value;
                         setDescription(temp);
                     }} />
                 </Form.Group>
                 <Button variant="primary" onClick={updateSubcategory} style={{ marginTop: "0.5rem" }} >
-                    {languageStore.currentLanguage.createSubcategoryUpdate}
+                    {languageStore.currentLanguage.createSubCategoryUpdate}
                 </Button>
             </Form>
         )

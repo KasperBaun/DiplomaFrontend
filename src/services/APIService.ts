@@ -28,7 +28,7 @@ class APIService implements IAPIService {
         }
     }
     //////////////////////////////// Subcategory
-    async getSubcategories(): Promise<SubCategory[]> {
+    async getSubCategories(): Promise<SubCategory[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} fetching categories`, this.color);
@@ -98,7 +98,7 @@ class APIService implements IAPIService {
             console.error("Error", error);
         }
     }
-    async updateSubcategory(subcategory: SubCategory): Promise<WebAPIResponse> {
+    async updateSubCategory(subcategory: SubCategory): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} attempting to update subcategory with name ${subcategory.name}`, this.color);
@@ -135,7 +135,7 @@ class APIService implements IAPIService {
         }
     }
 
-    async deleteSubcategory(id: number): Promise<WebAPIResponse> {
+    async deleteSubCategory(id: number): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} attempting to delete subcategory with id: ${id} `, this.color);

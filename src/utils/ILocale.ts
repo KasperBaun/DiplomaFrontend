@@ -38,6 +38,8 @@ export interface ILocale {
   createSubCategorySelectCategoryFailedMessage: string;
   createSubCategoryMissingFieldsMessage: string;
   noSubCategoriesToShow: string; 
+  createSubCategoryUpdateSuccessMessage: string;
+  createSubCategoryUpdateFailedMessage: string;
 
   // Admin Header 
   GeneralHeaderAdmin: string;
