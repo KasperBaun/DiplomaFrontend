@@ -19,26 +19,27 @@ export interface ILocale {
     updateCategoryFormImgURL : string;
     updateCategoryFormOrderDesc : string;
     updateCategoryFormDescriptionDesc : string;
+    updateCategorySubmit : string;
   ///////////////////////////////////////////////////////////////////////////////
   // BACKOFFICE
 
   // Subcategory
-  createSubcategoryCategoryTitle: string;
-  createSubcategoryModalTitle: string;
-  createSubcategoryTitle: string;
-  createSubcategoryOrder: string;
-  createSubcategoryImgUrl: string;
-  createSubcategoryDescription: string;
-  createSubcategorySubmit: string;
-  createSubcategoryUpdate: string;
-  createSubcategorySuccessMessage: string;
-  createSubcategoryFailedMessage: string;
-  createSubcategoryUpdateSuccessMessage: string;
-  createSubcategoryUpdateFailedMessage: string;
-  createSubcategorySelectCategoryTitle: string;
-  createSubcategorySelectCategoryFailedMessage: string;
-  createSubcategoryMissingFieldsMessage: string;
+  createSubCategoryCategoryTitle: string;
+  createSubCategoryModalTitle: string;
+  createSubCategoryTitle: string;
+  createSubCategoryOrder: string;
+  createSubCategoryImgUrl: string;
+  createSubCategoryDescription: string;
+  createSubCategorySubmit: string;
+  createSubCategoryUpdate: string;
+  createSubCategorySuccessMessage: string;
+  createSubCategoryFailedMessage: string;
+  createSubCategorySelectCategoryTitle: string;
+  createSubCategorySelectCategoryFailedMessage: string;
+  createSubCategoryMissingFieldsMessage: string;
   noSubCategoriesToShow: string; 
+  createSubCategoryUpdateSuccessMessage: string;
+  createSubCategoryUpdateFailedMessage: string;
 
   // Admin Header 
   GeneralHeaderAdmin: string;

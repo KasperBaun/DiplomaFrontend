@@ -79,7 +79,7 @@ const UpdateForm = ( {category} : IProps) => {
             title={languageStore.currentLanguage.updateCategoryFormDescription} />
 
             <Button variant="primary" type="submit" style={{ marginTop: "0.5rem" }} onClick={handleOnUpdateCategory}>
-                {languageStore.currentLanguage.createCategorySubmit}
+                {languageStore.currentLanguage.updateCategorySubmit}
             </Button>
         </Form>
     )

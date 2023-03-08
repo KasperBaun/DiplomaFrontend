@@ -22,24 +22,25 @@ export default class DKLocale implements ILocale {
     updateCategoryFormImgURL = "Billede URL"; 
     updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
     updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
+    updateCategorySubmit = "Opdater";
 
   // Subcategory
-  createSubcategoryCategoryTitle = "Vælg kategori";
-  createSubcategoryModalTitle = "Opret underkategori";
-  createSubcategoryTitle = "Titel";
-  createSubcategoryOrder = "Rækkefølge";
-  createSubcategoryImgUrl = "Billede Url";
-  createSubcategoryDescription = "Beskrivelse";
-  createSubcategorySubmit = "Opret";
-  createSubcategoryUpdate = "Opdater";
-  createSubcategorySuccessMessage = "Underkategory oprettet";
-  createSubcategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
-  createSubcategoryUpdateSuccessMessage = "Opdatering gennemført";
-  createSubcategoryUpdateFailedMessage: "Kunne ikke gennemføre opdatering";
-  createSubcategorySelectCategoryTitle = "Vælg kategori";
-  createSubcategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
-  createSubcategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
+  createSubCategoryCategoryTitle = "Vælg kategori";
+  createSubCategoryModalTitle = "Opret underkategori";
+  createSubCategoryTitle = "Titel";
+  createSubCategoryOrder = "Rækkefølge";
+  createSubCategoryImgUrl = "Billede Url";
+  createSubCategoryDescription = "Beskrivelse";
+  createSubCategorySubmit = "Opret";
+  createSubCategoryUpdate = "Opdater";
+  createSubCategorySuccessMessage = "Underkategory oprettet";
+  createSubCategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
+  createSubCategorySelectCategoryTitle = "Vælg kategori";
+  createSubCategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
+  createSubCategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
   noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side"; 
+  createSubCategoryUpdateSuccessMessage = "Opdatering gennemført";
+  createSubCategoryUpdateFailedMessage = "Kunne ikke gennemføre opdatering";
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";

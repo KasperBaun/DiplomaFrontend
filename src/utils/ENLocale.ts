@@ -22,24 +22,27 @@ export default class ENLocale implements ILocale {
   updateCategoryFormImgURL = "Image URL";    
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
+  updateCategorySubmit = "Update";
 
-  // Subcategory
-  createSubcategoryModalTitle = "Create subcategory";
+  // SubCategory
+  createSubCategoryCategoryTitle = "Select Category";
+  createSubCategoryModalTitle = "Create Subcategory";
   createSubcategoryCategoryTitle = "Choose subcategory";
-  createSubcategoryTitle = "Title";
-  createSubcategoryOrder = "Order";
-  createSubcategoryImgUrl = "Image Url";
-  createSubcategoryDescription = "Description";
-  createSubcategorySubmit = "Create";
-  createSubcategoryUpdate = "Update";
-  createSubcategorySuccessMessage = "Subcategory created";
-  createSubcategoryFailedMessage = "Error. Could not create subcategory";
-  createSubcategoryUpdateSuccessMessage = "Successfully updated subcategory";
-  createSubcategoryUpdateFailedMessage = "Error. Could not update subcategory";
-  createSubcategorySelectCategoryTitle = "Choose category";
-  createSubcategorySelectCategoryFailedMessage = "You have to choose a category to create a subcategory";
-  createSubcategoryMissingFieldsMessage = "The following fields are required:";
+  createSubCategoryTitle = "Title";
+  createSubCategoryOrder = "Order";
+  createSubCategoryImgUrl = "Image Url";
+  createSubCategoryDescription = "Description";
+  createSubCategorySubmit = "Create";
+  createSubCategoryUpdate = "Update";
+  createSubCategorySuccessMessage = "SubCategory created";
+  createSubCategoryFailedMessage = "Error. Could not create SubCategory";
+  createSubCategorySelectCategoryTitle = "Choose category";
+  createSubCategorySelectCategoryFailedMessage = "You have to choose a category to create a SubCategory";
+  createSubCategoryMissingFieldsMessage = "The following fields are required:";
   noSubCategoriesToShow = "There are currently no subcategories on this page";
+  createSubCategoryUpdateSuccessMessage = "Successfully updated subcategory";
+  createSubCategoryUpdateFailedMessage = "Error. Could not update subcategory";
+
   // Admin Header 
   GeneralHeaderAdmin = "General";
 

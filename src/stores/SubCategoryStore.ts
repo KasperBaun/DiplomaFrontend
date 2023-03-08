@@ -25,7 +25,7 @@ export class SubCategoryStore {
 
     public async init(): Promise<boolean> {
         // Fetch subcategories
-        this._subCategories = await this.apiService.getSubcategories();
+        this._subCategories = await this.apiService.getSubCategories();
         this.mapCategoryToSubcategory(this._subCategories);
         this.mapSubCategoriesToId(this._subCategories);
 
@@ -71,7 +71,7 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public getSubcategories(): SubCategory[] {
+    public getSubCategories(): SubCategory[] {
         return this._subCategories;
     }
 
@@ -84,14 +84,14 @@ export class SubCategoryStore {
         return this.subcategoryMapping.get(categoryId);
     }
 
-    public async getSubcategory(id: number): Promise<SubCategory> {
+    public async getSubCategory(id: number): Promise<SubCategory> {
         return this._subCategories.find(subCat => subCat.id === id);
     }
 
-    public async deleteSubcategory(id: number): Promise<boolean> {
+    public async deleteSubCategory(id: number): Promise<boolean> {
         try {
-            await this.apiService.deleteSubcategory(id);
-            this.refreshSubcategories();
+            await this.apiService.deleteSubCategory(id);
+            this.refreshSubCategories();
         } catch (error) {
             console.log(error);
             return false;
@@ -99,28 +99,28 @@ export class SubCategoryStore {
         return true;
     }
 
-    public async createSubcategory(subCategory: SubCategory): Promise<boolean> {
-        const response = await this.apiService.createSubcategory(subCategory);
+    public async createSubCategory(subCategory: SubCategory): Promise<boolean> {
+        const response = await this.apiService.createSubCategory(subCategory);
         if (response.success) {
-            await this.refreshSubcategories();
+            await this.refreshSubCategories();
             return true;
         } else {
             return false;
         }
     }
-    public async updateSubcategory(subCategory: SubCategory): Promise<boolean> {
-        const response = await this.apiService.updateSubcategory(subCategory);
+    public async updateSubCategory(subCategory: SubCategory): Promise<boolean> {
+        const response = await this.apiService.updateSubCategory(subCategory);
         if (response.success) {
-            await this.refreshSubcategories();
+            await this.refreshSubCategories();
             return true;
         } else {
             return false;
         }
     }
 
-    private async refreshSubcategories(): Promise<void> {
+    private async refreshSubCategories(): Promise<void> {
         await runInAction(async () => {
-            this._subCategories = await this.apiService.getSubcategories();
+            this._subCategories = await this.apiService.getSubCategories();
             this.mapCategoryToSubcategory(this._subCategories);
             this.mapSubCategoriesToId(this._subCategories);
         });
