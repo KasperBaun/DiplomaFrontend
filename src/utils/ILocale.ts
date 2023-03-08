@@ -41,6 +41,17 @@ export interface ILocale {
   createSubCategoryUpdateSuccessMessage: string;
   createSubCategoryUpdateFailedMessage: string;
 
+  // Product
+    productPage_productName: string;
+    productPage_productModelNumber: string;
+    productPage_productMaterial: string;
+    productPage_productDesign: string;
+    productPage_productCondition: string;
+    productPage_productQuality: string;
+    productPage_productDimension: string;
+    productPage_productCustomText: string;
+    productPage_createProduct: string;
+
   // Admin Header 
   GeneralHeaderAdmin: string;
 
@@ -70,4 +81,6 @@ export interface ILocale {
   AboutUsTabText: string;
   FAQTabText: string;
   ContactTabText: string;
+
+  
 }

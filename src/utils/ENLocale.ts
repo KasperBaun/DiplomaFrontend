@@ -1,6 +1,7 @@
 import { ILocale } from "./ILocale";
 
 export default class ENLocale implements ILocale {
+
   id = "en_US";
   aboutUs = "About Us";
   aboutUsText = "We sell porcelain";
@@ -15,11 +16,11 @@ export default class ENLocale implements ILocale {
   createCategorySuccessMessage = "Created category successfully";
   createCategoryFailedMessage = "Failed creating category";
   ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
-      // Update Form
+  // Update Form
   updateCategoryFormTitle = "Title";
   updateCategoryFormOrder = "Order";
   updateCategoryFormDescription = "Description";
-  updateCategoryFormImgURL = "Image URL";    
+  updateCategoryFormImgURL = "Image URL";
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
@@ -43,6 +44,16 @@ export default class ENLocale implements ILocale {
   createSubCategoryUpdateSuccessMessage = "Successfully updated subcategory";
   createSubCategoryUpdateFailedMessage = "Error. Could not update subcategory";
 
+  // Product
+  productPage_productName = "Title";
+  productPage_productModelNumber = "Model number";
+  productPage_productMaterial = "Material";
+  productPage_productDesign = "Design";
+  productPage_productCondition = "Condition";
+  productPage_productQuality = "Quality";
+  productPage_productDimension = "Dimension";
+  productPage_productCustomText = "Extra information";
+  productPage_createProduct = "Opret produkt";
   // Admin Header 
   GeneralHeaderAdmin = "General";
 

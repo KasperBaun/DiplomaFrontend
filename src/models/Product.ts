@@ -9,7 +9,7 @@ export default class Product {
     dimension: string;
     customText: string;
     imageUrls: string[];
-
+    subcategoryId: number;
 }
 
 export enum materialType {
@@ -20,7 +20,7 @@ export enum materialType {
 
 }
 
-export enum qualityType { 
+export enum qualityType {
     "1. Quality" = 1,
     "2. Quality" = 2,
     "3. Quality" = 3
