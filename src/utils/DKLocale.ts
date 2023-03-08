@@ -20,6 +20,7 @@ export default class DKLocale {
     updateCategoryFormImgURL = "Billede URL"; 
     updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
     updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
+    updateCategorySubmit = "Opdater";
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";

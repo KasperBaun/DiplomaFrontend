@@ -22,6 +22,7 @@ export default class ENLocale implements ILocale {
   updateCategoryFormImgURL = "Image URL";    
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
+  updateCategorySubmit = "Update";
 
   // Admin Header 
   GeneralHeaderAdmin = "General";

@@ -19,6 +19,7 @@ export interface ILocale {
     updateCategoryFormImgURL : string;
     updateCategoryFormOrderDesc : string;
     updateCategoryFormDescriptionDesc : string;
+    updateCategorySubmit : string;
 
     // Admin Header 
     GeneralHeaderAdmin: string; 
