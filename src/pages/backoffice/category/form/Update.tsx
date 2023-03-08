@@ -6,9 +6,10 @@ import CategoryFormGroup from "../components/CategoryFormGroup";
 
 interface IProps {
     category : Category
+    onCloseUpdate : () => void;
 }
 
-const UpdateForm = ( {category} : IProps) => {
+const UpdateForm = ( {category, onCloseUpdate} : IProps) => {
 
     const { languageStore, categoryStore } = useContext(MobXContext);
 
@@ -23,6 +24,8 @@ const UpdateForm = ( {category} : IProps) => {
         console.log(order);
         console.log(description);
 
+        
+
         const updateAction : Category = {
             id: category.id,
             name: title,
@@ -32,8 +35,9 @@ const UpdateForm = ( {category} : IProps) => {
         };
 
         try {
-            await categoryStore.updateCategory(updateAction, category.id);
+            await categoryStore.updateCategory(updateAction);
             alert(languageStore.currentLanguage.createCategorySuccessMessage);
+            onCloseUpdate();
         }
         catch (err) {
             console.log(err);
@@ -78,7 +82,7 @@ const UpdateForm = ( {category} : IProps) => {
             descText={languageStore.currentLanguage.updateCategoryFormDescriptionDesc}
             title={languageStore.currentLanguage.updateCategoryFormDescription} />
 
-            <Button variant="primary" type="submit" style={{ marginTop: "0.5rem" }} onClick={handleOnUpdateCategory}>
+            <Button variant="primary" style={{ marginTop: "0.5rem" }} onClick={handleOnUpdateCategory}>
                 {languageStore.currentLanguage.updateCategorySubmit}
             </Button>
         </Form>

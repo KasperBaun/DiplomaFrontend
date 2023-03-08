@@ -12,8 +12,10 @@ export default class ENLocale implements ILocale {
   createCategoryImgUrl = "Image Url";
   createCategoryDescription = "Description";
   createCategorySubmit = "Submit";
-  createCategorySuccessMessage = "Created category successfully";
-  createCategoryFailedMessage = "Failed creating category";
+  createCategorySuccessMessage = "Created category successfully!";
+  createCategoryFailedMessage = "Failed creating category!";
+  updateCategorySuccessMessage = "Category updated!";
+  updateCategoryFailedMessage = "Failed to edit category!";
   ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
       // Update Form
   updateCategoryFormTitle = "Title";
