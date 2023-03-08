@@ -19,13 +19,6 @@ const UpdateForm = ( {category, onCloseUpdate} : IProps) => {
     const [description, setDescription] = useState<string>(category.description ? category.description : "");
 
     async function handleOnUpdateCategory() {
-        console.log(title);
-        console.log(url);
-        console.log(order);
-        console.log(description);
-
-        
-
         const updateAction : Category = {
             id: category.id,
             name: title,
