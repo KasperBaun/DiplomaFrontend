@@ -249,31 +249,40 @@ class APIService implements IAPIService {
         }
     }
 
-    async updateCategory(category: Category, id: number): Promise<WebAPIResponse> {
+    async updateCategory(category: Category): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} updating category with id: ${category.id} `, this.color);
+            console.log(`${this.prefix} attempting to update subcategory with name ${category.name}`, this.color);
         }
 
         try {
-            const response = await fetch(`${this.apiBaseUrl}/Category/${id}`, {
+            const response = await fetch(`${this.apiBaseUrl}/Category/${category.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(category),
                 headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
             });
-            console.log(response.statusText)
+
             if (response.status === 200) {
                 if (Constants.loggingEnabled) {
                     const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated category. Statuscode: ${response.status}`, t1, t2, this.color);
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated category with name ${category.name}. Statuscode: ${response.status}`, t1, t2, this.color);
                 }
-                return;
-
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
             } else {
-                console.log(`${this.prefix} failed to update category with id: ${category.id}. Status: ${response.status} ${response.statusText} `, this.color);
+                console.log(`${this.prefix} failed updating category with name ${category.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error", error);
         }
     }
 

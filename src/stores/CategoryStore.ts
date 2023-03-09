@@ -71,16 +71,19 @@ export class CategoryStore {
         }
     }
 
-    public async updateCategory(category: Category, id : number): Promise<boolean> {
-        const updateResult = await this.apiService.updateCategory(category, id);
-        if(updateResult.success) {
-            runInAction(() => {
-                this._categories = this._categories.filter(c => c.id !== id);
-            })
+    public async updateCategory(Category: Category): Promise<boolean> {
+        const response = await this.apiService.updateCategory(Category);
+        if (response.success) {
+            await this.refreshCategories();
             return true;
-        }
-        if (!updateResult.success) {
+        } else {
             return false;
         }
+    }
+
+    private async refreshCategories(): Promise<void> {
+        await runInAction(async () => {
+            this._categories = await this.apiService.getCategories();
+        });
     }
 }

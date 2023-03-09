@@ -20,6 +20,8 @@ export interface ILocale {
     updateCategoryFormOrderDesc : string;
     updateCategoryFormDescriptionDesc : string;
     updateCategorySubmit : string;
+    updateCategorySuccessMessage: string;
+    updateCategoryFailedMessage: string;
   ///////////////////////////////////////////////////////////////////////////////
   // BACKOFFICE
 

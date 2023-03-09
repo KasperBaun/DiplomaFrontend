@@ -12,18 +12,19 @@ export default class DKLocale implements ILocale {
   createCategoryImgUrl = "Billede Url";
   createCategoryDescription = "Beskrivelse";
   createCategorySubmit = "Opret";
-  createCategorySuccessMessage = "Kategory oprettet";
-  createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori";
+  createCategorySuccessMessage = "Kategory oprettet!";
+  createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori!";
   ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
-
   // Update Form
   updateCategoryFormTitle = "Titel";
   updateCategoryFormOrder = "Rækkefølge";
   updateCategoryFormDescription = "Beskrivelse";
-  updateCategoryFormImgURL = "Billede URL";
+  updateCategoryFormImgURL = "Billede URL"; 
   updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
   updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
   updateCategorySubmit = "Opdater";
+  updateCategorySuccessMessage = "Kategory opdateret!";
+  updateCategoryFailedMessage = "Fejl. Kunne ikke opdatere kategori!";
 
   // Subcategory
   createSubCategoryCategoryTitle = "Vælg kategori";

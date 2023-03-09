@@ -12,6 +12,8 @@ export default class Product {
     subcategoryId: number;
 }
 
+// TODO: PRODUCT has been split in the backend and DATA (THIS Class need to be looked upon)
+
 export enum materialType {
     porcelain = 1,
     steel = 2,

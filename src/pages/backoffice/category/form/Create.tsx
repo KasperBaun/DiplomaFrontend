@@ -6,7 +6,6 @@ import { Button, Form } from "react-bootstrap";
 const CreateForm: React.FC = function CreateForm() {
 
     const { categoryStore, languageStore } = useContext(MobXContext);
-
     const [title, setTitle] = useState<string>("");
     const [url, setUrl] = useState<string>("");
     const [order, setOrder] = useState<number>(0);
