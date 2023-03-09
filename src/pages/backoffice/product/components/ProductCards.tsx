@@ -4,7 +4,8 @@ import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import ProductCard from "./ProductCard";
-import "./ProductCards.scss";
+import { productCardContainer } from "../ProductsStyling";
+
 
 export interface IProductCardsProps {
     products: Product[];
@@ -38,17 +39,16 @@ const ProductCards: React.FC<IProductCardsProps> = observer(function ProductCard
         onOpenUpdate();
     }
 
+
     function showProductClicked(product: Product): void {
         // Pop Modal with product info
     }
-
     return (
-        <Container>
-            <Row>
+        <Container >
+            <Row style={productCardContainer}>
                 {props.products.map((product: Product) => {
                     return (
                         <ProductCard
-                            className="card"
                             product={product}
                             handleOnDeleteClicked={handleOnDeleteClicked}
                             handleOnUpdateClicked={handleOnUpdateClicked}

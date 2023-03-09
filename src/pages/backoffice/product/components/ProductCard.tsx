@@ -4,6 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Pencil, XLg, Plus } from "react-bootstrap-icons";
+import { productCardItem } from "../ProductsStyling";
 
 export interface IProductCardProps {
     className?: string;
@@ -17,14 +18,9 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
 
     const { languageStore } = useContext<IMobXContext>(MobXContext);
 
-    const cardStyles: React.CSSProperties = {
-        width: '12rem',
-        height: '23rem',
-        cursor: 'pointer',
-    }
 
     return (
-        <Card style={cardStyles}>
+        <Card style={productCardItem}>
             <Card.Img variant="top" src={props.product.imageUrls[0]} />
             <Card.Body onClick={() => props.showProductClicked(props.product)}>
                 <Card.Title>{props.product.name}</Card.Title>

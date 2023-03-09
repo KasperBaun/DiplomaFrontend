@@ -5,11 +5,10 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import { Form, Spinner } from "react-bootstrap";
-import "./BO_Products.scss";
 import ProductCards from "./components/ProductCards";
 import Product from "@models/Product";
 
-const BO_Products: React.FC = observer(function BO_Products() {
+const Products: React.FC = observer(function Products() {
 
     const { productStore, languageStore, categoryStore, subCategoryStore } = useContext(MobXContext)
     const [loading, setLoading] = useState<boolean>(productStore.Products.length > 0);
@@ -99,4 +98,4 @@ const BO_Products: React.FC = observer(function BO_Products() {
     }
 });
 
-export default BO_Products;
+export default Products;
