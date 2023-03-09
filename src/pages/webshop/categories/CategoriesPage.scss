@@ -1,36 +1,26 @@
-.card {
+.card.category{
     border: 'primary';
     height: 18rem;
     margin: 1rem 0.5rem;
   }
 
-.card-body{
+  .card-body.category{
     align-self: center;
-}
-  
-  .card-footer {
+  }
+
+  .card-footer.category{
     background-color: #e9e8e8;
     border-bottom:1px solid #000000;
     border-top: 1px solid #000000;
   }
   
-  .card img {
-    height: 13.5rem;
-    width: auto;
-  }
-  
-  .img-fluid {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .container {
+  .container-cat{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    align-items: flex-start;
   }
   
-  .col-20 {
+  .col-20-cat {
     width: 20%;
     flex-basis: 20%;
   }

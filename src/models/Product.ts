@@ -9,8 +9,9 @@ export default class Product {
     dimension: string;
     customText: string;
     imageUrls: string[];
-
 }
+
+// TODO: PRODUCT has been split in the backend and DATA (THIS Class need to be looked upon)
 
 export enum materialType {
     porcelain = 1,

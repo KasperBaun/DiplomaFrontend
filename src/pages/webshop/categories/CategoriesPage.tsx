@@ -22,14 +22,14 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
 
     if (categoryStore.Categories) {
         return (
-            <div className="container">
+            <div className="container-cat">
                 {categoryStore.Categories.map((category) => (
-                    <div className="col-20" key={category.id + "Component"}>
-                        <Card border="primary" onClick={() => handleClick(category, category.name)}>
-                            <Card.Body>
-                                <img src={category.imageUrl} className='img-fluid shadow-4' alt='...' />
+                    <div className="col-20-cat" key={category.id + "Component"}>
+                        <Card className="category" border="primary" onClick={() => handleClick(category, category.name)}>
+                            <Card.Body className="category">
+                                <img  src={category.imageUrl} className='img-fluid shadow-4' style={{height: '13.5rem', width: 'auto'}} alt='...' />
                             </Card.Body>
-                            <Card.Footer> {category.name.toString()}</Card.Footer>
+                            <Card.Footer className="category"> {category.name.toString()}</Card.Footer>
                         </Card>
                     </div>
                 ))}
