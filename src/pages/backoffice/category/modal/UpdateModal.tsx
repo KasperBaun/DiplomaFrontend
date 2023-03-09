@@ -16,7 +16,7 @@ const UpdateCategory = ({onClose, visible, category} : IProps) => {
                     <Modal.Title>Update {category.name ? category.name : ""}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UpdateForm category={category}/>
+                    <UpdateForm category={category} onCloseUpdate={onClose}/>
                 </Modal.Body>
             </Modal>
         )

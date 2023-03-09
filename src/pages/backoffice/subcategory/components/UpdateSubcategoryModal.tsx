@@ -1,4 +1,3 @@
-import Category from "@models/Category";
 import { Container, Modal } from "react-bootstrap";
 import UpdateForm from "./UpdateSubcategoryForm";
 import { observer } from "mobx-react-lite";
@@ -14,15 +13,15 @@ interface IUpdateSubCategoryModalProps {
 
 const UpdateSubcategoryModal: React.FC<IUpdateSubCategoryModalProps> = observer(function UpdateSubcategoryModal(props: IUpdateSubCategoryModalProps) {
     const { languageStore } = useContext(MobXContext);
-    
+
     if (props.subcategory) {
         return (
             <Modal show={props.visible} onHide={props.onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{languageStore.currentLanguage.createSubcategoryUpdate} {props.subcategory.name ? props.subcategory.name : ""}</Modal.Title>
+                    <Modal.Title>{languageStore.currentLanguage.createSubCategoryUpdate} {props.subcategory.name ? props.subcategory.name : ""}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UpdateForm subcategory={props.subcategory} />
+                    <UpdateForm subcategory={props.subcategory} onSubmitClicked={props.onClose} />
                 </Modal.Body>
             </Modal>
         )

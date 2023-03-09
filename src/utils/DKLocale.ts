@@ -1,4 +1,6 @@
-export default class DKLocale {
+import { ILocale } from "./ILocale";
+
+export default class DKLocale implements ILocale {
   id = "da_DK";
   aboutUs = "Om os";
   aboutUsText = "Vi sælger porcelæn .....";
@@ -10,32 +12,37 @@ export default class DKLocale {
   createCategoryImgUrl = "Billede Url";
   createCategoryDescription = "Beskrivelse";
   createCategorySubmit = "Opret";
-  createCategorySuccessMessage = "Kategory oprettet";
-  createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori";
+  createCategorySuccessMessage = "Kategory oprettet!";
+  createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori!";
   ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
-    // Update Form
-    updateCategoryFormTitle = "Titel";
-    updateCategoryFormOrder = "Rækkefølge";
-    updateCategoryFormDescription = "Beskrivelse";
-    updateCategoryFormImgURL = "Billede URL"; 
-    updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
-    updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
+  // Update Form
+  updateCategoryFormTitle = "Titel";
+  updateCategoryFormOrder = "Rækkefølge";
+  updateCategoryFormDescription = "Beskrivelse";
+  updateCategoryFormImgURL = "Billede URL"; 
+  updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
+  updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
+  updateCategorySubmit = "Opdater";
+  updateCategorySuccessMessage = "Kategory opdateret!";
+  updateCategoryFailedMessage = "Fejl. Kunne ikke opdatere kategori!";
 
   // Subcategory
-  createSubcategoryCategoryTitle = "Vælg kategori";
-  createSubcategoryModalTitle = "Opret underkategori";
-  createSubcategoryTitle = "Titel";
-  createSubcategoryOrder = "Rækkefølge";
-  createSubcategoryImgUrl = "Billede Url";
-  createSubcategoryDescription = "Beskrivelse";
-  createSubcategorySubmit = "Opret";
-  createSubcategoryUpdate = "Opdater";
-  createSubcategorySuccessMessage = "Underkategory oprettet";
-  createSubcategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
-  createSubcategorySelectCategoryTitle = "Vælg kategori";
-  createSubcategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
-  createSubcategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
+  createSubCategoryCategoryTitle = "Vælg kategori";
+  createSubCategoryModalTitle = "Opret underkategori";
+  createSubCategoryTitle = "Titel";
+  createSubCategoryOrder = "Rækkefølge";
+  createSubCategoryImgUrl = "Billede Url";
+  createSubCategoryDescription = "Beskrivelse";
+  createSubCategorySubmit = "Opret";
+  createSubCategoryUpdate = "Opdater";
+  createSubCategorySuccessMessage = "Underkategory oprettet";
+  createSubCategoryFailedMessage = "Fejl. Kunne ikke oprette underkategori";
+  createSubCategorySelectCategoryTitle = "Vælg kategori";
+  createSubCategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
+  createSubCategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
   noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side"; 
+  createSubCategoryUpdateSuccessMessage = "Opdatering gennemført";
+  createSubCategoryUpdateFailedMessage = "Kunne ikke gennemføre opdatering";
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";

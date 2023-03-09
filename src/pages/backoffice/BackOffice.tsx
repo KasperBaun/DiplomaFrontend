@@ -1,6 +1,6 @@
 
 import { Col, Container, Row } from 'react-bootstrap';
-import VertNavBackOffice from './category/navigationbars/VerticalNavigationBO';
+import VertNavBackOffice from './navigationbars/VerticalNavigationBO';
 import "./css/backoffice.scss"
 import BOCategories from "@backoffice/category/Categories"
 import BackOfficeDashboard from './Dashboard/dashboard';

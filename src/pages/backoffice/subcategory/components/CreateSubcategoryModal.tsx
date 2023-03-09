@@ -15,7 +15,7 @@ const CreateSubcategoryModal = ({ onClose, visible }: IProps) => {
     return (
         <Modal show={visible} onHide={onClose}>
             <Modal.Header closeButton>
-                <Modal.Title>{languageStore.currentLanguage.createSubcategoryModalTitle}</Modal.Title>
+                <Modal.Title>{languageStore.currentLanguage.createSubCategoryModalTitle}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <CreateSubcategoryForm />

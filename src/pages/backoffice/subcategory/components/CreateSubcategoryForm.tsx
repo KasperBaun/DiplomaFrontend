@@ -26,21 +26,21 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
         };
 
         if (!emptyValueCheck(subCategory)) {
-            alert(`${languageStore.currentLanguage.createSubcategoryMissingFieldsMessage}
-            ${languageStore.currentLanguage.createSubcategoryCategoryTitle}
-            ${languageStore.currentLanguage.createSubcategoryTitle}
-            ${languageStore.currentLanguage.createSubcategoryOrder}
+            alert(`${languageStore.currentLanguage.createSubCategoryMissingFieldsMessage}
+            ${languageStore.currentLanguage.createSubCategoryCategoryTitle}
+            ${languageStore.currentLanguage.createSubCategoryTitle}
+            ${languageStore.currentLanguage.createSubCategoryOrder}
            `)
             return;
         }
 
         try {
-            await subCategoryStore.createSubcategory(subCategory)
-            alert(languageStore.currentLanguage.createSubcategorySuccessMessage);
+            await subCategoryStore.createSubCategory(subCategory)
+            alert(languageStore.currentLanguage.createSubCategorySuccessMessage);
         }
         catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createSubcategoryFailedMessage);
+            alert(languageStore.currentLanguage.createSubCategoryFailedMessage);
         }
     }
 
@@ -62,7 +62,7 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
 
     function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
         if (event.currentTarget.value === "initValue") {
-            alert(languageStore.currentLanguage.createSubcategorySelectCategoryFailedMessage);
+            alert(languageStore.currentLanguage.createSubCategorySelectCategoryFailedMessage);
             return;
         } else {
             const categoryId: number = parseInt(event.currentTarget.value);
@@ -78,9 +78,9 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
     return (
         <Form>
             <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryCategoryTitle}</Form.Label>
+                <Form.Label>{languageStore.currentLanguage.createSubCategoryCategoryTitle}</Form.Label>
                 <Form.Select aria-label="Select category" onChange={handleOptionChange}>
-                    <option key="initKey" value="initValue" >{languageStore.currentLanguage.createSubcategorySelectCategoryTitle}</option>
+                    <option key="initKey" value="initValue" >{languageStore.currentLanguage.createSubCategorySelectCategoryTitle}</option>
                     {categoryStore.Categories.map((category, index) => {
                         return (
                             <option key={"option" + category.name + index} value={category.id}>{category.name}</option>
@@ -91,35 +91,35 @@ const CreateSubcategoryForm: React.FC = function CreateSubcategoryForm() {
 
             </Form.Group>
             <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryTitle}</Form.Label>
+                <Form.Label>{languageStore.currentLanguage.createSubCategoryTitle}</Form.Label>
                 <Form.Control type="text" onChange={(event) => {
                     let temp = event.target.value;
                     setTitle(temp);
                 }} />
             </Form.Group>
             <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryOrder}</Form.Label>
+                <Form.Label>{languageStore.currentLanguage.createSubCategoryOrder}</Form.Label>
                 <Form.Control type="text" onChange={(event) => {
                     let temp = event.target.value;
                     setOrder(parseInt(temp));
                 }} />
             </Form.Group>
             <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryImgUrl}</Form.Label>
+                <Form.Label>{languageStore.currentLanguage.createSubCategoryImgUrl}</Form.Label>
                 <Form.Control type="text" onChange={(event) => {
                     let temp = event.target.value;
                     setUrl(temp);
                 }} />
             </Form.Group>
             <Form.Group>
-                <Form.Label>{languageStore.currentLanguage.createSubcategoryDescription}</Form.Label>
+                <Form.Label>{languageStore.currentLanguage.createSubCategoryDescription}</Form.Label>
                 <Form.Control type="textarea" onChange={(event) => {
                     let temp = event.target.value;
                     setDescription(temp);
                 }} />
             </Form.Group>
             <Button variant="primary" type="submit" style={{ marginTop: "0.5rem" }} onClick={createSubcategory}>
-                {languageStore.currentLanguage.createSubcategorySubmit}
+                {languageStore.currentLanguage.createSubCategorySubmit}
             </Button>
         </Form>
     )

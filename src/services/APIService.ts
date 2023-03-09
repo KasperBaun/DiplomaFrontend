@@ -27,7 +27,8 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-    async getSubcategories(): Promise<SubCategory[]> {
+    //////////////////////////////// Subcategory
+    async getSubCategories(): Promise<SubCategory[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} fetching categories`, this.color);
@@ -60,7 +61,7 @@ class APIService implements IAPIService {
         }
     }
 
-    async createSubcategory(subcategory: SubCategory): Promise<WebAPIResponse> {
+    async createSubCategory(subcategory: SubCategory): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} attempting to create subcategory with name ${subcategory.name}`, this.color);
@@ -97,10 +98,77 @@ class APIService implements IAPIService {
             console.error("Error", error);
         }
     }
+    async updateSubCategory(subcategory: SubCategory): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to update subcategory with name ${subcategory.name}`, this.color);
+        }
 
-    async deleteSubcategory(id: number): Promise<WebAPIResponse> {
-        throw new Error("Method not implemented.");
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Subcategory/${subcategory.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(subcategory),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated subcategory with name ${subcategory.name}. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
+            } else {
+                console.log(`${this.prefix} failed updating subcategory with name ${subcategory.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
     }
+
+    async deleteSubCategory(id: number): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to delete subcategory with id: ${id} `, this.color);
+        }
+
+        try {
+            const response = await fetch(this.apiBaseUrl + "/Subcategory/" + id, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted subcategory with id: ${id} `, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    message: `successfully deleted category with id: ${id}`,
+                    statusCode: response.status,
+                };
+            } else {
+                console.log(`${this.prefix} failed to delete subcategory with id: ${id}. Status: ${response.status} ${response.statusText} `, this.color);
+                return {
+                    success: false,
+                    message: `failed to delete category with id: ${id}. Status: ${response.status} ${response.statusText} `,
+                    statusCode: response.status,
+                };
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    //////////////////////////// Category
 
     async getCategories(): Promise<Category[]> {
         const t1 = performance.now();
@@ -162,31 +230,40 @@ class APIService implements IAPIService {
         }
     }
 
-    async updateCategory(category: Category, id : number): Promise<WebAPIResponse> {
+    async updateCategory(category: Category): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} updating category with id: ${category.id} `, this.color);
+            console.log(`${this.prefix} attempting to update subcategory with name ${category.name}`, this.color);
         }
 
         try {
-            const response = await fetch(`${this.apiBaseUrl}/Category/${id}`, {
+            const response = await fetch(`${this.apiBaseUrl}/Category/${category.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(category),
                 headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
             });
-            console.log(response.statusText)
+
             if (response.status === 200) {
                 if (Constants.loggingEnabled) {
                     const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated category. Statuscode: ${response.status}`, t1, t2, this.color);
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated category with name ${category.name}. Statuscode: ${response.status}`, t1, t2, this.color);
                 }
-                return;
-
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
             } else {
-                console.log(`${this.prefix} failed to update category with id: ${category.id}. Status: ${response.status} ${response.statusText} `, this.color);
+                console.log(`${this.prefix} failed updating category with name ${category.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error", error);
         }
     }
 
