@@ -9,7 +9,6 @@ export default class Product {
     imageUrls: string[];
 
 }
-
 export enum conditionType {
     "No shards" = 1,
     "Few shards" = 2,

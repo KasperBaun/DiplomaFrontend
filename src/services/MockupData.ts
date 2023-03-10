@@ -1,6 +1,6 @@
 import Category from "@models/Category";
-import Product, { conditionType, materialType, qualityType } from "@models/Product";
-
+import Product, {materialType } from "@models/Product";
+import ProductItem, {conditionType, qualityType} from "@models/ProductItem";
 export const categories: Category[] = [
 
     { id: 0, name: "Plates", order: 1, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Foliated_dish_with_underglaze_blue_design_of_melons%2C_bamboo_and_grapes%2C_Jingdezhen_ware%2C_Yuan%2C_1271-1368%2C_Shanghai_Museum.jpg/220px-Foliated_dish_with_underglaze_blue_design_of_melons%2C_bamboo_and_grapes%2C_Jingdezhen_ware%2C_Yuan%2C_1271-1368%2C_Shanghai_Museum.jpg" },
@@ -16,6 +16,100 @@ export const categories: Category[] = [
     { id: 10, name: "Clocks", order: 11, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Rew17h09_1977.jpg/220px-Rew17h09_1977.jpg" }
 ]
 
+export const productItemMockupData: ProductItem[] = [
+    {   
+        id: 3,
+        productId: 1, 
+        condition: conditionType["No shards"],
+        quality: qualityType["1. Quality"],
+        sold: false,  
+        weight : null,  
+        customText: "This beautiful vase is perfect for any room in your home.",
+        imageUrls: [
+            "https://via.placeholder.com/160",
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+        ]
+    },
+    {
+        id: 4,
+        productId: 2, 
+        condition: conditionType["No shards"],
+        quality: qualityType["2. Quality"],
+        sold: false,  
+        weight : null,  
+        customText: "Enjoy a warm cup of tea with this exquisite teapot.",
+        imageUrls: [
+            "https://via.placeholder.com/160",
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+        ]
+    },
+    {
+        id: 5,
+        productId: 3, 
+        condition: conditionType["Few shards"],
+        quality: qualityType["3. Quality"],
+        sold: false,  
+        weight : null,  
+        customText: "This intricately designed bowl is perfect for serving salads or fruit.",
+        imageUrls: [
+            "https://via.placeholder.com/160",
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+        ]
+    },
+    {
+        id:6,
+        productId: 4, 
+        condition: conditionType["Many shards"],
+        quality: qualityType["1. Quality"],
+        sold: false,  
+        weight : null,  
+        customText: "This beautiful plate is perfect for special occasions.",
+        imageUrls: [
+            "https://via.placeholder.com/160",
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+        ]
+    },
+    {
+        id:7,
+        productId: 5, 
+        condition: conditionType["No shards"],
+        quality: qualityType["2. Quality"],
+        sold: false,  
+        weight : null,  
+        customText: "Enjoy a warm beverage with this delicate cup.",
+        imageUrls: [
+            "https://via.placeholder.com/160",
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+        ]
+    },
+    {
+        id:8,
+        productId: 6, 
+        condition: conditionType["Few shards"],
+        quality: qualityType["3. Quality"],
+        sold: false,  
+        weight : null,  
+        customText: "This intricately designed teacup is perfect for a special tea time.",
+        imageUrls: [
+            "https://via.placeholder.com/160",
+            "https://via.placeholder.com/170",
+            "https://via.placeholder.com/180",
+            "https://via.placeholder.com/190",
+        ]
+    },
+
+]
+
 export const productMockupData: Product[] = [
     {
         id: 1,
@@ -23,10 +117,7 @@ export const productMockupData: Product[] = [
         modelNumber: 101,
         material: materialType.porcelain,
         design: "Flower Pattern",
-        condition: conditionType["No shards"],
-        quality: qualityType["1. Quality"],
         dimension: "9 inches x 5 inches",
-        customText: "This beautiful vase is perfect for any room in your home.",
         imageUrls: [
             "https://via.placeholder.com/160",
             "https://via.placeholder.com/170",
@@ -41,10 +132,7 @@ export const productMockupData: Product[] = [
         modelNumber: 102,
         material: materialType.porcelain,
         design: "Butterfly Pattern",
-        condition: conditionType["No shards"],
-        quality: qualityType["2. Quality"],
         dimension: "7 inches x 4 inches",
-        customText: "Enjoy a warm cup of tea with this exquisite teapot.",
         imageUrls: [
             "https://via.placeholder.com/160",
             "https://via.placeholder.com/170",
@@ -59,10 +147,7 @@ export const productMockupData: Product[] = [
         modelNumber: 103,
         material: materialType.porcelain,
         design: "Fruit Pattern",
-        condition: conditionType["Few shards"],
-        quality: qualityType["3. Quality"],
         dimension: "10 inches x 6 inches",
-        customText: "This intricately designed bowl is perfect for serving salads or fruit.",
         imageUrls: [
             "https://via.placeholder.com/160",
             "https://via.placeholder.com/170",
@@ -78,10 +163,7 @@ export const productMockupData: Product[] = [
         modelNumber: 248,
         material: materialType.porcelain,
         design: "Leaf Pattern",
-        condition: conditionType["Many shards"],
-        quality: qualityType["1. Quality"],
         dimension: "8 inches x 8 inches",
-        customText: "This beautiful plate is perfect for special occasions.",
         imageUrls: [
             "https://via.placeholder.com/160",
             "https://via.placeholder.com/170",
@@ -96,10 +178,7 @@ export const productMockupData: Product[] = [
         modelNumber: 249,
         material: materialType.porcelain,
         design: "Bird Pattern",
-        condition: conditionType["No shards"],
-        quality: qualityType["2. Quality"],
         dimension: "3 inches x 3 inches",
-        customText: "Enjoy a warm beverage with this delicate cup.",
         imageUrls: [
             "https://via.placeholder.com/160",
             "https://via.placeholder.com/170",
@@ -114,10 +193,7 @@ export const productMockupData: Product[] = [
         modelNumber: 250,
         material: materialType.porcelain,
         design: "Rose Pattern",
-        condition: conditionType["Few shards"],
-        quality: qualityType["3. Quality"],
         dimension: "2 inches x 2 inches",
-        customText: "This intricately designed teacup is perfect for a special tea time.",
         imageUrls: [
             "https://via.placeholder.com/160",
             "https://via.placeholder.com/170",
