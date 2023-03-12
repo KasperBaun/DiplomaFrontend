@@ -26,6 +26,7 @@
     "react-intl": "^6.2.10",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
+    "recharts": "^2.4.3",
     "sass": "^1.58.2",
     "styled-components": "^5.3.8",
     "tsconfig-paths": "^4.1.2",
