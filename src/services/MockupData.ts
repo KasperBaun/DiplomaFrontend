@@ -30,7 +30,11 @@ export const productItemMockupData: ProductItem[] = [
             "https://via.placeholder.com/170",
             "https://via.placeholder.com/180",
             "https://via.placeholder.com/190",
-        ]
+        ], 
+        purchasePrice  : 2000, 
+        currentPrice : 4500, 
+        createdDate : new Date(2023, 1, 12), 
+        priceHistory : [{id: 8, productItemId : 3, changeDate : new Date(2023, 1, 12), price : 4500}]
     },
     {
         id: 4,
@@ -45,7 +49,11 @@ export const productItemMockupData: ProductItem[] = [
             "https://via.placeholder.com/170",
             "https://via.placeholder.com/180",
             "https://via.placeholder.com/190",
-        ]
+        ],
+        purchasePrice  : 1000, 
+        currentPrice : 9000     , 
+        createdDate : new Date(2022, 12, 12), 
+        priceHistory : [{id: 7, productItemId : 4, changeDate : new Date(2022, 12, 12), price : 9000}]
     },
     {
         id: 5,
@@ -60,7 +68,12 @@ export const productItemMockupData: ProductItem[] = [
             "https://via.placeholder.com/170",
             "https://via.placeholder.com/180",
             "https://via.placeholder.com/190",
-        ]
+        ],
+        purchasePrice  : 800, 
+        currentPrice : 1500, 
+        createdDate : new Date(2023, 1, 12), 
+        soldDate: new Date(2023, 3, 12), 
+        priceHistory : [{id: 6, productItemId : 5, changeDate : new Date(2023, 1, 12), price : 1500}]
     },
     {
         id:6,
@@ -75,8 +88,11 @@ export const productItemMockupData: ProductItem[] = [
             "https://via.placeholder.com/170",
             "https://via.placeholder.com/180",
             "https://via.placeholder.com/190",
-        ]
-    },
+        ],
+        purchasePrice  : 20000, 
+        currentPrice : 25000, 
+        createdDate : new Date(2023, 1, 12), 
+        priceHistory : [{id: 5, productItemId : 6, changeDate : new Date(2023, 1, 12), price : 25000}]    },
     {
         id:7,
         productId: 5, 
@@ -90,7 +106,11 @@ export const productItemMockupData: ProductItem[] = [
             "https://via.placeholder.com/170",
             "https://via.placeholder.com/180",
             "https://via.placeholder.com/190",
-        ]
+        ],
+        purchasePrice  : 8000, 
+        currentPrice : 8001, 
+        createdDate : new Date(), 
+        priceHistory : [{id: 4, productItemId : 7, changeDate : new Date(), price : 8001}]
     },
     {
         id:8,
@@ -105,9 +125,15 @@ export const productItemMockupData: ProductItem[] = [
             "https://via.placeholder.com/170",
             "https://via.placeholder.com/180",
             "https://via.placeholder.com/190",
-        ]
-    },
-
+        ],
+        purchasePrice  : 2000, 
+        currentPrice : 8000, 
+        createdDate : new Date(2021, 1, 12), 
+        priceHistory : [
+            {id: 1, productItemId : 8, changeDate : new Date(2021, 1, 12), price : 12000},
+            {id: 2, productItemId : 8, changeDate : new Date(2021, 1, 12), price : 10000},
+            {id: 3, productItemId : 8, changeDate : new Date(2023, 2, 12), price : 8000}]
+    }
 ]
 
 export const productMockupData: Product[] = [
