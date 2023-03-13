@@ -1,21 +1,32 @@
-import { Card } from "react-bootstrap";
+import { Card, CardMedia, CardContent, Typography, CardHeader  } from "@mui/material/";
 
 
 interface IProps {
-    url : string;
+    url ?: string;
     var1 ?: string;
     var2 ?: string;
+    styleclass ?: string;
+    header ?: boolean;
 }
 
 const Cards = (props : IProps) => {
     return (
-        <Card className="DashBoardCards">
-            <Card.Img className="DashBoardCards_image" src={props.url}></Card.Img>
+        <Card className={props.styleclass} variant="outlined">
+            {
+                props.url ? (
+                    <CardMedia component="img" className="DashBoardCards_image" image={props.url}></CardMedia>
+                ) : (
+                    <CardMedia component="img" className="DashBoardCards_image"></CardMedia>
+                )
+            }
             <hr />
             { 
-                props.var1 ? (
+                props.header ? (
+                    <CardWithTextAndHeader title={props.var1} text={props.var2} /> 
+                ) : (
                     <CardWithText1 title={props.var1} text={props.var2} />
-                ) : null}
+                )
+            }
         </Card>
     )
 }
@@ -27,10 +38,24 @@ interface CardWithTextProps {
 
 const CardWithText1 = (props : CardWithTextProps) => {
     return (
-        <Card.Body>
-            <Card.Title>{props.title}</Card.Title>
-            { props.text ? props.text : "" }
-        </Card.Body>
+        <CardContent>
+            <Typography variant="h5">{props.title}</Typography>
+            <Typography variant="body2">
+                { props.text ? props.text : "" }
+            </Typography>
+        </CardContent>
+    )
+}
+
+
+const CardWithTextAndHeader = (props : CardWithTextProps) => {
+    return (
+        <CardContent>
+            <CardHeader title={props.title} subheader={Date.now()} />
+            <Typography variant="body2">
+                { props.text ? props.text : "" }
+            </Typography>
+        </CardContent>
     )
 }
 

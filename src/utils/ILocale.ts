@@ -53,6 +53,9 @@ export interface ILocale {
   ProductSniperTabText: string;
   ManagementTabText: string;
 
+  // Admin Dashboard
+  EconomyWidgetSalesFormat : string;
+
   ///////////////////////////////////////////////////////////////////////////////
 
   // Header tabs

@@ -54,6 +54,9 @@ export default class DKLocale implements ILocale {
   ProductSniperTabText = "Produkt Sniper";
   ManagementTabText = "Styring";
 
+  // Admin Dashboard
+  EconomyWidgetSalesFormat = "Salg (DKK)";
+
 
   // Header tabs
   HomeTabText = "Hjem";
