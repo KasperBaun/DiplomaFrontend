@@ -55,6 +55,15 @@ export interface ILocale {
 
   // Admin Dashboard
   EconomyWidgetSalesFormat : string;
+  EconomyWidgetTitle : string;
+  RecentSalesWidgetTitle : string;
+  RecentSalesTableDate : string;
+  RecentSalesTableName : string;
+  RecentSalesTableShipmentLoc : string;
+  RecentSalesTablePaymentMethod : string;
+  RecentSalesTableSalePrice : string;
+  RecentSalesNavButton : string;
+  RecentSalesCurrencyId : string;
 
   ///////////////////////////////////////////////////////////////////////////////
 

@@ -50,24 +50,31 @@ function createData(
 
 interface IProps {
     title : string;
+    tableDate : string;
+    tableName : string;
+    tableLoc : string;
+    tablePay : string;
+    tableSaleAmount : string;
+    tableButton : string;
+    currencyId : string;
 }
 
-const RecentSalesList = ({title} : IProps) => {
+const RecentSalesList = ( props : IProps) => {
     
     function preventDefault(event: React.MouseEvent) {
         event.preventDefault();
     }
     return (
         <React.Fragment>
-            <h3>{title}</h3>
+            <h3>{props.title}</h3>
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell>Name</TableCell>
-              <TableCell>Ship To</TableCell>
-              <TableCell>Payment Method</TableCell>
-              <TableCell align="right">Sale Amount</TableCell>
+              <TableCell>{props.tableDate}</TableCell>
+              <TableCell>{props.tableName}</TableCell>
+              <TableCell>{props.tableLoc}</TableCell>
+              <TableCell>{props.tablePay}</TableCell>
+              <TableCell align="right">{props.tableSaleAmount}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -77,13 +84,13 @@ const RecentSalesList = ({title} : IProps) => {
                 <TableCell>{row.name}</TableCell>
                 <TableCell>{row.shipTo}</TableCell>
                 <TableCell>{row.paymentMethod}</TableCell>
-                <TableCell align="right">{`$${row.amount}`}</TableCell>
+                <TableCell align="right">{`${row.amount} DKK`}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
         <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-          See more orders
+          {props.tableButton}
         </Link>
       </React.Fragment>
     )
