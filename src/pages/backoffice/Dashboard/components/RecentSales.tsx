@@ -1,5 +1,6 @@
 import { Link, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
-import React from "react";
+import MobXContext from "@stores/MobXContext";
+import React, { useContext } from "react";
 
 function createData(
     id: number,
@@ -18,7 +19,7 @@ function createData(
       '16 Mar, 2019',
       'Elvis Presley',
       'Tupelo, MS',
-      'VISA ⠀•••• 3719',
+      'Creditcard ⠀•••• 3719',
       312.44,
     ),
     createData(
@@ -26,16 +27,16 @@ function createData(
       '16 Mar, 2019',
       'Paul McCartney',
       'London, UK',
-      'VISA ⠀•••• 2574',
+      'Creditcard ⠀•••• 2574',
       866.99,
     ),
-    createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
+    createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'Stripe ⠀•••• 1253', 100.81),
     createData(
       3,
       '16 Mar, 2019',
       'Michael Jackson',
       'Gary, IN',
-      'AMEX ⠀•••• 2000',
+      'MobilePay +45 41432725',
       654.39,
     ),
     createData(
@@ -43,7 +44,7 @@ function createData(
       '15 Mar, 2019',
       'Bruce Springsteen',
       'Long Branch, NJ',
-      'VISA ⠀•••• 5919',
+      'Creditcard ⠀•••• 5919',
       212.79,
     ),
   ];
@@ -60,40 +61,42 @@ interface IProps {
 }
 
 const RecentSalesList = ( props : IProps) => {
+  const {  } = useContext(MobXContext);
     
-    function preventDefault(event: React.MouseEvent) {
-        event.preventDefault();
-    }
-    return (
-        <React.Fragment>
-            <h3>{props.title}</h3>
-        <Table size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell>{props.tableDate}</TableCell>
-              <TableCell>{props.tableName}</TableCell>
-              <TableCell>{props.tableLoc}</TableCell>
-              <TableCell>{props.tablePay}</TableCell>
-              <TableCell align="right">{props.tableSaleAmount}</TableCell>
+  function preventDefault(event: React.MouseEvent) {
+      event.preventDefault();
+  }
+
+  return (
+      <React.Fragment>
+          <h3>{props.title}</h3>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>{props.tableDate}</TableCell>
+            <TableCell>{props.tableName}</TableCell>
+            <TableCell>{props.tableLoc}</TableCell>
+            <TableCell>{props.tablePay}</TableCell>
+            <TableCell align="right">{props.tableSaleAmount}</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow key={row.id}>
+              <TableCell>{row.date}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.shipTo}</TableCell>
+              <TableCell>{row.paymentMethod}</TableCell>
+              <TableCell align="right">{`${row.amount} DKK`}</TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.date}</TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.shipTo}</TableCell>
-                <TableCell>{row.paymentMethod}</TableCell>
-                <TableCell align="right">{`${row.amount} DKK`}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-        <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-          {props.tableButton}
-        </Link>
-      </React.Fragment>
-    )
+          ))}
+        </TableBody>
+      </Table>
+      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+        {props.tableButton}
+      </Link>
+    </React.Fragment>
+  )
 }
 
 export default RecentSalesList;
