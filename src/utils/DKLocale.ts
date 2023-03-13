@@ -57,11 +57,10 @@ export default class DKLocale implements ILocale {
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Salg (DKK)";
   EconomyWidgetTitle = "Indtægter / Udgifter";
-  RecentSalesTableDate = "Salgsdato";
-  RecentSalesTableName = "Produkt";
-  RecentSalesTableShipmentLoc = "Shipping";
-  RecentSalesTablePaymentMethod = "Betalingsmetode";
-  RecentSalesTableSalePrice = "Salgspris";
+  RecentSalesDatePaid = "Salgsdato";
+  RecentSalesApproved = "Betaling Godkendt";
+  RecentSalesMethod = "Betalingsmetode";
+  RecentSalesAmount = "Salgspris";
   RecentSalesNavButton = "Se flere salg";
   RecentSalesWidgetTitle = "Seneste Salg";
   RecentSalesCurrencyId = "DKK";

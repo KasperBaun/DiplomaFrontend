@@ -1,6 +1,7 @@
 import Category from "@models/Category";
 import { WebAPIResponse } from "./APIService";
 import SubCategory from "@models/SubCategory";
+import Payment from "@models/Payment";
 
 
 interface IAPIService {
@@ -12,6 +13,9 @@ interface IAPIService {
     createSubCategory(subcategory:SubCategory): Promise<WebAPIResponse>;
     updateSubCategory(subcategory:SubCategory): Promise<WebAPIResponse>;
     deleteSubCategory(id: number): Promise<WebAPIResponse>;
+
+    createPayment(payment: Payment): Promise<void>;
+    getPayments(): Promise<Payment[]>;
 }
 
 export default IAPIService;

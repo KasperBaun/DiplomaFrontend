@@ -59,11 +59,10 @@ export default class ENLocale implements ILocale {
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Sales ($)";
   EconomyWidgetTitle = "Revenue / Expenses";
-  RecentSalesTableDate = "Date";
-  RecentSalesTableName = "Name";
-  RecentSalesTableShipmentLoc = "Ship To";
-  RecentSalesTablePaymentMethod = "Payment Method";
-  RecentSalesTableSalePrice = "Sale Amount";
+  RecentSalesDatePaid = "Date";
+  RecentSalesApproved = "Payment Approved";
+  RecentSalesMethod = "Payment Method";
+  RecentSalesAmount = "Sale Amount";
   RecentSalesNavButton = "See more orders";
   RecentSalesWidgetTitle = "Recent Sales";
   RecentSalesCurrencyId = "$";
