@@ -1,8 +1,13 @@
 import Category from "@models/Category";
-import { WebAPIResponse } from "./APIService";
 import SubCategory from "@models/SubCategory";
 import Product from "@models/Product";
 
+export interface WebAPIResponse {
+    success: boolean;
+    message?: string;
+    statusCode: number;
+    data?: any;
+}
 
 interface IAPIService {
     getCategories: () => Promise<Category[]>

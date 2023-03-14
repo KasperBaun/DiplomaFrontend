@@ -2,16 +2,11 @@
 import Category from "@models/Category";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
-import IAPIService from "./IAPIService";
+import IAPIService, { WebAPIResponse } from "./IAPIService";
 import SubCategory from "@models/SubCategory";
 import Product from "@models/Product";
 
-export interface WebAPIResponse {
-    success: boolean;
-    message?: string;
-    statusCode: number;
-    data?: any;
-}
+
 
 class APIService implements IAPIService {
 

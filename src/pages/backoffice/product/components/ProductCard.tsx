@@ -26,7 +26,7 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
                 <Card.Title>{props.product.name}</Card.Title>
                 <Card.Subtitle>{props.product.modelNumber}</Card.Subtitle>
                 <Card.Text>
-                    {languageStore.currentLanguage.productPage_productCondition}: {props.product.condition || 'N/A'}
+                    {/* {languageStore.currentLanguage.productPage_productCondition}: {props.product.condition || 'N/A'} */}
                 </Card.Text>
                 <Card.Text>
                 </Card.Text>

@@ -45,22 +45,22 @@ const ProductInformationComponent: React.FC<IProductInfoProps> = observer(functi
                 <label>{languageStore.currentLanguage.productPage_productDesign}</label>
                 <input type="text" value={props.product.design || 'N/A'} disabled />
             </div>
-            <div>
+            {/* <div>
                 <label>{languageStore.currentLanguage.productPage_productCondition}</label>
                 <input type="text" value={props.product.condition || 'N/A'} disabled />
-            </div>
-            <div>
+            </div> */}
+            {/* <div>
                 <label>{languageStore.currentLanguage.productPage_productQuality}</label>
                 <input type="text" value={props.product.quality || 'N/A'} disabled />
-            </div>
+            </div> */}
             <div>
                 <label>{languageStore.currentLanguage.productPage_productDimension}</label>
                 <input type="text" value={props.product.dimension || 'N/A'} disabled />
             </div>
-            <div>
+            {/* <div>
                 <label>{languageStore.currentLanguage.productPage_productCustomText}</label>
                 <input type="text" value={props.product.customText || 'N/A'} disabled />
-            </div>
+            </div> */}
 
         </div>
     )
