@@ -5,6 +5,7 @@ import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
 import { productMockupData } from '@services/MockupData';
+import ProductItem from '@models/ProductItem';
 
 export class ProductStore {
 
@@ -17,6 +18,7 @@ export class ProductStore {
     private apiService: APIService;
     private products: Product[] = [];
     private productsLoaded: boolean = false;
+    private productItems: ProductItem[] = [];
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -58,6 +60,8 @@ export class ProductStore {
     public async loadProducts(): Promise<void> {
         if (!this.isLoaded) {
             this.products = await this.apiService.getProducts();
+            this.productItems = await this.apiService.getProductItems(); 
+            
             runInAction(() => {
                 this.loaded = true;
                 this.loading = false;

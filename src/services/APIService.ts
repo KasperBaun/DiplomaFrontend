@@ -5,6 +5,7 @@ import { Constants } from "@utils/Constants";
 import IAPIService, { WebAPIResponse } from "./IAPIService";
 import SubCategory from "@models/SubCategory";
 import Product from "@models/Product";
+import ProductItem from "@models/ProductItem";
 
 
 
@@ -23,22 +24,200 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-    /* Products */
-    createProduct(product: Product): Promise<WebAPIResponse> {
+        /* Product Iems */
+    createProductItem(productItem: ProductItem): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");
     }
+    getProductItem(id: number): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+    updateProductItem(productItem: ProductItem): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+    deleteProductItem(id: number): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+
+    async getProductItems(): Promise<ProductItem[]> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} fetching product Items`, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/ProductItem`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched product Items from API. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                try {
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error(error);
+                    return [];
+                }
+
+            } else {
+                console.log(`${this.prefix} failed fetching product Items from API. Status: ${response.status} ${response.statusText}`, this.color);
+                return [];
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    
+    /* Products */
+    async createProduct(product: Product): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to create Product with name ${product.name}`, this.color);
+        }
+
+        try {
+            console.log("we here");
+            const response = await fetch(`${this.apiBaseUrl}/Product`, {
+                method: 'POST',
+                body: JSON.stringify(product),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created Product with name ${product.name}. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
+            } else {
+                console.log(`${this.prefix} failed creating Product with name ${product.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
+    }
+    
     getProduct(id: number): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");
     }
-    getProducts(): Promise<Product[]> {
-        throw new Error("Method not implemented.");
+ 
+    async updateProduct(product: Product): Promise<WebAPIResponse> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} attempting to update product with name ${product.name}`, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Product/${product.id}`, {
+                method: 'PUT',
+                body: JSON.stringify(product),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated product with name ${product.name}. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    statusCode: response.status,
+                    message: response.statusText,
+                    data: response.body
+                }
+            } else {
+                console.log(`${this.prefix} failed updating product with name ${product.name}. Status: ${response.status} ${response.statusText}`, this.color);
+                return {
+                    success: false,
+                    statusCode: response.status,
+                    message: response.statusText
+                }
+            }
+        } catch (error) {
+            console.error("Error", error);
+        }
     }
-    updateProduct(product: Product): Promise<WebAPIResponse> {
-        throw new Error("Method not implemented.");
+
+    async deleteProduct(id: number): Promise<WebAPIResponse>  {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} deleting Product with id: ${id} `, this.color);
+        }
+
+        try {
+            const response = await fetch(this.apiBaseUrl + "/Product/" + id, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted Product with id: ${id} `, t1, t2, this.color);
+                }
+                return {
+                    success: true,
+                    message: `successfully deleted Product with id: ${id}`,
+                    statusCode: 200,
+                };
+            } else {
+                console.log(`${this.prefix} failed to delete Product with id: ${id}. Status: ${response.status} ${response.statusText} `, this.color);
+                return {
+                    success: false,
+                    message: `failed to delete Product with id: ${id}. Status: ${response.status} ${response.statusText} `,
+                    statusCode: 500,
+                };
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
-    deleteProduct(id: number): Promise<WebAPIResponse> {
-        throw new Error("Method not implemented.");
+    async getProducts(): Promise<Product[]> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} fetching products`, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Product`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched products from API. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                try {
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error(error);
+                    return [];
+                }
+
+            } else {
+                console.log(`${this.prefix} failed fetching products from API. Status: ${response.status} ${response.statusText}`, this.color);
+                return [];
+            }
+        } catch (error) {
+            console.error(error);
+        }
     }
+
 
 
     /* Subcategories */

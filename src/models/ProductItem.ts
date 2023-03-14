@@ -1,6 +1,6 @@
 import PriceHistory from "./PriceHistory"
 
-export default class Product {
+export default class ProductItem {
     id: number;
     productId: number; 
     condition: conditionType;

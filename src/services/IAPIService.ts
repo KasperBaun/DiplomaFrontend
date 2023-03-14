@@ -1,6 +1,7 @@
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
 import Product from "@models/Product";
+import ProductItem from "@models/ProductItem";
 
 export interface WebAPIResponse {
     success: boolean;
@@ -24,6 +25,12 @@ interface IAPIService {
     getProducts(): Promise<Product[]>;
     updateProduct(product: Product): Promise<WebAPIResponse>;
     deleteProduct(id: number): Promise<WebAPIResponse>;
+
+    createProductItem(productItem: ProductItem): Promise<WebAPIResponse>;
+    getProductItem(id: number): Promise<WebAPIResponse>;
+    getProductItems(): Promise<ProductItem[]>;
+    updateProductItem(productItem: ProductItem): Promise<WebAPIResponse>;
+    deleteProductItem(id: number): Promise<WebAPIResponse>;
 
 
 }
