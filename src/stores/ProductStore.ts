@@ -15,8 +15,8 @@ export class ProductStore {
     private apiService: APIService;
     private products: Product[] = [];
 
-    constructor(_rootStore: RootStore, _mockupService: APIService) {
-        this.apiService = _mockupService;
+    constructor(_rootStore: RootStore, _apiService: APIService) {
+        this.apiService = _apiService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
