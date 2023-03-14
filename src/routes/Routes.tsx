@@ -11,6 +11,7 @@ import PaymentPage from "@webshop/payment/PaymentPage"
 import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
 import BackOffice from "@backoffice/BackOffice"
+import ProductListPage from "@webshop/product/ProductListPage"
 
 
 const Routing: FunctionComponent = () => {
@@ -26,6 +27,7 @@ const Routing: FunctionComponent = () => {
                 <Route path="confirmation" element={<ConfirmationPage />} />
                 <Route path="payment" element={<PaymentPage />} />
                 <Route path="product" element={<ProductPage productId={1} />} />
+                <Route path="productList" element={<ProductListPage/>} />
                 <Route path="search" element={<SearchPage />} />
             </Route>
             <Route path="/backoffice" element={<BackOffice />}>

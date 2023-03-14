@@ -19,6 +19,7 @@ export class ProductStore {
     private products: Product[] = [];
     private productsLoaded: boolean = false;
     private productItems: ProductItem[] = [];
+    private productMap : Map<number, Product> = new Map(); 
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -28,11 +29,10 @@ export class ProductStore {
     }
 
     public async init(): Promise<boolean> {
+
         this.loading = true;
         // Fetch products
-        //this.products = await this.spService.getFiles(Constants.documentLibraryListTitle);
-        this.products = productMockupData;
-
+        await this.loadProducts();
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -57,17 +57,30 @@ export class ProductStore {
         return result;
     }
 
-    public async loadProducts(): Promise<void> {
+    public async loadProducts(): Promise<void>{
         if (!this.isLoaded) {
             this.products = await this.apiService.getProducts();
+            this.productMap = this.createProductMap(this.products);
             this.productItems = await this.apiService.getProductItems(); 
-            
+
             runInAction(() => {
                 this.loaded = true;
                 this.loading = false;
             });
         }
     }
+
+    private createProductMap(products : Product[]) : Map<number, Product> {
+        const prodMap : Map<number , Product> = new Map<number , Product>();
+        for (const product of products){
+            let tempProd = prodMap.get(product.id);
+            if (tempProd === null && tempProd){
+                prodMap.set(product.id, product); 
+            }
+        }
+        return prodMap
+    }
+
 
     public getProducts(): Product[] {
         return this.products;
@@ -77,8 +90,12 @@ export class ProductStore {
         return this.products;
     }
 
-    public async getProduct(id: number): Promise<Product> {
-        return null;
+    public get ProductItems(): ProductItem[] {
+        return this.productItems;
+    }
+
+    public  getProduct(id: number): Product {
+        return this.productMap.get(id);
     }
 
     public async deleteProduct(id: number): Promise<boolean> {
