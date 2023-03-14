@@ -67,6 +67,18 @@ export default class ENLocale implements ILocale {
   ProductSniperTabText = "Product Sniper";
   ManagementTabText = "Management";
 
+  // Admin Dashboard
+  EconomyWidgetSalesFormat = "Sales ($)";
+  EconomyWidgetTitle = "Revenue / Expenses";
+  RecentSalesTableDate = "Date";
+  RecentSalesTableName = "Name";
+  RecentSalesTableShipmentLoc = "Ship To";
+  RecentSalesTablePaymentMethod = "Payment Method";
+  RecentSalesTableSalePrice = "Sale Amount";
+  RecentSalesNavButton = "See more orders";
+  RecentSalesWidgetTitle = "Recent Sales";
+  RecentSalesCurrencyId = "$";
+
   // Header tabs
   HomeTabText = "Home";
   ProductTabText = "Products";

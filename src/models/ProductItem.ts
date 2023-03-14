@@ -1,3 +1,5 @@
+import PriceHistory from "./PriceHistory"
+
 export default class Product {
     id: number;
     productId: number; 
@@ -7,7 +9,11 @@ export default class Product {
     weight : number; 
     customText: string;
     imageUrls: string[];
-
+    purchasePrice: number;
+    currentPrice: number; 
+    createdDate: Date;
+    soldDate?: Date;
+    priceHistory?: PriceHistory[];  
 }
 
 export enum conditionType {

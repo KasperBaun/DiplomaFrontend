@@ -65,6 +65,18 @@ export default class DKLocale implements ILocale {
   ProductSniperTabText = "Produkt Sniper";
   ManagementTabText = "Styring";
 
+  // Admin Dashboard
+  EconomyWidgetSalesFormat = "Salg (DKK)";
+  EconomyWidgetTitle = "Indtægter / Udgifter";
+  RecentSalesTableDate = "Salgsdato";
+  RecentSalesTableName = "Produkt";
+  RecentSalesTableShipmentLoc = "Shipping";
+  RecentSalesTablePaymentMethod = "Betalingsmetode";
+  RecentSalesTableSalePrice = "Salgspris";
+  RecentSalesNavButton = "Se flere salg";
+  RecentSalesWidgetTitle = "Seneste Salg";
+  RecentSalesCurrencyId = "DKK";
+
 
   // Header tabs
   HomeTabText = "Hjem";

@@ -42,7 +42,7 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
             {/* // Beskrivelseskomponent */}
                 <h1>ProductPage</h1>
                 <p>Name: {product.name}</p>
-                <p>Condition: {product.condition}</p>
+               {/*<p>Condition: {product.condition}</p>*/}
             </div >
 
         )
