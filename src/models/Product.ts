@@ -6,6 +6,7 @@ export default class Product {
     design: string;
     dimension: string;
     imageUrls: string[];
+    subcategoryId: number;
 }
 // TODO: Remove this imageUrls? (and use it only in productItem?)
 

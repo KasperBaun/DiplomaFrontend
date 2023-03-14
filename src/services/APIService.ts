@@ -2,15 +2,11 @@
 import Category from "@models/Category";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
-import IAPIService from "./IAPIService";
+import IAPIService, { WebAPIResponse } from "./IAPIService";
 import SubCategory from "@models/SubCategory";
+import Product from "@models/Product";
 
-export interface WebAPIResponse {
-    success: boolean;
-    message?: string;
-    statusCode: number;
-    data?: any;
-}
+
 
 class APIService implements IAPIService {
 
@@ -27,7 +23,25 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-    //////////////////////////////// Subcategory
+    /* Products */
+    createProduct(product: Product): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+    getProduct(id: number): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+    getProducts(): Promise<Product[]> {
+        throw new Error("Method not implemented.");
+    }
+    updateProduct(product: Product): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+    deleteProduct(id: number): Promise<WebAPIResponse> {
+        throw new Error("Method not implemented.");
+    }
+
+
+    /* Subcategories */
     async getSubCategories(): Promise<SubCategory[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
@@ -168,8 +182,8 @@ class APIService implements IAPIService {
             console.error(error);
         }
     }
-    //////////////////////////// Category
 
+    /* Categories */
     async getCategories(): Promise<Category[]> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {

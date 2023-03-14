@@ -1,7 +1,4 @@
-import MobXContext from "@stores/MobXContext";
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import { useContext } from "react";
-import { Container } from "@mui/material";
 import React from "react";
 
 function createData(date: string, sale?: number, purchase?: number) {
@@ -21,15 +18,14 @@ const data = [
 ];
 
 
-const EconomyWidget = () => {
-
-    const { languageStore } = useContext(MobXContext);
-    // Display Revenue from Sales
-    // Display Expenses from purchases 
-    // Display Inventory, Sale and Purchase count for Day / Month / Half Yearly and Yearly. 
+interface IProps {
+    title : string;
+    salgsformat : string;
+}
+const EconomyWidget = ({title, salgsformat} : IProps) => {
     return (
         <React.Fragment>
-            <h3>Revenue / Expenses</h3>
+            <h3>{title}</h3>
             <ResponsiveContainer width="95%" height="80%">
                 <LineChart
                 width={500} height={250}
@@ -50,7 +46,7 @@ const EconomyWidget = () => {
                         textAnchor: 'middle',
                     }}
                     >
-                        { languageStore.currentLanguage.EconomyWidgetSalesFormat }
+                        { salgsformat }
                     </Label>
                 </YAxis>
                 <Line
