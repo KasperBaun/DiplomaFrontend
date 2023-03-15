@@ -4,6 +4,7 @@ import { RootStore } from './RootStore';
 import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
+import { productMockupData } from '@services/MockupData';
 
 export class ProductStore {
 
@@ -12,8 +13,11 @@ export class ProductStore {
     private prefix: string = `%c[ProductStore]`;
     private color: string = ComponentLoggingConfig.DarkCrimson;
     private loaded: boolean = false;
+    private loading: boolean = false;
     private apiService: APIService;
     private products: Product[] = [];
+    private productsLoaded: boolean = false;
+
 
     constructor(_rootStore: RootStore, _mockupService: APIService) {
         this.apiService = _mockupService;
@@ -22,13 +26,17 @@ export class ProductStore {
     }
 
     public async init(): Promise<boolean> {
+        this.loading = true;
         // Fetch products
         //this.products = await this.spService.getFiles(Constants.documentLibraryListTitle);
+        this.products = productMockupData;
+
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
         runInAction(() => {
+            this.loading = false;
             this.loaded = true;
         })
         return this.loaded;
@@ -42,15 +50,35 @@ export class ProductStore {
     }
 
     public get isLoaded(): boolean {
-        return this.loaded;
+        let result: boolean = !this.loading;
+        result = this.loaded;
+        return result;
+    }
+
+    public async loadProducts(): Promise<void> {
+        if (!this.isLoaded) {
+            this.products = await this.apiService.getProducts();
+            runInAction(() => {
+                this.loaded = true;
+                this.loading = false;
+            });
+        }
     }
 
     public getProducts(): Product[] {
         return this.products;
     }
 
+    public get Products(): Product[] {
+        return this.products;
+    }
+
     public async getProduct(id: number): Promise<Product> {
         return null;
+    }
+
+    public async deleteProduct(id: number): Promise<boolean> {
+        return false;
     }
 
 }

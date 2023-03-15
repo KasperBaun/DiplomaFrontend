@@ -151,6 +151,7 @@ export const productMockupData: Product[] = [
             "https://via.placeholder.com/190",
             "https://via.placeholder.com/200",
         ],
+        subcategoryId: 1,
     },
     {
         id: 2,
@@ -166,6 +167,7 @@ export const productMockupData: Product[] = [
             "https://via.placeholder.com/190",
             "https://via.placeholder.com/200",
         ],
+        subcategoryId: 1,
     },
     {
         id: 3,
@@ -181,6 +183,7 @@ export const productMockupData: Product[] = [
             "https://via.placeholder.com/190",
             "https://via.placeholder.com/200",
         ],
+        subcategoryId: 1,
     },
 
     {
@@ -197,6 +200,7 @@ export const productMockupData: Product[] = [
             "https://via.placeholder.com/190",
             "https://via.placeholder.com/200",
         ],
+        subcategoryId: 1,
     },
     {
         id: 5,
@@ -212,6 +216,7 @@ export const productMockupData: Product[] = [
             "https://via.placeholder.com/190",
             "https://via.placeholder.com/200",
         ],
+        subcategoryId: 1,
     },
     {
         id: 6,
@@ -227,5 +232,6 @@ export const productMockupData: Product[] = [
             "https://via.placeholder.com/190",
             "https://via.placeholder.com/200",
         ],
+        subcategoryId: 1,
     }
 ];

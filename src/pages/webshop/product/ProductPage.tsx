@@ -3,7 +3,7 @@ import Product from "@models/Product";
 import { useContext, useEffect, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import ImageGallery from "./ImageGallery";
-import "./productStyles.scss";
+import "./ProductPage.scss";
 
 interface IProductPageProps {
     productId: number;

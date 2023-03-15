@@ -40,9 +40,20 @@ export default class DKLocale implements ILocale {
   createSubCategorySelectCategoryTitle = "Vælg kategori";
   createSubCategorySelectCategoryFailedMessage = "Du skal vælge en kategori for at oprette en underkategori";
   createSubCategoryMissingFieldsMessage = "Følgende felter er påkrævede:";
-  noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side"; 
+  noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side";
   createSubCategoryUpdateSuccessMessage = "Opdatering gennemført";
   createSubCategoryUpdateFailedMessage = "Kunne ikke gennemføre opdatering";
+
+  // Product
+  productPage_productName = "Titel";
+  productPage_productModelNumber = "Model nummer";
+  productPage_productMaterial = "Materiale";
+  productPage_productDesign = "Design";
+  productPage_productCondition = "Stand";
+  productPage_productQuality = "Sortering";
+  productPage_productDimension = "Størrelse";
+  productPage_productCustomText = "Ekstra information";
+  productPage_createProduct = "Create product";
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";
