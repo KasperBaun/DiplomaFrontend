@@ -1,4 +1,4 @@
-import { Container, Link, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Container, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import React, { useContext, useState } from "react";
@@ -33,6 +33,7 @@ const RecentSalesList = ( props : IProps ) => {
     return (
       <React.Fragment>
         <h3>{props.title}</h3>
+        <TableContainer sx={{ height: 225 }}>
         <Table size="small">
           <TableHead>
             <TableRow>
@@ -42,7 +43,7 @@ const RecentSalesList = ( props : IProps ) => {
               <TableCell align="right">{props.amount}</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody style={{ overflowY: 'auto', maxHeight: '15rem' }}>
             {paymentStore.Payments.map((payment) => (
               <TableRow key={payment.id}>
                 <TableCell>{ payment.datePaid.toString() }</TableCell>
@@ -53,6 +54,7 @@ const RecentSalesList = ( props : IProps ) => {
             ))}
           </TableBody>
         </Table>
+        </TableContainer>
         <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
           {props.tableButton}
         </Link>
