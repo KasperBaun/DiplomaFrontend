@@ -8,56 +8,28 @@ import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 import ProductItemWEB from "@models/webShop/ProductItemWEB";
+import CrudHelper from "./Crudhelper";
 
 class APIService implements IAPIService {
-
 
     private prefix: string = `%c[APIService]`;
     private color: string = ComponentLoggingConfig.DarkBlue;
     private apiBaseUrl: string;
-
+    private crudHelper: CrudHelper;
 
     constructor(_apiBaseUrl: string) {
         this.apiBaseUrl = _apiBaseUrl;
+        this.crudHelper = new CrudHelper();
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
+
     async getProductItemDTOs(): Promise<ProductItemWEB[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching productItemDTOs`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/ProductItem/GetProductItemDTOs`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched productItemDTOs from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const rsp = await response.json();
-                    console.log("data", rsp);
-                    const data: ProductItemWEB[] = rsp;
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
-
-            } else {
-                console.log(`${this.prefix} failed fetching productItemDTOs from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetProductItemDTOs`, Constants.loggingEnabled, "ProductItemDTOs");
     }
+
     /* Product Iems */
     createProductItem(productItem: ProductItem): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");

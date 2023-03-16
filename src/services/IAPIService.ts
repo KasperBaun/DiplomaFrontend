@@ -9,7 +9,7 @@ export interface WebAPIResponse {
     success: boolean;
     message?: string;
     statusCode: number;
-    data?: any;
+    data?: any | any[];
 }
 
 interface IAPIService {
