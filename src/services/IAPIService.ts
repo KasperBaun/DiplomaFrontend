@@ -15,27 +15,27 @@ export interface WebAPIResponse {
 interface IAPIService {
     getCategories: () => Promise<Category[]>
     createCategory(category: Category): Promise<void>;
-    deleteCategory(id: number): Promise<WebAPIResponse>;
+    deleteCategory(id: number): Promise<void>;
 
-    createSubCategory(subcategory: SubCategory): Promise<WebAPIResponse>;
+    createSubCategory(subcategory: SubCategory): Promise<void>;
     getSubCategories(): Promise<SubCategory[]>;
-    updateSubCategory(subcategory: SubCategory): Promise<WebAPIResponse>;
-    deleteSubCategory(id: number): Promise<WebAPIResponse>;
+    updateSubCategory(subcategory: SubCategory): Promise<SubCategory>;
+    deleteSubCategory(id: number): Promise<void>;
 
     createPayment(payment: Payment): Promise<void>;
     getPayments(): Promise<Payment[]>;
 
-    createProduct(product: Product): Promise<WebAPIResponse>;
-    getProduct(id: number): Promise<WebAPIResponse>;
+    createProduct(product: Product): Promise<void>;
+    getProduct(id: number): Promise<Product>;
     getProducts(): Promise<Product[]>;
-    updateProduct(product: Product): Promise<WebAPIResponse>;
-    deleteProduct(id: number): Promise<WebAPIResponse>;
+    updateProduct(product: Product): Promise<Product>;
+    deleteProduct(id: number): Promise<void>;
 
-    createProductItem(productItem: ProductItem): Promise<WebAPIResponse>;
-    getProductItem(id: number): Promise<WebAPIResponse>;
+    createProductItem(productItem: ProductItem): Promise<void>;
+    getProductItem(id: number): Promise<ProductItem>;
     getProductItems(): Promise<ProductItem[]>;
-    updateProductItem(productItem: ProductItem): Promise<WebAPIResponse>;
-    deleteProductItem(id: number): Promise<WebAPIResponse>;
+    updateProductItem(productItem: ProductItem): Promise<ProductItem>;
+    deleteProductItem(id: number): Promise<void>;
 
     getProductItemDTOs(): Promise<ProductItemWEB[]>;
 

@@ -106,23 +106,15 @@ export class SubCategoryStore {
         return true;
     }
 
-    public async createSubCategory(subCategory: SubCategory): Promise<boolean> {
-        const response = await this.apiService.createSubCategory(subCategory);
-        if (response.success) {
-            await this.refreshSubCategories();
-            return true;
-        } else {
-            return false;
-        }
+    public async createSubCategory(subCategory: SubCategory): Promise<void> {
+        await this.apiService.createSubCategory(subCategory);
+        await this.refreshSubCategories();
+        return;
     }
     public async updateSubCategory(subCategory: SubCategory): Promise<boolean> {
-        const response = await this.apiService.updateSubCategory(subCategory);
-        if (response.success) {
-            await this.refreshSubCategories();
-            return true;
-        } else {
-            return false;
-        }
+        await this.apiService.updateSubCategory(subCategory);
+        await this.refreshSubCategories();
+        return;
     }
 
     private async refreshSubCategories(): Promise<void> {
