@@ -25,13 +25,9 @@ const ListCategories: React.FC = function ListCategories() {
         // Pop Modal to confirm?
         const catToBeDeleted = categoryStore.getCategory(id);
         if (catToBeDeleted !== null) {
-            const deleted = await categoryStore.deleteCategory(id);
-            if (deleted) {
-                // Alt er godt
-                alert("Successfully deleted category: " + catToBeDeleted.name)
-            } else {
-                // Alt er lort
-            }
+            await categoryStore.deleteCategory(id);
+            // Alt er godt
+            alert("Successfully deleted category: " + catToBeDeleted.name)
         } else {
             alert("Could not find category with id: " + id);
         }

@@ -8,586 +8,113 @@ import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 import ProductItemWEB from "@models/webShop/ProductItemWEB";
+import CrudHelper from "./CrudHelper";
 
 class APIService implements IAPIService {
-
 
     private prefix: string = `%c[APIService]`;
     private color: string = ComponentLoggingConfig.DarkBlue;
     private apiBaseUrl: string;
-
+    private crudHelper: CrudHelper;
 
     constructor(_apiBaseUrl: string) {
         this.apiBaseUrl = _apiBaseUrl;
+        this.crudHelper = new CrudHelper(Constants.loggingEnabled);
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-    async getProductItemDTOs(): Promise<ProductItemWEB[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching productItemDTOs`, this.color);
-        }
 
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/ProductItem/GetProductItemDTOs`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched productItemDTOs from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const rsp = await response.json();
-                    console.log("data", rsp);
-                    const data: ProductItemWEB[] = rsp;
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
 
-            } else {
-                console.log(`${this.prefix} failed fetching productItemDTOs from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    /* Product Iems */
-    createProductItem(productItem: ProductItem): Promise<WebAPIResponse> {
+    /* Product Items */
+    createProductItem(productItem: ProductItem): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    getProductItem(id: number): Promise<WebAPIResponse> {
+    getProductItem(id: number): Promise<ProductItem> {
         throw new Error("Method not implemented.");
     }
-    updateProductItem(productItem: ProductItem): Promise<WebAPIResponse> {
+    updateProductItem(productItem: ProductItem): Promise<ProductItem> {
         throw new Error("Method not implemented.");
     }
-    deleteProductItem(id: number): Promise<WebAPIResponse> {
+    deleteProductItem(id: number): Promise<void> {
         throw new Error("Method not implemented.");
     }
-
     async getProductItems(): Promise<ProductItem[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching product Items`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/ProductItem`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched product Items from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
-
-            } else {
-                console.log(`${this.prefix} failed fetching product Items from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetProductItems`, "ProductItems");
     }
+    async getProductItemDTOs(): Promise<ProductItemWEB[]> {
+        return this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetProductItemDTOs`, "ProductItemDTOs");
+    }
+
+
+
 
 
     /* Products */
-    async createProduct(product: Product): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} attempting to create Product with name ${product.name}`, this.color);
-        }
-
-        try {
-            console.log("we here");
-            const response = await fetch(`${this.apiBaseUrl}/Product`, {
-                method: 'POST',
-                body: JSON.stringify(product),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created Product with name ${product.name}. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    statusCode: response.status,
-                    message: response.statusText,
-                    data: response.body
-                }
-            } else {
-                console.log(`${this.prefix} failed creating Product with name ${product.name}. Status: ${response.status} ${response.statusText}`, this.color);
-                return {
-                    success: false,
-                    statusCode: response.status,
-                    message: response.statusText
-                }
-            }
-        } catch (error) {
-            console.error("Error", error);
-        }
+    async createProduct(product: Product): Promise<void> {
+        return await this.crudHelper.create(`${this.apiBaseUrl}/Product`, "Product", product);
     }
-
-    getProduct(id: number): Promise<WebAPIResponse> {
+    getProduct(id: number): Promise<Product> {
         throw new Error("Method not implemented.");
     }
-
-    async updateProduct(product: Product): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} attempting to update product with name ${product.name}`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Product/${product.id}`, {
-                method: 'PUT',
-                body: JSON.stringify(product),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated product with name ${product.name}. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    statusCode: response.status,
-                    message: response.statusText,
-                    data: response.body
-                }
-            } else {
-                console.log(`${this.prefix} failed updating product with name ${product.name}. Status: ${response.status} ${response.statusText}`, this.color);
-                return {
-                    success: false,
-                    statusCode: response.status,
-                    message: response.statusText
-                }
-            }
-        } catch (error) {
-            console.error("Error", error);
-        }
+    async updateProduct(product: Product): Promise<Product> {
+        return await this.crudHelper.update(`${this.apiBaseUrl}/Product/${product.id}`, "Product", product);
     }
-
-    async deleteProduct(id: number): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} deleting Product with id: ${id} `, this.color);
-        }
-
-        try {
-            const response = await fetch(this.apiBaseUrl + "/Product/" + id, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted Product with id: ${id} `, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    message: `successfully deleted Product with id: ${id}`,
-                    statusCode: 200,
-                };
-            } else {
-                console.log(`${this.prefix} failed to delete Product with id: ${id}. Status: ${response.status} ${response.statusText} `, this.color);
-                return {
-                    success: false,
-                    message: `failed to delete Product with id: ${id}. Status: ${response.status} ${response.statusText} `,
-                    statusCode: 500,
-                };
-            }
-        } catch (error) {
-            console.error(error);
-        }
+    async deleteProduct(id: number): Promise<void> {
+        return await this.crudHelper.delete(this.apiBaseUrl + "/Product/" + id, "Product");
     }
     async getProducts(): Promise<Product[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching products`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Product`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched products from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
-
-            } else {
-                console.log(`${this.prefix} failed fetching products from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Product`, "Products");
     }
+
+
+
 
 
 
     /* Subcategories */
     async getSubCategories(): Promise<SubCategory[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching categories`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Subcategory`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched subcategories from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
-
-            } else {
-                console.log(`${this.prefix} failed fetching subcategories from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Subcategory`, "Subcategories");
+    }
+    async createSubCategory(subcategory: SubCategory): Promise<void> {
+        return await this.crudHelper.create(`${this.apiBaseUrl}/Subcategory`, "Subcategory", subcategory);
+    }
+    async updateSubCategory(subcategory: SubCategory): Promise<SubCategory> {
+        return await this.crudHelper.update(`${this.apiBaseUrl}/Subcategory/${subcategory.id}`, "Subcategory", subcategory);
+    }
+    async deleteSubCategory(id: number): Promise<void> {
+        return await this.crudHelper.delete(this.apiBaseUrl + "/Subcategory/" + id, "Subcategory");
     }
 
-    async createSubCategory(subcategory: SubCategory): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} attempting to create subcategory with name ${subcategory.name}`, this.color);
-        }
 
-        try {
-            console.log("we here");
-            const response = await fetch(`${this.apiBaseUrl}/Subcategory`, {
-                method: 'POST',
-                body: JSON.stringify(subcategory),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
 
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created subcategory with name ${subcategory.name}. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    statusCode: response.status,
-                    message: response.statusText,
-                    data: response.body
-                }
-            } else {
-                console.log(`${this.prefix} failed creating subcategory with name ${subcategory.name}. Status: ${response.status} ${response.statusText}`, this.color);
-                return {
-                    success: false,
-                    statusCode: response.status,
-                    message: response.statusText
-                }
-            }
-        } catch (error) {
-            console.error("Error", error);
-        }
-    }
-    async updateSubCategory(subcategory: SubCategory): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} attempting to update subcategory with name ${subcategory.name}`, this.color);
-        }
 
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Subcategory/${subcategory.id}`, {
-                method: 'PUT',
-                body: JSON.stringify(subcategory),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated subcategory with name ${subcategory.name}. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    statusCode: response.status,
-                    message: response.statusText,
-                    data: response.body
-                }
-            } else {
-                console.log(`${this.prefix} failed updating subcategory with name ${subcategory.name}. Status: ${response.status} ${response.statusText}`, this.color);
-                return {
-                    success: false,
-                    statusCode: response.status,
-                    message: response.statusText
-                }
-            }
-        } catch (error) {
-            console.error("Error", error);
-        }
-    }
-
-    async deleteSubCategory(id: number): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} attempting to delete subcategory with id: ${id} `, this.color);
-        }
-
-        try {
-            const response = await fetch(this.apiBaseUrl + "/Subcategory/" + id, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted subcategory with id: ${id} `, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    message: `successfully deleted category with id: ${id}`,
-                    statusCode: response.status,
-                };
-            } else {
-                console.log(`${this.prefix} failed to delete subcategory with id: ${id}. Status: ${response.status} ${response.statusText} `, this.color);
-                return {
-                    success: false,
-                    message: `failed to delete category with id: ${id}. Status: ${response.status} ${response.statusText} `,
-                    statusCode: response.status,
-                };
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     /* Categories */
     async getCategories(): Promise<Category[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching categories`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Category`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched categories from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
-
-            } else {
-                console.log(`${this.prefix} failed fetching categories from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Category`, "Categories");
     }
-
     async createCategory(category: Category): Promise<void> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} creating category with title: ${category.name} `, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Category`, {
-                method: 'POST',
-                body: JSON.stringify(category),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created category. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return;
-
-            } else {
-                console.log(`${this.prefix} failed creating category with title: ${category.name}. Status: ${response.status} ${response.statusText} `, this.color);
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.create(`${this.apiBaseUrl}/Category`, "Category", category);
+    }
+    async updateCategory(category: Category): Promise<Category> {
+        return await this.crudHelper.update(`${this.apiBaseUrl}/Category/${category.id}`, "Category", category)
+    }
+    async deleteCategory(id: number): Promise<void> {
+        return await this.crudHelper.delete(this.apiBaseUrl + "/Category/" + id, "Category");
     }
 
-    async updateCategory(category: Category): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} attempting to update subcategory with name ${category.name}`, this.color);
-        }
 
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Category/${category.id}`, {
-                method: 'PUT',
-                body: JSON.stringify(category),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
 
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully updated category with name ${category.name}. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    statusCode: response.status,
-                    message: response.statusText,
-                    data: response.body
-                }
-            } else {
-                console.log(`${this.prefix} failed updating category with name ${category.name}. Status: ${response.status} ${response.statusText}`, this.color);
-                return {
-                    success: false,
-                    statusCode: response.status,
-                    message: response.statusText
-                }
-            }
-        } catch (error) {
-            console.error("Error", error);
-        }
-    }
 
-    async deleteCategory(id: number): Promise<WebAPIResponse> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} deleting category with id: ${id} `, this.color);
-        }
-
-        try {
-            const response = await fetch(this.apiBaseUrl + "/Category/" + id, {
-                method: 'DELETE',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully deleted category with id: ${id} `, t1, t2, this.color);
-                }
-                return {
-                    success: true,
-                    message: `successfully deleted category with id: ${id}`,
-                    statusCode: 200,
-                };
-            } else {
-                console.log(`${this.prefix} failed to delete category with id: ${id}. Status: ${response.status} ${response.statusText} `, this.color);
-                return {
-                    success: false,
-                    message: `failed to delete category with id: ${id}. Status: ${response.status} ${response.statusText} `,
-                    statusCode: 500,
-                };
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    //////////////////////////// Payment
+    /* Payment */
 
     async getPayments(): Promise<Payment[]> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} fetching payments`, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Payment`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.ok) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched payments from API. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                try {
-                    const data = await response.json();
-                    return data;
-                } catch (error) {
-                    console.error(error);
-                    return [];
-                }
-
-            } else {
-                console.log(`${this.prefix} failed fetching payments from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Payment`, "Payment");
     }
-
     async createPayment(payment: Payment): Promise<void> {
-        const t1 = performance.now();
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} creating payment with date: ${payment.datePaid} `, this.color);
-        }
-
-        try {
-            const response = await fetch(`${this.apiBaseUrl}/Payment`, {
-                method: 'POST',
-                body: JSON.stringify(payment),
-                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
-            });
-            if (response.status === 200) {
-                if (Constants.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created payment. Statuscode: ${response.status}`, t1, t2, this.color);
-                }
-                return;
-
-            } else {
-                console.log(`${this.prefix} failed creating payment with date: ${payment.datePaid}. Status: ${response.status} ${response.statusText} `, this.color);
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
     }
 
 }

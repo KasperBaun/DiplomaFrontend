@@ -58,27 +58,18 @@ export class CategoryStore {
         return await this.apiService.createCategory(category);
     }
 
-    public async deleteCategory(id: number): Promise<boolean> {
-        const deleteResult = await this.apiService.deleteCategory(id);
-        if (deleteResult.success) {
-            runInAction(() => {
-                this._categories = this._categories.filter(c => c.id !== id);
-            })
-            return true;
-        }
-        if (!deleteResult.success) {
-            return false;
-        }
+    public async deleteCategory(id: number): Promise<void> {
+        await this.apiService.deleteCategory(id);
+        runInAction(() => {
+            this._categories = this._categories.filter(c => c.id !== id);
+        })
+        return;
     }
 
-    public async updateCategory(Category: Category): Promise<boolean> {
-        const response = await this.apiService.updateCategory(Category);
-        if (response.success) {
-            await this.refreshCategories();
-            return true;
-        } else {
-            return false;
-        }
+    public async updateCategory(Category: Category): Promise<void> {
+        await this.apiService.updateCategory(Category);
+        await this.refreshCategories();
+        return;
     }
 
     private async refreshCategories(): Promise<void> {
