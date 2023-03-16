@@ -68,11 +68,10 @@ export interface ILocale {
   EconomyWidgetSalesFormat : string;
   EconomyWidgetTitle : string;
   RecentSalesWidgetTitle : string;
-  RecentSalesTableDate : string;
-  RecentSalesTableName : string;
-  RecentSalesTableShipmentLoc : string;
-  RecentSalesTablePaymentMethod : string;
-  RecentSalesTableSalePrice : string;
+  RecentSalesDatePaid : string;
+  RecentSalesAmount : string;
+  RecentSalesApproved : string;
+  RecentSalesMethod : string;
   RecentSalesNavButton : string;
   RecentSalesCurrencyId : string;
 

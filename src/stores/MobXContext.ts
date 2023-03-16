@@ -4,6 +4,7 @@ import { ProductStore } from "./ProductStore";
 import { CategoryStore } from "./CategoryStore";
 import { LanguageStore } from "./LanguageStore";
 import { SubCategoryStore } from "./SubCategoryStore";
+import { PaymentStore } from "./PaymentStore";
 
 export interface IMobXContext {
     productStore: ProductStore;
@@ -11,6 +12,7 @@ export interface IMobXContext {
     categoryStore : CategoryStore;
     subCategoryStore : SubCategoryStore;
     languageStore: LanguageStore;
+    paymentStore : PaymentStore;
 }
 
 const MobXContext = React.createContext<IMobXContext>(undefined);

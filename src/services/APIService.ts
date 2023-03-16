@@ -4,6 +4,7 @@ import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
 import IAPIService, { WebAPIResponse } from "./IAPIService";
 import SubCategory from "@models/SubCategory";
+import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 
@@ -493,7 +494,68 @@ class APIService implements IAPIService {
             console.error(error);
         }
     }
+    
+    //////////////////////////// Payment
 
+    async getPayments(): Promise<Payment[]> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} fetching payments`, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Payment`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched payments from API. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                try {
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error(error);
+                    return [];
+                }
+
+            } else {
+                console.log(`${this.prefix} failed fetching payments from API. Status: ${response.status} ${response.statusText}`, this.color);
+                return [];
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    async createPayment(payment: Payment): Promise<void> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} creating payment with date: ${payment.datePaid} `, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/Payment`, {
+                method: 'POST',
+                body: JSON.stringify(payment),
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.status === 200) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully created payment. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                return;
+
+            } else {
+                console.log(`${this.prefix} failed creating payment with date: ${payment.datePaid}. Status: ${response.status} ${response.statusText} `, this.color);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
 }
 

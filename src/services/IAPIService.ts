@@ -1,5 +1,6 @@
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
+import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 
@@ -19,7 +20,8 @@ interface IAPIService {
     getSubCategories(): Promise<SubCategory[]>;
     updateSubCategory(subcategory: SubCategory): Promise<WebAPIResponse>;
     deleteSubCategory(id: number): Promise<WebAPIResponse>;
-
+    createPayment(payment: Payment): Promise<void>;
+    getPayments(): Promise<Payment[]>;
     createProduct(product: Product): Promise<WebAPIResponse>;
     getProduct(id: number): Promise<WebAPIResponse>;
     getProducts(): Promise<Product[]>;

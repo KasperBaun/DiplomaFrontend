@@ -1,102 +1,73 @@
-import { Link, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Container, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
-import React, { useContext } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useContext, useState } from "react";
+import { Spinner } from "react-bootstrap";
 
-function createData(
-    id: number,
-    date: string,
-    name: string,
-    shipTo: string,
-    paymentMethod: string,
-    amount: number,
-  ) {
-    return { id, date, name, shipTo, paymentMethod, amount };
-  }
-  
-  const rows = [
-    createData(
-      0,
-      '16 Mar, 2019',
-      'Elvis Presley',
-      'Tupelo, MS',
-      'Creditcard ⠀•••• 3719',
-      312.44,
-    ),
-    createData(
-      1,
-      '16 Mar, 2019',
-      'Paul McCartney',
-      'London, UK',
-      'Creditcard ⠀•••• 2574',
-      866.99,
-    ),
-    createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'Stripe ⠀•••• 1253', 100.81),
-    createData(
-      3,
-      '16 Mar, 2019',
-      'Michael Jackson',
-      'Gary, IN',
-      'MobilePay +45 41432725',
-      654.39,
-    ),
-    createData(
-      4,
-      '15 Mar, 2019',
-      'Bruce Springsteen',
-      'Long Branch, NJ',
-      'Creditcard ⠀•••• 5919',
-      212.79,
-    ),
-  ];
+class Payment{
+  id: number;
+  datePaid? : Date;
+  amount? : number;
+  approved? : number;
+  method? : string;
+}
 
 interface IProps {
     title : string;
-    tableDate : string;
-    tableName : string;
-    tableLoc : string;
-    tablePay : string;
-    tableSaleAmount : string;
+    datePaid : string;
+    approved : string;
+    amount : string;
     tableButton : string;
     currencyId : string;
+    method : string;
 }
 
-const RecentSalesList = ( props : IProps) => {
-  const {  } = useContext(MobXContext);
-    
+const RecentSalesList = ( props : IProps ) => {
+  const { paymentStore } = useContext(MobXContext);
+
   function preventDefault(event: React.MouseEvent) {
       event.preventDefault();
   }
 
-  return (
+  if(paymentStore.Payments) {
+    return (
       <React.Fragment>
-          <h3>{props.title}</h3>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>{props.tableDate}</TableCell>
-            <TableCell>{props.tableName}</TableCell>
-            <TableCell>{props.tableLoc}</TableCell>
-            <TableCell>{props.tablePay}</TableCell>
-            <TableCell align="right">{props.tableSaleAmount}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`${row.amount} DKK`}</TableCell>
+        <h3>{props.title}</h3>
+        <TableContainer sx={{ height: 225 }}>
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>{props.datePaid}</TableCell>
+              <TableCell>{props.approved}</TableCell>
+              <TableCell>{props.method}</TableCell>
+              <TableCell align="right">{props.amount}</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
-        {props.tableButton}
-      </Link>
-    </React.Fragment>
-  )
+          </TableHead>
+          <TableBody style={{ overflowY: 'auto', maxHeight: '15rem' }}>
+            {paymentStore.Payments.map((payment) => (
+              <TableRow key={payment.id}>
+                <TableCell>{ payment.datePaid.toString() }</TableCell>
+                <TableCell align="center">{ payment.approved }</TableCell>
+                <TableCell align="center">{ payment.method }</TableCell>
+                <TableCell align="right">{`${payment.amount} DKK`}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        </TableContainer>
+        <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
+          {props.tableButton}
+        </Link>
+      </React.Fragment>
+    )
+  } else {
+    return (
+      <Container style={{ textAlign: "center", padding: "15rem" }}>
+          <Spinner animation="grow" variant="secondary" /> Loading...
+      </Container>
+    )
+  }
+  
 }
 
-export default RecentSalesList;
+export default observer(RecentSalesList);

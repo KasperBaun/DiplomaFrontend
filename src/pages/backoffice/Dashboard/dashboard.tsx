@@ -17,13 +17,12 @@ const BackOfficeDashboard = () => {
                     <Container  maxWidth="xl" className="DashBoardContainer">
                         <RecentSalesList 
                             title={languageStore.currentLanguage.RecentSalesWidgetTitle} 
-                            tableDate={languageStore.currentLanguage.RecentSalesTableDate}
-                            tableName={languageStore.currentLanguage.RecentSalesTableName}
-                            tableLoc={languageStore.currentLanguage.RecentSalesTableShipmentLoc}
-                            tablePay={languageStore.currentLanguage.RecentSalesTablePaymentMethod}
-                            tableSaleAmount={languageStore.currentLanguage.RecentSalesTableSalePrice}
+                            datePaid={languageStore.currentLanguage.RecentSalesDatePaid}
+                            approved={languageStore.currentLanguage.RecentSalesApproved}
+                            amount={languageStore.currentLanguage.RecentSalesAmount}
                             tableButton={languageStore.currentLanguage.RecentSalesNavButton}
                             currencyId={languageStore.currentLanguage.RecentSalesCurrencyId}
+                            method={languageStore.currentLanguage.RecentSalesMethod}
                         />
                     </Container>
                 </Grid>
