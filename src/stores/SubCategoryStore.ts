@@ -14,7 +14,7 @@ export class SubCategoryStore {
     private loaded: boolean = false;
     private apiService: APIService;
     private _subCategories: SubCategory[] = [];
-    private subcategoryMapping: Map<Number, SubCategory[]> = new Map();
+    private subcategoryMap: Map<Number, SubCategory[]> = new Map();
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -27,7 +27,9 @@ export class SubCategoryStore {
         // Fetch subcategories
         this._subCategories = await this.apiService.getSubCategories();
         this.mapCategoryToSubcategory(this._subCategories);
-        this.mapSubCategoriesToId(this._subCategories);
+        //    this.mapSubCategoriesToId(this._subCategories);
+        this.subcategoryMap = this.mapSubCategoriesToId(this._subCategories);
+
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -38,16 +40,22 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public mapSubCategoriesToId(subCategories: SubCategory[]): void {
+    public mapSubCategoriesToId(subCategories: SubCategory[]): Map<Number, SubCategory[]> {
         const categories = this.rootStore.categoryStore.Categories;
-        this.subcategoryMapping = new Map<Number, SubCategory[]>();
+        const subcategoryMap = new Map<Number, SubCategory[]>();
 
         for (const cat of categories) {
-            this.subcategoryMapping.set(cat.id, [])
+            subcategoryMap.set(cat.id, [])
         }
-        for (let subCat of subCategories) {
-            this.subcategoryMapping.get(subCat.categoryId).push(subCat);
+        for (const subCat of subCategories) {
+            const subcatMap = subcategoryMap.get(subCat.categoryId);
+            if (subcatMap) {
+                subcatMap.push(subCat);
+            } else {
+                console.error("SubCategoryStore.mapSubCategoriesToId -> Error mapping subcategory to category; subcategory: " + subCat.name + "with categoryId: " + subCat.categoryId + "could not find category in map");
+            }
         }
+        return subcategoryMap;
     }
 
     public mapCategoryToSubcategory(subCategories: SubCategory[]): void {
@@ -80,8 +88,7 @@ export class SubCategoryStore {
     }
 
     public subCategoriesByCategoryID(categoryId: Number): SubCategory[] {
-
-        return this.subcategoryMapping.get(categoryId);
+        return this.subcategoryMap.get(categoryId);
     }
 
     public async getSubCategory(id: number): Promise<SubCategory> {
