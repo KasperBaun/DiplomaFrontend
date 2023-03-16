@@ -1,4 +1,5 @@
 import PriceHistory from "./PriceHistory"
+import Product from "./Product";
 
 export default class ProductItem {
     id: number;
@@ -13,7 +14,8 @@ export default class ProductItem {
     currentPrice: number; 
     createdDate: Date;
     soldDate?: Date;
-    priceHistory?: PriceHistory[];  
+    priceHistory?: PriceHistory[];
+    product: Product;  
 }
 
 export enum conditionType {

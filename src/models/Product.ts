@@ -5,11 +5,8 @@ export default class Product {
     material: materialType;
     design: string;
     dimension: string;
-    imageUrls: string[];
     subcategoryId: number;
 }
-// TODO: Remove this imageUrls? (and use it only in productItem?)
-
 export enum materialType {
     porcelain = 1,
     steel = 2,

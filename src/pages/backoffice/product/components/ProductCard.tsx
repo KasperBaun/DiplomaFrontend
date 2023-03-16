@@ -21,7 +21,7 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
 
     return (
         <Card style={productCardItem}>
-            <Card.Img variant="top" src={props.product.imageUrls[0]} />
+            {/*<Card.Img variant="top" src={props.product.imageUrls[0] || "https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg" } />*/}
             <Card.Body onClick={() => props.showProductClicked(props.product)}>
                 <Card.Title>{props.product.name}</Card.Title>
                 <Card.Subtitle>{props.product.modelNumber}</Card.Subtitle>

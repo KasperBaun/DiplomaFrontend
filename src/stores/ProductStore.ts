@@ -4,7 +4,6 @@ import { RootStore } from './RootStore';
 import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
-import { productMockupData } from '@services/MockupData';
 import ProductItem from '@models/ProductItem';
 
 export class ProductStore {
