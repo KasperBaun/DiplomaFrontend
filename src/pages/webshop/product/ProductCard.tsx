@@ -1,5 +1,5 @@
 import ProductItemWEB from '@models/webShop/ProductItemWEB';
-import { Card, CardContent, Typography } from '@mui/material';
+import { Card, CardContent, CardMedia, Divider, Typography } from '@mui/material';
 import React from 'react';
 
 type ImageProps = {
@@ -45,78 +45,39 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
                 },
             },
         },
-        imageUrls,
+        images,
     } = props.data;
 
     return (
         <Card
-            style={{
-                width: 400,
-                margin: '16px',
-                borderRadius: 8,
-                boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.2)',
-            }}
+          style={{
+            width: 400,
+            margin: "16px",
+            borderRadius: 8,
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+          }}
         >
-            <CardContent>
-                <Typography variant="h5" component="h2">
-                    {name}
-                </Typography>
-                <Typography color="textSecondary">
-                    ID: {id}
-                </Typography>
-
-                <Typography color="textSecondary">
-                    Price: {price}
-                </Typography>
-
-                <Typography color="textSecondary">
-                    Condition: {condition}
-                </Typography>
-                <Typography color="textSecondary">
-                    Quality: {quality}
-                </Typography>
-                <Typography color="textSecondary">
-                    Sold: {sold}
-                </Typography>
-                <Typography color="textSecondary">
-                    Weight: {weight}
-                </Typography>
-                <Typography color="textSecondary">
-                    Custom Text: {customText}
-                </Typography>
-                <Typography color="textSecondary">
-                    Product ID: {productId}
-                </Typography>
-                <Typography color="textSecondary">
-                    Model Number: {modelNumber}
-                </Typography>
-                <Typography color="textSecondary">
-                    Material: {material}
-                </Typography>
-                <Typography color="textSecondary">
-                    Design: {design}
-                </Typography>
-                <Typography color="textSecondary">
-                    Dimension: {dimension}
-                </Typography>
-                <Typography color="textSecondary">
-                    Subcategory ID: {subcategoryId}
-                </Typography>
-                <Typography color="textSecondary">
-                    Subcategory Name: {subcategoryName}
-                </Typography>
-                <Typography color="textSecondary">
-                    Category ID: {categoryId}
-                </Typography>
-                <Typography color="textSecondary">
-                    Category Name: {categoryName}
-                </Typography>
-                <Typography color="textSecondary">
-                    Images: {imageUrls ? imageUrls.join(', ') : "ChatGPT er dum"}
-                </Typography>
-            </CardContent>
+          <CardMedia
+            component="img"
+            height="200"
+            image={images[0] || "https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"} // assuming the first URL in the array is the main image
+            alt={name}
+            style={{ objectFit: "cover" }}
+          />
+          <CardContent>
+            <Typography variant="h5" component="h2">
+              {name}
+            </Typography>
+            <Typography color="textSecondary">
+              Model Number: {modelNumber}
+            </Typography>
+            <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
+            <Typography color="textPrimary" >Price: {price}</Typography>
+            <Typography color="textSecondary">Condition: {condition}</Typography>
+            <Typography color="textSecondary">Quality: {quality}</Typography>
+          </CardContent>
         </Card>
-    );
-};
+      );
+    };
 
 export default MyCard;

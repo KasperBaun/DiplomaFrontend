@@ -7,7 +7,7 @@ export default class ProductItemWEB {
     sold: boolean; 
     weight : number; 
     customText: string;
-    imageUrls: string[];
+    images: string[];
     price: number; 
     createdDate: Date;
     product: Product;  
