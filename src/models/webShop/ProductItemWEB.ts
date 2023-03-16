@@ -1,20 +1,15 @@
-import PriceHistory from "./PriceHistory"
-import Product from "./Product";
+import Product from "./../Product";
 
-export default class ProductItem {
+export default class ProductItemWEB {
     id: number;
-    productId: number; 
     condition: conditionType;
     quality: qualityType;
     sold: boolean; 
     weight : number; 
     customText: string;
-    imageUrls: string[];
-    purchasePrice: number;
-    currentPrice: number; 
+    images: string[];
+    price: number; 
     createdDate: Date;
-    soldDate?: Date;
-    priceHistory?: PriceHistory[];
     product: Product;  
 }
 

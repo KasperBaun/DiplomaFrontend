@@ -37,7 +37,7 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
             {/* // Små billeder (mulighed for at browse) */}
 
             {/* // Stort billede */}
-            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} />
+            {/* <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} /> */}
 
             {/* // Beskrivelseskomponent */}
                 <h1>ProductPage</h1>

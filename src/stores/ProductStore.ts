@@ -4,7 +4,8 @@ import { RootStore } from './RootStore';
 import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
-import { productMockupData } from '@services/MockupData';
+import ProductItem from '@models/ProductItem';
+import ProductItemWEB from '@models/webShop/ProductItemWEB';
 
 export class ProductStore {
 
@@ -17,20 +18,22 @@ export class ProductStore {
     private apiService: APIService;
     private products: Product[] = [];
     private productsLoaded: boolean = false;
+    private productItems: ProductItem[] = [];
+    private productMap: Map<number, Product> = new Map();
+    private productItemDTOs: ProductItemWEB[] = [];
 
 
-    constructor(_rootStore: RootStore, _mockupService: APIService) {
-        this.apiService = _mockupService;
+    constructor(_rootStore: RootStore, _apiService: APIService) {
+        this.apiService = _apiService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
 
     public async init(): Promise<boolean> {
+
         this.loading = true;
         // Fetch products
-        //this.products = await this.spService.getFiles(Constants.documentLibraryListTitle);
-        this.products = productMockupData;
-
+        await this.loadProducts();
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -58,12 +61,28 @@ export class ProductStore {
     public async loadProducts(): Promise<void> {
         if (!this.isLoaded) {
             this.products = await this.apiService.getProducts();
+            this.productMap = this.createProductMap(this.products);
+            this.productItems = await this.apiService.getProductItems();
+            this.productItemDTOs = await this.apiService.getProductItemDTOs();
+
             runInAction(() => {
                 this.loaded = true;
                 this.loading = false;
             });
         }
     }
+
+    private createProductMap(products: Product[]): Map<number, Product> {
+        const prodMap: Map<number, Product> = new Map<number, Product>();
+        for (const product of products) {
+            let tempProd = prodMap.get(product.id);
+            if (tempProd === null && tempProd) {
+                prodMap.set(product.id, product);
+            }
+        }
+        return prodMap
+    }
+
 
     public getProducts(): Product[] {
         return this.products;
@@ -73,8 +92,16 @@ export class ProductStore {
         return this.products;
     }
 
-    public async getProduct(id: number): Promise<Product> {
-        return null;
+    public get ProductItems(): ProductItem[] {
+        return this.productItems;
+    }
+
+    public get ProductItemDTOs(): ProductItemWEB[] {
+        return this.productItemDTOs;
+    }
+
+    public getProduct(id: number): Product {
+        return this.productMap.get(id);
     }
 
     public async deleteProduct(id: number): Promise<boolean> {

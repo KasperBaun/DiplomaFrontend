@@ -16,7 +16,7 @@ export const categories: Category[] = [
     { id: 10, name: "Clocks", order: 11, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Rew17h09_1977.jpg/220px-Rew17h09_1977.jpg" }
 ]
 
-export const productItemMockupData: ProductItem[] = [
+/* export const productItemMockupData: ProductItem[] = [
     {   
         id: 3,
         productId: 1, 
@@ -235,3 +235,4 @@ export const productMockupData: Product[] = [
         subcategoryId: 1,
     }
 ];
+*/
