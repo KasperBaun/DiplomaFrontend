@@ -1,3 +1,5 @@
+import SubCategory from "./SubCategory";
+
 export default class Product {
     id: number;
     name: string;
@@ -6,6 +8,7 @@ export default class Product {
     design: string;
     dimension: string;
     subcategoryId: number;
+    subcategory: SubCategory;
 }
 export enum materialType {
     porcelain = 1,
