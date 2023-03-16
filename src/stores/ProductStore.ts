@@ -5,6 +5,7 @@ import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
 import ProductItem from '@models/ProductItem';
+import ProductItemWEB from '@models/webShop/ProductItemWEB';
 
 export class ProductStore {
 
@@ -18,7 +19,8 @@ export class ProductStore {
     private products: Product[] = [];
     private productsLoaded: boolean = false;
     private productItems: ProductItem[] = [];
-    private productMap : Map<number, Product> = new Map(); 
+    private productMap: Map<number, Product> = new Map();
+    private productItemDTOs: ProductItemWEB[] = [];
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -56,11 +58,12 @@ export class ProductStore {
         return result;
     }
 
-    public async loadProducts(): Promise<void>{
+    public async loadProducts(): Promise<void> {
         if (!this.isLoaded) {
             this.products = await this.apiService.getProducts();
             this.productMap = this.createProductMap(this.products);
-            this.productItems = await this.apiService.getProductItems(); 
+            this.productItems = await this.apiService.getProductItems();
+            this.productItemDTOs = await this.apiService.getProductItemDTOs();
 
             runInAction(() => {
                 this.loaded = true;
@@ -69,12 +72,12 @@ export class ProductStore {
         }
     }
 
-    private createProductMap(products : Product[]) : Map<number, Product> {
-        const prodMap : Map<number , Product> = new Map<number , Product>();
-        for (const product of products){
+    private createProductMap(products: Product[]): Map<number, Product> {
+        const prodMap: Map<number, Product> = new Map<number, Product>();
+        for (const product of products) {
             let tempProd = prodMap.get(product.id);
-            if (tempProd === null && tempProd){
-                prodMap.set(product.id, product); 
+            if (tempProd === null && tempProd) {
+                prodMap.set(product.id, product);
             }
         }
         return prodMap
@@ -93,7 +96,11 @@ export class ProductStore {
         return this.productItems;
     }
 
-    public  getProduct(id: number): Product {
+    public get ProductItemDTOs(): ProductItemWEB[] {
+        return this.productItemDTOs;
+    }
+
+    public getProduct(id: number): Product {
         return this.productMap.get(id);
     }
 

@@ -7,8 +7,7 @@ import SubCategory from "@models/SubCategory";
 import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
-
-
+import ProductItemWEB from "@models/webShop/ProductItemWEB";
 
 class APIService implements IAPIService {
 
@@ -25,7 +24,41 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-        /* Product Iems */
+    async getProductItemDTOs(): Promise<ProductItemWEB[]> {
+        const t1 = performance.now();
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} fetching productItemDTOs`, this.color);
+        }
+
+        try {
+            const response = await fetch(`${this.apiBaseUrl}/ProductItem/GetProductItemDTOs`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+            });
+            if (response.ok) {
+                if (Constants.loggingEnabled) {
+                    const t2 = performance.now();
+                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} successfully fetched productItemDTOs from API. Statuscode: ${response.status}`, t1, t2, this.color);
+                }
+                try {
+                    const rsp = await response.json();
+                    console.log("data", rsp);
+                    const data: ProductItemWEB[] = rsp;
+                    return data;
+                } catch (error) {
+                    console.error(error);
+                    return [];
+                }
+
+            } else {
+                console.log(`${this.prefix} failed fetching productItemDTOs from API. Status: ${response.status} ${response.statusText}`, this.color);
+                return [];
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    /* Product Iems */
     createProductItem(productItem: ProductItem): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");
     }
@@ -72,7 +105,7 @@ class APIService implements IAPIService {
         }
     }
 
-    
+
     /* Products */
     async createProduct(product: Product): Promise<WebAPIResponse> {
         const t1 = performance.now();
@@ -111,11 +144,11 @@ class APIService implements IAPIService {
             console.error("Error", error);
         }
     }
-    
+
     getProduct(id: number): Promise<WebAPIResponse> {
         throw new Error("Method not implemented.");
     }
- 
+
     async updateProduct(product: Product): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
@@ -153,7 +186,7 @@ class APIService implements IAPIService {
         }
     }
 
-    async deleteProduct(id: number): Promise<WebAPIResponse>  {
+    async deleteProduct(id: number): Promise<WebAPIResponse> {
         const t1 = performance.now();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} deleting Product with id: ${id} `, this.color);
@@ -494,7 +527,7 @@ class APIService implements IAPIService {
             console.error(error);
         }
     }
-    
+
     //////////////////////////// Payment
 
     async getPayments(): Promise<Payment[]> {

@@ -8,7 +8,7 @@ export default class ProductItemWEB {
     weight : number; 
     customText: string;
     imageUrls: string[];
-    currentPrice: number; 
+    price: number; 
     createdDate: Date;
     product: Product;  
 }
