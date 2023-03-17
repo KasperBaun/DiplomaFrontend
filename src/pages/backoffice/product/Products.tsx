@@ -8,6 +8,9 @@ import { Form } from "react-bootstrap";
 import ProductCards from "./components/ProductCards";
 import Loading from "@components/loading/Loading";
 import ProductItem from "@models/ProductItem";
+import Category from "@models/Category";
+import SubCategory from "@models/SubCategory";
+import { productCardContainer } from "./ProductsStyling";
 
 const Products: React.FC = observer(function Products() {
 
@@ -17,6 +20,9 @@ const Products: React.FC = observer(function Products() {
     const onOpenCreate = () => setVisibilityCreate(true);
     const onCloseCreate = () => setVisibilityCreate(false);
     const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.productItems);
+    const [selectedCategory, setSelectedCategory] = useState<Category>(null);
+    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
+    const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
 
 
     function handleOnResetClicked(): void {
@@ -24,31 +30,52 @@ const Products: React.FC = observer(function Products() {
     }
 
     function filterByCategory(categoryId: number) {
-        // Return new items filtered by category
-        const subCategories = subCategoryStore.subCategories.filter(subcat => subcat.categoryId === categoryId);
-        const filteredProducts = productItems.filter(prodItem => subCategories.some(subcat => subcat.id === prodItem.product.subcategoryId));
+        setSelectedCategory(categoryStore.getCategory(categoryId));
+        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategory.categoryId === categoryId);
         setProductItems(filteredProducts);
     }
 
-    function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
+    function handleCategoryChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
         if (event.currentTarget.value === "initValue") {
+            if (selectedCategory !== null) {
+                setSelectedCategory(null);
+                setSelectedSubcategory(null);
+                setSubcategories([]);
+                setProductItems(backofficeStore.productItems);
+            }
             return;
         } else {
             filterByCategory(event.currentTarget.value);
+            setSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === event.currentTarget.value));
         }
     };
+
+    function filterBySubcategory(subcategoryId: number) {
+        setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
+        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategoryId === subcategoryId);
+        setProductItems(filteredProducts);
+    }
+
+    function handleSubcategoryChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
+        if (event.currentTarget.value === "initValue") {
+            setSelectedSubcategory(null);
+            return
+        }
+        else {
+            filterBySubcategory(event.currentTarget.value);
+        }
+    }
 
     if (!backofficeStore.isLoaded) {
         return (
             <Loading />
         )
-
     }
 
     else {
 
         return (
-            <Container fluid className="BO_ProductsContainer">
+            <Container fluid style={{ ...productCardContainer }}>
                 <Row>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -58,11 +85,23 @@ const Products: React.FC = observer(function Products() {
 
                         <Form.Group>
                             <Form.Label>Filter by category</Form.Label>
-                            <Form.Select aria-label="Select category" onChange={handleOptionChange}>
+                            <Form.Select aria-label="Select category" onChange={handleCategoryChange}>
                                 <option key="initKey" value="initValue" >{languageStore.currentLanguage.createSubCategorySelectCategoryTitle}</option>
                                 {categoryStore.Categories.map((category, index) => {
                                     return (
                                         <option key={"option" + category.name + index} value={category.id}>{category.name}</option>
+                                    )
+                                })}
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Filter by subcategory</Form.Label>
+                            <Form.Select aria-label="Select subcategory" onChange={handleSubcategoryChange}>
+                                <option key="initKey" value="initValue" >{"Select subcategory..."}</option>
+                                {subcategories.map((subcategory, index) => {
+                                    return (
+                                        <option key={"option" + subcategory.name + index} value={subcategory.id}>{subcategory.name}</option>
                                     )
                                 })}
                             </Form.Select>
