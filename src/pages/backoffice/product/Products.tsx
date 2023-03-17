@@ -1,46 +1,33 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
-import { Form, Spinner } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import ProductCards from "./components/ProductCards";
-import Product from "@models/Product";
+import Loading from "@components/loading/Loading";
+import ProductItem from "@models/ProductItem";
 
 const Products: React.FC = observer(function Products() {
 
-    const { productStore, languageStore, categoryStore, subCategoryStore } = useContext(MobXContext)
-    const [loading, setLoading] = useState<boolean>(productStore.Products.length > 0);
-    const [products, setProducts] = useState<Product[]>([]);
-
-
-    useEffect(() => {
-        const loadProducts = async (): Promise<void> => {
-            productStore.loadProducts();
-        }
-        if (productStore.isLoaded) {
-            setProducts(productStore.Products);
-            setLoading(false);
-        } else {
-            loadProducts();
-            setProducts(productStore.Products);
-        }
-    }, [productStore.isLoaded])
+    const { languageStore, categoryStore, backofficeStore, subCategoryStore } = useContext(MobXContext)
 
     const [visibleCreate, setVisibilityCreate] = useState(false);
     const onOpenCreate = () => setVisibilityCreate(true);
     const onCloseCreate = () => setVisibilityCreate(false);
+    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.productItems);
+
 
     function handleOnResetClicked(): void {
-        setProducts(productStore.Products);
+        setProductItems(backofficeStore.productItems);
     }
 
     function filterByCategory(categoryId: number) {
         // Return new items filtered by category
         const subCategories = subCategoryStore.subCategories.filter(subcat => subcat.categoryId === categoryId);
-        const filteredProducts = products.filter(prod => subCategories.some(subcat => subcat.id === prod.subcategoryId));
-        setProducts(filteredProducts);
+        const filteredProducts = productItems.filter(prodItem => subCategories.some(subcat => subcat.id === prodItem.product.subcategoryId));
+        setProductItems(filteredProducts);
     }
 
     function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
@@ -51,16 +38,15 @@ const Products: React.FC = observer(function Products() {
         }
     };
 
-    if (loading) {
+    if (!backofficeStore.isLoaded) {
         return (
-            <Container style={{ textAlign: "center", padding: "15rem" }}>
-                <Spinner animation="grow" variant="secondary" /> Loading...
-            </Container>
+            <Loading />
         )
 
     }
 
     else {
+
         return (
             <Container fluid className="BO_ProductsContainer">
                 <Row>
@@ -91,7 +77,7 @@ const Products: React.FC = observer(function Products() {
                     <Button size="lg" variant='outline-primary' className="createButton" onClick={onOpenCreate}>{languageStore.currentLanguage.productPage_createProduct}</Button>
                 </Row>
                 <Row className="element">
-                    <ProductCards products={productStore.Products} />
+                    <ProductCards products={productItems} />
                 </Row>
             </Container>
         )

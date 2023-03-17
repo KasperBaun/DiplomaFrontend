@@ -3,26 +3,25 @@ export interface ILocale {
   aboutUs: string;
   aboutUsText: string;
 
-    // Category Admin
-    createCategoryModalTitle: string;
-    createCategoryTitle: string;
-    createCategoryOrder: string;
-    createCategoryImgUrl: string;
-    createCategoryDescription: string;
-    createCategorySubmit: string;
-    createCategorySuccessMessage: string;
-    createCategoryFailedMessage: string;
-    ProductCommaSeperatedText: string;
-    updateCategoryFormTitle : string;
-    updateCategoryFormOrder : string;
-    updateCategoryFormDescription : string;
-    updateCategoryFormImgURL : string;
-    updateCategoryFormOrderDesc : string;
-    updateCategoryFormDescriptionDesc : string;
-    updateCategorySubmit : string;
-    updateCategorySuccessMessage: string;
-    updateCategoryFailedMessage: string;
-  ///////////////////////////////////////////////////////////////////////////////
+  // Category Admin
+  createCategoryModalTitle: string;
+  createCategoryTitle: string;
+  createCategoryOrder: string;
+  createCategoryImgUrl: string;
+  createCategoryDescription: string;
+  createCategorySubmit: string;
+  createCategorySuccessMessage: string;
+  createCategoryFailedMessage: string;
+  ProductCommaSeperatedText: string;
+  updateCategoryFormTitle: string;
+  updateCategoryFormOrder: string;
+  updateCategoryFormDescription: string;
+  updateCategoryFormImgURL: string;
+  updateCategoryFormOrderDesc: string;
+  updateCategoryFormDescriptionDesc: string;
+  updateCategorySubmit: string;
+  updateCategorySuccessMessage: string;
+  updateCategoryFailedMessage: string;
   // BACKOFFICE
 
   // Subcategory
@@ -39,20 +38,20 @@ export interface ILocale {
   createSubCategorySelectCategoryTitle: string;
   createSubCategorySelectCategoryFailedMessage: string;
   createSubCategoryMissingFieldsMessage: string;
-  noSubCategoriesToShow: string; 
+  noSubCategoriesToShow: string;
   createSubCategoryUpdateSuccessMessage: string;
   createSubCategoryUpdateFailedMessage: string;
 
   // Product
-    productPage_productName: string;
-    productPage_productModelNumber: string;
-    productPage_productMaterial: string;
-    productPage_productDesign: string;
-    productPage_productCondition: string;
-    productPage_productQuality: string;
-    productPage_productDimension: string;
-    productPage_productCustomText: string;
-    productPage_createProduct: string;
+  productPage_productName: string;
+  productPage_productModelNumber: string;
+  productPage_productMaterial: string;
+  productPage_productDesign: string;
+  productPage_productCondition: string;
+  productPage_productQuality: string;
+  productPage_productDimension: string;
+  productPage_productCustomText: string;
+  productPage_createProduct: string;
 
   // Admin Header 
   GeneralHeaderAdmin: string;
@@ -65,17 +64,15 @@ export interface ILocale {
   ManagementTabText: string;
 
   // Admin Dashboard
-  EconomyWidgetSalesFormat : string;
-  EconomyWidgetTitle : string;
-  RecentSalesWidgetTitle : string;
-  RecentSalesDatePaid : string;
-  RecentSalesAmount : string;
-  RecentSalesApproved : string;
-  RecentSalesMethod : string;
-  RecentSalesNavButton : string;
-  RecentSalesCurrencyId : string;
-
-  ///////////////////////////////////////////////////////////////////////////////
+  EconomyWidgetSalesFormat: string;
+  EconomyWidgetTitle: string;
+  RecentSalesWidgetTitle: string;
+  RecentSalesDatePaid: string;
+  RecentSalesAmount: string;
+  RecentSalesApproved: string;
+  RecentSalesMethod: string;
+  RecentSalesNavButton: string;
+  RecentSalesCurrencyId: string;
 
   // Header tabs
   HomeTabText: string;
@@ -95,5 +92,5 @@ export interface ILocale {
   FAQTabText: string;
   ContactTabText: string;
 
-  
+
 }

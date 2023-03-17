@@ -2,7 +2,7 @@
 import Category from "@models/Category";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
-import IAPIService, { WebAPIResponse } from "./IAPIService";
+import IAPIService from "./IAPIService";
 import SubCategory from "@models/SubCategory";
 import Payment from "@models/Payment";
 import Product from "@models/Product";

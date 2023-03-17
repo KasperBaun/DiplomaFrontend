@@ -5,16 +5,17 @@ import { useContext, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import ProductCard from "./ProductCard";
 import { productCardContainer } from "../ProductsStyling";
+import ProductItem from "@models/ProductItem";
 
 
 export interface IProductCardsProps {
-    products: Product[];
+    products: ProductItem[];
 }
 
 const ProductCards: React.FC<IProductCardsProps> = observer(function ProductCards(props: IProductCardsProps) {
 
     const { productStore, } = useContext(MobXContext);
-    const [selectedProduct, setSelectedProduct] = useState<Product>();
+    const [selectedProductItem, setSelectedProductItem] = useState<ProductItem>();
     const [visibleUpdate, setVisibilityUpdate] = useState(false);
     const onOpenUpdate = () => setVisibilityUpdate(true);
     const onCloseUpdate = () => setVisibilityUpdate(false);
@@ -24,32 +25,28 @@ const ProductCards: React.FC<IProductCardsProps> = observer(function ProductCard
         const subCatToBeDeleted = await productStore.getProduct(id);
         if (subCatToBeDeleted !== null) {
             const deleted = await productStore.deleteProduct(id);
-            if (deleted) {
-                alert("Successfully deleted product: " + subCatToBeDeleted.name)
-            } else {
-                alert("Failed to delete product: " + subCatToBeDeleted.name)
-            }
+            alert("Successfully deleted product: " + subCatToBeDeleted.name)
         } else {
             alert("Could not find product with id: " + id);
         }
     }
 
-    function handleOnUpdateClicked(product: Product) {
-        setSelectedProduct(product);
+    function handleOnUpdateClicked(productItem: ProductItem) {
+        setSelectedProductItem(productItem);
         onOpenUpdate();
     }
 
 
-    function showProductClicked(product: Product): void {
+    function showProductClicked(productItem: ProductItem): void {
         // Pop Modal with product info
     }
     return (
         <Container >
             <Row style={productCardContainer}>
-                {props.products.map((product: Product) => {
+                {props.products.map((product: ProductItem) => {
                     return (
                         <ProductCard
-                            product={product}
+                            productItem={product}
                             handleOnDeleteClicked={handleOnDeleteClicked}
                             handleOnUpdateClicked={handleOnUpdateClicked}
                             showProductClicked={showProductClicked}
