@@ -102,12 +102,17 @@ class CrudHelper implements ICrudHelper {
                     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
                 });
             if (response.ok) {
-                const data = await response.json();
-                if (this.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully fetched ${objectName}`, t1, t2, this.color);
+                try {
+                    const data = await response.json();
+                    if (this.loggingEnabled) {
+                        const t2 = performance.now();
+                        ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully fetched ${objectName}`, t1, t2, this.color);
+                    }
+                    return data as T[];
+                } catch (err) {
+                    console.error('error', err);
+                    return [];
                 }
-                return data as T[];
             } else {
                 console.log(`${this.prefix} failed fetching ${objectName} from API. Status: ${response.status} ${response.statusText}`, this.color);
                 return [];
@@ -127,14 +132,19 @@ class CrudHelper implements ICrudHelper {
                     headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
                 });
             if (response.ok) {
-                const data = await response.json();
-                if (this.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully fetched ${objectName}`, t1, t2, this.color);
+                try {
+                    const data = await response.json();
+                    if (this.loggingEnabled) {
+                        const t2 = performance.now();
+                        ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully fetched ${objectName}`, t1, t2, this.color);
+                    }
+                    return data as T;
+                } catch (err) {
+                    console.error('error', err);
+                    return null;
                 }
-                return data as T;
             } else {
-                console.log(`${this.prefix} failed fetching ${objectName} from API. Status: ${response.status} ${response.statusText}`, this.color);
+                console.error(`${this.prefix} failed fetching ${objectName} from API. Status: ${response.status} ${response.statusText}`, this.color);
                 return null;
             }
         } catch (error) {
