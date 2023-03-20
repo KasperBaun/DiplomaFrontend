@@ -18,7 +18,7 @@ const VertNavBackOffice = (props: vertNavProps) => {
                 <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.AnalyticsTabText}</Nav.Link>
                 <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.SalesTabText}</Nav.Link>
                 <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.InventoryTabText}</Nav.Link>
-                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(0)}>{languageStore.currentLanguage.ProductSniperTabText}</Nav.Link>
+                <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(4)}>{languageStore.currentLanguage.ProductSniperTabText}</Nav.Link>
                 <NavTitleDivider title={languageStore.currentLanguage.ManagementTabText} />
                 <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(1)}>{languageStore.currentLanguage.CategoriesTabText}</Nav.Link>
                 <Nav.Link className="NavLinkText" onClick={() => props.setNavKey(2)}>{languageStore.currentLanguage.SubCategoriesTabText}</Nav.Link>

@@ -9,6 +9,7 @@ import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 import ProductItemWEB from "@models/webShop/ProductItemWEB";
 import CrudHelper from "./CrudHelper";
+import SniperModel from "@models/SniperModel";
 
 class APIService implements IAPIService {
 
@@ -105,9 +106,6 @@ class APIService implements IAPIService {
         return await this.crudHelper.delete(this.apiBaseUrl + "/Category/" + id, "Category");
     }
 
-
-
-
     /* Payment */
 
     async getPayments(): Promise<Payment[]> {
@@ -117,6 +115,11 @@ class APIService implements IAPIService {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
     }
 
+
+    /* Sniper */
+    async getSniping(searchValue : string): Promise<SniperModel[]> {
+        return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?" + searchValue, "SniperModel")
+    }
 }
 
 export default APIService;
