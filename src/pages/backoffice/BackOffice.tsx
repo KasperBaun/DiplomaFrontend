@@ -7,6 +7,7 @@ import BackOfficeDashboard from './Dashboard/dashboard';
 import { useContext, useEffect, useState } from 'react';
 import Subcategories from './subcategory/Subcategory';
 import Products from './product/Products';
+import SniperPage from './sniper/SniperPage';
 import MobXContext from '@stores/MobXContext';
 import Loading from '@components/loading/Loading';
 import { observer } from 'mobx-react-lite';
@@ -28,6 +29,7 @@ const BackOfficeMain = observer(() => {
             case 1: return (<BOCategories />)
             case 2: return (<Subcategories />)
             case 3: return (<Products />)
+            case 4: return (<SniperPage />)
         }
     }
 

@@ -1,6 +1,8 @@
 import ProductItemWEB from '@models/webShop/ProductItemWEB';
 import { Card, CardContent, CardMedia, Divider, Typography } from '@mui/material';
 import React from 'react';
+import { useState } from "react";
+
 
 type ImageProps = {
     url: string;
@@ -48,14 +50,32 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
         images,
     } = props.data;
 
+  const [cardStyle, setCardStyle] = useState({
+    width: 300,
+    margin: "12px",
+    borderRadius: 8,
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+    transition: "box-shadow 0.2s ease-in-out",
+  });
+
+  const hoverCardStyle = {
+    ...cardStyle,
+    boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+  };
+
+  const originalStyle ={
+    ...cardStyle,
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)" }
+
     return (
         <Card
-          style={{
-            width: 400,
-            margin: "16px",
-            borderRadius: 8,
-            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
-          }}
+          style={cardStyle}
+          onMouseOver={()=>{
+            setCardStyle(hoverCardStyle);
+          }} 
+          onMouseOut={()=>{
+            setCardStyle(originalStyle);
+          }} 
         >
           <CardMedia
             component="img"
@@ -72,7 +92,7 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
               Model Number: {modelNumber}
             </Typography>
             <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
-            <Typography color="textPrimary" >Price: {price}</Typography>
+            <Typography color="textPrimary" >Price: {price} DKK</Typography>
             <Typography color="textSecondary">Condition: {condition}</Typography>
             <Typography color="textSecondary">Quality: {quality}</Typography>
           </CardContent>

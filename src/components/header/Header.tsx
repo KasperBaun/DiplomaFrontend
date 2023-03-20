@@ -23,7 +23,7 @@ const Header: React.FC = observer(function Header() {
 
   const navPaths: INavModel[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
-  navPaths.push({ path: "/product", text: `${languageStore.currentLanguage.ProductTabText}` });
+  navPaths.push({ path: "/productList", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
   navPaths.push({ path: "/basket", text: `${languageStore.currentLanguage.BasketTabText}` });
   navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
