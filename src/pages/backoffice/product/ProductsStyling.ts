@@ -2,7 +2,7 @@ export const productCardContainer: React.CSSProperties = {
     width: '100%',
     height: '100%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
 
 }
 

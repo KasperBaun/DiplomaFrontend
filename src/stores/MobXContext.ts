@@ -5,6 +5,7 @@ import { CategoryStore } from "./CategoryStore";
 import { LanguageStore } from "./LanguageStore";
 import { SubCategoryStore } from "./SubCategoryStore";
 import { PaymentStore } from "./PaymentStore";
+import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 
 export interface IMobXContext {
@@ -14,6 +15,7 @@ export interface IMobXContext {
     subCategoryStore : SubCategoryStore;
     languageStore: LanguageStore;
     paymentStore : PaymentStore;
+    backofficeStore: BackofficeStore;
     sniperStore : SniperStore;
 }
 

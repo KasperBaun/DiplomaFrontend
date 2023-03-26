@@ -25,7 +25,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
 
     const handleOnDeleteCategory = async (id: number) => {
         // Pop Modal to confirm?
-        const subCatToBeDeleted = await subCategoryStore.getSubCategory(id);
+        const subCatToBeDeleted = await subCategoryStore.getSubcategory(id);
         if (subCatToBeDeleted !== null) {
             const deleted = await subCategoryStore.deleteSubCategory(id);
             if (deleted) {

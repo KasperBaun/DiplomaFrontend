@@ -5,7 +5,9 @@ import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
 import ProductItem from '@models/ProductItem';
-import ProductItemWEB from '@models/webShop/ProductItemWEB';
+import ProductItemDTO from '@models/DTO/ProductItemDTO';
+import ProductDTO from '@models/DTO/ProductDTO';
+import SubCategory from '@models/SubCategory';
 
 export class ProductStore {
 
@@ -18,9 +20,8 @@ export class ProductStore {
     private apiService: APIService;
     private products: Product[] = [];
     private productsLoaded: boolean = false;
-    private productItems: ProductItem[] = [];
     private productMap: Map<number, Product> = new Map();
-    private productItemDTOs: ProductItemWEB[] = [];
+    private productItems: ProductItem[] = [];
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -60,10 +61,11 @@ export class ProductStore {
 
     public async loadProducts(): Promise<void> {
         if (!this.isLoaded) {
-            this.products = await this.apiService.getProducts();
+            const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
+            this.products = this.generateProducts(productDTOs);
             this.productMap = this.createProductMap(this.products);
-            this.productItems = await this.apiService.getProductItems();
-            this.productItemDTOs = await this.apiService.getProductItemDTOs();
+            const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
+            this.productItems = this.generateProductItems(productItemDTOs, this.productMap);
 
             runInAction(() => {
                 this.loaded = true;
@@ -83,9 +85,55 @@ export class ProductStore {
         return prodMap
     }
 
+    private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItem[] {
+        const productItems: ProductItem[] = [];
+        for (const productItemDTO of productItemDTOs) {
+            const productItem: ProductItem = {
+                id: productItemDTO.id,
+                productId: productItemDTO.productId,
+                condition: productItemDTO.condition,
+                quality: productItemDTO.quality,
+                sold: false,
+                weight: productItemDTO.weight,
+                customText: productItemDTO.customText,
+                images: productItemDTO.images,
+                priceHistory: [],
+                product: productMap.get(productItemDTO.productId),
+                purchasePrice: null,
+                currentPrice: productItemDTO.price,
+                createdDate: productItemDTO.createdDate,
+                soldDate: null
+            };
+            productItems.push(productItem);
+        }
 
-    public getProducts(): Product[] {
-        return this.products;
+        return productItems;
+    }
+
+    private generateProducts(productDTOs: ProductDTO[]): Product[] {
+        const products: Product[] = [];
+        for (const productDTO of productDTOs) {
+
+            const productSubcategories: SubCategory[] = [];
+
+            for (const subcatId of productDTO.subcategoryIds) {
+                productSubcategories.push(this.rootStore.subCategoryStore.getSubcategory(subcatId));
+            }
+
+            const product: Product = {
+                id: productDTO.id,
+                name: productDTO.name,
+                modelNumber: productDTO.modelNumber,
+                manufacturer: productDTO.manufacturer,
+                design: productDTO.design,
+                dimension: productDTO.dimension,
+                material: productDTO.material,
+                subcategories: productSubcategories
+            }
+            products.push(product);
+        }
+
+        return products;
     }
 
     public get Products(): Product[] {
@@ -94,10 +142,6 @@ export class ProductStore {
 
     public get ProductItems(): ProductItem[] {
         return this.productItems;
-    }
-
-    public get ProductItemDTOs(): ProductItemWEB[] {
-        return this.productItemDTOs;
     }
 
     public getProduct(id: number): Product {

@@ -1,68 +1,81 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
-import { Form, Spinner } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import ProductCards from "./components/ProductCards";
-import Product from "@models/Product";
+import Loading from "@components/loading/Loading";
+import ProductItem from "@models/ProductItem";
+import Category from "@models/Category";
+import SubCategory from "@models/SubCategory";
+import { productCardContainer } from "./ProductsStyling";
 
 const Products: React.FC = observer(function Products() {
 
-    const { productStore, languageStore, categoryStore, subCategoryStore } = useContext(MobXContext)
-    const [loading, setLoading] = useState<boolean>(productStore.Products.length > 0);
-    const [products, setProducts] = useState<Product[]>([]);
-
-
-    useEffect(() => {
-        const loadProducts = async (): Promise<void> => {
-            productStore.loadProducts();
-        }
-        if (productStore.isLoaded) {
-            setProducts(productStore.Products);
-            setLoading(false);
-        } else {
-            loadProducts();
-            setProducts(productStore.Products);
-        }
-    }, [productStore.isLoaded])
+    const { languageStore, categoryStore, backofficeStore, subCategoryStore } = useContext(MobXContext)
 
     const [visibleCreate, setVisibilityCreate] = useState(false);
     const onOpenCreate = () => setVisibilityCreate(true);
     const onCloseCreate = () => setVisibilityCreate(false);
+    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.productItems);
+    const [selectedCategory, setSelectedCategory] = useState<Category>(null);
+    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
+    const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
+
 
     function handleOnResetClicked(): void {
-        setProducts(productStore.Products);
+        setProductItems(backofficeStore.productItems);
     }
 
     function filterByCategory(categoryId: number) {
-        // Return new items filtered by category
-        const subCategories = subCategoryStore.subCategories.filter(subcat => subcat.categoryId === categoryId);
-        const filteredProducts = products.filter(prod => subCategories.some(subcat => subcat.id === prod.subcategoryId));
-        setProducts(filteredProducts);
+        setSelectedCategory(categoryStore.getCategory(categoryId));
+        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+        setProductItems(filteredProducts);
     }
 
-    function handleOptionChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
+    function handleCategoryChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
         if (event.currentTarget.value === "initValue") {
+            if (selectedCategory !== null) {
+                setSelectedCategory(null);
+                setSelectedSubcategory(null);
+                setSubcategories([]);
+                setProductItems(backofficeStore.productItems);
+            }
             return;
         } else {
             filterByCategory(event.currentTarget.value);
+            setSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === event.currentTarget.value));
         }
     };
 
-    if (loading) {
-        return (
-            <Container style={{ textAlign: "center", padding: "15rem" }}>
-                <Spinner animation="grow" variant="secondary" /> Loading...
-            </Container>
-        )
+    function filterBySubcategory(subcategoryId: number) {
+        setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
+        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
+        setProductItems(filteredProducts);
+    }
 
+    function handleSubcategoryChange(event: any): React.ChangeEventHandler<HTMLSelectElement> {
+        if (event.currentTarget.value === "initValue") {
+            setSelectedSubcategory(null);
+            return
+        }
+        else {
+            filterBySubcategory(event.currentTarget.value);
+        }
+    }
+
+    if (!backofficeStore.isLoaded) {
+        return (
+            <Loading />
+        )
     }
 
     else {
+
         return (
-            <Container fluid className="BO_ProductsContainer">
+            <Container fluid style={{ ...productCardContainer }}>
                 <Row>
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -72,11 +85,23 @@ const Products: React.FC = observer(function Products() {
 
                         <Form.Group>
                             <Form.Label>Filter by category</Form.Label>
-                            <Form.Select aria-label="Select category" onChange={handleOptionChange}>
+                            <Form.Select aria-label="Select category" onChange={handleCategoryChange}>
                                 <option key="initKey" value="initValue" >{languageStore.currentLanguage.createSubCategorySelectCategoryTitle}</option>
                                 {categoryStore.Categories.map((category, index) => {
                                     return (
                                         <option key={"option" + category.name + index} value={category.id}>{category.name}</option>
+                                    )
+                                })}
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Filter by subcategory</Form.Label>
+                            <Form.Select aria-label="Select subcategory" onChange={handleSubcategoryChange}>
+                                <option key="initKey" value="initValue" >{"Select subcategory..."}</option>
+                                {subcategories.map((subcategory, index) => {
+                                    return (
+                                        <option key={"option" + subcategory.name + index} value={subcategory.id}>{subcategory.name}</option>
                                     )
                                 })}
                             </Form.Select>
@@ -91,7 +116,7 @@ const Products: React.FC = observer(function Products() {
                     <Button size="lg" variant='outline-primary' className="createButton" onClick={onOpenCreate}>{languageStore.currentLanguage.productPage_createProduct}</Button>
                 </Row>
                 <Row className="element">
-                    <ProductCards products={productStore.Products} />
+                    <ProductCards products={productItems} />
                 </Row>
             </Container>
         )

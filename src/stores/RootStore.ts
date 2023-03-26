@@ -8,6 +8,7 @@ import { Constants } from "@utils/Constants";
 import { LanguageStore } from "./LanguageStore";
 import { SubCategoryStore } from "./SubCategoryStore";
 import { PaymentStore } from "./PaymentStore";
+import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 
 
@@ -20,8 +21,9 @@ export class RootStore implements IMobXContext {
     productStore: ProductStore;
     categoryStore: CategoryStore;
     subCategoryStore: SubCategoryStore;
-    paymentStore : PaymentStore;
+    paymentStore: PaymentStore;
     languageStore: LanguageStore;
+    backofficeStore: BackofficeStore;
     sniperStore : SniperStore;
     rootStore: RootStore = this;
 
@@ -30,13 +32,14 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructor called`, this.color)
         }
         // Create API with baseUrl from constants
-        this.apiService = new APIService(Constants.devApiBaseUrl);
+        this.apiService = new APIService(Constants.apiBaseUrl);
         // Instantiate stores here
         this.productStore = ProductStore.GetInstance(this, this.apiService);
         this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
         this.languageStore = LanguageStore.GetInstance(this);
         this.paymentStore = PaymentStore.GetInstance(this, this.apiService);
         this.subCategoryStore = SubCategoryStore.GetInstance(this, this.apiService);
+        this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         makeAutoObservable(this);
         void this.init();

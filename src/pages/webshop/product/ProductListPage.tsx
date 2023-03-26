@@ -3,13 +3,13 @@ import MobXContext from "@stores/MobXContext";
 //import { Product } from "@models/Product"; 
 //import { ProductItem } from "@models/ProductItem"; 
 import { useContext } from "react";
-import ProductItemWEB from "@models/webShop/ProductItemWEB";
 import MyCard from "./ProductCard";
 import { useNavigate } from "react-router-dom"
+import ProductItem from "@models/ProductItem";
 
 
 export interface IProductPageProps {
-    items?: ProductItemWEB[];
+    items?: ProductItem[];
 }
 
 
@@ -18,11 +18,11 @@ const ProductListPage: React.FC<IProductPageProps> = observer(function ProductLi
     const { productStore } = useContext(MobXContext);
     const navigate = useNavigate();
 
-    function handleClick(product: ProductItemWEB) {
+    function handleClick(product: ProductItem) {
     navigate('/product/' + product.id)
     }
 
-    function createProductLit(productItems: ProductItemWEB[]): JSX.Element {
+    function createProductLit(productItems: ProductItem[]): JSX.Element {
         return (
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {productItems.map(podItem => {
@@ -43,7 +43,7 @@ const ProductListPage: React.FC<IProductPageProps> = observer(function ProductLi
     }
     else {
         return (
-            createProductLit(productStore.ProductItemDTOs)
+            createProductLit(productStore.ProductItems)
         )
     }
 

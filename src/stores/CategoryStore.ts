@@ -23,15 +23,17 @@ export class CategoryStore {
     }
 
     public async init(): Promise<boolean> {
-        // Fetch categories
-        this._categories = await this.apiService.getCategories()
+
+        const categories = await this.apiService.getCategories();
+
+        runInAction(() => {
+            this._categories = categories;
+            this.loaded = true;
+        })
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
-        runInAction(() => {
-            this.loaded = true;
-        })
         return this.loaded;
     }
 

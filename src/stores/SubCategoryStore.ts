@@ -91,7 +91,7 @@ export class SubCategoryStore {
         return this.subcategoryMap.get(categoryId);
     }
 
-    public async getSubCategory(id: number): Promise<SubCategory> {
+    public  getSubcategory(id: number): SubCategory {
         return this._subCategories.find(subCat => subCat.id === id);
     }
 

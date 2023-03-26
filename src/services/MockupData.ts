@@ -1,6 +1,4 @@
 import Category from "@models/Category";
-import Product, {materialType } from "@models/Product";
-import ProductItem, {conditionType, qualityType} from "@models/ProductItem";
 export const categories: Category[] = [
 
     { id: 0, name: "Plates", order: 1, imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Foliated_dish_with_underglaze_blue_design_of_melons%2C_bamboo_and_grapes%2C_Jingdezhen_ware%2C_Yuan%2C_1271-1368%2C_Shanghai_Museum.jpg/220px-Foliated_dish_with_underglaze_blue_design_of_melons%2C_bamboo_and_grapes%2C_Jingdezhen_ware%2C_Yuan%2C_1271-1368%2C_Shanghai_Museum.jpg" },
