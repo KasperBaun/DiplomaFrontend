@@ -7,9 +7,10 @@ import SubCategory from "@models/SubCategory";
 import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
-import ProductItemWEB from "@models/webShop/ProductItemWEB";
 import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
+import ProductItemDTO from "@models/DTO/ProductItemDTO";
+import ProductDTO from "@models/DTO/ProductDTO";
 
 class APIService implements IAPIService {
 
@@ -27,7 +28,6 @@ class APIService implements IAPIService {
         }
     }
 
-
     /* Product Items */
     createProductItem(productItem: ProductItem): Promise<void> {
         throw new Error("Method not implemented.");
@@ -42,14 +42,11 @@ class APIService implements IAPIService {
         throw new Error("Method not implemented.");
     }
     async getProductItems(): Promise<ProductItem[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetProductItems`, "ProductItems");
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetAll`, "ProductItems");
     }
-    async getProductItemDTOs(): Promise<ProductItemWEB[]> {
-        return this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetProductItemDTOs`, "ProductItemDTOs");
+    async getProductItemDTOs(): Promise<ProductItemDTO[]> {
+        return this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetAll`, "ProductItemDTOs");
     }
-
-
-
 
 
     /* Products */
@@ -66,12 +63,11 @@ class APIService implements IAPIService {
         return await this.crudHelper.delete(this.apiBaseUrl + "/Product/" + id, "Product");
     }
     async getProducts(): Promise<Product[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Product`, "Products");
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Product/GetAll`, "Products");
     }
-
-
-
-
+    async getProductDTOs(): Promise<ProductDTO[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Product/GetAll`, "ProductDTOs");
+    }
 
 
     /* Subcategories */
@@ -90,8 +86,6 @@ class APIService implements IAPIService {
 
 
 
-
-
     /* Categories */
     async getCategories(): Promise<Category[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Category`, "Categories");
@@ -107,7 +101,6 @@ class APIService implements IAPIService {
     }
 
     /* Payment */
-
     async getPayments(): Promise<Payment[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Payment`, "Payment");
     }
@@ -115,9 +108,8 @@ class APIService implements IAPIService {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
     }
 
-
     /* Sniper */
-    async getSniping(searchValue : string): Promise<SniperModel[]> {
+    async getSniping(searchValue: string): Promise<SniperModel[]> {
         return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?" + searchValue, "SniperModel")
     }
 }

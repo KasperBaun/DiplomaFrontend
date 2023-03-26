@@ -31,7 +31,7 @@ const Products: React.FC = observer(function Products() {
 
     function filterByCategory(categoryId: number) {
         setSelectedCategory(categoryStore.getCategory(categoryId));
-        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategory.categoryId === categoryId);
+        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
         setProductItems(filteredProducts);
     }
 
@@ -52,7 +52,7 @@ const Products: React.FC = observer(function Products() {
 
     function filterBySubcategory(subcategoryId: number) {
         setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
-        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategoryId === subcategoryId);
+        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
         setProductItems(filteredProducts);
     }
 

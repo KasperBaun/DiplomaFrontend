@@ -32,7 +32,7 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructor called`, this.color)
         }
         // Create API with baseUrl from constants
-        this.apiService = new APIService(Constants.devApiBaseUrl);
+        this.apiService = new APIService(Constants.apiBaseUrl);
         // Instantiate stores here
         this.productStore = ProductStore.GetInstance(this, this.apiService);
         this.categoryStore = CategoryStore.GetInstance(this, this.apiService);

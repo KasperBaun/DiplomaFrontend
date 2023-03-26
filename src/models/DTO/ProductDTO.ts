@@ -1,7 +1,6 @@
-import { materialType } from "./Enums";
-import SubCategory from "./SubCategory";
+import { materialType } from "@models/Enums";
 
-export default class Product {
+export default class ProductDTO {
     id: number;
     name: string;
     modelNumber: number;
@@ -9,5 +8,5 @@ export default class Product {
     material: materialType;
     design?: string;
     dimension?: string;
-    subcategories: SubCategory[];
+    subcategoryIds: number[];
 }

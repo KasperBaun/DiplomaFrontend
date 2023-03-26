@@ -1,4 +1,4 @@
-import ProductItemWEB from '@models/webShop/ProductItemWEB';
+import ProductItem from '@models/ProductItem';
 import { Card, CardContent, CardMedia, Divider, Typography } from '@mui/material';
 import React from 'react';
 import { useState } from "react";
@@ -17,14 +17,14 @@ const Image = ({ url }: ImageProps) => (
 );
 
 export interface IMyCardProps {
-    data: ProductItemWEB;
+    data: ProductItem;
 }
 
 
 const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
     const {
         id,
-        price,
+        currentPrice,
         createdDate,
         condition,
         quality,
@@ -38,14 +38,7 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
             material,
             design,
             dimension,
-            subcategory: {
-                id: subcategoryId,
-                name: subcategoryName,
-                category: {
-                    id: categoryId,
-                    name: categoryName,
-                },
-            },
+            subcategories,
         },
         images,
     } = props.data;
@@ -92,7 +85,7 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
               Model Number: {modelNumber}
             </Typography>
             <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
-            <Typography color="textPrimary" >Price: {price} DKK</Typography>
+            <Typography color="textPrimary" >Price: {currentPrice} DKK</Typography>
             <Typography color="textSecondary">Condition: {condition}</Typography>
             <Typography color="textSecondary">Quality: {quality}</Typography>
           </CardContent>
