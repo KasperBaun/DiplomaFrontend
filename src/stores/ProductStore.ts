@@ -62,14 +62,10 @@ export class ProductStore {
     public async loadProducts(): Promise<void> {
         if (!this.isLoaded) {
             const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
-            console.log("prodDto", productDTOs);
             this.products = this.generateProducts(productDTOs);
-            console.log("products", this.products);
             this.productMap = this.createProductMap(this.products);
-            console.log("productMap", this.productMap);
             const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
             this.productItems = this.generateProductItems(productItemDTOs, this.productMap);
-            console.log("productItems", this.productItems);
 
             runInAction(() => {
                 this.loaded = true;
