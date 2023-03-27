@@ -109,8 +109,8 @@ class APIService implements IAPIService {
     }
 
     /* Sniper */
-    async getSniping(searchValue: string): Promise<SniperModel[]> {
-        return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?" + searchValue, "SniperModel")
+    async getSniping(searchValue : string): Promise<SniperModel[]> {
+        return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?arg=" + searchValue, "SniperModel")
     }
 }
 
