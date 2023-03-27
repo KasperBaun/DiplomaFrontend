@@ -20,15 +20,16 @@ import InputAdornment from '@mui/material/InputAdornment/InputAdornment';
 import IconButton from '@mui/material/IconButton/IconButton';
 import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
 import { useState } from 'react';
-import { Avatar } from '@mui/material';
+import { Avatar, Backdrop } from '@mui/material';
+import Loading from '@components/loading/Loading';
 
 /* This component is taken from https://mui.com/material-ui/getting-started/templates/sign-in-side/ and edited to fit customer */
 
 export interface ILoginPageProps {
-    signInText: string;
-    forgotPasswordText: string;
     defaultEmailText?: string;
     defaultPasswordText?: string;
+    signInText: string;
+    forgotPasswordText: string;
     companyName: string;
     companyUrl: string;
     dontHaveAccountText: string;
@@ -41,9 +42,13 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
 
     const [email, setEmail] = useState<string>(props.defaultEmailText ? props.defaultEmailText : '');
     const [password, setPassword] = useState<string>(props.defaultPasswordText ? props.defaultPasswordText : '');
+    const [showPassword, setShowPassword] = React.useState(false);
+    const [showBackdrop, setShowBackdrop] = React.useState(false);
+
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setShowBackdrop(true);
         const data: ILoginData = {
             email: email,
             password: password,
@@ -51,14 +56,11 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
         props.onLoginClicked(data);
 
     };
-
-    const [showPassword, setShowPassword] = React.useState(false);
-
     const handleClickShowPassword = () => setShowPassword((show) => !show);
-
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
+    const handleCloseBackdrop = () => setShowBackdrop((showBackdrop) => !showBackdrop);
 
     return (
         <ThemeProvider theme={theme}>
@@ -88,9 +90,20 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                             alignItems: 'center',
                         }}
                     >
-                        <GroendlundLogo width={400} color={Constants.royalCopenhagenBlueColor} />
-                        <Avatar sx={{ m: 1, bgcolor: Constants.royalCopenhagenBlueColor }}>
-                            <LockOutlined style={{ backgroundColor: Constants.royalCopenhagenBlueColor }} />
+                        <Backdrop
+                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                            open={showBackdrop}
+                            onClick={handleCloseBackdrop}
+                        >
+                            <Loading
+                                size={100}
+                                color={Constants.primaryColor}
+                            />
+                        </Backdrop>
+
+                        <GroendlundLogo width={400} color={Constants.primaryColor} />
+                        <Avatar sx={{ m: 1, bgcolor: Constants.primaryColor }}>
+                            <LockOutlined style={{ backgroundColor: Constants.primaryColor }} />
                         </Avatar>
                         <Box component="form" noValidate={false} onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
@@ -143,7 +156,7 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                style={{ backgroundColor: Constants.royalCopenhagenBlueColor }}
+                                style={{ backgroundColor: Constants.primaryColor }}
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 {props.signInText}

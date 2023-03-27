@@ -14,6 +14,8 @@ import BackOffice from "@backoffice/BackOffice"
 import ProductListPage from "@webshop/product/ProductListPage"
 import MobXContext, { IMobXContext } from "@stores/MobXContext"
 import { observer } from "mobx-react-lite"
+import Loading from "@components/loading/Loading"
+import { Constants } from "@utils/Constants"
 
 
 const Routing: FunctionComponent = observer(() => {
@@ -21,9 +23,10 @@ const Routing: FunctionComponent = observer(() => {
 
     if (!rootStore.isLoaded) {
         return (
-            <div>
-                <h1>Loading!</h1>
-            </div>
+            <Loading
+                size={100}
+                color={Constants.primaryColor}
+            />
         )
     } else {
 
@@ -38,8 +41,8 @@ const Routing: FunctionComponent = observer(() => {
                     <Route path="basket" element={<BasketPage />} />
                     <Route path="confirmation" element={<ConfirmationPage />} />
                     <Route path="payment" element={<PaymentPage />} />
-                    <Route path="product" element={<ProductPage productId={1}/>} />
-                    <Route path="productList" element={<ProductListPage/>} />
+                    <Route path="product" element={<ProductPage productId={1} />} />
+                    <Route path="productList" element={<ProductListPage />} />
                     <Route path="search" element={<SearchPage />} />
                 </Route>
                 <Route path="/backoffice" element={<BackOffice />}>

@@ -16,10 +16,9 @@ const Footer: React.FC = observer(function Footer() {
       <footer className="footer">
         <div className="footer-container">
 
-          <h3>Grønlund&<span>Lefort</span></h3>
+          <h3>{Constants.companyName}</h3>
           <div className="contact-info">
-            <p>Gl. Kongevej 94a, st tv</p>
-            <p>1850 Frederiksberg</p>
+            <p>{Constants.companyAdress}</p>
           </div>
 
           <p className="footer-links">

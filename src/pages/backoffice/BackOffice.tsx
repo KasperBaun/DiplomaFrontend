@@ -4,7 +4,7 @@ import VertNavBackOffice from './navigationbars/VerticalNavigationBO';
 import "./css/backoffice.scss"
 import BOCategories from "@backoffice/category/Categories"
 import BackOfficeDashboard from './Dashboard/dashboard';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Subcategories from './subcategory/Subcategory';
 import Products from './product/Products';
 import SniperPage from './sniper/SniperPage';
@@ -21,20 +21,22 @@ export interface ILoginData {
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { backofficeStore, languageStore } = useContext(MobXContext);
-    const [authorized, setAuthorized] = useState<boolean>(false);
+    const { backofficeStore, languageStore, authStore } = useContext(MobXContext);
 
+    // useEffect(() => {
+    //     const loadBackofficeStore = async () => {
+    //         await backofficeStore.init();
+    //     }
+    //     loadBackofficeStore();
+    // }, [])
 
-    useEffect(() => {
-        const loadBackofficeStore = async () => {
-            await backofficeStore.init();
+    async function handleLoginClicked(data: ILoginData): Promise<void> {
+        async function delayTwoSeconds(): Promise<void> {
+            await new Promise(resolve => setTimeout(resolve, 2000));
         }
-        loadBackofficeStore();
-    }, [])
-
-    function handleLoginClicked(data: ILoginData): void {
+        await delayTwoSeconds();
         if (data.email === "test@example.com" && data.password === "test-password") {
-            setAuthorized(true);
+            authStore.setUserAuthenticated(true);
         }
     }
 
@@ -48,12 +50,13 @@ const BackOfficeMain = observer(() => {
         }
     }
 
-    if (!backofficeStore.isLoaded) {
-        return (
-            <Loading />
-        )
-    }
-    else if (!authorized) {
+    // if (!backofficeStore.isLoaded) {
+    //     return (
+    //         <Loading />
+    //     )
+    // }
+    // else 
+    if (!authStore.userAuthenticated) {
         return (
             <LoginPage
                 companyName={Constants.companyName}
