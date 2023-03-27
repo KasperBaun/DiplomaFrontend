@@ -62,10 +62,14 @@ export class ProductStore {
     public async loadProducts(): Promise<void> {
         if (!this.isLoaded) {
             const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
+            console.log("prodDto", productDTOs);
             this.products = this.generateProducts(productDTOs);
+            console.log("products", this.products);
             this.productMap = this.createProductMap(this.products);
+            console.log("productMap", this.productMap);
             const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
             this.productItems = this.generateProductItems(productItemDTOs, this.productMap);
+            console.log("productItems", this.productItems);
 
             runInAction(() => {
                 this.loaded = true;
@@ -77,12 +81,12 @@ export class ProductStore {
     private createProductMap(products: Product[]): Map<number, Product> {
         const prodMap: Map<number, Product> = new Map<number, Product>();
         for (const product of products) {
-            let tempProd = prodMap.get(product.id);
-            if (tempProd === null && tempProd) {
+            const productExists = prodMap.get(product.id);
+            if (!productExists) {
                 prodMap.set(product.id, product);
             }
         }
-        return prodMap
+        return prodMap;
     }
 
     private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItem[] {

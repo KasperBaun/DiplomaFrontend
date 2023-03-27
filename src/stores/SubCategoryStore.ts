@@ -14,7 +14,7 @@ export class SubCategoryStore {
     private loaded: boolean = false;
     private apiService: APIService;
     private _subCategories: SubCategory[] = [];
-    private subcategoryMap: Map<Number, SubCategory[]> = new Map();
+    private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -27,8 +27,7 @@ export class SubCategoryStore {
         // Fetch subcategories
         this._subCategories = await this.apiService.getSubCategories();
         this.mapCategoryToSubcategory(this._subCategories);
-        //    this.mapSubCategoriesToId(this._subCategories);
-        this.subcategoryMap = this.mapSubCategoriesToId(this._subCategories);
+        this.subcategoriesInCategoryMap = this.mapSubCategoriesToCategoryId(this._subCategories);
 
 
         if (Constants.loggingEnabled) {
@@ -40,7 +39,7 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public mapSubCategoriesToId(subCategories: SubCategory[]): Map<Number, SubCategory[]> {
+    public mapSubCategoriesToCategoryId(subCategories: SubCategory[]): Map<Number, SubCategory[]> {
         const categories = this.rootStore.categoryStore.Categories;
         const subcategoryMap = new Map<Number, SubCategory[]>();
 
@@ -88,7 +87,7 @@ export class SubCategoryStore {
     }
 
     public subCategoriesByCategoryID(categoryId: Number): SubCategory[] {
-        return this.subcategoryMap.get(categoryId);
+        return this.subcategoriesInCategoryMap.get(categoryId);
     }
 
     public  getSubcategory(id: number): SubCategory {
@@ -121,7 +120,7 @@ export class SubCategoryStore {
         await runInAction(async () => {
             this._subCategories = await this.apiService.getSubCategories();
             this.mapCategoryToSubcategory(this._subCategories);
-            this.mapSubCategoriesToId(this._subCategories);
+            this.mapSubCategoriesToCategoryId(this._subCategories);
         });
     }
 
