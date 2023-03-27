@@ -23,9 +23,8 @@ const Header: React.FC = observer(function Header() {
 
   const navPaths: INavModel[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
-  navPaths.push({ path: "/product", text: `${languageStore.currentLanguage.ProductTabText}` });
+  navPaths.push({ path: "/productList", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
-  navPaths.push({ path: "/subcategories", text: `${languageStore.currentLanguage.SubCategoriesTabText}` });
   navPaths.push({ path: "/basket", text: `${languageStore.currentLanguage.BasketTabText}` });
   navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
   navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
@@ -45,7 +44,7 @@ const Header: React.FC = observer(function Header() {
   }
 
   return (
-    <Navbar expand="lg" className='header'>
+    <Navbar expand="lg" className='header' key="navbar">
       <Container fluid >
         <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
@@ -59,10 +58,11 @@ const Header: React.FC = observer(function Header() {
             style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
-            {navPaths.map((navItem) => {
+            {navPaths.map((navItem, index) => {
               return (
                 <NavLink
                   to={navItem.path}
+                  key={navItem.text+index}
                   className={({ isActive, isPending }) => {
                     return navLinkStyling(isActive, isPending)
                   }}

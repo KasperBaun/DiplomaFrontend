@@ -3,7 +3,7 @@ import Product from "@models/Product";
 import { useContext, useEffect, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import ImageGallery from "./ImageGallery";
-import "./productStyles.scss";
+import "./ProductPage.scss";
 
 interface IProductPageProps {
     productId: number;
@@ -37,12 +37,12 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
             {/* // Små billeder (mulighed for at browse) */}
 
             {/* // Stort billede */}
-            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} />
+            {/* <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} /> */}
 
             {/* // Beskrivelseskomponent */}
                 <h1>ProductPage</h1>
                 <p>Name: {product.name}</p>
-                <p>Condition: {product.condition}</p>
+               {/*<p>Condition: {product.condition}</p>*/}
             </div >
 
         )

@@ -1,7 +1,9 @@
+import Category from "@models/Category";
 import { observer } from "mobx-react-lite"
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Card } from "react-bootstrap";
-import Category from "../../../models/Category";
+import { useNavigate } from "react-router-dom"
+
 import MobXContext from "../../../stores/MobXContext";
 import './CategoriesPage.scss';
 
@@ -12,49 +14,29 @@ interface ICategoriesPageProps {
 const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categories(props: ICategoriesPageProps) {
 
     const { categoryStore } = useContext(MobXContext);
-    const [categories, setCategories] = useState<Category[]>(null);
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        const getCategoryModel = async () => {
-            try {
-                setCategories(await categoryStore.getCategories())
-            }
-            catch (err) {
-                console.log(err);
-            }
-        }
-        getCategoryModel();
-    }, [categoryStore])
+    function handleClick(category: Category, name : String) {
+        navigate('/subcategories/' + category.id , { state: { name } })
+    }
 
-    if (categories) {
+    if (categoryStore.Categories) {
         return (
-
-            <div className="container">
-            {categories.map((index) => (
-              <div className="col-20">
-                <Card border="primary">
-                  <Card.Body>
-                    <img src={index.imageUrl} className='img-fluid shadow-4' alt='...'/>
-                  </Card.Body>
-                  <Card.Footer> {index.name.toString()}</Card.Footer>
-                </Card>
-              </div>
-            ))}
-          </div>
-        ) }
-
-   /* if (categories) {
-        return (
-            <div>
-                {categories.map((index) => (
-                    <h2> {index.name.toString()}</h2>
+            <div className="container-cat">
+                {categoryStore.Categories.map((category) => (
+                    <div className="col-20-cat" key={category.id + "Component"}>
+                        <Card className="category" border="primary" onClick={() => handleClick(category, category.name)}>
+                            <Card.Body className="category">
+                                <img  src={category.imageUrl} className='img-fluid shadow-4' style={{height: '13.5rem', width: 'auto'}} alt='...' />
+                            </Card.Body>
+                            <Card.Footer className="category"> {category.name.toString()}</Card.Footer>
+                        </Card>
+                    </div>
                 ))}
-                <Button onClick={() => createCategory(category)}></Button>
             </div>
-        );
-    } */ 
-
-    else {
+        )
+    }
+       else {
         return (
             <h1>Loading...</h1>
         )

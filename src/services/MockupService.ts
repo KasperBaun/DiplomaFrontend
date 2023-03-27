@@ -2,14 +2,14 @@ import Category from "@models/Category";
 import Product from "@models/Product";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
-import { productMockupData, categories } from "./MockupData";
+import {categories } from "./MockupData";
 
 export class MockupService {
   
 
     private prefix: string = `%c[MockupService]`;
     private color: string = ComponentLoggingConfig.DarkBlue;
-    private products: Product[] = productMockupData;
+    //private products: Product[] = productMockupData;
     private categories: Category[] = categories;
 
     constructor() {
@@ -33,8 +33,8 @@ export class MockupService {
 
     }
 
-    public async getProduct(productId: number): Promise<Product> {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        return this.products[productId];
-    }
+    // public async getProduct(productId: number): Promise<Product> {
+    //     await new Promise(resolve => setTimeout(resolve, 1000));
+    //     return this.products[productId];
+    // }
 }
