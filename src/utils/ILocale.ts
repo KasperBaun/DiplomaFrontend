@@ -92,5 +92,13 @@ export interface ILocale {
   FAQTabText: string;
   ContactTabText: string;
 
-
+  // Sniper
+  TableEntrySniperVN : string;
+  TableEntrySniperTitle : string;
+  TableEntrySniperBuyNowPrice : string;
+  TableEntrySniperNextBid : string;
+  TableEntrySniperPriceEst : string;
+  TableEntrySniperDescription : string;
+  TableEntrySniperImages : string;
+  TableEntrySniperItemUrl : string;
 }

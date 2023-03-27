@@ -102,10 +102,9 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`,
                 {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                    mode: 'no-cors'
+                    headers: { 'Content-Type': 'application/json' }
                 });
-            if (response.ok || response.status == 200) {
+            if (response.ok || response.status === 200) {
                 try {
                     const data = await response.json();
                     if (this.loggingEnabled) {
