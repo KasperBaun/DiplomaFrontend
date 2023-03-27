@@ -7,24 +7,24 @@ import { Constants } from "@utils/Constants";
 
 
 export const textStyle: React.CSSProperties = {
-    color: Constants.groenlundGoldColor,
+    color: Constants.secondaryColor,
     fontSize: 14
 }
 
 export const headingStyle: React.CSSProperties = {
-    color: Constants.groenlundGoldColor,
+    color: Constants.secondaryColor,
     fontSize: 20,
 }
 
 export const footerStyle: React.CSSProperties = {
-    backgroundColor: Constants.groenlundGreenColor,
+    backgroundColor: Constants.primaryColor,
     bottom: '0 !important',
     paddingTop: '10px !important',
     paddingBottom: '10px !important',
 }
 
 export const h3Style: React.CSSProperties = {
-    color: Constants.groenlundGoldColor,
+    color: Constants.secondaryColor,
     fontSize: '1em',
     marginTop: '0.5em !important',
     marginBottom: '0.5em !important',

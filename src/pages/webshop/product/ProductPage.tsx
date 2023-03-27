@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import Product from "@models/Product";
 import { useContext, useEffect, useState } from "react";
 import MobXContext from "@stores/MobXContext";
-import ImageGallery from "./ImageGallery";
+//import ImageGallery from "./ImageGallery";
 import "./ProductPage.scss";
 
 interface IProductPageProps {

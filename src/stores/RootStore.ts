@@ -10,6 +10,8 @@ import { SubCategoryStore } from "./SubCategoryStore";
 import { PaymentStore } from "./PaymentStore";
 import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
+import { AuthStore } from "./AuthStore";
+import { AuthService } from "@services/AuthService";
 
 
 export class RootStore implements IMobXContext {
@@ -18,13 +20,15 @@ export class RootStore implements IMobXContext {
     private color: string = ComponentLoggingConfig.DarkBlueviolet;
     private loaded: boolean = false;
     private apiService: APIService;
+    private authService: AuthService;
     productStore: ProductStore;
     categoryStore: CategoryStore;
     subCategoryStore: SubCategoryStore;
     paymentStore: PaymentStore;
     languageStore: LanguageStore;
     backofficeStore: BackofficeStore;
-    sniperStore : SniperStore;
+    sniperStore: SniperStore;
+    authStore: AuthStore;
     rootStore: RootStore = this;
 
     constructor() {
@@ -33,6 +37,8 @@ export class RootStore implements IMobXContext {
         }
         // Create API with baseUrl from constants
         this.apiService = new APIService(Constants.apiBaseUrl);
+        this.authService = new AuthService(Constants.apiBaseUrl);
+
         // Instantiate stores here
         this.productStore = ProductStore.GetInstance(this, this.apiService);
         this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
@@ -41,6 +47,8 @@ export class RootStore implements IMobXContext {
         this.subCategoryStore = SubCategoryStore.GetInstance(this, this.apiService);
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
+        this.authStore = AuthStore.GetInstance(this, this.authService);
+
         makeAutoObservable(this);
         void this.init();
     }
@@ -55,10 +63,11 @@ export class RootStore implements IMobXContext {
         const subcatLoaded = await this.subCategoryStore.init();
         const prodLoaded = await this.productStore.init();
         const langLoaded = await this.languageStore.init();
+        const authLoaded = await this.authStore.init();
 
         runInAction(() => {
             // this.loaded = userResult && documentResult;
-            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded;
+            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();
