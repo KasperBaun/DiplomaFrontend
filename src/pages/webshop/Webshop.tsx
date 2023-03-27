@@ -16,7 +16,6 @@ const Webshop: FunctionComponent<WebshopProps> = () => {
             <Container style={{ display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: 'auto' }}>
                 <Outlet />
             </Container>            
-            <CartDrawer/>
             <Footer />
         </div>
     );

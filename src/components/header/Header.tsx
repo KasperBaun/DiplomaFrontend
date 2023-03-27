@@ -10,6 +10,7 @@ import { Dk, Us } from "react-flags-select";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
+import CartDrawer from '@components/CartDrawer';
 
 interface INavModel {
   path: string;
@@ -74,7 +75,7 @@ const Header: React.FC = observer(function Header() {
             })}
 
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex">  
             <Button onClick={() => {
               languageStore.changeLanguage("da_DK");
             }}>
@@ -99,6 +100,8 @@ const Header: React.FC = observer(function Header() {
                 {languageStore.currentLanguage.SearchBarText}
               </NavLink>
             </Button>
+
+            <CartDrawer/>
           </Form>
         </Navbar.Collapse>
       </Container>

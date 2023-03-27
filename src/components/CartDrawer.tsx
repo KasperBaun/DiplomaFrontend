@@ -1,8 +1,7 @@
-import { Button, Drawer, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer  } from "@mui/material";
+import {IconButton, Button, Drawer, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer  } from "@mui/material";
 import * as React from 'react';
 import Box from '@mui/material/Box';
-
- 
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 export default function CartDrawer(){
     const [drawerState, setDrawerState] = React.useState(false); 
     
@@ -25,8 +24,8 @@ export default function CartDrawer(){
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
-          <List>
-            {['Old boots', 'Golden Spoon', 'Your Mama', 'etc'].map((text, index) => (
+          <List style={{width: '15vw'}}>
+            {['Royal Copenhagen Skål', '20 stk Illums bolighus stel', 'Figur fra Patrick Swazy INC', 'etc'].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemText primary={text} />
@@ -40,12 +39,11 @@ export default function CartDrawer(){
     return(
         <div>
         <React.Fragment>
-          <Button onClick={toggleDrawer(true)}>Show my shopping list</Button>
+          <IconButton onClick={toggleDrawer(true)}><ShoppingCartIcon style={{ color: 'white' , fontSize: 40  }}/></IconButton>
           <Drawer
             anchor='right'
             open={drawerState}
-            onClose={toggleDrawer(false)}
-          >
+            onClose={toggleDrawer(false)}>
             {cartElements()}
           </Drawer>
         </React.Fragment>
