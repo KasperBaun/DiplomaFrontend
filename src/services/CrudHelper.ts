@@ -23,8 +23,7 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`, {
                 method: 'POST',
                 body: JSON.stringify(object),
-                headers: { 'Content-Type': 'application/json' },
-                mode: 'no-cors'
+                headers: { 'Content-Type': 'application/json' }
             });
 
             if (response.ok) {
@@ -52,7 +51,7 @@ class CrudHelper implements ICrudHelper {
                 method: 'PUT',
                 body: JSON.stringify(object),
                 headers: { 'Content-Type': 'application/json' },
-                mode: 'no-cors'
+               
             });
 
             if (response.ok) {
@@ -78,7 +77,7 @@ class CrudHelper implements ICrudHelper {
                 {
                     method: 'DELETE',
                     headers: { 'Content-Type': 'application/json' },
-                    mode: 'no-cors'
+                   
                 });
             if (response.ok) {
                 if (this.loggingEnabled) {
@@ -103,7 +102,7 @@ class CrudHelper implements ICrudHelper {
                 {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
-                    mode: 'no-cors'
+                   
                 });
             if (response.ok || response.status == 200) {
                 try {
@@ -134,7 +133,7 @@ class CrudHelper implements ICrudHelper {
                 {
                     method: 'GET',
                     headers: { 'Content-Type': 'application/json' },
-                    mode: 'no-cors'
+                   
                 });
             if (response.ok) {
                 try {
