@@ -14,19 +14,19 @@ import { productCardContainer } from "./ProductsStyling";
 
 const Products: React.FC = observer(function Products() {
 
-    const { languageStore, categoryStore, backofficeStore, subCategoryStore } = useContext(MobXContext)
+    const { languageStore, categoryStore, backofficeStore, subCategoryStore, productStore } = useContext(MobXContext)
 
     const [visibleCreate, setVisibilityCreate] = useState(false);
     const onOpenCreate = () => setVisibilityCreate(true);
     const onCloseCreate = () => setVisibilityCreate(false);
-    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.productItems);
+    const [productItems, setProductItems] = useState<ProductItem[]>(productStore.ProductItems);
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
     const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
 
 
     function handleOnResetClicked(): void {
-        setProductItems(backofficeStore.productItems);
+        setProductItems(productStore.ProductItems);
     }
 
     function filterByCategory(categoryId: number) {
@@ -41,7 +41,7 @@ const Products: React.FC = observer(function Products() {
                 setSelectedCategory(null);
                 setSelectedSubcategory(null);
                 setSubcategories([]);
-                setProductItems(backofficeStore.productItems);
+                setProductItems(productStore.ProductItems);
             }
             return;
         } else {

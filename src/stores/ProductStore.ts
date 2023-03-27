@@ -77,12 +77,12 @@ export class ProductStore {
     private createProductMap(products: Product[]): Map<number, Product> {
         const prodMap: Map<number, Product> = new Map<number, Product>();
         for (const product of products) {
-            let tempProd = prodMap.get(product.id);
-            if (tempProd === null && tempProd) {
+            const productExists = prodMap.get(product.id);
+            if (!productExists) {
                 prodMap.set(product.id, product);
             }
         }
-        return prodMap
+        return prodMap;
     }
 
     private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItem[] {
