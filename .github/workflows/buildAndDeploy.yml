@@ -19,8 +19,6 @@ jobs:
         #shell: '/home/baun/actions-runner/DiplomaFrontend'
         working-directory: '/home/baun/actions-runner/DiplomaFrontend'
 
-
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -46,10 +44,9 @@ jobs:
     #  run: npm test
 
     - name: Build project
-      run: npm run build --no-warnings
+      run: npm run build --no-strict
 
     - name: Deploy
       run: |
         cp -r build/* /var/www/html
         rm -r build
-
