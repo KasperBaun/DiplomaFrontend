@@ -1,3 +1,4 @@
+import CartDrawer from "@components/CartDrawer";
 import Footer from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import { FunctionComponent } from "react";
@@ -14,7 +15,8 @@ const Webshop: FunctionComponent<WebshopProps> = () => {
             <Header />
             <Container style={{ display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: 'auto' }}>
                 <Outlet />
-            </Container>
+            </Container>            
+            <CartDrawer/>
             <Footer />
         </div>
     );
