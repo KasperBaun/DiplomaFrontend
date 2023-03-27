@@ -44,9 +44,7 @@ export class SniperStore {
     }
 
     public async GetSniping(searchValue : string) : Promise<SniperModel[]> {
-        console.log("https://groenlund.uglyrage.com/api" + "/Sniper?arg=" + JSON.stringify(searchValue));
-
-        this._sniperData = await this.apiService.getSniping(JSON.stringify(searchValue));
+        this._sniperData = await this.apiService.getSniping(searchValue);
         return this._sniperData;
     }
 }

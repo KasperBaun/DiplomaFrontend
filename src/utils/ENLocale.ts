@@ -97,4 +97,16 @@ export default class ENLocale implements ILocale {
   AboutUsTabText = "About us";
   FAQTabText = "FAQ";
   ContactTabText = "Contact";
+
+  
+
+  // Sniper
+  TableEntrySniperVN = "Lot Id";
+  TableEntrySniperTitle = "Title";
+  TableEntrySniperBuyNowPrice = "Buy Now Price";
+  TableEntrySniperNextBid = "Next Bid";
+  TableEntrySniperPriceEst = "Estimation";
+  TableEntrySniperDescription = "Description";
+  TableEntrySniperImages = "Image(s)";
+  TableEntrySniperItemUrl = "URL";
 }

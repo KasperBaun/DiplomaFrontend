@@ -7,10 +7,11 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 interface IProps {
     setSnipedResults : Dispatch<SetStateAction<SniperModel[]>>;
     setHasSnipedValues : Dispatch<SetStateAction<boolean>>;
+    setIsSniping : Dispatch<SetStateAction<boolean>>;
     snipedResults : SniperModel[];
 }
 
-const SniperForm = ({ setSnipedResults, setHasSnipedValues }: IProps) => {
+const SniperForm = ({ setSnipedResults, setHasSnipedValues, setIsSniping }: IProps) => {
     const { sniperStore, languageStore } = useContext(MobXContext);
     const [searchValue, setSearchValue] = useState<string>("");
     const placeholders: string[] = ["Royal Copenhagen Musselmalet Stel", "Bing og Grøndal Frokosttallerken", "Rosenborg Sterling Sølv"];
@@ -51,6 +52,7 @@ const SniperForm = ({ setSnipedResults, setHasSnipedValues }: IProps) => {
         const results = await sniperStore.GetSniping(searchValue) 
         setSnipedResults(results);
         setHasSnipedValues(true);
+        setIsSniping(true);
         if(results) {
             console.log(JSON.stringify(results));
         }
