@@ -51,10 +51,10 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
         // Init stores here
-        const prodLoaded = await this.productStore.init();
         const catLoaded = await this.categoryStore.init();
-        const langLoaded = await this.languageStore.init();
         const subcatLoaded = await this.subCategoryStore.init();
+        const prodLoaded = await this.productStore.init();
+        const langLoaded = await this.languageStore.init();
 
         runInAction(() => {
             // this.loaded = userResult && documentResult;
