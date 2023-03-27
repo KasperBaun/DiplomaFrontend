@@ -11,10 +11,18 @@ import SniperPage from './sniper/SniperPage';
 import MobXContext from '@stores/MobXContext';
 import Loading from '@components/loading/Loading';
 import { observer } from 'mobx-react-lite';
+import LoginPage from './login/LoginPage';
+import { Constants } from '@utils/Constants';
+
+export interface ILoginData {
+    email: string;
+    password: string;
+}
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
     const { backofficeStore } = useContext(MobXContext);
+    const [authorized, setAuthorized] = useState<boolean>(false);
 
     useEffect(() => {
         const loadBackofficeStore = async () => {
@@ -22,6 +30,12 @@ const BackOfficeMain = observer(() => {
         }
         loadBackofficeStore();
     }, [])
+
+    function handleLoginClicked(data: ILoginData): void {
+        if (data.email === "test@example.com" && data.password === "password") {
+            setAuthorized(true);
+        }
+    }
 
     const navSwitch = () => {
         switch (activeNavKey) {
@@ -36,6 +50,18 @@ const BackOfficeMain = observer(() => {
     if (!backofficeStore.isLoaded) {
         return (
             <Loading />
+        )
+    }
+    else if (!authorized) {
+        return (
+            <LoginPage
+                companyName={Constants.companyName}
+                companyUrl={Constants.companyUrl}
+                signInText="Sign in"
+                forgotPasswordText='Forgot Password?'
+                dontHaveAccountText="Don't have an account? Sign Up"
+                onLoginClicked={handleLoginClicked}
+            />
         )
     }
     else {
