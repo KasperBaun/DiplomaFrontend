@@ -24,9 +24,18 @@ export class ComponentLoggingConfig {
     public static DarkSalmon = '🦐;background: salmon; color: white;';
 
     static printPerformanceMessage(message: string, t1: number, t2: number, color: string): void {
-        const minutes = Math.round((((t2 - t1) / 1000) / 60));
-        const seconds = (((t2 - t1) / 1000) % 60).toFixed(2);
-        const minutesText = minutes > 0 ? ' ' + minutes.toFixed(0) : 0 + minutes > 1 ? 'minutes' : 'minute' + "and ";
-        console.log(`${message} in${minutes > 0 ? minutesText : ''} ${seconds} seconds!`, color);
+        const minutes: number = Math.round((((t2 - t1) / 1000) / 60));
+        const seconds: string = (((t2 - t1) / 1000) % 60).toFixed(2);
+        let minText: string = "";
+        if (minutes > 0) {
+            minText = ' ' + minutes.toFixed(0);
+
+            if (minutes > 1) {
+                minText = minText + ' minutes and ';
+            } else {
+                minText = minText + ' minute and ';
+            }
+        }
+        console.log(`${message} in${minText}${seconds} seconds!`, color);
     }
 }

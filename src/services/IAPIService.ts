@@ -14,6 +14,7 @@ export interface WebAPIResponse {
 }
 
 interface IAPIService {
+
     getCategories: () => Promise<Category[]>
     createCategory(category: Category): Promise<void>;
     deleteCategory(id: number): Promise<void>;

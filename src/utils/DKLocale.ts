@@ -104,4 +104,10 @@ export default class DKLocale implements ILocale {
   TableEntrySniperDescription = "Beskrivelse";
   TableEntrySniperImages = "Billede(r)";
   TableEntrySniperItemUrl = "URL";
+
+   // Loginpage
+   signInText = "Log ind";
+   forgotPasswordText = "Glemt password?";
+   dontHaveAccountText = "Har du ikke en konto? Opret en";
+   rememberMeText = "Husk mig";
 }

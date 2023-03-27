@@ -109,4 +109,10 @@ export default class ENLocale implements ILocale {
   TableEntrySniperDescription = "Description";
   TableEntrySniperImages = "Image(s)";
   TableEntrySniperItemUrl = "URL";
+
+   // Loginpage
+   signInText = "SIGN IN";
+   forgotPasswordText = "Forgot Password?";
+   dontHaveAccountText = "Don't have an account? Sign Up";
+   rememberMeText = "Remember me";
 }
