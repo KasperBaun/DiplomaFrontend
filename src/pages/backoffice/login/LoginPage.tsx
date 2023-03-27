@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
@@ -9,19 +8,27 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
 import { Constants } from '@utils/Constants';
-import GroendlundLogo from '@components/GroenlundLogoTextAndLion';
+import GroendlundLogo from '@components/GroenlundLogo';
 import { ILoginData } from '@backoffice/BackOffice';
+import FormControl from '@mui/material/FormControl/FormControl';
+import InputLabel from '@mui/material/InputLabel/InputLabel';
+import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput';
+import InputAdornment from '@mui/material/InputAdornment/InputAdornment';
+import IconButton from '@mui/material/IconButton/IconButton';
+import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
+import { useState } from 'react';
+import { Avatar } from '@mui/material';
 
 /* This component is taken from https://mui.com/material-ui/getting-started/templates/sign-in-side/ and edited to fit customer */
 
 export interface ILoginPageProps {
     signInText: string;
     forgotPasswordText: string;
+    defaultEmailText?: string;
+    defaultPasswordText?: string;
     companyName: string;
     companyUrl: string;
     dontHaveAccountText: string;
@@ -32,15 +39,25 @@ const theme = createTheme();
 
 const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPageProps) {
 
+    const [email, setEmail] = useState<string>(props.defaultEmailText ? props.defaultEmailText : '');
+    const [password, setPassword] = useState<string>(props.defaultPasswordText ? props.defaultPasswordText : '');
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const formData: ILoginData = {
-            email: data.get('email').toString(),
-            password: data.get('password').toString(),
+        const data: ILoginData = {
+            email: email,
+            password: password,
         }
-        props.onLoginClicked(formData);
+        props.onLoginClicked(data);
 
+    };
+
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
     };
 
     return (
@@ -71,14 +88,11 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                             alignItems: 'center',
                         }}
                     >
-                        <GroendlundLogo width={400} color={Constants.groenlundGreenColor} />
-                        {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                            <LockOutlinedIcon />
-                        </Avatar> */}
-                        <Typography component="h1" variant="h5">
-                            {props.signInText}
-                        </Typography>
-                        <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+                        <GroendlundLogo width={400} color={Constants.royalCopenhagenBlueColor} />
+                        <Avatar sx={{ m: 1, bgcolor: Constants.royalCopenhagenBlueColor }}>
+                            <LockOutlined style={{ backgroundColor: Constants.royalCopenhagenBlueColor }} />
+                        </Avatar>
+                        <Box component="form" noValidate={false} onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
@@ -86,21 +100,41 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 id="email"
                                 name="email"
                                 label="Email Address"
-                                placeholder="test@example.com"
+                                defaultValue={props.defaultEmailText ? props.defaultEmailText : ''}
                                 autoComplete="email"
                                 autoFocus
+                                value={email}
+                                onChange={(event) => setEmail(event.target.value)}
                             />
-                            <TextField
+
+                            <FormControl sx={{}}
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="password"
-                                name="password"
-                                label="Password"
-                                type="password"
-                                placeholder="test-password"
-                                autoComplete="current-password"
-                            />
+                                variant="outlined"
+                            >
+                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <OutlinedInput
+                                    id="password"
+                                    name="password"
+                                    label="Password"
+                                    value={password}
+                                    onChange={(event) => setPassword(event.target.value)}
+                                    type={showPassword ? 'text' : 'password'}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary" />}
                                 label="Remember me"
@@ -109,6 +143,7 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 type="submit"
                                 fullWidth
                                 variant="contained"
+                                style={{ backgroundColor: Constants.royalCopenhagenBlueColor }}
                                 sx={{ mt: 3, mb: 2 }}
                             >
                                 {props.signInText}

@@ -4,6 +4,7 @@ export abstract class Constants {
     public static readonly loggingEnabled = true;
     public static readonly groenlundGreenColor = "#09473f";// "rgb(9, 71, 63)"
     public static readonly groenlundGoldColor = "#FFD700";
+    public static readonly royalCopenhagenBlueColor = "#000080";
     public static readonly companyName = "Grønlund";
     public static readonly companyUrl = "https://www.gl-antik.dk/";
     public static readonly companyAdress = "Gl. Kongevej 94a, st tv, 1850 Frederiksberg";

@@ -21,8 +21,9 @@ export interface ILoginData {
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { backofficeStore } = useContext(MobXContext);
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [authorized, setAuthorized] = useState<boolean>(false);
+
 
     useEffect(() => {
         const loadBackofficeStore = async () => {
@@ -32,7 +33,7 @@ const BackOfficeMain = observer(() => {
     }, [])
 
     function handleLoginClicked(data: ILoginData): void {
-        if (data.email === "test@example.com" && data.password === "password") {
+        if (data.email === "test@example.com" && data.password === "test-password") {
             setAuthorized(true);
         }
     }
@@ -57,9 +58,11 @@ const BackOfficeMain = observer(() => {
             <LoginPage
                 companyName={Constants.companyName}
                 companyUrl={Constants.companyUrl}
-                signInText="Sign in"
-                forgotPasswordText='Forgot Password?'
-                dontHaveAccountText="Don't have an account? Sign Up"
+                defaultEmailText="test@example.com"
+                defaultPasswordText="test-password"
+                signInText={languageStore.currentLanguage.signInText}
+                forgotPasswordText={languageStore.currentLanguage.forgotPasswordText}
+                dontHaveAccountText={languageStore.currentLanguage.dontHaveAccountText}
                 onLoginClicked={handleLoginClicked}
             />
         )
