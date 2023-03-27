@@ -10,6 +10,8 @@ on:
 
 # env:
   # NODE_ENV: production
+env:
+    CI: false
 
 jobs:
   build:
