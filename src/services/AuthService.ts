@@ -1,5 +1,4 @@
 import { Constants } from "@utils/Constants";
-import CrudHelper from "./CrudHelper";
 import { IAuthService } from "./IAuthService";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import UserLoginDTO from "@models/DTO/UserLoginDTO";
@@ -33,9 +32,11 @@ export class AuthService implements IAuthService {
         }
 
         try {
+            const userRegistrationJson = JSON.stringify(userRegistrationDTO);
+            console.log("userReg", userRegistrationJson);
             const response = await fetch(`${this.apiBaseUrl}/Auth/Register`, {
                 method: 'POST',
-                body: JSON.stringify(userRegistrationDTO),
+                body: userRegistrationJson,
                 headers: this.headers,
                 mode: this.mode
             });
@@ -73,7 +74,7 @@ export class AuthService implements IAuthService {
 
         try {
             const response = await fetch(`${this.apiBaseUrl}/Auth/Login`, {
-                method: 'GET',
+                method: 'POST',
                 body: JSON.stringify(userLoginDTO),
                 headers: this.headers,
                 mode: this.mode

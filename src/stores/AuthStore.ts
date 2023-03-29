@@ -17,6 +17,7 @@ export class AuthStore {
     private authService: AuthService;
     private userRole: string;
     private _userAuthenticated: boolean = false;
+    private accessToken: string;
 
 
     constructor(_rootStore: RootStore, _authService: AuthService) {
@@ -62,14 +63,23 @@ export class AuthStore {
         return await this.authService.registerUser(userRegistrationDTO);
     }
 
-    public async login(userLoginDTO: UserLoginDTO): Promise<string> {
-        const response = await this.authService.login(userLoginDTO);
+    public async login(userLoginDTO: UserLoginDTO): Promise<boolean> {
+        let response;
+        try {
+            response = await this.authService.login(userLoginDTO);
+
+        } catch (err) {
+            console.error(err);
+        }
         if (response && response !== "") {
             this._userAuthenticated = true;
+            this.setToken(response);
+            return true;
         }
+        return false;
+    }
 
-        // TODO - Set token for future auth
-
-        return await this.authService.login(userLoginDTO);
+    private setToken(token: string): void {
+        // TODO: Set token in localstorage and AuthStore and assign role
     }
 }

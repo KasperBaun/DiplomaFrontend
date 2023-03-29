@@ -15,7 +15,7 @@ import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext, useState } from 'react';
 import LockOutlined from '@mui/icons-material/LockOutlined';
 import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
-import RegistrationFeedback from './RegistrationFeedback';
+import UserFeedback from './UserFeedback';
 import { WebAPIResponse } from '@services/IAPIService';
 
 export interface ISignUpProps {
@@ -71,7 +71,7 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
-                <RegistrationFeedback
+                <UserFeedback
                     message={message}
                     open={showFeedback}
                     variant={variant}

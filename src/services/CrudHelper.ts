@@ -7,8 +7,8 @@ class CrudHelper implements ICrudHelper {
     private color: string = ComponentLoggingConfig.Lightkhaki;
     private loggingEnabled: boolean = false;
     private headers: HeadersInit = {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'content-type': 'application/json',
+        'access-control-allow-origin': '*'
     };
     private mode: RequestMode = 'cors';
 

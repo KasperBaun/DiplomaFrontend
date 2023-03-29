@@ -11,7 +11,7 @@ export interface ISnackbarProps {
     onClose: () => void;
 }
 
-const RegistrationFeedback: React.FC<ISnackbarProps> = function RegistrationFeedback(props: ISnackbarProps) {
+const UserFeedback: React.FC<ISnackbarProps> = function UserFeedback(props: ISnackbarProps) {
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -32,6 +32,8 @@ const RegistrationFeedback: React.FC<ISnackbarProps> = function RegistrationFeed
             autoHideDuration={6000}
             onClose={handleClose}
             anchorOrigin={snackbarOrigin}
+            onClickCapture={handleClose}
+            ClickAwayListenerProps={{ onClickAway: handleClose }}
         >
             <Alert
                 onClose={handleClose}
@@ -43,4 +45,4 @@ const RegistrationFeedback: React.FC<ISnackbarProps> = function RegistrationFeed
     )
 }
 
-export default RegistrationFeedback;
+export default UserFeedback;
