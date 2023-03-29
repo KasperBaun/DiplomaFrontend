@@ -19,29 +19,25 @@ import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment/InputAdornment';
 import IconButton from '@mui/material/IconButton/IconButton';
 import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Avatar, Backdrop } from '@mui/material';
 import Loading from '@components/loading/Loading';
+import MobXContext, { IMobXContext } from '@stores/MobXContext';
 
 /* This component is taken from https://mui.com/material-ui/getting-started/templates/sign-in-side/ and edited to fit customer */
 
 export interface ILoginPageProps {
-    defaultEmailText?: string;
-    defaultPasswordText?: string;
-    signInText: string;
-    forgotPasswordText: string;
-    companyName: string;
-    companyUrl: string;
-    dontHaveAccountText: string;
     onLoginClicked: (data: ILoginData) => void;
+    onAuthNavClicked: (key: number) => void;
 }
 
 const theme = createTheme();
 
 const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPageProps) {
 
-    const [email, setEmail] = useState<string>(props.defaultEmailText ? props.defaultEmailText : '');
-    const [password, setPassword] = useState<string>(props.defaultPasswordText ? props.defaultPasswordText : '');
+    const { languageStore } = useContext<IMobXContext>(MobXContext);
+    const [email, setEmail] = useState<string>("test@example.com");
+    const [password, setPassword] = useState<string>("test-password");
     const [showPassword, setShowPassword] = React.useState(false);
     const [showBackdrop, setShowBackdrop] = React.useState(false);
 
@@ -113,7 +109,6 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 id="email"
                                 name="email"
                                 label="Email Address"
-                                defaultValue={props.defaultEmailText ? props.defaultEmailText : ''}
                                 autoComplete="email"
                                 autoFocus
                                 value={email}
@@ -159,21 +154,21 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 style={{ backgroundColor: Constants.primaryColor }}
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                {props.signInText}
+                                {languageStore.currentLanguage.signInText}
                             </Button>
                             <Grid container>
                                 <Grid item xs>
-                                    <Link href="#" variant="body2">
-                                        {props.forgotPasswordText}
+                                    <Link onClick={() => props.onAuthNavClicked(1)} variant="body2">
+                                        {languageStore.currentLanguage.forgotPasswordText}
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2">
-                                        {props.dontHaveAccountText}
+                                    <Link onClick={() => props.onAuthNavClicked(2)} variant="body2">
+                                        {languageStore.currentLanguage.dontHaveAccountText}
                                     </Link>
                                 </Grid>
                             </Grid>
-                            <Copyright companyName={props.companyName} companyUrl={props.companyUrl} />
+                            <Copyright />
                         </Box>
                     </Box>
                 </Grid>

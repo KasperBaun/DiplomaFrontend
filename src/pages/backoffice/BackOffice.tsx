@@ -9,10 +9,9 @@ import Subcategories from './subcategory/Subcategory';
 import Products from './product/Products';
 import SniperPage from './sniper/SniperPage';
 import MobXContext from '@stores/MobXContext';
-import Loading from '@components/loading/Loading';
 import { observer } from 'mobx-react-lite';
 import LoginPage from './login/LoginPage';
-import { Constants } from '@utils/Constants';
+import SignUpPage from './login/SignUpPage';
 
 export interface ILoginData {
     email: string;
@@ -21,14 +20,8 @@ export interface ILoginData {
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { backofficeStore, languageStore, authStore } = useContext(MobXContext);
-
-    // useEffect(() => {
-    //     const loadBackofficeStore = async () => {
-    //         await backofficeStore.init();
-    //     }
-    //     loadBackofficeStore();
-    // }, [])
+    const [activeAuthNavKey, setActiveAuthNavKey] = useState<number>(0);
+    const { authStore } = useContext(MobXContext);
 
     async function handleLoginClicked(data: ILoginData): Promise<void> {
         async function delayTwoSeconds(): Promise<void> {
@@ -38,6 +31,10 @@ const BackOfficeMain = observer(() => {
         if (data.email === "test@example.com" && data.password === "test-password") {
             authStore.setUserAuthenticated(true);
         }
+    }
+
+    function handleAuthNav(key: number): void {
+        setActiveAuthNavKey(key);
     }
 
     const navSwitch = () => {
@@ -50,25 +47,16 @@ const BackOfficeMain = observer(() => {
         }
     }
 
-    // if (!backofficeStore.isLoaded) {
-    //     return (
-    //         <Loading />
-    //     )
-    // }
-    // else 
+    const authNavSwitch = () => {
+        switch (activeAuthNavKey) {
+            case 0: return (<LoginPage onLoginClicked={handleLoginClicked} onAuthNavClicked={handleAuthNav} />);
+            case 1: return (<></>);
+            case 2: return (<SignUpPage onAuthNavClicked={handleAuthNav} />);
+        }
+    }
+
     if (!authStore.userAuthenticated) {
-        return (
-            <LoginPage
-                companyName={Constants.companyName}
-                companyUrl={Constants.companyUrl}
-                defaultEmailText="test@example.com"
-                defaultPasswordText="test-password"
-                signInText={languageStore.currentLanguage.signInText}
-                forgotPasswordText={languageStore.currentLanguage.forgotPasswordText}
-                dontHaveAccountText={languageStore.currentLanguage.dontHaveAccountText}
-                onLoginClicked={handleLoginClicked}
-            />
-        )
+        return authNavSwitch();
     }
     else {
         return (

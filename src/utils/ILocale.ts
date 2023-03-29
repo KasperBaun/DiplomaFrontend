@@ -104,7 +104,15 @@ export interface ILocale {
 
   // Loginpage
   signInText: string;
+  signUpText: string;
   forgotPasswordText: string;
+  alreadyHaveAccountText: string;
   dontHaveAccountText: string;
   rememberMeText: string;
+
+  // Signup page
+  firstName: string;
+  lastName: string;
+  emailAdress: string;
+  password: string;
 }
