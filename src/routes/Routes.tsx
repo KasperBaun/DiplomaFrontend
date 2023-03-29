@@ -16,7 +16,6 @@ import MobXContext, { IMobXContext } from "@stores/MobXContext"
 import { observer } from "mobx-react-lite"
 import Loading from "@components/loading/Loading"
 import { Constants } from "@utils/Constants"
-import SignUpPage from "@backoffice/login/SignUpPage"
 
 
 const Routing: FunctionComponent = observer(() => {

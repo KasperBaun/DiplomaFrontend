@@ -6,6 +6,11 @@ class CrudHelper implements ICrudHelper {
     private prefix: string = `%c[CrudHelper]`;
     private color: string = ComponentLoggingConfig.Lightkhaki;
     private loggingEnabled: boolean = false;
+    private headers: HeadersInit = {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    };
+    private mode: RequestMode = 'cors';
 
     constructor(_loggingEnabled: boolean) {
         this.loggingEnabled = _loggingEnabled;
@@ -23,7 +28,8 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`, {
                 method: 'POST',
                 body: JSON.stringify(object),
-                headers: { 'Content-Type': 'application/json' }
+                headers: this.headers,
+                mode: this.mode
             });
 
             if (response.ok) {
@@ -50,8 +56,8 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`, {
                 method: 'PUT',
                 body: JSON.stringify(object),
-                headers: { 'Content-Type': 'application/json' },
-               
+                headers: this.headers,
+                mode: this.mode
             });
 
             if (response.ok) {
@@ -76,8 +82,9 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`,
                 {
                     method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                   
+                    headers: this.headers,
+                    mode: this.mode
+
                 });
             if (response.ok) {
                 if (this.loggingEnabled) {
@@ -101,7 +108,8 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`,
                 {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: this.headers,
+                    mode: this.mode
                 });
             if (response.ok || response.status === 200) {
                 try {
@@ -131,8 +139,9 @@ class CrudHelper implements ICrudHelper {
             const response = await fetch(`${apiUrl}`,
                 {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' },
-                   
+                    headers: this.headers,
+                    mode: this.mode
+
                 });
             if (response.ok) {
                 try {

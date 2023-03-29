@@ -5,6 +5,7 @@ import { RootStore } from './RootStore';
 import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
 import { AuthService } from '@services/AuthService';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
+import { WebAPIResponse } from '@services/IAPIService';
 
 
 export class AuthStore {
@@ -57,7 +58,7 @@ export class AuthStore {
         });
     }
 
-    public async registerUser(userRegistrationDTO: UserRegistrationDTO): Promise<void> {
+    public async registerUser(userRegistrationDTO: UserRegistrationDTO): Promise<WebAPIResponse> {
         return await this.authService.registerUser(userRegistrationDTO);
     }
 

@@ -16,4 +16,5 @@ export abstract class Constants {
     public static readonly facebookUrl = "https://www.facebook.com/profile.php?id=100090134074673";
     public static readonly apiBaseUrl = "https://groenlund.uglyrage.com/api";
     public static readonly devApiBaseUrl = "https://api.uglyrage.com/api";
+    public static readonly localApiUrl = "https://localhost:7003/api";
 }

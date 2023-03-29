@@ -10,32 +10,11 @@ import Products from './product/Products';
 import SniperPage from './sniper/SniperPage';
 import MobXContext from '@stores/MobXContext';
 import { observer } from 'mobx-react-lite';
-import LoginPage from './login/LoginPage';
-import SignUpPage from './login/SignUpPage';
-
-export interface ILoginData {
-    email: string;
-    password: string;
-}
+import AuthPage from './auth/AuthPage';
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const [activeAuthNavKey, setActiveAuthNavKey] = useState<number>(0);
     const { authStore } = useContext(MobXContext);
-
-    async function handleLoginClicked(data: ILoginData): Promise<void> {
-        async function delayTwoSeconds(): Promise<void> {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-        }
-        await delayTwoSeconds();
-        if (data.email === "test@example.com" && data.password === "test-password") {
-            authStore.setUserAuthenticated(true);
-        }
-    }
-
-    function handleAuthNav(key: number): void {
-        setActiveAuthNavKey(key);
-    }
 
     const navSwitch = () => {
         switch (activeNavKey) {
@@ -47,16 +26,8 @@ const BackOfficeMain = observer(() => {
         }
     }
 
-    const authNavSwitch = () => {
-        switch (activeAuthNavKey) {
-            case 0: return (<LoginPage onLoginClicked={handleLoginClicked} onAuthNavClicked={handleAuthNav} />);
-            case 1: return (<></>);
-            case 2: return (<SignUpPage onAuthNavClicked={handleAuthNav} />);
-        }
-    }
-
     if (!authStore.userAuthenticated) {
-        return authNavSwitch();
+        return <AuthPage />;
     }
     else {
         return (

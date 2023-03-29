@@ -12,7 +12,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
 import { Constants } from '@utils/Constants';
 import GroendlundLogo from '@components/GroenlundLogo';
-import { ILoginData } from '@backoffice/BackOffice';
 import FormControl from '@mui/material/FormControl/FormControl';
 import InputLabel from '@mui/material/InputLabel/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput';
@@ -23,12 +22,12 @@ import { useContext, useState } from 'react';
 import { Avatar, Backdrop } from '@mui/material';
 import Loading from '@components/loading/Loading';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
-
-/* This component is taken from https://mui.com/material-ui/getting-started/templates/sign-in-side/ and edited to fit customer */
+import { ILoginData } from './AuthPage';
 
 export interface ILoginPageProps {
     onLoginClicked: (data: ILoginData) => void;
     onAuthNavClicked: (key: number) => void;
+    backgroundImageUrl: string;
 }
 
 const theme = createTheme();
@@ -68,7 +67,7 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                     sm={4}
                     md={7}
                     sx={{
-                        backgroundImage: 'url(https://firmagave-shop.dk/wp-content/uploads/2020/09/Royal-copenhagen-mix-og-match-termokopper-6-stk.jpg)',
+                        backgroundImage: `url(${props.backgroundImageUrl})`,
                         backgroundRepeat: 'no-repeat',
                         backgroundColor: (t) =>
                             t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

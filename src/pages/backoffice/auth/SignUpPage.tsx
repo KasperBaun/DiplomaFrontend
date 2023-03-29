@@ -12,9 +12,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Constants } from '@utils/Constants';
 import Copyright from './Copyright';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import LockOutlined from '@mui/icons-material/LockOutlined';
 import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
+import RegistrationFeedback from './RegistrationFeedback';
+import { WebAPIResponse } from '@services/IAPIService';
 
 export interface ISignUpProps {
     onAuthNavClicked: (key: number) => void;
@@ -25,7 +27,17 @@ const theme = createTheme();
 const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpProps) {
 
     const { languageStore, authStore } = useContext<IMobXContext>(MobXContext);
+    const [showFeedback, setShowFeedback] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>("");
+    const [variant, setVariant] = useState<'error' | 'warning' | 'success'>('success');
+    const [navigateBack, setNavigateBack] = useState<boolean>(false);
 
+    const handleClose = () => {
+        setShowFeedback(!showFeedback)
+        if (navigateBack) {
+            props.onAuthNavClicked(0);
+        }
+    };
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,24 +49,37 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
             lastName: data.get('lastName').toString(),
             password: data.get('password').toString()
         };
+        let response: WebAPIResponse;
         try {
-            await authStore.registerUser(userRegDTO);
-            console.log("User successfully registered");
-            // TODO - Create snack here or similar to inform user of success
-            props.onAuthNavClicked(0);
-
+            response = await authStore.registerUser(userRegDTO);
         } catch (exception) {
             console.log(exception);
-            console.log("Unable to register user");
-            // TODO - Create snack here or similar to inform user of failure
-
         }
-
+        if (response.success) {
+            setMessage("User successfully registered");
+            setVariant('success');
+            setShowFeedback(true);
+            setNavigateBack(true);
+            // Await 5 seconds or let user click somewhere
+        } else {
+            setMessage("Unable to register user");
+            setVariant('error');
+            setShowFeedback(true);
+        }
     };
 
     return (
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
+                <RegistrationFeedback
+                    message={message}
+                    open={showFeedback}
+                    variant={variant}
+                    onClose={handleClose}
+                    horizontalPosition='right'
+                    verticalPosition='top'
+
+                />
                 <CssBaseline />
                 <Box
                     sx={{
