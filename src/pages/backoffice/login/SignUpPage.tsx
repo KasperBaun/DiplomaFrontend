@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -15,6 +14,7 @@ import Copyright from './Copyright';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext } from 'react';
 import LockOutlined from '@mui/icons-material/LockOutlined';
+import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
 
 export interface ISignUpProps {
     onAuthNavClicked: (key: number) => void;
@@ -24,15 +24,32 @@ const theme = createTheme();
 
 const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpProps) {
 
-    const { languageStore } = useContext<IMobXContext>(MobXContext);
+    const { languageStore, authStore } = useContext<IMobXContext>(MobXContext);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+
+        const userRegDTO: UserRegistrationDTO = {
+            email: data.get('email').toString(),
+            firstName: data.get('firstName').toString(),
+            lastName: data.get('lastName').toString(),
+            password: data.get('password').toString()
+        };
+        try {
+            await authStore.registerUser(userRegDTO);
+            console.log("User successfully registered");
+            // TODO - Create snack here or similar to inform user of success
+            props.onAuthNavClicked(0);
+
+        } catch (exception) {
+            console.log(exception);
+            console.log("Unable to register user");
+            // TODO - Create snack here or similar to inform user of failure
+
+        }
+
     };
 
     return (
@@ -97,12 +114,6 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                                     autoComplete="new-password"
                                 />
                             </Grid>
-                            {/* <Grid item xs={12}>
-                                <FormControlLabel
-                                    control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                    label="I want to receive inspiration, marketing promotions and updates via email."
-                                />
-                            </Grid> */}
                         </Grid>
                         <Button
                             type="submit"
@@ -111,7 +122,7 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                             style={{ backgroundColor: Constants.primaryColor }}
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            {languageStore.currentLanguage.signInText}
+                            {languageStore.currentLanguage.signUpText}
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
