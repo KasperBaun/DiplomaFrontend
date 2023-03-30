@@ -41,8 +41,9 @@ const Routing: FunctionComponent = observer(() => {
                     <Route path="basket" element={<BasketPage />} />
                     <Route path="confirmation" element={<ConfirmationPage />} />
                     <Route path="payment" element={<PaymentPage />} />
-                    <Route path="product" element={<ProductPage productId={1} />} />
+                    <Route path="product/:id" element={<ProductPage />} />
                     <Route path="productList" element={<ProductListPage />} />
+                    <Route path="productList/:id" element={<ProductListPage />} />
                     <Route path="search" element={<SearchPage />} />
                 </Route>
                 <Route path="/backoffice" element={<BackOffice />}>

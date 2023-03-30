@@ -152,4 +152,8 @@ export class ProductStore {
         return false;
     }
 
+    public getProductItemsFilterBySubcategory(subcategoryId: number): ProductItem[] {
+        return this.productItems.filter(p => p.product.subcategories.some(s => s.id === subcategoryId));
+    }
+
 }
