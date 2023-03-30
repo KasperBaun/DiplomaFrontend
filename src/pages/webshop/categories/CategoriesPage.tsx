@@ -1,5 +1,4 @@
 import Category from "@models/Category";
-import { observer } from "mobx-react-lite"
 import { useContext } from "react";
 import { Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
@@ -11,13 +10,13 @@ interface ICategoriesPageProps {
 }
 
 
-const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categories(props: ICategoriesPageProps) {
+const CategoriesPage: React.FC<ICategoriesPageProps> = function Categories(props: ICategoriesPageProps) {
 
     const { categoryStore } = useContext(MobXContext);
     const navigate = useNavigate();
 
-    function handleClick(category: Category, name : String) {
-        navigate('/subcategories/' + category.id , { state: { name } })
+    function handleClick(category: Category) {
+        navigate('subcategories/' + category.id)
     }
 
     if (categoryStore.Categories) {
@@ -25,9 +24,9 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
             <div className="container-cat">
                 {categoryStore.Categories.map((category) => (
                     <div className="col-20-cat" key={category.id + "Component"}>
-                        <Card className="category" border="primary" onClick={() => handleClick(category, category.name)}>
+                        <Card className="category" border="primary" onClick={() => handleClick(category)}>
                             <Card.Body className="category">
-                                <img  src={category.imageUrl} className='img-fluid shadow-4' style={{height: '13.5rem', width: 'auto'}} alt='...' />
+                                <img src={category.imageUrl} className='img-fluid shadow-4' style={{ height: '13.5rem', width: 'auto' }} alt='...' />
                             </Card.Body>
                             <Card.Footer className="category"> {category.name.toString()}</Card.Footer>
                         </Card>
@@ -36,12 +35,12 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
             </div>
         )
     }
-       else {
+    else {
         return (
             <h1>Loading...</h1>
         )
     }
 
-});
+};
 
 export default CategoriesPage;

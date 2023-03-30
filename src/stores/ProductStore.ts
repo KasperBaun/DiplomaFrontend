@@ -22,7 +22,7 @@ export class ProductStore {
     private productsLoaded: boolean = false;
     private productMap: Map<number, Product> = new Map();
     private productItems: ProductItem[] = [];
-    private filteredProductItems: ProductItem[] = [];
+    private _filteredProductItems: ProductItem[] = [];
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -153,17 +153,29 @@ export class ProductStore {
         return false;
     }
 
-    
+
     public get ProductFilteredItems(): ProductItem[] {
         return this.ProductFilteredItems;
     }
 
-    public set ProductFilteredItems(filteredItems : ProductItem[]){
-        runInAction(()=>{
-         this.filteredProductItems = filteredItems; 
+    // public set ProductFilteredItems(filteredItems: ProductItem[]) {
+    //     runInAction(() => {
+    //         this.filteredProductItems = filteredItems;
+    //     })
+    // }
+
+    public filterProductItemsBySubcategory(subcategory: SubCategory): void {
+        //const subcategoryIds: number[] = this.rootStore.subCategoryStore.SubCategories.map(subcategory => subcategory.id);
+        const filteredItems: ProductItem[] = [];
+        for (const productItem of this.productItems) {
+            const productItemSubcategoriesIds: number[] = productItem.product.subcategories.map(subcategory => subcategory.id);
+            if (productItemSubcategoriesIds.includes(subcategory.id)) {
+                filteredItems.push(productItem);
+            }
+        }
+        //const items: ProductItem[] = this.productItems.filter(p => p.product.subcategories.some());
+        runInAction(() => {
+            this._filteredProductItems = filteredItems;
         })
     }
-
-
-
 }

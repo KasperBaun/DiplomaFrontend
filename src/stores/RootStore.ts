@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from "mobx";
+import { makeAutoObservable, observable, runInAction } from "mobx";
 import { ProductStore } from "./ProductStore";
 import { CategoryStore } from "./CategoryStore";
 import { IMobXContext } from "./MobXContext";

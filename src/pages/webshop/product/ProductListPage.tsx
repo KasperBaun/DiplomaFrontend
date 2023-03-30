@@ -8,34 +8,45 @@ import { useNavigate, useParams } from "react-router-dom"
 import ProductItem from "@models/ProductItem";
 
 
-const ProductListPage: React.FC = function ProductListPage() {
-
-    //let { id } = useParams();
-    const [items, setItems] = useState<ProductItem[]>([]);
+const ProductListPage: React.FC = observer(function ProductListPage() {
 
     const { productStore, subCategoryStore } = useContext(MobXContext);
-   // const navigate = useNavigate();
-    let subcategory;
+    const { id } = useParams();
+    console.log(id);
+    //const items: ProductItem[] = filteredItems;
+    let items = productStore.ProductFilteredItems;
+    const [loaded, setLoaded] = useState<boolean>(false);
 
-     function handleClick(product: ProductItem) {
-    //     navigate('/product/' + product.id)
-     }
+    const navigate = useNavigate();
+    //let title: string;
+    if (id !== undefined) {
+        //     //console.log("!");
+        //     //const subCategoryId = Number.parseInt(id);
+        //     //const subcategory = subCategoryStore.getSubcategory(subCategoryId);
+        //     //title = subcategory.name;
+        //     //const filteredItems = productStore.filterProductItemsBySubcategory(subcategory);
+        //     //items = filteredItems;
+        setLoaded(true);
 
-    if (subcategory) {
-        console.log("!")
-        setItems(productStore.ProductFilteredItems);
+    }
+    // else {
+    // items = productStore.ProductItems;
+    // }
+
+
+
+    function handleClick(product: ProductItem) {
+        //     navigate('/product/' + product.id)
     }
 
-    else {
-        setItems(productStore.ProductItems);
-    }
 
-    if (items.length > 0){
+    if (loaded) {
         return (
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                {/* <h1>{title}</h1> */}
                 {items.map(podItem => {
                     return (
-                        <div key= {"ProductList" + podItem.id}  onClick={() => handleClick(podItem)}>
+                        <div key={"ProductList" + podItem.id} onClick={() => handleClick(podItem)}>
                             <MyCard data={podItem} />
                         </div>
                     )
@@ -43,6 +54,11 @@ const ProductListPage: React.FC = function ProductListPage() {
             </div>
         )
     }
-    else return <div> Yo nothing here </div>
-};
+    else {
+        return (
+            <div> Yo nothing here </div>
+        )
+    }
+});
+
 export default ProductListPage;
