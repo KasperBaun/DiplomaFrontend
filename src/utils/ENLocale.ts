@@ -101,9 +101,10 @@ export default class ENLocale implements ILocale {
   
 
   // Sniper
+  TableEntrySniperSource = "Source";
   TableEntrySniperVN = "Lot Id";
   TableEntrySniperTitle = "Title";
-  TableEntrySniperBuyNowPrice = "Buy Now Price";
+  TableEntrySniperBuyNowPrice = "Price";
   TableEntrySniperNextBid = "Next Bid";
   TableEntrySniperPriceEst = "Estimation";
   TableEntrySniperDescription = "Description";

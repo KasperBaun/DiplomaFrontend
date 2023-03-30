@@ -1,4 +1,5 @@
 export default class SniperModel{
+    source : string;
     varenummer: number;
     itemTitle: string;
     buyNowPrice ?: string;
@@ -7,4 +8,8 @@ export default class SniperModel{
     description: string;
     imageUrls ?: string[];
     itemUrl ?: string;
+    dbaItemLink ?: string;
+    dbaItemPrice ?: string;
+    dbaItemImages ?: string[];
+    dbaItemDescription ?: string;
 }

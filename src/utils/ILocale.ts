@@ -94,6 +94,7 @@ export interface ILocale {
 
   // Sniper
   TableEntrySniperVN: string;
+  TableEntrySniperSource: string;
   TableEntrySniperTitle: string;
   TableEntrySniperBuyNowPrice: string;
   TableEntrySniperNextBid: string;
