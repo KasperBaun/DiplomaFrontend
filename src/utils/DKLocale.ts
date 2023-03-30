@@ -96,9 +96,10 @@ export default class DKLocale implements ILocale {
   ContactTabText = "Kontakt";
 
   // Sniper
+  TableEntrySniperSource = "Kilde";
   TableEntrySniperVN = "Varenummer";
   TableEntrySniperTitle = "Titel";
-  TableEntrySniperBuyNowPrice = "Købs pris";
+  TableEntrySniperBuyNowPrice = "Pris";
   TableEntrySniperNextBid = "Næste Bud";
   TableEntrySniperPriceEst = "Estimat";
   TableEntrySniperDescription = "Beskrivelse";
