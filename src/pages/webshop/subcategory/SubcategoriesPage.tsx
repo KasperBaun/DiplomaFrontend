@@ -1,21 +1,26 @@
 import { observer } from "mobx-react-lite"
 import { useLocation, useParams } from 'react-router-dom';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MobXContext from "../../../stores/MobXContext";
 import { Card, Container } from "react-bootstrap";
 import SubCategory from "@models/SubCategory";
+import { useNavigate } from "react-router-dom"
+import { runInAction } from "mobx";
+
 
 const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: any) {
-    const { subCategoryStore } = useContext(MobXContext);   
-    const { languageStore } = useContext(MobXContext);
-
+    const { subCategoryStore, languageStore, productStore } = useContext(MobXContext);   
+    
     let {id} = useParams();
     const location = useLocation(); 
     const {name} = location.state; 
     const subCategories = (subCategoryStore.subCategoriesByCategoryID(Number(id)))
+    const navigate = useNavigate();
 
-    function handleClick(subCategory: SubCategory, name : String) {
-       // navigate('/subcategories/' + subCategory.id , {state: { name }})
+    function handleClick(subCategory: SubCategory) {
+   
+        productStore.ProductFilteredItems = productStore.ProductItems.filter(p => p.product.subcategories.some(s => s.id === subCategory.id));            
+        navigate('/productList/'+ subCategory.id);
     }
     if (subCategories.length > 0)
         return (
@@ -24,7 +29,7 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
                 <div className="container-cat">
                     {subCategories.map((subCategory) => (
                         <div className="col-20-cat">
-                            <Card className="category" border="primary" onClick={() => handleClick(subCategory, subCategory.name)}>
+                            <Card className="category" border="primary" onClick={() => handleClick(subCategory)}>
                                 <Card.Body className="category">
                                     <img src={subCategory.imageUrl} className='img-fluid shadow-4' style={{height: '13.5rem', width: 'auto'}} alt='...' />
                                 </Card.Body>

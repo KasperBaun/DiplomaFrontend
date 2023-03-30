@@ -2,50 +2,47 @@ import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
 //import { Product } from "@models/Product"; 
 //import { ProductItem } from "@models/ProductItem"; 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import MyCard from "./ProductCard";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import ProductItem from "@models/ProductItem";
 
 
-export interface IProductPageProps {
-    items?: ProductItem[];
-}
+const ProductListPage: React.FC = function ProductListPage() {
 
+    //let { id } = useParams();
+    const [items, setItems] = useState<ProductItem[]>([]);
 
-const ProductListPage: React.FC<IProductPageProps> = observer(function ProductListPage(props: IProductPageProps) {
+    const { productStore, subCategoryStore } = useContext(MobXContext);
+   // const navigate = useNavigate();
+    let subcategory;
 
-    const { productStore } = useContext(MobXContext);
-    const navigate = useNavigate();
+     function handleClick(product: ProductItem) {
+    //     navigate('/product/' + product.id)
+     }
 
-    function handleClick(product: ProductItem) {
-    navigate('/product/' + product.id)
+    if (subcategory) {
+        console.log("!")
+        setItems(productStore.ProductFilteredItems);
     }
 
-    function createProductLit(productItems: ProductItem[]): JSX.Element {
+    else {
+        setItems(productStore.ProductItems);
+    }
+
+    if (items.length > 0){
         return (
-        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {productItems.map(podItem => {
-                        return (
-                            <div onClick={() => handleClick(podItem)}>
-                                <MyCard data={podItem}/>
-                            </div>
-                        )
-                    })}
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                {items.map(podItem => {
+                    return (
+                        <div key= {"ProductList" + podItem.id}  onClick={() => handleClick(podItem)}>
+                            <MyCard data={podItem} />
+                        </div>
+                    )
+                })}
             </div>
         )
     }
-
-    if (props.items) {
-        return (
-            createProductLit(props.items)
-        )
-    }
-    else {
-        return (
-            createProductLit(productStore.ProductItems)
-        )
-    }
-
-});
+    else return <div> Yo nothing here </div>
+};
 export default ProductListPage;

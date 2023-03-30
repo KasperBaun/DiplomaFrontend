@@ -22,6 +22,7 @@ export class ProductStore {
     private productsLoaded: boolean = false;
     private productMap: Map<number, Product> = new Map();
     private productItems: ProductItem[] = [];
+    private filteredProductItems: ProductItem[] = [];
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -151,5 +152,18 @@ export class ProductStore {
     public async deleteProduct(id: number): Promise<boolean> {
         return false;
     }
+
+    
+    public get ProductFilteredItems(): ProductItem[] {
+        return this.ProductFilteredItems;
+    }
+
+    public set ProductFilteredItems(filteredItems : ProductItem[]){
+        runInAction(()=>{
+         this.filteredProductItems = filteredItems; 
+        })
+    }
+
+
 
 }
