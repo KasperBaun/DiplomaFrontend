@@ -29,7 +29,7 @@ const BackOfficeMain = observer(() => {
     if (!authStore.userAuthenticated) {
         return <AuthPage />;
     }
-    else {
+    else if (authStore.authState.user.role === "SuperAdministrator") {
         return (
             <Container className="BackOfficeMain" fluid>
                 <Row>
@@ -40,6 +40,33 @@ const BackOfficeMain = observer(() => {
                         {navSwitch()}
                     </Col>
                 </Row>
+            </Container>
+        )
+    }
+    else if (authStore.authState.user.role === "Administrator") {
+        return (
+            <Container className="BackOfficeMain" fluid>
+                <Row>
+                    <Col md="2">
+                        <VertNavBackOffice setNavKey={setActiveNavKey} />
+                    </Col>
+                    <Col>
+                        {navSwitch()}
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } else if (authStore.authState.user.role === "User") {
+        return (
+            <Container>
+                <img width="600" src="https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg" />
+            </Container>
+        )
+    }
+    else if (authStore.authState.user.role === "Guest") {
+        return (
+            <Container>
+                <img width="600" src="https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg" />
             </Container>
         )
     }

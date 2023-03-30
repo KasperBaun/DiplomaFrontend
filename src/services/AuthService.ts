@@ -69,7 +69,7 @@ export class AuthService implements IAuthService {
     async login(userLoginDTO: UserLoginDTO): Promise<string> {
         const t1 = performance.now();
         if (this.loggingEnabled) {
-            console.log(`${this.prefix} attempting to create userRegistrationDTO`, this.color);
+            console.log(`${this.prefix} attempting to login user: ${userLoginDTO.email}`, this.color);
         }
 
         try {
@@ -85,7 +85,8 @@ export class AuthService implements IAuthService {
                     const t2 = performance.now();
                     ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText})`, t1, t2, this.color);
                 }
-                return await response.json() as string;
+                const token = await response.text();
+                return token;
             } else {
                 console.log(`${this.prefix} failed to login user  ${userLoginDTO.email}. Status: ${response.status} ${response.statusText}`, this.color);
                 return "";

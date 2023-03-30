@@ -6,7 +6,7 @@ import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
 import { AuthService } from '@services/AuthService';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
 import { WebAPIResponse } from '@services/IAPIService';
-
+import { AuthStateProvider, IAuthState } from '@services/AuthStateProvider';
 
 export class AuthStore {
     private static _Instance: AuthStore;
@@ -15,9 +15,10 @@ export class AuthStore {
     private color: string = ComponentLoggingConfig.DarkPurple;
     private loaded: boolean = false;
     private authService: AuthService;
-    private userRole: string;
     private _userAuthenticated: boolean = false;
-    private accessToken: string;
+    private _authState: IAuthState;
+
+    private authStateProvider: AuthStateProvider = new AuthStateProvider();
 
 
     constructor(_rootStore: RootStore, _authService: AuthService) {
@@ -27,8 +28,12 @@ export class AuthStore {
     }
 
     public async init(): Promise<boolean> {
-
-
+        // Look for previous token and use it to sign in if possible
+        const authed = await this.authStateProvider.trySilentAuthenticateUser();
+        if (authed) {
+            this._authState = authed;
+            this.setUserAuthed();
+        }
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
@@ -53,10 +58,18 @@ export class AuthStore {
         return this._userAuthenticated;
     }
 
-    public setUserAuthenticated(value: boolean) {
+    public get authState(): IAuthState {
+        return this._authState;
+    }
+
+    public async signOut(): Promise<void> {
+        this._authState = await this.authStateProvider.signOut();
+    }
+
+    private setUserAuthed(): void {
         runInAction(() => {
-            this._userAuthenticated = value;
-        });
+            this._userAuthenticated = true;
+        })
     }
 
     public async registerUser(userRegistrationDTO: UserRegistrationDTO): Promise<WebAPIResponse> {
@@ -64,22 +77,18 @@ export class AuthStore {
     }
 
     public async login(userLoginDTO: UserLoginDTO): Promise<boolean> {
-        let response;
+        let responseToken;
         try {
-            response = await this.authService.login(userLoginDTO);
+            responseToken = await this.authService.login(userLoginDTO);
 
         } catch (err) {
             console.error(err);
         }
-        if (response && response !== "") {
-            this._userAuthenticated = true;
-            this.setToken(response);
+        if (responseToken && responseToken !== "") {
+            this._authState = await this.authStateProvider.signIn(responseToken);
+            this.setUserAuthed();
             return true;
         }
         return false;
-    }
-
-    private setToken(token: string): void {
-        // TODO: Set token in localstorage and AuthStore and assign role
     }
 }

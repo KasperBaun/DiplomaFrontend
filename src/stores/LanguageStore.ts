@@ -15,6 +15,7 @@ export class LanguageStore {
     private loaded: boolean = false;
     private locales: Map<string, ILocale> = new Map<string, ILocale>();
     private _currentLanguage: string;
+    private _previousLanguageSet: string;
 
     constructor(_rootStore: RootStore) {
         this.rootStore = _rootStore;
@@ -26,9 +27,10 @@ export class LanguageStore {
         this.locales.set("da_DK", new DKLocale());
         this.locales.set("en_US", new ENLocale());
 
-        // Create a method that reads values from localstorage to determine previously set preffered language by user ->
+        // Reads values from localstorage to determine previously set preffered language by user ->
         // If no preffered language was set by user -> default to da-DK locale
-        this.setCurrentLanguage(localStorage['locale'] ? localStorage['locale'] : 'da_DK');
+        this._previousLanguageSet = localStorage['locale'];
+        this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da_DK');
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -48,12 +50,13 @@ export class LanguageStore {
 
     private setCurrentLanguage(language: string): void {
         this._currentLanguage = language;
+        // Set local storage language setting
+        localStorage.setItem('locale', language);
     }
 
     public changeLanguage(lang: string): void {
         if (lang !== this._currentLanguage) {
             this.setCurrentLanguage(lang);
-            localStorage.setItem('locale', lang);
         }
     }
 
