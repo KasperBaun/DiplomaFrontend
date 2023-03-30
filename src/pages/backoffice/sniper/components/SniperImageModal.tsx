@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
-import { Modal, Image, Container, Carousel } from "react-bootstrap";
+import { Modal, Container, Carousel } from "react-bootstrap";
 
 interface IProps {
-    imageUrls : string[]
+    imageUrl : string
     handleClose : Dispatch<SetStateAction<void>>;
     show : boolean;
 }
 
-const ImageModal = ({imageUrls, handleClose, show} : IProps) => {
+const ImageModal = ({imageUrl, handleClose, show} : IProps) => {
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -16,15 +16,13 @@ const ImageModal = ({imageUrls, handleClose, show} : IProps) => {
             <Modal.Body>
                 <Container style={{ textAlign: "center" }}>
                     <Carousel>
-                        { imageUrls.map((image) => (
-                            <Carousel.Item>
-                                <img style={{ objectFit: "fill" }}
-                                className="d-block w-100"
-                                src={image}
-                                alt="First slide"
-                                />
-                            </Carousel.Item>
-                        )) }
+                        <Carousel.Item>
+                            <img style={{ objectFit: "fill" }}
+                            className="d-block w-100"
+                            src={imageUrl}
+                            alt="First slide"
+                            />
+                        </Carousel.Item>
                     </Carousel>
                 </Container>
             </Modal.Body>

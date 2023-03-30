@@ -98,21 +98,30 @@ export default class ENLocale implements ILocale {
   FAQTabText = "FAQ";
   ContactTabText = "Contact";
 
-  
+
 
   // Sniper
+  TableEntrySniperSource = "Source";
   TableEntrySniperVN = "Lot Id";
   TableEntrySniperTitle = "Title";
-  TableEntrySniperBuyNowPrice = "Buy Now Price";
+  TableEntrySniperBuyNowPrice = "Price";
   TableEntrySniperNextBid = "Next Bid";
   TableEntrySniperPriceEst = "Estimation";
   TableEntrySniperDescription = "Description";
   TableEntrySniperImages = "Image(s)";
   TableEntrySniperItemUrl = "URL";
 
-   // Loginpage
-   signInText = "SIGN IN";
-   forgotPasswordText = "Forgot Password?";
-   dontHaveAccountText = "Don't have an account? Sign Up";
-   rememberMeText = "Remember me";
+  // Loginpage
+  signInText = "SIGN IN";
+  signUpText = "Sign Up";
+  forgotPasswordText = "Forgot Password?";
+  alreadyHaveAccountText = "Already have an account? Sign in";
+  dontHaveAccountText = "Don't have an account? Sign Up";
+  rememberMeText = "Remember me";
+
+  // Signup page
+  firstName = "First Name";
+  lastName = "Last Name";
+  emailAdress = "Email Address";
+  password = "Password";
 }

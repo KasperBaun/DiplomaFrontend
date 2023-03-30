@@ -10,6 +10,7 @@ import { Dk, Us } from "react-flags-select";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
+import CartDrawer from '@components/CartDrawer';
 
 interface INavModel {
   path: string;
@@ -25,7 +26,6 @@ const Header: React.FC = observer(function Header() {
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
   navPaths.push({ path: "/productList", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
-  navPaths.push({ path: "/basket", text: `${languageStore.currentLanguage.BasketTabText}` });
   navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
   navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
   navPaths.push({path: "/backOffice", text: `${languageStore.currentLanguage.BackOfficeTabText}`})
@@ -74,7 +74,7 @@ const Header: React.FC = observer(function Header() {
             })}
 
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex">  
             <Button onClick={() => {
               languageStore.changeLanguage("da_DK");
             }}>
@@ -99,6 +99,8 @@ const Header: React.FC = observer(function Header() {
                 {languageStore.currentLanguage.SearchBarText}
               </NavLink>
             </Button>
+
+            <CartDrawer/>
           </Form>
         </Navbar.Collapse>
       </Container>

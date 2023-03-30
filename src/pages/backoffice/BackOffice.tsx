@@ -9,36 +9,12 @@ import Subcategories from './subcategory/Subcategory';
 import Products from './product/Products';
 import SniperPage from './sniper/SniperPage';
 import MobXContext from '@stores/MobXContext';
-import Loading from '@components/loading/Loading';
 import { observer } from 'mobx-react-lite';
-import LoginPage from './login/LoginPage';
-import { Constants } from '@utils/Constants';
-
-export interface ILoginData {
-    email: string;
-    password: string;
-}
+import AuthPage from './auth/AuthPage';
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { backofficeStore, languageStore, authStore } = useContext(MobXContext);
-
-    // useEffect(() => {
-    //     const loadBackofficeStore = async () => {
-    //         await backofficeStore.init();
-    //     }
-    //     loadBackofficeStore();
-    // }, [])
-
-    async function handleLoginClicked(data: ILoginData): Promise<void> {
-        async function delayTwoSeconds(): Promise<void> {
-            await new Promise(resolve => setTimeout(resolve, 2000));
-        }
-        await delayTwoSeconds();
-        if (data.email === "test@example.com" && data.password === "test-password") {
-            authStore.setUserAuthenticated(true);
-        }
-    }
+    const { authStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
@@ -50,27 +26,10 @@ const BackOfficeMain = observer(() => {
         }
     }
 
-    // if (!backofficeStore.isLoaded) {
-    //     return (
-    //         <Loading />
-    //     )
-    // }
-    // else 
     if (!authStore.userAuthenticated) {
-        return (
-            <LoginPage
-                companyName={Constants.companyName}
-                companyUrl={Constants.companyUrl}
-                defaultEmailText="test@example.com"
-                defaultPasswordText="test-password"
-                signInText={languageStore.currentLanguage.signInText}
-                forgotPasswordText={languageStore.currentLanguage.forgotPasswordText}
-                dontHaveAccountText={languageStore.currentLanguage.dontHaveAccountText}
-                onLoginClicked={handleLoginClicked}
-            />
-        )
+        return <AuthPage />;
     }
-    else {
+    else if (authStore.authState.user.role === "SuperAdmin") {
         return (
             <Container className="BackOfficeMain" fluid>
                 <Row>
@@ -81,6 +40,33 @@ const BackOfficeMain = observer(() => {
                         {navSwitch()}
                     </Col>
                 </Row>
+            </Container>
+        )
+    }
+    else if (authStore.authState.user.role === "Admin") {
+        return (
+            <Container className="BackOfficeMain" fluid>
+                <Row>
+                    <Col md="2">
+                        <VertNavBackOffice setNavKey={setActiveNavKey} />
+                    </Col>
+                    <Col>
+                        {navSwitch()}
+                    </Col>
+                </Row>
+            </Container>
+        )
+    } else if (authStore.authState.user.role === "User") {
+        return (
+            <Container>
+                <img width="600" src="https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg" />
+            </Container>
+        )
+    }
+    else if (authStore.authState.user.role === "Guest") {
+        return (
+            <Container>
+                <img width="600" src="https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg" />
             </Container>
         )
     }

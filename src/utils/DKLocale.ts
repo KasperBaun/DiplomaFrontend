@@ -19,7 +19,7 @@ export default class DKLocale implements ILocale {
   updateCategoryFormTitle = "Titel";
   updateCategoryFormOrder = "Rækkefølge";
   updateCategoryFormDescription = "Beskrivelse";
-  updateCategoryFormImgURL = "Billede URL"; 
+  updateCategoryFormImgURL = "Billede URL";
   updateCategoryFormOrderDesc = "Indstiller visnings rækkefølgen på website";
   updateCategoryFormDescriptionDesc = "Beskriver detajler om varene i denne katagori";
   updateCategorySubmit = "Opdater";
@@ -96,18 +96,27 @@ export default class DKLocale implements ILocale {
   ContactTabText = "Kontakt";
 
   // Sniper
+  TableEntrySniperSource = "Kilde";
   TableEntrySniperVN = "Varenummer";
   TableEntrySniperTitle = "Titel";
-  TableEntrySniperBuyNowPrice = "Købs pris";
+  TableEntrySniperBuyNowPrice = "Pris";
   TableEntrySniperNextBid = "Næste Bud";
   TableEntrySniperPriceEst = "Estimat";
   TableEntrySniperDescription = "Beskrivelse";
   TableEntrySniperImages = "Billede(r)";
   TableEntrySniperItemUrl = "URL";
 
-   // Loginpage
-   signInText = "Log ind";
-   forgotPasswordText = "Glemt password?";
-   dontHaveAccountText = "Har du ikke en konto? Opret en";
-   rememberMeText = "Husk mig";
+  // Loginpage
+  signInText = "Log ind";
+  signUpText = "Opret Konto";
+  forgotPasswordText = "Glemt password?";
+  alreadyHaveAccountText = "Har du allerede en konto? Log ind";
+  dontHaveAccountText = "Har du ikke en konto? Opret en";
+  rememberMeText = "Husk mig";
+
+  // Signup page
+  firstName = "Fornavn";
+  lastName = "Efternavn";
+  emailAdress = "Email";
+  password = "Kodeord";
 }
