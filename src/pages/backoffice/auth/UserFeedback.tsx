@@ -29,7 +29,7 @@ const UserFeedback: React.FC<ISnackbarProps> = function UserFeedback(props: ISna
     return (
         <Snackbar
             open={props.open}
-            autoHideDuration={6000}
+            autoHideDuration={3000}
             onClose={handleClose}
             anchorOrigin={snackbarOrigin}
             onClickCapture={handleClose}

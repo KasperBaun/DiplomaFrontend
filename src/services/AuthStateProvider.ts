@@ -24,7 +24,7 @@ class Claim {
 export class AuthStateProvider {
   private tokenKey: string = "groenlundAuthToken";
   private accessToken: string;
-  private userRole: "SuperAdministrator" | "Administrator" | "User" | "Guest";
+  private userRole: "SuperAdmin" | "Admin" | "User" | "Guest";
 
 
   public async trySilentAuthenticateUser(): Promise<IAuthState> {
@@ -39,7 +39,7 @@ export class AuthStateProvider {
   }
 
   public async signIn(token: string): Promise<IAuthState> {
-
+    this.setToken(token);
     const decodedjwt: JwtToken = jwt_decode(token);
 
     const user: User = {
@@ -91,3 +91,5 @@ export class AuthStateProvider {
     return "";
   }
 }
+
+export default AuthStateProvider;

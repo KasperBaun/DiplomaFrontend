@@ -29,7 +29,7 @@ const BackOfficeMain = observer(() => {
     if (!authStore.userAuthenticated) {
         return <AuthPage />;
     }
-    else if (authStore.authState.user.role === "SuperAdministrator") {
+    else if (authStore.authState.user.role === "SuperAdmin") {
         return (
             <Container className="BackOfficeMain" fluid>
                 <Row>
@@ -43,7 +43,7 @@ const BackOfficeMain = observer(() => {
             </Container>
         )
     }
-    else if (authStore.authState.user.role === "Administrator") {
+    else if (authStore.authState.user.role === "Admin") {
         return (
             <Container className="BackOfficeMain" fluid>
                 <Row>

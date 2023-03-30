@@ -6,7 +6,7 @@ import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
 import { AuthService } from '@services/AuthService';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
 import { WebAPIResponse } from '@services/IAPIService';
-import { AuthStateProvider, IAuthState } from '@services/AuthStateProvider';
+import AuthStateProvider, { IAuthState } from '@services/AuthStateProvider';
 
 export class AuthStore {
     private static _Instance: AuthStore;
