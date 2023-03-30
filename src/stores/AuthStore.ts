@@ -5,7 +5,8 @@ import { RootStore } from './RootStore';
 import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
 import { AuthService } from '@services/AuthService';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
-
+import { WebAPIResponse } from '@services/IAPIService';
+import { AuthStateProvider, IAuthState } from '@services/AuthStateProvider';
 
 export class AuthStore {
     private static _Instance: AuthStore;
@@ -14,8 +15,10 @@ export class AuthStore {
     private color: string = ComponentLoggingConfig.DarkPurple;
     private loaded: boolean = false;
     private authService: AuthService;
-    private userRole: string;
     private _userAuthenticated: boolean = false;
+    private _authState: IAuthState;
+
+    private authStateProvider: AuthStateProvider = new AuthStateProvider();
 
 
     constructor(_rootStore: RootStore, _authService: AuthService) {
@@ -25,8 +28,12 @@ export class AuthStore {
     }
 
     public async init(): Promise<boolean> {
-
-
+        // Look for previous token and use it to sign in if possible
+        const authed = await this.authStateProvider.trySilentAuthenticateUser();
+        if (authed) {
+            this._authState = authed;
+            this.setUserAuthed();
+        }
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
@@ -51,24 +58,37 @@ export class AuthStore {
         return this._userAuthenticated;
     }
 
-    public setUserAuthenticated(value: boolean) {
-        runInAction(() => {
-            this._userAuthenticated = value;
-        });
+    public get authState(): IAuthState {
+        return this._authState;
     }
 
-    public async registerUser(userRegistrationDTO: UserRegistrationDTO): Promise<void> {
+    public async signOut(): Promise<void> {
+        this._authState = await this.authStateProvider.signOut();
+    }
+
+    private setUserAuthed(): void {
+        runInAction(() => {
+            this._userAuthenticated = true;
+        })
+    }
+
+    public async registerUser(userRegistrationDTO: UserRegistrationDTO): Promise<WebAPIResponse> {
         return await this.authService.registerUser(userRegistrationDTO);
     }
 
-    public async login(userLoginDTO: UserLoginDTO): Promise<string> {
-        const response = await this.authService.login(userLoginDTO);
-        if (response && response !== "") {
-            this._userAuthenticated = true;
+    public async login(userLoginDTO: UserLoginDTO): Promise<boolean> {
+        let responseToken;
+        try {
+            responseToken = await this.authService.login(userLoginDTO);
+
+        } catch (err) {
+            console.error(err);
         }
-
-        // TODO - Set token for future auth
-
-        return await this.authService.login(userLoginDTO);
+        if (responseToken && responseToken !== "") {
+            this._authState = await this.authStateProvider.signIn(responseToken);
+            this.setUserAuthed();
+            return true;
+        }
+        return false;
     }
 }

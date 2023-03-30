@@ -98,7 +98,7 @@ export default class ENLocale implements ILocale {
   FAQTabText = "FAQ";
   ContactTabText = "Contact";
 
-  
+
 
   // Sniper
   TableEntrySniperVN = "Lot Id";
@@ -110,9 +110,17 @@ export default class ENLocale implements ILocale {
   TableEntrySniperImages = "Image(s)";
   TableEntrySniperItemUrl = "URL";
 
-   // Loginpage
-   signInText = "SIGN IN";
-   forgotPasswordText = "Forgot Password?";
-   dontHaveAccountText = "Don't have an account? Sign Up";
-   rememberMeText = "Remember me";
+  // Loginpage
+  signInText = "SIGN IN";
+  signUpText = "Sign Up";
+  forgotPasswordText = "Forgot Password?";
+  alreadyHaveAccountText = "Already have an account? Sign in";
+  dontHaveAccountText = "Don't have an account? Sign Up";
+  rememberMeText = "Remember me";
+
+  // Signup page
+  firstName = "First Name";
+  lastName = "Last Name";
+  emailAdress = "Email Address";
+  password = "Password";
 }
