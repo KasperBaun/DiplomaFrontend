@@ -34,24 +34,24 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
     if (product) {
         return (
             <div>
-            {/* // Små billeder (mulighed for at browse) */}
+                {/* // Små billeder (mulighed for at browse) */}
 
-            {/* // Stort billede */}
-            {/* <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} /> */}
+                {/* // Stort billede */}
+                {/* <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} /> */}
 
-            {/* // Beskrivelseskomponent */}
+                {/* // Beskrivelseskomponent */}
                 <h1>ProductPage</h1>
                 <p>Name: {product.name}</p>
-               {/*<p>Condition: {product.condition}</p>*/}
+                {/*<p>Condition: {product.condition}</p>*/}
             </div >
 
         )
 
     } else {
-    return (
-        <h1>Loading...</h1>
-    )
-}
+        return (
+            <h1>Loading...</h1>
+        )
+    }
 
 });
 

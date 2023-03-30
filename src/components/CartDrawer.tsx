@@ -1,8 +1,9 @@
-import {IconButton, Button, Drawer, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer, Divider  } from "@mui/material";
+import {IconButton, Button, Drawer, List, ListItem, ListItemButton, ListItemText, Divider  } from "@mui/material";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
+import { randomBytes } from "crypto";
 
 export default function CartDrawer(){
     const [drawerState, setDrawerState] = React.useState(false); 
@@ -25,14 +26,14 @@ export default function CartDrawer(){
   }
 
     const cartElements = () => (
-        <Box
+        <Box 
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
           <List style={{width: '15vw'}}>
             {['Royal Copenhagen Skål', '20 stk Illums bolighus stel', 'Figur fra Patrick Swazy INC', 'etc'].map((text, index, array) => (
-              <div>
+              <div key={"cart" + Math.random()}>
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemText primary={text} />

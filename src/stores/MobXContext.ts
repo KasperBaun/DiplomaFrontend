@@ -12,12 +12,12 @@ import { AuthStore } from "./AuthStore";
 export interface IMobXContext {
     productStore: ProductStore;
     rootStore: RootStore;
-    categoryStore : CategoryStore;
-    subCategoryStore : SubCategoryStore;
+    categoryStore: CategoryStore;
+    subCategoryStore: SubCategoryStore;
     languageStore: LanguageStore;
-    paymentStore : PaymentStore;
+    paymentStore: PaymentStore;
     backofficeStore: BackofficeStore;
-    sniperStore : SniperStore;
+    sniperStore: SniperStore;
     authStore: AuthStore;
 }
 
