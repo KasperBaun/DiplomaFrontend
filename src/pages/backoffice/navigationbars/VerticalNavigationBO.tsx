@@ -10,6 +10,8 @@ const VertNavBackOffice = (props: vertNavProps) => {
 
     const { languageStore } = useContext(MobXContext);
 
+   
+
     return (
         <Container className="VertNavContainer">
             <Nav defaultActiveKey="/backoffice" className="flex-column VertNav">

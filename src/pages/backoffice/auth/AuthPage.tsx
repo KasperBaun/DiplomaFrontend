@@ -40,14 +40,7 @@ const AuthPage: React.FC = function AuthPage() {
     async function handleLoginClicked(data: UserLoginDTO): Promise<void> {
         setShowBackdrop(true);
         const loginSuccess = await authStore.login(data);
-        // // TODO: Add login functionality here
-        // async function delayTwoSeconds(): Promise<void> {
-        //     await new Promise(resolve => setTimeout(resolve, 2000));
-        // }
-        // await delayTwoSeconds();
-        // if (data.email === "test@example.com" && data.password === "test-password") {
-        //     authStore.setUserAuthenticated(true);
-        // }
+
         if (loginSuccess === true) {
             setShowBackdrop(false);
             setMessage("Successfully logged in");
