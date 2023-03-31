@@ -11,7 +11,7 @@ import AuthStateProvider, { IAuthState } from '@services/AuthStateProvider';
 export class AuthStore {
     private static _Instance: AuthStore;
     private rootStore: RootStore;
-    private prefix: string = `%c[BackofficeStore]`;
+    private prefix: string = `%c[AuthStore]`;
     private color: string = ComponentLoggingConfig.DarkPurple;
     private loaded: boolean = false;
     private authService: AuthService;
