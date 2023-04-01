@@ -4,10 +4,12 @@ import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import UserFeedback from "./UserFeedback";
 import UserLoginDTO from "@models/DTO/UserLoginDTO";
+import Loading from "@components/loading/Loading";
+import { observer } from "mobx-react-lite";
 
-const AuthPage: React.FC = function AuthPage() {
+const AuthPage: React.FC = observer(function AuthPage() {
 
-    const { authStore } = useContext<IMobXContext>(MobXContext);
+    const { authStore, rootStore } = useContext<IMobXContext>(MobXContext);
     const [activeKey, setActiveKey] = useState<number>(0);
     const [showFeedback, setShowFeedback] = useState<boolean>(false);
     const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
@@ -53,21 +55,25 @@ const AuthPage: React.FC = function AuthPage() {
             setShowFeedback(true);
         }
     }
+    if (!rootStore.isLoaded) {
+        return (<Loading />)
+    } else {
 
-    return (
-        <div>
-            <UserFeedback
-                message={message}
-                open={showFeedback}
-                variant={variant}
-                onClose={handleCloseFeedback}
-                horizontalPosition='right'
-                verticalPosition='top'
-            />
-            {navSwitch()}
+        return (
+            <div>
+                <UserFeedback
+                    message={message}
+                    open={showFeedback}
+                    variant={variant}
+                    onClose={handleCloseFeedback}
+                    horizontalPosition='right'
+                    verticalPosition='top'
+                />
+                {navSwitch()}
 
-        </div>
-    )
-}
+            </div>
+        )
+    }
+});
 
 export default AuthPage;

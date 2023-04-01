@@ -1,23 +1,21 @@
-import { Analytics, Category, CategorySharp, Home, Inventory, Logout, Money, ProductionQuantityLimits, SnippetFolder } from "@mui/icons-material";
+import { AnalyticsOutlined, ChevronLeft, ChevronRight, CreateNewFolderOutlined, DashboardOutlined, InventoryOutlined, Logout, PaymentsOutlined, ReceiptLongOutlined, TravelExploreOutlined } from "@mui/icons-material";
 import MobXContext from "@stores/MobXContext";
 import { CSSProperties, Dispatch, SetStateAction, useContext, useState } from "react";
-import { Nav } from "react-bootstrap";
-import "./NavbarStyles.css"; // Import the CSS file
-import { flexColumn, iconStyling, listItem, sideBar } from "./NavbarStyles";
+import { iconStyling, listItem, sideBar } from "./NavbarStyles";
+import LionLogo from "@components/LionLogo";
+import { Constants } from "@utils/Constants";
+import { LanguageStore } from "@stores/LanguageStore";
 
 export interface INavbarProps {
     setNavKey: Dispatch<SetStateAction<number>>;
 }
 
-interface Navpath {
-    navigationClick: () => void;
-    title: string;
-    icon: JSX.Element;
-}
-
 const Navbar: React.FC<INavbarProps> = function Navbar(props: INavbarProps) {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    const { languageStore, authStore } = useContext(MobXContext);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [navbarStyle, setNavbarStyle] = useState<CSSProperties>(sideBar);
+    const navPaths: Navpath[] = createNavPaths(languageStore, props.setNavKey);
 
     const toggleSidebar = () => {
         // Change the width of the sidebar
@@ -28,76 +26,26 @@ const Navbar: React.FC<INavbarProps> = function Navbar(props: INavbarProps) {
         setIsSidebarOpen(!isSidebarOpen)
     };
 
-    const { languageStore, authStore } = useContext(MobXContext);
 
-    const navPaths: Navpath[] = [
-        {
-            navigationClick: () => props.setNavKey(0),
-            title: languageStore.currentLanguage.BackOfficeTabText,
-            icon: <Home style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(0),
-            title: languageStore.currentLanguage.AnalyticsTabText,
-            icon: <Analytics style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(0),
-            title: languageStore.currentLanguage.SalesTabText,
-            icon: <Money style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(0),
-            title: languageStore.currentLanguage.InventoryTabText,
-            icon: <Inventory style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(4),
-            title: languageStore.currentLanguage.ProductSniperTabText,
-            icon: <SnippetFolder style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(1),
-            title: languageStore.currentLanguage.CategoriesTabText,
-            icon: <Category style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(2),
-            title: languageStore.currentLanguage.SubCategoriesTabText,
-            icon: <CategorySharp style={iconStyling} />
-        },
-        {
-            navigationClick: () => props.setNavKey(3),
-            title: languageStore.currentLanguage.ProductTabText,
-            icon: <ProductionQuantityLimits style={iconStyling} />
-        }
-    ]
+
+
     return (
         <nav style={navbarStyle}>
             <header>
-                <div className="image-text">
-                    <span className="image">{/*<img src="logo.png" alt="" />*/}</span>
+                <LionLogo color={Constants.primaryColor} width={isSidebarOpen ? 100 : 50} />
+                {isSidebarOpen ? <ChevronLeft onClick={toggleSidebar} /> : <ChevronRight onClick={toggleSidebar} />}
 
-                    <div className="text" style={flexColumn}>
-                        <span className="name">Codinglab</span>
-                        <span className="profession">Web developer</span>
-                    </div>
-                </div>
 
-                <i className="bx bx-chevron-right toggle" onClick={toggleSidebar}></i>
             </header>
 
             <div className="menu-bar">
                 <div className="menu">
-                    <li className="search-box" onClick={() => setIsSidebarOpen(false)}>
-                        <i className="bx bx-search icon"></i>
-                        <input type="text" placeholder="Search..." />
-                    </li>
 
-                    <NavTitleDivider title={languageStore.currentLanguage.GeneralHeaderAdmin} />
+
+                    <hr style={{ color: Constants.primaryColor }} />
                     <ul className="menu-links">
 
-                        {navPaths.slice(0, 5).map(navpath => {
+                        {navPaths.slice(0, 6).map(navpath => {
                             return (
                                 <li style={listItem} key={"navpath" + navpath.title} className="nav-link" onClick={navpath.navigationClick}>
 
@@ -107,9 +55,9 @@ const Navbar: React.FC<INavbarProps> = function Navbar(props: INavbarProps) {
                             )
                         })}
 
-                        <NavTitleDivider title={languageStore.currentLanguage.ManagementTabText} />
+                        <hr style={{ color: Constants.primaryColor }} />
 
-                        {navPaths.slice(5, 8).map(navpath => {
+                        {navPaths.slice(6, 9).map(navpath => {
                             return (
                                 <li style={listItem} key={"navpath" + navpath.title} className="nav-link" onClick={navpath.navigationClick}>
                                     {navpath.icon}
@@ -122,7 +70,7 @@ const Navbar: React.FC<INavbarProps> = function Navbar(props: INavbarProps) {
                 </div>
 
                 <div className="bottom-content">
-                    <li onClick={authStore.signOut}>
+                    <li style={listItem} onClick={() => authStore.signOut()}>
                         <Logout />
                         <span className="text nav-text">Logout</span>
                     </li>
@@ -146,16 +94,62 @@ const Navbar: React.FC<INavbarProps> = function Navbar(props: INavbarProps) {
 
 export default Navbar;
 
-interface props {
+
+interface Navpath {
+    navigationClick: () => void;
     title: string;
+    icon: JSX.Element;
 }
 
+function createNavPaths(languageStore: LanguageStore, setNavKey: Dispatch<SetStateAction<number>>): Navpath[] {
+    const paths =
+        [
+            {
+                navigationClick: () => setNavKey(0),
+                title: languageStore.currentLanguage.BackOfficeTabText,
+                icon: <DashboardOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(0),
+                title: languageStore.currentLanguage.AnalyticsTabText,
+                icon: <AnalyticsOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(0),
+                title: languageStore.currentLanguage.SalesTabText,
+                icon: <PaymentsOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(0),
+                title: languageStore.currentLanguage.InventoryTabText,
+                icon: <InventoryOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(0),
+                title: languageStore.currentLanguage.OrdersTabText,
+                icon: <ReceiptLongOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(4),
+                title: languageStore.currentLanguage.ProductSniperTabText,
+                icon: <TravelExploreOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(1),
+                title: languageStore.currentLanguage.CategoriesTabText,
+                icon: <CreateNewFolderOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(2),
+                title: languageStore.currentLanguage.SubCategoriesTabText,
+                icon: <CreateNewFolderOutlined style={iconStyling} />
+            },
+            {
+                navigationClick: () => setNavKey(3),
+                title: languageStore.currentLanguage.ProductTabText,
+                icon: <CreateNewFolderOutlined style={iconStyling} />
+            }
+        ];
 
-const NavTitleDivider = (props: props) => {
-    return (
-        <>
-            <Nav.Item className="VertNavItem"><i className="VertNavTitle">{props.title}</i></Nav.Item>
-            <hr className="NavTitleDividerHR" />
-        </>
-    )
+    return paths;
 }

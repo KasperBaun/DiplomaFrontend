@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom"
 import ErrorPage from "@webshop/error/ErrorPage"
 import Webshop from "@webshop/Webshop"
 import CategoriesPage from "@webshop/categories/CategoriesPage"
-import { FunctionComponent } from "react"
 import HomePage from "@webshop/home/HomePage"
 import SubcategoriesPage from "@webshop/subcategory/SubcategoriesPage"
 import BasketPage from "@webshop/basket/BasketPage"
@@ -13,10 +12,12 @@ import SearchPage from "@webshop/search/SearchPage"
 import BackOffice from "@backoffice/BackOffice"
 import ProductListPage from "@webshop/product/ProductListPage"
 
-const Routing: FunctionComponent = () => {
+const Routing: React.FC = function Routing() {
 
     return (
         <Routes>
+            <Route path="/backoffice" element={<BackOffice />} errorElement={<ErrorPage />}>
+            </Route>
             <Route path="/" element={<Webshop />} errorElement={<ErrorPage />}>
                 <Route path="/" element={<HomePage />} />
                 <Route path="categories" element={<CategoriesPage />} />
@@ -30,11 +31,11 @@ const Routing: FunctionComponent = () => {
                 <Route path="productList" element={<ProductListPage />} />
                 <Route path="productList/:id" element={<ProductListPage />} />
                 <Route path="search" element={<SearchPage />} />
+                <Route path="*" element={<ErrorPage />} />
             </Route>
-            <Route path="/backoffice" element={<BackOffice />}>
-            </Route>
-        </Routes>
+
+        </Routes >
     );
-}
+};
 
 export default Routing;

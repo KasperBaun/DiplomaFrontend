@@ -64,8 +64,9 @@ export default class ENLocale implements ILocale {
   AnalyticsTabText = "Analytics";
   SalesTabText = "Sales";
   InventoryTabText = "Inventory";
-  ProductSniperTabText = "Product Sniper";
+  ProductSniperTabText = "Productsniper";
   ManagementTabText = "Management";
+  OrdersTabText = "Orders";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Sales ($)";
@@ -86,7 +87,7 @@ export default class ENLocale implements ILocale {
   BasketTabText = "Basket";
   PaymentTabText = "Payment";
   ConfirmationTabText = "Confirmation";
-  BackOfficeTabText = "BackOffice";
+  BackOfficeTabText = "Dashboard";
   SearchBarText = "Search";
 
 

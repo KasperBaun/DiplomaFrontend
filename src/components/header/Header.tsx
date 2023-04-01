@@ -28,7 +28,7 @@ const Header: React.FC = observer(function Header() {
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
   navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
   navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
-  navPaths.push({path: "/backOffice", text: `${languageStore.currentLanguage.BackOfficeTabText}`})
+  navPaths.push({ path: "/backoffice", text: `${languageStore.currentLanguage.BackOfficeTabText}` })
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
@@ -62,7 +62,7 @@ const Header: React.FC = observer(function Header() {
               return (
                 <NavLink
                   to={navItem.path}
-                  key={navItem.text+index}
+                  key={navItem.text + index}
                   className={({ isActive, isPending }) => {
                     return navLinkStyling(isActive, isPending)
                   }}
@@ -74,7 +74,7 @@ const Header: React.FC = observer(function Header() {
             })}
 
           </Nav>
-          <Form className="d-flex">  
+          <Form className="d-flex">
             <Button onClick={() => {
               languageStore.changeLanguage("da_DK");
             }}>
@@ -100,7 +100,7 @@ const Header: React.FC = observer(function Header() {
               </NavLink>
             </Button>
 
-            <CartDrawer/>
+            <CartDrawer />
           </Form>
         </Navbar.Collapse>
       </Container>

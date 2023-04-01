@@ -17,8 +17,7 @@ export class AuthStore {
     private authService: AuthService;
     private _userAuthenticated: boolean = false;
     private _authState: IAuthState;
-
-    private authStateProvider: AuthStateProvider = new AuthStateProvider();
+    private authStateProvider: AuthStateProvider;
 
 
     constructor(_rootStore: RootStore, _authService: AuthService) {
@@ -28,6 +27,7 @@ export class AuthStore {
     }
 
     public async init(): Promise<boolean> {
+        this.authStateProvider = new AuthStateProvider();
         // Look for previous token and use it to sign in if possible
         const authed = await this.authStateProvider.trySilentAuthenticateUser();
         if (authed) {

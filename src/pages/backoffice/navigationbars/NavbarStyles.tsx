@@ -41,8 +41,9 @@ export const flexColumn: React.CSSProperties = {
 
 export const sideBar: React.CSSProperties = {
     position: 'fixed',
-    top: '0',
-    left: '0',
+    //top: '0',
+    margin: 'auto',
+    //left: '0',
     height: '100%',
     width: '250px',
     padding: '10px 14px',
