@@ -63,7 +63,10 @@ export class AuthStore {
     }
 
     public async signOut(): Promise<void> {
-        this._authState = await this.authStateProvider.signOut();
+        runInAction(async () => {
+            this._authState = await this.authStateProvider.signOut();
+            this._userAuthenticated = false;
+        })
     }
 
     private setUserAuthed(): void {
