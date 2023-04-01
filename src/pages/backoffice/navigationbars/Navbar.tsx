@@ -2,7 +2,7 @@ import { Analytics, Category, CategorySharp, Home, Inventory, Money, ProductionQ
 import MobXContext from "@stores/MobXContext";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { Nav } from "react-bootstrap";
-import "../styles/style.css"; // Import the CSS file
+import "./NavbarStyles.css"; // Import the CSS file
 
 export interface INavbarProps {
     setNavKey: Dispatch<SetStateAction<number>>;
@@ -94,7 +94,7 @@ const Navbar: React.FC<INavbarProps> = function Navbar(props: INavbarProps) {
 
                             {navPaths.slice(0, 5).map(navpath => {
                                 return (
-                                    <li className="nav-link" onClick={navpath.navigationClick}>
+                                    <li key={"navpath"+navpath.title} className="nav-link" onClick={navpath.navigationClick}>
                                         {navpath.icon}
                                         <span className="text nav-text">{navpath.title}</span>
                                     </li>
