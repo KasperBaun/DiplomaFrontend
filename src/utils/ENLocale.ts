@@ -111,6 +111,10 @@ export default class ENLocale implements ILocale {
   TableEntrySniperDescription = "Description";
   TableEntrySniperImages = "Image(s)";
   TableEntrySniperItemUrl = "URL";
+  SniperFormMutedText = "Currently we will look for data on Lauritz.com and dba.dk";
+  SniperFormButtonText = "Search";
+  SniperFormLabelText = "Enter Search Value";
+  SniperFormTitleText = "Price Sniper";
 
   // Loginpage
   signInText = "SIGN IN";

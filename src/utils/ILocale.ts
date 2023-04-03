@@ -103,6 +103,10 @@ export interface ILocale {
   TableEntrySniperDescription: string;
   TableEntrySniperImages: string;
   TableEntrySniperItemUrl: string;
+  SniperFormMutedText : string;
+  SniperFormButtonText : string;
+  SniperFormLabelText : string;
+  SniperFormTitleText : string;
 
   // Loginpage
   signInText: string;

@@ -106,6 +106,10 @@ export default class DKLocale implements ILocale {
   TableEntrySniperDescription = "Beskrivelse";
   TableEntrySniperImages = "Billede(r)";
   TableEntrySniperItemUrl = "URL";
+  SniperFormMutedText = "Søgeresultater kommer fra lauritz.com og dba.dk";
+  SniperFormButtonText = "Søg";
+  SniperFormLabelText = "Indtast produkt du vil søge efter";
+  SniperFormTitleText = "Pris Sniper";
 
   // Loginpage
   signInText = "Log ind";
