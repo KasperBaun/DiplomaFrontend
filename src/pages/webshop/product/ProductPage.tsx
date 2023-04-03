@@ -34,26 +34,47 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
 
     if (product) {
         return (
-            <div>
-                <h1>Product Page</h1>
-                {/* // Små billeder (mulighed for at browse) */}
+            <table>
+              <thead>
+                <tr>
+                  <th style={{ width: '50' }}>
+                  <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />                
+                  </th>
+                  <th style={{ width: '50%' }}>
+                    <p>Name: {product.product.name}</p>
+                    <p>Condition: {product.condition}</p>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* add table rows and cells here */}
+              </tbody>
+            </table>
+          );
+        }
 
-                {/* // Stort billede */}
-                <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />
 
-                {/* // Beskrivelseskomponent */}
-                <p>Name: {product.product.name}</p>
-                <p>Condition: {product.condition}</p>
-            </div >
+//         return (
+//             <div>
+//                 <h1>Product Page</h1>
+//                 {/* // Små billeder (mulighed for at browse) */}
 
-        )
+//                 {/* // Stort billede */}
+//                 <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />
 
-    } else {
-        return (
-            <h1>Loading...</h1>
-        )
-    }
+//                 {/* // Beskrivelseskomponent */}
+//                 <p>Name: {product.product.name}</p>
+//                 <p>Condition: {product.condition}</p>
+//             </div >
 
-});
+//         )
+
+//     } else {
+//         return (
+//             <h1>Loading...</h1>
+//         )
+//     }
+
+ });
 
 export default ProductPage;
