@@ -41,8 +41,15 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
                   <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />                
                   </th>
                   <th style={{ width: '50%' }}>
-                    <p>Name: {product.product.name}</p>
+                    <h3>{product.product.name}</h3>
+                    <p>Price: {product.currentPrice}</p>
                     <p>Condition: {product.condition}</p>
+                    <p>Quality: {product.quality}</p>
+                    <p>Weight: {product.weight}</p>
+                    
+                    <p>{product.customText}</p>
+
+
                   </th>
                 </tr>
               </thead>

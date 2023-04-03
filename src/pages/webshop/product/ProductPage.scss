@@ -5,11 +5,13 @@
   
     .big-image {
       width: 60%;
-      margin-right: 30px;
     }
   
     .small-images {
-      width: 40%;
+      width: 60%;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+
       display: flex;
       flex-wrap: wrap;
       overflow-y: hidden;

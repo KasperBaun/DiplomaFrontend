@@ -13,24 +13,33 @@ const ImageGallery: React.FC<IImageGalleryProps> = observer(function ImageGaller
   const [image3, setImage3] = useState(props.imageURLs[3] || "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Trois.svg/1024px-Trois.svg.png");
   const [image4, setImage4] = useState(props.imageURLs[4] || "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Quatre.svg/1024px-Quatre.svg.png");
 
-  const images : Array<string> = props.imageURLs;
-  let order: Array<number> = [0, 1 , 2 , 3 ,4]
+  const tempImages : Array<string> = [mainImage, image1, image2, image3, image4]
  
   function rearangeOrder(index : number){
-   const val = order[index];
+   const val = tempImages[index];
     // Remove the value from its current position
-    order.splice(index, 1);
+    tempImages.splice(index, 1);
     // Add the value at the beginning of the array
-    order.unshift(val);
-    return order
+    tempImages.unshift(val);
+    return tempImages
   }
 
-  function setImages(order : Array<number>, images : Array<string>){
-    let i = 0; 
-    order.forEach(element => {
-      setMainImage(images[i]);
-    });
+  function setImages(images : Array<string>){
+    setMainImage(images[0]);
+    setImage1(images[1]);
+    setImage2(images[2]);
+    setImage3(images[3]);
+    setImage4(images[4]);
   }
+
+  function handleClick(pictureNumber : number) {
+  console.log(tempImages);
+   rearangeOrder(pictureNumber);
+   console.log(tempImages);
+  setImages(tempImages);
+}
+
+  
 
   
   
@@ -39,27 +48,20 @@ const ImageGallery: React.FC<IImageGalleryProps> = observer(function ImageGaller
       <table>
       <tbody>
         <tr>
-          <th style={{ width: '12.5%' }}>
-           
-            <Image src={image1} key={"1productImgGalSelImg"} fluid className="big-image" />
-            <Image src={image2} key={"2productImgGalSelImg"} fluid className="big-image" />
-            <Image src={image3} key={"3productImgGalSelImg"} fluid className="big-image" />
-            <Image src={image4} key={"4productImgGalSelImg"} fluid className="big-image" />
+          <th style={{ width: '12.5%', textAlign: 'center'}}>
+            <div>
+            <Image src={image1} key={"1productImgGalSelImg"} onClick={() => handleClick(1) } fluid className="small-images" />
+            <Image src={image2} key={"2productImgGalSelImg"} onClick={() => handleClick(2) } fluid className="small-images" />
+            <Image src={image3} key={"3productImgGalSelImg"} onClick={() => handleClick(3) } fluid className="small-images" />
+            <Image src={image4} key={"4productImgGalSelImg"} onClick={() => handleClick(4) } fluid className="small-images" />
+            </div>
           </th>
-          <th style={{ width: '37.5%' }}>
-            <Image src={mainImage} key={"1productImgGalSelImg"} fluid className="big-image" />
+          <th style={{ width: '37.5%', textAlign: 'center'}}>
+            <Image src={mainImage} key={"MainproductImgGalSelImg"} fluid className="big-image" />
           </th>
         </tr>
       </tbody>
     </table>
-
-      {/* <div className="small-images">
-        {props.imageURLs.map((url, index) => (
-          <div key={index}>
-            <Image src={url} thumbnail onClick={() => setMainImage(url)} />
-          </div>
-        ))}
-      </div> */}
     </div>
   )
 
