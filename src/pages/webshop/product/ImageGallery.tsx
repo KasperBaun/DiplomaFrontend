@@ -7,7 +7,7 @@ interface IImageGalleryProps {
 }
 
 const ImageGallery: React.FC<IImageGalleryProps> = observer(function ImageGallery(props: IImageGalleryProps) {
-  const [selectedImage, setSelectedImage] = useState(props.imageURLs[0]);
+  const [selectedImage, setSelectedImage] = useState(props.imageURLs[0] || "https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png");
 
   return (
 

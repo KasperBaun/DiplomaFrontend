@@ -29,7 +29,7 @@ export class SubCategoryStore {
         this._subCategories = await this.apiService.getSubCategories();
         this.mapCategoryToSubcategory(this._subCategories);
         this.subcategoriesInCategoryMap = this.mapSubCategoriesToCategoryId(this._subCategories);
-
+        this._subcategoryMap = this.createSubcategoryMap(this._subCategories);
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
