@@ -1,4 +1,6 @@
 import { Box } from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Item from '@mui/material/Stack';
 import SizeConfigs from "@styles/SizeConfigs";
 import ColorConfigs from "@styles/ColorConfigs";
 import Sidebar from "./navigationbars/Sidebar";
@@ -10,7 +12,6 @@ import Products from "./product/Products";
 import SniperPage from "./sniper/SniperPage";
 import Categories from "@backoffice/category/Categories";
 import InventoryMain from './inventory/Inventory';
-
 
 const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
 
@@ -37,8 +38,7 @@ const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
     }
 
     return (
-        <Box sx={{ display: "flex", height: "100vh" }}>
-            <Topbar />
+        <Box sx={{ display: "flex" }}>
             <Box
                 component="nav"
                 sx={{
@@ -56,16 +56,20 @@ const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    p: 3,
                     width: mainBoxWidth,
-                    minHeight: "100vh",
                     backgroundColor: ColorConfigs.mainBg
                 }}
             >
-                {navSwitch()}
-
+                <Stack>
+                    <Item>
+                        <Topbar />
+                    </Item>
+                    <Item padding={1}>
+                        {navSwitch()}
+                    </Item>
+                </Stack>
             </Box>
-        </Box>
+        </Box >
     );
 };
 

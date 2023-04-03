@@ -92,7 +92,7 @@ const Sidebar: React.FC<INavbarProps> = function Sidebar(props: INavbarProps) {
 
                 <SidebarItem item={{
                     navigationClick: () => authStore.signOut(),
-                    title: 'Logout',
+                    title: languageStore.currentLanguage.LogoutTabText,
                     icon: <Logout />
                 }} />
             </List>
