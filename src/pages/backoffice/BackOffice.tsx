@@ -1,6 +1,5 @@
 
 import { Col, Container, Row } from 'react-bootstrap';
-import VertNavBackOffice from './navigationbars/VerticalNavigationBO';
 import "./css/backoffice.scss"
 import BOCategories from "@backoffice/category/Categories"
 import BackOfficeDashboard from './Dashboard/dashboard';
@@ -12,6 +11,7 @@ import MobXContext from '@stores/MobXContext';
 import { observer } from 'mobx-react-lite';
 import AuthPage from './auth/AuthPage';
 import Navbar from './navigationbars/Navbar';
+import InventoryMain from './inventory/Inventory';
 
 const BackOfficeMain = observer(() => {
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
@@ -24,6 +24,7 @@ const BackOfficeMain = observer(() => {
             case 2: return (<Subcategories />)
             case 3: return (<Products />)
             case 4: return (<SniperPage />)
+            case 5: return (<InventoryMain />)
         }
     }
 

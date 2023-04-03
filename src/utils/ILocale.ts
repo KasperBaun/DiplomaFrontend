@@ -108,6 +108,9 @@ export interface ILocale {
   SniperFormLabelText : string;
   SniperFormTitleText : string;
 
+  // Inventory
+  InventoryAmountLabel : string;
+
   // Loginpage
   signInText: string;
   signUpText: string;

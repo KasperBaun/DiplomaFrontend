@@ -111,6 +111,9 @@ export default class DKLocale implements ILocale {
   SniperFormLabelText = "Indtast produkt du vil søge efter";
   SniperFormTitleText = "Pris Sniper";
 
+  // Inventory
+  InventoryAmountLabel = "Produkter: ";
+
   // Loginpage
   signInText = "Log ind";
   signUpText = "Opret Konto";

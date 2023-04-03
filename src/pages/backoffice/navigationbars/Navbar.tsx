@@ -120,7 +120,7 @@ function createNavPaths(languageStore: LanguageStore, setNavKey: Dispatch<SetSta
                 icon: <PaymentsOutlined style={iconStyling} />
             },
             {
-                navigationClick: () => setNavKey(0),
+                navigationClick: () => setNavKey(5),
                 title: languageStore.currentLanguage.InventoryTabText,
                 icon: <InventoryOutlined style={iconStyling} />
             },

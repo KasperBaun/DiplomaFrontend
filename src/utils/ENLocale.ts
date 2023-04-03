@@ -116,6 +116,9 @@ export default class ENLocale implements ILocale {
   SniperFormLabelText = "Enter Search Value";
   SniperFormTitleText = "Price Sniper";
 
+  // Inventory
+  InventoryAmountLabel = "Total Products: ";
+
   // Loginpage
   signInText = "SIGN IN";
   signUpText = "Sign Up";

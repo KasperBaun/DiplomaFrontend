@@ -8,6 +8,7 @@ import { PaymentStore } from "./PaymentStore";
 import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
+import { CategoryProductViewStore } from "./CategoryProductViewStore";
 
 export interface IMobXContext {
     productStore: ProductStore;
@@ -19,6 +20,7 @@ export interface IMobXContext {
     backofficeStore: BackofficeStore;
     sniperStore : SniperStore;
     authStore: AuthStore;
+    CPVStore : CategoryProductViewStore;
 }
 
 const MobXContext = React.createContext<IMobXContext>(undefined);
