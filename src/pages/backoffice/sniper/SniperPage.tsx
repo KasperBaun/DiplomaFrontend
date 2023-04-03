@@ -8,7 +8,6 @@ import SniperForm from "./components/SniperForm";
 
 const Sniper = () => {
     const [snipedResults, setSnipedResults] = useState<SniperModel[]>();
-    const [hasSnipedValue, setHasSnipedValues] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>("");
     const [isSniping, setIsSniping] = useState<boolean>(false);
     const { sniperStore } = useContext(MobXContext);

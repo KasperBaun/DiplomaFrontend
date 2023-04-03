@@ -2,7 +2,6 @@ import SniperModel from "@models/SniperModel";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Spinner } from "react-bootstrap";
 import SniperImageModal from "./SniperImageModal";
 import { observer } from "mobx-react-lite";
 import Loading from "@components/loading/Loading";
