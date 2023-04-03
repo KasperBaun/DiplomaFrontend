@@ -1,25 +1,27 @@
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { Notifications } from "@mui/icons-material";
+import { Paper, Typography } from "@mui/material";
 import ColorConfigs from "@styles/ColorConfigs";
-import SizeConfigs from "@styles/SizeConfigs";
 
 const Topbar: React.FC = function Topbar() {
     return (
-        <AppBar
-            position="fixed"
+        <Paper
             sx={{
-                width: `calc(100% - ${SizeConfigs.sidebarOpen.width})`,
-                ml: SizeConfigs.sidebarOpen.width,
-                boxShadow: "unset",
-                backgroundColor: ColorConfigs.topbar.bg,
-                color: ColorConfigs.topbar.color
+                background: ColorConfigs.topbar.bg,
+                color: ColorConfigs.topbar.color,
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'end',
+                padding: '5px',
+                borderRadius: 0,
+                // borderBottomLeftRadius: '4px',
+                // borderBottomRightRadius: '4px',
             }}
         >
-            <Toolbar>
-                <Typography variant="h6">
-                    React sidebar with dropdown
-                </Typography>
-            </Toolbar>
-        </AppBar>
+            <Typography variant="h6" sx={{ marginRight: '20px' }}>
+                Appbar for notifications / Settings and other stuff
+            </Typography>
+            <Notifications sx={{ marginRight: '20px' }} />
+        </Paper>
     );
 };
 

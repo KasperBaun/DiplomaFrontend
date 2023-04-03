@@ -67,6 +67,7 @@ export default class ENLocale implements ILocale {
   ProductSniperTabText = "Productsniper";
   ManagementTabText = "Management";
   OrdersTabText = "Orders";
+  LogoutTabText = "Log out";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Sales ($)";

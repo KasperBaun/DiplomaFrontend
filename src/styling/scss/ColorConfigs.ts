@@ -9,8 +9,8 @@ const ColorConfigs = {
         activeBg: "#1e253a"
     },
     topbar: {
-        bg: Constants.backgroundColor,//"#fff",
-        color: "#000"
+        bg: "#233044",//Constants.backgroundColor,//"#fff",
+        color: "#FFF"
     },
     mainBg: Constants.backgroundColor //colors.grey["100"]
 };

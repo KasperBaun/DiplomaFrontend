@@ -9,7 +9,7 @@ export abstract class Constants {
     public static readonly groenlundGreenColor = "#09473f";// "rgb(9, 71, 63)"
     public static readonly groenlundGoldColor = "#FFD700";
     public static readonly royalCopenhagenBlueColor = "#000080";
-    public static readonly backgroundColor: "#FFF";
+    public static readonly backgroundColor: "#FFFFFF";
 
     /* Company information */
     public static readonly companyName = "Grønlund";
