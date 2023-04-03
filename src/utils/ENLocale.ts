@@ -67,6 +67,7 @@ export default class ENLocale implements ILocale {
   ProductSniperTabText = "Productsniper";
   ManagementTabText = "Management";
   OrdersTabText = "Orders";
+  LogoutTabText = "Log out";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Sales ($)";
@@ -115,6 +116,9 @@ export default class ENLocale implements ILocale {
   SniperFormButtonText = "Search";
   SniperFormLabelText = "Enter Search Value";
   SniperFormTitleText = "Price Sniper";
+
+  // Inventory
+  InventoryAmountLabel = "Total Products: ";
 
   // Loginpage
   signInText = "SIGN IN";

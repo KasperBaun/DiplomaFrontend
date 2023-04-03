@@ -65,6 +65,7 @@ export default class DKLocale implements ILocale {
   ProductSniperTabText = "Produktsniper";
   ManagementTabText = "Styring";
   OrdersTabText = "Ordrer";
+  LogoutTabText = "Log ud";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Salg (DKK)";
@@ -110,6 +111,9 @@ export default class DKLocale implements ILocale {
   SniperFormButtonText = "Søg";
   SniperFormLabelText = "Indtast produkt du vil søge efter";
   SniperFormTitleText = "Pris Sniper";
+
+  // Inventory
+  InventoryAmountLabel = "Produkter: ";
 
   // Loginpage
   signInText = "Log ind";

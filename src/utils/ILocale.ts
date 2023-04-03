@@ -63,6 +63,7 @@ export interface ILocale {
   ProductSniperTabText: string;
   ManagementTabText: string;
   OrdersTabText: string;
+  LogoutTabText: string;
 
   // Admin Dashboard
   EconomyWidgetSalesFormat: string;
@@ -107,6 +108,9 @@ export interface ILocale {
   SniperFormButtonText : string;
   SniperFormLabelText : string;
   SniperFormTitleText : string;
+
+  // Inventory
+  InventoryAmountLabel : string;
 
   // Loginpage
   signInText: string;

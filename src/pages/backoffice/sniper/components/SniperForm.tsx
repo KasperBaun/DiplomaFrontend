@@ -13,11 +13,22 @@ interface IProps {
 }
 
 const SniperForm = ({ setSearchValue, isSniping, setIsSniping }: IProps) => {
-    const placeholders: string[] = ["Royal Copenhagen Musselmalet Stel", "Bing og Grøndal Frokosttallerken", "Rosenborg Sterling Sølv"];
+    const placeholders: string[] = [
+      "Royal Copenhagen Musselmalet Stel", 
+      "Bing og Grøndal Frokosttallerken", 
+      "Rosenborg Sterling Sølv",
+      "Isbjørn Figur", 
+      "Kâhler Vase", 
+      "Aluminia Tenera Spejl", 
+      "Georg Jensen Julepynt", 
+      "O.V. Mogensen sølv",  
+      "Holmegaard Viol"];
     const [currentPlaceholder, setCurrentPlaceholder] = useState<number>(0);
     const [typedPlaceholder, setTypedPlaceholder] = useState<string>("");
     const { languageStore } = useContext(MobXContext);
     
+    const placeholder = `${typedPlaceholder}`
+
     useEffect(() => {
       const timeoutId: NodeJS.Timeout = setTimeout(() => {
         setCurrentPlaceholder((currentPlaceholder + 1) % placeholders.length);
@@ -45,7 +56,6 @@ const SniperForm = ({ setSearchValue, isSniping, setIsSniping }: IProps) => {
       return () => clearTimeout(typingTimerId);
     }, [currentPlaceholder, typedPlaceholder, placeholders.length]);
 
-    const placeholder = `${typedPlaceholder}`
 
     const handleOnSniperSearchSubmit = async () => {
         setIsSniping(true);
