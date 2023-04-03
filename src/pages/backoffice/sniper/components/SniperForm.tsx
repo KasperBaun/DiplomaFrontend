@@ -1,23 +1,34 @@
 import SniperModel from "@models/SniperModel";
 import { Container } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
+import { observer } from "mobx-react-lite";
+import MobXContext from "@stores/MobXContext";
 
 interface IProps {
-    setSnipedResults : Dispatch<SetStateAction<SniperModel[]>>;
-    setHasSnipedValues : Dispatch<SetStateAction<boolean>>;
+    setSearchValue : Dispatch<SetStateAction<string>>;
     setIsSniping : Dispatch<SetStateAction<boolean>>;
     snipedResults : SniperModel[];
+    isSniping : boolean;
 }
 
-const SniperForm = ({ setSnipedResults, setHasSnipedValues, setIsSniping }: IProps) => {
-    const { sniperStore, languageStore } = useContext(MobXContext);
-    const [searchValue, setSearchValue] = useState<string>("");
-    const placeholders: string[] = ["Royal Copenhagen Musselmalet Stel", "Bing og Grøndal Frokosttallerken", "Rosenborg Sterling Sølv"];
+const SniperForm = ({ setSearchValue, isSniping, setIsSniping }: IProps) => {
+    const placeholders: string[] = [
+      "Royal Copenhagen Musselmalet Stel", 
+      "Bing og Grøndal Frokosttallerken", 
+      "Rosenborg Sterling Sølv",
+      "Isbjørn Figur", 
+      "Kâhler Vase", 
+      "Aluminia Tenera Spejl", 
+      "Georg Jensen Julepynt", 
+      "O.V. Mogensen sølv",  
+      "Holmegaard Viol"];
     const [currentPlaceholder, setCurrentPlaceholder] = useState<number>(0);
     const [typedPlaceholder, setTypedPlaceholder] = useState<string>("");
+    const { languageStore } = useContext(MobXContext);
     
+    const placeholder = `${typedPlaceholder}`
+
     useEffect(() => {
       const timeoutId: NodeJS.Timeout = setTimeout(() => {
         setCurrentPlaceholder((currentPlaceholder + 1) % placeholders.length);
@@ -45,28 +56,28 @@ const SniperForm = ({ setSnipedResults, setHasSnipedValues, setIsSniping }: IPro
       return () => clearTimeout(typingTimerId);
     }, [currentPlaceholder, typedPlaceholder, placeholders.length]);
 
-    const placeholder = `${typedPlaceholder}`
 
     const handleOnSniperSearchSubmit = async () => {
-        try {
-        const results = await sniperStore.GetSniping(searchValue) 
-        setSnipedResults(results);
-        setHasSnipedValues(true);
         setIsSniping(true);
-        if(results) {
-            console.log(JSON.stringify(results));
-        }
-        } catch (error) {
-            console.log(error);
-        }
     }
 
     return (
         <Container>
-            <h2 style={{ textAlign: "center" }}>Price Sniper</h2>
+            <h2 style={{ textAlign: "center" }}>{ languageStore.currentLanguage.SniperFormTitleText }</h2>
             <Form>
-                <Form.Label>Enter Search Value</Form.Label>
+                <Form.Label>{ languageStore.currentLanguage.SniperFormLabelText }</Form.Label>
                 <InputGroup className="mb-3">
+                  { isSniping ? (
+                    <Form.Control
+                        type="text"
+                        disabled
+                        placeholder={placeholder}
+                        onChange={(event) => {
+                            let temp = event.currentTarget.value;
+                            setSearchValue(temp);
+                        }}
+                    />
+                    ) : (
                     <Form.Control
                         type="text"
                         placeholder={placeholder}
@@ -75,16 +86,24 @@ const SniperForm = ({ setSnipedResults, setHasSnipedValues, setIsSniping }: IPro
                             setSearchValue(temp);
                         }}
                     />
+                    ) 
+                }
+                    
+                    { isSniping ? (
+                    <Button variant="outline-primary" disabled
+                        onClick={() => {handleOnSniperSearchSubmit()}}
+                    >{ languageStore.currentLanguage.SniperFormButtonText }</Button>) : (
                     <Button variant="outline-primary"
                         onClick={() => {handleOnSniperSearchSubmit()}}
-                    >Submit</Button>
+                    >{ languageStore.currentLanguage.SniperFormButtonText }</Button>)
+                  }
                 </InputGroup>
                 <Form.Text className="text-muted">
-                    Currently we will look for data on Lauritz.com
+                    { languageStore.currentLanguage.SniperFormMutedText }
                 </Form.Text>
             </Form>
         </Container>
     )
 }
 
-export default SniperForm;
+export default observer(SniperForm);

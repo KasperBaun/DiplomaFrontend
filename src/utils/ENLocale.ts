@@ -64,8 +64,10 @@ export default class ENLocale implements ILocale {
   AnalyticsTabText = "Analytics";
   SalesTabText = "Sales";
   InventoryTabText = "Inventory";
-  ProductSniperTabText = "Product Sniper";
+  ProductSniperTabText = "Productsniper";
   ManagementTabText = "Management";
+  OrdersTabText = "Orders";
+  LogoutTabText = "Log out";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Sales ($)";
@@ -86,7 +88,7 @@ export default class ENLocale implements ILocale {
   BasketTabText = "Basket";
   PaymentTabText = "Payment";
   ConfirmationTabText = "Confirmation";
-  BackOfficeTabText = "BackOffice";
+  BackOfficeTabText = "Dashboard";
   SearchBarText = "Search";
 
 
@@ -110,6 +112,13 @@ export default class ENLocale implements ILocale {
   TableEntrySniperDescription = "Description";
   TableEntrySniperImages = "Image(s)";
   TableEntrySniperItemUrl = "URL";
+  SniperFormMutedText = "Currently we will look for data on Lauritz.com and dba.dk";
+  SniperFormButtonText = "Search";
+  SniperFormLabelText = "Enter Search Value";
+  SniperFormTitleText = "Price Sniper";
+
+  // Inventory
+  InventoryAmountLabel = "Total Products: ";
 
   // Loginpage
   signInText = "SIGN IN";

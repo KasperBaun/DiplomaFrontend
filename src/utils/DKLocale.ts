@@ -62,8 +62,10 @@ export default class DKLocale implements ILocale {
   AnalyticsTabText = "Analyse";
   SalesTabText = "Salg";
   InventoryTabText = "Lager";
-  ProductSniperTabText = "Produkt Sniper";
+  ProductSniperTabText = "Produktsniper";
   ManagementTabText = "Styring";
+  OrdersTabText = "Ordrer";
+  LogoutTabText = "Log ud";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Salg (DKK)";
@@ -85,7 +87,7 @@ export default class DKLocale implements ILocale {
   BasketTabText = "Kurv";
   PaymentTabText = "Betaling";
   ConfirmationTabText = "Bekræftelse";
-  BackOfficeTabText = "BackOffice";
+  BackOfficeTabText = "Dashboard";
   SearchBarText = "Søg";
 
   // Footer tabs
@@ -105,6 +107,13 @@ export default class DKLocale implements ILocale {
   TableEntrySniperDescription = "Beskrivelse";
   TableEntrySniperImages = "Billede(r)";
   TableEntrySniperItemUrl = "URL";
+  SniperFormMutedText = "Søgeresultater kommer fra lauritz.com og dba.dk";
+  SniperFormButtonText = "Søg";
+  SniperFormLabelText = "Indtast produkt du vil søge efter";
+  SniperFormTitleText = "Pris Sniper";
+
+  // Inventory
+  InventoryAmountLabel = "Produkter: ";
 
   // Loginpage
   signInText = "Log ind";
