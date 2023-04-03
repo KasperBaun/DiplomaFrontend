@@ -4,7 +4,6 @@ import { Container } from 'react-bootstrap';
 import MobXContext from '@stores/MobXContext';
 import { observer } from 'mobx-react-lite';
 import AuthPage from './auth/AuthPage';
-import InventoryMain from './inventory/Inventory';
 import BackofficeMainLayout from './BackofficeMainLayout';
 import { useContext } from 'react';
 

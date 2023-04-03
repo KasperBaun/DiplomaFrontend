@@ -9,7 +9,7 @@ import Subcategories from "./subcategory/Subcategory";
 import Products from "./product/Products";
 import SniperPage from "./sniper/SniperPage";
 import Categories from "@backoffice/category/Categories";
-
+import InventoryMain from './inventory/Inventory';
 
 
 const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
@@ -23,6 +23,7 @@ const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
             case 2: return (<Subcategories />)
             case 3: return (<Products />)
             case 4: return (<SniperPage />)
+            case 5: return (<InventoryMain />)
         }
     }
 
