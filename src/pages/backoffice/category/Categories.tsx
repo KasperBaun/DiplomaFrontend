@@ -10,7 +10,7 @@ import { Pencil } from "react-bootstrap-icons";
 import UpdateCategory from "./modal/UpdateModal";
 import Category from "@models/Category";
 
-const ListCategories: React.FC = function ListCategories() {
+const Categories: React.FC = function Categories() {
     const [visibleCreate, setVisibilityCreate] = useState(false);
     const [visibleUpdate, setVisibilityUpdate] = useState(false);
     const onOpenCreate = () => setVisibilityCreate(true);
@@ -84,5 +84,5 @@ const ListCategories: React.FC = function ListCategories() {
 
 }
 
-export default observer(ListCategories);
+export default observer(Categories);
 

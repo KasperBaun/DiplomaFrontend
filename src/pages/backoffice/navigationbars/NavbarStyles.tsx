@@ -8,6 +8,12 @@ export const rootColors: React.CSSProperties = {
     // textColor: '#707070',
 }
 
+export const menuSliderContainer: React.CSSProperties = {
+    height: '100vh',
+    width: '250',
+    background: '#511',
+}
+
 export const container: React.CSSProperties = {
     width: '100%',
     height: '100%',
