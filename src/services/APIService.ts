@@ -11,6 +11,7 @@ import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
 import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import ProductDTO from "@models/DTO/ProductDTO";
+import CategoryProductView from "@models/CategoryProductView";
 
 class APIService implements IAPIService {
 
@@ -98,6 +99,11 @@ class APIService implements IAPIService {
     }
     async deleteCategory(id: number): Promise<void> {
         return await this.crudHelper.delete(this.apiBaseUrl + "/Category/" + id, "Category");
+    }
+
+    /* Inventory */
+    async getCategoryProducts(): Promise<CategoryProductView[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Inventory`, "CategoryProductView");
     }
 
     /* Payment */
