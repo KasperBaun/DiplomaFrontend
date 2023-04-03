@@ -62,8 +62,9 @@ export default class DKLocale implements ILocale {
   AnalyticsTabText = "Analyse";
   SalesTabText = "Salg";
   InventoryTabText = "Lager";
-  ProductSniperTabText = "Produkt Sniper";
+  ProductSniperTabText = "Produktsniper";
   ManagementTabText = "Styring";
+  OrdersTabText = "Ordrer";
 
   // Admin Dashboard
   EconomyWidgetSalesFormat = "Salg (DKK)";
@@ -85,7 +86,7 @@ export default class DKLocale implements ILocale {
   BasketTabText = "Kurv";
   PaymentTabText = "Betaling";
   ConfirmationTabText = "Bekræftelse";
-  BackOfficeTabText = "BackOffice";
+  BackOfficeTabText = "Dashboard";
   SearchBarText = "Søg";
 
   // Footer tabs

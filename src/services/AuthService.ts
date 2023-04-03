@@ -7,7 +7,7 @@ import { WebAPIResponse } from "./IAPIService";
 
 export class AuthService implements IAuthService {
 
-    private prefix: string = `%c[APIService]`;
+    private prefix: string = `%c[AuthService]`;
     private color: string = ComponentLoggingConfig.Lightgreen;
     private apiBaseUrl: string;
     private loggingEnabled: boolean = Constants.loggingEnabled;

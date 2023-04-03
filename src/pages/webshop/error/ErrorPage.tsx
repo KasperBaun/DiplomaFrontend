@@ -3,8 +3,8 @@ import { Constants } from "@utils/Constants";
 import  "./ErrorPage.scss";
 
 export default function ErrorPage() {
-  const error = useRouteError();
-  console.error(error);
+  // const error = useRouteError();
+  // console.error(error);
 
   return (
     <div id="error-page" >

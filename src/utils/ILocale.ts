@@ -62,6 +62,7 @@ export interface ILocale {
   InventoryTabText: string;
   ProductSniperTabText: string;
   ManagementTabText: string;
+  OrdersTabText: string;
 
   // Admin Dashboard
   EconomyWidgetSalesFormat: string;

@@ -22,6 +22,7 @@ export class ProductStore {
     private productsLoaded: boolean = false;
     private productMap: Map<number, Product> = new Map();
     private productItems: ProductItem[] = [];
+    private productItemMap: Map<number, ProductItem> = new Map();
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -66,6 +67,7 @@ export class ProductStore {
             this.productMap = this.createProductMap(this.products);
             const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
             this.productItems = this.generateProductItems(productItemDTOs, this.productMap);
+            this.productItemMap = this.createProductItemsMap(this.productItems);
 
             runInAction(() => {
                 this.loaded = true;
@@ -83,6 +85,17 @@ export class ProductStore {
             }
         }
         return prodMap;
+    }
+
+    private createProductItemsMap(productItems: ProductItem[]): Map<number, ProductItem> {
+        const prodItemMap: Map<number, ProductItem> = new Map<number, ProductItem>();
+        for (const prodItem of productItems) {
+            const productItemExists = prodItemMap.get(prodItem.id);
+            if (!productItemExists) {
+                prodItemMap.set(prodItem.id, prodItem);
+            }
+        }
+        return prodItemMap;
     }
 
     private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItem[] {
@@ -146,6 +159,10 @@ export class ProductStore {
 
     public getProduct(id: number): Product {
         return this.productMap.get(id);
+    }
+
+    public getProductItem(id: number): ProductItem {
+        return this.productItemMap.get(id);
     }
 
     public async deleteProduct(id: number): Promise<boolean> {

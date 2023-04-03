@@ -11,14 +11,13 @@ import AuthStateProvider, { IAuthState } from '@services/AuthStateProvider';
 export class AuthStore {
     private static _Instance: AuthStore;
     private rootStore: RootStore;
-    private prefix: string = `%c[BackofficeStore]`;
+    private prefix: string = `%c[AuthStore]`;
     private color: string = ComponentLoggingConfig.DarkPurple;
     private loaded: boolean = false;
     private authService: AuthService;
     private _userAuthenticated: boolean = false;
     private _authState: IAuthState;
-
-    private authStateProvider: AuthStateProvider = new AuthStateProvider();
+    private authStateProvider: AuthStateProvider;
 
 
     constructor(_rootStore: RootStore, _authService: AuthService) {
@@ -28,6 +27,7 @@ export class AuthStore {
     }
 
     public async init(): Promise<boolean> {
+        this.authStateProvider = new AuthStateProvider();
         // Look for previous token and use it to sign in if possible
         const authed = await this.authStateProvider.trySilentAuthenticateUser();
         if (authed) {
@@ -63,7 +63,10 @@ export class AuthStore {
     }
 
     public async signOut(): Promise<void> {
-        this._authState = await this.authStateProvider.signOut();
+        runInAction(async () => {
+            this._authState = await this.authStateProvider.signOut();
+            this._userAuthenticated = false;
+        })
     }
 
     private setUserAuthed(): void {

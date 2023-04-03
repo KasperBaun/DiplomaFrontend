@@ -14,6 +14,7 @@ export class SubCategoryStore {
     private loaded: boolean = false;
     private apiService: APIService;
     private _subCategories: SubCategory[] = [];
+    private _subcategoryMap: Map<Number, SubCategory> = new Map();
     private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
 
 
@@ -39,7 +40,15 @@ export class SubCategoryStore {
         return this.loaded;
     }
 
-    public mapSubCategoriesToCategoryId(subCategories: SubCategory[]): Map<Number, SubCategory[]> {
+    private createSubcategoryMap(subCategories: SubCategory[]): Map<number, SubCategory> {
+        const map = new Map<number, SubCategory>();
+        for (const subcategory of subCategories) {
+            map.set(subcategory.id, subcategory);
+        }
+        return map;
+    }
+
+    private mapSubCategoriesToCategoryId(subCategories: SubCategory[]): Map<Number, SubCategory[]> {
         const categories = this.rootStore.categoryStore.Categories;
         const subcategoryMap = new Map<Number, SubCategory[]>();
 
@@ -57,7 +66,7 @@ export class SubCategoryStore {
         return subcategoryMap;
     }
 
-    public mapCategoryToSubcategory(subCategories: SubCategory[]): void {
+    private mapCategoryToSubcategory(subCategories: SubCategory[]): void {
 
         for (let subCat of subCategories) {
             subCat.category = this.rootStore.categoryStore.Categories.find(cat => cat.id === subCat.categoryId);
@@ -90,8 +99,8 @@ export class SubCategoryStore {
         return this.subcategoriesInCategoryMap.get(categoryId);
     }
 
-    public  getSubcategory(id: number): SubCategory {
-        return this._subCategories.find(subCat => subCat.id === id);
+    public getSubcategory(id: number): SubCategory {
+        return this._subcategoryMap.get(id);
     }
 
     public async deleteSubCategory(id: number): Promise<boolean> {
