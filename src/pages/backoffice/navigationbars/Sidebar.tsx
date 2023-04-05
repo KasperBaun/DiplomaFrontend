@@ -142,19 +142,19 @@ function createNavPaths(languageStore: LanguageStore, setNavKey: Dispatch<SetSta
             },
             {
                 navigationClick: () => setNavKey(1),
-                title: languageStore.currentLanguage.CategoriesTabText,
+                title: languageStore.currentLanguage.CatelogTabText,
                 icon: <CreateNewFolderOutlined style={iconStyling ? iconStyling : {}} />
             },
-            {
-                navigationClick: () => setNavKey(2),
-                title: languageStore.currentLanguage.SubCategoriesTabText,
-                icon: <CreateNewFolderOutlined style={iconStyling ? iconStyling : {}} />
-            },
-            {
-                navigationClick: () => setNavKey(3),
-                title: languageStore.currentLanguage.ProductTabText,
-                icon: <CreateNewFolderOutlined style={iconStyling ? iconStyling : {}} />
-            }
+            // {
+            //     navigationClick: () => setNavKey(2),
+            //     title: languageStore.currentLanguage.SubCategoriesTabText,
+            //     icon: <CreateNewFolderOutlined style={iconStyling ? iconStyling : {}} />
+            // },
+            // {
+            //     navigationClick: () => setNavKey(3),
+            //     title: languageStore.currentLanguage.ProductTabText,
+            //     icon: <CreateNewFolderOutlined style={iconStyling ? iconStyling : {}} />
+            // }
         ];
 
     return paths;
