@@ -8,6 +8,7 @@ import ColorConfigs from "@styles/ColorConfigs";
 
 export interface ISidebarItemCollapseProps {
     item: INavpath;
+    sidebarOpen: boolean;
 }
 
 const SidebarItemCollapse: React.FC<ISidebarItemProps> = function SidebarItemCollapse(props: ISidebarItemProps) {
@@ -23,11 +24,13 @@ const SidebarItemCollapse: React.FC<ISidebarItemProps> = function SidebarItemCol
                         backgroundColor: ColorConfigs.sidebar.hoverBg
                     },
                     paddingY: "12px",
-                    paddingX: "24px"
+                    paddingX: "24px",
+                    justifyContent: props.sidebarOpen ? "flex-start" : "center"
                 }}
             >
                 <ListItemIcon sx={{
-                    color: ColorConfigs.sidebar.color
+                    color: ColorConfigs.sidebar.color,
+                    justifyContent: props.sidebarOpen ? "flex-start" : "center",
                 }}>
                     {props.item.icon && props.item.icon}
                 </ListItemIcon>
@@ -44,13 +47,13 @@ const SidebarItemCollapse: React.FC<ISidebarItemProps> = function SidebarItemCol
             <Collapse in={open} timeout="auto">
                 <List>
                     {props.item.child && props.item.child.map((navpath, index) => (
-                        
-                            navpath.child ? (
-                                <SidebarItemCollapse item={navpath} key={index} />
-                            ) : (
-                                <SidebarItem item={navpath} key={index} />
-                            )
-                        
+
+                        navpath.child ? (
+                            <SidebarItemCollapse item={navpath} sidebarOpen={props.sidebarOpen} key={index} />
+                        ) : (
+                            <SidebarItem item={navpath} sidebarOpen={props.sidebarOpen} key={index} />
+                        )
+
                     ))}
                 </List>
             </Collapse>

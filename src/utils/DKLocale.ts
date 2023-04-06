@@ -89,7 +89,7 @@ export default class DKLocale implements ILocale {
   ConfirmationTabText = "Bekræftelse";
   BackOfficeTabText = "Dashboard";
   SearchBarText = "Søg";
-  CatelogTabText = "Katalog";
+  CatalogTabText = "Katalog";
 
   // Footer tabs
   BlogTabText = "Blog";
