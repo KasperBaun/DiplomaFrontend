@@ -1,9 +1,9 @@
+import { Navpath } from "@models/Navpath";
 import { ListItemButton, ListItemIcon } from "@mui/material";
-import { INavpath } from "./INavpath";
 import ColorConfigs from "@styles/ColorConfigs";
 
 export interface ISidebarItemProps {
-    item: INavpath;
+    item: Navpath;
     sidebarOpen: boolean;
 }
 

@@ -49,8 +49,6 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
         <Box
             display='flex'
             justifyContent='space-between'
-            //backgroundColor={ColorConfigs.topbar.bg}
-            //p={2}
             sx={{
                 background: ColorConfigs.topbar.bg,
                 color: ColorConfigs.topbar.color,
