@@ -86,7 +86,7 @@ export interface ILocale {
   ConfirmationTabText: string;
   BackOfficeTabText: string;
   SearchBarText: string;
-  CatelogTabText: string;
+  CatalogTabText: string;
 
   // Footer tabs
   BlogTabText: string;

@@ -1,17 +1,16 @@
 import { Box } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Item from '@mui/material/Stack';
-import SizeConfigs from "@styles/SizeConfigs";
 import ColorConfigs from "@styles/ColorConfigs";
-import Sidebar from "./navigationbars/Sidebar";
-import Topbar from "./navigationbars/Topbar";
+import Sidebar from "./navigation/Sidebar";
+import Topbar from "./navigation/Topbar";
 import { useState } from "react";
 import BackOfficeDashboard from "./Dashboard/dashboard";
-import Subcategories from "./subcategory/Subcategory";
-import Products from "./product/Products";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import CategoryTabs from "./category/CategoryTabs";
+import Subcategories from "./subcategory/Subcategory";
+import Products from "./product/Products";
 
 const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
 
@@ -21,18 +20,17 @@ const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
         switch (activeNavKey) {
             case 0: return (<BackOfficeDashboard />)
             case 1: return (<CategoryTabs />)
+            case 2: return (<Subcategories />)
+            case 3: return (<Products />)
             case 4: return (<SniperPage />)
             case 5: return (<InventoryMain />)
         }
     }
 
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-    const [mainBoxWidth, setMainBoxWidth] = useState<string>(`calc(100% - ${SizeConfigs.sidebarOpen}`);
 
     const handleToggleSidebarOpenClicked = () => {
         setSidebarOpen(!sidebarOpen);
-        setMainBoxWidth(`calc(100% -${sidebarOpen ? SizeConfigs.sidebarOpen : SizeConfigs.sidebarClosed}`);
-
     }
 
     return (
@@ -40,13 +38,11 @@ const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
             <Box
                 component="nav"
                 sx={{
-                    width: SizeConfigs.sidebarOpen.width,
                     flexShrink: 0
                 }}
             >
                 <Sidebar
                     sidebarOpen={sidebarOpen}
-                    setSidebarOpen={handleToggleSidebarOpenClicked}
                     setNavKey={setActiveNavKey}
                 />
             </Box>
@@ -54,13 +50,15 @@ const BackofficeMainLayout: React.FC = function BackofficeMainLayout() {
                 component="main"
                 sx={{
                     flexGrow: 1,
-                    width: mainBoxWidth,
                     backgroundColor: ColorConfigs.mainBg
                 }}
             >
                 <Stack>
                     <Item>
-                        <Topbar />
+                        <Topbar
+                            sidebarOpen={sidebarOpen}
+                            setSidebarOpen={handleToggleSidebarOpenClicked}
+                        />
                     </Item>
                     <Item padding={1}>
                         {navSwitch()}

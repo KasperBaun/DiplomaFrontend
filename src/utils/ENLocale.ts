@@ -90,7 +90,7 @@ export default class ENLocale implements ILocale {
   ConfirmationTabText = "Confirmation";
   BackOfficeTabText = "Dashboard";
   SearchBarText = "Search";
-  CatelogTabText = "Catelog";
+  CatalogTabText = "Catalog";
 
 
 

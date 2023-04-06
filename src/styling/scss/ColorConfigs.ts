@@ -1,4 +1,3 @@
-import { colors } from "@mui/material";
 import { Constants } from "@utils/Constants";
 
 const ColorConfigs = {
@@ -10,7 +9,8 @@ const ColorConfigs = {
     },
     topbar: {
         bg: "#233044",//Constants.backgroundColor,//"#fff",
-        color: "#FFF"
+        color: "#FFF",
+        hoverBg: "#1e253a",
     },
     mainBg: Constants.backgroundColor //colors.grey["100"]
 };
