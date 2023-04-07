@@ -28,7 +28,7 @@
         cursor: pointer;
         border-radius: 2px;
         font-size: 20px;
-        color: $textColor;
+        color: $textHoverColor;
         text-align: center;
         line-height: 35px;
         margin-right: 3px;
@@ -60,6 +60,6 @@
 }
 
 .FL_NavLink:hover {
-    color: $textColor !important;
+    color: $textHoverColor !important;
     text-decoration: underline;
 }

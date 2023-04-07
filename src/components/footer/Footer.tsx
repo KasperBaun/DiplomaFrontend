@@ -1,5 +1,5 @@
 import "./footer.scss";
-import React, { useContext } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 import { Container } from "react-bootstrap";
 import FooterIcons from "./FooterIcons";
