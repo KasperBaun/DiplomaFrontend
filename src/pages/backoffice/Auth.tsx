@@ -2,9 +2,9 @@
 import MobXContext from '@stores/MobXContext';
 import { observer } from 'mobx-react-lite';
 import AuthPage from './auth/AuthPage';
-import Backoffice from './Backoffice';
 import { useContext } from 'react';
 import { Container } from '@mui/material';
+import Backoffice from './BackOffice';
 
 const Auth = observer(() => {
     const { authStore } = useContext(MobXContext);

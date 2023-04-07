@@ -5,7 +5,7 @@ import ColorConfigs from "@styles/ColorConfigs";
 import Sidebar from "./navigation/Sidebar";
 import Topbar from "./navigation/Topbar";
 import { useState } from "react";
-import Dashboard from "./dashboard/Dashboard";
+import Dashboard from "./Dashboard/dashboard";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import CategoryTabs from "./category/CategoryTabs";
