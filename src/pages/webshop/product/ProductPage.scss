@@ -1,26 +1,23 @@
 .image-gallery {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    overflow-x: auto;
   
     .big-image {
-      width: 60%;
+      flex: 1 1 10%;
+      width: 30rem;
+      margin: 2rem;
     }
   
     .small-images {
-      width: 60%;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-
-      display: flex;
-      flex-wrap: wrap;
-      overflow-y: hidden;
-  
-      div {
-        margin-bottom: 10px;
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
+      flex: 1 1 40%;
+      padding: 1rem;
+      justify-content: space-between; /* Add this to evenly space the small images */
+      flex-direction: column; /* Set flex direction to column to stack the small images */
+      align-items: flex-start; /* Align items to center the images horizontally */
+      align-self: flex-start;
+    }
+    .small-images.clicked{
+      border: 1px solid black;
     }
   }
