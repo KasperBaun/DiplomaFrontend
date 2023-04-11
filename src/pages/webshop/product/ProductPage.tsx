@@ -5,6 +5,7 @@ import MobXContext from "@stores/MobXContext";
 import ImageGallery from "./ImageGallery";
 import "./ProductPage.scss";
 import { useParams } from "react-router-dom";
+import ProductDescription from "./ProductDescription";
 
 interface IProductPageProps {
 }
@@ -34,53 +35,19 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
 
     if (product) {
         return (
-            <table>
-              <thead>
-                <tr>
-                  <th style={{ width: '50' }}>
-                  <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />                
-                  </th>
-                  <th style={{ width: '50%' }}>
-                    <h3>{product.product.name}</h3>
-                    <p>Price: {product.currentPrice}</p>
-                    <p>Condition: {product.condition}</p>
-                    <p>Quality: {product.quality}</p>
-                    <p>Weight: {product.weight}</p>
-                    
-                    <p>{product.customText}</p>
-
-
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* add table rows and cells here */}
-              </tbody>
-            </table>
+            <div>
+              <div style={{ display: 'flex' }}>
+                <div style={{ width: '50%' }}>
+                  <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />
+                </div>
+                <div style={{ width: '50%' }}>
+                  <ProductDescription key={"productDes"+product.id} Iproduct={product} />
+                </div>
+              </div>
+              {/* add additional divs here for table rows and cells */}
+          </div>
           );
         }
-
-
-//         return (
-//             <div>
-//                 <h1>Product Page</h1>
-//                 {/* // Små billeder (mulighed for at browse) */}
-
-//                 {/* // Stort billede */}
-//                 <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />
-
-//                 {/* // Beskrivelseskomponent */}
-//                 <p>Name: {product.product.name}</p>
-//                 <p>Condition: {product.condition}</p>
-//             </div >
-
-//         )
-
-//     } else {
-//         return (
-//             <h1>Loading...</h1>
-//         )
-//     }
 
  });
 

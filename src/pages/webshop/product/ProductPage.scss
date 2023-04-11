@@ -21,3 +21,23 @@
       border: 1px solid black;
     }
   }
+
+  .ProductDescription{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    .ProductDe_header {
+      align-content: flex-start;
+      font-style: bold;
+    }
+    
+    .productDe_price{
+      padding-top: 1rem;
+      font-weight: 900;
+      color: goldenrod;
+    }
+  }
