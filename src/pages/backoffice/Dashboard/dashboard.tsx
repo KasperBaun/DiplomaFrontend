@@ -4,6 +4,8 @@ import { useContext } from "react";
 import "./css/dashboard.scss";
 import EconomyWidget from "./components/EconomyWidget";
 import RecentSalesList from "@backoffice/orders/components/RecentSales";
+import SalesSummary from "./components/SalesSummary";
+import InventoryWidget from "./components/InventoryWidget";
 
 const Dashboard = () => {
     const { languageStore } = useContext(MobXContext);
@@ -37,17 +39,12 @@ const Dashboard = () => {
 
             <Grid className="DashBoardGridContainer" item xs>
                 <Container className="DashBoardContainer">
-                    <h3>Salg Total</h3>
+                    <SalesSummary />
                 </Container>
             </Grid>
             <Grid className="DashBoardGridContainer" item xs>
                 <Container className="DashBoardContainer">
-                    <h3>Køb Total</h3>
-                </Container>
-            </Grid>
-            <Grid className="DashBoardGridContainer" item xs>
-                <Container className="DashBoardContainer">
-                    <h3>Inventar</h3>
+                    <InventoryWidget />
                 </Container>
             </Grid>
         </Grid>

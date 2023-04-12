@@ -94,6 +94,9 @@ export default class ENLocale implements ILocale {
 
   // Payments
   GoToSales = "See more sales";
+  SalesSummaryTitle = "Sales Summary";
+  SalesSummaryTotalSales = "Sales (total)";
+  SalesSummaryTotalAmount = "Amount (total)";
 
   // Footer tabs
   BlogTabText = "Blog";
@@ -121,6 +124,8 @@ export default class ENLocale implements ILocale {
 
   // Inventory
   InventoryAmountLabel = "Total Products: ";
+  InventoryWidgetTitle = "Inventory";
+  InventoryTitle = "Title";
 
   // Loginpage
   signInText = "SIGN IN";

@@ -1,4 +1,4 @@
-import { Container, Link } from "@mui/material";
+import { Container } from "@mui/material";
 import RecentSalesList from "./components/RecentSales";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";

@@ -89,7 +89,10 @@ export interface ILocale {
   CatalogTabText: string;
 
   // Payments
-  GoToSales: string
+  GoToSales: string;
+  SalesSummaryTitle: string;
+  SalesSummaryTotalSales: string;
+  SalesSummaryTotalAmount: string;
 
   // Footer tabs
   BlogTabText: string;
@@ -115,6 +118,8 @@ export interface ILocale {
 
   // Inventory
   InventoryAmountLabel : string;
+  InventoryTitle : string;
+  InventoryWidgetTitle : string;
 
   // Loginpage
   signInText: string;
