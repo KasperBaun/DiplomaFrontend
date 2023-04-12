@@ -1,12 +1,16 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Link } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import "./css/dashboard.scss";
 import EconomyWidget from "./components/EconomyWidget";
-import RecentSalesList from "./components/RecentSales";
+import RecentSalesList from "@backoffice/orders/components/RecentSales";
 
 const Dashboard = () => {
     const { languageStore } = useContext(MobXContext);
+
+    const navigateToSales = () => {
+
+    }
 
     return (
         <Grid container spacing={2}>
@@ -23,7 +27,11 @@ const Dashboard = () => {
                         tableButton={languageStore.currentLanguage.RecentSalesNavButton}
                         currencyId={languageStore.currentLanguage.RecentSalesCurrencyId}
                         method={languageStore.currentLanguage.RecentSalesMethod}
+                        tableHeight={225}
                     />
+                    <Link color="primary" href="#" onClick={navigateToSales} sx={{ mt: 3}}>
+                        { languageStore.currentLanguage.GoToSales }
+                    </Link>
                 </Container>
             </Grid>
 

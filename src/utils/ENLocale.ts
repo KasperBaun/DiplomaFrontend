@@ -92,7 +92,8 @@ export default class ENLocale implements ILocale {
   SearchBarText = "Search";
   CatalogTabText = "Catalog";
 
-
+  // Payments
+  GoToSales = "See more sales";
 
   // Footer tabs
   BlogTabText = "Blog";

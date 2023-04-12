@@ -88,6 +88,9 @@ export interface ILocale {
   SearchBarText: string;
   CatalogTabText: string;
 
+  // Payments
+  GoToSales: string
+
   // Footer tabs
   BlogTabText: string;
   PricingTabText: string;
