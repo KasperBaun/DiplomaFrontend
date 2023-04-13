@@ -5,6 +5,41 @@ export default class DKLocale implements ILocale {
   aboutUs = "Om os";
   aboutUsText = "Vi sælger porcelæn .....";
 
+  getQuality(qualityType: number): string {
+    switch (qualityType) {
+      case 1: return "1. Sortering";
+      case 2: return "2. Sortering";
+      case 3: return "3. Sortering";
+      default: return "Sortering er ikke defineret";
+    }
+  }
+
+  getCondition (conditionType: number): string {
+    switch (conditionType) {
+      case 1: return "Ingen skår";
+      case 2: return "Få skår";
+      case 3: return "Mange skår"; 
+      default: return "Stand er ikke defineret";
+    }
+  }
+
+  getMaterialType (materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelæn";
+      case 2: return "Stål";
+      case 3: return "Glas"; 
+      case 4: return "Guld";
+      case 5: return "Sølv";
+      case 6: return "Keramik"; 
+      case 7: return "Stentøj";
+      case 8: return "Fajance"; 
+      default: return "Materiale er ikke defineret";
+    }
+  }
+
+
+  
+
   // Category Admin
   createCategoryModalTitle = "Opret ny kategori";
   createCategoryTitle = "Titel";
@@ -53,7 +88,11 @@ export default class DKLocale implements ILocale {
   productPage_productQuality = "Sortering";
   productPage_productDimension = "Størrelse";
   productPage_productCustomText = "Ekstra information";
-  productPage_createProduct = "Create product";
+  productPage_createProduct = "Opret produkt";
+  productPage_weight = "Vægt";
+
+  productPage_modelSpecifications = "Model specifikationer";
+  productPage_productInfoHeadline = "General information";
 
   // Analysis
   AnalysisTitle = "Guld & Sølv";

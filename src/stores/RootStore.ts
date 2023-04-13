@@ -44,9 +44,9 @@ export class RootStore implements IMobXContext {
         this.authService = new AuthService(Constants.apiBaseUrl);
 
         // Instantiate stores here
+        this.languageStore = LanguageStore.GetInstance(this);
         this.productStore = ProductStore.GetInstance(this, this.apiService);
         this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
-        this.languageStore = LanguageStore.GetInstance(this);
         this.paymentStore = PaymentStore.GetInstance(this, this.apiService);
         this.subCategoryStore = SubCategoryStore.GetInstance(this, this.apiService);
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
@@ -65,10 +65,10 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
         // Init stores here
+        const langLoaded = await this.languageStore.init();
         const catLoaded = await this.categoryStore.init();
         const subcatLoaded = await this.subCategoryStore.init();
         const prodLoaded = await this.productStore.init();
-        const langLoaded = await this.languageStore.init();
         const authLoaded = await this.authStore.init();
         const cpvLoaded = await this.CPVStore.init();
         const payLoaded = await this.paymentStore.init();

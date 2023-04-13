@@ -33,7 +33,7 @@ export class ProductStore {
     }
 
     public async init(): Promise<boolean> {
-
+     
         this.loading = true;
         // Fetch products
         await this.loadProducts();
@@ -50,7 +50,7 @@ export class ProductStore {
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _apiService: APIService): ProductStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService ): ProductStore {
         if (!ProductStore._Instance) {
             ProductStore._Instance = new ProductStore(_rootStore, _apiService);
         }

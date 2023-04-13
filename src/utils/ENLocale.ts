@@ -6,6 +6,38 @@ export default class ENLocale implements ILocale {
   aboutUs = "About Us";
   aboutUsText = "We sell porcelain";
 
+  getQuality(qualityType: number): string {
+    switch (qualityType) {
+      case 1: return "1. Quality";
+      case 2: return "2. Quality";
+      case 3: return "3. Quality";
+      default: return "Sorting not defined";
+    }
+  }
+
+  getCondition (conditionType: number): string {
+    switch (conditionType) {
+      case 1: return "No shards";
+      case 2: return "Few shards";
+      case 3: return "Many shards"; 
+      default: return "Condition not defined";
+    }
+  }
+
+  getMaterialType (materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelain";
+      case 2: return "Steel";
+      case 3: return "Glass"; 
+      case 4: return "Gold";
+      case 5: return "Silver";
+      case 6: return "Ceramics"; 
+      case 7: return "Stoneware";
+      case 8: return "Fajance"; 
+      default: return "Material not defined";
+    }
+  }
+
   // Category Admin
   createCategoryModalTitle = "Create Category";
   createCategoryTitle = "Title";
@@ -55,7 +87,10 @@ export default class ENLocale implements ILocale {
   productPage_productQuality = "Quality";
   productPage_productDimension = "Dimension";
   productPage_productCustomText = "Extra information";
-  productPage_createProduct = "Opret produkt";
+  productPage_weight = "Weight";
+  productPage_createProduct = "create product";
+  productPage_modelSpecifications = "Model specifictations";
+  productPage_productInfoHeadline = "General info";
 
   // Analysis
   AnalysisTitle = "Gold and Silver";
@@ -68,6 +103,7 @@ export default class ENLocale implements ILocale {
   AnalysisGold = "Gold";
 
 
+ 
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
