@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import ColorConfigs from "@styles/ColorConfigs";
 
 export interface IHeaderProps {
     title: string;
@@ -12,7 +11,6 @@ const BackofficeHeader: React.FC<IHeaderProps> = function BackofficeHeader(props
         <Box>
             <Typography
                 variant="h2"
-                color={ColorConfigs.colors.grey[100]}
                 fontWeight="bold"
                 sx={{ mb: "5px" }}
             >
@@ -20,7 +18,6 @@ const BackofficeHeader: React.FC<IHeaderProps> = function BackofficeHeader(props
             </Typography>
             <Typography
                 variant="h5"
-                color={ColorConfigs.colors.green[500]}
             >{props.subtitle}</Typography>
         </Box>
     )

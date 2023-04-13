@@ -3,6 +3,10 @@ export interface ILocale {
   aboutUs: string;
   aboutUsText: string;
 
+  // Button text
+  buttonCancelText: string;
+  buttonDeleteText: string;
+
   // Category Admin
   createCategoryModalTitle: string;
   createCategoryTitle: string;
@@ -22,6 +26,8 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
+  deleteCategoryConfirmMessage: string;
+
   // BACKOFFICE
 
   // Subcategory

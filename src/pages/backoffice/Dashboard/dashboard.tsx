@@ -1,10 +1,11 @@
-import { Box } from "@mui/material";
+import { Container, Grid, Link } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import "./css/dashboard.scss";
-import { Container, Grid, Link } from "@mui/material";
-import "./css/dashboard.scss";
-import BackofficeHeader from "./components/BackofficeHeader";
+import EconomyWidget from "./components/EconomyWidget";
+import RecentSalesList from "@backoffice/orders/components/RecentSales";
+import SalesSummary from "./components/SalesSummary";
+import InventoryWidget from "./components/InventoryWidget";
 
 const Dashboard = () => {
     const { languageStore } = useContext(MobXContext);
@@ -14,18 +15,7 @@ const Dashboard = () => {
     }
 
     return (
-        <Box m="20px">
-            <Box display="flex" justifyContent="space-between" alignItems="center">
-                <BackofficeHeader title={"Dashboard"} subtitle={"Welcome to your dashboard"} />
-            </Box>
-        </Box>
-    )
-}
-
-export default Dashboard;
-
-
-{/* <Grid container spacing={2}>
+        <Grid container spacing={2}>
             <Grid className="DashBoardGridContainer" item xs={12}>
                 <EconomyWidget title={languageStore.currentLanguage.EconomyWidgetTitle} salgsformat={languageStore.currentLanguage.EconomyWidgetSalesFormat} />
             </Grid>
@@ -57,4 +47,8 @@ export default Dashboard;
                     <InventoryWidget />
                 </Container>
             </Grid>
-        </Grid> */}
+        </Grid>
+    )
+}
+
+export default Dashboard;
