@@ -87,7 +87,6 @@ export default class ENLocale implements ILocale {
   productPage_productQuality = "Quality";
   productPage_productDimension = "Dimension";
   productPage_productCustomText = "Extra information";
-  productPage_createProduct = "Opret produkt";
   productPage_weight = "Weight";
   productPage_createProduct = "create product";
   productPage_modelSpecifications = "Model specifictations";
