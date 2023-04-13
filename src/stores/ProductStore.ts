@@ -8,6 +8,7 @@ import ProductItem from '@models/ProductItem';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import ProductDTO from '@models/DTO/ProductDTO';
 import SubCategory from '@models/SubCategory';
+import ProductItemDetails from '@models/ProductItemDetails';
 
 export class ProductStore {
 
@@ -23,7 +24,7 @@ export class ProductStore {
     private productMap: Map<number, Product> = new Map();
     private productItems: ProductItem[] = [];
     private productItemMap: Map<number, ProductItem> = new Map();
-
+    private productItemDetailItems : ProductItemDetails[] = [];
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -36,6 +37,7 @@ export class ProductStore {
         this.loading = true;
         // Fetch products
         await this.loadProducts();
+        const productItemDetailItems = await this.apiService.getProductItemDetails();
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -43,6 +45,7 @@ export class ProductStore {
         runInAction(() => {
             this.loading = false;
             this.loaded = true;
+            this.productItemDetailItems = productItemDetailItems;
         })
         return this.loaded;
     }
@@ -151,6 +154,10 @@ export class ProductStore {
 
     public get Products(): Product[] {
         return this.products;
+    }
+
+    public get ProductItemDetails(): ProductItemDetails[] {
+        return this.productItemDetailItems;
     }
 
     public get ProductItems(): ProductItem[] {

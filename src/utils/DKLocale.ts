@@ -94,6 +94,16 @@ export default class DKLocale implements ILocale {
   productPage_modelSpecifications = "Model specifikationer";
   productPage_productInfoHeadline = "General information";
 
+  // Analysis
+  AnalysisTitle = "Guld & Sølv";
+  AnalysisMaterial = "Materiale";
+  AnalysisItems = "Enheder på lager";
+  AnalysisWeight = "Samlet vægt";
+  AnalysisPricePrKg = "Kilopris";
+  AnalysisSummary = "Nuværende værdi";
+  AnalysisSilver = "Sølv";
+  AnalysisGold = "Guld";
+
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";
 
@@ -103,7 +113,7 @@ export default class DKLocale implements ILocale {
   InventoryTabText = "Lager";
   ProductSniperTabText = "Produktsniper";
   ManagementTabText = "Styring";
-  OrdersTabText = "Ordrer";
+  OrdersTabText = "Ordre";
   LogoutTabText = "Log ud";
 
   // Admin Dashboard
@@ -128,6 +138,7 @@ export default class DKLocale implements ILocale {
   ConfirmationTabText = "Bekræftelse";
   BackOfficeTabText = "Dashboard";
   SearchBarText = "Søg";
+  CatalogTabText = "Katalog";
 
   // Footer tabs
   BlogTabText = "Blog";
@@ -135,6 +146,23 @@ export default class DKLocale implements ILocale {
   AboutUsTabText = "Om os";
   FAQTabText = "Ofte stillede spørgsmål";
   ContactTabText = "Kontakt";
+
+  // Payments
+  GoToSales = "Se flere salg";
+  SalesSummaryTitle = "Salgs oversigt";
+  SalesSummaryTotalSales = "Salg (total)";
+  SalesSummaryTotalAmount = "Sum (total)";
+
+  // Orders
+  GoToOrders = "Se flere Ordre";
+  OrderDetailsProductName = "Produkt";
+  OrderDetailsManufacturer = "Mærke";
+  OrderDetailsCustomerId = "Kunde (Id)";
+  OrderDetailsPaymentStatus = "Betalingsstatus";
+  OrderDetailsDeliveryStatus = "Afsendelsesstatus";
+  OrderDetailsDiscountTag = "Discount brugt";
+  OrderDetailsCompletionStatus = "Status";
+  OrderDetailsListTitle = "Seneste Ordre";
 
   // Sniper
   TableEntrySniperSource = "Kilde";
@@ -153,6 +181,8 @@ export default class DKLocale implements ILocale {
 
   // Inventory
   InventoryAmountLabel = "Produkter: ";
+  InventoryWidgetTitle = "Lagerbeholdning";
+  InventoryTitle = "Titel";
 
   // Loginpage
   signInText = "Log ind";

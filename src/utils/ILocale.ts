@@ -96,6 +96,42 @@ export interface ILocale {
   ConfirmationTabText: string;
   BackOfficeTabText: string;
   SearchBarText: string;
+  CatalogTabText: string;
+
+  // Payments
+  GoToSales: string;
+  SalesSummaryTitle: string;
+  SalesSummaryTotalSales: string;
+  SalesSummaryTotalAmount: string;
+
+  // Analysis
+  AnalysisTitle : string;
+  AnalysisMaterial : string;
+  AnalysisItems : string;
+  AnalysisWeight : string;
+  AnalysisPricePrKg : string;
+  AnalysisSummary : string;
+  AnalysisSilver : string;
+  AnalysisGold : string;
+
+  // Orders
+  GoToOrders: string;
+  OrderDetailsProductName : string;
+  OrderDetailsManufacturer : string;
+  OrderDetailsCustomerId : string;
+  OrderDetailsPaymentStatus : string;
+  OrderDetailsDeliveryStatus : string;
+  OrderDetailsDiscountTag : string;
+  OrderDetailsCompletionStatus : string;
+  OrderDetailsListTitle : string;
+
+  // <TableCell align="left">Product Name</TableCell>
+  // <TableCell align="left">Manufacturer</TableCell>
+  // <TableCell align="left">Customer (Id)</TableCell>
+  // <TableCell align="left">Payment Status</TableCell>
+  // <TableCell align="left">Delivery Status</TableCell>
+  // <TableCell align="left">Discount used</TableCell>
+  // <TableCell align="left">Completed</TableCell>
 
   // Footer tabs
   BlogTabText: string;
@@ -121,6 +157,8 @@ export interface ILocale {
 
   // Inventory
   InventoryAmountLabel : string;
+  InventoryTitle : string;
+  InventoryWidgetTitle : string;
 
   // Loginpage
   signInText: string;

@@ -87,13 +87,24 @@ export default class ENLocale implements ILocale {
   productPage_productQuality = "Quality";
   productPage_productDimension = "Dimension";
   productPage_productCustomText = "Extra information";
+  productPage_createProduct = "Opret produkt";
   productPage_weight = "Weight";
-
   productPage_createProduct = "create product";
-
   productPage_modelSpecifications = "Model specifictations";
   productPage_productInfoHeadline = "General info";
-  
+
+  // Analysis
+  AnalysisTitle = "Gold and Silver";
+  AnalysisMaterial = "Material";
+  AnalysisItems = "Items in Stock";
+  AnalysisWeight = "Weight";
+  AnalysisPricePrKg = "Price pr. Kg";
+  AnalysisSummary = "Price summary";
+  AnalysisSilver = "Silver";
+  AnalysisGold = "Gold";
+
+
+ 
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
@@ -128,8 +139,24 @@ export default class ENLocale implements ILocale {
   ConfirmationTabText = "Confirmation";
   BackOfficeTabText = "Dashboard";
   SearchBarText = "Search";
+  CatalogTabText = "Catalog";
 
+  // Payments
+  GoToSales = "See more sales";
+  SalesSummaryTitle = "Sales Summary";
+  SalesSummaryTotalSales = "Sales (total)";
+  SalesSummaryTotalAmount = "Amount (total)";
 
+  // Orders
+  GoToOrders = "See more Orders";
+  OrderDetailsProductName = "Product";
+  OrderDetailsManufacturer = "Fabricator";
+  OrderDetailsCustomerId = "Customer (Id)";
+  OrderDetailsPaymentStatus = "Payment Status";
+  OrderDetailsDeliveryStatus = "Delivery Status";
+  OrderDetailsDiscountTag = "Discount used";
+  OrderDetailsCompletionStatus = "Completed?";
+  OrderDetailsListTitle = "Order Summary";
 
   // Footer tabs
   BlogTabText = "Blog";
@@ -157,6 +184,8 @@ export default class ENLocale implements ILocale {
 
   // Inventory
   InventoryAmountLabel = "Total Products: ";
+  InventoryWidgetTitle = "Inventory";
+  InventoryTitle = "Title";
 
   // Loginpage
   signInText = "SIGN IN";

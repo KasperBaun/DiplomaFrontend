@@ -1,30 +1,78 @@
+import { Box } from "@mui/material";
+import Stack from '@mui/material/Stack';
+import Item from '@mui/material/Stack';
+import ColorConfigs from "@styles/ColorConfigs";
+import Sidebar from "./navigation/Sidebar";
+import Topbar from "./navigation/Topbar";
+import { useState } from "react";
+import Dashboard from "./Dashboard/dashboard";
+import SniperPage from "./sniper/SniperPage";
+import InventoryMain from './inventory/Inventory';
+import CategoryTabs from "./category/CategoryTabs";
+import Subcategories from "./subcategory/Subcategory";
+import Products from "./product/Products";
+import SalesList from "./sales/SalesList";
+import Orders from "./orders/Orders";
+import Analysis from "./Dashboard/analysis/Analysis";
 
-import "./css/backoffice.scss";
-import { Container } from 'react-bootstrap';
-import MobXContext from '@stores/MobXContext';
-import { observer } from 'mobx-react-lite';
-import AuthPage from './auth/AuthPage';
-import BackofficeMainLayout from './BackofficeMainLayout';
-import { useContext } from 'react';
+const Backoffice: React.FC = function Backoffice() {
 
-const BackOfficeMain = observer(() => {
-    const { authStore } = useContext(MobXContext);
+    const [activeNavKey, setActiveNavKey] = useState<number>(0);
 
-    if (!authStore.userAuthenticated) {
-        return <AuthPage />;
+    const navSwitch = () => {
+        switch (activeNavKey) {
+            case 0: return (<Dashboard />)
+            case 1: return (<CategoryTabs />)
+            case 2: return (<Subcategories />)
+            case 3: return (<Products />)
+            case 4: return (<SniperPage />)
+            case 5: return (<InventoryMain />)
+            case 6: return (<SalesList />)
+            case 7: return (<Orders />)
+            case 8: return (<Analysis />)
+        }
     }
-    else if (authStore.authState.user.role === "SuperAdmin" || "Admin") {
-        return (
-            <BackofficeMainLayout />
-        )
-    }
-    else if (authStore.authState.user.role === "User" || "Guest") {
-        return (
-            <Container>
-                <img width="600" src="https://i.kym-cdn.com/entries/icons/original/000/002/144/You_Shall_Not_Pass!_0-1_screenshot.jpg" />
-            </Container>
-        )
-    }
-});
 
-export default BackOfficeMain;
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+
+    const handleToggleSidebarOpenClicked = () => {
+        setSidebarOpen(!sidebarOpen);
+    }
+
+    return (
+        <Box sx={{ display: "flex" }}>
+            <Box
+                component="nav"
+                sx={{
+                    flexShrink: 0
+                }}
+            >
+                <Sidebar
+                    sidebarOpen={sidebarOpen}
+                    setNavKey={setActiveNavKey}
+                />
+            </Box>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    backgroundColor: ColorConfigs.mainBg
+                }}
+            >
+                <Stack>
+                    <Item>
+                        <Topbar
+                            sidebarOpen={sidebarOpen}
+                            setSidebarOpen={handleToggleSidebarOpenClicked}
+                        />
+                    </Item>
+                    <Item padding={1}>
+                        {navSwitch()}
+                    </Item>
+                </Stack>
+            </Box>
+        </Box >
+    );
+};
+
+export default Backoffice;

@@ -1,6 +1,6 @@
-export interface INavpath {
+export class Navpath {
     navigationClick: () => void;
     title: string;
     icon?: JSX.Element;
-    child?: INavpath[];
+    child?: Navpath[];
 }

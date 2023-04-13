@@ -12,6 +12,10 @@ import SniperModel from "@models/SniperModel";
 import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
+import SalesSummary from "@models/SalesSummary";
+import Order from "@models/Orders";
+import OrderDetails from "@models/OrderDetails";
+import ProductItemDetails from "@models/ProductItemDetails";
 
 class APIService implements IAPIService {
 
@@ -69,6 +73,9 @@ class APIService implements IAPIService {
     async getProductDTOs(): Promise<ProductDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Product/GetAll`, "ProductDTOs");
     }
+    async getProductItemDetails(): Promise<ProductItemDetails[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItemDetails`, "ProductItemDetails");
+    }
 
 
     /* Subcategories */
@@ -101,6 +108,24 @@ class APIService implements IAPIService {
         return await this.crudHelper.delete(this.apiBaseUrl + "/Category/" + id, "Category");
     }
 
+
+    /* Categories */
+    async getOrders(): Promise<Order[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Order`, "Orders");
+    }
+    async getOrderDetails(): Promise<OrderDetails[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
+    }
+    async createOrder(order: Order): Promise<void> {
+        return await this.crudHelper.create(`${this.apiBaseUrl}/Order`, "Order", order);
+    }
+    async updateOrder(order: Order): Promise<Order> {
+        return await this.crudHelper.update(`${this.apiBaseUrl}/Order/${order.id}`, "Order", order)
+    }
+    async deleteOrder(id: number): Promise<void> {
+        return await this.crudHelper.delete(this.apiBaseUrl + "/Order/" + id, "Order");
+    }
+
     /* Inventory */
     async getCategoryProducts(): Promise<CategoryProductView[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Inventory`, "CategoryProductView");
@@ -112,6 +137,11 @@ class APIService implements IAPIService {
     }
     async createPayment(payment: Payment): Promise<void> {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
+    }
+
+    /* Sales */
+    async getSalesSummary(): Promise<SalesSummary[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/SalesSummary`, "Sales");
     }
 
     /* Sniper */
