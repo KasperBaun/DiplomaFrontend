@@ -3,6 +3,9 @@ export interface ILocale {
   aboutUs: string;
   aboutUsText: string;
 
+  getQuality(qualityType: number): string;
+  getCondition (conditionType: number): string; 
+
   // Category Admin
   createCategoryModalTitle: string;
   createCategoryTitle: string;
@@ -50,8 +53,13 @@ export interface ILocale {
   productPage_productCondition: string;
   productPage_productQuality: string;
   productPage_productDimension: string;
+  productPage_weight : string; 
   productPage_productCustomText: string;
   productPage_createProduct: string;
+
+  productPage_modelSpecifications: string; 
+  productPage_productInfoHeadline: string; 
+
 
   // Admin Header 
   GeneralHeaderAdmin: string;

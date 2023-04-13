@@ -26,13 +26,14 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 2rem;
+    margin-top: 4rem;
     margin-left: 2rem;
     margin-right: 2rem;
 
     .ProductDe_header {
       align-content: flex-start;
       font-style: bold;
+      margin-bottom: 2rem;
     }
     
     .productDe_price{
@@ -40,4 +41,21 @@
       font-weight: 900;
       color: goldenrod;
     }
+
+    .productDe_modelNumber{
+      font-size: 14px;
+      font-style: oblique;
+      font-weight: 400;
+      color: grey;
+
+    }
+
+    .ProductDe_extraInfo{
+      margin-bottom: 3rem;
+    }
+
+    .P_Text{
+      padding-top: 0.5rem;
+    }
+
   }
