@@ -27,7 +27,7 @@ export function createNavPaths(languageStore: LanguageStore, setNavKey: Dispatch
                 icon: <InventoryOutlined style={iconStyling ? iconStyling : {}} />
             },
             {
-                navigationClick: () => setNavKey(0),
+                navigationClick: () => setNavKey(7),
                 title: sidebarOpen ? languageStore.currentLanguage.OrdersTabText : '',
                 icon: <ReceiptLongOutlined style={iconStyling ? iconStyling : {}} />
             },

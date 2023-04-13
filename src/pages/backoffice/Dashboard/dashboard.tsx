@@ -3,9 +3,10 @@ import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import "./css/dashboard.scss";
 import EconomyWidget from "./components/EconomyWidget";
-import RecentSalesList from "@backoffice/orders/components/RecentSales";
+import RecentSalesList from "@backoffice/sales/components/RecentSales";
 import SalesSummary from "./components/SalesSummary";
 import InventoryWidget from "./components/InventoryWidget";
+import OrderDetailsList from "@backoffice/orders/components/OrderDetailsList";
 
 const Dashboard = () => {
     const { languageStore } = useContext(MobXContext);
@@ -13,14 +14,22 @@ const Dashboard = () => {
     const navigateToSales = () => {
 
     }
+    const navigateToOrders = () => {
+
+    }
 
     return (
-        <Grid container spacing={2}>
-            <Grid className="DashBoardGridContainer" item xs={12}>
-                <EconomyWidget title={languageStore.currentLanguage.EconomyWidgetTitle} salgsformat={languageStore.currentLanguage.EconomyWidgetSalesFormat} />
+        <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
+            <Grid item xs={12} md={5.9}>
+                <div className="DashBoardGridContainer">
+                    <OrderDetailsList tableHeight={450} />
+                    <Link color="primary" href="#" onClick={navigateToOrders} sx={{ mt: 3 }}>
+                        {languageStore.currentLanguage.GoToOrders}
+                    </Link>
+                </div>
             </Grid>
-            <Grid className="DashBoardGridContainer" item xs={12}>
-                <Container maxWidth="xl" className="DashBoardContainer">
+            <Grid item xs={12} md={5.9}>
+                <div className="DashBoardGridContainer">
                     <RecentSalesList
                         title={languageStore.currentLanguage.RecentSalesWidgetTitle}
                         datePaid={languageStore.currentLanguage.RecentSalesDatePaid}
@@ -29,23 +38,22 @@ const Dashboard = () => {
                         tableButton={languageStore.currentLanguage.RecentSalesNavButton}
                         currencyId={languageStore.currentLanguage.RecentSalesCurrencyId}
                         method={languageStore.currentLanguage.RecentSalesMethod}
-                        tableHeight={225}
+                        tableHeight={450}
                     />
-                    <Link color="primary" href="#" onClick={navigateToSales} sx={{ mt: 3}}>
-                        { languageStore.currentLanguage.GoToSales }
+                    <Link color="primary" href="#" onClick={navigateToSales} sx={{ mt: 3 }}>
+                        {languageStore.currentLanguage.GoToSales}
                     </Link>
-                </Container>
+                </div>
             </Grid>
-
-            <Grid className="DashBoardGridContainer" item xs>
-                <Container className="DashBoardContainer">
-                    <SalesSummary />
-                </Container>
-            </Grid>
-            <Grid className="DashBoardGridContainer" item xs>
-                <Container className="DashBoardContainer">
+            <Grid item xs={12} md={5.9}>
+                <div className="DashBoardGridContainer">
                     <InventoryWidget />
-                </Container>
+                </div>
+            </Grid>
+            <Grid item xs={12} md={5.9}>
+                <div className="DashBoardGridContainer">
+                    <SalesSummary />
+                </div>
             </Grid>
         </Grid>
     )

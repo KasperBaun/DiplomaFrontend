@@ -13,6 +13,7 @@ import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
 import { AuthService } from "@services/AuthService";
 import { CategoryProductViewStore } from "./CategoryProductViewStore";
+import { OrderStore } from "./OrderStore";
 
 
 export class RootStore implements IMobXContext {
@@ -31,6 +32,7 @@ export class RootStore implements IMobXContext {
     sniperStore: SniperStore;
     authStore: AuthStore;
     CPVStore: CategoryProductViewStore;
+    orderStore: OrderStore;
     rootStore: RootStore = this;
 
     constructor() {
@@ -51,6 +53,7 @@ export class RootStore implements IMobXContext {
         this.CPVStore = CategoryProductViewStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         this.authStore = AuthStore.GetInstance(this, this.authService);
+        this.orderStore = OrderStore.GetInstance(this, this.apiService);
 
         makeAutoObservable(this);
         void this.init();
@@ -69,10 +72,11 @@ export class RootStore implements IMobXContext {
         const authLoaded = await this.authStore.init();
         const cpvLoaded = await this.CPVStore.init();
         const payLoaded = await this.paymentStore.init();
+        const orderLoaded = await this.orderStore.init();
 
         runInAction(() => {
             // this.loaded = userResult && documentResult;
-            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded && payLoaded;
+            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded && payLoaded && orderLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();

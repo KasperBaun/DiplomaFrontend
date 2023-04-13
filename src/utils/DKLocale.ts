@@ -64,7 +64,7 @@ export default class DKLocale implements ILocale {
   InventoryTabText = "Lager";
   ProductSniperTabText = "Produktsniper";
   ManagementTabText = "Styring";
-  OrdersTabText = "Ordrer";
+  OrdersTabText = "Ordre";
   LogoutTabText = "Log ud";
 
   // Admin Dashboard
@@ -103,6 +103,17 @@ export default class DKLocale implements ILocale {
   SalesSummaryTitle = "Salgs oversigt";
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
+
+  // Orders
+  GoToOrders = "Se flere Ordre";
+  OrderDetailsProductName = "Produkt";
+  OrderDetailsManufacturer = "Mærke";
+  OrderDetailsCustomerId = "Kunde (Id)";
+  OrderDetailsPaymentStatus = "Betalingsstatus";
+  OrderDetailsDeliveryStatus = "Afsendelsesstatus";
+  OrderDetailsDiscountTag = "Discount brugt";
+  OrderDetailsCompletionStatus = "Status";
+  OrderDetailsListTitle = "Seneste Ordre";
 
   // Sniper
   TableEntrySniperSource = "Kilde";

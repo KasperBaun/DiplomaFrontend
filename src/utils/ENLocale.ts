@@ -98,6 +98,17 @@ export default class ENLocale implements ILocale {
   SalesSummaryTotalSales = "Sales (total)";
   SalesSummaryTotalAmount = "Amount (total)";
 
+  // Orders
+  GoToOrders = "See more Orders";
+  OrderDetailsProductName = "Product";
+  OrderDetailsManufacturer = "Fabricator";
+  OrderDetailsCustomerId = "Customer (Id)";
+  OrderDetailsPaymentStatus = "Payment Status";
+  OrderDetailsDeliveryStatus = "Delivery Status";
+  OrderDetailsDiscountTag = "Discount used";
+  OrderDetailsCompletionStatus = "Completed?";
+  OrderDetailsListTitle = "Order Summary";
+
   // Footer tabs
   BlogTabText = "Blog";
   PricingTabText = "Prices";

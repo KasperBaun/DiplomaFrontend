@@ -94,6 +94,26 @@ export interface ILocale {
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
 
+
+  // Orders
+  GoToOrders: string;
+  OrderDetailsProductName : string;
+  OrderDetailsManufacturer : string;
+  OrderDetailsCustomerId : string;
+  OrderDetailsPaymentStatus : string;
+  OrderDetailsDeliveryStatus : string;
+  OrderDetailsDiscountTag : string;
+  OrderDetailsCompletionStatus : string;
+  OrderDetailsListTitle : string;
+
+  // <TableCell align="left">Product Name</TableCell>
+  // <TableCell align="left">Manufacturer</TableCell>
+  // <TableCell align="left">Customer (Id)</TableCell>
+  // <TableCell align="left">Payment Status</TableCell>
+  // <TableCell align="left">Delivery Status</TableCell>
+  // <TableCell align="left">Discount used</TableCell>
+  // <TableCell align="left">Completed</TableCell>
+
   // Footer tabs
   BlogTabText: string;
   PricingTabText: string;
