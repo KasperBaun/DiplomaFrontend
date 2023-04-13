@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import SilverAndGold from './components/InventorySGTable';
+import SilverAndGold from './components/AnalysisGoldSilverTable';
 const Analysis = () => {
     return (
         <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
