@@ -1,9 +1,13 @@
 
-export enum materialType {
-    porcelain = 1,
-    steel = 2,
-    glass = 3,
-    // etc..
+export enum materialType {    
+    "porcelain" = 1,
+    "steel" = 2,
+    "glass" = 3,
+    "gold" = 4,
+    "silver" = 5,
+    "ceramics" = 6,
+    "stoneware" = 7,
+    "fajance" = 8,
 }
 
 export enum conditionType {

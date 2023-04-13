@@ -32,7 +32,7 @@ function getHeight(){
 function getMaterial(){
     if (props.Iproduct.product.material){
         return(
-            <div className="P_Text">{languageStore.currentLanguage.productPage_productMaterial} : {props.Iproduct.product.material} </div>
+            <div className="P_Text">{languageStore.currentLanguage.productPage_productMaterial} : {languageStore.currentLanguage.getMaterialType(props.Iproduct.product.material)} </div>
         ); 
     }    
 }

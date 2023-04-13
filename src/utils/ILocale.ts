@@ -6,6 +6,8 @@ export interface ILocale {
   getQuality(qualityType: number): string;
   getCondition (conditionType: number): string; 
 
+  getMaterialType(materialType : number): string; 
+
   // Category Admin
   createCategoryModalTitle: string;
   createCategoryTitle: string;

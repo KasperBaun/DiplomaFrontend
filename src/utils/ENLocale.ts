@@ -8,11 +8,10 @@ export default class ENLocale implements ILocale {
 
   getQuality(qualityType: number): string {
     switch (qualityType) {
-      case 0: return "No data"
       case 1: return "1. Quality";
       case 2: return "2. Quality";
       case 3: return "3. Quality";
-      default: return "";
+      default: return "Sorting not defined";
     }
   }
 
@@ -22,6 +21,20 @@ export default class ENLocale implements ILocale {
       case 2: return "Few shards";
       case 3: return "Many shards"; 
       default: return "Condition not defined";
+    }
+  }
+
+  getMaterialType (materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelain";
+      case 2: return "Steel";
+      case 3: return "Glass"; 
+      case 4: return "Gold";
+      case 5: return "Silver";
+      case 6: return "Ceramics"; 
+      case 7: return "Stoneware";
+      case 8: return "Fajance"; 
+      default: return "Material not defined";
     }
   }
 

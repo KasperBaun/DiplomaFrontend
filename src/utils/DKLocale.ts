@@ -23,6 +23,21 @@ export default class DKLocale implements ILocale {
     }
   }
 
+  getMaterialType (materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelæn";
+      case 2: return "Stål";
+      case 3: return "Glas"; 
+      case 4: return "Guld";
+      case 5: return "Sølv";
+      case 6: return "Keramik"; 
+      case 7: return "Stentøj";
+      case 8: return "Fajance"; 
+      default: return "Materiale er ikke defineret";
+    }
+  }
+
+
   
 
   // Category Admin
