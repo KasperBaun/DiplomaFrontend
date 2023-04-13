@@ -68,10 +68,11 @@ export class RootStore implements IMobXContext {
         const langLoaded = await this.languageStore.init();
         const authLoaded = await this.authStore.init();
         const cpvLoaded = await this.CPVStore.init();
+        const payLoaded = await this.paymentStore.init();
 
         runInAction(() => {
             // this.loaded = userResult && documentResult;
-            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded;
+            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded && payLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();

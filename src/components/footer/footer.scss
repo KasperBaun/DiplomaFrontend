@@ -1,147 +1,65 @@
+@import "~@styles/Main.scss";
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
 // $primaryColor: rgba(255, 215, 0, 1);
-$primaryColor: #dc8665;
-$secondaryColor:  rgba(19, 128, 134, 1);
-$primaryTextColor: rgba(255, 255, 255, 1);
-$bgColor: rgba(19, 128, 134, 1);
 
 * {
     font-family: Open Sans;
 }
 
-@mixin blockStyle {
-    display: inline-block;
-    vertical-align: bottom;
-}
 
 .footer {
-    position: relative;
+    position: fixed;
     bottom: 0;
-    width: 100%;
-    /* Footer container */
-    .footer-container {
-        background: var(--primary-color);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-        box-sizing: border-box;
-        text-align: center;
-        font: bold 16px sans-serif;
-        padding: 15px;
-        width: 100%;
-        margin: auto;
+    background-color: $primary;
+    text-align: center;
+    justify-content: center;
+    padding-top: 1rem;
+}
+
+/* Social icons */
+.footer-icons {
+    margin-top: 25px;
+    transition: transform .7s ease-in-out;
+
+    a {
         display: inline-block;
-        vertical-align: bottom;
-    }
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        border-radius: 2px;
+        font-size: 20px;
+        color: $textHoverColor;
+        text-align: center;
+        line-height: 35px;
+        margin-right: 3px;
+        margin-bottom: 5px;
+        transition: all 0.5s ease-in-out;
 
-    /* The company logo */
-    h3 {
-        color: $primaryTextColor;
-        font: normal 30px 'Open Sans', cursive;
-        margin: 0;
+        &:hover {
+            color: $textColor;
+            transform: rotate(360deg);
 
-        span {
-            color: $primaryColor;
-        }
-    }
-
-    .footer-company-name {
-        color: $primaryTextColor;
-        font-size: 14px;
-        font-weight: normal;
-        margin: 0;
-
-    }
-
-    /* Contact info */
-    .contact-info {
-        color: $primaryTextColor;
-        font-size: 14px;
-        font-weight: normal;
-        margin: 0;
-    }
-
-
-    /* Social icons */
-    .footer-icons {
-        margin-top: 25px;
-        transition: transform .7s ease-in-out;
-
-        a {
-            display: inline-block;
-            width: 35px;
-            height: 35px;
-            cursor: pointer;
-            border-radius: 2px;
-            font-size: 20px;
-            color: $primaryColor;
-            text-align: center;
-            line-height: 35px;
-            margin-right: 3px;
-            margin-bottom: 5px;
-            transition: all 0.5s ease-in-out;
-
-            &:hover {
-                color: $primaryColor;
-                transform: rotate(360deg);
-
-            }
-        }
-    }
-
-    /* Footer links */
-    .footer-links {
-        color: $primaryTextColor;
-        margin: 20px 0 12px;
-        padding: 0;
-
-        a:before {
-            content: "|";
-            font-weight: 300;
-            font-size: 18px;
-            left: 0;
-            color: $primaryTextColor;
-            display: inline-block;
-            padding-right: 5px;
-        }
-
-        a {
-            display: inline-block;
-            line-height: 1.8;
-            font-weight: 400;
-            text-decoration: none;
-            color: inherit;
-
-            &:hover {
-                color: $primaryColor;
-                font-size: large;
-            }
-        }
-
-        .link-1:before {
-            content: none;
         }
     }
 }
 
+.ContactInfo {
+    color:#FFF;
+}
 
+.footerLinks {
+    justify-content: center;
+}
 
-/* If you don't want the footer to be responsive, remove these media queries */
+.FL_NavLink {
+    display: inline-block;
+    line-height: 1.8;
+    font-weight: 400;
+    text-decoration: none;
+    color: #FFF !important;
+}
 
-@media (max-width: 880px) {
-
-    .footer-distributed {
-        font: bold 14px sans-serif;
-    }
-
-    .footer-distributed .footer-left,
-    .footer-distributed .footer-center,
-    .footer-distributed .footer-right {
-        display: block;
-        width: 100%;
-        margin-bottom: 40px;
-        text-align: center;
-    }
-
-    .footer-distributed .footer-center i {
-        margin-left: 0;
-    }
+.FL_NavLink:hover {
+    color: $textHoverColor !important;
+    text-decoration: underline;
 }

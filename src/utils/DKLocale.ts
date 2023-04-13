@@ -98,6 +98,12 @@ export default class DKLocale implements ILocale {
   FAQTabText = "Ofte stillede spørgsmål";
   ContactTabText = "Kontakt";
 
+  // Payments
+  GoToSales = "Se flere salg";
+  SalesSummaryTitle = "Salgs oversigt";
+  SalesSummaryTotalSales = "Salg (total)";
+  SalesSummaryTotalAmount = "Sum (total)";
+
   // Sniper
   TableEntrySniperSource = "Kilde";
   TableEntrySniperVN = "Varenummer";
@@ -115,6 +121,8 @@ export default class DKLocale implements ILocale {
 
   // Inventory
   InventoryAmountLabel = "Produkter: ";
+  InventoryWidgetTitle = "Lagerbeholdning";
+  InventoryTitle = "Titel";
 
   // Loginpage
   signInText = "Log ind";

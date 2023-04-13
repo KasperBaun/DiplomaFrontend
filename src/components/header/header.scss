@@ -1,25 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,500,300,700);
-
-// $primaryColor: rgb(37, 6, 121);
-// $secondaryColor: rgb(128, 143, 141); // rgba(19, 128, 134, 1);
-// $primaryTextColor: rgba(255, 255, 255, 1);
-// $bgColor: rgba(19, 128, 134, 1);
-
-$primaryColor: rgba(220,134,101,1);
-$secondaryColor:  rgba(19, 128, 134, 1);
-$primaryTextColor: rgba(255, 255, 255, 1);
-$bgColor: rgba(19, 128, 134, 1);
+@import "~@styles/Main.scss";
 
 * {
     font-family: Open Sans;
 }
 
 .header {
-    background: var(--primary-color);
+    background: $primary;
 }
 
 .header-links {
-    color: $primaryTextColor;
+    color: $textColor;
     padding-right: 10px;
     display: inline-block;
     line-height: 1.8;
@@ -27,37 +18,34 @@ $bgColor: rgba(19, 128, 134, 1);
     font-size: 18;
     text-decoration: none;
     cursor: pointer;
+
+    &:hover {
+        color: $textHoverColor;
+    }
 }
 
 .active {
     //font-size: 20px;
-    color: $primaryColor;
+    color: $textHoverColor;
     text-decoration: line;
 
     &:hover {
-        color: $primaryColor;
-    }
-}
-
-.inactive {
-    &:hover {
-        color: $primaryColor;
-        font-size: large;
+        color: $textHoverColor;
     }
 }
 
 .nav-brand {
-    color: $primaryTextColor;
+    color: $primary;
     font-size: 24;
     text-decoration: none;
 
     &:hover {
-        color: $primaryTextColor;
+        color: $textHoverColor;
     }
 }
 
 .search-button{
-    color: $primaryTextColor;
+    color: $textColor;
     padding-right: 10px;
     display: inline-block;
     line-height: 1.8;
@@ -67,6 +55,6 @@ $bgColor: rgba(19, 128, 134, 1);
     cursor: pointer;
 
     &:hover{
-        background-color: $primaryColor;
+        background-color: $textHoverColor;
     }
 }

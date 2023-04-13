@@ -4,9 +4,9 @@ import { observer } from 'mobx-react-lite';
 import AuthPage from './auth/AuthPage';
 import { useContext } from 'react';
 import { Container } from '@mui/material';
-import Backoffice from './Backoffice';
 import { ColorModeContext, useMode } from 'styling/Theme';
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import Backoffice from './BackOffice';
 
 const Auth = observer(() => {
     const { authStore } = useContext(MobXContext);
