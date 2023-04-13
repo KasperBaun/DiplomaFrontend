@@ -46,11 +46,11 @@ const SilverAndGold = () => {
 
         return (
             <React.Fragment>
-                <h3>Gold and Silver</h3>
+                <h3>{languageStore.currentLanguage.AnalysisTitle}</h3>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>{languageStore.currentLanguage.AnalysisTitle}</TableCell>
+                            <TableCell>{languageStore.currentLanguage.AnalysisMaterial}</TableCell>
                             <TableCell>{languageStore.currentLanguage.AnalysisItems}</TableCell>
                             <TableCell>{languageStore.currentLanguage.AnalysisWeight}</TableCell>
                             <TableCell>{languageStore.currentLanguage.AnalysisPricePrKg}</TableCell>
