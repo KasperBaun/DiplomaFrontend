@@ -69,8 +69,8 @@ function getDesigner(){
             {getWeight()}
         </div> 
 
-        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem'}}>
-            <Button className="cartButton" variant="outlined" style={{width: '12rem', minHeight: '3rem'}}>Tilføj til kurv</Button>
+        <div style={{width:'100%', display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: '3rem'}}>
+            <Button className="cartButton" variant="outlined" style={{width: '12rem', minHeight: '3rem',justifyContent: 'center' }}>Tilføj til kurv</Button>
         </div>
     </div> 
 );
