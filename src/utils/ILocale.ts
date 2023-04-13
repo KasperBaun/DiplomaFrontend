@@ -94,6 +94,15 @@ export interface ILocale {
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
 
+  // Analysis
+  AnalysisTitle : string;
+  AnalysisMaterial : string;
+  AnalysisItems : string;
+  AnalysisWeight : string;
+  AnalysisPricePrKg : string;
+  AnalysisSummary : string;
+  AnalysisSilver : string;
+  AnalysisGold : string;
 
   // Orders
   GoToOrders: string;

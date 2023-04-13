@@ -12,7 +12,7 @@ export function createNavPaths(languageStore: LanguageStore, setNavKey: Dispatch
                 icon: <DashboardOutlined style={iconStyling ? iconStyling : {}} />,
             },
             {
-                navigationClick: () => setNavKey(0),
+                navigationClick: () => setNavKey(8),
                 title: sidebarOpen ? languageStore.currentLanguage.AnalyticsTabText : '',
                 icon: <AnalyticsOutlined style={iconStyling ? iconStyling : {}} />
             },

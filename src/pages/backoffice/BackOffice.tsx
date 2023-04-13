@@ -13,6 +13,7 @@ import Subcategories from "./subcategory/Subcategory";
 import Products from "./product/Products";
 import SalesList from "./sales/SalesList";
 import Orders from "./orders/Orders";
+import Analysis from "./Dashboard/analysis/Analysis";
 
 const Backoffice: React.FC = function Backoffice() {
 
@@ -28,6 +29,7 @@ const Backoffice: React.FC = function Backoffice() {
             case 5: return (<InventoryMain />)
             case 6: return (<SalesList />)
             case 7: return (<Orders />)
+            case 8: return (<Analysis />)
         }
     }
 

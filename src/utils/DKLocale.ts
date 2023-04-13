@@ -55,6 +55,16 @@ export default class DKLocale implements ILocale {
   productPage_productCustomText = "Ekstra information";
   productPage_createProduct = "Create product";
 
+  // Analysis
+  AnalysisTitle = "Guld & Sølv";
+  AnalysisMaterial = "Materiale";
+  AnalysisItems = "Enheder på lager";
+  AnalysisWeight = "Samlet vægt";
+  AnalysisPricePrKg = "Kilopris";
+  AnalysisSummary = "Nuværende værdi";
+  AnalysisSilver = "Sølv";
+  AnalysisGold = "Guld";
+
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";
 

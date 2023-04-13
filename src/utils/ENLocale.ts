@@ -56,6 +56,18 @@ export default class ENLocale implements ILocale {
   productPage_productDimension = "Dimension";
   productPage_productCustomText = "Extra information";
   productPage_createProduct = "Opret produkt";
+
+  // Analysis
+  AnalysisTitle = "Gold and Silver";
+  AnalysisMaterial = "Material";
+  AnalysisItems = "Items in Stock";
+  AnalysisWeight = "Weight";
+  AnalysisPricePrKg = "Price pr. Kg";
+  AnalysisSummary = "Price summary";
+  AnalysisSilver = "Silver";
+  AnalysisGold = "Gold";
+
+
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
