@@ -14,14 +14,17 @@ import ConfirmDeleteCategoryDialog from "./components/ConfirmDeleteCategoryDialo
 const Categories: React.FC = observer(function Categories() {
 
     /* Define state for categories and selected category - Dependency inject stores */
-    const { categoryStore, languageStore } = useContext(MobXContext)
-    const [categories, setCategories] = useState<Category[]>([]);
+    const { categoryStore, languageStore } = useContext(MobXContext);
+    //const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
     /* Define state for modals */
     const [showCreateCategory, setShowCreateCategory] = useState<boolean>(false);
     const [showUpdateCategory, setShowUpdateCategory] = useState<boolean>(false);
     const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
+
+    /* Define which component to show */
+    const [showCategories, setShowCategories] = useState<boolean>(true);
 
     /* Define the event handlers for the buttons */
     const handleUpdateClick = (category: Category) => {
@@ -44,14 +47,15 @@ const Categories: React.FC = observer(function Categories() {
     const handleOnDeleteClick = async (category: Category) => {
         setSelectedCategory(category);
         setShowConfirmDelete(true);
-
-
     }
 
-    if (categoryStore.Categories && categoryStore.Categories.length > 0) {
+    const handleOnCategoryClicked = (category: Category) => {
+        setSelectedCategory(category);
+        setShowCategories(false);
+    }
 
+    const Categories = () => {
         return (
-            // <Grid container style={categoryContainer} spacing={1} >
             <Grid container >
                 {/* Modals for creating/updating */}
                 <CreateCategoryDialog visible={showCreateCategory} onClose={() => setShowCreateCategory(false)} />
@@ -69,7 +73,7 @@ const Categories: React.FC = observer(function Categories() {
                     categoryStore.Categories.map((cat, index) => {
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
-                                <CategoryCard category={cat} updateCategory={handleUpdateClick} deleteCategory={handleOnDeleteClick} />
+                                <CategoryCard category={cat} updateCategory={handleUpdateClick} deleteCategory={handleOnDeleteClick} goToSubcategories={handleOnCategoryClicked} />
                             </Grid>
                         )
                     })
@@ -77,7 +81,21 @@ const Categories: React.FC = observer(function Categories() {
             </Grid>
         )
     }
-    else return <Loading />
+
+
+    if (showCategories && categoryStore.Categories && categoryStore.Categories.length > 0) {
+        return (
+            <Categories />
+        )
+    }
+    else if (!showCategories) {
+        return (
+            <div onClick={() => setShowCategories(true)}>
+                <Loading />
+            </div>
+            // TODO: Create component for subcategories
+        )
+    } else return <Loading />
 });
 
 export default Categories;
