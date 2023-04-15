@@ -3,6 +3,10 @@ export interface ILocale {
   aboutUs: string;
   aboutUsText: string;
 
+  // Button text
+  buttonCancelText: string;
+  buttonDeleteText: string;
+
   // Category Admin
   createCategoryModalTitle: string;
   createCategoryTitle: string;
@@ -22,6 +26,8 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
+  deleteCategoryConfirmMessage: string;
+
   // BACKOFFICE
 
   // Subcategory
@@ -86,6 +92,13 @@ export interface ILocale {
   ConfirmationTabText: string;
   BackOfficeTabText: string;
   SearchBarText: string;
+  CatalogTabText: string;
+
+  // Payments
+  GoToSales: string;
+  SalesSummaryTitle: string;
+  SalesSummaryTotalSales: string;
+  SalesSummaryTotalAmount: string;
 
   // Footer tabs
   BlogTabText: string;
@@ -111,6 +124,8 @@ export interface ILocale {
 
   // Inventory
   InventoryAmountLabel : string;
+  InventoryTitle : string;
+  InventoryWidgetTitle : string;
 
   // Loginpage
   signInText: string;

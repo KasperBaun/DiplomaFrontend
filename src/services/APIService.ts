@@ -12,6 +12,7 @@ import SniperModel from "@models/SniperModel";
 import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
+import SalesSummary from "@models/SalesSummary";
 
 class APIService implements IAPIService {
 
@@ -112,6 +113,11 @@ class APIService implements IAPIService {
     }
     async createPayment(payment: Payment): Promise<void> {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
+    }
+
+    /* Sales */
+    async getSalesSummary(): Promise<SalesSummary[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/SalesSummary`, "Sales");
     }
 
     /* Sniper */

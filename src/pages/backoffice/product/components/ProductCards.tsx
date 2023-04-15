@@ -1,4 +1,3 @@
-import Product from "@models/Product";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";

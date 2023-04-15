@@ -12,8 +12,8 @@ const InventoryCards = () => {
     if(CPVStore.CategoryProducts) {
         return (
             <Grid container spacing={2}>
-                { CPVStore.CategoryProducts.map((item) => (
-                    <Grid item xs>
+                { CPVStore.CategoryProducts.map((item, index) => (
+                    <Grid key={"card_"+index} item xs>
                         <Card className="inventoryCard" sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography variant="h5" component="div">

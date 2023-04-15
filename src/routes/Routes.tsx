@@ -9,14 +9,14 @@ import ConfirmationPage from "@webshop/confirmation/ConfirmationPage"
 import PaymentPage from "@webshop/payment/PaymentPage"
 import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
-import BackOffice from "@backoffice/BackOffice"
+import Auth from "@backoffice/Auth"
 import ProductListPage from "@webshop/product/ProductListPage"
 
 const Routing: React.FC = function Routing() {
 
     return (
         <Routes>
-            <Route path="/backoffice" element={<BackOffice />} errorElement={<ErrorPage />}>
+            <Route path="/backoffice" element={<Auth />} errorElement={<ErrorPage />}>
             </Route>
             <Route path="/" element={<Webshop />} errorElement={<ErrorPage />}>
                 <Route path="/" element={<HomePage />} />

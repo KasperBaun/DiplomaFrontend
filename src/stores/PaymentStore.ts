@@ -3,8 +3,8 @@ import Payment from '@models/Payment';
 import APIService from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
-
 import { RootStore } from './RootStore';
+import SalesSummary from '@models/SalesSummary';
 
 
 export class PaymentStore {
@@ -15,6 +15,7 @@ export class PaymentStore {
     private loaded: boolean = false;
     private apiService: APIService;
     private _payments: Payment[] = [];
+    private _salesSummary: SalesSummary[] = [];
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -24,12 +25,15 @@ export class PaymentStore {
 
     public async init(): Promise<boolean> {
         // Fetch payments
-        this._payments = await this.apiService.getPayments()
+        const payments = await this.apiService.getPayments()
+        const salesSummary = await this.apiService.getSalesSummary();
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
         runInAction(() => {
+            this._payments = payments;
+            this._salesSummary = salesSummary;
             this.loaded = true;
         })
         return this.loaded;
@@ -50,6 +54,10 @@ export class PaymentStore {
         return this._payments;
     }
 
+    public get SalesSummaries(): SalesSummary[] {
+        return this._salesSummary;
+    }
+
     public getPayment(id: number): Payment {
         return this._payments.find(p => p.id === id);
     }
@@ -61,6 +69,12 @@ export class PaymentStore {
     private async refreshPayments(): Promise<void> {
         await runInAction(async () => {
             this._payments = await this.apiService.getPayments();
+        });
+    }
+
+    private async refreshSalesSummary(): Promise<void> {
+        await runInAction(async () => {
+            this._salesSummary = await this.apiService.getSalesSummary();
         });
     }
 }

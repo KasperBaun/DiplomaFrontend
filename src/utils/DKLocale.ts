@@ -5,6 +5,10 @@ export default class DKLocale implements ILocale {
   aboutUs = "Om os";
   aboutUsText = "Vi sælger porcelæn .....";
 
+  // Button text
+  buttonCancelText = "Annuller";
+  buttonDeleteText = "Slet";
+
   // Category Admin
   createCategoryModalTitle = "Opret ny kategori";
   createCategoryTitle = "Titel";
@@ -25,6 +29,7 @@ export default class DKLocale implements ILocale {
   updateCategorySubmit = "Opdater";
   updateCategorySuccessMessage = "Kategory opdateret!";
   updateCategoryFailedMessage = "Fejl. Kunne ikke opdatere kategori!";
+  deleteCategoryConfirmMessage = "Er du sikker på at du vil slette denne kategori?";
 
   // Subcategory
   createSubCategoryCategoryTitle = "Vælg kategori";
@@ -89,6 +94,7 @@ export default class DKLocale implements ILocale {
   ConfirmationTabText = "Bekræftelse";
   BackOfficeTabText = "Dashboard";
   SearchBarText = "Søg";
+  CatalogTabText = "Katalog";
 
   // Footer tabs
   BlogTabText = "Blog";
@@ -96,6 +102,12 @@ export default class DKLocale implements ILocale {
   AboutUsTabText = "Om os";
   FAQTabText = "Ofte stillede spørgsmål";
   ContactTabText = "Kontakt";
+
+  // Payments
+  GoToSales = "Se flere salg";
+  SalesSummaryTitle = "Salgs oversigt";
+  SalesSummaryTotalSales = "Salg (total)";
+  SalesSummaryTotalAmount = "Sum (total)";
 
   // Sniper
   TableEntrySniperSource = "Kilde";
@@ -114,6 +126,8 @@ export default class DKLocale implements ILocale {
 
   // Inventory
   InventoryAmountLabel = "Produkter: ";
+  InventoryWidgetTitle = "Lagerbeholdning";
+  InventoryTitle = "Titel";
 
   // Loginpage
   signInText = "Log ind";

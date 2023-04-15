@@ -6,6 +6,10 @@ export default class ENLocale implements ILocale {
   aboutUs = "About Us";
   aboutUsText = "We sell porcelain";
 
+  // Button text
+  buttonCancelText = "Cancel";
+  buttonDeleteText = "Delete";
+
   // Category Admin
   createCategoryModalTitle = "Create Category";
   createCategoryTitle = "Title";
@@ -26,6 +30,7 @@ export default class ENLocale implements ILocale {
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
+  deleteCategoryConfirmMessage = "Are you sure you want to delete this category?";
 
   // SubCategory
   createSubCategoryCategoryTitle = "Select Category";
@@ -90,8 +95,13 @@ export default class ENLocale implements ILocale {
   ConfirmationTabText = "Confirmation";
   BackOfficeTabText = "Dashboard";
   SearchBarText = "Search";
+  CatalogTabText = "Catalog";
 
-
+  // Payments
+  GoToSales = "See more sales";
+  SalesSummaryTitle = "Sales Summary";
+  SalesSummaryTotalSales = "Sales (total)";
+  SalesSummaryTotalAmount = "Amount (total)";
 
   // Footer tabs
   BlogTabText = "Blog";
@@ -119,6 +129,8 @@ export default class ENLocale implements ILocale {
 
   // Inventory
   InventoryAmountLabel = "Total Products: ";
+  InventoryWidgetTitle = "Inventory";
+  InventoryTitle = "Title";
 
   // Loginpage
   signInText = "SIGN IN";

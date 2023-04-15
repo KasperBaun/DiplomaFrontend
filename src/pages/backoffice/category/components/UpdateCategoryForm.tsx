@@ -2,14 +2,14 @@ import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { Button, Form, Image } from "react-bootstrap";
-import CategoryFormGroup from "../components/CategoryFormGroup";
+import CategoryFormGroup from "./CategoryFormGroup";
 
 interface IProps {
     category : Category
     onCloseUpdate : () => void;
 }
 
-const UpdateForm = ( {category, onCloseUpdate} : IProps) => {
+const UpdateCategoryForm = ( {category, onCloseUpdate} : IProps) => {
 
     const { languageStore, categoryStore } = useContext(MobXContext);
 
@@ -82,4 +82,4 @@ const UpdateForm = ( {category, onCloseUpdate} : IProps) => {
     )
 }
 
-export default UpdateForm;
+export default UpdateCategoryForm;
