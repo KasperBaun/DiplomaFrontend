@@ -1,17 +1,18 @@
 import { observer } from "mobx-react-lite";
 import { Image } from 'react-bootstrap';
 import React, { useState } from 'react';
+import {  Grid } from "@mui/material";
 
 interface IImageGalleryProps {
   imageURLs: string[];
 }
 
 const ImageGallery: React.FC<IImageGalleryProps> = observer(function ImageGallery(props: IImageGalleryProps) {
-  const [mainImage, setMainImage] = useState(props.imageURLs[0] || "https://static.wixstatic.com/media/c38ac4_7920cfe5a47843db9631961ac4f80a3d~mv2.jpeg/v1/fill/w_315,h_420,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_7920cfe5a47843db9631961ac4f80a3d~mv2.webp");
-  const image1 = (props.imageURLs[1] || "https://static.wixstatic.com/media/c38ac4_7920cfe5a47843db9631961ac4f80a3d~mv2.jpeg/v1/fill/w_315,h_420,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_7920cfe5a47843db9631961ac4f80a3d~mv2.webp");
-  const image2 = (props.imageURLs[2] || "https://static.wixstatic.com/media/c38ac4_f00775c3541f485a94425e807fc682b4~mv2.jpeg/v1/fill/w_315,h_420,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_f00775c3541f485a94425e807fc682b4~mv2.webp");
-  const image3 = (props.imageURLs[3] || "https://static.wixstatic.com/media/c38ac4_35a57731a617411a834f11603fc565ea~mv2.jpeg/v1/fill/w_315,h_420,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_35a57731a617411a834f11603fc565ea~mv2.webp");
-  const image4 = (props.imageURLs[4] || "https://static.wixstatic.com/media/c38ac4_a5c77572fd204b8a96d6426a438209bb~mv2.jpeg/v1/fill/w_315,h_420,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_a5c77572fd204b8a96d6426a438209bb~mv2.webp");
+  const [mainImage, setMainImage] = useState(props.imageURLs[0]);
+  const image1 = (props.imageURLs[0] );
+  const image2 = (props.imageURLs[1] );
+  const image3 = (props.imageURLs[2]);
+  const image4 = (props.imageURLs[3]);
 
   const tempImages : Array<string> = [mainImage, image1, image2, image3, image4]
  
@@ -71,25 +72,21 @@ const [image4Clicked, setImage4Clicked]  = useState(false);
 
 
   return (
-    <div className="image-gallery">
-      <table>
-      <tbody>
-        <tr>
-          <th style={{ width: '10%'}}>
-            <div>
-            <Image src={image1} key={"1productImgGalSelImg"} onClick={() => handleClick(1) } fluid className={image1Clicked ? "small-images clicked" : "small-images"}/>
-            <Image src={image2} key={"2productImgGalSelImg"} onClick={() => handleClick(2) } fluid className={image2Clicked  ? "small-images clicked" : "small-images"} />
-            <Image src={image3} key={"3productImgGalSelImg"} onClick={() => handleClick(3) } fluid className={image3Clicked  ? "small-images clicked" : "small-images"} />
-            <Image src={image4} key={"4productImgGalSelImg"} onClick={() => handleClick(4) } fluid className={image4Clicked  ? "small-images clicked" : "small-images"} />
-            </div>
-          </th>
-          <th style={{ width: '40%', textAlign: 'center'}}>
+        <Grid container spacing={2}>
+          <Grid item lg={3}>
+              <div className="small-images">
+              <Image src={image1} key={"1productImgGalSelImg"} onClick={() => handleClick(1) } fluid className={image1Clicked ? "small-images clicked" : "small-images"}/>
+              <Image src={image2} key={"2productImgGalSelImg"} onClick={() => handleClick(2) } fluid className={image2Clicked  ? "small-images clicked" : "small-images"} />
+              <Image src={image3} key={"3productImgGalSelImg"} onClick={() => handleClick(3) } fluid className={image3Clicked  ? "small-images clicked" : "small-images"} />
+              <Image src={image4} key={"4productImgGalSelImg"} onClick={() => handleClick(4) } fluid className={image4Clicked  ? "small-images clicked" : "small-images"} />
+              </div>
+          </Grid>
+          <Grid item lg={8}>
+            <div className="big-image">
             <Image src={mainImage} key={"MainproductImgGalSelImg"} fluid className="big-image" />
-          </th>
-        </tr>
-      </tbody>
-    </table>
-    </div>
+            </div>
+          </Grid>
+        </Grid>
   )
 
 });
