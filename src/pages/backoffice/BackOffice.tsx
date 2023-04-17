@@ -8,12 +8,13 @@ import { useState } from "react";
 import Dashboard from "./Dashboard/dashboard";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
-import Subcategories from "./subcategory/Subcategory";
+import Subcategories from "./category/subcategory/Subcategory";
 import Products from "./product/Products";
 import Categories from "./category/Categories";
 import SalesList from "./sales/SalesList";
 import Orders from "./orders/Orders";
 import Analysis from "./Dashboard/analysis/Analysis";
+import CategoryManager from "./category/CategoryManager";
 
 const Backoffice: React.FC = function Backoffice() {
 
@@ -22,8 +23,8 @@ const Backoffice: React.FC = function Backoffice() {
     const navSwitch = () => {
         switch (activeNavKey) {
             case 0: return (<Dashboard />)
-            case 1: return (<Categories />)
-            case 2: return (<Subcategories />)
+            case 1: return (<CategoryManager />)
+            // case 2: return (<Subcategories />)
             case 3: return (<Products />)
             case 4: return (<SniperPage />)
             case 5: return (<InventoryMain />)

@@ -136,7 +136,7 @@ export default class ENLocale implements ILocale {
   HomeTabText = "Home";
   ProductTabText = "Products";
   CategoriesTabText = "Categories";
-  SubCategoriesTabText = "Sub categories";
+  SubCategoriesTabText = "Subcategories";
   BasketTabText = "Basket";
   PaymentTabText = "Payment";
   ConfirmationTabText = "Confirmation";

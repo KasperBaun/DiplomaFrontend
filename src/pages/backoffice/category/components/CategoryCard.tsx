@@ -55,6 +55,7 @@ const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: 
                 onClick={onImageClicked}
                 image={props.category.imageUrl ? props.category.imageUrl : "https://picsum.photos/200/300?grayscale"}
                 alt="Category image for category card"
+                style={{ objectFit: "cover" }}
             />
             <CardContent>
                 <Typography variant="h2" color="text.primary">

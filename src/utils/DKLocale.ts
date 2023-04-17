@@ -136,7 +136,7 @@ export default class DKLocale implements ILocale {
   HomeTabText = "Hjem";
   ProductTabText = "Produkter";
   CategoriesTabText = "Kategorier";
-  SubCategoriesTabText = "Under kategorier";
+  SubCategoriesTabText = "Underkategorier";
   BasketTabText = "Kurv";
   PaymentTabText = "Betaling";
   ConfirmationTabText = "Bekræftelse";

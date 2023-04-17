@@ -5,14 +5,18 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Button from "react-bootstrap/esm/Button";
 import Table from "react-bootstrap/esm/Table";
-import { Spinner } from "react-bootstrap";
 import SubCategory from "@models/SubCategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
-import CreateSubcategoryModal from "./components/CreateSubcategoryModal";
-import UpdateSubcategoryModal from "./components/UpdateSubcategoryModal";
+import CreateSubcategoryModal from "./CreateSubcategoryModal";
+import UpdateSubcategoryModal from "./UpdateSubcategoryModal";
+import Category from "@models/Category";
+import Loading from "@components/loading/Loading";
 
+export interface ISubcategoriesProps {
+    selectedCategory?: Category;
+}
 
-const Subcategories: React.FC = observer(function Subcategories() {
+const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcategories(props: ISubcategoriesProps) {
 
     const { subCategoryStore, languageStore } = useContext(MobXContext)
     const [visibleCreate, setVisibilityCreate] = useState(false);
@@ -43,7 +47,9 @@ const Subcategories: React.FC = observer(function Subcategories() {
         onOpenUpdate();
     }
 
-    if (subCategoryStore.subCategories)
+    if (subCategoryStore.subCategories) {
+        const subcats = props.selectedCategory ? subCategoryStore.subCategoriesByCategoryID(props.selectedCategory.id) : subCategoryStore.subCategories;
+
         return (
             <Container className="CategoryListContainer">
                 <Row style={{ width: "100%", justifyContent: "end" }}>
@@ -60,7 +66,7 @@ const Subcategories: React.FC = observer(function Subcategories() {
                             </tr>
                         </thead>
                         <tbody>
-                            {subCategoryStore.subCategories.map((subCat) => (
+                            {subcats.map((subCat) => (
                                 <tr id={"listId_" + subCat.id} key={"item_" + subCat.id}>
                                     <td style={{ width: "12rem" }}>{subCat.name}</td>
                                     <td>{subCat.description ? subCat.description : null}</td>
@@ -80,11 +86,10 @@ const Subcategories: React.FC = observer(function Subcategories() {
                 <UpdateSubcategoryModal visible={visibleUpdate} onClose={onCloseUpdate} subcategory={selectedSubcategory} />
             </Container>
         )
+    }
     else
         return (
-            <Container style={{ textAlign: "center", padding: "15rem" }}>
-                <Spinner animation="grow" variant="secondary" /> Loading...
-            </Container>
+            <Loading />
         )
 });
 

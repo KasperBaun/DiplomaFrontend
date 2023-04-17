@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Categories from './Categories';
-import Subcategories from '@backoffice/subcategory/Subcategory';
+import Subcategories from '@backoffice/category/subcategory/Subcategory';
 import MobXContext from '@stores/MobXContext';
 import { useContext } from 'react';
 import Products from '@backoffice/product/Products';
@@ -60,7 +60,7 @@ const CategoryTabs = () => {
         </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-            <Categories />
+            {/* <Categories /> */}
         </TabPanel>
         <TabPanel value={value} index={1}>
             <Subcategories />
