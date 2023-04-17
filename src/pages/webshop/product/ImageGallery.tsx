@@ -81,9 +81,9 @@ const [image4Clicked, setImage4Clicked]  = useState(false);
               <Image src={image4} key={"4productImgGalSelImg"} onClick={() => handleClick(4) } fluid className={image4Clicked  ? "small-images clicked" : "small-images"} />
               </div>
           </Grid>
-          <Grid item lg={8}>
+          <Grid item lg={9}>
             <div className="big-image">
-            <Image src={mainImage} key={"MainproductImgGalSelImg"} fluid className="big-image" />
+              <Image src={mainImage} key={"MainproductImgGalSelImg"} fluid className="big-image" />
             </div>
           </Grid>
         </Grid>

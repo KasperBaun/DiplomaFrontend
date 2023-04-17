@@ -1,6 +1,4 @@
    .big-image {
-      width: 30rem;
-      margin-right: 2rem;
       margin-top: 1rem;
     }
   
@@ -8,6 +6,7 @@
       margin: 1rem;
       margin-right: 2rem;
       flex-direction: column; /* Set flex direction to column to stack the small images */
+      justify-content: space-around;
       align-items: flex-start; /* Align items to center the images horizontally */
       align-self: flex-start;
     }
