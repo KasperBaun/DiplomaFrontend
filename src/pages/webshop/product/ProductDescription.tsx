@@ -17,8 +17,9 @@ const { languageStore, basketStore } = useContext(MobXContext);
 const navigate = useNavigate();
 
     function handleClick() {
-        basketStore.setBasket(props.Iproduct);
-        navigate('/basket' , { state: { } })
+        basketStore.addToBasket(props.Iproduct);
+        navigate('/productList/')
+
   }
 
 

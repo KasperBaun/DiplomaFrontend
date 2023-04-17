@@ -4,6 +4,7 @@ import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
 import ProductItem from '@models/ProductItem';
 
+
 export class BasketStore {
     private static _Instance: BasketStore;
     private rootStore : RootStore;
@@ -32,10 +33,27 @@ export class BasketStore {
         return this.loaded;
     }
 
-    public setBasket(item: ProductItem): void {
-        this._basket.push(item);
+
+    public addToBasket(item: ProductItem): void {
+
+        if ((this._basket.indexOf(item)) === -1){
+            this._basket.push(item);
+        }
+        else {
+            // TODO : Make a warning:
+            console.log('Item is already in the basket');
+        }   
         // Set local storage language setting
        // sessionStorage.setItem('basket', JSON.stringify(items));
+    }
+
+    public removeFromBasket(item: ProductItem): void {
+        
+        const newBasketArray = this._basket;
+        const index = newBasketArray.indexOf(item);
+        newBasketArray.splice(index, 1);
+
+        this._basket = newBasketArray;
     }
 
     public static GetInstance(_rootStore: RootStore): BasketStore {
