@@ -24,7 +24,7 @@ class Claim {
 export class AuthStateProvider {
   private tokenKey: string = "groenlundAuthToken";
   private accessToken: string;
-  private userRole: "SuperAdmin" | "Admin" | "User" | "Guest";
+  //private userRole: "SuperAdmin" | "Admin" | "User" | "Guest";
 
 
   public async trySilentAuthenticateUser(): Promise<IAuthState> {

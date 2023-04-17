@@ -6,6 +6,9 @@ export default class ENLocale implements ILocale {
   aboutUs = "About Us";
   aboutUsText = "We sell porcelain";
 
+  // Button text
+  buttonCancelText = "Cancel";
+  buttonDeleteText = "Delete";
   getQuality(qualityType: number): string {
     switch (qualityType) {
       case 1: return "1. Quality";
@@ -58,6 +61,7 @@ export default class ENLocale implements ILocale {
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
+  deleteCategoryConfirmMessage = "Are you sure you want to delete this category?";
 
   // SubCategory
   createSubCategoryCategoryTitle = "Select Category";

@@ -1,9 +1,10 @@
-import { ChevronLeft, ChevronRight, Logout, Notifications, Settings } from "@mui/icons-material";
-import { Box, IconButton } from "@mui/material";
+import { ChevronLeft, ChevronRight, DarkModeOutlined, LightModeOutlined, Logout, Notifications, Settings } from "@mui/icons-material";
+import { Box, IconButton, useTheme } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import ColorConfigs from "@styles/ColorConfigs";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
+import { ColorModeContext, tokens } from "styling/Theme";
 
 export interface ITopbarProps {
     sidebarOpen: boolean;
@@ -13,6 +14,9 @@ export interface ITopbarProps {
 const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarProps) {
 
     const { authStore } = useContext(MobXContext);
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+    const colorMode = useContext(ColorModeContext);
 
     function toggleSideBar(sidebarOpen: boolean, setSidebarOpen: () => void): JSX.Element {
         if (sidebarOpen) {
@@ -72,6 +76,14 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 justifyContent="center"
                 alignItems="center"
             >
+                <IconButton onClick={colorMode.toggleColorMode}>
+                    {theme.palette.mode === 'dark' ? (
+                        <DarkModeOutlined />
+                    ) : (
+                        <LightModeOutlined />
+                    )
+                    }
+                </IconButton>
                 <IconButton
                     sx={{
                         color: ColorConfigs.topbar.color,

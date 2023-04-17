@@ -8,9 +8,9 @@ import { useState } from "react";
 import Dashboard from "./Dashboard/dashboard";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
-import CategoryTabs from "./category/CategoryTabs";
 import Subcategories from "./subcategory/Subcategory";
 import Products from "./product/Products";
+import Categories from "./category/Categories";
 import SalesList from "./sales/SalesList";
 import Orders from "./orders/Orders";
 import Analysis from "./Dashboard/analysis/Analysis";
@@ -22,7 +22,7 @@ const Backoffice: React.FC = function Backoffice() {
     const navSwitch = () => {
         switch (activeNavKey) {
             case 0: return (<Dashboard />)
-            case 1: return (<CategoryTabs />)
+            case 1: return (<Categories />)
             case 2: return (<Subcategories />)
             case 3: return (<Products />)
             case 4: return (<SniperPage />)
@@ -66,7 +66,7 @@ const Backoffice: React.FC = function Backoffice() {
                             setSidebarOpen={handleToggleSidebarOpenClicked}
                         />
                     </Item>
-                    <Item padding={1}>
+                    <Item>
                         {navSwitch()}
                     </Item>
                 </Stack>
