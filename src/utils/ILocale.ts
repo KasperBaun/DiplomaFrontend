@@ -3,6 +3,9 @@ export interface ILocale {
   aboutUs: string;
   aboutUsText: string;
 
+  // Button text
+  buttonCancelText: string;
+  buttonDeleteText: string;
   getQuality(qualityType: number): string;
   getCondition (conditionType: number): string; 
 
@@ -27,6 +30,8 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
+  deleteCategoryConfirmMessage: string;
+
   // BACKOFFICE
 
   // Subcategory

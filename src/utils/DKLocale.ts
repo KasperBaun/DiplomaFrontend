@@ -5,6 +5,9 @@ export default class DKLocale implements ILocale {
   aboutUs = "Om os";
   aboutUsText = "Vi sælger porcelæn .....";
 
+  // Button text
+  buttonCancelText = "Annuller";
+  buttonDeleteText = "Slet";
   getQuality(qualityType: number): string {
     switch (qualityType) {
       case 1: return "1. Sortering";
@@ -60,6 +63,7 @@ export default class DKLocale implements ILocale {
   updateCategorySubmit = "Opdater";
   updateCategorySuccessMessage = "Kategory opdateret!";
   updateCategoryFailedMessage = "Fejl. Kunne ikke opdatere kategori!";
+  deleteCategoryConfirmMessage = "Er du sikker på at du vil slette denne kategori?";
 
   // Subcategory
   createSubCategoryCategoryTitle = "Vælg kategori";
