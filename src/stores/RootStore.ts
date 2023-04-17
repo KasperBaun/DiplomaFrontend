@@ -14,6 +14,7 @@ import { AuthStore } from "./AuthStore";
 import { AuthService } from "@services/AuthService";
 import { CategoryProductViewStore } from "./CategoryProductViewStore";
 import { OrderStore } from "./OrderStore";
+import { BasketStore } from "./BasketStore";
 
 
 export class RootStore implements IMobXContext {
@@ -28,6 +29,7 @@ export class RootStore implements IMobXContext {
     subCategoryStore: SubCategoryStore;
     paymentStore: PaymentStore;
     languageStore: LanguageStore;
+    basketStore: BasketStore;
     backofficeStore: BackofficeStore;
     sniperStore: SniperStore;
     authStore: AuthStore;
@@ -46,6 +48,7 @@ export class RootStore implements IMobXContext {
         // Instantiate stores here
         this.languageStore = LanguageStore.GetInstance(this);
         this.productStore = ProductStore.GetInstance(this, this.apiService);
+        this.basketStore = BasketStore.GetInstance(this);
         this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
         this.paymentStore = PaymentStore.GetInstance(this, this.apiService);
         this.subCategoryStore = SubCategoryStore.GetInstance(this, this.apiService);

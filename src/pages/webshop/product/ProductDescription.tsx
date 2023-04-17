@@ -3,6 +3,8 @@ import { useContext, useState} from "react";
 import Button from '@mui/material/Button';
 import MobXContext from "@stores/MobXContext";import { observer } from "mobx-react-lite";
 import "./ProductPage.scss";
+import { useNavigate } from "react-router-dom"
+
 
 interface IProductDescription{
     Iproduct: ProductItem
@@ -11,7 +13,14 @@ interface IProductDescription{
 
 const ProductDescription: React.FC<IProductDescription> = observer(function ProductDescription(props: IProductDescription){
 
-const { languageStore } = useContext(MobXContext);  
+const { languageStore, basketStore } = useContext(MobXContext);  
+const navigate = useNavigate();
+
+    function handleClick() {
+        basketStore.setBasket(props.Iproduct);
+        navigate('/basket' , { state: { } })
+  }
+
 
 function getWeight(){
     if (props.Iproduct.weight !== 0){
@@ -70,7 +79,7 @@ function getDesigner(){
         </div> 
 
         <div style={{width:'100%', display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: '3rem'}}>
-            <Button className="cartButton" variant="outlined" style={{width: '12rem', minHeight: '3rem',justifyContent: 'center' }}>Tilføj til kurv</Button>
+            <Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{width: '12rem', minHeight: '3rem',justifyContent: 'center' }}>Tilføj til kurv</Button>
         </div>
     </div> 
 );

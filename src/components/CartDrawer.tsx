@@ -3,8 +3,16 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
+import MobXContext from "@stores/MobXContext";
+import { observer } from "mobx-react-lite";
+import { useContext, useState} from "react";
 
 export default function CartDrawer(){
+
+    const {basketStore } = useContext(MobXContext);
+    if (basketStore.Basket[0]){
+      console.log(basketStore.Basket[0].product.name );
+    }    
     const [drawerState, setDrawerState] = React.useState(false); 
     const navigate = useNavigate();
     const toggleDrawer =
@@ -23,7 +31,6 @@ export default function CartDrawer(){
     function handleClick() {
       navigate('/basket' , { state: { } })
   }
-
     const cartElements = () => (
         <Box
           role="presentation"
@@ -31,11 +38,11 @@ export default function CartDrawer(){
           onKeyDown={toggleDrawer(false)}
         >
           <List style={{width: '15vw'}}>
-            {['Royal Copenhagen Skål', '20 stk Illums bolighus stel', 'Figur fra Patrick Swazy INC', 'etc'].map((text, index, array) => (
+            {basketStore.Basket.map((item, index) => (
               <div>
-              <ListItem key={text} disablePadding>
+              <ListItem key={item.id + index} disablePadding>
                 <ListItemButton>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={item.product.name} />
                 </ListItemButton>
               </ListItem>
               <Divider style={{backgroundColor: 'black', height: '2px'}}/>
@@ -59,17 +66,18 @@ export default function CartDrawer(){
         </Box>
       );
 
-    return(
-        <div>
-        <React.Fragment>
-          <IconButton onClick={toggleDrawer(true)}><ShoppingCartIcon style={{ color: 'white' , fontSize: 40  }}/></IconButton>
-          <Drawer
-            anchor='right'
-            open={drawerState}
-            onClose={toggleDrawer(false)}>
-            {cartElements()}
-          </Drawer>
-        </React.Fragment>
-        </div>    
-    )
+  
+        return(
+            <div>
+            <React.Fragment>
+              <IconButton onClick={toggleDrawer(true)}><ShoppingCartIcon style={{ color: 'white' , fontSize: 40  }}/></IconButton>
+              <Drawer
+                anchor='right'
+                open={drawerState}
+                onClose={toggleDrawer(false)}>
+                {cartElements()}
+              </Drawer>
+            </React.Fragment>
+            </div>    
+        )   
 }
