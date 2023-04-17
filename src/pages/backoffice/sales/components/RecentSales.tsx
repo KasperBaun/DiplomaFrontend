@@ -23,7 +23,7 @@ const RecentSalesList = (props: IProps) => {
   if (paymentStore.Payments) {
     return (
       <React.Fragment>
-        <h3>{props.title}</h3>
+        <h4>{props.title}</h4>
         <TableContainer sx={{ height: props.tableHeight }}>
           <Table size="small">
             <TableHead>

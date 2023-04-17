@@ -8,6 +8,40 @@ export default class DKLocale implements ILocale {
   // Button text
   buttonCancelText = "Annuller";
   buttonDeleteText = "Slet";
+  getQuality(qualityType: number): string {
+    switch (qualityType) {
+      case 1: return "1. Sortering";
+      case 2: return "2. Sortering";
+      case 3: return "3. Sortering";
+      default: return "Sortering er ikke defineret";
+    }
+  }
+
+  getCondition (conditionType: number): string {
+    switch (conditionType) {
+      case 1: return "Ingen skår";
+      case 2: return "Få skår";
+      case 3: return "Mange skår"; 
+      default: return "Stand er ikke defineret";
+    }
+  }
+
+  getMaterialType (materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelæn";
+      case 2: return "Stål";
+      case 3: return "Glas"; 
+      case 4: return "Guld";
+      case 5: return "Sølv";
+      case 6: return "Keramik"; 
+      case 7: return "Stentøj";
+      case 8: return "Fajance"; 
+      default: return "Materiale er ikke defineret";
+    }
+  }
+
+
+  
 
   // Category Admin
   createCategoryModalTitle = "Opret ny kategori";
@@ -58,7 +92,21 @@ export default class DKLocale implements ILocale {
   productPage_productQuality = "Sortering";
   productPage_productDimension = "Størrelse";
   productPage_productCustomText = "Ekstra information";
-  productPage_createProduct = "Create product";
+  productPage_createProduct = "Opret produkt";
+  productPage_weight = "Vægt";
+
+  productPage_modelSpecifications = "Model specifikationer";
+  productPage_productInfoHeadline = "General information";
+
+  // Analysis
+  AnalysisTitle = "Guld & Sølv";
+  AnalysisMaterial = "Materiale";
+  AnalysisItems = "Enheder på lager";
+  AnalysisWeight = "Samlet vægt";
+  AnalysisPricePrKg = "Kilopris";
+  AnalysisSummary = "Nuværende værdi";
+  AnalysisSilver = "Sølv";
+  AnalysisGold = "Guld";
 
   // Admin Header 
   GeneralHeaderAdmin = "Generelt";
@@ -69,7 +117,7 @@ export default class DKLocale implements ILocale {
   InventoryTabText = "Lager";
   ProductSniperTabText = "Produktsniper";
   ManagementTabText = "Styring";
-  OrdersTabText = "Ordrer";
+  OrdersTabText = "Ordre";
   LogoutTabText = "Log ud";
 
   // Admin Dashboard
@@ -108,6 +156,17 @@ export default class DKLocale implements ILocale {
   SalesSummaryTitle = "Salgs oversigt";
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
+
+  // Orders
+  GoToOrders = "Se flere Ordre";
+  OrderDetailsProductName = "Produkt";
+  OrderDetailsManufacturer = "Mærke";
+  OrderDetailsCustomerId = "Kunde (Id)";
+  OrderDetailsPaymentStatus = "Betalingsstatus";
+  OrderDetailsDeliveryStatus = "Afsendelsesstatus";
+  OrderDetailsDiscountTag = "Discount brugt";
+  OrderDetailsCompletionStatus = "Status";
+  OrderDetailsListTitle = "Seneste Ordre";
 
   // Sniper
   TableEntrySniperSource = "Kilde";

@@ -6,6 +6,10 @@ export interface ILocale {
   // Button text
   buttonCancelText: string;
   buttonDeleteText: string;
+  getQuality(qualityType: number): string;
+  getCondition (conditionType: number): string; 
+
+  getMaterialType(materialType : number): string; 
 
   // Category Admin
   createCategoryModalTitle: string;
@@ -56,8 +60,13 @@ export interface ILocale {
   productPage_productCondition: string;
   productPage_productQuality: string;
   productPage_productDimension: string;
+  productPage_weight : string; 
   productPage_productCustomText: string;
   productPage_createProduct: string;
+
+  productPage_modelSpecifications: string; 
+  productPage_productInfoHeadline: string; 
+
 
   // Admin Header 
   GeneralHeaderAdmin: string;
@@ -99,6 +108,35 @@ export interface ILocale {
   SalesSummaryTitle: string;
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
+
+  // Analysis
+  AnalysisTitle : string;
+  AnalysisMaterial : string;
+  AnalysisItems : string;
+  AnalysisWeight : string;
+  AnalysisPricePrKg : string;
+  AnalysisSummary : string;
+  AnalysisSilver : string;
+  AnalysisGold : string;
+
+  // Orders
+  GoToOrders: string;
+  OrderDetailsProductName : string;
+  OrderDetailsManufacturer : string;
+  OrderDetailsCustomerId : string;
+  OrderDetailsPaymentStatus : string;
+  OrderDetailsDeliveryStatus : string;
+  OrderDetailsDiscountTag : string;
+  OrderDetailsCompletionStatus : string;
+  OrderDetailsListTitle : string;
+
+  // <TableCell align="left">Product Name</TableCell>
+  // <TableCell align="left">Manufacturer</TableCell>
+  // <TableCell align="left">Customer (Id)</TableCell>
+  // <TableCell align="left">Payment Status</TableCell>
+  // <TableCell align="left">Delivery Status</TableCell>
+  // <TableCell align="left">Discount used</TableCell>
+  // <TableCell align="left">Completed</TableCell>
 
   // Footer tabs
   BlogTabText: string;

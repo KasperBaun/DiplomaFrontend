@@ -10,8 +10,10 @@ import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import Subcategories from "./subcategory/Subcategory";
 import Products from "./product/Products";
-import OrderList from "./orders/OrderList";
 import Categories from "./category/Categories";
+import SalesList from "./sales/SalesList";
+import Orders from "./orders/Orders";
+import Analysis from "./Dashboard/analysis/Analysis";
 
 const Backoffice: React.FC = function Backoffice() {
 
@@ -25,7 +27,9 @@ const Backoffice: React.FC = function Backoffice() {
             case 3: return (<Products />)
             case 4: return (<SniperPage />)
             case 5: return (<InventoryMain />)
-            case 6: return (<OrderList />)
+            case 6: return (<SalesList />)
+            case 7: return (<Orders />)
+            case 8: return (<Analysis />)
         }
     }
 
