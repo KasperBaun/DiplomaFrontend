@@ -2,8 +2,8 @@ import ProductItem from "./ProductItem";
 
 export default class Basket{
     id: number;
-    active: boolean; 
+    proceededToCheckOut: boolean; 
     createdTime: Date; 
-    editTime: Date;  
+    lastEditTime: Date;  
     productList: ProductItem[]
 };

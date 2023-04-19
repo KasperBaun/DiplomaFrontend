@@ -1,10 +1,16 @@
-import {IconButton, Button, Drawer, List, ListItem, ListItemButton, ListItemText, SwipeableDrawer, Divider  } from "@mui/material";
+import {IconButton, Button, Drawer } from "@mui/material";
 import * as React from 'react';
-import Box from '@mui/material/Box';
+import {Box, Badge} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
+import MobXContext from "@stores/MobXContext";
+import { useContext} from "react";
+import { CartItem } from "./CartItem";
+
 
 export default function CartDrawer(){
+
+    const {basketStore } = useContext(MobXContext);
     const [drawerState, setDrawerState] = React.useState(false); 
     const navigate = useNavigate();
     const toggleDrawer =
@@ -20,35 +26,39 @@ export default function CartDrawer(){
       setDrawerState(open);
     };    
 
+    
+    const getTotal = (bas = basketStore.Basket) => {
+      let sum = 0;
+      for (let i = 0; i < bas.length; i++) {
+        sum = sum + bas[i].currentPrice;
+      }
+      return sum;
+    }
+
     function handleClick() {
       navigate('/basket' , { state: { } })
   }
-
     const cartElements = () => (
         <Box
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
-          <List style={{width: '15vw'}}>
-            {['Royal Copenhagen Skål', '20 stk Illums bolighus stel', 'Figur fra Patrick Swazy INC', 'etc'].map((text, index, array) => (
-              <div>
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-              <Divider style={{backgroundColor: 'black', height: '2px'}}/>
-              </div>
-            ))}
-          </List>
+        
+          <div style={{width: '18vw'}}>
+              {basketStore.Basket.map((item, index) => (
+              <CartItem key={item.id} item={item} />
+              
+              ))}
+          </div>
+
           <div style={{position: 'fixed', bottom: 0, marginBottom : '3vh'}}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '15vw', margin: 'auto'}}>
+            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '18vw', margin: 'auto'}}>
                   <div style={{textAlign: 'start', marginLeft: '1.5rem', fontSize: '1.2 rem', fontWeight:"bold" }}>
-                    {'Subtotal (5 items)'}
+                    {'Subtotal ('+ basketStore.Basket.length + ')'}
                   </div>
                   <div style={{textAlign: 'end' , marginRight: '1.5rem',  fontSize: '1.2 rem', fontWeight:"bold"}}>
-                    {'100,00 DKK'}
+                    {getTotal() + ' DKK'}
                   </div>
             </div>
 
@@ -59,17 +69,26 @@ export default function CartDrawer(){
         </Box>
       );
 
-    return(
-        <div>
-        <React.Fragment>
-          <IconButton onClick={toggleDrawer(true)}><ShoppingCartIcon style={{ color: 'white' , fontSize: 40  }}/></IconButton>
-          <Drawer
-            anchor='right'
-            open={drawerState}
-            onClose={toggleDrawer(false)}>
-            {cartElements()}
-          </Drawer>
-        </React.Fragment>
-        </div>    
-    )
+  
+        return(
+            <div>
+            <React.Fragment>
+              <IconButton onClick={toggleDrawer(true)}>
+                  <Badge
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right'}}
+                    badgeContent={basketStore.Basket.length} color="warning">
+                    <ShoppingCartIcon style={{ color: 'white' , fontSize: 40  }}/>
+                  </Badge>
+              </IconButton>
+              <Drawer
+                anchor='right'
+                open={drawerState}
+                onClose={toggleDrawer(false)}>
+                {cartElements()}
+              </Drawer>
+            </React.Fragment>
+            </div>    
+        )   
 }
