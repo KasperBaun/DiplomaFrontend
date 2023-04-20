@@ -36,6 +36,6 @@ export class ComponentLoggingConfig {
                 minText = minText + ' minute and ';
             }
         }
-        console.log(`${message} in${minText}${seconds} seconds!`, color);
+        console.log(`${message} in ${minText}${seconds} seconds!`, color);
     }
 }

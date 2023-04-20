@@ -13,6 +13,8 @@ import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
 import { AuthService } from "@services/AuthService";
 import { CategoryProductViewStore } from "./CategoryProductViewStore";
+import { OrderStore } from "./OrderStore";
+import { BasketStore } from "./BasketStore";
 
 
 export class RootStore implements IMobXContext {
@@ -27,10 +29,12 @@ export class RootStore implements IMobXContext {
     subCategoryStore: SubCategoryStore;
     paymentStore: PaymentStore;
     languageStore: LanguageStore;
+    basketStore: BasketStore;
     backofficeStore: BackofficeStore;
     sniperStore: SniperStore;
     authStore: AuthStore;
     CPVStore: CategoryProductViewStore;
+    orderStore: OrderStore;
     rootStore: RootStore = this;
 
     constructor() {
@@ -38,19 +42,21 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructor called`, this.color)
         }
         // Create API with baseUrl from constants
-        this.apiService = new APIService(Constants.apiBaseUrl);
-        this.authService = new AuthService(Constants.apiBaseUrl);
+        this.apiService = new APIService(Constants.localApiUrl);
+        this.authService = new AuthService(Constants.localApiUrl);
 
         // Instantiate stores here
-        this.productStore = ProductStore.GetInstance(this, this.apiService);
-        this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
         this.languageStore = LanguageStore.GetInstance(this);
+        this.productStore = ProductStore.GetInstance(this, this.apiService);
+        this.basketStore = BasketStore.GetInstance(this);
+        this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
         this.paymentStore = PaymentStore.GetInstance(this, this.apiService);
         this.subCategoryStore = SubCategoryStore.GetInstance(this, this.apiService);
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.CPVStore = CategoryProductViewStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         this.authStore = AuthStore.GetInstance(this, this.authService);
+        this.orderStore = OrderStore.GetInstance(this, this.apiService);
 
         makeAutoObservable(this);
         void this.init();
@@ -62,17 +68,18 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
         // Init stores here
+        const langLoaded = await this.languageStore.init();
         const catLoaded = await this.categoryStore.init();
         const subcatLoaded = await this.subCategoryStore.init();
         const prodLoaded = await this.productStore.init();
-        const langLoaded = await this.languageStore.init();
         const authLoaded = await this.authStore.init();
         const cpvLoaded = await this.CPVStore.init();
         const payLoaded = await this.paymentStore.init();
+        const orderLoaded = await this.orderStore.init();
 
         runInAction(() => {
             // this.loaded = userResult && documentResult;
-            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded && payLoaded;
+            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded && payLoaded && orderLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();

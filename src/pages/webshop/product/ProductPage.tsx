@@ -2,56 +2,37 @@ import { observer } from "mobx-react-lite"
 import Product from "@models/Product";
 import { useContext, useEffect, useState } from "react";
 import MobXContext from "@stores/MobXContext";
-//import ImageGallery from "./ImageGallery";
+import ImageGallery from "./ImageGallery";
 import "./ProductPage.scss";
+import { useParams } from "react-router-dom";
+import ProductDescription from "./ProductDescription";
+import {  Grid } from "@mui/material";
+
 
 interface IProductPageProps {
 }
 
 const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(props: IProductPageProps) {
 
+    let { id } = useParams();
     const { productStore } = useContext(MobXContext);
-
-    const [product, setProduct] = useState<Product>(null);
-
-    // useEffect(() => {
-    //     // make store->api call here.. await fetch
-    //     const getProductModel = async () => {
-    //         try {
-    //             //setProduct(await productStore.getProduct(props.productId));
-
-    //         }
-    //         catch (err) {
-    //             console.error(err);
-    //         }
-    //     }
-
-    //     // update setProduct
-    //     getProductModel();
-    // }, [productStore, props.productId])
+    const product = (productStore.getProductItem(Number(id)));
 
     if (product) {
         return (
-            <div>
-                {/* // Små billeder (mulighed for at browse) */}
+          <Grid container spacing={2}>
+            <Grid item lg={6}>
+            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />
 
-                {/* // Stort billede */}
-                {/* <ImageGallery key={"productImgGal"+product.id} imageURLs={product.imageUrls} /> */}
+            </Grid>
+            <Grid item lg={6}>
 
-                {/* // Beskrivelseskomponent */}
-                <h1>ProductPage</h1>
-                <p>Name: {product.name}</p>
-                {/*<p>Condition: {product.condition}</p>*/}
-            </div >
+            <ProductDescription key={"productDes"+product.id} Iproduct={product} />
+            </Grid>
+          </Grid>
+          );
+        }
 
-        )
-
-    } else {
-        return (
-            <h1>Loading...</h1>
-        )
-    }
-
-});
+ });
 
 export default ProductPage;

@@ -6,12 +6,56 @@ export default class ENLocale implements ILocale {
   aboutUs = "About Us";
   aboutUsText = "We sell porcelain";
 
+  // Standard text
+  create = "Create";
+  cancel = "Cancel";
+  update = "Update";
+
   // Button text
   buttonCancelText = "Cancel";
   buttonDeleteText = "Delete";
+  confirmDeleteText = "Are you sure you want to delete this item?";
+
+  getQuality(qualityType: number): string {
+    switch (qualityType) {
+      case 1: return "1. Quality";
+      case 2: return "2. Quality";
+      case 3: return "3. Quality";
+      default: return "Sorting not defined";
+    }
+  }
+
+  getCondition(conditionType: number): string {
+    switch (conditionType) {
+      case 1: return "No shards";
+      case 2: return "Few shards";
+      case 3: return "Many shards";
+      default: return "Condition not defined";
+    }
+  }
+
+  getMaterialType(materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelain";
+      case 2: return "Steel";
+      case 3: return "Glass";
+      case 4: return "Gold";
+      case 5: return "Silver";
+      case 6: return "Ceramics";
+      case 7: return "Stoneware";
+      case 8: return "Fajance";
+      default: return "Material not defined";
+    }
+  }
+
+    //Basket Page
+    yourBasket = "Your basket";
+    yourTotal = "Total price" 
+    deliveryOptions = "Delivery Options:"
+    paymentOptions = "Payment Options";
 
   // Category Admin
-  createCategoryModalTitle = "Create Category";
+  createCategoryDialogTitle = "Create Category";
   createCategoryTitle = "Title";
   createCategoryOrder = "Order";
   createCategoryImgUrl = "Image Url";
@@ -23,6 +67,7 @@ export default class ENLocale implements ILocale {
   updateCategoryFailedMessage = "Failed to edit category!";
   ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
   // Update Form
+  updateCategoryDialogTitle = "Update Category";
   updateCategoryFormTitle = "Title";
   updateCategoryFormOrder = "Order";
   updateCategoryFormDescription = "Description";
@@ -30,11 +75,12 @@ export default class ENLocale implements ILocale {
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
-  deleteCategoryConfirmMessage = "Are you sure you want to delete this category?";
+  deleteCategorySuccessMessage = "Category deleted successfully!";
+  deleteCategoryFailedMessage = "Failed to delete category!";
 
   // SubCategory
   createSubCategoryCategoryTitle = "Select Category";
-  createSubCategoryModalTitle = "Create Subcategory";
+  createSubCategoryDialogTitle = "Create Subcategory";
   createSubcategoryCategoryTitle = "Choose subcategory";
   createSubCategoryTitle = "Title";
   createSubCategoryOrder = "Order";
@@ -60,7 +106,23 @@ export default class ENLocale implements ILocale {
   productPage_productQuality = "Quality";
   productPage_productDimension = "Dimension";
   productPage_productCustomText = "Extra information";
-  productPage_createProduct = "Opret produkt";
+  productPage_weight = "Weight";
+  productPage_createProduct = "create product";
+  productPage_modelSpecifications = "Model specifictations";
+  productPage_productInfoHeadline = "General info";
+
+  // Analysis
+  AnalysisTitle = "Gold and Silver";
+  AnalysisMaterial = "Material";
+  AnalysisItems = "Items in Stock";
+  AnalysisWeight = "Weight";
+  AnalysisPricePrKg = "Price pr. Kg";
+  AnalysisSummary = "Price summary";
+  AnalysisSilver = "Silver";
+  AnalysisGold = "Gold";
+
+
+
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
@@ -89,7 +151,7 @@ export default class ENLocale implements ILocale {
   HomeTabText = "Home";
   ProductTabText = "Products";
   CategoriesTabText = "Categories";
-  SubCategoriesTabText = "Sub categories";
+  SubCategoriesTabText = "Subcategories";
   BasketTabText = "Basket";
   PaymentTabText = "Payment";
   ConfirmationTabText = "Confirmation";
@@ -102,6 +164,17 @@ export default class ENLocale implements ILocale {
   SalesSummaryTitle = "Sales Summary";
   SalesSummaryTotalSales = "Sales (total)";
   SalesSummaryTotalAmount = "Amount (total)";
+
+  // Orders
+  GoToOrders = "See more Orders";
+  OrderDetailsProductName = "Product";
+  OrderDetailsManufacturer = "Fabricator";
+  OrderDetailsCustomerId = "Customer (Id)";
+  OrderDetailsPaymentStatus = "Payment Status";
+  OrderDetailsDeliveryStatus = "Delivery Status";
+  OrderDetailsDiscountTag = "Discount used";
+  OrderDetailsCompletionStatus = "Completed?";
+  OrderDetailsListTitle = "Order Summary";
 
   // Footer tabs
   BlogTabText = "Blog";
