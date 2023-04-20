@@ -150,6 +150,22 @@ export default class ENLocale implements ILocale {
   SalesSummaryTotalSales = "Sales (total)";
   SalesSummaryTotalAmount = "Amount (total)";
 
+  ShoppingCartWidgetPaymentFeeLabel = "Payment fee(s)";
+  ShoppingCartWidgetTotalLabel = "Total w/o discount";
+  ShoppingCartWidgetTotalAmountLabel = "Total incl. tax";
+
+  CheckoutFormTitle= "Checkout";
+  CheckoutFormFirstNameLabel= "Firstname";
+  CheckoutFormLastNameLabel= "Lastname";
+  CheckoutFormEmailLabel= "Email";
+  CheckoutFormAddressLabel= "Address";
+  CheckoutFormZipCodeLabel= "Zipcode";
+  CheckoutFormCityLabel= "City";
+  CheckoutFormCountryLabel= "Country";
+  CheckoutFormCountryCodeLabel= "Countrycode";
+  CheckoutFormPhoneLabel= "Phonenumber";
+  CheckoutFormSubmitButton= "Continue to payment";
+
   // Orders
   GoToOrders = "See more Orders";
   OrderDetailsProductName = "Product";

@@ -157,6 +157,22 @@ export default class DKLocale implements ILocale {
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
 
+  ShoppingCartWidgetPaymentFeeLabel = "Betalingsgebyr";
+  ShoppingCartWidgetTotalLabel = "Total før rabat";
+  ShoppingCartWidgetTotalAmountLabel = "Samlet pris (Inkl. moms)";
+
+  CheckoutFormTitle= "Faktureringsoplysninger";
+  CheckoutFormFirstNameLabel= "Fornavn";
+  CheckoutFormLastNameLabel= "Efternavn";
+  CheckoutFormEmailLabel= "Email";
+  CheckoutFormAddressLabel= "Vej/Gade & Husnummer";
+  CheckoutFormZipCodeLabel= "Postnummer";
+  CheckoutFormCityLabel= "By";
+  CheckoutFormCountryLabel= "Land";
+  CheckoutFormCountryCodeLabel= "Landekode";
+  CheckoutFormPhoneLabel= "Telefonnummer";
+  CheckoutFormSubmitButton= "Fortsæt til Betaling";
+
   // Orders
   GoToOrders = "Se flere Ordre";
   OrderDetailsProductName = "Produkt";
