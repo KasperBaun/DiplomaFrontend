@@ -1,6 +1,5 @@
 import ProductItem from "@models/ProductItem";
-import { Height, VerticalAlignBottom } from "@mui/icons-material";
-import { Stack, Image, Button } from "react-bootstrap";
+import { Stack, Button } from "react-bootstrap";
 import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext} from "react";

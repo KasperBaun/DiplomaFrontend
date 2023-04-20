@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom"
 import MobXContext from "@stores/MobXContext";
 import { useContext} from "react";
 import { CartItem } from "./CartItem";
+import { observer } from "mobx-react-lite";
 
 
-export default function CartDrawer(){
+const CartDrawer: React.FC = observer(function CartDrawer(){
 
     const {basketStore } = useContext(MobXContext);
     const [drawerState, setDrawerState] = React.useState(false); 
@@ -91,4 +92,5 @@ export default function CartDrawer(){
             </React.Fragment>
             </div>    
         )   
-}
+});
+export default CartDrawer;

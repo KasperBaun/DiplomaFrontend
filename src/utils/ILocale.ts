@@ -32,6 +32,12 @@ export interface ILocale {
   updateCategoryFailedMessage: string;
   deleteCategoryConfirmMessage: string;
 
+  // BasketPage: 
+  yourBasket: string;
+  yourTotal: string; 
+  deliveryOptions: string;
+  paymentOptions: string;
+
   // BACKOFFICE
 
   // Subcategory
