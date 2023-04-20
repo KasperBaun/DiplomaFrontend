@@ -43,6 +43,12 @@ export interface ILocale {
   deleteCategoryFailedMessage: string;
   
   ProductCommaSeperatedText: string;
+  // BasketPage: 
+  yourBasket: string;
+  yourTotal: string; 
+  deliveryOptions: string;
+  paymentOptions: string;
+
   // BACKOFFICE
 
   // Subcategory

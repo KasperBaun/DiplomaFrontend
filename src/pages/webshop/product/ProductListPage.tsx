@@ -6,20 +6,18 @@ import { useContext, useEffect, useState } from "react";
 import MyCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom"
 import ProductItem from "@models/ProductItem";
-import Loading from "@components/loading/Loading";
-
-
-
+import { Translater } from "@utils/Translater";
 
 
 const ProductListPage: React.FC = observer(function ProductListPage() {
-
     let { id } = useParams();
+    const translater = new Translater(); 
     const subcategoryId = Number.parseInt(id);
-    const { productStore, subCategoryStore } = useContext(MobXContext);
+    const {languageStore, productStore, subCategoryStore } = useContext(MobXContext);
     const navigate = useNavigate();
     const [items, setItems] = useState<ProductItem[]>(null);
     const [subcategoryTitle, setSubcategoryTitle] = useState<string>("");
+    
 
     function handleClick(product: ProductItem) {
         navigate('/product/' + product.id)
@@ -41,8 +39,9 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
 
     if (items && items.length > 0) {
         return (
+            <div>
+                <h1>{translater.getCategoryBasedOnLanguage(languageStore,subcategoryTitle)}</h1>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <h1>{subcategoryTitle}</h1>
                 {items.map(pItem => {
                     return (
                         <div key={"pItem" + pItem.id} onClick={() => handleClick(pItem)}>
@@ -50,6 +49,7 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
                         </div>
                     )
                 })}
+            </div>
             </div>
         )
     }

@@ -3,11 +3,15 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useContext } from "react";
 import MobXContext from "../../../stores/MobXContext";
 import { Card, Container } from "react-bootstrap";
+import { Grid } from "@mui/material";
+import CategoryCardWeb from "../categories/CategoryCardWeb";
 import SubCategory from "@models/SubCategory";
+import { Translater } from "@utils/Translater";
 
 const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: any) {
     const { subCategoryStore } = useContext(MobXContext);
     const { languageStore } = useContext(MobXContext);
+    const translater = new Translater(); 
 
     let { id } = useParams();
     const location = useLocation();
@@ -18,20 +22,19 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
     function handleClick(subCategory: SubCategory, name: String) {
         navigate('/productList/' + subCategory.id, { state: { name } })
     }
+
+
     if (subCategories && subCategories.length > 0)
         return (
             <Container>
-                <h1>{name}</h1>
+                <h1>{translater.getCategoryBasedOnLanguage(languageStore,name)}</h1>
                 <div className="container-cat">
-                    {subCategories.map((subCategory) => (
-                        <div className="col-20-cat">
-                            <Card className="category" border="primary" onClick={() => handleClick(subCategory, subCategory.name)}>
-                                <Card.Body className="category">
-                                    <img src={subCategory.imageUrl} className='img-fluid shadow-4' style={{ height: '13.5rem', width: 'auto' }} alt='...' />
-                                </Card.Body>
-                                <Card.Footer className="category"> {subCategory.name.toString()}</Card.Footer>
-                            </Card>
-                        </div>
+                    {subCategories.map((subCategory, index) => (
+                        <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
+                            <div onClick={() => handleClick(subCategory, subCategory.name)}>
+                                <CategoryCardWeb category={subCategory} type={"subCat"}/>
+                            </div>
+                    </Grid>
                     ))}
                 </div>
             </Container>
