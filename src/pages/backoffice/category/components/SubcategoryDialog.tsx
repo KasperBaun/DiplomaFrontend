@@ -24,21 +24,12 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
         const subCategory: SubCategory = {
             id: 0,
             name: title,
-            imageUrl: url,
             order: order,
+            imageUrl: url,
             description: description,
             categoryId: selectedCategory.id,
             category: selectedCategory
         };
-
-        if (!emptyValueCheck(subCategory)) {
-            alert(`${languageStore.currentLanguage.createSubCategoryMissingFieldsMessage}
-            ${languageStore.currentLanguage.createSubCategoryCategoryTitle}
-            ${languageStore.currentLanguage.createSubCategoryTitle}
-            ${languageStore.currentLanguage.createSubCategoryOrder}
-           `)
-            return;
-        }
 
         try {
             await subCategoryStore.createSubCategory(subCategory)
@@ -61,39 +52,25 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
             category: selectedCategory
         };
 
-        if (!emptyValueCheck(subCategory)) {
-            alert(`${languageStore.currentLanguage.createSubCategoryMissingFieldsMessage}
-            ${languageStore.currentLanguage.createSubCategoryCategoryTitle}
-            ${languageStore.currentLanguage.createSubCategoryTitle}
-            ${languageStore.currentLanguage.createSubCategoryOrder}
-           `)
-            return;
-        }
-
         try {
             await subCategoryStore.updateSubCategory(subCategory)
             // TODO: Change this notification to a toast or something that does not require the user to click a button to confirm.
             alert(languageStore.currentLanguage.createSubCategoryUpdateSuccessMessage);
-            onClose();
         }
         catch (err) {
             console.log(err);
             alert(languageStore.currentLanguage.createSubCategoryUpdateFailedMessage);
         }
+        onClose();
     }
 
 
     const handleSelectedCategoryChange = (event: SelectChangeEvent) => {
-        console.log(event.target.value);
+        //console.log(event.target.value);
         const categoryId: number = parseInt(event.target.value);
-        setSelectedCategory(categoryStore.getCategory(categoryId));
-
-        if (event.target.value === "1") {
-            alert(languageStore.currentLanguage.createSubCategorySelectCategoryFailedMessage);
-            return;
-        } else {
-            const categoryId: number = parseInt(event.target.value);
-            setSelectedCategory(categoryStore.getCategory(categoryId));
+        const category: Category = categoryStore.getCategory(categoryId);
+        if (category) {
+            setSelectedCategory(category);
         }
     };
 
@@ -209,21 +186,3 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
 }
 
 export default SubcategoryDialog;
-
-
-
-function emptyValueCheck(subcategory: SubCategory): boolean {
-    if (!subcategory.name || subcategory.name === "") {
-        return false;
-    }
-    if (!subcategory.order || subcategory.order === 0) {
-        return false;
-    }
-    if (!subcategory.category || subcategory.category === null) {
-        return false;
-    }
-    if (!subcategory.categoryId || subcategory.categoryId === 0) {
-        return false;
-    }
-    return true;
-}

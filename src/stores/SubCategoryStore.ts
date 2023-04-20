@@ -99,7 +99,12 @@ export class SubCategoryStore {
     }
 
     public subCategoriesByCategoryID(categoryId: Number): SubCategory[] {
-        return this.subcategoriesInCategoryMap.get(categoryId);
+        const result = this.subcategoriesInCategoryMap.get(categoryId);
+        if (!result) {
+            return [];
+        } else {
+            return result;
+        }
     }
 
     public getSubcategory(id: number): SubCategory {
