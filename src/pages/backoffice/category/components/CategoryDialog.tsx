@@ -1,14 +1,16 @@
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 import Category from "@models/Category";
 
 export interface IProps {
-    visible: boolean
+    visible: boolean;
     onClose: () => void;
+    create?: boolean;
+    category?: Category;
 }
 
-const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
+const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
 
     const { categoryStore, languageStore } = useContext(MobXContext);
     const [title, setTitle] = useState<string>("");
@@ -29,6 +31,25 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
         }
     }
 
+    async function handleOnUpdateCategory() {
+        const updateAction: Category = {
+            id: category.id,
+            name: title,
+            imageUrl: url,
+            order: order,
+            description: description,
+        };
+
+        try {
+            await categoryStore.updateCategory(updateAction);
+            alert(languageStore.currentLanguage.createCategorySuccessMessage);
+            onClose();
+        } catch (err) {
+            console.log(err);
+            alert(languageStore.currentLanguage.createCategoryFailedMessage);
+        }
+    }
+
     if (!visible) {
         return (
             <></>
@@ -37,18 +58,27 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
 
         return (
             <Dialog open={visible} onClose={onClose}>
-                <DialogTitle>Subscribe</DialogTitle>
+                <DialogTitle variant="h2">
+                    {create ? languageStore.currentLanguage.createCategoryDialogTitle : languageStore.currentLanguage.updateCategoryDialogTitle}
+                </DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We
-                        will send updates occasionally.
-                    </DialogContentText>
+
                     <Grid container spacing={3}>
+                        {create ? <></> :
+                            <Grid item xs={12} sx={{ width: '60%' }}>
+                                <img
+                                    alt={"picture of " + category?.name}
+                                    src={category?.imageUrl}
+                                    style={{ width: 'auto', height: '300px' }}
+                                />
+                            </Grid>
+                        }
                         <Grid item xs={12}>
                             <TextField
                                 label={languageStore.currentLanguage.createCategoryTitle}
                                 fullWidth
                                 margin="normal"
+                                defaultValue={create ? '' : category?.name}
                                 onChange={(event) => {
                                     let temp = event.target.value;
                                     setTitle(temp);
@@ -60,6 +90,7 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
+                                defaultValue={create ? '' : category?.order}
                                 onChange={(event) => {
                                     let temp = event.target.value;
                                     setOrder(parseInt(temp));
@@ -71,6 +102,7 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
+                                defaultValue={create ? '' : category?.imageUrl}
                                 onChange={(event) => {
                                     let temp = event.target.value;
                                     setUrl(temp);
@@ -83,6 +115,7 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
                                 variant="outlined"
                                 fullWidth
                                 margin="normal"
+                                defaultValue={create ? '' : category?.description}
                                 multiline
                                 onChange={(event) => {
                                     let temp = event.target.value;
@@ -99,8 +132,8 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
                     <Button
                         variant="contained"
                         type="submit"
-                        onClick={createCategory}>
-                        {languageStore.currentLanguage.createCategorySubmit}
+                        onClick={create ? createCategory : handleOnUpdateCategory}>
+                        {create ? languageStore.currentLanguage.createCategorySubmit : languageStore.currentLanguage.updateCategorySubmit}
                     </Button>
                 </DialogActions>
             </Dialog>
@@ -108,4 +141,4 @@ const CreateCategoryDialog = ({ onClose, visible }: IProps) => {
     }
 }
 
-export default CreateCategoryDialog;
+export default CategoryDialog;

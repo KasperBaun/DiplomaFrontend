@@ -1,39 +1,38 @@
-import Category from "@models/Category";
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
-export interface IConfirmDeleteCategoryDialogProps {
+export interface IConfirmDeleteDialogProps {
     visible: boolean;
-    category: Category;
+    objectName: string;
     onConfirmDeleteClicked: () => void;
     onCancelClicked: () => void;
 }
 
-const ConfirmDeleteCategoryDialog: React.FC<IConfirmDeleteCategoryDialogProps> = observer(function ConfirmDeleteCategoryDialog(props: IConfirmDeleteCategoryDialogProps) {
+const ConfirmDeleteDialog: React.FC<IConfirmDeleteDialogProps> = observer(function ConfirmDeleteDialog({visible, objectName, onConfirmDeleteClicked, onCancelClicked}: IConfirmDeleteDialogProps) {
 
-    const { categoryStore, languageStore } = useContext(MobXContext);
-    if (!props.visible) {
+    const { languageStore } = useContext(MobXContext);
+    if (!visible) {
         return <></>;
     } else {
 
         return (
-            <Dialog open={props.visible} onClose={props.onCancelClicked}>
-                <DialogTitle>{props.category.name}</DialogTitle>
+            <Dialog open={visible} onClose={onCancelClicked}>
+                <DialogTitle>{objectName}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        {languageStore.currentLanguage.deleteCategoryConfirmMessage}
+                        {languageStore.currentLanguage.confirmDeleteText}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={props.onCancelClicked}>
+                    <Button onClick={onCancelClicked}>
                         {languageStore.currentLanguage.buttonCancelText}
                     </Button>
                     <Button
                         variant="contained"
                         type="submit"
-                        onClick={props.onConfirmDeleteClicked}>
+                        onClick={onConfirmDeleteClicked}>
                         {languageStore.currentLanguage.buttonDeleteText}
                     </Button>
                 </DialogActions>
@@ -42,4 +41,4 @@ const ConfirmDeleteCategoryDialog: React.FC<IConfirmDeleteCategoryDialogProps> =
     }
 });
 
-export default ConfirmDeleteCategoryDialog;
+export default ConfirmDeleteDialog;

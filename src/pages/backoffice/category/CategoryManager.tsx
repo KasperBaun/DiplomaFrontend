@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import Categories from "./Categories";
 import Category from "@models/Category";
-import Subcategories from "./subcategory/Subcategory";
+import Subcategories from "./components/Subcategories";
 
 export interface ICategoryManagerProps {
 
@@ -33,14 +33,14 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
     return (
         <Grid container>
             {/* Navigation */}
-            <Grid item xs={12} marginBottom='10px'>
+            <Grid item xs={12} margin='10px'>
                 <Breadcrumbs separator={<NavigateNext fontSize="large" />} aria-label="breadcrumb">
-                    <Link onClick={() => setActiveKey(0)}>
+                    <Link onClick={() => setActiveKey(0)} underline={activeKey === 0 ? "always" : "hover"}>
                         <Typography variant="h3">
                             {languageStore.currentLanguage.CategoriesTabText}
                         </Typography>
                     </Link>
-                    <Link onClick={() => setActiveKey(1)}>
+                    <Link onClick={() => setActiveKey(1)} underline={activeKey === 1 ? "always" : "hover"}>
                         <Typography variant="h3">
                             {languageStore.currentLanguage.SubCategoriesTabText}
                         </Typography>

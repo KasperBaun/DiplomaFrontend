@@ -3,11 +3,10 @@ import { Button, Grid } from "@mui/material";
 import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
 import Loading from "@components/loading/Loading";
-import CreateCategoryDialog from "./components/CreateCategoryDialog";
+import CategoryDialog from "./components/CategoryDialog";
 import { observer } from "mobx-react-lite";
 import CategoryCard from "./components/CategoryCard";
-import UpdateCategoryModal from "./components/UpdateCategoryModal";
-import ConfirmDeleteCategoryDialog from "./components/ConfirmDeleteCategoryDialog";
+import ConfirmDeleteDialog from "./components/ConfirmDeleteDialog";
 
 export interface ICategoriesProps {
     onCategoryClicked: (category: Category) => void;
@@ -15,24 +14,23 @@ export interface ICategoriesProps {
 
 const Categories: React.FC<ICategoriesProps> = observer(function Categories(props: ICategoriesProps) {
 
-    /* Define state for categories and selected category - Dependency inject stores */
+    /* Define state for categories and selected category - Inject stores */
     const { categoryStore, languageStore } = useContext(MobXContext);
-    //const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
     /* Define state for modals */
-    const [showCreateCategory, setShowCreateCategory] = useState<boolean>(false);
-    const [showUpdateCategory, setShowUpdateCategory] = useState<boolean>(false);
+    const [create, setCreate] = useState<boolean>(false);
+    const [showCategoryDialog, setShowCategoryDialog] = useState<boolean>(false);
     const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
 
     /* Define the event handlers for the buttons */
     const handleUpdateClick = (category: Category) => {
+        setCreate(false);
         setSelectedCategory(category);
-        setShowUpdateCategory(true);
+        setShowCategoryDialog(true);
     };
 
     const handleOnConfirmDeleteClick = async () => {
-        // Pop Modal to confirm?
         const catToBeDeleted = categoryStore.getCategory(selectedCategory.id);
         if (catToBeDeleted !== null) {
             await categoryStore.deleteCategory(selectedCategory.id);
@@ -57,13 +55,12 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
         return (
             <Grid container >
                 {/* Modals for creating/updating */}
-                <CreateCategoryDialog visible={showCreateCategory} onClose={() => setShowCreateCategory(false)} />
-                <UpdateCategoryModal visible={showUpdateCategory} onClose={() => setShowUpdateCategory(false)} category={selectedCategory} />
-                <ConfirmDeleteCategoryDialog visible={showConfirmDelete} category={selectedCategory} onConfirmDeleteClicked={handleOnConfirmDeleteClick} onCancelClicked={() => setShowConfirmDelete(false)} />
+                <CategoryDialog visible={showCategoryDialog} create={create} category={selectedCategory} onClose={() => setShowCategoryDialog(false)} />
+                <ConfirmDeleteDialog visible={showConfirmDelete} objectName={selectedCategory ? selectedCategory.name : ''} onConfirmDeleteClicked={handleOnConfirmDeleteClick} onCancelClicked={() => setShowConfirmDelete(false)} />
 
-                <Grid item xs={12} display={'flex'} justifyContent={'space-between'} margin='10px'>
-                    <Grid item xs={4} display={'flex'} justifyContent={'end'} alignContent={'center'}>
-                        <Button style={{ width: "12rem" }} variant="contained" onClick={() => setShowCreateCategory(true)}>{languageStore.currentLanguage.createCategoryModalTitle}</Button>
+                <Grid item xs={12} display={'flex'} justifyContent={'end'} margin='10px'>
+                    <Grid item xs={4} display={'flex'} justifyContent={'end'} alignContent={'end'}>
+                        <Button style={{ width: "12rem" }} variant="contained" onClick={() => { setCreate(true); setShowCategoryDialog(true) }}>{languageStore.currentLanguage.createCategoryDialogTitle}</Button>
                     </Grid>
                 </Grid>
 
@@ -76,7 +73,6 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
                     )
                 })}
             </Grid>
-
         )
     }
     else return <Loading />

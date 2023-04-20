@@ -8,7 +8,7 @@ import { useState } from "react";
 import Dashboard from "./Dashboard/dashboard";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
-import Subcategories from "./category/subcategory/Subcategory";
+import Subcategories from "./category/components/Subcategories";
 import Products from "./product/Products";
 import Categories from "./category/Categories";
 import SalesList from "./sales/SalesList";
