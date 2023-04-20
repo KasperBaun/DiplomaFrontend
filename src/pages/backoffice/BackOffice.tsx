@@ -15,6 +15,7 @@ import SalesList from "./sales/SalesList";
 import Orders from "./orders/Orders";
 import Analysis from "./Dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
+import ProductManager from "./product/ProductManager";
 
 const Backoffice: React.FC = function Backoffice() {
 
@@ -25,7 +26,7 @@ const Backoffice: React.FC = function Backoffice() {
             case 0: return (<Dashboard />)
             case 1: return (<CategoryManager />)
             // case 2: return (<Subcategories />)
-            case 3: return (<Products />)
+            case 3: return (<ProductManager />)
             case 4: return (<SniperPage />)
             case 5: return (<InventoryMain />)
             case 6: return (<SalesList />)

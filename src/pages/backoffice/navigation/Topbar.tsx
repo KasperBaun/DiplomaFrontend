@@ -3,8 +3,9 @@ import { Box, IconButton, useTheme } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import ColorConfigs from "@styles/ColorConfigs";
 import { observer } from "mobx-react-lite";
-import { useContext } from "react";
-import { ColorModeContext, tokens } from "styling/Theme";
+import { useContext, useState } from "react";
+import { Dk, Us } from "react-flags-select";
+import { ColorModeContext } from "styling/Theme";
 
 export interface ITopbarProps {
     sidebarOpen: boolean;
@@ -13,10 +14,21 @@ export interface ITopbarProps {
 
 const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarProps) {
 
-    const { authStore } = useContext(MobXContext);
+    const { authStore, languageStore } = useContext(MobXContext);
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+    // const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
+    const [language, setLanguage] = useState<"da_DK" | "en_US" | "">(languageStore.getCurrentLanguageCode());
+
+    const toggleLanguage = () => {
+        if (language === "da_DK") {
+            setLanguage("en_US");
+            languageStore.changeLanguage("en_US");
+        } else {
+            setLanguage("da_DK");
+            languageStore.changeLanguage("da_DK");
+        }
+    }
 
     function toggleSideBar(sidebarOpen: boolean, setSidebarOpen: () => void): JSX.Element {
         if (sidebarOpen) {
@@ -76,6 +88,9 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 justifyContent="center"
                 alignItems="center"
             >
+                <IconButton onClick={toggleLanguage}>
+                    {language === 'da_DK' ? <Dk /> : <Us />}
+                </IconButton>
                 <IconButton onClick={colorMode.toggleColorMode}>
                     {theme.palette.mode === 'dark' ? (
                         <DarkModeOutlined />

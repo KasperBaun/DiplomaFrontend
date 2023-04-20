@@ -3,35 +3,37 @@ import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import Categories from "./Categories";
-import Category from "@models/Category";
-import Subcategories from "./components/Subcategories";
+import Products from "./Products";
+import ProductItem from "@models/ProductItem";
+import ProductEditor from "./components/ProductEditor";
 
-export interface ICategoryManagerProps {
+export interface IProductManagerProps {
+
 }
 
-const CategoryManager: React.FC<ICategoryManagerProps> = observer(function CategoryManager(props: ICategoryManagerProps) {
+const ProductManager: React.FC<IProductManagerProps> = observer(function ProductManager(props: IProductManagerProps) {
 
     const { languageStore } = useContext(MobXContext);
-    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+    const [selectedProductItem, setSelectedProductItem] = useState<ProductItem | null>(null);
     const [activeKey, setActiveKey] = useState<number>(0);
 
     const navSwitch = (activeKey: number) => {
         switch (activeKey) {
-            case 0: return <Categories onCategoryClicked={handleOnCategoryClicked} />;
-            case 1: return <Subcategories selectedCategory={selectedCategory} />;
+            case 0: return <Products />;
+            case 1: return <ProductEditor productItem={selectedProductItem} />;
         }
     }
 
-    const handleOnCategoryClicked = (category: Category) => {
-        setSelectedCategory(category);
+    const handleOnProductItemClicked = (productItem: ProductItem) => {
+        setSelectedProductItem(productItem);
         setActiveKey(1);
     }
 
-    const handleOnSubcategoryClicked = () => {
-        setSelectedCategory(null);
+    const handleOnProductsClicked = () => {
+        setSelectedProductItem(null);
         setActiveKey(1);
     }
+
 
     return (
         <Grid container>
@@ -40,18 +42,18 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
                 <Breadcrumbs separator={<NavigateNext fontSize="large" />} aria-label="breadcrumb">
                     <Link onClick={() => setActiveKey(0)} underline={activeKey === 0 ? "always" : "hover"}>
                         <Typography variant="h3">
-                            {languageStore.currentLanguage.CategoriesTabText}
+                            {languageStore.currentLanguage.ProductTabText}
                         </Typography>
                     </Link>
-                    <Link onClick={handleOnSubcategoryClicked} underline={activeKey === 1 ? "always" : "hover"}>
+                    <Link onClick={handleOnProductsClicked} underline={activeKey === 1 ? "always" : "hover"}>
                         <Typography variant="h3">
-                            {languageStore.currentLanguage.SubCategoriesTabText}
+                            {languageStore.currentLanguage.product}
                         </Typography>
                     </Link>
                 </Breadcrumbs>
             </Grid>
 
-            {/* Display Categories or Subcategories */}
+            {/* Display Products or ProductEditor */}
             <Grid item xs={12} display={'flex'} justifyContent={'space-between'} margin='10px'>
                 {navSwitch(activeKey)}
             </Grid>
@@ -59,4 +61,4 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
     );
 });
 
-export default CategoryManager;
+export default ProductManager;

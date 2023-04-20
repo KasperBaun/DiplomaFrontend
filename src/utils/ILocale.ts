@@ -7,6 +7,7 @@ export interface ILocale {
   create: string;
   cancel: string;
   update: string;
+  product: string;
 
   // Button text
   buttonCancelText: string;
