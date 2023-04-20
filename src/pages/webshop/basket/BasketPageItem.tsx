@@ -28,7 +28,7 @@ const BasketPageItem: React.FC<IBasketPageItemProps> = observer(function BasketP
             <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
                  <img
                         src={props.item.images[0]}
-                        style={{ maxWidth:'100%', paddingLeft:'0.5rem',
+                        style={{ maxWidth:'100%',
                         paddingRight:'0.5rem', display:'flex'}}
                         alt=""
                     /> 

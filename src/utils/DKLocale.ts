@@ -41,7 +41,11 @@ export default class DKLocale implements ILocale {
   }
 
 
-  
+  //Basket Page
+  yourBasket = "Din indkøbskurv";
+  yourTotal = "Pris i alt" 
+  deliveryOptions = "Levering:"
+  paymentOptions = "Vi acceptere";
 
   // Category Admin
   createCategoryModalTitle = "Opret ny kategori";

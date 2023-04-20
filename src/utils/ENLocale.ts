@@ -41,6 +41,12 @@ export default class ENLocale implements ILocale {
     }
   }
 
+    //Basket Page
+    yourBasket = "Your basket";
+    yourTotal = "Total price" 
+    deliveryOptions = "Delivery Options:"
+    paymentOptions = "Payment Options";
+
   // Category Admin
   createCategoryModalTitle = "Create Category";
   createCategoryTitle = "Title";
