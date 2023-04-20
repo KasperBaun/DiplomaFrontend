@@ -5,9 +5,15 @@ export default class DKLocale implements ILocale {
   aboutUs = "Om os";
   aboutUsText = "Vi sælger porcelæn .....";
 
+  // Standard text
+  create = "Opret";
+  cancel = "Annuller";
+  update = "Opdater";
+
   // Button text
   buttonCancelText = "Annuller";
   buttonDeleteText = "Slet";
+  confirmDeleteText = "Er du sikker på at du vil slette dette element?";
   getQuality(qualityType: number): string {
     switch (qualityType) {
       case 1: return "1. Sortering";
@@ -17,28 +23,29 @@ export default class DKLocale implements ILocale {
     }
   }
 
-  getCondition (conditionType: number): string {
+  getCondition(conditionType: number): string {
     switch (conditionType) {
       case 1: return "Ingen skår";
       case 2: return "Få skår";
-      case 3: return "Mange skår"; 
+      case 3: return "Mange skår";
       default: return "Stand er ikke defineret";
     }
   }
 
-  getMaterialType (materialType: number): string {
+  getMaterialType(materialType: number): string {
     switch (materialType) {
       case 1: return "Porcelæn";
       case 2: return "Stål";
-      case 3: return "Glas"; 
+      case 3: return "Glas";
       case 4: return "Guld";
       case 5: return "Sølv";
-      case 6: return "Keramik"; 
+      case 6: return "Keramik";
       case 7: return "Stentøj";
-      case 8: return "Fajance"; 
+      case 8: return "Fajance";
       default: return "Materiale er ikke defineret";
     }
   }
+
 
 
   //Basket Page
@@ -48,7 +55,7 @@ export default class DKLocale implements ILocale {
   paymentOptions = "Vi acceptere";
 
   // Category Admin
-  createCategoryModalTitle = "Opret ny kategori";
+  createCategoryDialogTitle = "Opret ny kategori";
   createCategoryTitle = "Titel";
   createCategoryOrder = "Rækkefølge";
   createCategoryImgUrl = "Billede Url";
@@ -58,6 +65,7 @@ export default class DKLocale implements ILocale {
   createCategoryFailedMessage = "Fejl. Kunne ikke oprette kategori!";
   ProductCommaSeperatedText = "Tilføj flere produkter ved at comma separere, såsom Tallerken, Kop, Skål";
   // Update Form
+  updateCategoryDialogTitle = "Opdater kategori";
   updateCategoryFormTitle = "Titel";
   updateCategoryFormOrder = "Rækkefølge";
   updateCategoryFormDescription = "Beskrivelse";
@@ -67,11 +75,13 @@ export default class DKLocale implements ILocale {
   updateCategorySubmit = "Opdater";
   updateCategorySuccessMessage = "Kategory opdateret!";
   updateCategoryFailedMessage = "Fejl. Kunne ikke opdatere kategori!";
-  deleteCategoryConfirmMessage = "Er du sikker på at du vil slette denne kategori?";
+
+  deleteCategorySuccessMessage = "Kategory slettet!";
+  deleteCategoryFailedMessage = "Fejl. Kunne ikke slette kategori!";
 
   // Subcategory
   createSubCategoryCategoryTitle = "Vælg kategori";
-  createSubCategoryModalTitle = "Opret underkategori";
+  createSubCategoryDialogTitle = "Opret underkategori";
   createSubCategoryTitle = "Titel";
   createSubCategoryOrder = "Rækkefølge";
   createSubCategoryImgUrl = "Billede Url";
@@ -140,7 +150,7 @@ export default class DKLocale implements ILocale {
   HomeTabText = "Hjem";
   ProductTabText = "Produkter";
   CategoriesTabText = "Kategorier";
-  SubCategoriesTabText = "Under kategorier";
+  SubCategoriesTabText = "Underkategorier";
   BasketTabText = "Kurv";
   PaymentTabText = "Betaling";
   ConfirmationTabText = "Bekræftelse";

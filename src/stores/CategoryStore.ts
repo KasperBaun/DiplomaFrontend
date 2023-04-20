@@ -57,7 +57,17 @@ export class CategoryStore {
     }
 
     public async createCategory(category: Category): Promise<void> {
-        return await this.apiService.createCategory(category);
+        try {
+            await this.apiService.createCategory(category).then(() => {
+                runInAction(() => {
+                    this._categories.push(category);
+                }
+                )
+            });
+            return;
+        } catch (err) {
+            console.log("Failed creating new category. Error: ", err);
+        }
     }
 
     public async deleteCategory(id: number): Promise<void> {
@@ -68,9 +78,14 @@ export class CategoryStore {
         return;
     }
 
-    public async updateCategory(Category: Category): Promise<void> {
-        await this.apiService.updateCategory(Category);
-        await this.refreshCategories();
+    public async updateCategory(category: Category): Promise<void> {
+        try {
+            await this.apiService.updateCategory(category)
+                .then(async () => await this.refreshCategories());
+            return;
+        } catch (err) {
+            console.log("Failed creating new category. Error: ", err);
+        }
         return;
     }
 

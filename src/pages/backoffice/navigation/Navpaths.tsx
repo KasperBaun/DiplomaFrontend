@@ -46,11 +46,11 @@ export function createNavPaths(languageStore: LanguageStore, setNavKey: Dispatch
                         title: sidebarOpen ? languageStore.currentLanguage.CategoriesTabText : '',
                         icon: <PlaylistAdd style={iconStyling ? iconStyling : {}} />,
                     },
-                    {
-                        navigationClick: () => setNavKey(2),
-                        title: sidebarOpen ? languageStore.currentLanguage.SubCategoriesTabText : '',
-                        icon: <PlaylistAdd style={iconStyling ? iconStyling : {}} />
-                    },
+                    // {
+                    //     navigationClick: () => setNavKey(2),
+                    //     title: sidebarOpen ? languageStore.currentLanguage.SubCategoriesTabText : '',
+                    //     icon: <PlaylistAdd style={iconStyling ? iconStyling : {}} />
+                    // },
                     {
                         navigationClick: () => setNavKey(3),
                         title: sidebarOpen ? languageStore.currentLanguage.ProductTabText : '',

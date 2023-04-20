@@ -3,16 +3,23 @@ export interface ILocale {
   aboutUs: string;
   aboutUsText: string;
 
+  // Standard text
+  create: string;
+  cancel: string;
+  update: string;
+
   // Button text
   buttonCancelText: string;
   buttonDeleteText: string;
+  confirmDeleteText: string;
+
   getQuality(qualityType: number): string;
   getCondition (conditionType: number): string; 
 
   getMaterialType(materialType : number): string; 
 
   // Category Admin
-  createCategoryModalTitle: string;
+  createCategoryDialogTitle: string;
   createCategoryTitle: string;
   createCategoryOrder: string;
   createCategoryImgUrl: string;
@@ -20,7 +27,8 @@ export interface ILocale {
   createCategorySubmit: string;
   createCategorySuccessMessage: string;
   createCategoryFailedMessage: string;
-  ProductCommaSeperatedText: string;
+
+  updateCategoryDialogTitle: string;
   updateCategoryFormTitle: string;
   updateCategoryFormOrder: string;
   updateCategoryFormDescription: string;
@@ -30,8 +38,11 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
-  deleteCategoryConfirmMessage: string;
 
+  deleteCategorySuccessMessage: string;
+  deleteCategoryFailedMessage: string;
+  
+  ProductCommaSeperatedText: string;
   // BasketPage: 
   yourBasket: string;
   yourTotal: string; 
@@ -42,7 +53,7 @@ export interface ILocale {
 
   // Subcategory
   createSubCategoryCategoryTitle: string;
-  createSubCategoryModalTitle: string;
+  createSubCategoryDialogTitle: string;
   createSubCategoryTitle: string;
   createSubCategoryOrder: string;
   createSubCategoryImgUrl: string;

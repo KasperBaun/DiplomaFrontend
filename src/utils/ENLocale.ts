@@ -6,9 +6,16 @@ export default class ENLocale implements ILocale {
   aboutUs = "About Us";
   aboutUsText = "We sell porcelain";
 
+  // Standard text
+  create = "Create";
+  cancel = "Cancel";
+  update = "Update";
+
   // Button text
   buttonCancelText = "Cancel";
   buttonDeleteText = "Delete";
+  confirmDeleteText = "Are you sure you want to delete this item?";
+
   getQuality(qualityType: number): string {
     switch (qualityType) {
       case 1: return "1. Quality";
@@ -18,25 +25,25 @@ export default class ENLocale implements ILocale {
     }
   }
 
-  getCondition (conditionType: number): string {
+  getCondition(conditionType: number): string {
     switch (conditionType) {
       case 1: return "No shards";
       case 2: return "Few shards";
-      case 3: return "Many shards"; 
+      case 3: return "Many shards";
       default: return "Condition not defined";
     }
   }
 
-  getMaterialType (materialType: number): string {
+  getMaterialType(materialType: number): string {
     switch (materialType) {
       case 1: return "Porcelain";
       case 2: return "Steel";
-      case 3: return "Glass"; 
+      case 3: return "Glass";
       case 4: return "Gold";
       case 5: return "Silver";
-      case 6: return "Ceramics"; 
+      case 6: return "Ceramics";
       case 7: return "Stoneware";
-      case 8: return "Fajance"; 
+      case 8: return "Fajance";
       default: return "Material not defined";
     }
   }
@@ -48,7 +55,7 @@ export default class ENLocale implements ILocale {
     paymentOptions = "Payment Options";
 
   // Category Admin
-  createCategoryModalTitle = "Create Category";
+  createCategoryDialogTitle = "Create Category";
   createCategoryTitle = "Title";
   createCategoryOrder = "Order";
   createCategoryImgUrl = "Image Url";
@@ -60,6 +67,7 @@ export default class ENLocale implements ILocale {
   updateCategoryFailedMessage = "Failed to edit category!";
   ProductCommaSeperatedText = "Add more products by comma seperating them like: Cup, Plate, Vase";
   // Update Form
+  updateCategoryDialogTitle = "Update Category";
   updateCategoryFormTitle = "Title";
   updateCategoryFormOrder = "Order";
   updateCategoryFormDescription = "Description";
@@ -67,11 +75,12 @@ export default class ENLocale implements ILocale {
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
-  deleteCategoryConfirmMessage = "Are you sure you want to delete this category?";
+  deleteCategorySuccessMessage = "Category deleted successfully!";
+  deleteCategoryFailedMessage = "Failed to delete category!";
 
   // SubCategory
   createSubCategoryCategoryTitle = "Select Category";
-  createSubCategoryModalTitle = "Create Subcategory";
+  createSubCategoryDialogTitle = "Create Subcategory";
   createSubcategoryCategoryTitle = "Choose subcategory";
   createSubCategoryTitle = "Title";
   createSubCategoryOrder = "Order";
@@ -113,7 +122,7 @@ export default class ENLocale implements ILocale {
   AnalysisGold = "Gold";
 
 
- 
+
   // Admin Header 
   GeneralHeaderAdmin = "General";
 
@@ -142,7 +151,7 @@ export default class ENLocale implements ILocale {
   HomeTabText = "Home";
   ProductTabText = "Products";
   CategoriesTabText = "Categories";
-  SubCategoriesTabText = "Sub categories";
+  SubCategoriesTabText = "Subcategories";
   BasketTabText = "Basket";
   PaymentTabText = "Payment";
   ConfirmationTabText = "Confirmation";

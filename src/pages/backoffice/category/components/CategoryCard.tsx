@@ -55,16 +55,17 @@ const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: 
                 onClick={onImageClicked}
                 image={props.category.imageUrl ? props.category.imageUrl : "https://picsum.photos/200/300?grayscale"}
                 alt="Category image for category card"
+                style={{ objectFit: "cover" }}
             />
             <CardContent>
-                <Typography variant="h2" color="text.primary">
-                    {props.category.name}
+                <Typography variant="h3" color="text.primary" sx={{ maxHeight: '40px', overflow: 'hidden' }}>
+                    {props.category.name.split('|')[0]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     {subcategoryCountTitle}
                 </Typography>
             </CardContent>
-            <CardActions style={{ display: 'flex', justifyContent: 'end' }}>
+            <CardActions style={{ display: 'flex', alignItems: 'end', justifyContent: 'end' }}>
                 <IconButton onClick={onUpdateIconClicked} aria-label="edit">
                     <Edit />
                 </IconButton>

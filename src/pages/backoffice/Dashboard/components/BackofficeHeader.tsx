@@ -3,12 +3,13 @@ import { Box, Typography } from "@mui/material";
 export interface IHeaderProps {
     title: string;
     subtitle: string;
+    onClick?: () => void;
 }
 
 const BackofficeHeader: React.FC<IHeaderProps> = function BackofficeHeader(props: IHeaderProps) {
 
     return (
-        <Box>
+        <Box onClick={props.onClick}>
             <Typography
                 variant="h2"
                 fontWeight="bold"

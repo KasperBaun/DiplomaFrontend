@@ -31,7 +31,9 @@ export class AuthStore {
         // Look for previous token and use it to sign in if possible
         const authed = await this.authStateProvider.trySilentAuthenticateUser();
         if (authed) {
-            this._authState = authed;
+            runInAction(() => {
+                this._authState = authed;
+            });
             this.setUserAuthed();
         }
         if (Constants.loggingEnabled) {
