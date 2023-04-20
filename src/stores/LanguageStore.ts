@@ -68,4 +68,16 @@ export class LanguageStore {
         return this.locales.get(this._currentLanguage);
     }
 
+    public getcurrentLanguageCode(): string {
+        if (this.locales.get(this._currentLanguage) instanceof DKLocale) {
+            // Dansk
+            return "da_DK";
+        }
+        if (this.locales.get(this._currentLanguage) instanceof ENLocale) {
+            // English
+            return "en_US";
+        }
+        return "Could not determine";
+    }
+
 }
