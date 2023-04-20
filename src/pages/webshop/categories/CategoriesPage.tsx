@@ -18,8 +18,9 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
     const navigate = useNavigate();
 
     function handleClick(category: Category, name : String) {
-        navigate('/subcategories/' + category.id , { state: { name } })
+        navigate('/subcategories/' + category.id , { state: { name} })
     }
+    
 
     if (categoryStore.Categories) {
         return (
@@ -27,7 +28,7 @@ const CategoriesPage: React.FC<ICategoriesPageProps> = observer(function Categor
                 {categoryStore.Categories.map((category, index) => (
                     <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                     <div onClick={() => handleClick(category, category.name)}>
-                        <CategoryCardWeb category={category}/>
+                        <CategoryCardWeb category={category} type={"cat"}/>
                     </div>
                 </Grid>
                 ))}
