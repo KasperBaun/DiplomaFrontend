@@ -38,6 +38,9 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
+
+  deleteCategorySuccessMessage: string;
+  deleteCategoryFailedMessage: string;
   
   ProductCommaSeperatedText: string;
   // BACKOFFICE

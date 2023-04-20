@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Snackbar, TextField } from "@mui/material";
 import Category from "@models/Category";
 
 export interface IProps {
@@ -13,22 +13,33 @@ export interface IProps {
 const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
 
     const { categoryStore, languageStore } = useContext(MobXContext);
+    const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+    const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
+    const [alertText, setAlertText] = useState<string>("");
     const [title, setTitle] = useState<string>("");
     const [url, setUrl] = useState<string>("");
     const [order, setOrder] = useState<number>(0);
     const [description, setDescription] = useState<string>("");
 
     async function createCategory(): Promise<void> {
-        const category: Category = ({ id: 0, name: title, imageUrl: url, order, description })
+        const category: Category = ({ id: 0, name: title, imageUrl: url, order, description: description })
 
         try {
             await categoryStore.createCategory(category)
-            alert(languageStore.currentLanguage.createCategorySuccessMessage);
+            setAlertType("success");
+            setAlertText(languageStore.currentLanguage.createCategorySuccessMessage);
         }
         catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createCategoryFailedMessage);
+            setAlertType("warning");
+            setAlertText(languageStore.currentLanguage.createCategoryFailedMessage);
         }
+        setShowSnackbar(true);
+    }
+
+    const handleCloseDialog = () => {
+        setShowSnackbar(false);
+        onClose();
     }
 
     async function handleOnUpdateCategory() {
@@ -42,12 +53,14 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
 
         try {
             await categoryStore.updateCategory(updateAction);
-            alert(languageStore.currentLanguage.createCategorySuccessMessage);
-            onClose();
+            setAlertType("success");
+            setAlertText(languageStore.currentLanguage.updateCategorySuccessMessage);
         } catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createCategoryFailedMessage);
+            setAlertType("warning");
+            setAlertText(languageStore.currentLanguage.updateCategoryFailedMessage);
         }
+        setShowSnackbar(true);
     }
 
     if (!visible) {
@@ -136,6 +149,11 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
                         {create ? languageStore.currentLanguage.createCategorySubmit : languageStore.currentLanguage.updateCategorySubmit}
                     </Button>
                 </DialogActions>
+
+
+                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={showSnackbar} autoHideDuration={5000} onClose={handleCloseDialog}>
+                    <Alert severity={alertType}>{alertText}</Alert>
+                </Snackbar>
             </Dialog>
         )
     }

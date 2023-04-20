@@ -25,12 +25,15 @@ class CrudHelper implements ICrudHelper {
         }
 
         try {
+            //console.log(`${this.prefix} apiUrl ${apiUrl}`, this.color);
             const response = await fetch(`${apiUrl}`, {
                 method: 'POST',
                 body: JSON.stringify(object),
                 headers: this.headers,
                 mode: this.mode
             });
+
+            console.log(`${this.prefix} response ${response}`, this.color);
 
             if (response.ok) {
                 if (this.loggingEnabled) {

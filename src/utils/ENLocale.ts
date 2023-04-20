@@ -69,6 +69,8 @@ export default class ENLocale implements ILocale {
   updateCategoryFormOrderDesc = "Sets the order in which categories will be displayed on the website";
   updateCategoryFormDescriptionDesc = "Describes details about the products in this category";
   updateCategorySubmit = "Update";
+  deleteCategorySuccessMessage = "Category deleted successfully!";
+  deleteCategoryFailedMessage = "Failed to delete category!";
 
   // SubCategory
   createSubCategoryCategoryTitle = "Select Category";

@@ -29,6 +29,11 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
         setActiveKey(1);
     }
 
+    const handleOnSubcategoryClicked = () => {
+        setSelectedCategory(null);
+        setActiveKey(1);
+    }
+
 
     return (
         <Grid container>
@@ -40,7 +45,7 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
                             {languageStore.currentLanguage.CategoriesTabText}
                         </Typography>
                     </Link>
-                    <Link onClick={() => setActiveKey(1)} underline={activeKey === 1 ? "always" : "hover"}>
+                    <Link onClick={handleOnSubcategoryClicked} underline={activeKey === 1 ? "always" : "hover"}>
                         <Typography variant="h3">
                             {languageStore.currentLanguage.SubCategoriesTabText}
                         </Typography>

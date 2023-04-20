@@ -71,6 +71,9 @@ export default class DKLocale implements ILocale {
   updateCategorySuccessMessage = "Kategory opdateret!";
   updateCategoryFailedMessage = "Fejl. Kunne ikke opdatere kategori!";
 
+  deleteCategorySuccessMessage = "Kategory slettet!";
+  deleteCategoryFailedMessage = "Fejl. Kunne ikke slette kategori!";
+
   // Subcategory
   createSubCategoryCategoryTitle = "Vælg kategori";
   createSubCategoryDialogTitle = "Opret underkategori";

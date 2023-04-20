@@ -26,10 +26,13 @@ export class SubCategoryStore {
 
     public async init(): Promise<boolean> {
         // Fetch subcategories
-        this._subCategories = await this.apiService.getSubCategories();
-        this.mapCategoryToSubcategory(this._subCategories);
-        this.subcategoriesInCategoryMap = this.mapSubCategoriesToCategoryId(this._subCategories);
-        this._subcategoryMap = this.createSubcategoryMap(this._subCategories);
+        const subcategories = await this.apiService.getSubCategories();
+        runInAction(async () => {
+            this._subCategories = subcategories;
+            this.mapCategoryToSubcategory(this._subCategories);
+            this.subcategoriesInCategoryMap = this.mapSubCategoriesToCategoryId(this._subCategories);
+            this._subcategoryMap = this.createSubcategoryMap(this._subCategories);
+        });
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -115,13 +118,23 @@ export class SubCategoryStore {
     }
 
     public async createSubCategory(subCategory: SubCategory): Promise<void> {
-        await this.apiService.createSubCategory(subCategory);
-        await this.refreshSubCategories();
+        try {
+            await this.apiService.createSubCategory(subCategory);
+            runInAction(async () => await this.refreshSubCategories());
+        }
+        catch (error) {
+            console.log("Failed updating subcategory: ", error);
+        }
         return;
     }
     public async updateSubCategory(subCategory: SubCategory): Promise<boolean> {
-        await this.apiService.updateSubCategory(subCategory);
-        await this.refreshSubCategories();
+        try {
+            await this.apiService.updateSubCategory(subCategory);
+            runInAction(async () => await this.refreshSubCategories());
+        }
+        catch (error) {
+            console.log("Failed updating subcategory: ", error);
+        }
         return;
     }
 

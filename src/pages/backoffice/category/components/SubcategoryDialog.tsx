@@ -19,7 +19,6 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
     const [order, setOrder] = useState<number>(0);
     const [description, setDescription] = useState<string>("");
     const [selectedCategory, setSelectedCategory] = useState<Category>(subcategory ? subcategory : null);
-    const [selectedCategoryId, setSelectedCategoryId] = useState<number>(subcategory ? subcategory.categoryId : 0);
 
     async function createSubcategory() {
         const subCategory: SubCategory = {
@@ -86,6 +85,8 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
 
     const handleSelectedCategoryChange = (event: SelectChangeEvent) => {
         console.log(event.target.value);
+        const categoryId: number = parseInt(event.target.value);
+        setSelectedCategory(categoryStore.getCategory(categoryId));
 
         if (event.target.value === "1") {
             alert(languageStore.currentLanguage.createSubCategorySelectCategoryFailedMessage);
@@ -94,7 +95,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
             const categoryId: number = parseInt(event.target.value);
             setSelectedCategory(categoryStore.getCategory(categoryId));
         }
-      };
+    };
 
     if (!visible) {
         return (
@@ -119,7 +120,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
                                 />
                             </Grid>
                         }
-                        <Grid item xs={12}>
+                        <Grid item xs={12} marginTop={'20px'}>
                             <FormControl fullWidth>
                                 <InputLabel id="category-select-label">
                                     {languageStore.currentLanguage.createSubCategoryCategoryTitle}
@@ -127,7 +128,8 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
                                 <Select
                                     labelId="category-select-label"
                                     id="category-select"
-                                    value={selectedCategoryId? selectedCategory.name: ''}
+                                    value={selectedCategory ? selectedCategory.id.toString() : ''}
+                                    label={languageStore.currentLanguage.createSubCategoryCategoryTitle}
                                     onChange={handleSelectedCategoryChange}
                                 >
                                     {categoryStore.Categories.map((category, index) => (
