@@ -126,6 +126,22 @@ export interface ILocale {
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
 
+  ShoppingCartWidgetTotalLabel : string;
+  ShoppingCartWidgetPaymentFeeLabel : string;
+  ShoppingCartWidgetTotalAmountLabel : string;
+
+  CheckoutFormTitle : string;
+  CheckoutFormFirstNameLabel : string;
+  CheckoutFormLastNameLabel : string;
+  CheckoutFormEmailLabel : string;
+  CheckoutFormAddressLabel : string;
+  CheckoutFormZipCodeLabel : string;
+  CheckoutFormCityLabel : string;
+  CheckoutFormCountryLabel : string;
+  CheckoutFormCountryCodeLabel : string;
+  CheckoutFormPhoneLabel : string;
+  CheckoutFormSubmitButton : string;
+
   // Analysis
   AnalysisTitle : string;
   AnalysisMaterial : string;
