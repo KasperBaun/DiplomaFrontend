@@ -2,18 +2,21 @@ import { observer } from "mobx-react-lite"
 import UserDetailForm from "./components/UserDetailForm";
 import { Grid } from "@mui/material";
 import './css/payment.scss';
-import { Row } from "react-bootstrap";
 import ShoppingCartWidget from "./components/ShopCart";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
-import Basket from "@models/Basket";
+import OrderDetails from "@models/OrderDetails";
 
 interface IPaymentPageProps {
+    orders : OrderDetails[];
 }
 
 const PaymentPage = (props: IPaymentPageProps) => {
 
-    const { languageStore, basketStore, orderStore } = useContext(MobXContext);
+    const { languageStore, basketStore } = useContext(MobXContext);
+
+    // Process: Select Product -> Add to basket -> Go to Basket onCLick => Create Order -> Payment
+
 
     // TODO: 
     /*
@@ -26,7 +29,7 @@ const PaymentPage = (props: IPaymentPageProps) => {
                 <UserDetailForm ls={languageStore} />
             </Grid>
             <Grid item xs={12} sm={4}>
-                <ShoppingCartWidget ls={languageStore} basket={ basketStore.Basket } order={orderStore.OrderDetails} />
+                <ShoppingCartWidget ls={languageStore} basket={ basketStore.Basket } order={ props.orders } />
             </Grid>
         </Grid>
     )

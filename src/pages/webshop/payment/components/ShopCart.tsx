@@ -17,7 +17,7 @@ const ShoppingCartWidget = ( props : IShopCart ) => {
 
     let totalWithDiscount = 0;
     if ( props.order[0].discountCode ) { 
-        // totalWithDiscount = totalPriceNoDiscount - (totalPriceNoDiscount * props.order.discountCode.discountPercentage);
+        totalWithDiscount = totalPriceNoDiscount - (totalPriceNoDiscount * parseInt(props.order[0].discountCode));
     }
 
     return (
