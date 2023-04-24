@@ -1,5 +1,5 @@
 import ProductItem from "@models/ProductItem";
-import { useContext, useState} from "react";
+import { useContext} from "react";
 import Button from '@mui/material/Button';
 import MobXContext from "@stores/MobXContext";import { observer } from "mobx-react-lite";
 import "./ProductPage.scss";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom"
 
 interface IProductDescription{
     Iproduct: ProductItem
-
+    source : string
 }
 
 const ProductDescription: React.FC<IProductDescription> = observer(function ProductDescription(props: IProductDescription){
@@ -80,7 +80,7 @@ function getDesigner(){
         </div> 
 
         <div style={{width:'100%', display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: '3rem'}}>
-            <Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{width: '12rem', minHeight: '3rem',justifyContent: 'center' }}>Tilføj til kurv</Button>
+            { props.source === "web" ? (<Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{width: '12rem', minHeight: '3rem',justifyContent: 'center' }}>Tilføj til kurv</Button>) : (<></>)}
         </div>
     </div> 
 );

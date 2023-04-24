@@ -65,7 +65,14 @@ export class OrderStore {
         return this.orders.find(p => p.id === id);
     }
 
-    public async createOrder(order: Order): Promise<void> {
-        return await this.apiService.createOrder(order);
+    public getOrderDetail(id: number): OrderDetails[] {
+        let orders = this.orderDetails.filter(p => p.id === id);
+        return orders;
+    }
+
+    public async createOrder(order: Order): Promise<OrderDetails[]> {
+        await this.apiService.createOrder(order);
+        await this.apiService.getOrderDetails();
+        return this.getOrderDetail(order.id);
     }
 }

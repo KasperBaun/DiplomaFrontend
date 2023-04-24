@@ -1,0 +1,38 @@
+@import "~@styles/Main.scss";
+.GridFormControl {
+    width: 100%;
+}
+
+.GridItem {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    & button {
+        text-align: right !important;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        color: $primary;
+
+        &:hover {
+            background-color: $primary;
+            color: $textColor;
+        }
+    }
+}
+
+.checkoutForm {
+    width: 45rem !important;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    height: 100%;
+    margin: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem !important;
+}
+
+.checkoutShoppingCart {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+    margin: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem !important;
+}

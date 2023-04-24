@@ -51,9 +51,16 @@ export default class DKLocale implements ILocale {
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
-  yourTotal = "Pris i alt" 
+  yourTotal = "Pris" 
   deliveryOptions = "Levering:"
   paymentOptions = "Vi acceptere";
+  subTotal = "Subtotal:";
+  procesFee = "Behandlings gebyr:";
+  totalIncMoms = "Pris i alt (inklusiv moms):"
+  checkOutText = "Checkout"
+  addDiscountCode = "Tilføj rabatkode"
+  discountCodeOptional = "Discount kode (valgfri)"
+  addButton = "Tilføj"
 
   // Category Admin
   createCategoryDialogTitle = "Opret ny kategori";
@@ -171,6 +178,22 @@ export default class DKLocale implements ILocale {
   SalesSummaryTitle = "Salgs oversigt";
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
+
+  ShoppingCartWidgetPaymentFeeLabel = "Betalingsgebyr";
+  ShoppingCartWidgetTotalLabel = "Total før rabat";
+  ShoppingCartWidgetTotalAmountLabel = "Samlet pris (Inkl. moms)";
+
+  CheckoutFormTitle= "Faktureringsoplysninger";
+  CheckoutFormFirstNameLabel= "Fornavn";
+  CheckoutFormLastNameLabel= "Efternavn";
+  CheckoutFormEmailLabel= "Email";
+  CheckoutFormAddressLabel= "Vej/Gade & Husnummer";
+  CheckoutFormZipCodeLabel= "Postnummer";
+  CheckoutFormCityLabel= "By";
+  CheckoutFormCountryLabel= "Land";
+  CheckoutFormCountryCodeLabel= "Landekode";
+  CheckoutFormPhoneLabel= "Telefonnummer";
+  CheckoutFormSubmitButton= "Fortsæt til Betaling";
 
   // Orders
   GoToOrders = "Se flere Ordre";

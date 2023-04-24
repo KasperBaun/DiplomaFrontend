@@ -2,10 +2,12 @@ import Loading from "@components/loading/Loading";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import React from "react";
+import ProductDialog from "./ProductDialog";
+import '../../css/backoffice.scss';
 
 interface IProps {
     tableHeight: number;
@@ -13,6 +15,22 @@ interface IProps {
 
 const OrderDetailsList = ( {tableHeight} : IProps ) => {
     const { orderStore, languageStore } = useContext(MobXContext);
+    const [openDialog, setOpenDialog] = useState(false);
+
+    const [productId, setProductId] = useState(0);
+
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    }
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    }
+
+    const handleOnProductClick = (id: number) => {
+        setProductId(id);
+        handleOpenDialog();
+    }
 
     if (orderStore.OrderDetails)
         return (
@@ -35,7 +53,7 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
                             {
                                 orderStore.OrderDetails.map((order, index) => (
                                     <TableRow key={order.id + "_orderDetail_" + index}>
-                                        <TableCell align="left">{order.productItemId}</TableCell>
+                                        <TableCell className="tableCellOnClick" align="left" onClick={() => handleOnProductClick(order.productItemId)}><b><u>{order.productItemId}</u></b></TableCell>
                                         <TableCell align="left">{order.manufacturer}</TableCell>
                                         <TableCell align="left">{order.customerId}</TableCell>
                                         <TableCell align="left">{order.paymentStatus}</TableCell>
@@ -55,6 +73,7 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                <ProductDialog ls={languageStore} id={productId} open={openDialog} onClose={handleCloseDialog} />
             </React.Fragment>
         )
     else {

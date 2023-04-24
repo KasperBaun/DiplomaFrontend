@@ -49,6 +49,14 @@ export interface ILocale {
   yourTotal: string; 
   deliveryOptions: string;
   paymentOptions: string;
+  subTotal: string;
+  procesFee: string;
+  totalIncMoms: string; 
+  checkOutText: string; 
+  addDiscountCode: string; 
+  discountCodeOptional: string;
+  addButton: string; 
+
 
   // BACKOFFICE
 
@@ -126,6 +134,22 @@ export interface ILocale {
   SalesSummaryTitle: string;
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
+
+  ShoppingCartWidgetTotalLabel : string;
+  ShoppingCartWidgetPaymentFeeLabel : string;
+  ShoppingCartWidgetTotalAmountLabel : string;
+
+  CheckoutFormTitle : string;
+  CheckoutFormFirstNameLabel : string;
+  CheckoutFormLastNameLabel : string;
+  CheckoutFormEmailLabel : string;
+  CheckoutFormAddressLabel : string;
+  CheckoutFormZipCodeLabel : string;
+  CheckoutFormCityLabel : string;
+  CheckoutFormCountryLabel : string;
+  CheckoutFormCountryCodeLabel : string;
+  CheckoutFormPhoneLabel : string;
+  CheckoutFormSubmitButton : string;
 
   // Analysis
   AnalysisTitle : string;

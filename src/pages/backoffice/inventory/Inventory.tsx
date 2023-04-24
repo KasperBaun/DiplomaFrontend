@@ -1,13 +1,16 @@
-import { observer } from "mobx-react-lite";
+import { Grid } from '@mui/material';
 import InventoryCards from "./components/InventoryCards";
-import './inventory.scss';
 
 const InventoryMain = () => {
     return (
-        <>
-            <InventoryCards />
-        </>
+            <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
+            <Grid item xs={11.9}>
+                <div className="DashBoardGridContainer">
+                    <InventoryCards />
+                </div>
+            </Grid>
+        </Grid>
     )
 }
 
-export default observer(InventoryMain);
+export default InventoryMain;
