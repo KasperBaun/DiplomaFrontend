@@ -48,6 +48,14 @@ export interface ILocale {
   yourTotal: string; 
   deliveryOptions: string;
   paymentOptions: string;
+  subTotal: string;
+  procesFee: string;
+  totalIncMoms: string; 
+  checkOutText: string; 
+  addDiscountCode: string; 
+  discountCodeOptional: string;
+  addButton: string; 
+
 
   // BACKOFFICE
 

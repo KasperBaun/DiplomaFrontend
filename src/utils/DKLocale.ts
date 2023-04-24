@@ -50,9 +50,16 @@ export default class DKLocale implements ILocale {
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
-  yourTotal = "Pris i alt" 
+  yourTotal = "Pris" 
   deliveryOptions = "Levering:"
   paymentOptions = "Vi acceptere";
+  subTotal = "Subtotal:";
+  procesFee = "Behandlings gebyr:";
+  totalIncMoms = "Pris i alt (inklusiv moms):"
+  checkOutText = "Checkout"
+  addDiscountCode = "Tilføj rabatkode"
+  discountCodeOptional = "Discount kode (valgfri)"
+  addButton = "Tilføj"
 
   // Category Admin
   createCategoryDialogTitle = "Opret ny kategori";
