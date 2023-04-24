@@ -25,7 +25,8 @@ const BasketPage: React.FC<IBasketPageProps> = observer(function BasketPage(prop
     }
 
     function handleClick() {
-        navigate('/Payment' , { state: { } })
+        navigate('/Payment')
+        
     }
 
     return (
