@@ -19,7 +19,7 @@ const BasketPage: React.FC<IBasketPageProps> = observer(function BasketPage(prop
     const getTotal = (bas = basketStore.Basket) => {
         let sum = 0;
         for (let i = 0; i < bas.length; i++) {
-          sum = sum + bas[i].currentPrice;
+          sum = sum + bas[i].price;
         }
         return sum;
     }

@@ -1,15 +1,15 @@
-import ProductItem from "@models/ProductItem";
 import { Stack, Button } from "react-bootstrap";
 import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext} from "react";
+import ProductItemWeb from "@models/ProductItemWeb";
 
 
-export function CartItem( {item }: {item : ProductItem}){
+export function CartItem( {item }: {item : ProductItemWeb}){
    
     const {basketStore} = useContext(MobXContext);
 
-    function removeFromCart(item : ProductItem ){
+    function removeFromCart(item : ProductItemWeb ){
         basketStore.removeFromBasket(item);
     }
     
@@ -33,7 +33,7 @@ export function CartItem( {item }: {item : ProductItem}){
                     </Grid>     
                     <Grid item>
                         <div style={{fontSize:'16px', marginTop:'1.5rem', fontWeight:'600'}}>
-                            {item.currentPrice} DKK
+                            {item.price} DKK
                         </div>      
                     </Grid>  
                 </Stack>

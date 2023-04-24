@@ -22,7 +22,7 @@ const InventoryWidget = () => {
                     <TableBody>
                         { CPVStore.CategoryProducts.map((item, index) => (
                         <TableRow key={"inventory_" + index}>
-                            <TableCell align="left">{ languageStore.getcurrentLanguageCode() === "da_DK" ? item.name.split("|")[0] : item.name.split("|")[1] }</TableCell>
+                            <TableCell align="left">{ languageStore.getCurrentLanguageCode() === "da_DK" ? item.name.split("|")[0] : item.name.split("|")[1] }</TableCell>
                             <TableCell align="left">{item.totalProducts}</TableCell>
                         </TableRow>
                         ))}

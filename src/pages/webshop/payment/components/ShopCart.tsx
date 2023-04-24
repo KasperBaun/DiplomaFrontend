@@ -1,19 +1,17 @@
-import Basket from "@models/Basket";
 import OrderDetails from "@models/OrderDetails";
-import ProductItem from "@models/ProductItem";
-import { Grid } from "@mui/material";
+import ProductItemWeb from "@models/ProductItemWeb";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Col, Container, Row } from "react-bootstrap";
 
 interface IShopCart {
     ls : LanguageStore;
-    basket : ProductItem[];
+    basket : ProductItemWeb[];
     order : OrderDetails[];
 }
 
 const ShoppingCartWidget = ( props : IShopCart ) => {
     
-    let totalPriceNoDiscount = props.basket.map((product) => product.currentPrice).reduce((a, b) => a + b, 0);
+    let totalPriceNoDiscount = props.basket.map((product) => product.price).reduce((a, b) => a + b, 0);
 
     let totalWithDiscount = 0;
     if ( props.order[0].discountCode ) { 

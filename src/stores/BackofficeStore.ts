@@ -65,7 +65,16 @@ export class BackofficeStore {
         // Get Pricehistories
         const pricehistories = await this.apiService.getPriceHistories();
 
-        await this.loadProducts();
+        const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
+        runInAction(() => {
+            this._products = this.generateProducts(productDTOs);
+            this._productMap = this.createProductMap(this._products);
+        });
+        const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
+        runInAction(() => {
+            this._productItems = this.generateProductItems(productItemDTOs, this._productMap);
+            this._productItemMap = this.createProductItemsMap(this.productItems);
+        });
 
         // Get Orders
 
@@ -188,23 +197,6 @@ export class BackofficeStore {
 
 
     /* Products & ProductItems */
-
-    public async loadProducts(): Promise<void> {
-        if (!this.isLoaded) {
-            const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
-            this._products = this.generateProducts(productDTOs);
-            this._productMap = this.createProductMap(this._products);
-            const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
-            this._productItems = this.generateProductItems(productItemDTOs, this._productMap);
-            this._productItemMap = this.createProductItemsMap(this.productItems);
-
-            runInAction(() => {
-                this.loaded = true;
-                this.loading = false;
-            });
-        }
-    }
-
     private generateProducts(productDTOs: ProductDTO[]): Product[] {
         const products: Product[] = [];
         for (const productDTO of productDTOs) {
@@ -283,6 +275,18 @@ export class BackofficeStore {
         return prodItemMap;
     }
 
+    public getProduct(id: number): Product {
+        return this._productMap.get(id);
+    }
+
+    public getProductItem(id: number): ProductItem {
+        return this._productItemMap.get(id);
+    }
+
+    public get ProductItems(): ProductItem[] {
+        return this.productItems;
+    }
+
     public get isLoaded(): boolean {
         return this.loaded;
     }
@@ -291,7 +295,6 @@ export class BackofficeStore {
         return this._productItems;
     }
 
-    /* Get Accessors */
     public get subCategories(): SubCategory[] {
         return this._subcategories;
     }
