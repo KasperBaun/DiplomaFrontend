@@ -37,7 +37,7 @@ const ProductDialog = ( props : IProps ) => {
                     <ImageGallery key={"productImgGal" + product.id} imageURLs={product.images} />
                   </Grid>
                   <Grid item lg={6}>
-                    <ProductDescription key={"productDes" + product.id} Iproduct={product} />
+                    <ProductDescription source={"backoffice"} key={"productDes" + product.id} Iproduct={product} />
                   </Grid>
                 </Grid>
               </DialogContent>
