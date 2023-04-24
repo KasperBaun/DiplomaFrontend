@@ -50,9 +50,17 @@ export default class ENLocale implements ILocale {
 
     //Basket Page
     yourBasket = "Your basket";
-    yourTotal = "Total price" 
+    yourTotal = "Price" 
     deliveryOptions = "Delivery Options:"
     paymentOptions = "Payment Options";
+    subTotal = "Subtotal:";
+    procesFee = "Handling fees:";
+    totalIncMoms = "Price in total (including taxs):"
+    checkOutText = "Checkout"
+    addDiscountCode = "Add dicsount code"
+    discountCodeOptional = "Discount code (optional)"
+    addButton = "Add"
+
 
   // Category Admin
   createCategoryDialogTitle = "Create Category";
