@@ -66,7 +66,7 @@ const Products: React.FC = observer(function Products() {
         }
     }
 
-    if (!backofficeStore.isLoaded) {
+    if (!backofficeStore.productItems && backofficeStore.productItems.length === 0) {
         return (
             <Loading />
         )
