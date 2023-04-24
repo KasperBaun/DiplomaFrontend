@@ -1,7 +1,7 @@
-import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
@@ -20,18 +20,26 @@ interface IProps {
 
 const RecentSalesList = (props: IProps) => {
   const { paymentStore } = useContext(MobXContext);
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+  const [toggle, setToggle] = useState(true);
 
-  const sortByDate = () => {
-    paymentStore.Payments.slice().sort((a: Payment, b: Payment) => {
-      const dateA = new Date(a.datePaid);
-      const dateB = new Date(b.datePaid);
-      return sortDirection === 'asc' ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
-    });
-    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-  }
+  useEffect(() => {
+    const sortedPayments = [...paymentStore.Payments].sort((a: Payment, b: Payment) =>
+      new Date(b.datePaid).getTime() - new Date(a.datePaid).getTime()
+    );
+    paymentStore.Payments = sortedPayments;
+  }, []);
 
   if (paymentStore.Payments) {
+    const sortByDate = () => {
+      const sortedPayments = [...paymentStore.Payments].sort((a: Payment, b: Payment) => {
+        const dateA = new Date(a.datePaid);
+        const dateB = new Date(b.datePaid);
+        return toggle ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
+      });
+      paymentStore.Payments = sortedPayments;
+      setToggle(!toggle);
+    };
+
     return (
       <React.Fragment>
         <h4>{props.title}</h4>
@@ -39,7 +47,13 @@ const RecentSalesList = (props: IProps) => {
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell align="left" onClick={sortByDate}>{props.datePaid}</TableCell>
+                <TableCell align="left" onClick={sortByDate}><TableSortLabel
+                  active
+                  direction={toggle ? 'desc' : 'asc'}
+                  onClick={sortByDate}
+                >
+                  {props.datePaid}
+                </TableSortLabel></TableCell>
                 <TableCell align="center" >{props.approved}</TableCell>
                 <TableCell align="center" >{props.method}</TableCell>
                 <TableCell align="right">{props.amount}</TableCell>
@@ -47,8 +61,6 @@ const RecentSalesList = (props: IProps) => {
             </TableHead>
             <TableBody style={{ overflowY: 'auto', maxHeight: '15rem' }}>
               {paymentStore.Payments
-                .slice()
-                .sort((a, b) => new Date(b.datePaid).getTime() - new Date(a.datePaid).getTime())
                 .map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell>
