@@ -17,7 +17,6 @@ const PaymentPage = (props: IPaymentPageProps) => {
 
     // Process: Select Product -> Add to basket -> Go to Basket onCLick => Create Order -> Payment
 
-
     // TODO: 
     /*
         1. Payment Form
