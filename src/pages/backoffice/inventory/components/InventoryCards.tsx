@@ -17,7 +17,7 @@ const InventoryCards = () => {
                         <Card className="inventoryCard" sx={{ minWidth: 275 }}>
                             <CardContent>
                                 <Typography variant="h5" component="div">
-                                    {item.name}
+                                    { languageStore.getcurrentLanguageCode() === "da_DK" ? item.name.split("|")[0] : item.name.split("|")[1] }
                                 </Typography>
                                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                                     { languageStore.currentLanguage.InventoryAmountLabel + "" + item.totalProducts }
