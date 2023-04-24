@@ -1,14 +1,14 @@
-import ProductItem from "@models/ProductItem";
 import { useContext} from "react";
 import Button from '@mui/material/Button';
 import MobXContext from "@stores/MobXContext";import { observer } from "mobx-react-lite";
 import "./ProductPage.scss";
 import { useNavigate } from "react-router-dom"
+import ProductItemWeb from "@models/ProductItemWeb";
 
 
 interface IProductDescription{
-    Iproduct: ProductItem
-    source : string
+    Iproduct: ProductItemWeb;
+    source : string;
 }
 
 const ProductDescription: React.FC<IProductDescription> = observer(function ProductDescription(props: IProductDescription){
@@ -62,7 +62,7 @@ function getDesigner(){
             <h3>{props.Iproduct.product.name}</h3>
             <div className="productDe_modelNumber">{languageStore.currentLanguage.productPage_productModelNumber} : {props.Iproduct.product.modelNumber}</div>
             
-            <div className="productDe_price">Kr {props.Iproduct.currentPrice} DKK</div>
+            <div className="productDe_price">Kr {props.Iproduct.price} DKK</div>
         </div>
 
         <div className="ProductDe_extraInfo">

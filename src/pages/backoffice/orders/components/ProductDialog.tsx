@@ -1,8 +1,7 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle, Grid } from "@mui/material";
 import { LanguageStore } from "@stores/LanguageStore";
 import MobXContext from "@stores/MobXContext";
 import ImageGallery from "@webshop/product/ImageGallery";
-import ProductDescription from "@webshop/product/ProductDescription";
 import { useContext, useState } from "react";
 
 interface IProps {
@@ -13,8 +12,8 @@ interface IProps {
 }
 
 const ProductDialog = ( props : IProps ) => {
-    const { productStore } = useContext(MobXContext);
-    const product = (productStore.getProductItem(Number(props.id)));
+    const { backofficeStore } = useContext(MobXContext);
+    const product = (backofficeStore.getProductItem(Number(props.id)));
     const [open, setOpen] = useState(false);
 
     const handleOpen = () => {
@@ -34,10 +33,10 @@ const ProductDialog = ( props : IProps ) => {
               <DialogContent>
                 <Grid container spacing={2}>
                   <Grid item lg={6}>
-                    <ImageGallery key={"productImgGal" + product.id} imageURLs={product.images} />
+                    <ImageGallery key={"productImgGal" + product.id} imageURLs={product.images.map(img => img.url)} />
                   </Grid>
                   <Grid item lg={6}>
-                    <ProductDescription source={"backoffice"} key={"productDes" + product.id} Iproduct={product} />
+                    {/* <ProductDescription source={"backoffice"} key={"productDes" + product.id} Iproduct={product} /> */}
                   </Grid>
                 </Grid>
               </DialogContent>

@@ -9,13 +9,16 @@ import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
-import ProductItemDTO from "@models/DTO/ProductItemDTO";
+import ProductItemWeb from "@models/ProductItemWeb";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
 import SalesSummary from "@models/SalesSummary";
 import Order from "@models/Orders";
 import OrderDetails from "@models/OrderDetails";
 import ProductItemDetails from "@models/ProductItemDetails";
+import Image from '@models/Image';
+import PriceHistory from "@models/PriceHistory";
+import ProductItemDTO from "@models/DTO/ProductItemDTO";
 
 class APIService implements IAPIService {
 
@@ -33,6 +36,19 @@ class APIService implements IAPIService {
         }
     }
 
+    /* Backoffice */
+    async getProductItemDTOs(): Promise<ProductItemDTO[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/ProductItem`, "ProductItems");
+    }
+    async getImages(): Promise<Image[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Image`, "Images");
+    }
+    async getPriceHistories(): Promise<PriceHistory[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/PriceHistory`, "PriceHistories");
+    }
+
+
+
     /* Product Items */
     createProductItem(productItem: ProductItem): Promise<void> {
         throw new Error("Method not implemented.");
@@ -46,10 +62,8 @@ class APIService implements IAPIService {
     deleteProductItem(id: number): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    async getProductItems(): Promise<ProductItem[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetAll`, "ProductItems");
-    }
-    async getProductItemDTOs(): Promise<ProductItemDTO[]> {
+    
+    async getProductItemWebs(): Promise<ProductItemDTO[]> {
         return this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetAll`, "ProductItemDTOs");
     }
 
@@ -58,7 +72,7 @@ class APIService implements IAPIService {
     async createProduct(product: Product): Promise<void> {
         return await this.crudHelper.create(`${this.apiBaseUrl}/Product`, "Product", product);
     }
-    getProduct(id: number): Promise<Product> {
+    async getProduct(id: number): Promise<Product> {
         throw new Error("Method not implemented.");
     }
     async updateProduct(product: Product): Promise<Product> {
@@ -109,7 +123,7 @@ class APIService implements IAPIService {
     }
 
 
-    /* Categories */
+    /* Orders */
     async getOrders(): Promise<Order[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Order`, "Orders");
     }

@@ -10,6 +10,7 @@ export default class ENLocale implements ILocale {
   create = "Create";
   cancel = "Cancel";
   update = "Update";
+  product = "Product";
 
   // Button text
   buttonCancelText = "Cancel";
