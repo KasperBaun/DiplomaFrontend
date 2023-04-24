@@ -1,5 +1,5 @@
 import SniperModel from "@models/SniperModel";
-import { Container } from "@mui/material";
+import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
@@ -21,10 +21,14 @@ const Sniper = () => {
     }
 
     return (
-        <Container>
-            <SniperForm setSearchValue={setSearchValue} setIsSniping={setIsSniping} isSniping={isSniping} snipedResults={snipedResults}/>
-            <SnipedTable snipedResults={snipedResults} isSniping={isSniping} setIsSniping={setIsSniping} />
-        </Container>
+        <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
+            <Grid item xs={11.9}>
+                <div className="DashBoardGridContainer">
+                    <SniperForm setSearchValue={setSearchValue} setIsSniping={setIsSniping} isSniping={isSniping} snipedResults={snipedResults}/>
+                    <SnipedTable snipedResults={snipedResults} isSniping={isSniping} setIsSniping={setIsSniping} />
+                </div>
+            </Grid>
+        </Grid>
     )
 }
 
