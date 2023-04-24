@@ -25,6 +25,7 @@ class CrudHelper implements ICrudHelper {
         }
 
         try {
+            //console.log(`${this.prefix} apiUrl ${apiUrl}`, this.color);
             const response = await fetch(`${apiUrl}`, {
                 method: 'POST',
                 body: JSON.stringify(object),
@@ -32,12 +33,14 @@ class CrudHelper implements ICrudHelper {
                 mode: this.mode
             });
 
+            console.log(`${this.prefix} response ${response}`, this.color);
+
             if (response.ok) {
                 if (this.loggingEnabled) {
                     const t2 = performance.now();
                     ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully created ${objectName}`, t1, t2, this.color);
                 }
-                return;
+                return response.json();
             } else {
                 console.log(`${this.prefix} failed creating ${objectName}. Status: ${response.status} ${response.statusText}`, this.color);
                 return;

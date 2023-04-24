@@ -48,9 +48,9 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
         
           <div style={{width: '18vw'}}>
               {basketStore.Basket.map((item, index) => (
-              <CartItem key={item.id} item={item} />
-              
-              ))}
+                <CartItem key={item.id} item={item} />
+                
+                ))}
           </div>
 
           <div style={{position: 'fixed', bottom: 0, marginBottom : '3vh'}}>
