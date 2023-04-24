@@ -1,0 +1,59 @@
+@import "~@styles/Main.scss";
+.CarouselItemName{
+    color: $primary;
+}
+
+.CarouselItemPrice{
+    color: $textHoverColor;
+}
+
+.CarouselItemManu{
+    color: $primary;
+}
+
+.CarouselItemBtn{
+    color: $primary;
+    background-color: #FFF;
+    border: 1px solid $textHoverColor;
+    cursor: pointer;
+    &:hover {
+        background-color: $primary;
+        color: #FFF;
+    };
+}
+
+.CarouselItemBtnDiv{
+    button {
+        color: $primary;
+        background-color: #FFF;
+        border: 1px solid $textHoverColor;
+        cursor: pointer;
+    };
+
+    button:hover {
+        background-color: $primary;
+        color: $textHoverColor;
+    };
+    
+
+    button p:hover {
+        background-color: $primary;
+        color: $textHoverColor;
+    };
+}
+
+.CarouselItemImg{
+    background-image: linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    );
+};
+
+.CarouselFrontpage{
+    padding: 1rem;
+}
+
+.GridCategoryCard:hover {
+    background-color: #C7C7C7;
+    color: #FFF;
+}
