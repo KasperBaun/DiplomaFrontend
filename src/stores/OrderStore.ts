@@ -5,6 +5,8 @@ import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
 import Order from '@models/Orders';
 import OrderDetails from '@models/OrderDetails';
+import OrderElements from '@models/OrderElements';
+import OrderDTO from '@models/DTO/OrderDTO';
 
 export class OrderStore {
 
@@ -15,7 +17,8 @@ export class OrderStore {
     private loaded: boolean = false;
     private loading: boolean = false;
     private apiService: APIService;
-    private orders: Order[] = [];
+    private orders: OrderDTO[] = [];
+    private orderElements: OrderElements[] =  [];
     private orderDetails: OrderDetails[] = [];
 
 
@@ -40,6 +43,20 @@ export class OrderStore {
         return this.loaded;
     }
 
+    public async loadOrderStore(): Promise<void>{
+        if (!this.isLoaded){
+            const orderDTOs: OrderDTO[] = await this.apiService.getOrders(); 
+           // this.orders = this.generateOrders(orderDTOs); 
+        }
+    }
+
+    private generateOrders(ordersDTO : OrderDTO): Order[] {
+        return 
+        
+    }
+
+
+
     public static GetInstance(_rootStore: RootStore, _apiService: APIService): OrderStore {
         if (!OrderStore._Instance) {
             OrderStore._Instance = new OrderStore(_rootStore, _apiService);
@@ -57,7 +74,7 @@ export class OrderStore {
         return this.orders;
     }
 
-    public get OrderDetails(): OrderDetails[] {
+   public get OrderDetails(): OrderDetails[] {
         return this.orderDetails;
     }
 

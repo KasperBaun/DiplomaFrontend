@@ -1,6 +1,4 @@
-import OrderElements from "./OrderElements";
-
-export default class Order {
+export default class OrderDTO {
     id: number;
     customerId: number;
     paymentId: number;
@@ -8,6 +6,5 @@ export default class Order {
     deliveryStatus: string;
     discountCode: string | null;
     active: Boolean;
-    orderElements: OrderElements[];
-  }
-  
+    orderElementIDs: number[];
+}

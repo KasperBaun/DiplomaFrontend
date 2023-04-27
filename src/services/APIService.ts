@@ -19,6 +19,8 @@ import ProductItemDetails from "@models/ProductItemDetails";
 import Image from '@models/Image';
 import PriceHistory from "@models/PriceHistory";
 import ProductItemDTO from "@models/DTO/ProductItemDTO";
+import OrderElements from "@models/OrderElements";
+import OrderDTO from "@models/DTO/OrderDTO";
 
 class APIService implements IAPIService {
 
@@ -124,7 +126,7 @@ class APIService implements IAPIService {
 
 
     /* Orders */
-    async getOrders(): Promise<Order[]> {
+    async getOrders(): Promise<OrderDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Order`, "Orders");
     }
     async getOrderDetails(): Promise<OrderDetails[]> {
