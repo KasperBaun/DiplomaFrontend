@@ -12,6 +12,12 @@ export default class ENLocale implements ILocale {
   update = "Update";
   product = "Product";
   reset = "Reset";
+  search = "Search";
+  showAll = "Show All";
+  sold = "Sold";
+  forSale = "For sale";
+  price = "Price";
+  description = "Description";
 
   // Button text
   buttonCancelText = "Cancel";
@@ -120,6 +126,10 @@ export default class ENLocale implements ILocale {
   productPage_createProduct = "create product";
   productPage_modelSpecifications = "Model specifictations";
   productPage_productInfoHeadline = "General info";
+  selectSubcategory= "Select subcategory";
+  filterBySubcategory = "Filter by subcategory";
+  selectCategory = "Select category";
+  filterByCategory= "Filter by category";
 
   // Analysis
   AnalysisTitle = "Gold and Silver";

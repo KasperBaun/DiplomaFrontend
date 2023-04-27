@@ -9,6 +9,12 @@ export interface ILocale {
   update: string;
   product: string;
   reset: string;
+  search: string;
+  showAll: string;
+  sold: string;
+  forSale: string;
+  price: string;
+  description: string;
 
   // Button text
   buttonCancelText: string;
@@ -90,9 +96,12 @@ export interface ILocale {
   productPage_weight : string; 
   productPage_productCustomText: string;
   productPage_createProduct: string;
-
   productPage_modelSpecifications: string; 
   productPage_productInfoHeadline: string; 
+  selectSubcategory: string;
+  filterBySubcategory: String;
+  selectCategory: string;
+  filterByCategory: string;
 
 
   // Admin Header 

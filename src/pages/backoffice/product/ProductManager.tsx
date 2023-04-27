@@ -3,7 +3,7 @@ import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import Products from "./Products";
+import Products from "./components/Products";
 import ProductItem from "@models/ProductItem";
 import ProductEditor from "./components/ProductEditor";
 import Loading from "@components/loading/Loading";
