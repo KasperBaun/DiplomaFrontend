@@ -32,7 +32,7 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
         handleOpenDialog();
     }
 
-    if (orderStore.OrderDetails)
+    if (orderStore.Orders)
         return (
             <React.Fragment>
                 <h4>{languageStore.currentLanguage.OrderDetailsListTitle}</h4>
@@ -40,7 +40,7 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
                     <Table size="small">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="left">{languageStore.currentLanguage.OrderDetailsProductName}</TableCell>
+                                <TableCell align="left">{"Order Id"}</TableCell>
                                 <TableCell align="left">{languageStore.currentLanguage.OrderDetailsManufacturer}</TableCell>
                                 <TableCell align="left">{languageStore.currentLanguage.OrderDetailsCustomerId}</TableCell>
                                 <TableCell align="left">{languageStore.currentLanguage.OrderDetailsPaymentStatus}</TableCell>
@@ -51,11 +51,12 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
                         </TableHead>
                         <TableBody>
                             {
-                                orderStore.OrderDetails.map((order, index) => (
+                                orderStore.Orders.map((order, index) => (
                                     <TableRow key={order.id + "_orderDetail_" + index}>
-                                        <TableCell className="tableCellOnClick" align="left" onClick={() => handleOnProductClick(order.productItemId)}><b><u>{order.productItemId}</u></b></TableCell>
-                                        <TableCell align="left">{order.manufacturer}</TableCell>
-                                        <TableCell align="left">{order.customerId}</TableCell>
+                                        {/* <TableCell className="tableCellOnClick" align="left" onClick={() => handleOnProductClick(order.orderElements[0].productItemId)}><b><u>{order.orderElements[0].productItemId}</u></b></TableCell> */}
+                                       
+                                        <TableCell align="left">{order.id}</TableCell>
+
                                         <TableCell align="left">{order.paymentStatus}</TableCell>
                                         <TableCell align="left">{order.deliveryStatus}</TableCell>
                                         <TableCell align="left">{order.discountCode}</TableCell>

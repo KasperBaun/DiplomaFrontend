@@ -5,7 +5,7 @@ import Loading from "@components/loading/Loading";
 import ProductItem from "@models/ProductItem";
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
-import { Button, Grid } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import ProductCard from "./components/ProductCard";
 
 export interface IProductsProps {
@@ -16,22 +16,34 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
     /* Define state for products and selected category & subcategory - Inject stores */
     const { categoryStore, languageStore, backofficeStore, subCategoryStore } = useContext(MobXContext);
-    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.ProductItems);
-    const [subcategories, setSubcategories] = useState<SubCategory[]>(null);
+    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.ProductItems.slice(0, backofficeStore.ProductItems.length / 5));
+    const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
+    const [searchText, setSearchText] = useState<string>("");
 
     /* Define the event handlers for the buttons */
+    const handleSearchTextChange = (event: any): React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> => {
+        setSearchText(event.target.value);
+        return;
+    }
+
     const handleOnResetClicked = (): void => {
-        setProductItems(backofficeStore.ProductItems);
+        setSelectedCategory(null);
+        setSelectedSubcategory(null);
+        setProductItems(backofficeStore.ProductItems.slice(0, backofficeStore.ProductItems.length / 5));
     };
+
+    const handleOnShowAllClicked = (): void => {
+        setProductItems(backofficeStore.ProductItems);
+    }
 
     const handleOnCreateClicked = (): void => {
         props.onProductItemClicked(null);
     };
 
     const handleCategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
-        if (event.currentTarget.value === "initValue") {
+        if (event.target.value === "initValue") {
             if (selectedCategory !== null) {
                 setSelectedCategory(null);
                 setSelectedSubcategory(null);
@@ -40,33 +52,35 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
             }
             return;
         } else {
-            filterByCategory(event.currentTarget.value);
-            setSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === event.currentTarget.value));
+            filterByCategory(event.target.value);
         }
     };
 
     const handleSubcategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
-        if (event.currentTarget.value === "initValue") {
+        if (event.target.value === "initValue") {
             setSelectedSubcategory(null);
-            return
+            return;
         }
         else {
-            filterBySubcategory(event.currentTarget.value);
+            filterBySubcategory(event.target.value);
+            return;
         }
     }
 
     const filterBySubcategory = (subcategoryId: number) => {
         setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
-        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
+        const filteredProducts = backofficeStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
         setProductItems(filteredProducts);
     }
     const filterByCategory = (categoryId: number) => {
+        setSelectedSubcategory(null);
         setSelectedCategory(categoryStore.getCategory(categoryId));
-        const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+        const filteredProducts = backofficeStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
         setProductItems(filteredProducts);
+        setSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === categoryId));
     }
 
-    if (!backofficeStore.productItems && backofficeStore.productItems.length === 0) {
+    if (!backofficeStore.isLoaded) {
         return (
             <Loading />
         )
@@ -76,68 +90,68 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
         return (
             <Grid container >
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} margin='10px'>
-                    <Button style={{ width: "12rem" }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.createCategoryDialogTitle}</Button>
-                    <Button style={{ width: "12rem" }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
+                <Grid item xs={12} display={'flex'} justifyContent={'start'} >
+                    <Button style={{ width: "12rem", margin: '5px' }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.productPage_createProduct}</Button>
+                </Grid>
+                <Grid item xs={12} display={'flex'} justifyContent={'start'} >
+                    <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                        <TextField
+                            label={languageStore.currentLanguage.search}
+                            type="search"
+                            placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
+                            value={searchText}
+                            onChange={handleSearchTextChange}
+                            sx={{ marginBottom: 2, marginRight: '10px', minWidth: '20vh' }}
+                        />
+
+                        <FormControl sx={{ marginBottom: 2, marginRight: '10px', minWidth: '20vh' }}>
+                            <InputLabel>{languageStore.currentLanguage.filterByCategory}</InputLabel>
+                            <Select value={selectedCategory ? selectedCategory.id : ''} onChange={handleCategoryChange} aria-label={languageStore.currentLanguage.selectCategory}>
+                                {backofficeStore.Categories.map((category) => (
+                                    <MenuItem key={category.id} value={category.id}>
+                                        {category.name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        <FormControl sx={{ marginBottom: 2, marginRight: '10px', minWidth: '20vh' }}>
+                            <InputLabel>{languageStore.currentLanguage.filterBySubcategory}</InputLabel>
+                            <Select
+                                value={selectedSubcategory ? selectedSubcategory.id : ''}
+                                onChange={handleSubcategoryChange}
+                                aria-label={languageStore.currentLanguage.selectSubcategory}
+                            >
+                                {subcategories.map((subcategory) => (
+                                    <MenuItem key={subcategory.id} value={subcategory.id}>
+                                        {subcategory.name}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnShowAllClicked}>{languageStore.currentLanguage.showAll}</Button>
+                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
+                </Grid>
+                <Grid item xs={12} display={'flex'} justifyContent={'start'} >
+                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnShowAllClicked}>{languageStore.currentLanguage.showAll}</Button>
+                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
                 </Grid>
 
                 {/* Productcards */}
-                {backofficeStore.ProductItems.map((product, index) => {
-                    return (
-                        <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
-                            <ProductCard
-                                productItem={product}
-                                onProductItemClicked={props.onProductItemClicked}
-                            />
-                        </Grid>
-                    )
-                })}
-
-            </Grid>
-
-            //     {/* <Row>
-            //         <Form>
-            //             <Form.Group className="mb-3" controlId="formBasicEmail">
-            //                 <Form.Label>Search</Form.Label>
-            //                 <Form.Control type="search" placeholder="Search by name..." />
-            //             </Form.Group>
-
-            //             <Form.Group>
-            //                 <Form.Label>Filter by category</Form.Label>
-            //                 <Form.Select aria-label="Select category" onChange={handleCategoryChange}>
-            //                     <option key="initKey" value="initValue" >{languageStore.currentLanguage.createSubCategorySelectCategoryTitle}</option>
-            //                     {categoryStore.Categories.map((category, index) => {
-            //                         return (
-            //                             <option key={"option" + category.name + index} value={category.id}>{category.name}</option>
-            //                         )
-            //                     })}
-            //                 </Form.Select>
-            //             </Form.Group>
-
-            //             <Form.Group>
-            //                 <Form.Label>Filter by subcategory</Form.Label>
-            //                 <Form.Select aria-label="Select subcategory" onChange={handleSubcategoryChange}>
-            //                     <option key="initKey" value="initValue" >{"Select subcategory..."}</option>
-            //                     {subcategories.map((subcategory, index) => {
-            //                         return (
-            //                             <option key={"option" + subcategory.name + index} value={subcategory.id}>{subcategory.name}</option>
-            //                         )
-            //                     })}
-            //                 </Form.Select>
-            //             </Form.Group>
-
-            //             <Button variant="primary" onClick={handleOnResetClicked}>
-            //                 Reset
-            //             </Button>
-            //         </Form>
-            //     </Row>
-            //     <Row className="alignToEnd">
-            //         <Button size="lg" variant='outline-primary' className="createButton" onClick={onOpenCreate}>{languageStore.currentLanguage.productPage_createProduct}</Button>
-            //     </Row>
-            //     <Row className="element">
-            //         <ProductCards products={productItems} />
-            //     </Row>
-            // </Container> */}
+                {productItems.length === 0 && <div style={{ marginTop: '20px' }}>Ingen produkter</div> || productItems.length > 0 &&
+                    productItems.map((product, index) => {
+                        return (
+                            <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
+                                <ProductCard
+                                    productItem={product}
+                                    onProductItemClicked={props.onProductItemClicked}
+                                />
+                            </Grid>
+                        )
+                    })
+                }
+            </Grid >
         )
     }
 });

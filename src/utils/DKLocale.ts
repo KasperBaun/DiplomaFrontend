@@ -11,6 +11,8 @@ export default class DKLocale implements ILocale {
   update = "Opdater";
   product = "Produkt";
   reset = "Nulstil";
+  search = "Søg";
+  showAll = "Vis alle";
 
   // Button text
   buttonCancelText = "Annuller";
@@ -52,7 +54,7 @@ export default class DKLocale implements ILocale {
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
-  yourTotal = "Pris" 
+  yourTotal = "Pris"
   deliveryOptions = "Levering:"
   paymentOptions = "Vi acceptere";
   subTotal = "Subtotal:";
@@ -120,6 +122,10 @@ export default class DKLocale implements ILocale {
 
   productPage_modelSpecifications = "Model specifikationer";
   productPage_productInfoHeadline = "General information";
+  selectSubcategory = "Vælg underkategori";
+  filterBySubcategory = "Filtrer efter underkategori";
+  selectCategory = "Vælg kategori";
+  filterByCategory = "Filtrer efter kategori";
 
   // Analysis
   AnalysisTitle = "Guld & Sølv";
@@ -184,17 +190,17 @@ export default class DKLocale implements ILocale {
   ShoppingCartWidgetTotalLabel = "Total før rabat";
   ShoppingCartWidgetTotalAmountLabel = "Samlet pris (Inkl. moms)";
 
-  CheckoutFormTitle= "Faktureringsoplysninger";
-  CheckoutFormFirstNameLabel= "Fornavn";
-  CheckoutFormLastNameLabel= "Efternavn";
-  CheckoutFormEmailLabel= "Email";
-  CheckoutFormAddressLabel= "Vej/Gade & Husnummer";
-  CheckoutFormZipCodeLabel= "Postnummer";
-  CheckoutFormCityLabel= "By";
-  CheckoutFormCountryLabel= "Land";
-  CheckoutFormCountryCodeLabel= "Landekode";
-  CheckoutFormPhoneLabel= "Telefonnummer";
-  CheckoutFormSubmitButton= "Fortsæt til Betaling";
+  CheckoutFormTitle = "Faktureringsoplysninger";
+  CheckoutFormFirstNameLabel = "Fornavn";
+  CheckoutFormLastNameLabel = "Efternavn";
+  CheckoutFormEmailLabel = "Email";
+  CheckoutFormAddressLabel = "Vej/Gade & Husnummer";
+  CheckoutFormZipCodeLabel = "Postnummer";
+  CheckoutFormCityLabel = "By";
+  CheckoutFormCountryLabel = "Land";
+  CheckoutFormCountryCodeLabel = "Landekode";
+  CheckoutFormPhoneLabel = "Telefonnummer";
+  CheckoutFormSubmitButton = "Fortsæt til Betaling";
 
   // Orders
   GoToOrders = "Se flere Ordre";

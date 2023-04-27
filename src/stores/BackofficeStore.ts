@@ -300,6 +300,10 @@ export class BackofficeStore {
         return this._productItems;
     }
 
+    public get Categories(): Category[] {
+        return this._categories;
+    }
+
     public get subCategories(): SubCategory[] {
         return this._subcategories;
     }
