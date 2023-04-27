@@ -11,6 +11,7 @@ export default class ENLocale implements ILocale {
   cancel = "Cancel";
   update = "Update";
   product = "Product";
+  reset = "Reset";
 
   // Button text
   buttonCancelText = "Cancel";

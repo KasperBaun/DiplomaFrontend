@@ -8,6 +8,7 @@ export interface ILocale {
   cancel: string;
   update: string;
   product: string;
+  reset: string;
 
   // Button text
   buttonCancelText: string;

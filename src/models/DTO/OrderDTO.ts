@@ -1,11 +1,10 @@
-export default class Order {
+export default class OrderDTO {
     id: number;
     customerId: number;
     paymentId: number;
-    productItemId: number;
     paymentStatus: string;
     deliveryStatus: string;
     discountCode: string | null;
     active: Boolean;
-  }
-  
+    orderElementIDs: number[];
+}

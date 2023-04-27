@@ -46,9 +46,9 @@ const ProductCards: React.FC<IProductCardsProps> = observer(function ProductCard
                     return (
                         <ProductCard
                             productItem={product}
-                            handleOnDeleteClicked={handleOnDeleteClicked}
-                            handleOnUpdateClicked={handleOnUpdateClicked}
-                            showProductClicked={showProductClicked}
+                            onDeleteClicked={handleOnDeleteClicked}
+                            onUpdateClicked={handleOnUpdateClicked}
+                            onProductItemClicked={showProductClicked}
                         />
                     )
                 })}
