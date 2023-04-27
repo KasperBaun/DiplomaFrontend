@@ -2,44 +2,32 @@ import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import ProductItem from "@models/ProductItem";
 import { useContext } from "react";
-import { Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography } from "@mui/material";
-import { Delete, Edit, FiberManualRecord } from "@mui/icons-material";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
+import { FiberManualRecord } from "@mui/icons-material";
 
 export interface IProductCardProps {
     productItem: ProductItem;
-    onUpdateClicked: (product: ProductItem) => void;
-    onDeleteClicked: (productId: number) => Promise<void>;
-    onProductItemClicked: (product: ProductItem) => void;
+    onProductItemClicked: (productItem: ProductItem) => void;
 }
 
 const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(props: IProductCardProps) {
 
-    const { languageStore } = useContext<IMobXContext>(MobXContext);
+    const { languageStore, backofficeStore } = useContext<IMobXContext>(MobXContext);
 
-    const handleOnUpdateClicked = () => {
-        props.onUpdateClicked(props.productItem);
-    };
-
-    const handleOnDeleteClicked = () => {
-        props.onDeleteClicked(props.productItem.id);
-    };
     const handleOnProductItemClicked = () => {
         props.onProductItemClicked(props.productItem);
     };
 
 
+
     return (
         <Card sx={{ width: '300px' }}>
+
             <CardHeader
-                avatar={<FiberManualRecord sx={{ color: 'green' }} />}
-                action={
-                    <IconButton onClick={handleOnDeleteClicked} aria-label="delete">
-                        <Delete />
-                    </IconButton>
-                }
-                title={<FiberManualRecord sx={{ color: 'green' }} /> && 'Active on website'}
+                avatar={<FiberManualRecord sx={{ color: props.productItem.sold ? 'red' : 'green' }} />}
+                title={props.productItem.sold ? 'SOLD' : 'Active on website'}
             >
-                <FiberManualRecord sx={{ color: 'green' }} /> Active on website'
+
             </CardHeader>
             <CardMedia
                 component="img"
@@ -58,30 +46,8 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
                 </Typography>
             </CardContent>
             <CardActions style={{ display: 'flex', alignItems: 'end', justifyContent: 'end' }}>
-                <IconButton onClick={handleOnUpdateClicked} aria-label="edit">
-                    <Edit />
-                </IconButton>
-
-
             </CardActions>
         </Card>
-        // <Card style={productCardItem}>
-        //     {/*<Card.Img variant="top" src={props.product.imageUrls[0] || "https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg" } />*/}
-        //     <Card.Body onClick={() => props.showProductClicked(props.productItem)}>
-        //         <Card.Title>{props.productItem.product.name}</Card.Title>
-        //         <Card.Subtitle>{props.productItem.product.modelNumber}</Card.Subtitle>
-        //         <Card.Text>
-        //             {/* {languageStore.currentLanguage.productPage_productCondition}: {props.product.condition || 'N/A'} */}
-        //         </Card.Text>
-        //         <Card.Text>
-        //         </Card.Text>
-        //         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-        //             <Button variant="outline-success"><Plus /></Button>
-        //             <Button variant="outline-secondary" onClick={() => props.handleOnUpdateClicked(props.productItem)}><Pencil /></Button>
-        //             <Button variant="outline-danger" onClick={() => props.handleOnDeleteClicked(props.productItem.id)}><XLg /></Button>
-        //         </div>
-        //     </Card.Body>
-        // </Card >
     )
 });
 

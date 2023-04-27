@@ -20,7 +20,7 @@ const ProductManager: React.FC<IProductManagerProps> = observer(function Product
 
     const navSwitch = (activeKey: number) => {
         switch (activeKey) {
-            case 0: return <Products />;
+            case 0: return <Products onProductItemClicked={handleOnProductItemClicked} />;
             case 1: return <ProductEditor productItem={selectedProductItem} />;
         }
     }

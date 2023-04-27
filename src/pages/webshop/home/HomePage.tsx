@@ -39,7 +39,7 @@ export const SelectedProductItems = () => {
     if(productStore.ProductItems) {
 
 
-    console.log(toJS(productStore.ProductItems))
+    //console.log(toJS(productStore.ProductItems))
 
     const handleSlide = () => {
         const caption = document.querySelector('.carousel-caption');

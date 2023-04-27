@@ -8,8 +8,11 @@ import SubCategory from "@models/SubCategory";
 import { Button, Grid } from "@mui/material";
 import ProductCard from "./components/ProductCard";
 
-const Products: React.FC = observer(function Products() {
+export interface IProductsProps {
+    onProductItemClicked: (productItem: ProductItem) => void;
+}
 
+const Products: React.FC<IProductsProps> = observer(function Products(props: IProductsProps) {
 
     /* Define state for products and selected category & subcategory - Inject stores */
     const { categoryStore, languageStore, backofficeStore, subCategoryStore } = useContext(MobXContext);
@@ -17,26 +20,16 @@ const Products: React.FC = observer(function Products() {
     const [subcategories, setSubcategories] = useState<SubCategory[]>(null);
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
-    const [selectedProductItem, setSelectedProductItem] = useState<ProductItem>(null);
-
-    /* Define state for modals */
-    const [create, setCreate] = useState<boolean>(false);
-    const [showProductDialog, setShowProductDialog] = useState<boolean>(false);
-    const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
-    const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
-    const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
 
     /* Define the event handlers for the buttons */
     const handleOnResetClicked = (): void => {
         setProductItems(backofficeStore.ProductItems);
     };
+
     const handleOnCreateClicked = (): void => {
-        setCreate(true);
-        setSelectedProductItem(null);
+        props.onProductItemClicked(null);
     };
-    const handleOnProductItemClicked = (): void => {
-        // Change view to single productitem view
-    };
+
     const handleCategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
         if (event.currentTarget.value === "initValue") {
             if (selectedCategory !== null) {
@@ -51,7 +44,7 @@ const Products: React.FC = observer(function Products() {
             setSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === event.currentTarget.value));
         }
     };
-    
+
     const handleSubcategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
         if (event.currentTarget.value === "initValue") {
             setSelectedSubcategory(null);
@@ -60,22 +53,6 @@ const Products: React.FC = observer(function Products() {
         else {
             filterBySubcategory(event.currentTarget.value);
         }
-    }
-
-    const handleOnDeleteClicked = async (id: number) => {
-        // Pop Modal to confirm?
-        const subCatToBeDeleted = backofficeStore.getProduct(id);
-        if (subCatToBeDeleted !== null) {
-            const deleted = await backofficeStore.deleteProductItem(id);
-            alert("Successfully deleted product: " + subCatToBeDeleted.name)
-        } else {
-            alert("Could not find product with id: " + id);
-        }
-    }
-
-    function handleOnUpdateClicked(productItem: ProductItem) {
-        setSelectedProductItem(productItem);
-        // Open update modal / page
     }
 
     const filterBySubcategory = (subcategoryId: number) => {
@@ -89,7 +66,6 @@ const Products: React.FC = observer(function Products() {
         setProductItems(filteredProducts);
     }
 
-
     if (!backofficeStore.productItems && backofficeStore.productItems.length === 0) {
         return (
             <Loading />
@@ -100,14 +76,6 @@ const Products: React.FC = observer(function Products() {
 
         return (
             <Grid container >
-
-                {/* Modals for creating/updating and user feedback */}
-                {/* <CategoryDialog visible={showCategoryDialog} create={create} category={selectedCategory} onClose={() => setShowCategoryDialog(false)} />
-                <ConfirmDeleteDialog visible={showConfirmDelete} objectName={selectedCategory ? selectedCategory.name : ''} onConfirmDeleteClicked={handleOnConfirmDeleteClick} onCancelClicked={() => setShowConfirmDelete(false)} />
-                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={showSnackbar} autoHideDuration={2000} onClose={() => setShowSnackbar(false)}>
-                    <Alert severity={alertType}>{alertType === "success" ? languageStore.currentLanguage.deleteCategorySuccessMessage : languageStore.currentLanguage.deleteCategoryFailedMessage}</Alert>
-                </Snackbar> */}
-
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} margin='10px'>
                     <Button style={{ width: "12rem" }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.createCategoryDialogTitle}</Button>
                     <Button style={{ width: "12rem" }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
@@ -119,9 +87,7 @@ const Products: React.FC = observer(function Products() {
                         <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                             <ProductCard
                                 productItem={product}
-                                onDeleteClicked={handleOnDeleteClicked}
-                                onUpdateClicked={handleOnUpdateClicked}
-                                onProductItemClicked={handleOnProductItemClicked}
+                                onProductItemClicked={props.onProductItemClicked}
                             />
                         </Grid>
                     )
