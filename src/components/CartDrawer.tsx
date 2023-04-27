@@ -1,12 +1,13 @@
-import {IconButton, Button, Drawer } from "@mui/material";
+import {IconButton, Button, Drawer, Grid, Divider, Box, Badge, List  } from "@mui/material";
 import * as React from 'react';
-import {Box, Badge} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
 import MobXContext from "@stores/MobXContext";
 import { useContext} from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
+import { Padding } from "@mui/icons-material";
+import { Stack } from "react-bootstrap";
 
 
 const CartDrawer: React.FC = observer(function CartDrawer(){
@@ -45,15 +46,22 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
         >
-        
-          <div style={{width: '18vw'}}>
-              {basketStore.Basket.map((item, index) => (
-                <CartItem key={item.id} item={item} />
-                
-                ))}
-          </div>
+      
+          {<div style={{width: '18vw'}}>
+    
+            <Stack direction="vertical"> 
 
-          <div style={{position: 'fixed', bottom: 0, marginBottom : '3vh'}}>
+            <List style={{height:'80%', overflow:'auto', marginBottom:'6rem'}}>
+              {basketStore.Basket.map((item, index) => (
+                <div>
+                  <CartItem key={item.id} item={item} />
+                  <Divider style={{paddingTop:"1rem"}}/>
+                </div>
+                ))} 
+          </List>  
+            
+
+        <div style={{position: 'fixed', bottom: 0, marginBottom : '3vh'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '18vw', margin: 'auto'}}>
                   <div style={{textAlign: 'start', marginLeft: '1.5rem', fontSize: '1.2 rem', fontWeight:"bold" }}>
                     {'Subtotal ('+ basketStore.Basket.length + ')'}
@@ -67,6 +75,12 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
               <Button className="cartButton" variant="outlined"  onClick={() => handleClick()} style={{width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem',}}>View cart</Button>
             </div>
           </div>
+          </Stack>
+
+        </div>
+
+
+          }
         </Box>
       );
 
