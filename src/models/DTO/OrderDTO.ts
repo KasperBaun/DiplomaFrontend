@@ -1,0 +1,10 @@
+export default class OrderDTO {
+    id: number;
+    customerId: number;
+    paymentId: number;
+    paymentStatus: string;
+    deliveryStatus: string;
+    discountCode: string | null;
+    active: Boolean;
+    orderElementIDs: number[];
+}
