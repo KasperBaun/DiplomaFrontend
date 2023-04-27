@@ -70,7 +70,7 @@ export class OrderStore {
         return result;
     }
 
-    public get Orders(): Order[] {
+    public get Orders(): OrderDTO[] {
         return this.orders;
     }
 
@@ -78,9 +78,9 @@ export class OrderStore {
         return this.orderDetails;
     }
 
-    public getOrder(id: number): Order {
+   /* public getOrder(id: number): Order {
         return this.orders.find(p => p.id === id);
-    }
+    }*/
 
     public getOrderDetail(id: number): OrderDetails[] {
         let orders = this.orderDetails.filter(p => p.id === id);
