@@ -14,19 +14,19 @@ import { productCardContainer } from "./ProductsStyling";
 
 const Products: React.FC = observer(function Products() {
 
-    const { languageStore, categoryStore, backofficeStore, subCategoryStore, productStore } = useContext(MobXContext)
+    const { languageStore, categoryStore, backofficeStore, subCategoryStore } = useContext(MobXContext)
 
     const [visibleCreate, setVisibilityCreate] = useState(false);
     const onOpenCreate = () => setVisibilityCreate(true);
     const onCloseCreate = () => setVisibilityCreate(false);
-    const [productItems, setProductItems] = useState<ProductItem[]>(productStore.ProductItems);
+    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.ProductItems);
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
     const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
 
 
     function handleOnResetClicked(): void {
-        setProductItems(productStore.ProductItems);
+        setProductItems(backofficeStore.ProductItems);
     }
 
     function filterByCategory(categoryId: number) {
@@ -41,7 +41,7 @@ const Products: React.FC = observer(function Products() {
                 setSelectedCategory(null);
                 setSelectedSubcategory(null);
                 setSubcategories([]);
-                setProductItems(productStore.ProductItems);
+                setProductItems(backofficeStore.ProductItems);
             }
             return;
         } else {
@@ -66,7 +66,7 @@ const Products: React.FC = observer(function Products() {
         }
     }
 
-    if (!backofficeStore.isLoaded) {
+    if (!backofficeStore.productItems && backofficeStore.productItems.length === 0) {
         return (
             <Loading />
         )

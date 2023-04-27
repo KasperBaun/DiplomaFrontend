@@ -4,28 +4,28 @@ import Item from '@mui/material/Stack';
 import ColorConfigs from "@styles/ColorConfigs";
 import Sidebar from "./navigation/Sidebar";
 import Topbar from "./navigation/Topbar";
-import { useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import Dashboard from "./Dashboard/dashboard";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
-import Subcategories from "./category/components/Subcategories";
-import Products from "./product/Products";
-import Categories from "./category/Categories";
 import SalesList from "./sales/SalesList";
 import Orders from "./orders/Orders";
 import Analysis from "./Dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
+import ProductManager from "./product/ProductManager";
+import MobXContext from "@stores/MobXContext";
 
 const Backoffice: React.FC = function Backoffice() {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
+    const { rootStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
             case 0: return (<Dashboard />)
             case 1: return (<CategoryManager />)
             // case 2: return (<Subcategories />)
-            case 3: return (<Products />)
+            case 3: return (<ProductManager />)
             case 4: return (<SniperPage />)
             case 5: return (<InventoryMain />)
             case 6: return (<SalesList />)
@@ -39,6 +39,12 @@ const Backoffice: React.FC = function Backoffice() {
     const handleToggleSidebarOpenClicked = () => {
         setSidebarOpen(!sidebarOpen);
     }
+
+    useEffect(() => {
+        if (!rootStore.backofficeStore.isLoaded) {
+            rootStore.backofficeStore.init();
+        }
+    });
 
     return (
         <Box sx={{ display: "flex" }}>

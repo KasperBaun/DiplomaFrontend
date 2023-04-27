@@ -59,7 +59,7 @@ const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: 
             />
             <CardContent>
                 <Typography variant="h3" color="text.primary" sx={{ maxHeight: '40px', overflow: 'hidden' }}>
-                    {props.category.name.split('|')[0]}
+                    {languageStore.getCurrentLanguageCode() === "da_DK" ? props.category.name.split('|')[0] : props.category.name.split('|')[1]}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     {subcategoryCountTitle}

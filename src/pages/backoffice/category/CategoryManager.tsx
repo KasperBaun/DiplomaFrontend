@@ -8,7 +8,6 @@ import Category from "@models/Category";
 import Subcategories from "./components/Subcategories";
 
 export interface ICategoryManagerProps {
-
 }
 
 const CategoryManager: React.FC<ICategoryManagerProps> = observer(function CategoryManager(props: ICategoryManagerProps) {
@@ -33,7 +32,6 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
         setSelectedCategory(null);
         setActiveKey(1);
     }
-
 
     return (
         <Grid container>
