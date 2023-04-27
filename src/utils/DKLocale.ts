@@ -10,6 +10,7 @@ export default class DKLocale implements ILocale {
   cancel = "Annuller";
   update = "Opdater";
   product = "Produkt";
+  reset = "Nulstil";
 
   // Button text
   buttonCancelText = "Annuller";

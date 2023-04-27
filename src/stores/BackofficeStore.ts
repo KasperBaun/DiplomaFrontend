@@ -275,6 +275,11 @@ export class BackofficeStore {
         return prodItemMap;
     }
 
+    public async deleteProductItem(id: number): Promise<boolean> {
+        await this.apiService.deleteProductItem(id);
+        return;
+    }
+
     public getProduct(id: number): Product {
         return this._productMap.get(id);
     }

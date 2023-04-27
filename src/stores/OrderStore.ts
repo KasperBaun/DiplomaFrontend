@@ -3,7 +3,7 @@ import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { RootStore } from './RootStore';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
-import Order from '@models/Orders';
+import Order from '@models/Order';
 import OrderDetails from '@models/OrderDetails';
 import OrderElements from '@models/OrderElements';
 import OrderDTO from '@models/DTO/OrderDTO';
@@ -17,10 +17,9 @@ export class OrderStore {
     private loaded: boolean = false;
     private loading: boolean = false;
     private apiService: APIService;
-    private orders: OrderDTO[] = [];
-    private orderElements: OrderElements[] =  [];
+    private orders: Order[] = [];
+    private orderElements: OrderElements[] = [];
     private orderDetails: OrderDetails[] = [];
-
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -29,33 +28,47 @@ export class OrderStore {
     }
 
     public async init(): Promise<boolean> {
-        const orders = await this.apiService.getOrders()
-        const orderDetails = await this.apiService.getOrderDetails();
-
+        await this.loadOrderStore();
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
         runInAction(() => {
-            this.orders = orders;
-            this.orderDetails = orderDetails;
             this.loaded = true;
         })
         return this.loaded;
     }
 
-    public async loadOrderStore(): Promise<void>{
-        if (!this.isLoaded){
-            const orderDTOs: OrderDTO[] = await this.apiService.getOrders(); 
-           // this.orders = this.generateOrders(orderDTOs); 
+    public async loadOrderStore(): Promise<void> {
+        if (!this.isLoaded) {
+            const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
+            const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
+            const orderElements: OrderElements[] = await this.apiService.getOrderElements();
+
+            runInAction(() => {
+                this.orderElements = orderElements;
+                this.orders = this.generateOrders(orderDTOs, this.orderElements);
+                this.orderDetails = orderDetails;
+            });
         }
     }
 
-    private generateOrders(ordersDTO : OrderDTO): Order[] {
-        return 
-        
+    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
+        const orders: Order[] = [];
+        for (var orderDTO of ordersDTO) {
+            const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+            const order: Order = new Order();
+            order.id = orderDTO.id;
+            order.customerId = orderDTO.customerId;
+            order.paymentId = orderDTO.paymentId;
+            order.paymentStatus = orderDTO.paymentStatus;
+            order.deliveryStatus = orderDTO.deliveryStatus;
+            order.discountCode = orderDTO.discountCode;
+            order.active = orderDTO.active;
+            order.orderElements = orderOrderElements;
+            orders.push(order);
+        }
+        return orders;
     }
-
-
 
     public static GetInstance(_rootStore: RootStore, _apiService: APIService): OrderStore {
         if (!OrderStore._Instance) {
@@ -74,7 +87,7 @@ export class OrderStore {
         return this.orders;
     }
 
-   public get OrderDetails(): OrderDetails[] {
+    public get OrderDetails(): OrderDetails[] {
         return this.orderDetails;
     }
 
@@ -87,9 +100,7 @@ export class OrderStore {
         return orders;
     }
 
-    public async createOrder(order: Order): Promise<OrderDetails[]> {
-        await this.apiService.createOrder(order);
-        await this.apiService.getOrderDetails();
-        return this.getOrderDetail(order.id);
+    public async createOrder(order: Order): Promise<Order> {
+        return await this.apiService.createOrder(order);
     }
 }
