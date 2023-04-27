@@ -1,4 +1,4 @@
-import {IconButton, Button, Drawer, Grid, Divider, Box, Badge, List  } from "@mui/material";
+import {IconButton, Button, Drawer, Divider, Box, Badge, List  } from "@mui/material";
 import * as React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
@@ -6,8 +6,6 @@ import MobXContext from "@stores/MobXContext";
 import { useContext} from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
-import { Padding } from "@mui/icons-material";
-import { Stack } from "react-bootstrap";
 
 
 const CartDrawer: React.FC = observer(function CartDrawer(){
@@ -43,15 +41,13 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
     const cartElements = () => (
         <Box
           role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
+          //onClick={toggleDrawer(false)}
+         //onKeyDown={toggleDrawer(false)}
         >
       
           {<div style={{width: '18vw'}}>
     
-            <Stack direction="vertical"> 
-
-            <List style={{height:'80%', overflow:'auto', marginBottom:'6rem'}}>
+            <List style={{maxHeight:"80vh", overflow:'auto', marginBottom:'6rem'}}>
               {basketStore.Basket.map((item, index) => (
                 <div>
                   <CartItem key={item.id} item={item} />
@@ -75,11 +71,8 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
               <Button className="cartButton" variant="outlined"  onClick={() => handleClick()} style={{width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem',}}>View cart</Button>
             </div>
           </div>
-          </Stack>
 
         </div>
-
-
           }
         </Box>
       );

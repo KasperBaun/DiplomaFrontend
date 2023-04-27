@@ -3,14 +3,21 @@ import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext} from "react";
 import ProductItemWeb from "@models/ProductItemWeb";
+import { useNavigate } from "react-router-dom";
 
 
 export function CartItem( {item }: {item : ProductItemWeb}){
-   
+    
+    const navigate = useNavigate();
     const {basketStore} = useContext(MobXContext);
 
     function removeFromCart(item : ProductItemWeb ){
         basketStore.removeFromBasket(item);
+    }
+
+    function navigateToItem(){
+        console.log("i navigate");
+        navigate('/product/' + item.id);
     }
     
     return(
@@ -18,7 +25,7 @@ export function CartItem( {item }: {item : ProductItemWeb}){
             <Grid container>
                 <Stack direction="horizontal" gap={2} className="d-flex-align-items-center">
                 <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
-                    <img
+                    <img 
                         src={item.images[0]}
                         style={{ maxWidth:'100%', paddingLeft:'0.5rem',
                         paddingRight:'0.5rem', display:'flex'}}
