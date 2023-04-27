@@ -25,12 +25,29 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
     /* Define the event handlers for the buttons */
     const handleSearchTextChange = (event: any): React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> => {
         setSearchText(event.target.value);
+
         return;
+    }
+
+    function handleEnterKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+        if (event.key === "Enter") {
+            // Enter key was pressed
+            const filteredProductItems = backofficeStore.ProductItems.filter(
+                productItem => 
+                productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
+                
+                );
+            setProductItems(filteredProductItems);
+        } else {
+            // Some other key was pressed do nothing
+        }
     }
 
     const handleOnResetClicked = (): void => {
         setSelectedCategory(null);
         setSelectedSubcategory(null);
+        setSubcategories(subCategoryStore.SubCategories);
         setProductItems(backofficeStore.ProductItems.slice(0, backofficeStore.ProductItems.length / 5));
     };
 
@@ -93,7 +110,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} >
                     <Button style={{ width: "12rem", margin: '5px' }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.productPage_createProduct}</Button>
                 </Grid>
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} >
+                <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                     <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                         <TextField
                             label={languageStore.currentLanguage.search}
@@ -101,10 +118,11 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                             placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
                             value={searchText}
                             onChange={handleSearchTextChange}
-                            sx={{ marginBottom: 2, marginRight: '10px', minWidth: '20vh' }}
+                            sx={{ marginRight: '10px', minWidth: '15vw' }}
+                            onKeyDownCapture={handleEnterKeyDown}
                         />
 
-                        <FormControl sx={{ marginBottom: 2, marginRight: '10px', minWidth: '20vh' }}>
+                        <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
                             <InputLabel>{languageStore.currentLanguage.filterByCategory}</InputLabel>
                             <Select value={selectedCategory ? selectedCategory.id : ''} onChange={handleCategoryChange} aria-label={languageStore.currentLanguage.selectCategory}>
                                 {backofficeStore.Categories.map((category) => (
@@ -115,7 +133,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                             </Select>
                         </FormControl>
 
-                        <FormControl sx={{ marginBottom: 2, marginRight: '10px', minWidth: '20vh' }}>
+                        <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
                             <InputLabel>{languageStore.currentLanguage.filterBySubcategory}</InputLabel>
                             <Select
                                 value={selectedSubcategory ? selectedSubcategory.id : ''}
@@ -130,13 +148,10 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                             </Select>
                         </FormControl>
                     </Box>
-                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnShowAllClicked}>{languageStore.currentLanguage.showAll}</Button>
-                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
+                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnShowAllClicked}>{languageStore.currentLanguage.showAll}</Button>
+                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
                 </Grid>
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} >
-                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnShowAllClicked}>{languageStore.currentLanguage.showAll}</Button>
-                    <Button style={{ width: "12rem", marginRight: '10px', minWidth: '20vh' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
-                </Grid>
+
 
                 {/* Productcards */}
                 {productItems.length === 0 && <div style={{ marginTop: '20px' }}>Ingen produkter</div> || productItems.length > 0 &&
