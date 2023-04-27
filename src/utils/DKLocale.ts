@@ -13,6 +13,10 @@ export default class DKLocale implements ILocale {
   reset = "Nulstil";
   search = "Søg";
   showAll = "Vis alle";
+  sold = "Solgt";
+  forSale = "Til salg";
+  price = "Pris";
+  description = "Beskrivelse";
 
   // Button text
   buttonCancelText = "Annuller";

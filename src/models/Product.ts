@@ -4,7 +4,7 @@ import SubCategory from "./SubCategory";
 export default class Product {
     id: number;
     name: string;
-    modelNumber: number;
+    modelNumber: string;
     manufacturer: string;
     material: materialType;
     design?: string;

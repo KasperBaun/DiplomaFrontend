@@ -6,7 +6,7 @@ import ProductItem from "@models/ProductItem";
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import ProductCard from "./components/ProductCard";
+import ProductCard from "./ProductCard";
 
 export interface IProductsProps {
     onProductItemClicked: (productItem: ProductItem) => void;
@@ -33,11 +33,11 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
         if (event.key === "Enter") {
             // Enter key was pressed
             const filteredProductItems = backofficeStore.ProductItems.filter(
-                productItem => 
-                productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
-                
-                );
+                productItem =>
+                    productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                    productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
+
+            );
             setProductItems(filteredProductItems);
         } else {
             // Some other key was pressed do nothing
@@ -154,7 +154,8 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
 
                 {/* Productcards */}
-                {productItems.length === 0 && <div style={{ marginTop: '20px' }}>Ingen produkter</div> || productItems.length > 0 &&
+                {productItems.length === 0 && <div style={{ marginTop: '20px' }}>Ingen produkter</div>}
+                {productItems.length > 0 &&
                     productItems.map((product, index) => {
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
