@@ -199,7 +199,7 @@ export default class ENLocale implements ILocale {
 
   // Orders
   GoToOrders = "See more Orders";
-  OrderDetailsProductName = "Product";
+  OrderDetailsProductName = "Product(s)";
   OrderDetailsManufacturer = "Fabricator";
   OrderDetailsCustomerId = "Customer (Id)";
   OrderDetailsPaymentStatus = "Payment Status";

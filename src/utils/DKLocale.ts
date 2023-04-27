@@ -204,7 +204,7 @@ export default class DKLocale implements ILocale {
 
   // Orders
   GoToOrders = "Se flere Ordre";
-  OrderDetailsProductName = "Produkt";
+  OrderDetailsProductName = "Produkt(er)";
   OrderDetailsManufacturer = "Mærke";
   OrderDetailsCustomerId = "Kunde (Id)";
   OrderDetailsPaymentStatus = "Betalingsstatus";

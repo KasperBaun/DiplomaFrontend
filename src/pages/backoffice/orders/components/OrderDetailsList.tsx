@@ -8,12 +8,14 @@ import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import React from "react";
 import ProductDialog from "./ProductDialog";
 import '../../css/backoffice.scss';
+import Order from "@models/Order";
 
 interface IProps {
     tableHeight: number;
+    origin: string
   }
 
-const OrderDetailsList = ( {tableHeight} : IProps ) => {
+const OrderDetailsList = ( {tableHeight, origin} : IProps ) => {
     const { orderStore, languageStore } = useContext(MobXContext);
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -32,6 +34,26 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
         handleOpenDialog();
     }
 
+    function renderProductIdUI(order : Order){
+
+        if (origin === "MainPage") {
+            return(
+                <TableCell className="tableCellOnClick" align="left"><b><u>{order.orderElements.map((element, index) => (
+                    <div key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
+                            <b><u>{element.productItemId}</u></b>
+                    </div>))}</u></b></TableCell>
+            )
+        }
+        else{
+            return(
+                <TableCell className="tableCellOnClick" align="left"><b style={{display:"flex"}}><u style={{display:"flex"}}>{order.orderElements.map((element, index) => (
+                    <div style={{display:"flex" , justifyContent:"space-between"}}key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
+                            <b><u>{element.productItemId} {","}</u></b>
+                    </div>))}</u></b></TableCell>
+            ) 
+        }
+    }
+
     if (orderStore.Orders)
         return (
             <React.Fragment>
@@ -40,8 +62,7 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
                     <Table size="small">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="left">{"Order Id"}</TableCell>
-                                <TableCell align="left">{languageStore.currentLanguage.OrderDetailsManufacturer}</TableCell>
+                                <TableCell align="left">{languageStore.currentLanguage.OrderDetailsProductName}</TableCell>
                                 <TableCell align="left">{languageStore.currentLanguage.OrderDetailsCustomerId}</TableCell>
                                 <TableCell align="left">{languageStore.currentLanguage.OrderDetailsPaymentStatus}</TableCell>
                                 <TableCell align="left">{languageStore.currentLanguage.OrderDetailsDeliveryStatus}</TableCell>
@@ -53,10 +74,8 @@ const OrderDetailsList = ( {tableHeight} : IProps ) => {
                             {
                                 orderStore.Orders.map((order, index) => (
                                     <TableRow key={order.id + "_orderDetail_" + index}>
-                                        {/* <TableCell className="tableCellOnClick" align="left" onClick={() => handleOnProductClick(order.orderElements[0].productItemId)}><b><u>{order.orderElements[0].productItemId}</u></b></TableCell> */}
-                                       
-                                        <TableCell align="left">{order.id}</TableCell>
-
+                                        {renderProductIdUI(order)}
+                                        <TableCell align="left">{order.customerId}</TableCell>
                                         <TableCell align="left">{order.paymentStatus}</TableCell>
                                         <TableCell align="left">{order.deliveryStatus}</TableCell>
                                         <TableCell align="left">{order.discountCode}</TableCell>
