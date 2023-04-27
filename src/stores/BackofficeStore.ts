@@ -64,23 +64,6 @@ export class BackofficeStore {
         const images = await this.apiService.getImages();
         // Get Pricehistories
         const pricehistories = await this.apiService.getPriceHistories();
-
-        const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
-        runInAction(() => {
-            this._products = this.generateProducts(productDTOs);
-            this._productMap = this.createProductMap(this._products);
-        });
-        const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
-        runInAction(() => {
-            this._productItems = this.generateProductItems(productItemDTOs, this._productMap);
-            this._productItemMap = this.createProductItemsMap(this.productItems);
-        });
-
-        // Get Orders
-
-        if (Constants.loggingEnabled) {
-            console.log(`${this.prefix} initialized!`, this.color);
-        }
         runInAction(() => {
             this._categories = categories;
             this._categoryMap = this.createCategoryMap(this._categories);
@@ -97,12 +80,29 @@ export class BackofficeStore {
 
             this._pricehistories = pricehistories;
             this.pricehistoriesLoaded = true;
+        })
 
+        const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
+        runInAction(() => {
+            this._products = this.generateProducts(productDTOs);
+            this._productMap = this.createProductMap(this._products);
+        });
+        const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
+        runInAction(() => {
+            this._productItems = this.generateProductItems(productItemDTOs, this._productMap);
+            this._productItemMap = this.createProductItemsMap(this.productItems);
             this.productsLoaded = true;
             this.productItemsLoaded = true;
             this.loading = false;
             this.loaded = this.categoriesLoaded && this.subcategoriesLoaded && this.productsLoaded && this.productItemsLoaded && this.imagesLoaded && this.pricehistoriesLoaded;
-        })
+        });
+
+        // Get Orders
+
+        if (Constants.loggingEnabled) {
+            console.log(`${this.prefix} initialized!`, this.color);
+        }
+
         return this.loaded;
     }
 
