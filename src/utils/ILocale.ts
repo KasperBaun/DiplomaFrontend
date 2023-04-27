@@ -11,6 +11,10 @@ export interface ILocale {
   reset: string;
   search: string;
   showAll: string;
+  sold: string;
+  forSale: string;
+  price: string;
+  description: string;
 
   // Button text
   buttonCancelText: string;

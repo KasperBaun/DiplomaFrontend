@@ -14,6 +14,10 @@ export default class ENLocale implements ILocale {
   reset = "Reset";
   search = "Search";
   showAll = "Show All";
+  sold = "Sold";
+  forSale = "For sale";
+  price = "Price";
+  description = "Description";
 
   // Button text
   buttonCancelText = "Cancel";
