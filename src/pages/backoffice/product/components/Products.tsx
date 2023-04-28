@@ -7,6 +7,7 @@ import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import ProductCard from "./ProductCard";
+import { toJS } from "mobx";
 
 export interface IProductsProps {
     onProductItemClicked: (productItem: ProductItem) => void;
@@ -157,6 +158,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                 {productItems.length === 0 && <div style={{ marginTop: '20px' }}>Ingen produkter</div>}
                 {productItems.length > 0 &&
                     productItems.map((product, index) => {
+                        // console.log(toJS(product))
                         return (
                             <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                                 <ProductCard

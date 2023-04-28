@@ -19,7 +19,6 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
     };
 
     const name: string = props.productItem.product.name ? props.productItem.product.name : '';
-
     const price: string = props.productItem.currentPrice ? props.productItem.currentPrice.toString() : '0';
     const modelNumber: string = props.productItem.product.modelNumber ? props.productItem.product.modelNumber : '';
     const material: string = props.productItem.product.material ? languageStore.currentLanguage.getMaterialType(props.productItem.product.material) : '';

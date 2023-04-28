@@ -17,6 +17,6 @@ export default class ProductItem {
     createdDate: Date;
     soldDate?: Date;
     images: Image[];
-    priceHistory?: PriceHistory[];
+    priceHistories?: PriceHistory[];
 }
 
