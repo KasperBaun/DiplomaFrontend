@@ -17,7 +17,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
     /* Define state for products and selected category & subcategory - Inject stores */
     const { categoryStore, languageStore, backofficeStore, subCategoryStore } = useContext(MobXContext);
     const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.ProductItems.slice(0, backofficeStore.ProductItems.length / 5));
-    const [subcategories, setSubcategories] = useState<SubCategory[]>([]);
+    const [subcategories, setSubcategories] = useState<SubCategory[]>(backofficeStore.subCategories);
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
     const [searchText, setSearchText] = useState<string>("");
