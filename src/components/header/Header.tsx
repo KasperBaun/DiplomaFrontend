@@ -76,12 +76,12 @@ const Header: React.FC = observer(function Header() {
           </Nav>
           <Form className="d-flex">
             <Button onClick={() => {
-              languageStore.changeLanguage("da_DK");
+              languageStore.toggleLanguage();
             }}>
               <Dk />
             </Button>
             <Button onClick={() => {
-              languageStore.changeLanguage("en_US")
+              languageStore.toggleLanguage();
             }}>
               <Us />
             </Button>

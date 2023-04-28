@@ -17,6 +17,8 @@ export default class DKLocale implements ILocale {
   forSale = "Til salg";
   price = "Pris";
   description = "Beskrivelse";
+  settings =  "Indstillinger";
+  notifications = "Notifikationer";
 
   // Button text
   buttonCancelText = "Annuller";

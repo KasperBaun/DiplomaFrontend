@@ -15,6 +15,8 @@ export interface ILocale {
   forSale: string;
   price: string;
   description: string;
+  settings: string;
+  notifications: string;
 
   // Button text
   buttonCancelText: string;
@@ -22,9 +24,9 @@ export interface ILocale {
   confirmDeleteText: string;
 
   getQuality(qualityType: number): string;
-  getCondition (conditionType: number): string; 
+  getCondition(conditionType: number): string;
 
-  getMaterialType(materialType : number): string; 
+  getMaterialType(materialType: number): string;
 
   // Category Admin
   createCategoryDialogTitle: string;
@@ -49,20 +51,20 @@ export interface ILocale {
 
   deleteCategorySuccessMessage: string;
   deleteCategoryFailedMessage: string;
-  
+
   ProductCommaSeperatedText: string;
   // BasketPage: 
   yourBasket: string;
-  yourTotal: string; 
+  yourTotal: string;
   deliveryOptions: string;
   paymentOptions: string;
   subTotal: string;
   procesFee: string;
-  totalIncMoms: string; 
-  checkOutText: string; 
-  addDiscountCode: string; 
+  totalIncMoms: string;
+  checkOutText: string;
+  addDiscountCode: string;
   discountCodeOptional: string;
-  addButton: string; 
+  addButton: string;
 
 
   // BACKOFFICE
@@ -93,11 +95,11 @@ export interface ILocale {
   productPage_productCondition: string;
   productPage_productQuality: string;
   productPage_productDimension: string;
-  productPage_weight : string; 
+  productPage_weight: string;
   productPage_productCustomText: string;
   productPage_createProduct: string;
-  productPage_modelSpecifications: string; 
-  productPage_productInfoHeadline: string; 
+  productPage_modelSpecifications: string;
+  productPage_productInfoHeadline: string;
   selectSubcategory: string;
   filterBySubcategory: String;
   selectCategory: string;
@@ -145,42 +147,42 @@ export interface ILocale {
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
 
-  ShoppingCartWidgetTotalLabel : string;
-  ShoppingCartWidgetPaymentFeeLabel : string;
-  ShoppingCartWidgetTotalAmountLabel : string;
+  ShoppingCartWidgetTotalLabel: string;
+  ShoppingCartWidgetPaymentFeeLabel: string;
+  ShoppingCartWidgetTotalAmountLabel: string;
 
-  CheckoutFormTitle : string;
-  CheckoutFormFirstNameLabel : string;
-  CheckoutFormLastNameLabel : string;
-  CheckoutFormEmailLabel : string;
-  CheckoutFormAddressLabel : string;
-  CheckoutFormZipCodeLabel : string;
-  CheckoutFormCityLabel : string;
-  CheckoutFormCountryLabel : string;
-  CheckoutFormCountryCodeLabel : string;
-  CheckoutFormPhoneLabel : string;
-  CheckoutFormSubmitButton : string;
+  CheckoutFormTitle: string;
+  CheckoutFormFirstNameLabel: string;
+  CheckoutFormLastNameLabel: string;
+  CheckoutFormEmailLabel: string;
+  CheckoutFormAddressLabel: string;
+  CheckoutFormZipCodeLabel: string;
+  CheckoutFormCityLabel: string;
+  CheckoutFormCountryLabel: string;
+  CheckoutFormCountryCodeLabel: string;
+  CheckoutFormPhoneLabel: string;
+  CheckoutFormSubmitButton: string;
 
   // Analysis
-  AnalysisTitle : string;
-  AnalysisMaterial : string;
-  AnalysisItems : string;
-  AnalysisWeight : string;
-  AnalysisPricePrKg : string;
-  AnalysisSummary : string;
-  AnalysisSilver : string;
-  AnalysisGold : string;
+  AnalysisTitle: string;
+  AnalysisMaterial: string;
+  AnalysisItems: string;
+  AnalysisWeight: string;
+  AnalysisPricePrKg: string;
+  AnalysisSummary: string;
+  AnalysisSilver: string;
+  AnalysisGold: string;
 
   // Orders
   GoToOrders: string;
-  OrderDetailsProductName : string;
-  OrderDetailsManufacturer : string;
-  OrderDetailsCustomerId : string;
-  OrderDetailsPaymentStatus : string;
-  OrderDetailsDeliveryStatus : string;
-  OrderDetailsDiscountTag : string;
-  OrderDetailsCompletionStatus : string;
-  OrderDetailsListTitle : string;
+  OrderDetailsProductName: string;
+  OrderDetailsManufacturer: string;
+  OrderDetailsCustomerId: string;
+  OrderDetailsPaymentStatus: string;
+  OrderDetailsDeliveryStatus: string;
+  OrderDetailsDiscountTag: string;
+  OrderDetailsCompletionStatus: string;
+  OrderDetailsListTitle: string;
 
   // <TableCell align="left">Product Name</TableCell>
   // <TableCell align="left">Manufacturer</TableCell>
@@ -207,15 +209,15 @@ export interface ILocale {
   TableEntrySniperDescription: string;
   TableEntrySniperImages: string;
   TableEntrySniperItemUrl: string;
-  SniperFormMutedText : string;
-  SniperFormButtonText : string;
-  SniperFormLabelText : string;
-  SniperFormTitleText : string;
+  SniperFormMutedText: string;
+  SniperFormButtonText: string;
+  SniperFormLabelText: string;
+  SniperFormTitleText: string;
 
   // Inventory
-  InventoryAmountLabel : string;
-  InventoryTitle : string;
-  InventoryWidgetTitle : string;
+  InventoryAmountLabel: string;
+  InventoryTitle: string;
+  InventoryWidgetTitle: string;
 
   // Loginpage
   signInText: string;
