@@ -1,6 +1,7 @@
 import ProductItemWeb from '@models/ProductItemWeb';
 import { Card, CardContent, CardMedia, Divider, Typography } from '@mui/material';
-import React from 'react';
+import MobXContext from '@stores/MobXContext';
+import React, { useContext } from 'react';
 import { useState } from "react";
 
 export interface IMyCardProps {
@@ -10,6 +11,7 @@ export interface IMyCardProps {
 const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
 
   const productItem = props.data;
+  const { languageStore } = useContext(MobXContext);  
 
   const [cardStyle, setCardStyle] = useState({
     width: 300,
@@ -54,9 +56,9 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
           Model Number: {props.data.product.modelNumber}
         </Typography>
         <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
-        <Typography color="textPrimary" >Price: {productItem.price} DKK</Typography>
-        <Typography color="textSecondary">Condition: {productItem.condition}</Typography>
-        <Typography color="textSecondary">Quality: {productItem.quality}</Typography>
+        <Typography color="textPrimary">{languageStore.currentLanguage.price}: {productItem.price} DKK</Typography>
+        <Typography color="textSecondary"> {languageStore.currentLanguage.getQuality(productItem.condition)}</Typography>
+        <Typography color="textSecondary">{languageStore.currentLanguage.getQuality(productItem.quality)}</Typography>
       </CardContent>
     </Card>
   );
