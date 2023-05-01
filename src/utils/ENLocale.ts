@@ -217,7 +217,7 @@ export default class ENLocale implements ILocale {
 
   // Footer tabs
   BlogTabText = "Blog";
-  PricingTabText = "Prices";
+  OldPageText = "Old webpage";
   AboutUsTabText = "About us";
   FAQTabText = "FAQ";
   ContactTabText = "Contact";

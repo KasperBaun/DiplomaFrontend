@@ -195,7 +195,7 @@ export interface ILocale {
 
   // Footer tabs
   BlogTabText: string;
-  PricingTabText: string;
+  OldPageText: string;
   AboutUsTabText: string;
   FAQTabText: string;
   ContactTabText: string;

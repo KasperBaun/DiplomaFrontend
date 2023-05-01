@@ -12,6 +12,7 @@ import SearchPage from "@webshop/search/SearchPage"
 import Auth from "@backoffice/Auth"
 import ProductListPage from "@webshop/product/ProductListPage"
 import OrderDetails from "@models/OrderDetails"
+import AboutUsPage from "@webshop/aboutUs/AboutUsPage"
 
 const Routing: React.FC = function Routing() {
 
@@ -31,6 +32,7 @@ const Routing: React.FC = function Routing() {
                 <Route path="product/:id" element={<ProductPage />} />
                 <Route path="productList" element={<ProductListPage />} />
                 <Route path="productList/:id" element={<ProductListPage />} />
+                <Route path="aboutUs" element={<AboutUsPage/>} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>

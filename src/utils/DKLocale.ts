@@ -182,7 +182,7 @@ export default class DKLocale implements ILocale {
 
   // Footer tabs
   BlogTabText = "Blog";
-  PricingTabText = "Priser";
+  OldPageText = "Gamle hjemmeside";
   AboutUsTabText = "Om os";
   FAQTabText = "Ofte stillede spørgsmål";
   ContactTabText = "Kontakt";
