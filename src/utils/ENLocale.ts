@@ -83,7 +83,7 @@ export default class ENLocale implements ILocale {
     SaturdayText = "Saturday"
     publicHollidayText = "Public Hollidays"
     SundayText = "Sunday" 
-    ClosedText= "Closhed"
+    ClosedText= "Closed"
     PerAgreemtText= "Per agrement"
     contactInformation = "Contact information"
     phoneText=  "Phone"
