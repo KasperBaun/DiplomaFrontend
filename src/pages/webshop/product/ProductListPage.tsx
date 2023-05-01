@@ -5,9 +5,9 @@ import MobXContext from "@stores/MobXContext";
 import { useContext, useEffect, useState } from "react";
 import MyCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom"
-import ProductItem from "@models/ProductItem";
 import { Translater } from "@utils/Translater";
 import ProductItemWeb from "@models/ProductItemWeb";
+import Loading from "@components/loading/Loading";
 
 
 const ProductListPage: React.FC = observer(function ProductListPage() {
@@ -18,12 +18,13 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
     const navigate = useNavigate();
     const [items, setItems] = useState<ProductItemWeb[]>(null);
     const [subcategoryTitle, setSubcategoryTitle] = useState<string>("");
+    const [loading, setLoading]  = useState(true); 
     
 
     function handleClick(product: ProductItemWeb) {
         navigate('/product/' + product.id)
     }
-
+    
     useEffect(() => {
         let items;
         if (subcategoryId > 0) {
@@ -38,35 +39,29 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
     }, [productStore])
 
 
-    if (items && items.length > 0) {
-        return (
-            <div>
-                <h1>{translater.getCategoryBasedOnLanguage(languageStore,subcategoryTitle)}</h1>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                {items.map(pItem => {
-                    return (
-                        <div key={"pItem" + pItem.id} onClick={() => handleClick(pItem)}>
-                            <MyCard data={pItem} />
-                        </div>
-                    )
-                })}
-            </div>
-            </div>
-        )
-    }
-    else {
-        return (
-            <div >
-                <span>
-                    <h1>{subcategoryTitle}</h1>
-                </span>
-                <span>
-                    Der er desværre ingen produkter i denne underkategori
-                </span>
-
-            </div>
-        )
-    }
+        if (items && items.length > 0) {
+            return (
+                <div>
+                    <h1>{translater.getCategoryBasedOnLanguage(languageStore,subcategoryTitle)}</h1>
+                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                    {items.map(pItem => {
+                        return (
+                            <div key={"pItem" + pItem.id} onClick={() => handleClick(pItem)}>
+                                <MyCard data={pItem} />
+                            </div>
+                        )
+                    })}
+                </div>
+                </div>
+            )
+        }
+        else {
+            return (
+                <div >
+                    <Loading/>
+                </div>
+            )
+        }
 });
 
 export default ProductListPage;
