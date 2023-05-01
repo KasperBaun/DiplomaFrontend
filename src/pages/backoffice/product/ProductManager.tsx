@@ -7,6 +7,7 @@ import Products from "./components/Products";
 import ProductItem from "@models/ProductItem";
 import ProductEditor from "./components/ProductEditor";
 import Loading from "@components/loading/Loading";
+import { toJS } from "mobx";
 
 export interface IProductManagerProps {
 
@@ -17,21 +18,25 @@ const ProductManager: React.FC<IProductManagerProps> = observer(function Product
     const { languageStore, backofficeStore } = useContext(MobXContext);
     const [selectedProductItem, setSelectedProductItem] = useState<ProductItem | null>(null);
     const [activeKey, setActiveKey] = useState<number>(0);
+    const [create, setCreate] = useState<boolean>(false);
+    // const [copy, setCopy] = useState<boolean>(false);
 
     const navSwitch = (activeKey: number) => {
         switch (activeKey) {
             case 0: return <Products onProductItemClicked={handleOnProductItemClicked} />;
-            case 1: return <ProductEditor productItem={selectedProductItem} />;
+            case 1: return <ProductEditor productItem={selectedProductItem} create={create} />;
         }
     }
 
     const handleOnProductItemClicked = (productItem: ProductItem) => {
-        setSelectedProductItem(productItem);
-        setActiveKey(1);
-    }
+        if (productItem === null) {
+            setCreate(true);
+            setSelectedProductItem(productItem);
+        } else {
+            setCreate(false);
+            setSelectedProductItem(productItem);
+        }
 
-    const handleOnProductsClicked = () => {
-        setSelectedProductItem(null);
         setActiveKey(1);
     }
 
@@ -49,7 +54,7 @@ const ProductManager: React.FC<IProductManagerProps> = observer(function Product
                                 {languageStore.currentLanguage.ProductTabText}
                             </Typography>
                         </Link>
-                        <Link onClick={handleOnProductsClicked} underline={activeKey === 1 ? "always" : "hover"}>
+                        <Link onClick={() => handleOnProductItemClicked(null)} underline={activeKey === 1 ? "always" : "hover"}>
                             <Typography variant="h3">
                                 {languageStore.currentLanguage.product}
                             </Typography>

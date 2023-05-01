@@ -14,10 +14,13 @@ export default class ENLocale implements ILocale {
   reset = "Reset";
   search = "Search";
   showAll = "Show All";
+  showMore = "Show more";
   sold = "Sold";
   forSale = "For sale";
   price = "Price";
   description = "Description";
+  settings = "Settings";
+  notifications = "Notifications";
 
   // Button text
   buttonCancelText = "Cancel";
@@ -56,18 +59,18 @@ export default class ENLocale implements ILocale {
     }
   }
 
-    //Basket Page
-    yourBasket = "Your basket";
-    yourTotal = "Price" 
-    deliveryOptions = "Delivery Options:"
-    paymentOptions = "Payment Options";
-    subTotal = "Subtotal:";
-    procesFee = "Handling fees:";
-    totalIncMoms = "Price in total (including taxs):"
-    checkOutText = "Checkout"
-    addDiscountCode = "Add dicsount code"
-    discountCodeOptional = "Discount code (optional)"
-    addButton = "Add"
+  //Basket Page
+  yourBasket = "Your basket";
+  yourTotal = "Price"
+  deliveryOptions = "Delivery Options:"
+  paymentOptions = "Payment Options";
+  subTotal = "Subtotal:";
+  procesFee = "Handling fees:";
+  totalIncMoms = "Price in total (including taxs):"
+  checkOutText = "Checkout"
+  addDiscountCode = "Add dicsount code"
+  discountCodeOptional = "Discount code (optional)"
+  addButton = "Add"
 
 
   // Category Admin
@@ -126,10 +129,10 @@ export default class ENLocale implements ILocale {
   productPage_createProduct = "create product";
   productPage_modelSpecifications = "Model specifictations";
   productPage_productInfoHeadline = "General info";
-  selectSubcategory= "Select subcategory";
+  selectSubcategory = "Select subcategory";
   filterBySubcategory = "Filter by subcategory";
   selectCategory = "Select category";
-  filterByCategory= "Filter by category";
+  filterByCategory = "Filter by category";
 
   // Analysis
   AnalysisTitle = "Gold and Silver";
@@ -189,17 +192,17 @@ export default class ENLocale implements ILocale {
   ShoppingCartWidgetTotalLabel = "Total w/o discount";
   ShoppingCartWidgetTotalAmountLabel = "Total incl. tax";
 
-  CheckoutFormTitle= "Checkout";
-  CheckoutFormFirstNameLabel= "Firstname";
-  CheckoutFormLastNameLabel= "Lastname";
-  CheckoutFormEmailLabel= "Email";
-  CheckoutFormAddressLabel= "Address";
-  CheckoutFormZipCodeLabel= "Zipcode";
-  CheckoutFormCityLabel= "City";
-  CheckoutFormCountryLabel= "Country";
-  CheckoutFormCountryCodeLabel= "Countrycode";
-  CheckoutFormPhoneLabel= "Phonenumber";
-  CheckoutFormSubmitButton= "Continue to payment";
+  CheckoutFormTitle = "Checkout";
+  CheckoutFormFirstNameLabel = "Firstname";
+  CheckoutFormLastNameLabel = "Lastname";
+  CheckoutFormEmailLabel = "Email";
+  CheckoutFormAddressLabel = "Address";
+  CheckoutFormZipCodeLabel = "Zipcode";
+  CheckoutFormCityLabel = "City";
+  CheckoutFormCountryLabel = "Country";
+  CheckoutFormCountryCodeLabel = "Countrycode";
+  CheckoutFormPhoneLabel = "Phonenumber";
+  CheckoutFormSubmitButton = "Continue to payment";
 
   // Orders
   GoToOrders = "See more Orders";

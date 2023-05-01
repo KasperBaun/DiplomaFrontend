@@ -255,7 +255,7 @@ export class BackofficeStore {
                 createdDate: productItemDTO.createdDate,
                 soldDate: productItemDTO.soldDate,
                 images: poImages,
-                priceHistory: poPriceHistory
+                priceHistories: poPriceHistory
 
             };
             productItems.push(productItem);
