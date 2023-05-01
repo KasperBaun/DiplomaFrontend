@@ -16,8 +16,6 @@ import Loading from "@components/loading/Loading";
 import Category from "@models/Category";
 import { useNavigate } from "react-router-dom";
 import './homepage.scss';
-import { Language } from "@mui/icons-material";
-import Product from "@models/Product";
 import ProductItemWeb from "@models/ProductItemWeb";
 
 interface IHomePageProps {
@@ -41,7 +39,7 @@ export const SelectedProductItems = observer(function SelectedProductItems(){
     const { productStore, languageStore } = useContext(MobXContext);
     const navigate = useNavigate();
     function handleClick(product: ProductItemWeb) {
-        navigate('/prodcut/' + product.id)
+        navigate('/product/' + product.id)
     }
 
     if(productStore.ProductItems) {
@@ -78,7 +76,7 @@ export const SelectedProductItems = observer(function SelectedProductItems(){
                                     {product.price} DKK
                                 </Typography>
                                 <div className="CarouselItemBtnDiv">
-                                    <Button onClickCapture={()=>handleClick(product)}> 
+                                    <Button onClick={()=>handleClick(product)}> 
                                       {languageStore.currentLanguage.seeProductBtn}
                                     </Button>
                                 </div>

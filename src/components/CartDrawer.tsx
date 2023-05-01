@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 
 const CartDrawer: React.FC = observer(function CartDrawer(){
 
-    const {basketStore } = useContext(MobXContext);
+    const {basketStore, languageStore} = useContext(MobXContext);
     const [drawerState, setDrawerState] = React.useState(false); 
     const navigate = useNavigate();
     const toggleDrawer =
@@ -68,7 +68,7 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
             </div>
 
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem'}}>
-              <Button className="cartButton" variant="outlined"  onClick={() => handleClick()} style={{width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem',}}>View cart</Button>
+              <Button className="cartButton" variant="outlined"  onClick={() => handleClick()} style={{width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem',}}>{languageStore.currentLanguage.shopButton}</Button>
             </div>
           </div>
 

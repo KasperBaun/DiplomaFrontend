@@ -95,7 +95,10 @@ export interface ILocale {
 
   // Frontpage:
   seeProductBtn: string; 
-  chosenCategories: string; 
+  chosenCategories: string;
+
+  //Pop-up : cart
+  shopButton: string; 
 
   // BACKOFFICE
 

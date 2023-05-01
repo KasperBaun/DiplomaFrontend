@@ -88,6 +88,9 @@ export default class DKLocale implements ILocale {
   seeProductBtn = "Se produkt"; 
   chosenCategories = "Udvalgte kategorier"
 
+   //Pop-up : cart
+   shopButton = "Gå til kurv";  
+
   //Basket Page
   yourBasket = "Din indkøbskurv";
   yourTotal = "Pris"
