@@ -1,7 +1,5 @@
 import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
-//import { Product } from "@models/Product"; 
-//import { ProductItem } from "@models/ProductItem"; 
 import { useContext, useEffect, useState } from "react";
 import MyCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom"
@@ -18,8 +16,6 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
     const navigate = useNavigate();
     const [items, setItems] = useState<ProductItemWeb[]>(null);
     const [subcategoryTitle, setSubcategoryTitle] = useState<string>("");
-    const [loading, setLoading]  = useState(true); 
-    
 
     function handleClick(product: ProductItemWeb) {
         navigate('/product/' + product.id)
@@ -29,7 +25,7 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
         let items;
         if (subcategoryId > 0) {
             setSubcategoryTitle(subCategoryStore.getSubcategory(subcategoryId).name);
-            console.log("fetching", subcategoryId);
+            //console.log("fetching", subcategoryId);
             items = productStore.getProductItemsFilterBySubcategory(subcategoryId);
         } else {
             items = productStore.ProductItems;
@@ -58,7 +54,7 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
         else {
             return (
                 <div >
-                    <Loading/>
+                    {languageStore.currentLanguage.noProductsAvailable}
                 </div>
             )
         }

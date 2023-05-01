@@ -21,6 +21,7 @@ export default class ENLocale implements ILocale {
   description = "Description";
   settings = "Settings";
   notifications = "Notifications";
+  noProductsAvailable = "There is currrently no products available in this category";
 
   // Button text
   buttonCancelText = "Cancel";

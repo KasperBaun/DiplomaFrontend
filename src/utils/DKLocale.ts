@@ -20,6 +20,8 @@ export default class DKLocale implements ILocale {
   description = "Beskrivelse";
   settings = "Indstillinger";
   notifications = "Notifikationer";
+  noProductsAvailable = "Der er desvære ingen vare i denne kategori på nuværende tidspunkt";
+
 
   // Button text
   buttonCancelText = "Annuller";

@@ -18,6 +18,7 @@ export interface ILocale {
   description: string;
   settings: string;
   notifications: string;
+  noProductsAvailable: string; 
 
   // Button text
   buttonCancelText: string;
