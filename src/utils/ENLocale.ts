@@ -230,6 +230,13 @@ export default class ENLocale implements ILocale {
   CheckoutFormPhoneLabel = "Phonenumber";
   CheckoutFormSubmitButton = "Continue to payment";
 
+  CheckoutPaymentWidgetPayButtonText = "Pay";
+  CheckoutPaymentWidgetPayFormMPLabel = "Phone number";
+  CheckoutPaymentWidgetPayFormCardLabel = "Choose card type";
+  CheckoutPaymentWidgetPayFormMMYYLabel = "MM/YY";
+  CheckoutPaymentWidgetPayFormCardHolderLabel = "Cardholders name";
+  CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
+
   // Orders
   GoToOrders = "See more Orders";
   OrderDetailsProductName = "Product(s)";

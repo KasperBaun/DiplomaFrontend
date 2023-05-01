@@ -3,7 +3,6 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import '../css/payment.scss';
 import { LanguageStore } from "@stores/LanguageStore";
-import Basket from "@models/Basket";
 
 interface IpInfo {
     ip: string;
@@ -19,7 +18,6 @@ interface IUserDetailFormProps {
 }
 
 const UserDetailForm = ( props: IUserDetailFormProps ) => {
-
 
     const [ipInfo, setIpInfo] = useState<IpInfo>({
         ip: "",
@@ -65,7 +63,7 @@ const UserDetailForm = ( props: IUserDetailFormProps ) => {
      * Btn: Forsæt / Fortsæt til Levering
      */
     return (
-        <Grid className="checkoutForm" container spacing={1} columns={12}>
+        <Grid className="checkoutForm" style={{ maxHeight: 750}} container spacing={1} columns={12}>
 
             <Grid item className="GridItem" xs={12} style={{ textAlign: "center"}}>
                 <h3>{props.ls.currentLanguage.CheckoutFormTitle}</h3>
@@ -143,7 +141,7 @@ const UserDetailForm = ( props: IUserDetailFormProps ) => {
                 </FormControl>
             </Grid>
 
-            <Grid item className="GridItem" xs={12} md={12}>
+            <Grid item className="GridItem" style={{ textAlign: "right"}} xs={12} md={12}>
                 {/* Fortsæt Knap */}
                 <Button>{props.ls.currentLanguage.CheckoutFormSubmitButton}</Button>
             </Grid>

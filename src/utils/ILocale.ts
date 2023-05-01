@@ -189,6 +189,13 @@ export interface ILocale {
   CheckoutFormPhoneLabel: string;
   CheckoutFormSubmitButton: string;
 
+  CheckoutPaymentWidgetPayButtonText : string;
+  CheckoutPaymentWidgetPayFormMPLabel : string;
+  CheckoutPaymentWidgetPayFormCardLabel : string;
+  CheckoutPaymentWidgetPayFormMMYYLabel : string;
+  CheckoutPaymentWidgetPayFormCardHolderLabel : string;
+  CheckoutPaymentWidgetPayFormSecureLabel : string;
+
   // Analysis
   AnalysisTitle: string;
   AnalysisMaterial: string;

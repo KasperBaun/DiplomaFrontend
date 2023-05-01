@@ -1,14 +1,13 @@
 import ConfirmDeleteDialog from "@backoffice/category/components/ConfirmDeleteDialog";
-import { conditionType, materialType, qualityType } from "@models/Enums";
-import PriceHistory from "@models/PriceHistory";
+import { materialType } from "@models/Enums";
+// import PriceHistory from "@models/PriceHistory";
 import ProductItem from "@models/ProductItem";
-import SubCategory from "@models/SubCategory";
-import Image from "@models/Image";
+// import SubCategory from "@models/SubCategory";
+// import Image from "@models/Image";
 import { Alert, Box, Grid, Link, Paper, Snackbar, Typography } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import Product from "@models/Product";
-import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 
 export interface IProductEditorProps {
@@ -22,7 +21,6 @@ const ProductEditor: React.FC<IProductEditorProps> = observer(function ProductEd
     const { languageStore, backofficeStore } = useContext<IMobXContext>(MobXContext);
 
     /* Define state for modals */
-    const [showProductDialog, setShowProductDialog] = useState<boolean>(false);
     const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
     const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
@@ -38,39 +36,39 @@ const ProductEditor: React.FC<IProductEditorProps> = observer(function ProductEd
         setShowConfirmDelete(false);
     }
 
-    const handleOnDeleteClick = async () => {
-        setShowConfirmDelete(true);
-    }
+    // const handleOnDeleteClick = async () => {
+    //     setShowConfirmDelete(true);
+    // }
 
 
-    const handleOnUpdateClicked = () => {
-        // Open update modal / page
-    };
+    // const handleOnUpdateClicked = () => {
+    //     // Open update modal / page
+    // };
 
     const productItem = configureProductItem(props.create, props.copy, props.productItem);
     const imageUrl: string = productItem?.images[0]?.url ? productItem.images[0].url : "https://images.unsplash.com/photo-1600456899121-68eda5705257?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80";
 
     /* States for each property in Product & ProductItem */
-    const [productId, setProductId] = useState<number>(productItem.product.id);
+    // const [productId, setProductId] = useState<number>(productItem.product.id);
     const [name, setName] = useState<string>(productItem.product.name);
-    const [manufacturer, setManufacturer] = useState<string>(productItem.product.manufacturer);
+    // const [manufacturer, setManufacturer] = useState<string>(productItem.product.manufacturer);
     const [material, setMaterial] = useState<materialType>(productItem.product.material);
     const [design, setDesign] = useState<string>(productItem.product.design);
-    const [dimension, setDimension] = useState<string>(productItem.product.dimension);
-    const [subcategories, setSubcategories] = useState<SubCategory[]>(productItem.product.subcategories);
+    // const [dimension, setDimension] = useState<string>(productItem.product.dimension);
+    // const [subcategories, setSubcategories] = useState<SubCategory[]>(productItem.product.subcategories);
 
-    const [Id, setId] = useState<number>(productItem.id);
-    const [condition, setCondition] = useState<conditionType>(productItem.condition);
-    const [quality, setQuality] = useState<qualityType>(productItem.quality);
-    const [sold, setSold] = useState<boolean>(productItem.sold);
-    const [weight, setWeight] = useState<number>(productItem.weight);
-    const [customText, setCustomText] = useState<string>(productItem.customText);
-    const [purchasePrice, setPurchasePrice] = useState<number>(productItem.purchasePrice);
-    const [currentPrice, setCurrentPrice] = useState<number>(productItem.currentPrice);
-    const [createdDate, setCreatedDate] = useState<Date>(productItem.createdDate);
-    const [soldDate, setSoldDate] = useState<Date | null>(productItem.soldDate);
-    const [images, setImages] = useState<Image[]>(productItem.images);
-    const [priceHistories, setPriceHistories] = useState<PriceHistory[] | null>(productItem.priceHistories);
+    // const [Id, setId] = useState<number>(productItem.id);
+    // const [condition, setCondition] = useState<conditionType>(productItem.condition);
+    // const [quality, setQuality] = useState<qualityType>(productItem.quality);
+    // const [sold, setSold] = useState<boolean>(productItem.sold);
+    // const [weight, setWeight] = useState<number>(productItem.weight);
+    // const [customText, setCustomText] = useState<string>(productItem.customText);
+    // const [purchasePrice, setPurchasePrice] = useState<number>(productItem.purchasePrice);
+    // const [currentPrice, setCurrentPrice] = useState<number>(productItem.currentPrice);
+    // const [createdDate, setCreatedDate] = useState<Date>(productItem.createdDate);
+    // const [soldDate, setSoldDate] = useState<Date | null>(productItem.soldDate);
+    // const [images, setImages] = useState<Image[]>(productItem.images);
+    // const [priceHistories, setPriceHistories] = useState<PriceHistory[] | null>(productItem.priceHistories);
 
     return (
         <Grid container>

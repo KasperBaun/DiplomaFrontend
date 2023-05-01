@@ -234,6 +234,13 @@ export default class DKLocale implements ILocale {
   CheckoutFormPhoneLabel = "Telefonnummer";
   CheckoutFormSubmitButton = "Fortsæt til Betaling";
 
+  CheckoutPaymentWidgetPayButtonText = "Betal";
+  CheckoutPaymentWidgetPayFormMPLabel = "Mobilnummer";
+  CheckoutPaymentWidgetPayFormCardLabel = "Vælg betalingskort";
+  CheckoutPaymentWidgetPayFormMMYYLabel = "MM/YY";
+  CheckoutPaymentWidgetPayFormCardHolderLabel = "Kortholderens navn";
+  CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
+
   // Orders
   GoToOrders = "Se flere Ordre";
   OrderDetailsProductName = "Produkt(er)";
