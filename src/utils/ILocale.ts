@@ -93,6 +93,10 @@ export interface ILocale {
   Q3Text: string;
   Q3Awnser: string; 
 
+  // Frontpage:
+  seeProductBtn: string; 
+  chosenCategories: string; 
+
   // BACKOFFICE
 
   // Subcategory

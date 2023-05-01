@@ -84,6 +84,10 @@ export default class DKLocale implements ILocale {
   Q3Awnser = "Det er altid en mulighed selv at hente varer i buttiken  inden for åbningstiderne." 
 
 
+  // Front page
+  seeProductBtn = "Se produkt"; 
+  chosenCategories = "Udvalgte kategorier"
+
   //Basket Page
   yourBasket = "Din indkøbskurv";
   yourTotal = "Pris"

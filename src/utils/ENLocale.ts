@@ -98,6 +98,9 @@ export default class ENLocale implements ILocale {
     Q3Text= "Can I pick up my goods in the store?"
     Q3Awnser ="It is always an option to pick up goods yourself in the shop during opening hours." 
 
+    // Front page
+    seeProductBtn = "See product"; 
+    chosenCategories = "Chosen Categories"
 
   // Category Admin
   createCategoryDialogTitle = "Create Category";
