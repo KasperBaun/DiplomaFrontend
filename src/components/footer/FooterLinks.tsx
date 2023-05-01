@@ -17,6 +17,9 @@ const FooterLinks = () => {
               <Nav.Link className="FL_NavLink" href={"/aboutUs"}>{languageStore.currentLanguage.AboutUsTabText}</Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
+              <Nav.Link className="FL_NavLink" href={"/aboutUs"}>{languageStore.currentLanguage.ContactTabText}</Nav.Link>
+            </Nav.Item>
+            <Nav.Item as="li">
               <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.OldPageText}</Nav.Link>
             </Nav.Item>
           </Nav>

@@ -67,6 +67,31 @@ export interface ILocale {
   discountCodeOptional: string;
   addButton: string;
 
+  // AboutUS page
+  copanyDescription: string; 
+  openingDays: string;
+  MondayText: string;
+  TuesdayText: string;
+  WendsayText:  string;
+  ThursdayText:  string;
+  FridayText: string;
+  SaturdayText:  string;
+  publicHollidayText:  string;
+  SundayText: string;
+  ClosedText: string;
+  PerAgreemtText:  string;
+  contactInformation : string; 
+  phoneText:  string;
+  emailText:  string;
+  addressText: string;
+  CVRNRText:  string;
+  FAQText:  string;
+  Q1Text: string;
+  Q1Awnser: string; 
+  Q2Text: string;
+  Q2Awnser: string; 
+  Q3Text: string;
+  Q3Awnser: string; 
 
   // BACKOFFICE
 
