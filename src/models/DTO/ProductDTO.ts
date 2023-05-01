@@ -3,7 +3,7 @@ import { materialType } from "@models/Enums";
 export default class ProductDTO {
     id: number;
     name: string;
-    modelNumber: number;
+    modelNumber: string;
     manufacturer: string;
     material: materialType;
     design?: string;

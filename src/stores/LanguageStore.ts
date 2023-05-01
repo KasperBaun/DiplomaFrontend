@@ -23,9 +23,11 @@ export class LanguageStore {
     }
 
     public async init(): Promise<boolean> {
-        // Load available languages
-        this.locales.set("da_DK", new DKLocale());
-        this.locales.set("en_US", new ENLocale());
+        runInAction(() => {
+            // Load available languages
+            this.locales.set("da_DK", new DKLocale());
+            this.locales.set("en_US", new ENLocale());
+        })
 
         // Reads values from localstorage to determine previously set preffered language by user ->
         // If no preffered language was set by user -> default to da-DK locale
@@ -47,6 +49,11 @@ export class LanguageStore {
         }
         return LanguageStore._Instance;
     }
+    // public changeLanguage(lang: string): void {
+    //     if (lang !== this._currentLanguage) {
+    //         this.setCurrentLanguage(lang);
+    //     }
+    // }
 
     private setCurrentLanguage(language: string): void {
         this._currentLanguage = language;
@@ -54,10 +61,14 @@ export class LanguageStore {
         localStorage.setItem('locale', language);
     }
 
-    public changeLanguage(lang: string): void {
-        if (lang !== this._currentLanguage) {
-            this.setCurrentLanguage(lang);
+    public toggleLanguage(): void {
+        let lang: string = "";
+        if (this._currentLanguage === "da_DK") {
+            lang = "en_US";
+        } else {
+            lang = "da_DK"
         }
+        this.setCurrentLanguage(lang);
     }
 
     public get isLoaded(): boolean {
@@ -68,7 +79,7 @@ export class LanguageStore {
         return this.locales.get(this._currentLanguage);
     }
 
-    public getcurrentLanguageCode(): string {
+    public getCurrentLanguageCode(): "da_DK" | "en_US" | "" {
         if (this.locales.get(this._currentLanguage) instanceof DKLocale) {
             // Dansk
             return "da_DK";
@@ -77,7 +88,6 @@ export class LanguageStore {
             // English
             return "en_US";
         }
-        return "Could not determine";
+        return "";
     }
-
 }

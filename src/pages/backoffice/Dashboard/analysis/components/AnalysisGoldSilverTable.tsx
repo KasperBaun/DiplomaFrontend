@@ -1,5 +1,4 @@
 import Loading from "@components/loading/Loading";
-import { Box } from "@mui/material";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,18 +8,6 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite"
 import React from "react";
 import { useContext } from "react";
-
-interface mineralData {
-    mineral : string;
-    items : number;
-    weight : number;
-    price : number;
-}
-
-const data: mineralData[] = [
-    { mineral: "Gold", items: 1120, weight: 10.2, price: 18142 },
-    { mineral: "Silver", items: 5513, weight: 5.4, price: 5296 }
-  ];
 
 const SilverAndGold = () => {
     const { languageStore, productStore } = useContext(MobXContext);

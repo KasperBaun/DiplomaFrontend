@@ -1,42 +1,80 @@
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import { useContext } from "react";
-import { Button, Card } from "react-bootstrap";
-import { Pencil, XLg, Plus } from "react-bootstrap-icons";
-import { productCardItem } from "../ProductsStyling";
 import ProductItem from "@models/ProductItem";
+import { useContext } from "react";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
+import { FiberManualRecord } from "@mui/icons-material";
 
 export interface IProductCardProps {
-    className?: string;
     productItem: ProductItem;
-    handleOnUpdateClicked: (product: ProductItem) => void;
-    handleOnDeleteClicked: (productId: number) => Promise<void>;
-    showProductClicked: (product: ProductItem) => void;
+    onProductItemClicked: (productItem: ProductItem) => void;
 }
 
 const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(props: IProductCardProps) {
 
     const { languageStore } = useContext<IMobXContext>(MobXContext);
 
+    const handleOnProductItemClicked = () => {
+        props.onProductItemClicked(props.productItem);
+    };
+
+    const name: string = props.productItem.product.name ? props.productItem.product.name : '';
+    const price: string = props.productItem.currentPrice ? props.productItem.currentPrice.toString() : '0';
+    const modelNumber: string = props.productItem.product.modelNumber ? props.productItem.product.modelNumber : '';
+    const material: string = props.productItem.product.material ? languageStore.currentLanguage.getMaterialType(props.productItem.product.material) : '';
+    const design: string = props.productItem.product.design ? props.productItem.product.design : '';
+    const quality: string = props.productItem.quality ? languageStore.currentLanguage.getQuality(props.productItem.quality) : '';
+    //const dimension: string = props.productItem.product.dimension ? props.productItem.product.dimension : '';
+    const description: string = props.productItem.customText ? props.productItem.customText : '';
 
     return (
-        <Card style={productCardItem}>
-            {/*<Card.Img variant="top" src={props.product.imageUrls[0] || "https://t3.ftcdn.net/jpg/04/62/93/66/360_F_462936689_BpEEcxfgMuYPfTaIAOC1tCDurmsno7Sp.jpg" } />*/}
-            <Card.Body onClick={() => props.showProductClicked(props.productItem)}>
-                <Card.Title>{props.productItem.product.name}</Card.Title>
-                <Card.Subtitle>{props.productItem.product.modelNumber}</Card.Subtitle>
-                <Card.Text>
-                    {/* {languageStore.currentLanguage.productPage_productCondition}: {props.product.condition || 'N/A'} */}
-                </Card.Text>
-                <Card.Text>
-                </Card.Text>
-                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-                    <Button variant="outline-success"><Plus /></Button>
-                    <Button variant="outline-secondary" onClick={() => props.handleOnUpdateClicked(props.productItem)}><Pencil /></Button>
-                    <Button variant="outline-danger" onClick={() => props.handleOnDeleteClicked(props.productItem.id)}><XLg /></Button>
-                </div>
-            </Card.Body>
-        </Card >
+        <Card sx={{ width: '300px' }}>
+
+            <CardHeader
+                avatar={<FiberManualRecord sx={{ color: props.productItem.sold ? 'red' : 'green' }} />}
+                title={props.productItem.sold ? languageStore.currentLanguage.sold : languageStore.currentLanguage.forSale}
+            >
+
+            </CardHeader>
+            <CardMedia
+                component="img"
+                height={200}
+                onClick={handleOnProductItemClicked}
+                image={props.productItem.images[0]?.url ? props.productItem.images[0].url : "https://picsum.photos/200/300?grayscale"}
+                alt="Category image for category card"
+                style={{ objectFit: "cover" }}
+            />
+            <CardContent>
+                <Typography variant="h5" color="text.primary" sx={{ maxHeight: '80px', overflow: 'hidden' }}>
+                    {/* <b>{languageStore.currentLanguage.productPage_productName}</b>: {name} */}<b>{name}</b>
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                    <b>{languageStore.currentLanguage.productPage_productModelNumber}</b>: {modelNumber}
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                    <b>{languageStore.currentLanguage.productPage_productMaterial}</b>: {material}
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                    <b>{languageStore.currentLanguage.productPage_productDesign}</b>: {design}
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                    <b>{languageStore.currentLanguage.productPage_productQuality}</b>: {quality}
+                </Typography>
+                {/* <Typography variant="body1" color="text.primary">
+                    <b>{languageStore.currentLanguage.productPage_productDimension}</b>: {dimension}
+                </Typography> */}
+                <Typography variant="body1" color="text.primary">
+                    <b>{languageStore.currentLanguage.price}</b>: {price}
+                </Typography>
+                {description.length > 0 &&
+                    <Typography variant="body1" color="text.primary">
+                        <b>{languageStore.currentLanguage.description}</b>: {description}
+                    </Typography>
+                }
+            </CardContent>
+            <CardActions style={{ display: 'flex', alignItems: 'end', justifyContent: 'end' }}>
+            </CardActions>
+        </Card>
     )
 });
 

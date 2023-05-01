@@ -1,10 +1,11 @@
 import { ChevronLeft, ChevronRight, DarkModeOutlined, LightModeOutlined, Logout, Notifications, Settings } from "@mui/icons-material";
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import ColorConfigs from "@styles/ColorConfigs";
 import { observer } from "mobx-react-lite";
-import { useContext } from "react";
-import { ColorModeContext, tokens } from "styling/Theme";
+import { useContext, useState } from "react";
+import { Dk, Us } from "react-flags-select";
+import { ColorModeContext } from "styling/Theme";
 
 export interface ITopbarProps {
     sidebarOpen: boolean;
@@ -13,40 +14,29 @@ export interface ITopbarProps {
 
 const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarProps) {
 
-    const { authStore } = useContext(MobXContext);
+    const { authStore, languageStore } = useContext(MobXContext);
     const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+    // const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
 
-    function toggleSideBar(sidebarOpen: boolean, setSidebarOpen: () => void): JSX.Element {
-        if (sidebarOpen) {
-            return (
-                <IconButton
-                    sx={{
-                        color: ColorConfigs.topbar.color,
-                        "&:hover": {
-                            background: ColorConfigs.topbar.hoverBg,
-                        }
-                    }}
-                    onClick={setSidebarOpen}
-                >
-                    <ChevronLeft />
-                </IconButton>
-            )
-        } else {
-            return (
-                <IconButton sx={{
+    const handleLanguageIconClicked = () => {
+        languageStore.toggleLanguage();
+    }
+
+    const toggleSideBar = (sidebarOpen: boolean, setSidebarOpen: () => void): JSX.Element => {
+        return (
+            <IconButton
+                sx={{
                     color: ColorConfigs.topbar.color,
                     "&:hover": {
                         background: ColorConfigs.topbar.hoverBg,
                     }
                 }}
-                    onClick={setSidebarOpen}
-                >
-                    <ChevronRight />
-                </IconButton>
-            )
-        }
+                onClick={setSidebarOpen}
+            >
+                {sidebarOpen ? <ChevronLeft /> : <ChevronRight />}
+            </IconButton>
+        )
     }
 
     return (
@@ -76,47 +66,65 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 justifyContent="center"
                 alignItems="center"
             >
-                <IconButton onClick={colorMode.toggleColorMode}>
-                    {theme.palette.mode === 'dark' ? (
-                        <DarkModeOutlined />
-                    ) : (
-                        <LightModeOutlined />
-                    )
-                    }
-                </IconButton>
-                <IconButton
-                    sx={{
-                        color: ColorConfigs.topbar.color,
-                        "&:hover": {
-                            background: ColorConfigs.topbar.hoverBg,
-                        }
-                    }}
-                >
-                    <Notifications />
-                </IconButton>
+                <Tooltip title={"Language setting: " + languageStore.getCurrentLanguageCode()}>
+                    <IconButton onClick={handleLanguageIconClicked}>
+                        {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
+                    </IconButton>
+                </Tooltip>
 
-                <IconButton
-                    sx={{
-                        color: ColorConfigs.topbar.color,
-                        "&:hover": {
-                            background: ColorConfigs.topbar.hoverBg,
-                        }
-                    }}
-                >
-                    <Settings />
-                </IconButton>
 
-                <IconButton
-                    sx={{
-                        color: ColorConfigs.topbar.color,
-                        "&:hover": {
-                            background: ColorConfigs.topbar.hoverBg,
+                <Tooltip title={
+                    "Colormode: " + (theme.palette.mode === 'dark' ? "dark" : "light")
+                }>
+                    <IconButton onClick={colorMode.toggleColorMode}>
+                        {theme.palette.mode === 'dark' ? (
+                            <DarkModeOutlined sx={{ color: ColorConfigs.topbar.color, }} />
+                        ) : (
+                            <LightModeOutlined sx={{ color: ColorConfigs.topbar.color }} />
+                        )
                         }
-                    }}
-                    onClick={() => authStore.signOut()}
-                >
-                    <Logout />
-                </IconButton>
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title={languageStore.currentLanguage.notifications}>
+                    <IconButton
+                        sx={{
+                            color: ColorConfigs.topbar.color,
+                            "&:hover": {
+                                background: ColorConfigs.topbar.hoverBg,
+                            }
+                        }}
+                    >
+                        <Notifications />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title={languageStore.currentLanguage.settings}>
+                    <IconButton
+                        sx={{
+                            color: ColorConfigs.topbar.color,
+                            "&:hover": {
+                                background: ColorConfigs.topbar.hoverBg,
+                            }
+                        }}
+                    >
+                        <Settings />
+                    </IconButton>
+                </Tooltip>
+
+                <Tooltip title={languageStore.currentLanguage.LogoutTabText}>
+                    <IconButton
+                        sx={{
+                            color: ColorConfigs.topbar.color,
+                            "&:hover": {
+                                background: ColorConfigs.topbar.hoverBg,
+                            }
+                        }}
+                        onClick={() => authStore.signOut()}
+                    >
+                        <Logout />
+                    </IconButton>
+                </Tooltip>
             </Box>
         </Box>
     );

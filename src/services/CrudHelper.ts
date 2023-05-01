@@ -18,7 +18,7 @@ class CrudHelper implements ICrudHelper {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
-    async create<T>(apiUrl: string, objectName: string, object: T): Promise<void> {
+    async create<T>(apiUrl: string, objectName: string, object: T): Promise<T> {
         const t1 = performance.now();
         if (this.loggingEnabled) {
             console.log(`${this.prefix} attempting to create ${objectName}`, this.color);
@@ -40,10 +40,10 @@ class CrudHelper implements ICrudHelper {
                     const t2 = performance.now();
                     ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully created ${objectName}`, t1, t2, this.color);
                 }
-                return;
+                return response.json() as T;
             } else {
                 console.log(`${this.prefix} failed creating ${objectName}. Status: ${response.status} ${response.statusText}`, this.color);
-                return;
+                return null;
             }
         } catch (error) {
             console.error("Error", error);

@@ -1,15 +1,14 @@
-import ProductItem from "@models/ProductItem";
 import Grid from "@mui/material/Grid";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite"
 import { useContext } from "react";
-import { Button } from "react-bootstrap";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from "@mui/material";
+import ProductItemWeb from "@models/ProductItemWeb";
 
 
 interface IBasketPageItemProps {
-    item : ProductItem
+    item : ProductItemWeb
 }
 
 
@@ -17,7 +16,7 @@ interface IBasketPageItemProps {
 const BasketPageItem: React.FC<IBasketPageItemProps> = observer(function BasketPage(props: IBasketPageItemProps) {
     const { languageStore, basketStore} = useContext(MobXContext);  
 
-    function removeFromCart(item : ProductItem ){
+    function removeFromCart(item : ProductItemWeb ){
         basketStore.removeFromBasket(item);
     }
     return (
@@ -46,7 +45,7 @@ const BasketPageItem: React.FC<IBasketPageItemProps> = observer(function BasketP
             
             <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
                 <div style={{padding:"1rem"}}>
-                    <div style={{fontWeight:'700'}}>{props.item.currentPrice} Kr </div>
+                    <div style={{fontWeight:'700'}}>{props.item.price} Kr </div>
 
                     <IconButton onClick={()=>removeFromCart(props.item)}>
                             <DeleteIcon style={{ color: 'Grey' , fontSize: 30  }}/>

@@ -54,6 +54,10 @@ export class PaymentStore {
         return this._payments;
     }
 
+    public set Payments(value: Payment[]) {
+        this._payments = value;
+    }
+
     public get SalesSummaries(): SalesSummary[] {
         return this._salesSummary;
     }
@@ -62,7 +66,7 @@ export class PaymentStore {
         return this._payments.find(p => p.id === id);
     }
 
-    public async createPayment(payment: Payment): Promise<void> {
+    public async createPayment(payment: Payment): Promise<Payment> {
         return await this.apiService.createPayment(payment);
     }
 

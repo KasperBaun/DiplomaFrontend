@@ -7,6 +7,7 @@ import MyCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom"
 import ProductItem from "@models/ProductItem";
 import { Translater } from "@utils/Translater";
+import ProductItemWeb from "@models/ProductItemWeb";
 
 
 const ProductListPage: React.FC = observer(function ProductListPage() {
@@ -15,11 +16,11 @@ const ProductListPage: React.FC = observer(function ProductListPage() {
     const subcategoryId = Number.parseInt(id);
     const {languageStore, productStore, subCategoryStore } = useContext(MobXContext);
     const navigate = useNavigate();
-    const [items, setItems] = useState<ProductItem[]>(null);
+    const [items, setItems] = useState<ProductItemWeb[]>(null);
     const [subcategoryTitle, setSubcategoryTitle] = useState<string>("");
     
 
-    function handleClick(product: ProductItem) {
+    function handleClick(product: ProductItemWeb) {
         navigate('/product/' + product.id)
     }
 

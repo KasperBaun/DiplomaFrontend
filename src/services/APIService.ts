@@ -9,13 +9,17 @@ import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
 import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
-import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
 import SalesSummary from "@models/SalesSummary";
-import Order from "@models/Orders";
+import Order from "@models/Order";
 import OrderDetails from "@models/OrderDetails";
 import ProductItemDetails from "@models/ProductItemDetails";
+import Image from '@models/Image';
+import PriceHistory from "@models/PriceHistory";
+import ProductItemDTO from "@models/DTO/ProductItemDTO";
+import OrderElements from "@models/OrderElements";
+import OrderDTO from "@models/DTO/OrderDTO";
 
 class APIService implements IAPIService {
 
@@ -33,8 +37,22 @@ class APIService implements IAPIService {
         }
     }
 
+    /* Backoffice */
+    async getProductItemDTOs(): Promise<ProductItemDTO[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/ProductItem`, "ProductItems");
+    }
+    async getImages(): Promise<Image[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Image`, "Images");
+    }
+    async getPriceHistories(): Promise<PriceHistory[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/PriceHistory`, "PriceHistories");
+    }
+    async getOrderElements(): Promise<OrderElements[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/OrderElements`, "OrderElements");
+    }
+
     /* Product Items */
-    createProductItem(productItem: ProductItem): Promise<void> {
+    createProductItem(productItem: ProductItem): Promise<ProductItem> {
         throw new Error("Method not implemented.");
     }
     getProductItem(id: number): Promise<ProductItem> {
@@ -46,19 +64,16 @@ class APIService implements IAPIService {
     deleteProductItem(id: number): Promise<void> {
         throw new Error("Method not implemented.");
     }
-    async getProductItems(): Promise<ProductItem[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetAll`, "ProductItems");
-    }
-    async getProductItemDTOs(): Promise<ProductItemDTO[]> {
+
+    async getProductItemWebs(): Promise<ProductItemDTO[]> {
         return this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItem/GetAll`, "ProductItemDTOs");
     }
 
-
     /* Products */
-    async createProduct(product: Product): Promise<void> {
+    async createProduct(product: Product): Promise<Product> {
         return await this.crudHelper.create(`${this.apiBaseUrl}/Product`, "Product", product);
     }
-    getProduct(id: number): Promise<Product> {
+    async getProduct(id: number): Promise<Product> {
         throw new Error("Method not implemented.");
     }
     async updateProduct(product: Product): Promise<Product> {
@@ -77,12 +92,11 @@ class APIService implements IAPIService {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/ProductItemDetails`, "ProductItemDetails");
     }
 
-
     /* Subcategories */
     async getSubCategories(): Promise<SubCategory[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Subcategory`, "Subcategories");
     }
-    async createSubCategory(subcategory: SubCategory): Promise<void> {
+    async createSubCategory(subcategory: SubCategory): Promise<SubCategory> {
         return await this.crudHelper.create(`${this.apiBaseUrl}/Subcategory`, "Subcategory", subcategory);
     }
     async updateSubCategory(subcategory: SubCategory): Promise<SubCategory> {
@@ -92,13 +106,11 @@ class APIService implements IAPIService {
         return await this.crudHelper.delete(this.apiBaseUrl + "/Subcategory/" + id, "Subcategory");
     }
 
-
-
     /* Categories */
     async getCategories(): Promise<Category[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Category`, "Categories");
     }
-    async createCategory(category: Category): Promise<void> {
+    async createCategory(category: Category): Promise<Category> {
         return await this.crudHelper.create(`${this.apiBaseUrl}/Category`, "Category", category);
     }
     async updateCategory(category: Category): Promise<Category> {
@@ -108,15 +120,14 @@ class APIService implements IAPIService {
         return await this.crudHelper.delete(this.apiBaseUrl + "/Category/" + id, "Category");
     }
 
-
-    /* Categories */
-    async getOrders(): Promise<Order[]> {
+    /* Orders */
+    async getOrders(): Promise<OrderDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Order`, "Orders");
     }
     async getOrderDetails(): Promise<OrderDetails[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
     }
-    async createOrder(order: Order): Promise<void> {
+    async createOrder(order: Order): Promise<Order> {
         return await this.crudHelper.create(`${this.apiBaseUrl}/Order`, "Order", order);
     }
     async updateOrder(order: Order): Promise<Order> {
@@ -135,7 +146,7 @@ class APIService implements IAPIService {
     async getPayments(): Promise<Payment[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Payment`, "Payment");
     }
-    async createPayment(payment: Payment): Promise<void> {
+    async createPayment(payment: Payment): Promise<Payment> {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
     }
 
@@ -145,7 +156,7 @@ class APIService implements IAPIService {
     }
 
     /* Sniper */
-    async getSniping(searchValue : string): Promise<SniperModel[]> {
+    async getSniping(searchValue: string): Promise<SniperModel[]> {
         return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?arg=" + searchValue, "SniperModel")
     }
 }

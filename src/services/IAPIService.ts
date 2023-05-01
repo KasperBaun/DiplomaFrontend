@@ -3,8 +3,14 @@ import SubCategory from "@models/SubCategory";
 import Payment from "@models/Payment";
 import Product from "@models/Product";
 import ProductItem from "@models/ProductItem";
-import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import ProductDTO from "@models/DTO/ProductDTO";
+import Image from '@models/Image';
+import PriceHistory from "@models/PriceHistory";
+import ProductItemDTO from "@models/DTO/ProductItemDTO";
+import OrderDTO from "@models/DTO/OrderDTO";
+import OrderDetails from "@models/OrderDetails";
+import Order from "@models/Order";
+import OrderElements from "@models/OrderElements";
 
 export interface WebAPIResponse {
     success: boolean;
@@ -15,33 +21,44 @@ export interface WebAPIResponse {
 
 interface IAPIService {
 
-    getCategories: () => Promise<Category[]>
-    createCategory(category: Category): Promise<void>;
+    /* Backoffice */
+    createCategory(category: Category): Promise<Category>;
     deleteCategory(id: number): Promise<void>;
-
-    createSubCategory(subcategory: SubCategory): Promise<void>;
-    getSubCategories(): Promise<SubCategory[]>;
+    
+    createSubCategory(subcategory: SubCategory): Promise<SubCategory>;
     updateSubCategory(subcategory: SubCategory): Promise<SubCategory>;
     deleteSubCategory(id: number): Promise<void>;
 
-    createPayment(payment: Payment): Promise<void>;
+    createPayment(payment: Payment): Promise<Payment>;
     getPayments(): Promise<Payment[]>;
 
-    createProduct(product: Product): Promise<void>;
+    createProduct(product: Product): Promise<Product>;
     getProduct(id: number): Promise<Product>;
-    getProducts(): Promise<Product[]>;
-    getProductDTOs(): Promise<ProductDTO[]>;
     updateProduct(product: Product): Promise<Product>;
     deleteProduct(id: number): Promise<void>;
 
-    createProductItem(productItem: ProductItem): Promise<void>;
+    createProductItem(productItem: ProductItem): Promise<ProductItem>;
     getProductItem(id: number): Promise<ProductItem>;
-    getProductItems(): Promise<ProductItem[]>;
+    getProductItemDTOs(): Promise<ProductItemDTO[]>;
     updateProductItem(productItem: ProductItem): Promise<ProductItem>;
     deleteProductItem(id: number): Promise<void>;
 
-    getProductItemDTOs(): Promise<ProductItemDTO[]>;
+    getImages(): Promise<Image[]>;
+    getPriceHistories(): Promise<PriceHistory[]>;
 
+    getOrders(): Promise<OrderDTO[]>;
+    getOrderDetails(): Promise<OrderDetails[]>;
+    getOrderElements(): Promise<OrderElements[]>;
+    createOrder(order: Order): Promise<Order>;
+    updateOrder(order: Order): Promise<Order>;
+    deleteOrder(id: number): Promise<void>;
+    
+    /* Webshop */
+    getCategories: () => Promise<Category[]>
+    getSubCategories(): Promise<SubCategory[]>;
+    getProducts(): Promise<Product[]>;
+    getProductDTOs(): Promise<ProductDTO[]>;
+    getProductItemWebs(): Promise<ProductItemDTO[]>;
 
 }
 

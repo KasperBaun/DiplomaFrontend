@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
-import ProductItem from '@models/ProductItem';
+import ProductItemWeb from '@models/ProductItemWeb';
 
 
 export class BasketStore {
@@ -11,7 +11,7 @@ export class BasketStore {
     private prefix: string = `%c[BasketStore]`;
     private color: string = ComponentLoggingConfig.DarkRed;
     private loaded: boolean = false;
-    private _basket: ProductItem[] = [];
+    private _basket: ProductItemWeb[] = [];
 
     constructor(_rootStore: RootStore) {
         this.rootStore = _rootStore;
@@ -19,7 +19,7 @@ export class BasketStore {
     }
 
     public async init(): Promise<boolean> {
-        this._basket = new Array<ProductItem>();
+        this._basket = new Array<ProductItemWeb>();
         // Reads values from sesion storage to check for basket info: 
         //this._basket = JSON.parse(sessionStorage['basket']);
         //this.setBasket(this._basket);
@@ -34,7 +34,7 @@ export class BasketStore {
     }
 
 
-    public addToBasket(item: ProductItem): void {
+    public addToBasket(item: ProductItemWeb): void {
 
         if ((this._basket.indexOf(item)) === -1){
             this._basket.push(item);
@@ -47,7 +47,7 @@ export class BasketStore {
        // sessionStorage.setItem('basket', JSON.stringify(items));
     }
 
-    public removeFromBasket(item: ProductItem): void {
+    public removeFromBasket(item: ProductItemWeb): void {
         
         const newBasketArray = this._basket;
         const index = newBasketArray.indexOf(item);
@@ -67,7 +67,7 @@ export class BasketStore {
         return this.loaded;
     }
 
-    public get Basket(): ProductItem[] {
+    public get Basket(): ProductItemWeb[] {
         return this._basket;
     }
 }

@@ -55,6 +55,12 @@ const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISideb
                         alignItems: "center",
                         marginTop: '30px',
                         backgroundColor: ColorConfigs.sidebar.bg,
+                        ":hover": {
+                            cursor: "pointer"
+                        }
+                    }}
+                    onClick={() => {
+                        window.location.href = "/";
                     }}
                 >
                     <LionLogo color={ColorConfigs.sidebar.color} width={props.sidebarOpen ? 100 : 60} />

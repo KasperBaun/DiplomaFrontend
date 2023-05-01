@@ -9,6 +9,17 @@ export default class DKLocale implements ILocale {
   create = "Opret";
   cancel = "Annuller";
   update = "Opdater";
+  product = "Produkt";
+  reset = "Nulstil";
+  search = "Søg";
+  showAll = "Vis alle";
+  showMore = "Vis flere";
+  sold = "Solgt";
+  forSale = "Til salg";
+  price = "Pris";
+  description = "Beskrivelse";
+  settings = "Indstillinger";
+  notifications = "Notifikationer";
 
   // Button text
   buttonCancelText = "Annuller";
@@ -50,9 +61,16 @@ export default class DKLocale implements ILocale {
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
-  yourTotal = "Pris i alt" 
+  yourTotal = "Pris"
   deliveryOptions = "Levering:"
   paymentOptions = "Vi acceptere";
+  subTotal = "Subtotal:";
+  procesFee = "Behandlings gebyr:";
+  totalIncMoms = "Pris i alt (inklusiv moms):"
+  checkOutText = "Checkout"
+  addDiscountCode = "Tilføj rabatkode"
+  discountCodeOptional = "Discount kode (valgfri)"
+  addButton = "Tilføj"
 
   // Category Admin
   createCategoryDialogTitle = "Opret ny kategori";
@@ -111,6 +129,10 @@ export default class DKLocale implements ILocale {
 
   productPage_modelSpecifications = "Model specifikationer";
   productPage_productInfoHeadline = "General information";
+  selectSubcategory = "Vælg underkategori";
+  filterBySubcategory = "Filtrer efter underkategori";
+  selectCategory = "Vælg kategori";
+  filterByCategory = "Filtrer efter kategori";
 
   // Analysis
   AnalysisTitle = "Guld & Sølv";
@@ -171,9 +193,25 @@ export default class DKLocale implements ILocale {
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
 
+  ShoppingCartWidgetPaymentFeeLabel = "Betalingsgebyr";
+  ShoppingCartWidgetTotalLabel = "Total før rabat";
+  ShoppingCartWidgetTotalAmountLabel = "Samlet pris (Inkl. moms)";
+
+  CheckoutFormTitle = "Faktureringsoplysninger";
+  CheckoutFormFirstNameLabel = "Fornavn";
+  CheckoutFormLastNameLabel = "Efternavn";
+  CheckoutFormEmailLabel = "Email";
+  CheckoutFormAddressLabel = "Vej/Gade & Husnummer";
+  CheckoutFormZipCodeLabel = "Postnummer";
+  CheckoutFormCityLabel = "By";
+  CheckoutFormCountryLabel = "Land";
+  CheckoutFormCountryCodeLabel = "Landekode";
+  CheckoutFormPhoneLabel = "Telefonnummer";
+  CheckoutFormSubmitButton = "Fortsæt til Betaling";
+
   // Orders
   GoToOrders = "Se flere Ordre";
-  OrderDetailsProductName = "Produkt";
+  OrderDetailsProductName = "Produkt(er)";
   OrderDetailsManufacturer = "Mærke";
   OrderDetailsCustomerId = "Kunde (Id)";
   OrderDetailsPaymentStatus = "Betalingsstatus";

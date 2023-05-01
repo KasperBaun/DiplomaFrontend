@@ -4,11 +4,11 @@ import { RootStore } from './RootStore';
 import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
-import ProductItem from '@models/ProductItem';
-import ProductItemDTO from '@models/DTO/ProductItemDTO';
+import ProductItemWeb from '@models/ProductItemWeb';
 import ProductDTO from '@models/DTO/ProductDTO';
 import SubCategory from '@models/SubCategory';
 import ProductItemDetails from '@models/ProductItemDetails';
+import ProductItemDTO from '@models/DTO/ProductItemDTO';
 
 export class ProductStore {
 
@@ -19,12 +19,11 @@ export class ProductStore {
     private loaded: boolean = false;
     private loading: boolean = false;
     private apiService: APIService;
-    private products: Product[] = [];
-    private productsLoaded: boolean = false;
     private productMap: Map<number, Product> = new Map();
-    private productItems: ProductItem[] = [];
-    private productItemMap: Map<number, ProductItem> = new Map();
-    private productItemDetailItems : ProductItemDetails[] = [];
+    private productItemMap: Map<number, ProductItemWeb> = new Map();
+    private products: Product[] = [];
+    private productItems: ProductItemWeb[] = [];
+    private productItemDetailItems: ProductItemDetails[] = [];
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -33,7 +32,7 @@ export class ProductStore {
     }
 
     public async init(): Promise<boolean> {
-     
+
         this.loading = true;
         // Fetch products
         await this.loadProducts();
@@ -50,7 +49,7 @@ export class ProductStore {
         return this.loaded;
     }
 
-    public static GetInstance(_rootStore: RootStore, _apiService: APIService ): ProductStore {
+    public static GetInstance(_rootStore: RootStore, _apiService: APIService): ProductStore {
         if (!ProductStore._Instance) {
             ProductStore._Instance = new ProductStore(_rootStore, _apiService);
         }
@@ -68,7 +67,7 @@ export class ProductStore {
             const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
             this.products = this.generateProducts(productDTOs);
             this.productMap = this.createProductMap(this.products);
-            const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
+            const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemWebs();
             this.productItems = this.generateProductItems(productItemDTOs, this.productMap);
             this.productItemMap = this.createProductItemsMap(this.productItems);
 
@@ -90,8 +89,8 @@ export class ProductStore {
         return prodMap;
     }
 
-    private createProductItemsMap(productItems: ProductItem[]): Map<number, ProductItem> {
-        const prodItemMap: Map<number, ProductItem> = new Map<number, ProductItem>();
+    private createProductItemsMap(productItems: ProductItemWeb[]): Map<number, ProductItemWeb> {
+        const prodItemMap: Map<number, ProductItemWeb> = new Map<number, ProductItemWeb>();
         for (const prodItem of productItems) {
             const productItemExists = prodItemMap.get(prodItem.id);
             if (!productItemExists) {
@@ -101,24 +100,20 @@ export class ProductStore {
         return prodItemMap;
     }
 
-    private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItem[] {
-        const productItems: ProductItem[] = [];
+    private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItemWeb[] {
+        const productItems: ProductItemWeb[] = [];
         for (const productItemDTO of productItemDTOs) {
-            const productItem: ProductItem = {
+            const productItem: ProductItemWeb = {
                 id: productItemDTO.id,
                 productId: productItemDTO.productId,
                 condition: productItemDTO.condition,
                 quality: productItemDTO.quality,
-                sold: false,
                 weight: productItemDTO.weight,
                 customText: productItemDTO.customText,
-                images: productItemDTO.images,
-                priceHistory: [],
+                images: productItemDTO.imageUrls,
                 product: productMap.get(productItemDTO.productId),
-                purchasePrice: null,
-                currentPrice: productItemDTO.price,
                 createdDate: productItemDTO.createdDate,
-                soldDate: null
+                price: productItemDTO.currentPrice,
             };
             productItems.push(productItem);
         }
@@ -160,7 +155,7 @@ export class ProductStore {
         return this.productItemDetailItems;
     }
 
-    public get ProductItems(): ProductItem[] {
+    public get ProductItems(): ProductItemWeb[] {
         return this.productItems;
     }
 
@@ -168,7 +163,7 @@ export class ProductStore {
         return this.productMap.get(id);
     }
 
-    public getProductItem(id: number): ProductItem {
+    public getProductItem(id: number): ProductItemWeb {
         return this.productItemMap.get(id);
     }
 
@@ -176,7 +171,7 @@ export class ProductStore {
         return false;
     }
 
-    public getProductItemsFilterBySubcategory(subcategoryId: number): ProductItem[] {
+    public getProductItemsFilterBySubcategory(subcategoryId: number): ProductItemWeb[] {
         return this.productItems.filter(p => p.product.subcategories.some(s => s.id === subcategoryId));
     }
 

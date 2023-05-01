@@ -151,7 +151,7 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
                 </DialogActions>
 
 
-                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={showSnackbar} autoHideDuration={5000} onClose={handleCloseDialog}>
+                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={showSnackbar} autoHideDuration={2000} onClose={handleCloseDialog}>
                     <Alert severity={alertType}>{alertText}</Alert>
                 </Snackbar>
             </Dialog>
