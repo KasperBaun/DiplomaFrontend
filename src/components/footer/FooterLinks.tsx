@@ -8,19 +8,16 @@ const FooterLinks = () => {
     return (
         <Nav className="footerLinks" defaultActiveKey={Constants.companyUrl} as="ul">
             <Nav.Item as="li">
-              <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.HomeTabText}</Nav.Link>
+              <Nav.Link className="FL_NavLink" href={"/"}>{languageStore.currentLanguage.HomeTabText}</Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
-              <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.PricingTabText}</Nav.Link>
+              <Nav.Link className="FL_NavLink" href={"/aboutUs"}>{languageStore.currentLanguage.FAQTabText}</Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
-              <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.AboutUsTabText}</Nav.Link>
+              <Nav.Link className="FL_NavLink" href={"/aboutUs"}>{languageStore.currentLanguage.AboutUsTabText}</Nav.Link>
             </Nav.Item>
             <Nav.Item as="li">
-              <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.FAQTabText}</Nav.Link>
-            </Nav.Item>
-            <Nav.Item as="li">
-              <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.ContactTabText}</Nav.Link>
+              <Nav.Link className="FL_NavLink" href={Constants.companyUrl}>{languageStore.currentLanguage.OldPageText}</Nav.Link>
             </Nav.Item>
           </Nav>
     )
