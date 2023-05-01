@@ -20,6 +20,8 @@ export default class DKLocale implements ILocale {
   description = "Beskrivelse";
   settings = "Indstillinger";
   notifications = "Notifikationer";
+  noProductsAvailable = "Der er desvære ingen vare i denne kategori på nuværende tidspunkt";
+
 
   // Button text
   buttonCancelText = "Annuller";
@@ -83,6 +85,13 @@ export default class DKLocale implements ILocale {
   Q3Text = "Kan jeg afhente min varer i buttikken?"
   Q3Awnser = "Det er altid en mulighed selv at hente varer i buttiken  inden for åbningstiderne." 
 
+
+  // Front page
+  seeProductBtn = "Se produkt"; 
+  chosenCategories = "Udvalgte kategorier"
+
+   //Pop-up : cart
+   shopButton = "Gå til kurv";  
 
   //Basket Page
   yourBasket = "Din indkøbskurv";

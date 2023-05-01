@@ -18,6 +18,7 @@ export interface ILocale {
   description: string;
   settings: string;
   notifications: string;
+  noProductsAvailable: string; 
 
   // Button text
   buttonCancelText: string;
@@ -92,6 +93,13 @@ export interface ILocale {
   Q2Awnser: string; 
   Q3Text: string;
   Q3Awnser: string; 
+
+  // Frontpage:
+  seeProductBtn: string; 
+  chosenCategories: string;
+
+  //Pop-up : cart
+  shopButton: string; 
 
   // BACKOFFICE
 

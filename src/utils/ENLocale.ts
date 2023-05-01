@@ -21,6 +21,7 @@ export default class ENLocale implements ILocale {
   description = "Description";
   settings = "Settings";
   notifications = "Notifications";
+  noProductsAvailable = "There is currrently no products available in this category";
 
   // Button text
   buttonCancelText = "Cancel";
@@ -98,6 +99,12 @@ export default class ENLocale implements ILocale {
     Q3Text= "Can I pick up my goods in the store?"
     Q3Awnser ="It is always an option to pick up goods yourself in the shop during opening hours." 
 
+  // Front page
+  seeProductBtn = "See product"; 
+  chosenCategories = "Chosen Categories"
+
+  //Pop-up : cart
+  shopButton = "Go to cart";  
 
   // Category Admin
   createCategoryDialogTitle = "Create Category";
