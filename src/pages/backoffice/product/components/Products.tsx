@@ -5,7 +5,7 @@ import Loading from "@components/loading/Loading";
 import ProductItem from "@models/ProductItem";
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 
 export interface IProductsProps {
@@ -76,7 +76,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
             const categoryId: number = event.target.value;
             setSelectedSubcategory(null);
             setSelectedCategory(categoryStore.getCategory(categoryId));
-            const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+            const filteredProducts = backofficeStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
             updateDisplayedProductItems(filteredProducts, 1);
             setProductItems(filteredProducts);
             setSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === categoryId));
@@ -93,7 +93,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
             // Filter productitems by subcategory
             const subcategoryId: number = event.target.value;
             setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
-            const filteredProducts = productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
+            const filteredProducts = backofficeStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
             updateDisplayedProductItems(filteredProducts, 1);
             setProductItems(filteredProducts);
             setCurrentDisplayValue(1);
@@ -178,6 +178,9 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                     </Box>
                     <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnShowMoreClicked}>{languageStore.currentLanguage.showMore}</Button>
                     <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
+                </Grid>
+                <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
+                    <Typography variant="body2">{displayedProductItems.length} {languageStore.currentLanguage.ProductTabText}</Typography>
                 </Grid>
 
                 {/* Productcards */}
