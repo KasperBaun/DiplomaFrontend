@@ -22,7 +22,7 @@ const Dashboard = () => {
         <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
             <Grid item xs={12} md={5.9}>
                 <div className="DashBoardGridContainer">
-                    <OrderDetailsList tableHeight={450} />
+                <OrderDetailsList origin="MainPage" tableHeight={450} />
                     <Link color="primary" href="#" onClick={navigateToOrders} sx={{ mt: 3 }}>
                         {languageStore.currentLanguage.GoToOrders}
                     </Link>

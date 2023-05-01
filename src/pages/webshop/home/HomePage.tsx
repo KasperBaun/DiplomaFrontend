@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite"
-import { toJS } from "mobx";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import React from "react";
@@ -17,6 +16,7 @@ import Loading from "@components/loading/Loading";
 import Category from "@models/Category";
 import { useNavigate } from "react-router-dom";
 import './homepage.scss';
+import ProductItemWeb from "@models/ProductItemWeb";
 
 interface IHomePageProps {
 
@@ -34,13 +34,16 @@ const HomePage: React.FC<IHomePageProps> = observer(function HomePage(props: IHo
 
 export default HomePage;
 
-export const SelectedProductItems = () => {
-    const { productStore } = useContext(MobXContext);
+
+export const SelectedProductItems = observer(function SelectedProductItems(){
+    const { productStore, languageStore } = useContext(MobXContext);
+    const navigate = useNavigate();
+    function handleClick(product: ProductItemWeb) {
+        navigate('/product/' + product.id)
+    }
+
     if(productStore.ProductItems) {
-
-
     //console.log(toJS(productStore.ProductItems))
-
     const handleSlide = () => {
         const caption = document.querySelector('.carousel-caption');
         if (caption) {
@@ -73,8 +76,8 @@ export const SelectedProductItems = () => {
                                     {product.price} DKK
                                 </Typography>
                                 <div className="CarouselItemBtnDiv">
-                                    <Button>
-                                        View Product
+                                    <Button onClick={()=>handleClick(product)}> 
+                                      {languageStore.currentLanguage.seeProductBtn}
                                     </Button>
                                 </div>
                         {/* <Carousel.Caption style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)', transform: 'translateY(0)' }}>
@@ -90,7 +93,7 @@ export const SelectedProductItems = () => {
     else {
         return <Loading />
     }
-}
+});
 
 {/* <Carousel>
 {productStore.ProductItems.map((product) => (
@@ -108,7 +111,7 @@ export const SelectedProductItems = () => {
 ))}
 </Carousel> */}
 
-export const SelectedCategories = () => {
+export const SelectedCategories = observer(function SelectedCategories(){
     
     const { categoryStore, languageStore } = useContext(MobXContext);
 
@@ -123,7 +126,7 @@ export const SelectedCategories = () => {
         <Box sx={{ bgcolor: "background.paper", py: 8 }}>
             <Container maxWidth="lg">
                 <Typography variant="h5" align="left" gutterBottom>
-                    Udvalgte Kategorier
+                    {languageStore.currentLanguage.chosenCategories}
                 </Typography>
                 <hr />
                 <Grid container columnSpacing={0} rowSpacing={2} style={{ textAlign: "center" }}>
@@ -146,4 +149,4 @@ export const SelectedCategories = () => {
     else {
         return <Loading />
     }
-}
+});

@@ -1,6 +1,5 @@
-import {IconButton, Button, Drawer } from "@mui/material";
+import {IconButton, Button, Drawer, Divider, Box, Badge, List  } from "@mui/material";
 import * as React from 'react';
-import {Box, Badge} from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
 import MobXContext from "@stores/MobXContext";
@@ -11,7 +10,7 @@ import { observer } from "mobx-react-lite";
 
 const CartDrawer: React.FC = observer(function CartDrawer(){
 
-    const {basketStore } = useContext(MobXContext);
+    const {basketStore, languageStore} = useContext(MobXContext);
     const [drawerState, setDrawerState] = React.useState(false); 
     const navigate = useNavigate();
     const toggleDrawer =
@@ -42,18 +41,23 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
     const cartElements = () => (
         <Box
           role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
+          //onClick={toggleDrawer(false)}
+         //onKeyDown={toggleDrawer(false)}
         >
-        
-          <div style={{width: '18vw'}}>
+      
+          {<div style={{width: '18vw'}}>
+    
+            <List style={{maxHeight:"80vh", overflow:'auto', marginBottom:'6rem'}}>
               {basketStore.Basket.map((item, index) => (
-                <CartItem key={item.id} item={item} />
-                
-                ))}
-          </div>
+                <div>
+                  <CartItem key={item.id} item={item} />
+                  <Divider style={{paddingTop:"1rem"}}/>
+                </div>
+                ))} 
+          </List>  
+            
 
-          <div style={{position: 'fixed', bottom: 0, marginBottom : '3vh'}}>
+        <div style={{position: 'fixed', bottom: 0, marginBottom : '3vh'}}>
             <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '18vw', margin: 'auto'}}>
                   <div style={{textAlign: 'start', marginLeft: '1.5rem', fontSize: '1.2 rem', fontWeight:"bold" }}>
                     {'Subtotal ('+ basketStore.Basket.length + ')'}
@@ -64,9 +68,12 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
             </div>
 
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem'}}>
-              <Button className="cartButton" variant="outlined"  onClick={() => handleClick()} style={{width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem',}}>View cart</Button>
+              <Button className="cartButton" variant="outlined"  onClick={() => handleClick()} style={{width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem',}}>{languageStore.currentLanguage.shopButton}</Button>
             </div>
           </div>
+
+        </div>
+          }
         </Box>
       );
 

@@ -14,7 +14,7 @@ const Orders = () => {
             <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
                 <Grid item xs={11.9}>
                     <div className="DashBoardGridContainer">
-                        <OrderDetailsList tableHeight={750}/>
+                        <OrderDetailsList origin="OrderPage" tableHeight={750}/>
                     </div>
                 </Grid>
             </Grid>

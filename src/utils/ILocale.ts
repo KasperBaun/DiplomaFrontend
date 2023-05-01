@@ -18,6 +18,7 @@ export interface ILocale {
   description: string;
   settings: string;
   notifications: string;
+  noProductsAvailable: string; 
 
   // Button text
   buttonCancelText: string;
@@ -67,6 +68,38 @@ export interface ILocale {
   discountCodeOptional: string;
   addButton: string;
 
+  // AboutUS page
+  copanyDescription: string; 
+  openingDays: string;
+  MondayText: string;
+  TuesdayText: string;
+  WendsayText:  string;
+  ThursdayText:  string;
+  FridayText: string;
+  SaturdayText:  string;
+  publicHollidayText:  string;
+  SundayText: string;
+  ClosedText: string;
+  PerAgreemtText:  string;
+  contactInformation : string; 
+  phoneText:  string;
+  emailText:  string;
+  addressText: string;
+  CVRNRText:  string;
+  FAQText:  string;
+  Q1Text: string;
+  Q1Awnser: string; 
+  Q2Text: string;
+  Q2Awnser: string; 
+  Q3Text: string;
+  Q3Awnser: string; 
+
+  // Frontpage:
+  seeProductBtn: string; 
+  chosenCategories: string;
+
+  //Pop-up : cart
+  shopButton: string; 
 
   // BACKOFFICE
 
@@ -164,6 +197,13 @@ export interface ILocale {
   CheckoutFormPhoneLabel: string;
   CheckoutFormSubmitButton: string;
 
+  CheckoutPaymentWidgetPayButtonText : string;
+  CheckoutPaymentWidgetPayFormMPLabel : string;
+  CheckoutPaymentWidgetPayFormCardLabel : string;
+  CheckoutPaymentWidgetPayFormMMYYLabel : string;
+  CheckoutPaymentWidgetPayFormCardHolderLabel : string;
+  CheckoutPaymentWidgetPayFormSecureLabel : string;
+
   // Analysis
   AnalysisTitle: string;
   AnalysisMaterial: string;
@@ -195,7 +235,7 @@ export interface ILocale {
 
   // Footer tabs
   BlogTabText: string;
-  PricingTabText: string;
+  OldPageText: string;
   AboutUsTabText: string;
   FAQTabText: string;
   ContactTabText: string;

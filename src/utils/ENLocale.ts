@@ -21,6 +21,7 @@ export default class ENLocale implements ILocale {
   description = "Description";
   settings = "Settings";
   notifications = "Notifications";
+  noProductsAvailable = "There is currrently no products available in this category";
 
   // Button text
   buttonCancelText = "Cancel";
@@ -72,6 +73,38 @@ export default class ENLocale implements ILocale {
   discountCodeOptional = "Discount code (optional)"
   addButton = "Add"
 
+    // AboutUS page
+    copanyDescription = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg. We buy and sell Gold & Silver, Danish porcelain and ceramics, as well as other exciting antiques"
+    openingDays = "Opening hours"
+    MondayText = "Monday"
+    TuesdayText = "Tuesday"
+    WendsayText = "Wednesday"
+    ThursdayText = "Thursday"
+    FridayText = "Friday"
+    SaturdayText = "Saturday"
+    publicHollidayText = "Public Hollidays"
+    SundayText = "Sunday" 
+    ClosedText= "Closed"
+    PerAgreemtText= "Per agrement"
+    contactInformation = "Contact information"
+    phoneText=  "Phone"
+    emailText=  "Email"
+    addressText= "Address"
+    CVRNRText=  "CVR Number"
+    FAQText=  "Frequently asked questions:"
+    Q1Text= "What is your refund policy?"
+    Q1Awnser= "It is not possible to return goods after 24 hours."
+    Q2Text= "Is it possible to have goods delivered abroad?"
+    Q2Awnser= "By agreement, it can be arranged to have goods delivered abroad, however subject to the price of the goods and the distance to the country." 
+    Q3Text= "Can I pick up my goods in the store?"
+    Q3Awnser ="It is always an option to pick up goods yourself in the shop during opening hours." 
+
+  // Front page
+  seeProductBtn = "See product"; 
+  chosenCategories = "Chosen Categories"
+
+  //Pop-up : cart
+  shopButton = "Go to cart";  
 
   // Category Admin
   createCategoryDialogTitle = "Create Category";
@@ -204,9 +237,16 @@ export default class ENLocale implements ILocale {
   CheckoutFormPhoneLabel = "Phonenumber";
   CheckoutFormSubmitButton = "Continue to payment";
 
+  CheckoutPaymentWidgetPayButtonText = "Pay";
+  CheckoutPaymentWidgetPayFormMPLabel = "Phone number";
+  CheckoutPaymentWidgetPayFormCardLabel = "Choose card type";
+  CheckoutPaymentWidgetPayFormMMYYLabel = "MM/YY";
+  CheckoutPaymentWidgetPayFormCardHolderLabel = "Cardholders name";
+  CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
+
   // Orders
   GoToOrders = "See more Orders";
-  OrderDetailsProductName = "Product";
+  OrderDetailsProductName = "Product(s)";
   OrderDetailsManufacturer = "Fabricator";
   OrderDetailsCustomerId = "Customer (Id)";
   OrderDetailsPaymentStatus = "Payment Status";
@@ -217,7 +257,7 @@ export default class ENLocale implements ILocale {
 
   // Footer tabs
   BlogTabText = "Blog";
-  PricingTabText = "Prices";
+  OldPageText = "Old webpage";
   AboutUsTabText = "About us";
   FAQTabText = "FAQ";
   ContactTabText = "Contact";

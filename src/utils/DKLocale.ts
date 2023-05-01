@@ -20,6 +20,8 @@ export default class DKLocale implements ILocale {
   description = "Beskrivelse";
   settings = "Indstillinger";
   notifications = "Notifikationer";
+  noProductsAvailable = "Der er desvære ingen vare i denne kategori på nuværende tidspunkt";
+
 
   // Button text
   buttonCancelText = "Annuller";
@@ -57,7 +59,39 @@ export default class DKLocale implements ILocale {
     }
   }
 
+  // AboutUS page
+  copanyDescription = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg. Vi køber og sælger Guld & Sølv, dansk porcelæn og keramik, samt andre spændende antikviteter. "
+  openingDays = "Åbninstider"
+  MondayText = "Mandag"
+  TuesdayText = "Tirsdag";
+  WendsayText = "Onsdag";
+  ThursdayText = "Torsdag"; 
+  FridayText = "Fredag";
+  SaturdayText = "Lørdag"; 
+  publicHollidayText = "Helligdage";
+  SundayText = "Søndag"; 
+  ClosedText = "Lukket";
+  PerAgreemtText = "Per aftale";
+  contactInformation = "Kontakt information"
+  phoneText =  "Telefon";
+  emailText =  "Email";
+  addressText = "Addresse";
+  CVRNRText =  "CVR Nr";
+  FAQText =  "Ofte stillede spørgsmål:";
+  Q1Text = "Hvad er jeres retunerings politik?";
+  Q1Awnser = "Det er ikke muligt at retunere varer efter 24 timer."; 
+  Q2Text = "Er det muligt at få leveret vare til udlandet?";
+  Q2Awnser =  "Per aftale kan det arrangeres at få leveret vare til udlandet, dog med forbehold for varens pris samt distancen til landet." 
+  Q3Text = "Kan jeg afhente min varer i buttikken?"
+  Q3Awnser = "Det er altid en mulighed selv at hente varer i buttiken  inden for åbningstiderne." 
 
+
+  // Front page
+  seeProductBtn = "Se produkt"; 
+  chosenCategories = "Udvalgte kategorier"
+
+   //Pop-up : cart
+   shopButton = "Gå til kurv";  
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
@@ -182,9 +216,9 @@ export default class DKLocale implements ILocale {
 
   // Footer tabs
   BlogTabText = "Blog";
-  PricingTabText = "Priser";
+  OldPageText = "Gamle hjemmeside";
   AboutUsTabText = "Om os";
-  FAQTabText = "Ofte stillede spørgsmål";
+  FAQTabText = "FAQ";
   ContactTabText = "Kontakt";
 
   // Payments
@@ -209,9 +243,16 @@ export default class DKLocale implements ILocale {
   CheckoutFormPhoneLabel = "Telefonnummer";
   CheckoutFormSubmitButton = "Fortsæt til Betaling";
 
+  CheckoutPaymentWidgetPayButtonText = "Betal";
+  CheckoutPaymentWidgetPayFormMPLabel = "Mobilnummer";
+  CheckoutPaymentWidgetPayFormCardLabel = "Vælg betalingskort";
+  CheckoutPaymentWidgetPayFormMMYYLabel = "MM/YY";
+  CheckoutPaymentWidgetPayFormCardHolderLabel = "Kortholderens navn";
+  CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
+
   // Orders
   GoToOrders = "Se flere Ordre";
-  OrderDetailsProductName = "Produkt";
+  OrderDetailsProductName = "Produkt(er)";
   OrderDetailsManufacturer = "Mærke";
   OrderDetailsCustomerId = "Kunde (Id)";
   OrderDetailsPaymentStatus = "Betalingsstatus";

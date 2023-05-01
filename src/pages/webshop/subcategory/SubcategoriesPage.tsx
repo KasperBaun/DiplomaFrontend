@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useContext } from "react";
 import MobXContext from "../../../stores/MobXContext";
-import { Card, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { Grid } from "@mui/material";
 import CategoryCardWeb from "../categories/CategoryCardWeb";
 import SubCategory from "@models/SubCategory";
