@@ -62,7 +62,7 @@ export class PaymentStore {
         return this._salesSummary;
     }
 
-    public getPayment(id: number): Payment {
+    public getPayment(id: string): Payment {
         return this._payments.find(p => p.id === id);
     }
 

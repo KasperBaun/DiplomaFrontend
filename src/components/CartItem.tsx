@@ -15,10 +15,10 @@ export function CartItem( {item }: {item : ProductItemWeb}){
         basketStore.removeFromBasket(item);
     }
 
-    function navigateToItem(){
-        console.log("i navigate");
-        navigate('/product/' + item.id);
-    }
+    // function navigateToItem(){
+    //     console.log("i navigate");
+    //     navigate('/product/' + item.id);
+    // }
     
     return(
         <div style={{paddingTop:'0.5rem'}}>
