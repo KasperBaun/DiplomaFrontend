@@ -57,6 +57,31 @@ export default class DKLocale implements ILocale {
     }
   }
 
+  // AboutUS page
+  copanyDescription = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg. Vi køber og sælger Guld & Sølv, dansk porcelæn og keramik, samt andre spændende antikviteter. "
+  openingDays = "Åbninstider"
+  MondayText = "Mandag"
+  TuesdayText = "Tirsdag";
+  WendsayText = "Onsdag";
+  ThursdayText = "Torsdag"; 
+  FridayText = "Fredag";
+  SaturdayText = "Lørdag"; 
+  publicHollidayText = "Helligdage";
+  SundayText = "Søndag"; 
+  ClosedText = "Lukket";
+  PerAgreemtText = "Per aftale";
+  contactInformation = "Kontakt information"
+  phoneText =  "Telefon";
+  emailText =  "Email";
+  addressText = "Addresse";
+  CVRNRText =  "CVR Nr";
+  FAQText =  "Ofte stillede spørgsmål:";
+  Q1Text = "Hvad er jeres retunerings politik?";
+  Q1Awnser = "Det er ikke muligt at retunere varer efter 24 timer."; 
+  Q2Text = "Er det muligt at få leveret vare til udlandet?";
+  Q2Awnser =  "Per aftale kan det arrangeres at få leveret vare til udlandet, dog med forbehold for varens pris samt distancen til landet." 
+  Q3Text = "Kan jeg afhente min varer i buttikken?"
+  Q3Awnser = "Det er altid en mulighed selv at hente varer i buttiken  inden for åbningstiderne." 
 
 
   //Basket Page
@@ -184,7 +209,7 @@ export default class DKLocale implements ILocale {
   BlogTabText = "Blog";
   OldPageText = "Gamle hjemmeside";
   AboutUsTabText = "Om os";
-  FAQTabText = "Ofte stillede spørgsmål";
+  FAQTabText = "FAQ";
   ContactTabText = "Kontakt";
 
   // Payments

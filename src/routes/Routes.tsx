@@ -11,7 +11,6 @@ import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
 import Auth from "@backoffice/Auth"
 import ProductListPage from "@webshop/product/ProductListPage"
-import OrderDetails from "@models/OrderDetails"
 import AboutUsPage from "@webshop/aboutUs/AboutUsPage"
 
 const Routing: React.FC = function Routing() {
