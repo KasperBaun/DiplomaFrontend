@@ -11,6 +11,7 @@ export interface ILocale {
   reset: string;
   search: string;
   showAll: string;
+  showMore: string;
   sold: string;
   forSale: string;
   price: string;

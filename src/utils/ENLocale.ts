@@ -14,6 +14,7 @@ export default class ENLocale implements ILocale {
   reset = "Reset";
   search = "Search";
   showAll = "Show All";
+  showMore = "Show more";
   sold = "Sold";
   forSale = "For sale";
   price = "Price";

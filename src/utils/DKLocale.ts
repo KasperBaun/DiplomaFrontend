@@ -13,11 +13,12 @@ export default class DKLocale implements ILocale {
   reset = "Nulstil";
   search = "Søg";
   showAll = "Vis alle";
+  showMore = "Vis flere";
   sold = "Solgt";
   forSale = "Til salg";
   price = "Pris";
   description = "Beskrivelse";
-  settings =  "Indstillinger";
+  settings = "Indstillinger";
   notifications = "Notifikationer";
 
   // Button text
