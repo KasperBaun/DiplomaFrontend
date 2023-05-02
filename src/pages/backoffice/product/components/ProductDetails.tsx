@@ -1,0 +1,141 @@
+import React, { useContext, useState } from 'react';
+import TextField from '@mui/material/TextField';
+import MobXContext, { IMobXContext } from '@stores/MobXContext';
+import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import SubCategory from '@models/SubCategory';
+import { materialType } from '@models/Enums';
+import ProductItem from '@models/ProductItem';
+
+export interface Props {
+    productItem?: ProductItem;
+}
+
+const ProductDetails: React.FC<Props> = ({ productItem }) => {
+
+    const { languageStore, backofficeStore, subCategoryStore } = useContext<IMobXContext>(MobXContext);
+    const [subcategories, setSubcategories] = useState<SubCategory[]>(backofficeStore.subCategories);
+    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
+    const [selectedMaterial, setSelectedMaterial] = useState<materialType>(productItem?.product?.material ? productItem.product.material : null);
+
+    const handleSubcategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
+        if (event.target.value === "initValue") {
+            setSelectedSubcategory(null);
+            return;
+        }
+        else {
+            const subcategoryId: number = event.target.value;
+            setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
+            return;
+        }
+    }
+
+    const handleMaterialChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
+        if (event.target.value === "initValue") {
+            setSelectedMaterial(null);
+            productItem.product.material = null;
+            return;
+        }
+        else {
+            const materialId: number = event.target.value;
+            setSelectedMaterial(materialId);
+            productItem.product.material = materialId;
+            return;
+        }
+    }
+
+    return (
+        <Grid container height={'100%'} width={'100%'} padding={2} alignItems={'center'} >
+            <Grid item xs={12} paddingBottom={2}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    label={languageStore.currentLanguage.productPage_productName}
+                    defaultValue={productItem?.product?.name ? productItem.product.name : ''}
+                    onChange={(e) => { productItem.product.name = e.target.value; }}
+                />
+            </Grid>
+            <Grid item xs={12} paddingBottom={2}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    label={languageStore.currentLanguage.productPage_productModelNumber}
+                    defaultValue={productItem?.product?.modelNumber ? productItem.product.modelNumber : ''}
+                    onChange={(e) => { productItem.product.modelNumber = e.target.value; }}
+                />
+
+            </Grid>
+            <Grid item xs={12} paddingBottom={2}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    label={languageStore.currentLanguage.manufacturer}
+                    defaultValue={productItem?.product?.manufacturer ? productItem.product.manufacturer : ''}
+                    onChange={(e) => { productItem.product.manufacturer = e.target.value; }}
+                />
+            </Grid>
+            <Grid item xs={12} paddingBottom={2}>
+                <FormControl sx={{ minWidth: '100%' }}>
+                    <InputLabel>{languageStore.currentLanguage.productPage_productMaterial}</InputLabel>
+                    <Select label={languageStore.currentLanguage.productPage_productMaterial} value={selectedMaterial ? selectedMaterial : ''} onChange={handleMaterialChange} aria-label={languageStore.currentLanguage.selectMaterial}>
+                        {Object.keys(materialType).map((material) => (
+                            <MenuItem key={material} value={parseInt(material)}>
+                                {materialType[parseInt(material)]}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </Grid>
+            <Grid item xs={12} paddingBottom={2}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    label={languageStore.currentLanguage.productPage_productDesign}
+                    defaultValue={productItem.product?.design ? productItem.product.design : ''}
+                    onChange={(e) => { productItem.product.design = e.target.value; }}
+                />
+            </Grid>
+            <Grid item xs={12} paddingBottom={2}>
+                <TextField
+                    fullWidth
+                    variant="outlined"
+                    label={languageStore.currentLanguage.productPage_productDimension}
+                    defaultValue={productItem.product?.dimension ? productItem.product.dimension : ''}
+                    onChange={(e) => { productItem.product.dimension = e.target.value; }}
+                />
+
+            </Grid>
+            {/* <Grid item xs={12} paddingBottom={2}>
+                <FormControl sx={{ minWidth: '100%' }}>
+                    <InputLabel>{languageStore.currentLanguage.selectCategory}</InputLabel>
+                    <Select label={languageStore.currentLanguage.selectCategory} value={selectedCategory ? selectedCategory.id : ''} onChange={handleCategoryChange} aria-label={languageStore.currentLanguage.selectCategory}>
+                        {backofficeStore.Categories.map((category) => (
+                            <MenuItem key={category.id} value={category.id}>
+                                {category.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </Grid> */}
+            <Grid item xs={12} paddingBottom={2}>
+
+                <FormControl sx={{ minWidth: '100%' }}>
+                    <InputLabel>{languageStore.currentLanguage.selectSubcategory}</InputLabel>
+                    <Select
+                        label={languageStore.currentLanguage.selectSubcategory}
+                        value={selectedSubcategory ? selectedSubcategory.id : ''}
+                        onChange={handleSubcategoryChange}
+                        aria-label={languageStore.currentLanguage.selectSubcategory}
+                    >
+                        {subcategories.map((subcategory) => (
+                            <MenuItem key={subcategory.id} value={subcategory.id}>
+                                {subcategory.name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+            </Grid>
+        </Grid>
+    );
+};
+
+export default ProductDetails;
