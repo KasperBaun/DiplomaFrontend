@@ -1,16 +1,18 @@
 import ConfirmDeleteDialog from "@backoffice/category/components/ConfirmDeleteDialog";
 import ProductItem from "@models/ProductItem";
-import { Alert, Button, Container, Grid, Paper, Snackbar, Typography } from "@mui/material";
+import { Alert, Button, Container, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, ListSubheader, Paper, Snackbar, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import Product from "@models/Product";
 import { observer } from "mobx-react-lite";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Constants } from "@utils/Constants";
-import ProductImages from "./ProductImages";
 import ProductDetails from "./ProductDetails";
 import ImageGallery from "@webshop/product/ImageGallery";
 import { toJS } from "mobx";
+import { Delete } from "@mui/icons-material";
+import SubCategory from "@models/SubCategory";
+import Image from "@models/Image";
 
 export interface IProductEditorProps {
     productItem?: ProductItem;
@@ -60,7 +62,9 @@ const ProductEditor: React.FC<IProductEditorProps> = observer(function ProductEd
         setShowSnackbar(true);
     };
 
-    const imageUrl: string = productItem?.images[0]?.url ? productItem.images[0].url : "https://images.unsplash.com/photo-1600456899121-68eda5705257?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80";
+    const handleOnSubcategoryDeleteClicked = (subcategory: SubCategory) => {
+        productItem.product.subcategories = productItem.product.subcategories.filter((subcat) => subcat.id !== subcategory.id);
+    }
 
     return (
         <Grid container>
@@ -87,6 +91,37 @@ const ProductEditor: React.FC<IProductEditorProps> = observer(function ProductEd
                             <ProductDetails productItem={productItem} />
                         </Grid>
 
+                        <Grid item xs={12} padding={2}>
+                            <ImageList sx={{ width: 500, height: 450 }}>
+                                {productItem.product.subcategories.map((item) => {
+                                    const imgUrl = item.imageUrl ? item.imageUrl : '';
+                                    return (
+                                        <ImageListItem key={item.id}>
+                                            <img
+                                                src={`${imgUrl}?w=248&fit=crop&auto=format`}
+                                                srcSet={`${imgUrl}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                                alt={item.name}
+                                                loading="lazy"
+                                            />
+                                            <ImageListItemBar
+                                                title={item.name}
+                                                subtitle={item.name}
+                                                actionIcon={
+                                                    <IconButton
+                                                        sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                                                        aria-label={`info about ${item.name}`}
+                                                        onClick={() => handleOnSubcategoryDeleteClicked(item)}
+                                                    >
+                                                        <Delete />
+                                                    </IconButton>
+                                                }
+                                            />
+                                        </ImageListItem>
+                                    )
+                                })}
+                            </ImageList>
+                        </Grid>
+
                         <Grid item xs={12} md={12} display={'flex'} justifyContent={'space-between'} paddingTop={2} >
                             <Button variant="contained" onClick={() => console.log(toJS(productItem.product))} > Print </Button>
                             {!props.create &&
@@ -106,6 +141,7 @@ export default ProductEditor;
 const configureProductItem = (create?: boolean, copy?: boolean, productItemFromProps?: ProductItem): ProductItem => {
 
     let product: Product = new Product();
+    const subcategories = productItemFromProps?.product?.subcategories ? productItemFromProps.product.subcategories : [];
     if (create) {
         product.id = 0;
         product.name = "";
@@ -114,13 +150,16 @@ const configureProductItem = (create?: boolean, copy?: boolean, productItemFromP
         product.material = null;
         product.design = "";
         product.dimension = "";
-        product.subcategories = [];
+        product.subcategories = subcategories;
     } else {
         product = productItemFromProps.product;
     }
 
+    product.subcategories = subcategories;
+
     let productItem: ProductItem = new ProductItem();
     let id: number = create ? 0 : copy ? 0 : productItemFromProps.id;
+    let images: Image[] = create ? [] : productItemFromProps.images ? productItemFromProps.images : [];
     productItem.id = id;
     productItem.productId = product.id;
     productItem.product = product;
@@ -133,7 +172,7 @@ const configureProductItem = (create?: boolean, copy?: boolean, productItemFromP
     productItem.currentPrice = create ? 0 : productItemFromProps.currentPrice;
     productItem.createdDate = (create || copy) ? new Date() : productItemFromProps.createdDate;
     productItem.soldDate = (create || copy) ? null : productItemFromProps.soldDate;
-    productItem.images = create ? [] : productItemFromProps.images;
+    productItem.images = images;
     productItem.priceHistories = create ? [] : productItemFromProps.priceHistories;
 
     return productItem;
@@ -144,16 +183,4 @@ const Headline: React.FC<{ create: boolean, copy: boolean, productItem: ProductI
         return <Typography component="h1" variant="h4" align="center" color={props.color ? props.color : ''}>{props.languageStore.currentLanguage.createProduct}</Typography>;
     }
     return <Typography component="h1" variant="h4" align="center" color={props.color ? props.color : ''}>{props.languageStore.currentLanguage.editProduct}</Typography>;
-};
-
-const Dummydiv: React.FC = () => {
-    return (
-        <div style={{
-            backgroundColor: '#ccc',
-            height: '100%',
-            width: '100%',
-        }}>
-            {/* Your content goes here */}
-        </div>
-    )
 };

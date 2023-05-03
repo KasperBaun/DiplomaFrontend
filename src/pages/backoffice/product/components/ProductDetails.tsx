@@ -1,18 +1,18 @@
 import React, { useContext, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
-import { FormControl, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, InputLabel, ListSubheader, MenuItem, Select } from '@mui/material';
+import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import SubCategory from '@models/SubCategory';
 import { materialType } from '@models/Enums';
 import ProductItem from '@models/ProductItem';
-import { Delete } from '@mui/icons-material';
+import { observer } from 'mobx-react-lite';
 
-export interface Props {
+export interface IProductDetailsProps {
     productItem?: ProductItem;
 }
 
-const ProductDetails: React.FC<Props> = ({ productItem }) => {
-
+const ProductDetails: React.FC<IProductDetailsProps> = observer(function ProductDetails(props: IProductDetailsProps) {
+    const { productItem } = props;
     const { languageStore, backofficeStore, subCategoryStore } = useContext<IMobXContext>(MobXContext);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
     const [selectedMaterial, setSelectedMaterial] = useState<materialType>(productItem?.product?.material ? productItem.product.material : null);
@@ -24,9 +24,15 @@ const ProductDetails: React.FC<Props> = ({ productItem }) => {
         }
         else {
             const subcategoryId: number = event.target.value;
-            setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
-            productItem.product.subcategories.push(selectedSubcategory);
-            return;
+            const subcat = subCategoryStore.getSubcategory(subcategoryId);
+            if (subcat) {
+                productItem.product.subcategories.push(subcat);
+                setSelectedSubcategory(subcat);
+                return;
+
+            } else {
+                alert("Subcategory not found");
+            }
         }
     }
 
@@ -42,10 +48,6 @@ const ProductDetails: React.FC<Props> = ({ productItem }) => {
             productItem.product.material = materialId;
             return;
         }
-    }
-
-    const handleOnSubcategoryDeleteClicked = (subcategory: SubCategory) => {
-        productItem.product.subcategories = productItem.product.subcategories.filter((subcat) => subcat.id !== subcategory.id);
     }
 
     return (
@@ -122,7 +124,6 @@ const ProductDetails: React.FC<Props> = ({ productItem }) => {
                 </FormControl>
             </Grid> */}
             <Grid item xs={12} paddingBottom={2}>
-
                 <FormControl sx={{ minWidth: '100%' }}>
                     <InputLabel>{languageStore.currentLanguage.selectSubcategory}</InputLabel>
                     <Select
@@ -139,41 +140,8 @@ const ProductDetails: React.FC<Props> = ({ productItem }) => {
                     </Select>
                 </FormControl>
             </Grid>
-            <Grid item xs={12} paddingBottom={2}>
-                <ImageList sx={{ width: 500, height: 450 }}>
-                    <ImageListItem key="Subheader" cols={2}>
-                        <ListSubheader component="div">December</ListSubheader>
-                    </ImageListItem>
-                    {productItem.product.subcategories.map((item) => {
-                        const imgUrl = item.imageUrl ? item.imageUrl : '';
-                        return (
-                            <ImageListItem key={item.id}>
-                                <img
-                                    src={`${imgUrl}?w=248&fit=crop&auto=format`}
-                                    srcSet={`${imgUrl}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                    alt={item.name}
-                                    loading="lazy"
-                                />
-                                <ImageListItemBar
-                                    title={item.name}
-                                    subtitle={item.name}
-                                    actionIcon={
-                                        <IconButton
-                                            sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                                            aria-label={`info about ${item.name}`}
-                                            onClick={() => handleOnSubcategoryDeleteClicked(item)}
-                                        >
-                                            <Delete />
-                                        </IconButton>
-                                    }
-                                />
-                            </ImageListItem>
-                        )
-                    })}
-                </ImageList>
-            </Grid>
         </Grid>
     );
-};
+});
 
 export default ProductDetails;
