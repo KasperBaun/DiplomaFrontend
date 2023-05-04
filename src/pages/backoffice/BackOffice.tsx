@@ -37,7 +37,6 @@ const Backoffice: React.FC = function Backoffice() {
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
     const handleToggleSidebarOpenClicked = () => setSidebarOpen(!sidebarOpen);
 
-
     useEffect(() => {
         const backofficeStoreLoaded = async () => {
             if (!rootStore.isBackofficeLoaded && !rootStore.isBackofficeLoading) {

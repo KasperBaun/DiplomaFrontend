@@ -14,7 +14,7 @@ const Webshop: React.FC = observer(function Webshop() {
 
     useEffect(() => {
         const webshopStoreLoaded = async () => {
-            if (!webshopStore.isLoaded) {
+            if (!rootStore.isWebshopLoaded && !rootStore.isWebshopLoading) {
                 await rootStore.loadWebShop();
             }
         }

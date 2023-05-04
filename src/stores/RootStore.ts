@@ -53,6 +53,7 @@ export class RootStore implements IMobXContext {
         this.authStore = AuthStore.GetInstance(this, this.authService);
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
+        this.loadLanguageStore();
         makeAutoObservable(this);
     }
 
@@ -82,11 +83,7 @@ export class RootStore implements IMobXContext {
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} loading backoffice`, this.color)
         }
-        while(!this.languageStoreLoaded) {
-            if( !this.languageStoreLoading) {
-                await this.loadLanguageStore();
-            }
-        }
+        
         const backofficeStoreLoaded = await this.backofficeStore.init();
         const sniperStoreLoaded = await this.sniperStore.init();
 
@@ -113,11 +110,7 @@ export class RootStore implements IMobXContext {
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} loading webshop`, this.color)
         }
-        while(!this.languageStoreLoaded) {
-            if( !this.languageStoreLoading) {
-                await this.loadLanguageStore();
-            }
-        }
+   
         const webshopStoreLoaded = await this.webshopStore.init();
         const basketStoreLoaded = await this.basketStore.init();
 
