@@ -15,7 +15,7 @@ export interface ICategoriesProps {
 const Categories: React.FC<ICategoriesProps> = observer(function Categories(props: ICategoriesProps) {
 
     /* Define state for categories and selected category - Inject stores */
-    const { categoryStore, languageStore } = useContext(MobXContext);
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
     /* Define state for modals */
@@ -33,9 +33,9 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
     };
 
     const handleOnConfirmDeleteClick = async () => {
-        const catToBeDeleted = categoryStore.getCategory(selectedCategory.id);
+        const catToBeDeleted = backofficeStore.getCategory(selectedCategory.id);
         if (catToBeDeleted !== null) {
-            await categoryStore.deleteCategory(selectedCategory.id);
+            await backofficeStore.deleteCategory(selectedCategory.id);
             setAlertType("success");
         } else {
             setAlertType("warning");
@@ -53,7 +53,7 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
         props.onCategoryClicked(category);
     }
 
-    if (categoryStore.Categories && categoryStore.Categories.length > 0) {
+    if (backofficeStore.Categories && backofficeStore.Categories.length > 0) {
         return (
             <Grid container >
                 {/* Modals for creating/updating and user feedback */}
@@ -68,7 +68,7 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
                 </Grid>
 
                 {/* Categorycards */}
-                {categoryStore.Categories.map((cat, index) => {
+                {backofficeStore.Categories.map((cat, index) => {
                     return (
                         <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                             <CategoryCard category={cat} updateCategory={handleUpdateClick} deleteCategory={handleOnDeleteClick} goToSubcategories={handleOnCategoryClicked} />

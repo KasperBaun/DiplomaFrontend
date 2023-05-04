@@ -12,7 +12,7 @@ export interface IProps {
 
 const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
 
-    const { categoryStore, languageStore } = useContext(MobXContext);
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
     const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
     const [alertText, setAlertText] = useState<string>("");
@@ -25,7 +25,7 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
         const category: Category = ({ id: 0, name: title, imageUrl: url, order, description: description })
 
         try {
-            await categoryStore.createCategory(category)
+            await backofficeStore.createCategory(category)
             setAlertType("success");
             setAlertText(languageStore.currentLanguage.createCategorySuccessMessage);
         }
@@ -52,7 +52,7 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
         };
 
         try {
-            await categoryStore.updateCategory(updateAction);
+            await backofficeStore.updateCategory(updateAction);
             setAlertType("success");
             setAlertText(languageStore.currentLanguage.updateCategorySuccessMessage);
         } catch (err) {

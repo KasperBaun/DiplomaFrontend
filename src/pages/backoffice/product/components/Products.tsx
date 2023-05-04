@@ -7,6 +7,7 @@ import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import ProductSearch from "@components/productsearch/ProductSearch";
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 export type IProductsProps = {
     onProductItemClicked: (productItem: ProductItem) => void;
@@ -16,14 +17,14 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
     /* Define state for products and inject stores */
     const pageSizeAmount: number = 10;
-    const { categoryStore, languageStore, backofficeStore, subCategoryStore } = useContext(MobXContext);
+    const { languageStore, backofficeStore } = useContext(MobXContext);
     const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.ProductItems);
     const [displayedProductItems, setDisplayedProductItems] = useState<ProductItem[]>(productItems.slice(0, pageSizeAmount))
     const [currentDisplayValue, setCurrentDisplayValue] = useState<number>(1);
 
     /* Define the event handlers for the buttons */
     const updateDisplayedProductItems = (productItems: ProductItem[], amount: number) => {
-        setDisplayedProductItems(safeSlice(productItems, 0, amount * pageSizeAmount));
+        setDisplayedProductItems(ExtentionMethods.safeSlice(productItems, 0, amount * pageSizeAmount));
     }
 
     const handleItemsChanged = (productItems: ProductItem[] | ProductItemWeb[]) => {
@@ -73,8 +74,8 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                 </Grid>
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                     <ProductSearch
-                        categories={categoryStore.Categories}
-                        subcategories={subCategoryStore.subCategories}
+                        categories={backofficeStore.Categories}
+                        subcategories={backofficeStore.subCategories}
                         onProductItemClicked={props.onProductItemClicked}
                         items={backofficeStore.productItems}
                         onItemsChanged={handleItemsChanged}
@@ -98,9 +99,3 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
 export default Products;
 
-function safeSlice<T>(arr: T[], start: number, end?: number): T[] {
-    const maxLength = arr.length;
-    const safeStart = Math.min(start, maxLength);
-    const safeEnd = end !== undefined ? Math.min(end, maxLength) : maxLength;
-    return [...arr.slice(safeStart, safeEnd)];
-}

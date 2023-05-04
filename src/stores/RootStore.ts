@@ -1,20 +1,16 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ProductStore } from "./ProductStore";
-import { CategoryStore } from "./CategoryStore";
 import { IMobXContext } from "./MobXContext";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import APIService from "@services/APIService";
 import { Constants } from "@utils/Constants";
 import { LanguageStore } from "./LanguageStore";
-import { SubCategoryStore } from "./SubCategoryStore";
-import { PaymentStore } from "./PaymentStore";
 import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
 import { AuthService } from "@services/AuthService";
-import { CategoryProductViewStore } from "./CategoryProductViewStore";
 import { OrderStore } from "./OrderStore";
 import { BasketStore } from "./BasketStore";
+import { WebshopStore } from "./WebshopStore";
 
 
 export class RootStore implements IMobXContext {
@@ -24,18 +20,18 @@ export class RootStore implements IMobXContext {
     private loaded: boolean = false;
     private apiService: APIService;
     private authService: AuthService;
-    productStore: ProductStore;
-    categoryStore: CategoryStore;
-    subCategoryStore: SubCategoryStore;
-    paymentStore: PaymentStore;
+    rootStore: RootStore = this;
+
+    /* Stores for webshop */
     languageStore: LanguageStore;
+    webshopStore: WebshopStore;
     basketStore: BasketStore;
+    
+    /* Stores for backoffice */
+    authStore: AuthStore;
     backofficeStore: BackofficeStore;
     sniperStore: SniperStore;
-    authStore: AuthStore;
-    CPVStore: CategoryProductViewStore;
     orderStore: OrderStore;
-    rootStore: RootStore = this;
 
     constructor() {
         if (Constants.loggingEnabled) {
@@ -47,15 +43,12 @@ export class RootStore implements IMobXContext {
 
         // Instantiate stores here
         this.languageStore = LanguageStore.GetInstance(this);
-        this.productStore = ProductStore.GetInstance(this, this.apiService);
+        this.webshopStore = WebshopStore.GetInstance(this, this.apiService);
         this.basketStore = BasketStore.GetInstance(this);
-        this.categoryStore = CategoryStore.GetInstance(this, this.apiService);
-        this.paymentStore = PaymentStore.GetInstance(this, this.apiService);
-        this.subCategoryStore = SubCategoryStore.GetInstance(this, this.apiService);
-        this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
-        this.CPVStore = CategoryProductViewStore.GetInstance(this, this.apiService);
-        this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         this.authStore = AuthStore.GetInstance(this, this.authService);
+
+        this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
+        this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         this.orderStore = OrderStore.GetInstance(this, this.apiService);
 
         makeAutoObservable(this);
@@ -67,19 +60,12 @@ export class RootStore implements IMobXContext {
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} constructing stores`, this.color)
         }
-        // Init stores here
-        const langLoaded = await this.languageStore.init();
-        const catLoaded = await this.categoryStore.init();
-        const subcatLoaded = await this.subCategoryStore.init();
-        const prodLoaded = await this.productStore.init();
-        const authLoaded = await this.authStore.init();
-        const cpvLoaded = await this.CPVStore.init();
-        const payLoaded = await this.paymentStore.init();
-        const orderLoaded = await this.orderStore.init();
+        const langStoreLoaded = await this.languageStore.init();
+        const webshopStoreLoaded = await this.webshopStore.init();
+        const basketStoreLoaded = await this.basketStore.init();
 
-        runInAction(() => {
-            // this.loaded = userResult && documentResult;
-            this.loaded = prodLoaded && catLoaded && langLoaded && subcatLoaded && authLoaded && cpvLoaded && payLoaded && orderLoaded;
+        runInAction(async () => {
+            this.loaded =  langStoreLoaded && webshopStoreLoaded && basketStoreLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();

@@ -5,12 +5,11 @@ import { RootStore } from './stores/RootStore';
 
 
 function App() {
+  const rootStore = new RootStore();
   return (
-    <div>
-      <MobXContext.Provider value={new RootStore()} key={"RootStore"}>
-        <Routing />
-      </MobXContext.Provider>
-    </div>
+    <MobXContext.Provider value={rootStore} key={"RootStore"}>
+      <Routing />
+    </MobXContext.Provider>
   );
 }
 

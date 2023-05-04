@@ -17,7 +17,7 @@ export interface ISubcategoriesProps {
 const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcategories(props: ISubcategoriesProps) {
 
     /* Define state for categories and selected category - Inject stores */
-    const { subCategoryStore, languageStore } = useContext(MobXContext)
+    const { backofficeStore, languageStore } = useContext(MobXContext)
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>();
 
     /* Define state for modals */
@@ -35,9 +35,9 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
     };
 
     const handleOnConfirmDeleteClick = async () => {
-        const subCatToBeDeleted = subCategoryStore.getSubcategory(selectedSubcategory.id);
+        const subCatToBeDeleted = backofficeStore.getSubcategory(selectedSubcategory.id);
         if (subCatToBeDeleted !== null) {
-            const deleted = await subCategoryStore.deleteSubCategory(subCatToBeDeleted.id);
+            const deleted = await backofficeStore.deleteSubCategory(subCatToBeDeleted.id);
             if (deleted) {
                 alert("Successfully deleted category: " + subCatToBeDeleted.name)
             } else {
@@ -55,8 +55,8 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
     }
 
 
-    if (subCategoryStore.subCategories) {
-        const subcats = props.selectedCategory ? subCategoryStore.subCategoriesByCategoryID(props.selectedCategory.id) : subCategoryStore.subCategories;
+    if (backofficeStore.subCategories) {
+        const subcats = props.selectedCategory ? backofficeStore.subCategoriesByCategoryID(props.selectedCategory.id) : backofficeStore.subCategories;
 
         return (
 

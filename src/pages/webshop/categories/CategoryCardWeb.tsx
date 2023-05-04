@@ -9,21 +9,21 @@ import Category from '@models/Category';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext } from 'react';
 import { observer } from "mobx-react-lite";
-import { Translater} from "utils/Translater"
-;
-export interface ICategoryCardProps {
+import { Translater } from "utils/Translater"
+    ;
+export type CategoryCardProps = {
     category: Category;
     type: String;
 }
 
-const CategoryCardWeb: React.FC<ICategoryCardProps> = observer(function CategoryCard(props: ICategoryCardProps) {
+const CategoryCardWeb: React.FC<CategoryCardProps> = observer(function CategoryCard(props: CategoryCardProps) {
 
-    const { subCategoryStore, languageStore } = useContext<IMobXContext>(MobXContext);
-    const subcategoryCount: number = subCategoryStore.subCategoriesByCategoryID(props.category.id) ? subCategoryStore.subCategoriesByCategoryID(props.category.id).length : 0;
+    const { webshopStore, languageStore } = useContext<IMobXContext>(MobXContext);
+    const subcategoryCount: number = webshopStore.subCategoriesByCategoryID(props.category.id) ? webshopStore.subCategoriesByCategoryID(props.category.id).length : 0;
     const subcategoryCountTitle: string = subcategoryCount + " " + languageStore.currentLanguage.SubCategoriesTabText.toLowerCase();
-    const translater = new Translater(); 
+    const translater = new Translater();
 
-    if (props.type === "cat"){
+    if (props.type === "cat") {
         return (
             <Card sx={{ width: '300px' }}>
                 <CardHeader>
@@ -31,7 +31,7 @@ const CategoryCardWeb: React.FC<ICategoryCardProps> = observer(function Category
                 <CardMedia
                     component="img"
                     height={200}
-                    onClick={()=>translater.getCategoryBasedOnLanguage(languageStore, props.category.name)}
+                    onClick={() => translater.getCategoryBasedOnLanguage(languageStore, props.category.name)}
                     image={props.category.imageUrl ? props.category.imageUrl : "https://picsum.photos/200/300?grayscale"}
                     alt="Category image for category card"
                 />
@@ -44,14 +44,12 @@ const CategoryCardWeb: React.FC<ICategoryCardProps> = observer(function Category
                     </Typography>
                 </CardContent>
                 <CardActions style={{ display: 'flex', justifyContent: 'end' }}>
-        
-    
                 </CardActions>
             </Card>
         );
     }
 
-    else if (props.type === "subCat"){
+    else if (props.type === "subCat") {
         return (
             <Card sx={{ width: '300px' }}>
                 <CardHeader>
@@ -59,7 +57,7 @@ const CategoryCardWeb: React.FC<ICategoryCardProps> = observer(function Category
                 <CardMedia
                     component="img"
                     height={200}
-                    onClick={()=>translater.getCategoryBasedOnLanguage(languageStore, props.category.name)}
+                    onClick={() => translater.getCategoryBasedOnLanguage(languageStore, props.category.name)}
                     image={props.category.imageUrl ? props.category.imageUrl : "https://picsum.photos/200/300?grayscale"}
                     alt="Category image for category card"
                 />
@@ -69,8 +67,8 @@ const CategoryCardWeb: React.FC<ICategoryCardProps> = observer(function Category
                     </Typography>
                 </CardContent>
                 <CardActions style={{ display: 'flex', justifyContent: 'end' }}>
-        
-    
+
+
                 </CardActions>
             </Card>
         );
