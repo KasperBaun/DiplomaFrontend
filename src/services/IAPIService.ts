@@ -1,8 +1,8 @@
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
 import Payment from "@models/Payment";
-import { Product } from "@models/Product";
-import { ProductItem } from "@models/ProductItem";
+import Product from "@models/Product";
+import ProductItem from "@models/ProductItem";
 import ProductDTO from "@models/DTO/ProductDTO";
 import Image from '@models/Image';
 import PriceHistory from "@models/PriceHistory";

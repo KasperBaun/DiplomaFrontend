@@ -7,7 +7,6 @@ export interface ILocale {
   create: string;
   cancel: string;
   update: string;
-  delete: string;
   product: string;
   reset: string;
   search: string;
@@ -19,23 +18,7 @@ export interface ILocale {
   description: string;
   settings: string;
   notifications: string;
-  noProductsAvailable: string;
-  createProduct: string;
-  editProduct: string;
-  deleteProduct: string;
-  productImages: string;
-  manufacturer: string;
-  selectMaterial: string;
-  name: string;
-  modelNumber: string;
-
-  // Snackbar texts
-  createSuccess: string;
-  createFailed: string;
-  updateSuccess: string;
-  updateFailed: string;
-  deleteSuccess: string;
-  deleteFailed: string;
+  noProductsAvailable: string; 
 
   // Button text
   buttonCancelText: string;
@@ -212,9 +195,6 @@ export interface ILocale {
   CheckoutFormCountryLabel: string;
   CheckoutFormCountryCodeLabel: string;
   CheckoutFormPhoneLabel: string;
-  CheckoutFormDeliveryLabel: string;
-  CheckoutFormDeliveryOptionCollectLabel: string;
-  CheckoutFormDeliveryOptionSendLabel: string;
   CheckoutFormSubmitButton: string;
 
   CheckoutPaymentWidgetPayButtonText : string;

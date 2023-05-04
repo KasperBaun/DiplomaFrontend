@@ -1,4 +1,4 @@
-import { ProductItemWeb } from '@models/ProductItemWeb';
+import ProductItemWeb from '@models/ProductItemWeb';
 import { Card, CardContent, CardMedia, Divider, Typography } from '@mui/material';
 import MobXContext from '@stores/MobXContext';
 import React, { useContext } from 'react';
@@ -44,7 +44,7 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
       <CardMedia
         component="img"
         height="200"
-        image={productItem.images[0].url || "https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"} // assuming the first URL in the array is the main image
+        image={productItem.images[0] || "https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"} // assuming the first URL in the array is the main image
         alt={productItem.product.name}
         style={{ objectFit: "cover" }}
       />
@@ -56,7 +56,7 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
           Model Number: {props.data.product.modelNumber}
         </Typography>
         <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
-        <Typography color="textPrimary">{languageStore.currentLanguage.price}: {productItem.currentPrice} DKK</Typography>
+        <Typography color="textPrimary">{languageStore.currentLanguage.price}: {productItem.price} DKK</Typography>
         <Typography color="textSecondary"> {languageStore.currentLanguage.getQuality(productItem.condition)}</Typography>
         <Typography color="textSecondary">{languageStore.currentLanguage.getQuality(productItem.quality)}</Typography>
       </CardContent>

@@ -1,12 +1,15 @@
 import { observer } from "mobx-react-lite"
 
+interface IConfirmationPageProps {
 
-const ConfirmationPage = () => {
+}
+
+const ConfirmationPage: React.FC<IConfirmationPageProps> = observer(function ConfirmationPage(props: IConfirmationPageProps) {
 
     return (
         <h1>ConfirmationPage</h1>
     )
 
-}
+});
 
-export default observer(ConfirmationPage);
+export default ConfirmationPage;

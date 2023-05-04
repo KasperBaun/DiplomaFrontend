@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
-import {ProductItemWeb} from '@models/ProductItemWeb';
+import ProductItemWeb from '@models/ProductItemWeb';
 
 
 export class BasketStore {

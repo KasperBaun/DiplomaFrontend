@@ -1,15 +1,14 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { RootStore } from './RootStore';
-import {Product} from '@models/Product';
+import Product from '@models/Product';
 import { Constants } from '@utils/Constants';
 import APIService from '@services/APIService';
-import {ProductItemWeb} from '@models/ProductItemWeb';
+import ProductItemWeb from '@models/ProductItemWeb';
 import ProductDTO from '@models/DTO/ProductDTO';
 import SubCategory from '@models/SubCategory';
 import ProductItemDetails from '@models/ProductItemDetails';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
-import Image from '@models/Image';
 
 export class ProductStore {
 
@@ -104,14 +103,6 @@ export class ProductStore {
     private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItemWeb[] {
         const productItems: ProductItemWeb[] = [];
         for (const productItemDTO of productItemDTOs) {
-            const dtoImageUrls: Image[] = productItemDTO.imageUrls.map(imageUrl => {
-                return {
-                    id: 0,
-                    url: imageUrl,
-                    productItemId: productItemDTO.id,
-                }
-            });
-
             const productItem: ProductItemWeb = {
                 id: productItemDTO.id,
                 productId: productItemDTO.productId,
@@ -119,10 +110,10 @@ export class ProductStore {
                 quality: productItemDTO.quality,
                 weight: productItemDTO.weight,
                 customText: productItemDTO.customText,
-                images: dtoImageUrls,
+                images: productItemDTO.imageUrls,
                 product: productMap.get(productItemDTO.productId),
                 createdDate: productItemDTO.createdDate,
-                currentPrice: productItemDTO.currentPrice,
+                price: productItemDTO.currentPrice,
             };
             productItems.push(productItem);
         }

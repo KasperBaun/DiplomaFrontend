@@ -4,11 +4,16 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import Products from "./components/Products";
-import { ProductItem } from "@models/ProductItem";
+import ProductItem from "@models/ProductItem";
 import ProductEditor from "./components/ProductEditor";
 import Loading from "@components/loading/Loading";
+import { toJS } from "mobx";
 
-const ProductManager: React.FC = observer(function ProductManager() {
+export interface IProductManagerProps {
+
+}
+
+const ProductManager: React.FC<IProductManagerProps> = observer(function ProductManager(props: IProductManagerProps) {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
     const [selectedProductItem, setSelectedProductItem] = useState<ProductItem | null>(null);
