@@ -4,11 +4,12 @@ export abstract class Constants {
     public static readonly loggingEnabled = true;
 
     /* Styling */
-    public static readonly primaryColor = "#000080"; // Royal Copenhagen Blue
-    public static readonly secondaryColor = "#FFD700"; // Groenlund gold color
+    public static readonly royalCopenhagenBlueColor = "#000080";
     public static readonly groenlundGreenColor = "#09473f";// "rgb(9, 71, 63)"
     public static readonly groenlundGoldColor = "#FFD700";
-    public static readonly royalCopenhagenBlueColor = "#000080";
+    public static readonly primaryColor = this.groenlundGreenColor; // Royal Copenhagen Blue
+    public static readonly secondaryColor = "#FFD700"; // Groenlund gold color
+    public static readonly primaryTextColor ="#FFFFFF"
     public static readonly backgroundColor: "#FFFFFF";
 
     /* Company information */
