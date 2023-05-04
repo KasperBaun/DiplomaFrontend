@@ -51,7 +51,7 @@ export class WebshopStore {
         const images = await this.apiService.getImages();
         const products = this.generateProducts(await this.apiService.getProductDTOs())
         const productMap = this.createProductMap(products);
-        const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), this._productMap);
+        const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
         const productItemMap = this.createProductItemsMap(this.productItems);
 
         runInAction(() => {
@@ -166,11 +166,11 @@ export class WebshopStore {
         return prodMap;
     }
 
-    private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>): ProductItemWeb[] {
+    private generateProductItems(productItemDTOs: ProductItemDTO[], productMap: Map<number, Product>, images: Image[]): ProductItemWeb[] {
         const productItems: ProductItemWeb[] = [];
         for (const productItemDTO of productItemDTOs) {
 
-            const poImages: Image[] = this._images.filter(img => img.productItemId === productItemDTO.id);
+            const poImages: Image[] = images.filter(img => img.productItemId === productItemDTO.id);
 
             const productItem: ProductItemWeb = {
                 id: productItemDTO.id,

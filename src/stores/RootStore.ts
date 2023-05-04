@@ -52,7 +52,6 @@ export class RootStore implements IMobXContext {
         this.orderStore = OrderStore.GetInstance(this, this.apiService);
 
         makeAutoObservable(this);
-        void this.init();
     }
 
     public async init(): Promise<void> {
