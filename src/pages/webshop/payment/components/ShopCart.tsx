@@ -1,22 +1,22 @@
 import OrderDetails from "@models/OrderDetails";
-import ProductItemWeb from "@models/ProductItemWeb";
+import { ProductItemWeb } from "@models/ProductItemWeb";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Col, Container, Row } from "react-bootstrap";
 
 interface IShopCart {
-    ls : LanguageStore;
-    basket : ProductItemWeb[];
-    order : OrderDetails[];
+    ls: LanguageStore;
+    basket: ProductItemWeb[];
+    order: OrderDetails[];
 }
 
-const ShoppingCartWidget = ( props : IShopCart ) => {
-    
-    let totalPriceNoDiscount = props.basket.map((product) => product.price).reduce((a, b) => a + b, 0);
+const ShoppingCartWidget = (props: IShopCart) => {
 
-    let totalWithDiscount = 0;
-    if ( props.order[0].discountCode ) { 
-        totalWithDiscount = totalPriceNoDiscount - (totalPriceNoDiscount * parseInt(props.order[0].discountCode));
-    }
+    let totalPriceNoDiscount = props.basket.map((product) => product.currentPrice).reduce((a, b) => a + b, 0);
+
+    // let totalWithDiscount = 0;
+    // if (props.order[0].discountCode) {
+    //     totalWithDiscount = totalPriceNoDiscount - (totalPriceNoDiscount * parseInt(props.order[0].discountCode));
+    // }
 
     return (
         <Container className="checkoutShoppingCart">
@@ -36,7 +36,7 @@ const ShoppingCartWidget = ( props : IShopCart ) => {
             </Row>
             <Row xs={12}>
                 <Col xs={8}><b>{props.ls.currentLanguage.ShoppingCartWidgetTotalAmountLabel}</b></Col>
-                <Col xs={4} style={{ textAlign: 'right' }}><b>{  totalPriceNoDiscount !== 0 ? totalPriceNoDiscount.toString() + " DKK" : "0 DKK" }</b></Col>
+                <Col xs={4} style={{ textAlign: 'right' }}><b>{totalPriceNoDiscount !== 0 ? totalPriceNoDiscount.toString() + " DKK" : "0 DKK"}</b></Col>
             </Row>
         </Container>
     )

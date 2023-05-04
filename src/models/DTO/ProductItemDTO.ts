@@ -1,3 +1,4 @@
+import Image from "@models/Image";
 import { conditionType, qualityType } from "../Enums";
 
 export default class ProductItemDTO {
