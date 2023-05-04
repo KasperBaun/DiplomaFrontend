@@ -10,7 +10,6 @@ export default class ENLocale implements ILocale {
   create = "Create";
   cancel = "Cancel";
   update = "Update";
-  delete = "Delete";
   product = "Product";
   reset = "Reset";
   search = "Search";
@@ -23,23 +22,6 @@ export default class ENLocale implements ILocale {
   settings = "Settings";
   notifications = "Notifications";
   noProductsAvailable = "There is currrently no products available in this category";
-  createProduct = "Create Product";
-  editProduct = "Edit Product";
-  deleteProduct = "Delete Product";
-  productImages = "Product Images";
-  manufacturer = "Manufacturer";
-  selectMaterial = "Select Material";
-  name = "Name";
-  modelNumber = "Model Number";
-
-  // Snackbar texts
-  createSuccess = "Create Success";
-  createFailed = "Create Failed";
-  updateSuccess = "Update Success";
-  updateFailed = "Update Failed";
-  deleteSuccess = "Delete Success";
-  deleteFailed = "Delete Failed";
-
 
   // Button text
   buttonCancelText = "Cancel";
@@ -91,38 +73,38 @@ export default class ENLocale implements ILocale {
   discountCodeOptional = "Discount code (optional)"
   addButton = "Add"
 
-  // AboutUS page
-  copanyDescription = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg. We buy and sell Gold & Silver, Danish porcelain and ceramics, as well as other exciting antiques"
-  openingDays = "Opening hours"
-  MondayText = "Monday"
-  TuesdayText = "Tuesday"
-  WendsayText = "Wednesday"
-  ThursdayText = "Thursday"
-  FridayText = "Friday"
-  SaturdayText = "Saturday"
-  publicHollidayText = "Public Hollidays"
-  SundayText = "Sunday"
-  ClosedText = "Closed"
-  PerAgreemtText = "Per agrement"
-  contactInformation = "Contact information"
-  phoneText = "Phone"
-  emailText = "Email"
-  addressText = "Address"
-  CVRNRText = "CVR Number"
-  FAQText = "Frequently asked questions:"
-  Q1Text = "What is your refund policy?"
-  Q1Awnser = "It is not possible to return goods after 24 hours."
-  Q2Text = "Is it possible to have goods delivered abroad?"
-  Q2Awnser = "By agreement, it can be arranged to have goods delivered abroad, however subject to the price of the goods and the distance to the country."
-  Q3Text = "Can I pick up my goods in the store?"
-  Q3Awnser = "It is always an option to pick up goods yourself in the shop during opening hours."
+    // AboutUS page
+    copanyDescription = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg. We buy and sell Gold & Silver, Danish porcelain and ceramics, as well as other exciting antiques"
+    openingDays = "Opening hours"
+    MondayText = "Monday"
+    TuesdayText = "Tuesday"
+    WendsayText = "Wednesday"
+    ThursdayText = "Thursday"
+    FridayText = "Friday"
+    SaturdayText = "Saturday"
+    publicHollidayText = "Public Hollidays"
+    SundayText = "Sunday" 
+    ClosedText= "Closed"
+    PerAgreemtText= "Per agrement"
+    contactInformation = "Contact information"
+    phoneText=  "Phone"
+    emailText=  "Email"
+    addressText= "Address"
+    CVRNRText=  "CVR Number"
+    FAQText=  "Frequently asked questions:"
+    Q1Text= "What is your refund policy?"
+    Q1Awnser= "It is not possible to return goods after 24 hours."
+    Q2Text= "Is it possible to have goods delivered abroad?"
+    Q2Awnser= "By agreement, it can be arranged to have goods delivered abroad, however subject to the price of the goods and the distance to the country." 
+    Q3Text= "Can I pick up my goods in the store?"
+    Q3Awnser ="It is always an option to pick up goods yourself in the shop during opening hours." 
 
   // Front page
-  seeProductBtn = "See product";
+  seeProductBtn = "See product"; 
   chosenCategories = "Chosen Categories"
 
   //Pop-up : cart
-  shopButton = "Go to cart";
+  shopButton = "Go to cart";  
 
   // Category Admin
   createCategoryDialogTitle = "Create Category";
@@ -177,7 +159,7 @@ export default class ENLocale implements ILocale {
   productPage_productDimension = "Dimension";
   productPage_productCustomText = "Extra information";
   productPage_weight = "Weight";
-  productPage_createProduct = "Create product";
+  productPage_createProduct = "create product";
   productPage_modelSpecifications = "Model specifictations";
   productPage_productInfoHeadline = "General info";
   selectSubcategory = "Select subcategory";
@@ -253,9 +235,6 @@ export default class ENLocale implements ILocale {
   CheckoutFormCountryLabel = "Country";
   CheckoutFormCountryCodeLabel = "Countrycode";
   CheckoutFormPhoneLabel = "Phonenumber";
-  CheckoutFormDeliveryLabel = "Delivery method";
-  CheckoutFormDeliveryOptionCollectLabel = "Collect at store";
-  CheckoutFormDeliveryOptionSendLabel = "Ship to Billing Address";
   CheckoutFormSubmitButton = "Continue to payment";
 
   CheckoutPaymentWidgetPayButtonText = "Pay";
