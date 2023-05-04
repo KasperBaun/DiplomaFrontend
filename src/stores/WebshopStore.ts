@@ -10,6 +10,7 @@ import Image from '@models/Image';
 import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
+import Order from '@models/Order';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -241,5 +242,9 @@ export class WebshopStore {
 
     public getSubcategory(id: number): SubCategory {
         return this._subcategoryMap.get(id);
+    }
+
+    public async createOrder(order: Order): Promise<Order> {
+        return await this.apiService.createOrder(order);
     }
 }

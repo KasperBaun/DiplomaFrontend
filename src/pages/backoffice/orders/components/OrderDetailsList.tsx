@@ -13,10 +13,10 @@ import Order from "@models/Order";
 interface IProps {
     tableHeight: number;
     origin: string
-  }
+}
 
-const OrderDetailsList = ( {tableHeight, origin} : IProps ) => {
-    const { orderStore, languageStore } = useContext(MobXContext);
+const OrderDetailsList = ({ tableHeight, origin }: IProps) => {
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [openDialog, setOpenDialog] = useState(false);
 
     const [productId, setProductId] = useState(0);
@@ -34,27 +34,27 @@ const OrderDetailsList = ( {tableHeight, origin} : IProps ) => {
         handleOpenDialog();
     }
 
-    function renderProductIdUI(order : Order){
+    function renderProductIdUI(order: Order) {
 
         if (origin === "MainPage") {
-            return(
+            return (
                 <TableCell className="tableCellOnClick" align="left"><b><u>{order.orderElements.map((element, index) => (
                     <div key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
-                            <b><u>{element.productItemId}</u></b>
+                        <b><u>{element.productItemId}</u></b>
                     </div>))}</u></b></TableCell>
             )
         }
-        else{
-            return(
-                <TableCell className="tableCellOnClick" align="left"><b style={{display:"flex"}}><u style={{display:"flex"}}>{order.orderElements.map((element, index) => (
-                    <div style={{display:"flex" , justifyContent:"space-between"}}key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
-                            <b><u>{element.productItemId} {","}</u></b>
+        else {
+            return (
+                <TableCell className="tableCellOnClick" align="left"><b style={{ display: "flex" }}><u style={{ display: "flex" }}>{order.orderElements.map((element, index) => (
+                    <div style={{ display: "flex", justifyContent: "space-between" }} key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
+                        <b><u>{element.productItemId} {","}</u></b>
                     </div>))}</u></b></TableCell>
-            ) 
+            )
         }
     }
 
-    if (orderStore.Orders)
+    if (backofficeStore.Orders)
         return (
             <React.Fragment>
                 <h4>{languageStore.currentLanguage.OrderDetailsListTitle}</h4>
@@ -72,7 +72,7 @@ const OrderDetailsList = ( {tableHeight, origin} : IProps ) => {
                         </TableHead>
                         <TableBody>
                             {
-                                orderStore.Orders.map((order, index) => (
+                                backofficeStore.Orders.map((order, index) => (
                                     <TableRow key={order.id + "_orderDetail_" + index}>
                                         {renderProductIdUI(order)}
                                         <TableCell align="left">{order.customerId}</TableCell>
