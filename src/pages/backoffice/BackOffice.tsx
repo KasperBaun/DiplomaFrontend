@@ -18,7 +18,7 @@ import MobXContext from "@stores/MobXContext";
 const Backoffice: React.FC = function Backoffice() {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { rootStore } = useContext(MobXContext);
+    const { backofficeStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
@@ -41,8 +41,8 @@ const Backoffice: React.FC = function Backoffice() {
     }
 
     useEffect(() => {
-        if (!rootStore.backofficeStore.isLoaded) {
-            rootStore.backofficeStore.init();
+        if (!backofficeStore.isLoaded && !backofficeStore.isLoading) {
+            backofficeStore.init();
         }
     });
 

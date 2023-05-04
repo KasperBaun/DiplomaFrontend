@@ -15,6 +15,10 @@ import ProductItemDetails from '@models/ProductItemDetails';
 import CategoryProductView from '@models/CategoryProductView';
 import Payment from '@models/Payment';
 import SalesSummary from '@models/SalesSummary';
+import Order from '@models/Order';
+import OrderElements from '@models/OrderElements';
+import OrderDetails from '@models/OrderDetails';
+import OrderDTO from '@models/DTO/OrderDTO';
 
 
 export class BackofficeStore {
@@ -37,10 +41,13 @@ export class BackofficeStore {
     private _pricehistories: PriceHistory[] = [];
     private _payments: Payment[] = [];
     private _salesSummary: SalesSummary[] = [];
+    private _orders: Order[] = [];
+    private _orderElements: OrderElements[] = [];
 
     /* Views */
     public categoryProducts: CategoryProductView[] = [];
     public productItemDetails: ProductItemDetails[] = [];
+    public orderDetails: OrderDetails[] = [];
 
 
     /* Maps for quick access */
@@ -112,14 +119,23 @@ export class BackofficeStore {
         const payments = await this.apiService.getPayments()
         const salesSummary = await this.apiService.getSalesSummary();
 
+        const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
+            const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
+            const orderElements: OrderElements[] = await this.apiService.getOrderElements();
+
+            runInAction(() => {
+                
+            });
+
         runInAction(() => {
             this._payments = payments;
             this._salesSummary = salesSummary;
+            this._orderElements = orderElements;
+            this._orders = this.generateOrders(orderDTOs, this._orderElements);
+            this.orderDetails = orderDetails;
             this.loading = false;
             this.loaded = categoriesLoaded && subcategoriesLoaded && productsLoaded && productItemsLoaded && imagesLoaded && pricehistoriesLoaded;
         })
-
-        // Get Orders
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -133,6 +149,33 @@ export class BackofficeStore {
             BackofficeStore._Instance = new BackofficeStore(_rootStore, _apiService);
         }
         return BackofficeStore._Instance;
+    }
+
+    public get isLoading(): boolean {
+        return this.loading;
+    }
+
+    /* Orders */
+    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
+        const orders: Order[] = [];
+        for (var orderDTO of ordersDTO) {
+            const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+            const order: Order = new Order();
+            order.id = orderDTO.id;
+            order.customerId = orderDTO.customerId;
+            order.paymentId = orderDTO.paymentId;
+            order.paymentStatus = orderDTO.paymentStatus;
+            order.deliveryStatus = orderDTO.deliveryStatus;
+            order.discountCode = orderDTO.discountCode;
+            order.active = orderDTO.active;
+            order.orderElements = orderOrderElements;
+            orders.push(order);
+        }
+        return orders;
+    }
+
+    public get Orders(): Order[] {
+        return this._orders;
     }
 
     /* Payments */

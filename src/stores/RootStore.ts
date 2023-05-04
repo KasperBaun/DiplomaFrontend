@@ -8,7 +8,6 @@ import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
 import { AuthService } from "@services/AuthService";
-import { OrderStore } from "./OrderStore";
 import { BasketStore } from "./BasketStore";
 import { WebshopStore } from "./WebshopStore";
 
@@ -31,7 +30,6 @@ export class RootStore implements IMobXContext {
     authStore: AuthStore;
     backofficeStore: BackofficeStore;
     sniperStore: SniperStore;
-    orderStore: OrderStore;
 
     constructor() {
         if (Constants.loggingEnabled) {
@@ -49,7 +47,6 @@ export class RootStore implements IMobXContext {
 
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
-        this.orderStore = OrderStore.GetInstance(this, this.apiService);
 
         makeAutoObservable(this);
     }
