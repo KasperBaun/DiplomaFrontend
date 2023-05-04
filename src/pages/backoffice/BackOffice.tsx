@@ -18,7 +18,7 @@ import MobXContext from "@stores/MobXContext";
 const Backoffice: React.FC = function Backoffice() {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { backofficeStore } = useContext(MobXContext);
+    const { rootStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
@@ -35,15 +35,16 @@ const Backoffice: React.FC = function Backoffice() {
     }
 
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+    const handleToggleSidebarOpenClicked = () => setSidebarOpen(!sidebarOpen);
 
-    const handleToggleSidebarOpenClicked = () => {
-        setSidebarOpen(!sidebarOpen);
-    }
 
     useEffect(() => {
-        if (!backofficeStore.isLoaded && !backofficeStore.isLoading) {
-            backofficeStore.init();
+        const backofficeStoreLoaded = async () => {
+            if (!rootStore.isBackofficeLoaded && !rootStore.isBackofficeLoading) {
+                rootStore.loadBackoffice();
+            }
         }
+        backofficeStoreLoaded();
     });
 
     return (

@@ -7,7 +7,6 @@ import React from 'react';
 
 function App() {
   const rootStore = new RootStore();
-  rootStore.init();
   return (
     <MobXContext.Provider value={rootStore} key={"RootStore"}>
       <React.StrictMode>

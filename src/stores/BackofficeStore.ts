@@ -67,12 +67,6 @@ export class BackofficeStore {
         runInAction(() => {
             this.loading = true;
         });
-        let productsLoaded = false;
-        let productItemsLoaded = false;
-        let categoriesLoaded = false;
-        let subcategoriesLoaded = false;
-        let imagesLoaded = false;
-        let pricehistoriesLoaded = false;
 
         // Get categories
         const categories = await this.apiService.getCategories();
@@ -85,19 +79,13 @@ export class BackofficeStore {
         runInAction(() => {
             this._categories = categories;
             this._categoryMap = this.createCategoryMap(this._categories);
-            categoriesLoaded = true;
 
             this._subcategories = subcategories;
             this.mapCategoryToSubcategory(this._subcategories);
             this.subcategoriesInCategoryMap = this.mapSubCategoriesToCategoryId(this._subcategories);
             this._subcategoryMap = this.createSubcategoryMap(this._subcategories);
-            subcategoriesLoaded = true;
-
             this._images = images;
-            imagesLoaded = true;
-
             this._pricehistories = pricehistories;
-            pricehistoriesLoaded = true;
         })
 
         const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
@@ -120,13 +108,9 @@ export class BackofficeStore {
         const salesSummary = await this.apiService.getSalesSummary();
 
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
-            const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
-            const orderElements: OrderElements[] = await this.apiService.getOrderElements();
-
-            runInAction(() => {
-                
-            });
-
+        const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
+        const orderElements: OrderElements[] = await this.apiService.getOrderElements();
+        
         runInAction(() => {
             this._payments = payments;
             this._salesSummary = salesSummary;
@@ -134,7 +118,7 @@ export class BackofficeStore {
             this._orders = this.generateOrders(orderDTOs, this._orderElements);
             this.orderDetails = orderDetails;
             this.loading = false;
-            this.loaded = categoriesLoaded && subcategoriesLoaded && productsLoaded && productItemsLoaded && imagesLoaded && pricehistoriesLoaded;
+            this.loaded = true;
         })
 
         if (Constants.loggingEnabled) {
