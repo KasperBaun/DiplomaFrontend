@@ -26,9 +26,9 @@ const Header: React.FC = observer(function Header() {
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
   navPaths.push({ path: "/productList", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
-  navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
-  navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
-  navPaths.push({ path: "/backoffice", text: `${languageStore.currentLanguage.BackOfficeTabText}` })
+  //navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
+  //navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
+  //navPaths.push({ path: "/backoffice", text: `${languageStore.currentLanguage.BackOfficeTabText}` })
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
@@ -45,17 +45,28 @@ const Header: React.FC = observer(function Header() {
 
   return (
     <Navbar expand="lg" className='header' key="navbar">
-      <Container fluid >
-        <Navbar.Brand>
+      <Container fluid>
+      <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
             <LionLogo width={70} />
           </NavLink>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScrolls" />
+      <Navbar.Toggle aria-controls="navbarScrolls" />
+      
         <Navbar.Collapse id="navbarScroll">
+        <Button onClick={() => {
+              languageStore.toggleLanguage();
+            }}>
+              <Dk />
+            </Button>
+            <Button onClick={() => {
+              languageStore.toggleLanguage();
+            }}>
+              <Us />
+            </Button>
           <Nav
             className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
-            style={{ maxHeight: '100px', width: '100%' }}
+            style={{ maxHeight: '100px', width: '100%'}}
             navbarScroll
           >
             {navPaths.map((navItem, index) => {
@@ -75,22 +86,14 @@ const Header: React.FC = observer(function Header() {
 
           </Nav>
           <Form className="d-flex">
-            <Button onClick={() => {
-              languageStore.toggleLanguage();
-            }}>
-              <Dk />
-            </Button>
-            <Button onClick={() => {
-              languageStore.toggleLanguage();
-            }}>
-              <Us />
-            </Button>
             <Form.Control
               type="search"
+              style={{width:"20rem"}}
               placeholder={languageStore.currentLanguage.SearchBarText}
               className="me-2"
               aria-label="Search"
             />
+          
             <Button className='search-button'>
               <NavLink
                 to={"/search"}
@@ -99,7 +102,6 @@ const Header: React.FC = observer(function Header() {
                 {languageStore.currentLanguage.SearchBarText}
               </NavLink>
             </Button>
-
             <CartDrawer />
           </Form>
         </Navbar.Collapse>
