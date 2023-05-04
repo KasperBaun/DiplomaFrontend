@@ -1,0 +1,23 @@
+@import "~@styles/Main.scss";
+
+.ShippingProgressRow{
+    margin: 0;
+    padding: 0;
+}
+
+.ShippingProgressBox {
+    border: 1px solid $primary;
+    height: 250px;
+}
+
+.ShippingProgressBar {
+    margin: 0;
+    margin-top: 0.10rem;
+    padding: 0;
+    border-radius: 0;
+}
+
+.ShippingProgressBoxIcons {
+    font-size: 4rem !important;
+    color: $primary;
+}

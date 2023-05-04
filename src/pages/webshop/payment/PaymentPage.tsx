@@ -15,6 +15,14 @@ interface IPaymentPageProps {
     orders : OrderDetails[];
 }
 
+interface IPaymentForm {
+    checkoutForm : ICheckoutForm;
+    paymentMethod : string;
+    mobilePayPhone ?: string;
+    cardInfo ?: ICardInfoForm;
+    paypal ?: boolean;
+}
+
 interface ICheckoutForm {
     email: string;
     firstName: string;
@@ -26,22 +34,66 @@ interface ICheckoutForm {
     countryCode: string;
     phone: string;
     deliveryMethod: string;
-  }
+}
+
+interface ICardInfoForm {
+    cardNumber: string;
+    cardExpirationDate: string;
+    cardHolderName: string;
+    cardCVC: string;
+}
+
+interface IMPInfoForm {
+    phoneNumber: string;
+}
 
 const PaymentPage = (props: IPaymentPageProps) => {
 
     const { languageStore, basketStore } = useContext(MobXContext);
     const [selectedPaymentOption, setSelectedPaymentOption] = useState<number>(-1);
 
-    const [billingInfo, setBillingInfo] = useState<string>("");
+    const [paymentForm, setPaymentForm] = useState<IPaymentForm>();
     const [paymentMethod, setPaymentMethod] = useState<string>("");
-    const [mobilePayPhone, setMobilePayPhone] = useState<string>("");
-    const [cardInfo, setCardInfo] = useState<string>("");
+    const [mobilePayPhone, setMobilePayPhone] = useState<IMPInfoForm>();
+    const [cardInfo, setCardInfo] = useState<ICardInfoForm>();
+    const [paypalApproved, setPaypalApproved] = useState<boolean>();
 
     const [checkoutForm, setCheckoutForm] = useState<ICheckoutForm>();
     const [isCheckoutReady, setIsCheckoutReady] = useState<boolean>(false);
 
     const handleOnPaymentClick = () => {
+        if(isCheckoutReady) {
+            if(mobilePayPhone) {
+                setPaymentForm({
+                    checkoutForm: checkoutForm,
+                    paymentMethod: paymentMethod,
+                    mobilePayPhone: mobilePayPhone?.phoneNumber,
+                });
+            }
+            else if(cardInfo) {
+                setPaymentForm({
+                    checkoutForm: checkoutForm,
+                    paymentMethod: paymentMethod,
+                    cardInfo: {
+                        cardNumber: cardInfo.cardNumber,
+                        cardExpirationDate: cardInfo.cardExpirationDate,
+                        cardHolderName: cardInfo.cardHolderName,
+                        cardCVC: cardInfo.cardCVC
+                    }
+                });
+            }
+            else if(paypalApproved) {
+                setPaymentForm({
+                    checkoutForm: checkoutForm,
+                    paymentMethod: paymentMethod,
+                    paypal: paypalApproved
+                });
+            }
+            else {
+                alert("Error with payment");
+            }
+        }
+
 
     }
 
@@ -49,11 +101,11 @@ const PaymentPage = (props: IPaymentPageProps) => {
         if(selectedPaymentOption !== -1) {
             switch(selectedPaymentOption) {
                 case 0:
-                    return <PaymentMobilePayForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} />
+                    return <PaymentMobilePayForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} setMobilePayPhone={setMobilePayPhone} />
                 case 1:
-                    return <PaymentCreditCardForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick}/>
+                    return <PaymentCreditCardForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} setCardInfo={setCardInfo} />
                 case 2:
-                    return <PaymentPaypalForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} />
+                    return <PaymentPaypalForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} setPaypalApproved={setPaypalApproved} />
                 default:
                     console.log("Unknown payment option");
                     break;

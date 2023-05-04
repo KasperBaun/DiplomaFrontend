@@ -1,18 +1,19 @@
 import { LanguageStore } from "@stores/LanguageStore";
+import { Dispatch, SetStateAction } from "react";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 
 interface IPaymentPaypalFormProps {
     ls : LanguageStore;
     handleOnSubmitClick : () => void;
+    setPaypalApproved : Dispatch<SetStateAction<boolean>>;
 }
 
-const PaymentPaypalForm = ( {ls} : IPaymentPaypalFormProps ) => {
+const PaymentPaypalForm = ( {ls, handleOnSubmitClick, setPaypalApproved} : IPaymentPaypalFormProps ) => {
 
-    const navigate = useNavigate();
 
     const handleOnSubmit = () => {
-        navigate('www.paypal.com')
+        setPaypalApproved(true);
+        handleOnSubmitClick();
     }
 
     return (
