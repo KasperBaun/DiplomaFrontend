@@ -1,7 +1,7 @@
 import { materialType } from "./Enums";
 import SubCategory from "./SubCategory";
 
-export default class Product {
+export class Product {
     id: number;
     name: string;
     modelNumber: string;
