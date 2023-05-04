@@ -15,13 +15,13 @@ export type ProductSearchProps = {
     subcategories: SubCategory[];
     items: ProductItem[] | ProductItemWeb[];
     onItemsChanged: (items: ProductItem[] | ProductItemWeb[]) => void;
-    onProductItemClicked: (productItem: ProductItem) => void;
+    onProductItemClicked?: (productItem: ProductItem) => void;
 }
 
 export const ProductSearch: React.FC<ProductSearchProps> = observer(function ProductSearch(props: ProductSearchProps) {
     const { items, showSearchBar, categories, subcategories, onItemsChanged } = props;
     /* Define state for products and selected category & subcategory - Inject stores */
-    const { categoryStore, languageStore, subCategoryStore } = useContext(MobXContext);
+    const { languageStore } = useContext(MobXContext);
     const [selectedCategory, setSelectedCategory] = useState<Category>(null);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
     const [displayedSubcategories, setDisplayedSubcategories] = useState<SubCategory[]>(subcategories);
@@ -54,9 +54,9 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
             // Filter productitems by category
             const categoryId: number = event.target.value;
             setSelectedSubcategory(null);
-            setSelectedCategory(categoryStore.getCategory(categoryId));
+            setSelectedCategory(categories.find(cat => cat.id === categoryId));
             const filteredProducts = items.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
-            setDisplayedSubcategories(subCategoryStore.SubCategories.filter(subcat => subcat.categoryId === categoryId));
+            setDisplayedSubcategories(subcategories.filter(subcat => subcat.categoryId === categoryId));
             onItemsChanged(filteredProducts);
         }
     };
@@ -69,7 +69,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
         else {
             // Filter productitems by subcategory
             const subcategoryId: number = event.target.value;
-            setSelectedSubcategory(subCategoryStore.getSubcategory(subcategoryId));
+            setSelectedSubcategory(subcategories.find(s => s.id === subcategoryId));
             const filteredProducts = items.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
             onItemsChanged(filteredProducts);
             return;

@@ -2,15 +2,18 @@ import './styling/scss/custom.scss';
 import Routing from './routes/Routes';
 import MobXContext from './stores/MobXContext';
 import { RootStore } from './stores/RootStore';
+import React from 'react';
 
 
 function App() {
+  const rootStore = new RootStore();
+  rootStore.init();
   return (
-    <div>
-      <MobXContext.Provider value={new RootStore()} key={"RootStore"}>
+    <MobXContext.Provider value={rootStore} key={"RootStore"}>
+      <React.StrictMode>
         <Routing />
-      </MobXContext.Provider>
-    </div>
+      </React.StrictMode>
+    </MobXContext.Provider>
   );
 }
 

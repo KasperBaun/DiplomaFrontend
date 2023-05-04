@@ -13,7 +13,7 @@ export interface IProps {
 
 const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) => {
 
-    const { subCategoryStore, categoryStore, languageStore } = useContext(MobXContext);
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [title, setTitle] = useState<string>("");
     const [url, setUrl] = useState<string>("");
     const [order, setOrder] = useState<number>(0);
@@ -32,7 +32,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
         };
 
         try {
-            await subCategoryStore.createSubCategory(subCategory)
+            await backofficeStore.createSubCategory(subCategory)
             alert(languageStore.currentLanguage.createSubCategorySuccessMessage);
         }
         catch (err) {
@@ -53,7 +53,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
         };
 
         try {
-            await subCategoryStore.updateSubCategory(subCategory)
+            await backofficeStore.updateSubCategory(subCategory)
             // TODO: Change this notification to a toast or something that does not require the user to click a button to confirm.
             alert(languageStore.currentLanguage.createSubCategoryUpdateSuccessMessage);
         }
@@ -68,7 +68,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
     const handleSelectedCategoryChange = (event: SelectChangeEvent) => {
         //console.log(event.target.value);
         const categoryId: number = parseInt(event.target.value);
-        const category: Category = categoryStore.getCategory(categoryId);
+        const category: Category = backofficeStore.getCategory(categoryId);
         if (category) {
             setSelectedCategory(category);
         }
@@ -109,7 +109,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
                                     label={languageStore.currentLanguage.createSubCategoryCategoryTitle}
                                     onChange={handleSelectedCategoryChange}
                                 >
-                                    {categoryStore.Categories.map((category, index) => (
+                                    {backofficeStore.Categories.map((category, index) => (
                                         <MenuItem
                                             key={"option" + category.name + index}
                                             value={category.id}
