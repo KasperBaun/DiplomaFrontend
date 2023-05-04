@@ -4,7 +4,7 @@ import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import SubCategory from '@models/SubCategory';
 import { materialType } from '@models/Enums';
-import ProductItem from '@models/ProductItem';
+import { ProductItem } from '@models/ProductItem';
 import { observer } from 'mobx-react-lite';
 
 export interface IProductDetailsProps {

@@ -1,9 +1,9 @@
 import ConfirmDeleteDialog from "@backoffice/category/components/ConfirmDeleteDialog";
-import ProductItem from "@models/ProductItem";
-import { Alert, Button, Container, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, ListSubheader, Paper, Snackbar, Typography } from "@mui/material";
+import { ProductItem } from "@models/ProductItem";
+import { Alert, Button, Container, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, Paper, Snackbar, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import Product from "@models/Product";
+import { Product } from "@models/Product";
 import { observer } from "mobx-react-lite";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Constants } from "@utils/Constants";
