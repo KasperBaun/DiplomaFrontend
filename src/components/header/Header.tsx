@@ -59,7 +59,7 @@ const Header: React.FC = observer(function Header() {
             }}>
               <Dk />
             </Button>
-            <Button style={{marginRight:"20rem"}} onClick={() => {
+            <Button onClick={() => {
               languageStore.toggleLanguage();
             }}>
               <Us />
