@@ -1,5 +1,5 @@
 import Category from "@models/Category";
-import Product from "@models/Product";
+import { Product } from "@models/Product";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
 import {categories } from "./MockupData";
