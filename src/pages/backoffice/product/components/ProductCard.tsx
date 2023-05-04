@@ -1,6 +1,6 @@
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import ProductItem from "@models/ProductItem";
+import { ProductItem } from "@models/ProductItem";
 import { useContext } from "react";
 import { Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import { FiberManualRecord } from "@mui/icons-material";

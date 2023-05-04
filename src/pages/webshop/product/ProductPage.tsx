@@ -21,7 +21,7 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
         return (
           <Grid container spacing={2}>
             <Grid item lg={6}>
-            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images} />
+            <ImageGallery key={"productImgGal"+product.id} imageURLs={product.images.map(i => i.url)} />
 
             </Grid>
             <Grid item lg={6}>

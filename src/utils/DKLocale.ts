@@ -9,6 +9,7 @@ export default class DKLocale implements ILocale {
   create = "Opret";
   cancel = "Annuller";
   update = "Opdater";
+  delete = "Slet";
   product = "Produkt";
   reset = "Nulstil";
   search = "Søg";
@@ -21,6 +22,23 @@ export default class DKLocale implements ILocale {
   settings = "Indstillinger";
   notifications = "Notifikationer";
   noProductsAvailable = "Der er desvære ingen vare i denne kategori på nuværende tidspunkt";
+  createProduct = "Opret produkt";
+  editProduct = "Rediger produkt";
+  deleteProduct = "Slet produkt";
+  productImages = "Produkt billeder";
+  manufacturer = "Producent";
+  selectMaterial = "Vælg materiale";
+  name = "Navn";
+  modelNumber = "Model nummer";
+
+  // Snackbar texts
+  createSuccess = "Oprettelse succesfuld";
+  createFailed = "Oprettelse mislykkedes";
+  updateSuccess = "Opdatering succesfuld";
+  updateFailed = "Opdatering mislykkedes";
+  deleteSuccess = "Sletning succesfuld";
+  deleteFailed = "Sletning mislykkedes";
+
 
 
   // Button text

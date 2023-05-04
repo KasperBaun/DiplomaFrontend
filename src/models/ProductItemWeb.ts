@@ -1,9 +1,10 @@
 import { conditionType, qualityType } from "./Enums";
-import Product from "./Product";
+import Image from "./Image";
+import {Product} from "./Product";
 
-export default class ProductItemWeb {
+export abstract class ProductItemWeb {
     id: number;
-    price: number;
+    currentPrice: number;
     createdDate: Date;
     condition: conditionType;
     quality: qualityType;
@@ -11,6 +12,6 @@ export default class ProductItemWeb {
     customText: string;
     productId: number;
     product: Product;
-    images: string[];
+    images: Image[];
 }
 

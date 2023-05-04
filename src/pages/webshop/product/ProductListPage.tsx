@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import MyCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom"
 import { Translater } from "@utils/Translater";
-import ProductItemWeb from "@models/ProductItemWeb";
+import { ProductItemWeb } from "@models/ProductItemWeb";
 import Loading from "@components/loading/Loading";
 
 
