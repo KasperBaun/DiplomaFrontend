@@ -212,6 +212,9 @@ export interface ILocale {
   CheckoutFormCountryLabel: string;
   CheckoutFormCountryCodeLabel: string;
   CheckoutFormPhoneLabel: string;
+  CheckoutFormDeliveryLabel: string;
+  CheckoutFormDeliveryOptionCollectLabel: string;
+  CheckoutFormDeliveryOptionSendLabel: string;
   CheckoutFormSubmitButton: string;
 
   CheckoutPaymentWidgetPayButtonText : string;

@@ -253,6 +253,9 @@ export default class ENLocale implements ILocale {
   CheckoutFormCountryLabel = "Country";
   CheckoutFormCountryCodeLabel = "Countrycode";
   CheckoutFormPhoneLabel = "Phonenumber";
+  CheckoutFormDeliveryLabel = "Delivery method";
+  CheckoutFormDeliveryOptionCollectLabel = "Collect at store";
+  CheckoutFormDeliveryOptionSendLabel = "Ship to Billing Address";
   CheckoutFormSubmitButton = "Continue to payment";
 
   CheckoutPaymentWidgetPayButtonText = "Pay";

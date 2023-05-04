@@ -259,6 +259,9 @@ export default class DKLocale implements ILocale {
   CheckoutFormCountryLabel = "Land";
   CheckoutFormCountryCodeLabel = "Landekode";
   CheckoutFormPhoneLabel = "Telefonnummer";
+  CheckoutFormDeliveryOptionCollectLabel = "Afhent i butik";
+  CheckoutFormDeliveryOptionSendLabel = "Forsendelse til faktureringsadresse";
+  CheckoutFormDeliveryLabel = "Levering / Afhentning";
   CheckoutFormSubmitButton = "Fortsæt til Betaling";
 
   CheckoutPaymentWidgetPayButtonText = "Betal";

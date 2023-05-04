@@ -1,21 +1,22 @@
 import { LanguageStore } from "@stores/LanguageStore";
 import { Button, Container, Form } from "react-bootstrap";
+import PaymentButton from "./PaymentButton";
 
 interface IPaymentMobilePayFormProps {
     ls : LanguageStore;
+    handleOnSubmitClick : () => void;
 }
 
-const PaymentMobilePayForm = ( {ls} : IPaymentMobilePayFormProps ) => {
+const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
+
     return (
-        <Container>
+        <Container className="checkoutShoppingCart">
             <Form>
                 <Form.Group>
                     <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormMPLabel} </Form.Label>
                     <Form.Control type="phone" placeholder="+45 " />
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    { ls.currentLanguage.CheckoutPaymentWidgetPayButtonText }
-                </Button>
+                <PaymentButton ls={ls} handleOnSubmitClick={handleOnSubmitClick} />
             </Form>
         </Container>
     )
