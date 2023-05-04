@@ -9,6 +9,7 @@ export type ProductSearchBarProps = {
     searchText: string;
     setSearchText: (searchText: string) => void;
     showSearchBar?: boolean;
+    style?: React.CSSProperties;
     productItems: ProductItem[] | ProductItemWeb[];
     onItemsChanged: (productItems: ProductItem[] | ProductItemWeb[]) => void;
 
@@ -52,10 +53,11 @@ export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(functi
             <TextField
                 label={languageStore.currentLanguage.search}
                 type="search"
+                variant="outlined"
                 placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
                 value={searchText}
                 onChange={handleSearchTextChange}
-                sx={{ marginRight: '10px', minWidth: '15vw' }}
+                sx={props.style ? props.style : {}}
                 onKeyDownCapture={handleEnterKeyDown}
             />
         )

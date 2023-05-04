@@ -11,6 +11,9 @@ import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
+import { ProductSearchBar } from '@components/productsearch/ProductSearchBar';
+import { ProductItemWeb } from '@models/ProductItemWeb';
+import React from 'react';
 
 interface INavModel {
   path: string;
@@ -19,7 +22,15 @@ interface INavModel {
 
 const Header: React.FC = observer(function Header() {
 
-  const { languageStore } = useContext(MobXContext);
+  const { languageStore, productStore } = useContext(MobXContext);
+
+  const [displayedProductItems, setDisplayedProductItems] = React.useState<ProductItemWeb[]>([]);
+  const [searchText, setSearchText] = React.useState<string>('');
+
+  const handleItemsChanged = (productItems: ProductItemWeb[]) => {
+    setDisplayedProductItems(productItems);
+    console.log(displayedProductItems);
+  }
 
 
   const navPaths: INavModel[] = [];
@@ -46,27 +57,27 @@ const Header: React.FC = observer(function Header() {
   return (
     <Navbar expand="lg" className='header' key="navbar">
       <Container fluid>
-      <Navbar.Brand>
+        <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
             <LionLogo width={70} />
           </NavLink>
         </Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbarScrolls" />
-      
+        <Navbar.Toggle aria-controls="navbarScrolls" />
+
         <Navbar.Collapse id="navbarScroll">
-        <Button onClick={() => {
-              languageStore.toggleLanguage();
-            }}>
-              <Dk />
-            </Button>
-            <Button onClick={() => {
-              languageStore.toggleLanguage();
-            }}>
-              <Us />
-            </Button>
+          <Button onClick={() => {
+            languageStore.toggleLanguage();
+          }}>
+            <Dk />
+          </Button>
+          <Button onClick={() => {
+            languageStore.toggleLanguage();
+          }}>
+            <Us />
+          </Button>
           <Nav
             className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
-            style={{ maxHeight: '100px', width: '100%'}}
+            style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
             {navPaths.map((navItem, index) => {
@@ -85,25 +96,33 @@ const Header: React.FC = observer(function Header() {
             })}
 
           </Nav>
-          <Form className="d-flex">
+          <ProductSearchBar
+            searchText={searchText}
+            setSearchText={setSearchText}
+            productItems={productStore.ProductItems}
+            onItemsChanged={handleItemsChanged}
+            showSearchBar={true}
+            style={{ width: "20rem", backgroundColor: "white", borderRadius: '5px' }}
+          />
+          {/* <Form className="d-flex">
             <Form.Control
               type="search"
               style={{width:"20rem"}}
               placeholder={languageStore.currentLanguage.SearchBarText}
               className="me-2"
               aria-label="Search"
-            />
-          
-            <Button className='search-button'>
+            /> */}
+
+          {/* <Button className='search-button'>
               <NavLink
                 to={"/search"}
                 className={'search-button'}
               >
                 {languageStore.currentLanguage.SearchBarText}
               </NavLink>
-            </Button>
-            <CartDrawer />
-          </Form>
+            </Button> */}
+          <CartDrawer />
+          {/* </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
