@@ -19,24 +19,24 @@ interface IProps {
 }
 
 const RecentSalesList = (props: IProps) => {
-  const { paymentStore } = useContext(MobXContext);
+  const { backofficeStore } = useContext(MobXContext);
   const [toggle, setToggle] = useState(true);
 
   useEffect(() => {
-    const sortedPayments = [...paymentStore.Payments].sort((a: Payment, b: Payment) =>
+    const sortedPayments = [...backofficeStore.Payments].sort((a: Payment, b: Payment) =>
       new Date(b.created).getTime() - new Date(a.created).getTime()
     );
-    paymentStore.Payments = sortedPayments;
+    backofficeStore.Payments = sortedPayments;
   }, []);
 
-  if (paymentStore.Payments) {
+  if (backofficeStore.Payments) {
     const sortByDate = () => {
-      const sortedPayments = [...paymentStore.Payments].sort((a: Payment, b: Payment) => {
+      const sortedPayments = [...backofficeStore.Payments].sort((a: Payment, b: Payment) => {
         const dateA = new Date(a.created);
         const dateB = new Date(b.created);
         return toggle ? dateA.getTime() - dateB.getTime() : dateB.getTime() - dateA.getTime();
       });
-      paymentStore.Payments = sortedPayments;
+      backofficeStore.Payments = sortedPayments;
       setToggle(!toggle);
     };
 
@@ -60,15 +60,13 @@ const RecentSalesList = (props: IProps) => {
               </TableRow>
             </TableHead>
             <TableBody style={{ overflowY: 'auto', maxHeight: '15rem' }}>
-              {paymentStore.Payments
+              {backofficeStore.Payments
                 .map((payment) => (
                   <TableRow key={payment.id}>
                     <TableCell>
-                      {`${new Date(payment.created).getDate().toString().padStart(2, '0')}-${
-                        (new Date(payment.created).getMonth() + 1).toString().padStart(2, '0')
-                      }-${new Date(payment.created).getFullYear()} | ${
-                        new Date(payment.created).getHours().toString().padStart(2, '0')
-                      }:${new Date(payment.created).getMinutes().toString().padStart(2, '0')}`}
+                      {`${new Date(payment.created).getDate().toString().padStart(2, '0')}-${(new Date(payment.created).getMonth() + 1).toString().padStart(2, '0')
+                        }-${new Date(payment.created).getFullYear()} | ${new Date(payment.created).getHours().toString().padStart(2, '0')
+                        }:${new Date(payment.created).getMinutes().toString().padStart(2, '0')}`}
                     </TableCell>
                     <TableCell align="center">
                       {payment.created === 1 ? (
@@ -80,7 +78,7 @@ const RecentSalesList = (props: IProps) => {
                     <TableCell align="center">{payment.payment_method}</TableCell>
                     <TableCell align="right">{`${payment.amount.toFixed(2)} DKK`}</TableCell>
                   </TableRow>
-              ))}
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

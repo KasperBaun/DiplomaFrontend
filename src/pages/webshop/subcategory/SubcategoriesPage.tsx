@@ -9,15 +9,15 @@ import SubCategory from "@models/SubCategory";
 import { Translater } from "@utils/Translater";
 
 const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: any) {
-    const { subCategoryStore } = useContext(MobXContext);
+    const { webshopStore } = useContext(MobXContext);
     const { languageStore } = useContext(MobXContext);
-    const translater = new Translater(); 
+    const translater = new Translater();
 
     let { id } = useParams();
     const location = useLocation();
     const navigate = useNavigate();
     const { name } = location.state;
-    const subCategories = (subCategoryStore.subCategoriesByCategoryID(Number(id)))
+    const subCategories = (webshopStore.subCategoriesByCategoryID(Number(id)))
 
     function handleClick(subCategory: SubCategory, name: String) {
         navigate('/productList/' + subCategory.id, { state: { name } })
@@ -27,14 +27,14 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
     if (subCategories && subCategories.length > 0)
         return (
             <Container>
-                <h1>{translater.getCategoryBasedOnLanguage(languageStore,name)}</h1>
+                <h1>{translater.getCategoryBasedOnLanguage(languageStore, name)}</h1>
                 <div className="container-cat">
                     {subCategories.map((subCategory, index) => (
                         <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                             <div onClick={() => handleClick(subCategory, subCategory.name)}>
-                                <CategoryCardWeb category={subCategory} type={"subCat"}/>
+                                <CategoryCardWeb category={subCategory} type={"subCat"} />
                             </div>
-                    </Grid>
+                        </Grid>
                     ))}
                 </div>
             </Container>

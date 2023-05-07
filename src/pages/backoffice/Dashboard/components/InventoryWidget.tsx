@@ -5,13 +5,13 @@ import { useContext } from "react";
 import { Row } from "react-bootstrap";
 
 const InventoryWidget = () => {
-    const { languageStore, CPVStore } = useContext(MobXContext);
+    const { languageStore, backofficeStore } = useContext(MobXContext);
     return (
         <>
             <Row>
                 <h3>{languageStore.currentLanguage.InventoryWidgetTitle}</h3>
             </Row>
-            <TableContainer  sx={{ height: 180 }}>
+            <TableContainer sx={{ height: 180 }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -20,11 +20,11 @@ const InventoryWidget = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        { CPVStore.CategoryProducts.map((item, index) => (
-                        <TableRow key={"inventory_" + index}>
-                            <TableCell align="left">{ languageStore.getCurrentLanguageCode() === "da_DK" ? item.name.split("|")[0] : item.name.split("|")[1] }</TableCell>
-                            <TableCell align="left">{item.totalProducts}</TableCell>
-                        </TableRow>
+                        {backofficeStore.categoryProducts.map((item, index) => (
+                            <TableRow key={"inventory_" + index}>
+                                <TableCell align="left">{languageStore.getCurrentLanguageCode() === "da_DK" ? item.name.split("|")[0] : item.name.split("|")[1]}</TableCell>
+                                <TableCell align="left">{item.totalProducts}</TableCell>
+                            </TableRow>
                         ))}
                     </TableBody>
                 </Table>

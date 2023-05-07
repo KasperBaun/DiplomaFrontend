@@ -1,33 +1,39 @@
-import Footer from "@components/footer/Footer";
+import { Footer } from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import Loading from "@components/loading/Loading";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Constants } from "@utils/Constants";
 import { observer } from "mobx-react-lite";
-import { FunctionComponent, useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 
-interface WebshopProps {
+const Webshop: React.FC = observer(function Webshop() {
 
-}
+    const { webshopStore, rootStore } = useContext<IMobXContext>(MobXContext);
 
-const Webshop: FunctionComponent<WebshopProps> = observer(function Webshop() {
+    useEffect(() => {
+        const webshopStoreLoaded = async () => {
+            if (!rootStore.isWebshopLoaded && !rootStore.isWebshopLoading) {
+                await rootStore.loadWebShop();
+            }
+        }
+        webshopStoreLoaded();
+    });
 
-    const { rootStore } = useContext<IMobXContext>(MobXContext);
-
-    if (!rootStore.isLoaded) {
+    if (!webshopStore.isLoaded) {
         return (
             <Loading
-                size={100}
+                size={50}
                 color={Constants.primaryColor}
+                loadingText="Loading..."
             />
         )
     } else {
         return (
             <div>
                 <Header />
-                <Container style={{ minHeight:"70vh", display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: 'auto' }}>
+                <Container style={{ minHeight: "80vh", display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: 'auto' }}>
                     <Outlet />
                 </Container>
                 <Footer />

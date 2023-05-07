@@ -1,7 +1,7 @@
 import OrderElements from "./OrderElements";
 
 export default class Order {
-    id: number;
+    id?: number;
     customerId: number;
     paymentId: number;
     paymentStatus: string;

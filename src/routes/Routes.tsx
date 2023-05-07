@@ -10,7 +10,7 @@ import PaymentPage from "@webshop/payment/PaymentPage"
 import ProductPage from "@webshop/product/ProductPage"
 import SearchPage from "@webshop/search/SearchPage"
 import Auth from "@backoffice/Auth"
-import ProductListPage from "@webshop/product/ProductListPage"
+import { ProductListPage } from "@webshop/product/ProductListPage"
 import AboutUsPage from "@webshop/aboutUs/AboutUsPage"
 
 const Routing: React.FC = function Routing() {
@@ -26,12 +26,12 @@ const Routing: React.FC = function Routing() {
                 <Route path="subcategories/:id" element={<SubcategoriesPage />} />
                 <Route path="subcategories" element={<SubcategoriesPage />} />
                 <Route path="basket" element={<BasketPage />} />
-                <Route path="confirmation" element={<ConfirmationPage />} />
-                <Route path="payment" element={<PaymentPage orders={ [{"id": 0, "active": false, "customerId": 4, "deliveryStatus": "Waiting for Payment", "paymentId": 0, "discountCode": "", "name": "Vase", "manufacturer": "Royal Copenhagen", "productItemId": 13, "paymentStatus": "Missing Payment"}] } /> } />
+                <Route path="confirmation/:id" element={<ConfirmationPage />} />
+                <Route path="payment" element={<PaymentPage orders={[{ "id": 0, "active": false, "customerId": 4, "deliveryStatus": "Waiting for Payment", "paymentId": 0, "discountCode": "", "name": "Vase", "manufacturer": "Royal Copenhagen", "productItemId": 13, "paymentStatus": "Missing Payment" }]} />} />
                 <Route path="product/:id" element={<ProductPage />} />
                 <Route path="productList" element={<ProductListPage />} />
                 <Route path="productList/:id" element={<ProductListPage />} />
-                <Route path="aboutUs" element={<AboutUsPage/>} />
+                <Route path="aboutUs" element={<AboutUsPage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>

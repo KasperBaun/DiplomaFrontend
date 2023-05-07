@@ -7,13 +7,13 @@ import { materialType } from '@models/Enums';
 import { ProductItem } from '@models/ProductItem';
 import { observer } from 'mobx-react-lite';
 
-export interface IProductDetailsProps {
+export type ProductDetailsProps = {
     productItem?: ProductItem;
 }
 
-const ProductDetails: React.FC<IProductDetailsProps> = observer(function ProductDetails(props: IProductDetailsProps) {
+const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductDetails(props: ProductDetailsProps) {
     const { productItem } = props;
-    const { languageStore, backofficeStore, subCategoryStore } = useContext<IMobXContext>(MobXContext);
+    const { languageStore, backofficeStore } = useContext<IMobXContext>(MobXContext);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
     const [selectedMaterial, setSelectedMaterial] = useState<materialType>(productItem?.product?.material ? productItem.product.material : null);
 
@@ -24,7 +24,7 @@ const ProductDetails: React.FC<IProductDetailsProps> = observer(function Product
         }
         else {
             const subcategoryId: number = event.target.value;
-            const subcat = subCategoryStore.getSubcategory(subcategoryId);
+            const subcat = backofficeStore.getSubcategory(subcategoryId);
             if (subcat) {
                 productItem.product.subcategories.push(subcat);
                 setSelectedSubcategory(subcat);

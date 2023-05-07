@@ -5,6 +5,7 @@ import '../css/payment.scss';
 import { LanguageStore } from "@stores/LanguageStore";
 import React from "react";
 import validator from 'validator';
+import { CheckoutForm } from "@models/Checkout";
 
 
 interface IpInfo {
@@ -18,21 +19,8 @@ interface IpInfo {
 
 interface IUserDetailFormProps {
     ls: LanguageStore;
-    setCheckoutForm: Dispatch<SetStateAction<ICheckoutForm>>;
+    setCheckoutForm: Dispatch<SetStateAction<CheckoutForm>>;
     setIsCheckoutReady: Dispatch<SetStateAction<boolean>>;
-}
-
-interface ICheckoutForm {
-    email: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    countryCode: string;
-    phone: string;
-    deliveryMethod: string;
 }
 
 const UserDetailForm = (props: IUserDetailFormProps) => {

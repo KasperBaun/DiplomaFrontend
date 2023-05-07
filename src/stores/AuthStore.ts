@@ -13,6 +13,7 @@ export class AuthStore {
     private rootStore: RootStore;
     private prefix: string = `%c[AuthStore]`;
     private color: string = ComponentLoggingConfig.DarkPurple;
+    private loading: boolean = false;
     private loaded: boolean = false;
     private authService: AuthService;
     private _userAuthenticated: boolean = false;
@@ -27,6 +28,9 @@ export class AuthStore {
     }
 
     public async init(): Promise<boolean> {
+        runInAction(() => {
+            this.loading = true;
+        });
         this.authStateProvider = new AuthStateProvider();
         // Look for previous token and use it to sign in if possible
         const authed = await this.authStateProvider.trySilentAuthenticateUser();
@@ -36,12 +40,14 @@ export class AuthStore {
             });
             this.setUserAuthed();
         }
+        
+        runInAction(() => {
+            this.loading = false;
+            this.loaded = true;
+        })
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
-        runInAction(() => {
-            this.loaded = true;
-        })
         return this.loaded;
     }
 
@@ -54,6 +60,10 @@ export class AuthStore {
 
     public get isLoaded(): boolean {
         return this.loaded;
+    }
+
+    public get isLoading(): boolean {
+        return this.loading;
     }
 
     public get userAuthenticated(): boolean {

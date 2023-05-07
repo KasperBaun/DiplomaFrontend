@@ -1,11 +1,5 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Typography } from '@mui/material';
 import Category from '@models/Category';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext } from 'react';
@@ -20,21 +14,13 @@ export interface ICategoryCardProps {
 
 const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: ICategoryCardProps) {
 
-    const { subCategoryStore, languageStore } = useContext<IMobXContext>(MobXContext);
-    const subcategoryCount: number = subCategoryStore.subCategoriesByCategoryID(props.category.id) ? subCategoryStore.subCategoriesByCategoryID(props.category.id).length : 0;
+    const { backofficeStore, languageStore } = useContext<IMobXContext>(MobXContext);
+    const subcategoryCount: number = backofficeStore.subCategoriesByCategoryID(props.category.id) ? backofficeStore.subCategoriesByCategoryID(props.category.id).length : 0;
     const subcategoryCountTitle: string = subcategoryCount + " " + languageStore.currentLanguage.SubCategoriesTabText.toLowerCase();
 
-    const onImageClicked = () => {
-        props.goToSubcategories(props.category);
-    }
-
-    const onUpdateIconClicked = () => {
-        props.updateCategory(props.category)
-    }
-
-    const onDeleteIconClicked = () => {
-        props.deleteCategory(props.category)
-    }
+    const onImageClicked = () => { props.goToSubcategories(props.category); }
+    const onUpdateIconClicked = () => { props.updateCategory(props.category) }
+    const onDeleteIconClicked = () => { props.deleteCategory(props.category) }
 
     return (
         <Card sx={{ width: '300px' }}>
@@ -69,23 +55,9 @@ const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: 
                 <IconButton onClick={onUpdateIconClicked} aria-label="edit">
                     <Edit />
                 </IconButton>
-
-
             </CardActions>
         </Card>
     );
 }
 
 export default CategoryCard;
-
-
-// <CardHeader
-//                 avatar={
-//                     <Avatar>
-//                         {props.category.order ? props.category.order : ''}
-//                     </Avatar>
-//                 }
-
-                    // <IconButton aria-label="settings">
-                    //     <MoreVertIcon />
-                    // </IconButton>

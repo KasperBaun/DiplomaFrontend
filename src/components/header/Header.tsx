@@ -65,16 +65,16 @@ const Header: React.FC = observer(function Header() {
         <Navbar.Toggle aria-controls="navbarScrolls" />
 
         <Navbar.Collapse id="navbarScroll">
-          <Button onClick={() => {
-            languageStore.toggleLanguage();
-          }}>
-            <Dk />
-          </Button>
-          <Button onClick={() => {
-            languageStore.toggleLanguage();
-          }}>
-            <Us />
-          </Button>
+        <Button onClick={() => {
+              languageStore.toggleLanguage();
+            }}>
+              <Dk />
+            </Button>
+            <Button style={{paddingRight:'20rem'}} onClick={() => {
+              languageStore.toggleLanguage();
+            }}>
+              <Us/>
+            </Button>
           <Nav
             className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
             style={{ maxHeight: '100px', width: '100%' }}

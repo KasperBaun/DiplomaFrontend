@@ -11,6 +11,14 @@ import Image from '@models/Image';
 import PriceHistory from '@models/PriceHistory';
 import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
+import ProductItemDetails from '@models/ProductItemDetails';
+import CategoryProductView from '@models/CategoryProductView';
+import Payment from '@models/Payment';
+import SalesSummary from '@models/SalesSummary';
+import Order from '@models/Order';
+import OrderElements from '@models/OrderElements';
+import OrderDetails from '@models/OrderDetails';
+import OrderDTO from '@models/DTO/OrderDTO';
 
 
 export class BackofficeStore {
@@ -23,12 +31,6 @@ export class BackofficeStore {
     /* Loading states */
     private loaded: boolean = false;
     private loading: boolean = false;
-    private categoriesLoaded: boolean = false;
-    private subcategoriesLoaded: boolean = false;
-    private productsLoaded: boolean = false;
-    private productItemsLoaded: boolean = false;
-    private imagesLoaded: boolean = false;
-    private pricehistoriesLoaded: boolean = false;
 
     /* Data arrays */
     private _categories: Category[] = [];
@@ -37,6 +39,16 @@ export class BackofficeStore {
     private _productItems: ProductItem[] = [];
     private _images: Image[] = [];
     private _pricehistories: PriceHistory[] = [];
+    private _payments: Payment[] = [];
+    private _salesSummary: SalesSummary[] = [];
+    private _orders: Order[] = [];
+    private _orderElements: OrderElements[] = [];
+
+    /* Views */
+    public categoryProducts: CategoryProductView[] = [];
+    public productItemDetails: ProductItemDetails[] = [];
+    public orderDetails: OrderDetails[] = [];
+
 
     /* Maps for quick access */
     private _categoryMap: Map<number, Category> = new Map();
@@ -67,19 +79,13 @@ export class BackofficeStore {
         runInAction(() => {
             this._categories = categories;
             this._categoryMap = this.createCategoryMap(this._categories);
-            this.categoriesLoaded = true;
 
             this._subcategories = subcategories;
             this.mapCategoryToSubcategory(this._subcategories);
             this.subcategoriesInCategoryMap = this.mapSubCategoriesToCategoryId(this._subcategories);
             this._subcategoryMap = this.createSubcategoryMap(this._subcategories);
-            this.subcategoriesLoaded = true;
-
             this._images = images;
-            this.imagesLoaded = true;
-
             this._pricehistories = pricehistories;
-            this.pricehistoriesLoaded = true;
         })
 
         const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
@@ -88,16 +94,32 @@ export class BackofficeStore {
             this._productMap = this.createProductMap(this._products);
         });
         const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
+        const productItemDetails: ProductItemDetails[] = await this.apiService.getProductItemDetails();
+        const categoryProductViews: CategoryProductView[] = await this.apiService.getCategoryProducts();
         runInAction(() => {
             this._productItems = this.generateProductItems(productItemDTOs, this._productMap);
             this._productItemMap = this.createProductItemsMap(this.productItems);
-            this.productsLoaded = true;
-            this.productItemsLoaded = true;
-            this.loading = false;
-            this.loaded = this.categoriesLoaded && this.subcategoriesLoaded && this.productsLoaded && this.productItemsLoaded && this.imagesLoaded && this.pricehistoriesLoaded;
+            this.productItemDetails = productItemDetails;
+            this.categoryProducts = categoryProductViews;
+            
         });
 
-        // Get Orders
+        const payments = await this.apiService.getPayments()
+        const salesSummary = await this.apiService.getSalesSummary();
+
+        const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
+        const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
+        const orderElements: OrderElements[] = await this.apiService.getOrderElements();
+        
+        runInAction(() => {
+            this._payments = payments;
+            this._salesSummary = salesSummary;
+            this._orderElements = orderElements;
+            this._orders = this.generateOrders(orderDTOs, this._orderElements);
+            this.orderDetails = orderDetails;
+            this.loading = false;
+            this.loaded = true;
+        })
 
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
@@ -111,6 +133,66 @@ export class BackofficeStore {
             BackofficeStore._Instance = new BackofficeStore(_rootStore, _apiService);
         }
         return BackofficeStore._Instance;
+    }
+
+    public get isLoading(): boolean {
+        return this.loading;
+    }
+
+    /* Orders */
+    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
+        const orders: Order[] = [];
+        for (var orderDTO of ordersDTO) {
+            const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+            const order: Order = new Order();
+            order.id = orderDTO.id;
+            order.customerId = orderDTO.customerId;
+            order.paymentId = orderDTO.paymentId;
+            order.paymentStatus = orderDTO.paymentStatus;
+            order.deliveryStatus = orderDTO.deliveryStatus;
+            order.discountCode = orderDTO.discountCode;
+            order.active = orderDTO.active;
+            order.orderElements = orderOrderElements;
+            orders.push(order);
+        }
+        return orders;
+    }
+
+    public get Orders(): Order[] {
+        return this._orders;
+    }
+
+    /* Payments */
+    public get Payments(): Payment[] {
+        return this._payments;
+    }
+
+    public set Payments(value: Payment[]) {
+        this._payments = value;
+    }
+
+    public get SalesSummaries(): SalesSummary[] {
+        return this._salesSummary;
+    }
+
+    public getPayment(id: string): Payment {
+        return this._payments.find(p => p.id === id);
+    }
+
+    public async createPayment(payment: Payment): Promise<Payment> {
+        return await this.apiService.createPayment(payment);
+    }
+
+    private async refreshPayments(): Promise<void> {
+        await runInAction(async () => {
+            this._payments = await this.apiService.getPayments();
+        });
+    }
+
+    private async refreshSalesSummary(): Promise<void> {
+        await runInAction(async () => {
+            this._salesSummary = await this.apiService.getSalesSummary();
+        });
     }
 
 
@@ -204,7 +286,7 @@ export class BackofficeStore {
             const productSubcategories: SubCategory[] = [];
 
             for (const subcatId of productDTO.subcategoryIds) {
-                productSubcategories.push(this.rootStore.subCategoryStore.getSubcategory(subcatId));
+                productSubcategories.push(this.getSubcategory(subcatId));
             }
 
             const product: Product = {
@@ -279,19 +361,15 @@ export class BackofficeStore {
         await this.apiService.deleteProductItem(id);
         return;
     }
-
     public getProduct(id: number): Product {
         return this._productMap.get(id);
     }
-
     public getProductItem(id: number): ProductItem {
         return this._productItemMap.get(id);
     }
-
     public get ProductItems(): ProductItem[] {
         return this.productItems;
     }
-
     public get isLoaded(): boolean {
         return this.loaded;
     }
@@ -299,11 +377,6 @@ export class BackofficeStore {
     public get productItems(): ProductItem[] {
         return this._productItems;
     }
-
-    public get Categories(): Category[] {
-        return this._categories;
-    }
-
     public get subCategories(): SubCategory[] {
         return this._subcategories;
     }
@@ -319,5 +392,55 @@ export class BackofficeStore {
 
     public getSubcategory(id: number): SubCategory {
         return this._subcategoryMap.get(id);
+    }
+
+
+    /* Categories */
+
+    public get Categories(): Category[] {
+        return this._categories;
+    }
+
+    public getCategory(id: number): Category {
+        return this._categories.find(c => c.id === id);
+    }
+
+    public async createCategory(category: Category): Promise<void> {
+        try {
+            await this.apiService.createCategory(category).then(() => {
+                runInAction(() => {
+                    this._categories.push(category);
+                }
+                )
+            });
+            return;
+        } catch (err) {
+            console.log("Failed creating new category. Error: ", err);
+        }
+    }
+
+    public async deleteCategory(id: number): Promise<void> {
+        await this.apiService.deleteCategory(id);
+        runInAction(() => {
+            this._categories = this._categories.filter(c => c.id !== id);
+        })
+        return;
+    }
+
+    public async updateCategory(category: Category): Promise<void> {
+        try {
+            await this.apiService.updateCategory(category)
+                .then(async () => await this.refreshCategories());
+            return;
+        } catch (err) {
+            console.log("Failed creating new category. Error: ", err);
+        }
+        return;
+    }
+
+    private async refreshCategories(): Promise<void> {
+        await runInAction(async () => {
+            this._categories = await this.apiService.getCategories();
+        });
     }
 }

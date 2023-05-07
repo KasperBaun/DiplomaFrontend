@@ -1,30 +1,23 @@
 import * as React from "react";
 import { RootStore } from "./RootStore";
-import { ProductStore } from "./ProductStore";
-import { CategoryStore } from "./CategoryStore";
 import { LanguageStore } from "./LanguageStore";
-import { SubCategoryStore } from "./SubCategoryStore";
-import { PaymentStore } from "./PaymentStore";
 import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
-import { CategoryProductViewStore } from "./CategoryProductViewStore";
-import { OrderStore } from "./OrderStore";
 import { BasketStore } from "./BasketStore";
+import { WebshopStore } from "./WebshopStore";
 
 export interface IMobXContext {
-    productStore: ProductStore;
     rootStore: RootStore;
-    categoryStore : CategoryStore;
-    subCategoryStore : SubCategoryStore;
+    /* Webshop stores */
     languageStore: LanguageStore;
-    paymentStore : PaymentStore;
+    webshopStore : WebshopStore;
+    basketStore : BasketStore;
+    
+    /* Backoffice stores */
+    authStore: AuthStore;
     backofficeStore: BackofficeStore;
     sniperStore : SniperStore;
-    authStore: AuthStore;
-    CPVStore : CategoryProductViewStore;
-    orderStore : OrderStore;
-    basketStore : BasketStore;
 }
 
 const MobXContext = React.createContext<IMobXContext>(undefined);

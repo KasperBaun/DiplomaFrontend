@@ -4,14 +4,14 @@ import MobXContext from '@stores/MobXContext';
 import React, { useContext } from 'react';
 import { useState } from "react";
 
-export interface IMyCardProps {
+type ProductCardWebProps = {
   data: ProductItemWeb;
 }
 
-const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
+export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(props: ProductCardWebProps) {
 
   const productItem = props.data;
-  const { languageStore } = useContext(MobXContext);  
+  const { languageStore } = useContext(MobXContext);
 
   const [cardStyle, setCardStyle] = useState({
     width: 300,
@@ -63,5 +63,3 @@ const MyCard: React.FC<IMyCardProps> = function MyCard(props: IMyCardProps) {
     </Card>
   );
 };
-
-export default MyCard;

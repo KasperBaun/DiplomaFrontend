@@ -18,11 +18,9 @@ import { useNavigate } from "react-router-dom";
 import './homepage.scss';
 import { ProductItemWeb } from "@models/ProductItemWeb";
 
-interface IHomePageProps {
 
-}
 
-const HomePage: React.FC<IHomePageProps> = observer(function HomePage(props: IHomePageProps) {
+const HomePage: React.FC = observer(function HomePage() {
 
     return (
         <Container style={{ textAlign: "center" }}>
@@ -36,13 +34,13 @@ export default HomePage;
 
 
 export const SelectedProductItems = observer(function SelectedProductItems() {
-    const { productStore, languageStore } = useContext(MobXContext);
+    const { webshopStore, languageStore } = useContext(MobXContext);
     const navigate = useNavigate();
     function handleClick(product: ProductItemWeb) {
         navigate('/product/' + product.id)
     }
 
-    if (productStore.ProductItems) {
+    if (webshopStore.productItems) {
         //console.log(toJS(productStore.ProductItems))
         const handleSlide = () => {
             const caption = document.querySelector('.carousel-caption');
@@ -57,11 +55,11 @@ export const SelectedProductItems = observer(function SelectedProductItems() {
         return (
             <Cont>
                 <Carousel className="CarouselFrontpage" fade onSlide={handleSlide}>
-                    {productStore.ProductItems.map((product) => (
+                    {webshopStore.productItems.map((product) => (
                         <CarouselItem key={product.id}>
                             <div style={{ textAlign: 'center' }}>
                                 <img className="CarouselItemImg"
-                                    src={product.images[0].url}
+                                    src={product.images[0]?.url ? product.images[0]?.url : "https://via.placeholder.com/300x300.png?text=No+image"}
                                     alt={product.product.name}
                                     style={{ objectFit: 'cover', minWidth: '50rem', maxHeight: '30rem' }}
                                 />
@@ -114,7 +112,7 @@ export const SelectedProductItems = observer(function SelectedProductItems() {
 
 export const SelectedCategories = observer(function SelectedCategories() {
 
-    const { categoryStore, languageStore } = useContext(MobXContext);
+    const { webshopStore, languageStore } = useContext(MobXContext);
 
     const navigate = useNavigate();
 
@@ -122,7 +120,7 @@ export const SelectedCategories = observer(function SelectedCategories() {
         navigate('/subcategories/' + category.id, { state: { name } })
     }
 
-    if (categoryStore.Categories)
+    if (webshopStore.Categories)
         return (
             <Box sx={{ bgcolor: "background.paper", py: 8 }}>
                 <Container maxWidth="lg">
@@ -131,7 +129,7 @@ export const SelectedCategories = observer(function SelectedCategories() {
                     </Typography>
                     <hr />
                     <Grid container columnSpacing={0} rowSpacing={2} style={{ textAlign: "center" }}>
-                        {categoryStore.Categories.map((category) => (
+                        {webshopStore.Categories.map((category) => (
                             <Grid item key={category.id} xs={12} sm={6} md={4}>
                                 <Card className="GridCategoryCard" sx={{ maxWidth: 345 }} onClick={() => handleClick(category, category.name)}>
                                     <CardMedia component="img" height="140" src={category.imageUrl} />
