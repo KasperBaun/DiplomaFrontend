@@ -49,7 +49,7 @@ const CartDrawer: React.FC = observer(function CartDrawer(){
     
             <List style={{maxHeight:"80vh", overflow:'auto', marginBottom:'6rem'}}>
               {basketStore.Basket.map((item, index) => (
-                <div>
+                <div key={item.id}>
                   <CartItem key={item.id} item={item} />
                   <Divider style={{paddingTop:"1rem"}}/>
                 </div>

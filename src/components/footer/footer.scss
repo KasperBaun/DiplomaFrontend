@@ -1,7 +1,7 @@
 @import "~@styles/Main.scss";
 
 .footerLink {
-  text-decoration: none;
+  text-decoration: none !important;
 
   &:hover {
     color: $textHoverColor !important;

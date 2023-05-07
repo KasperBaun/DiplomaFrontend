@@ -17,7 +17,7 @@ export class MobilePayForm {
 }
 
 export class PaymentForm {
-    id ?: number;
+    id ?: string;
     checkoutForm : CheckoutForm;
     paymentMethod : string;
     mobilePayPhone ?: MobilePayForm;

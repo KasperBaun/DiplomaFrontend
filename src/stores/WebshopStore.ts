@@ -13,6 +13,7 @@ import { ProductItemWeb } from '@models/ProductItemWeb';
 import Order from '@models/Order';
 import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
+import Payment from '@models/Payment';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -32,10 +33,11 @@ export class WebshopStore {
     private _images: Image[] = [];
     private _checkoutPayments : PaymentForm[] = [];
     private _customer : Customer = null;
+    private _payment : Payment = null;
 
     /* Maps for quick access */
     private _categoryMap: Map<number, Category> = new Map();
-    private _checkoutPaymentMap: Map<number, PaymentForm> = new Map();
+    private _checkoutPaymentMap: Map<string, PaymentForm> = new Map();
     private _subcategoryMap: Map<Number, SubCategory> = new Map();
     private _productMap: Map<number, Product> = new Map();
     private _productItemMap: Map<number, ProductItemWeb> = new Map();
@@ -101,10 +103,10 @@ export class WebshopStore {
         return map;
     }
 
-    private createCheckoutPaymentMap(checkoutPayments: PaymentForm[]): Map<number, PaymentForm> {
-        const map = new Map<number, PaymentForm>();
+    private createCheckoutPaymentMap(checkoutPayments: PaymentForm[]): Map<string, PaymentForm> {
+        const map = new Map<string, PaymentForm>();
         for (const checkout of checkoutPayments) {
-            map.set(checkout.id, checkout);
+            map.set(checkout.checkoutForm.customer.email, checkout);
         }
         return map;
     }
@@ -248,7 +250,7 @@ export class WebshopStore {
         return this._checkoutPayments;
     }
 
-    public getCheckoutPaymentById(id: number): PaymentForm { 
+    public getCheckoutPaymentById(id: string): PaymentForm { 
         const result = this._checkoutPaymentMap.get(id);
         if(!result) {
             return null;
@@ -279,6 +281,24 @@ export class WebshopStore {
 
     public set Customer(customer: Customer) {
         this._customer = customer;
+    }
+
+    public get Payment() : Payment {
+        return this._payment;
+    }
+
+    public set Payment(payment: Payment) {
+        this._payment = payment;
+    }
+
+    public async createPayment(payment: Payment): Promise<Payment> {
+        const createdPayment = await this.apiService.createPayment(payment);
+        return createdPayment;
+    }
+
+    public async getPaymentById(id: number): Promise<Payment> {
+        const payment = await this.apiService.getPaymentById(id);
+        return payment;
     }
 
     public async createCustomer(customer: Customer): Promise<Customer> {

@@ -34,9 +34,12 @@ const PaymentPage = (props: IPaymentPageProps) => {
     const [isCheckoutReady, setIsCheckoutReady] = useState<boolean>(false);
 
     const handleOnPaymentClick = () => {
+        console.log(isCheckoutReady);
         if(isCheckoutReady) {
-            if(mobilePayPhone) {
+            console.log(mobilePayPhone);
+            if(mobilePayPhone.phoneNumber) {
                 setPaymentForm({
+                    id: checkoutForm.customer.email,
                     checkoutForm: checkoutForm,
                     paymentMethod: paymentMethod,
                     mobilePayPhone: mobilePayPhone,
@@ -44,6 +47,7 @@ const PaymentPage = (props: IPaymentPageProps) => {
 
                 // Save to Store
                 webshopStore.setCheckoutPayment(paymentForm);
+                console.log(paymentForm);
                 // Navigate to Confirmation Page
                 navigate('/confirmation/' + paymentForm.id)
             }
@@ -55,7 +59,10 @@ const PaymentPage = (props: IPaymentPageProps) => {
                 });
 
                 // Save to Store
+                webshopStore.setCheckoutPayment(paymentForm);
+                console.log(paymentForm);
                 // Navigate to Confirmation Page
+                navigate('/confirmation/' + paymentForm.id)
             }
             else if(paypalApproved) {
                 setPaymentForm({
@@ -65,14 +72,15 @@ const PaymentPage = (props: IPaymentPageProps) => {
                 });
 
                 // Save to Store
+                webshopStore.setCheckoutPayment(paymentForm);
+                console.log(paymentForm);
                 // Navigate to Confirmation Page
+                navigate('/confirmation/' + paymentForm.id)
             }
             else {
                 alert("Error with payment");
             }
         }
-
-
     }
 
     const selectPaymentExecutor = () => { 

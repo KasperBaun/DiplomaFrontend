@@ -150,6 +150,9 @@ class APIService implements IAPIService {
     async createPayment(payment: Payment): Promise<Payment> {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
     }
+    async getPaymentById(id: number): Promise<Payment> {
+        return await this.crudHelper.readSingle(this.apiBaseUrl + "/Payment/" + id, "Payment");
+    }
 
     /* Sales */
     async getSalesSummary(): Promise<SalesSummary[]> {

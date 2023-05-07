@@ -1,4 +1,3 @@
-import { Button, FormControl, FormControlLabel, FormLabel, Grid, Input, InputLabel, Radio, RadioGroup } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import '../css/payment.scss';
@@ -6,6 +5,7 @@ import { LanguageStore } from "@stores/LanguageStore";
 import React from "react";
 import validator from 'validator';
 import { CheckoutForm } from "@models/Checkout";
+import { Col, Container, Form, Row } from "react-bootstrap";
 
 
 interface IpInfo {
@@ -95,13 +95,13 @@ const UserDetailForm = (props: IUserDetailFormProps) => {
     const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
         setFirstName(input);
-        setFirstNameValid(validator.isAlpha(input));
+        setFirstNameValid(validator.isAlpha(input, 'da-DK'));
     };
 
     const handleLastNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
         setLastName(input);
-        setLastNameValid(validator.isAlpha(input));
+        setLastNameValid(validator.isAlpha(input, 'da-DK'));
     };
 
     const handleAddressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,107 +140,161 @@ const UserDetailForm = (props: IUserDetailFormProps) => {
         setPhoneValid(validator.isMobilePhone(input, "any"));
     };
 
+    
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
         setDeliveryMethod(input);
     };
 
-    if(emailValid && firstNameValid && lastNameValid && addressValid && zipCodeValid && cityValid && countryValid && countryCodeValid && phoneValid) {
-        props.setIsCheckoutReady(true);
+    const handleOnInfoCorrectClick = () => {
+        console.log("Pre Info correct");
+        if(emailValid && addressValid && phoneValid) {
+            console.log("Checkout ready");
+            props.setIsCheckoutReady(true);
+        }
     }
 
     return (
-        <Grid className="checkoutForm" style={{ maxHeight: 750 }} container spacing={1} columns={12}>
+        <Container className="checkoutForm" style={{ maxHeight: 650 }}>
 
-            <Grid item className="GridItem" xs={12} style={{ textAlign: "center" }}>
+            <Row className="GridItem" xs={12} style={{ textAlign: "center" }}>
                 <h3>{props.ls.currentLanguage.CheckoutFormTitle}</h3>
-            </Grid>
+            </Row>
 
-            <Grid item className="GridItem" xs={12}>
-                {/* Email */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="Email">{props.ls.currentLanguage.CheckoutFormEmailLabel}</InputLabel>
-                    <Input id="Email" type="text" onChange={handleEmailChange} />
-                </FormControl>
-            </Grid>
+                <Row>
+                    <Col xs={12} md={6}>
+                        {/* Fornavn */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormFirstNameLabel}</Form.Label>
+                            <Form.Control type="text"
+                                className={firstNameValid ? 'is-valid' : 'is-invalid'}
+                                onChange={handleFirstNameChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    
+                    <Col xs={12} md={6}>
+                        {/* Efternavn */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormLastNameLabel}</Form.Label> 
+                            <Form.Control type="text" className={lastNameValid ? 'is-valid' : 'is-invalid'} 
+                            onChange={handleLastNameChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
 
-            <Grid item className="GridItem" xs={6} md={6}>
-                {/* Fornavn */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="FirstName">{props.ls.currentLanguage.CheckoutFormFirstNameLabel}</InputLabel>
-                    <Input id="FirstName" type="text" onChange={handleFirstNameChange} />
-                </FormControl>
-            </Grid>
+                <Row>
+                    {/* Email */}
+                    <Form.Group className="GridFormControl">
+                        <Form.Label>{props.ls.currentLanguage.CheckoutFormEmailLabel}</Form.Label>
+                        <Form.Control type="text"
+                            className={emailValid ? 'is-valid' : 'is-invalid'}
+                            onChange={handleEmailChange}>
+                        </Form.Control>
+                    </Form.Group>
+                </Row>
 
-            <Grid item className="GridItem" xs={6} md={6}>
-                {/* Efternavn */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="LastName">{props.ls.currentLanguage.CheckoutFormLastNameLabel}</InputLabel>
-                    <Input id="LastName" type="text" onChange={handleLastNameChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={12} md={12}>
-                {/* Vej/Gade & Husnummer */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="Street">{props.ls.currentLanguage.CheckoutFormAddressLabel}</InputLabel>
-                    <Input id="Street" type="text" onChange={handleAddressChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={6} md={6}>
-                {/* Postnummer */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="Postal">{props.ls.currentLanguage.CheckoutFormZipCodeLabel}</InputLabel>
-                    <Input id="Postal" type="number" value={zipCode} onChange={handleZipCodeChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={6} md={6}>
-                {/* By*/}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="City">{props.ls.currentLanguage.CheckoutFormCityLabel}</InputLabel>
-                    <Input id="City" type="text" value={city} onChange={handleCityChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={12} md={12}>
-                {/* Land */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="Country">{props.ls.currentLanguage.CheckoutFormCountryLabel}</InputLabel>
-                    <Input id="Country" type="text" value={country} onChange={handleCountryChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={3} md={3}>
-                {/* Landekode */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="CountryCode">{props.ls.currentLanguage.CheckoutFormCountryCodeLabel}</InputLabel>
-                    <Input id="CountryCode" type="text" value={countryCode} onChange={handleCountryCodeChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={9} md={9}>
-                {/* Tlf */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <InputLabel htmlFor="PhoneNumber">{props.ls.currentLanguage.CheckoutFormPhoneLabel}</InputLabel>
-                    <Input id="PhoneNumber" type="number" onChange={handlePhoneChange} />
-                </FormControl>
-            </Grid>
-
-            <Grid item className="GridItem" xs={9} md={9}>
-                {/* Delivery Options */}
-                <FormControl className="GridFormControl" margin="normal">
-                    <FormLabel htmlFor="DeliverMethod">{props.ls.currentLanguage.CheckoutFormDeliveryLabel}</FormLabel>
-                    <RadioGroup
-                        id="DeliverMethod"
-                        onChange={handleChange}>
-                        <FormControlLabel value="Collect" control={<Radio />} label={props.ls.currentLanguage.CheckoutFormDeliveryOptionCollectLabel} />
-                        <FormControlLabel value="Ship" control={<Radio />} label={props.ls.currentLanguage.CheckoutFormDeliveryOptionSendLabel} />
-                    </RadioGroup>
-                </FormControl>
-            </Grid>
-        </Grid>
+                <Row>
+                    <Col xs={12} md={8}>
+                        {/* Vej/Gade & Husnummer */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormAddressLabel}</Form.Label>
+                            <Form.Control type="text"
+                                className={addressValid ? 'is-valid' : 'is-invalid'}
+                                onChange={handleAddressChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        {/* Postnummer */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormZipCodeLabel}</Form.Label>
+                            <Form.Control type="text"
+                                className={zipCode.length > 0 ? 'is-valid' : 'is-invalid'}
+                                value={zipCode}
+                                onChange={handleZipCodeChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        {/* By*/}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormCityLabel}</Form.Label>
+                            <Form.Control type="text"
+                                className={city.length > 0 ? 'is-valid' : 'is-invalid'}
+                                value={city}
+                                onChange={handleCityChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        {/* Land */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormCountryLabel}</Form.Label>
+                            <Form.Control type="text"
+                                className={country.length > 0 ? 'is-valid' : 'is-invalid'}
+                                value={country}
+                                onChange={handleCountryChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                        {/* Landekode */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormCountryCodeLabel}</Form.Label>
+                            <Form.Control type="text"
+                                className={countryCode.length > 0 ? 'is-valid' : 'is-invalid'}
+                                value={countryCode}
+                                onChange={handleCountryCodeChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} md={6}>
+                        {/* Tlf */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormPhoneLabel}</Form.Label>
+                            <Form.Control type="number"
+                                className={phoneValid ? 'is-valid' : 'is-invalid'}
+                                onChange={handlePhoneChange}>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col xs={12} md={6}>
+                        {/* Delivery Options */}
+                        <Form.Group className="GridFormControl">
+                            <Form.Label>{props.ls.currentLanguage.CheckoutFormDeliveryLabel}</Form.Label>
+                            <Form.Check
+                                type="radio"
+                                name="deliveryOption"
+                                id="Collect"
+                                value="Collect"
+                                checked={deliveryMethod === 'Collect'}
+                                onChange={handleChange}
+                                label={props.ls.currentLanguage.CheckoutFormDeliveryOptionCollectLabel}
+                            />
+                            <Form.Check
+                                type="radio"
+                                name="deliveryOption"
+                                id="Ship"
+                                value="Ship"
+                                checked={deliveryMethod === 'Ship'}
+                                onChange={handleChange}
+                                label={props.ls.currentLanguage.CheckoutFormDeliveryOptionSendLabel}
+                            />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                <Form.Check 
+                    type="switch"
+                    label={"Jeg acceptere at de data jeg har indtastet er korrekte"}
+                    onClick={handleOnInfoCorrectClick}
+                />
+                </Row>
+        </Container>
     )
 }
 

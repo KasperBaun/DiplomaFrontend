@@ -88,7 +88,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                         <Select value={selectedCategory ? selectedCategory.id : ''} onChange={handleCategoryChange} aria-label={languageStore.currentLanguage.selectCategory}>
                             {categories.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
-                                    {category.name}
+                                    {languageStore.getCurrentLanguageCode() === "da_DK" ? category.name.split("|")[0] : category.name.split("|")[1]}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -103,7 +103,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                         >
                             {displayedSubcategories.map((subcategory) => (
                                 <MenuItem key={subcategory.id} value={subcategory.id}>
-                                    {subcategory.name}
+                                {languageStore.getCurrentLanguageCode() === "da_DK" ? subcategory.name.split("|")[0] : subcategory.name.split("|")[1]}
                                 </MenuItem>
                             ))}
                         </Select>

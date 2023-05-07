@@ -175,7 +175,7 @@ export class BackofficeStore {
         return this._salesSummary;
     }
 
-    public getPayment(id: string): Payment {
+    public getPayment(id: number): Payment {
         return this._payments.find(p => p.id === id);
     }
 
