@@ -53,7 +53,7 @@ export class WebshopStore {
         const products = this.generateProducts(await this.apiService.getProductDTOs())
         const productMap = this.createProductMap(products);
         const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
-        const productItemMap = this.createProductItemsMap(this.productItems);
+        const productItemMap = this.createProductItemsMap(productItems);
 
         runInAction(() => {
             this._categories = categories;
