@@ -11,6 +11,8 @@ import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import Order from '@models/Order';
+import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
+import Customer from '@models/Customer';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -28,9 +30,12 @@ export class WebshopStore {
     private _products: Product[] = [];
     private _productItems: ProductItemWeb[] = [];
     private _images: Image[] = [];
+    private _checkoutPayments : PaymentForm[] = [];
+    private _customer : Customer = null;
 
     /* Maps for quick access */
     private _categoryMap: Map<number, Category> = new Map();
+    private _checkoutPaymentMap: Map<number, PaymentForm> = new Map();
     private _subcategoryMap: Map<Number, SubCategory> = new Map();
     private _productMap: Map<number, Product> = new Map();
     private _productItemMap: Map<number, ProductItemWeb> = new Map();
@@ -54,6 +59,8 @@ export class WebshopStore {
         const productMap = this.createProductMap(products);
         const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
         const productItemMap = this.createProductItemsMap(productItems);
+        const checkoutPaymentMap = this.createCheckoutPaymentMap(this._checkoutPayments);
+        const customers = await this.apiService.getCustomers();
 
         runInAction(() => {
             this._categories = categories;
@@ -66,6 +73,7 @@ export class WebshopStore {
             this._productMap = productMap;
             this._productItems = productItems;
             this._productItemMap = productItemMap;
+            this._checkoutPaymentMap = checkoutPaymentMap;
             this.loaded = true;
         })
 
@@ -92,6 +100,23 @@ export class WebshopStore {
         }
         return map;
     }
+
+    private createCheckoutPaymentMap(checkoutPayments: PaymentForm[]): Map<number, PaymentForm> {
+        const map = new Map<number, PaymentForm>();
+        for (const checkout of checkoutPayments) {
+            map.set(checkout.id, checkout);
+        }
+        return map;
+    }
+
+    private createCustomerMap(customers: Customer[]): Map<number, Customer> {
+        const map = new Map<number, Customer>();
+        for (const customer of customers) {
+            map.set(customer.id, customer);
+        }
+        return map;
+    }
+
     private createSubcategoryMap(subCategories: SubCategory[]): Map<number, SubCategory> {
         const map = new Map<number, SubCategory>();
         for (const subcategory of subCategories) {
@@ -219,6 +244,23 @@ export class WebshopStore {
         return this.loaded;
     }
 
+    public get CheckoutPayments() : PaymentForm[] {
+        return this._checkoutPayments;
+    }
+
+    public getCheckoutPaymentById(id: number): PaymentForm { 
+        const result = this._checkoutPaymentMap.get(id);
+        if(!result) {
+            return null;
+        } else {
+            return result;
+        }
+    }
+
+    public setCheckoutPayment(checkoutPayment: PaymentForm): void {
+        this._checkoutPaymentMap.set(checkoutPayment.id, checkoutPayment);
+    }
+
     public get productItems(): ProductItemWeb[] {
         return this._productItems;
     }
@@ -229,6 +271,19 @@ export class WebshopStore {
 
     public get subCategories(): SubCategory[] {
         return this._subcategories;
+    }
+
+    public get Customer() : Customer {
+        return this._customer;
+    }
+
+    public set Customer(customer: Customer) {
+        this._customer = customer;
+    }
+
+    public async createCustomer(customer: Customer): Promise<Customer> {
+        const createdCustomer = await this.apiService.createCustomer(customer);
+        return createdCustomer;
     }
 
     public subCategoriesByCategoryID(categoryId: Number): SubCategory[] {

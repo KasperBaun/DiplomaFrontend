@@ -10,38 +10,68 @@ import PaymentOptions from "./components/PaymentOptions";
 import PaymentMobilePayForm from "./components/PaymentMobilePayForm";
 import PaymentPaypalForm from "./components/PaymentPayPalForm";
 import PaymentCreditCardForm from "./components/PaymentCreditCardForm";
+import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
+import { useNavigate } from "react-router-dom";
 
 interface IPaymentPageProps {
     orders : OrderDetails[];
 }
 
-interface ICheckoutForm {
-    email: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    countryCode: string;
-    phone: string;
-    deliveryMethod: string;
-  }
-
 const PaymentPage = (props: IPaymentPageProps) => {
 
-    const { languageStore, basketStore } = useContext(MobXContext);
+    const { languageStore, basketStore, webshopStore } = useContext(MobXContext);
     const [selectedPaymentOption, setSelectedPaymentOption] = useState<number>(-1);
 
-    const [billingInfo, setBillingInfo] = useState<string>("");
+    const [paymentForm, setPaymentForm] = useState<PaymentForm>();
     const [paymentMethod, setPaymentMethod] = useState<string>("");
-    const [mobilePayPhone, setMobilePayPhone] = useState<string>("");
-    const [cardInfo, setCardInfo] = useState<string>("");
+    const [mobilePayPhone, setMobilePayPhone] = useState<MobilePayForm>();
+    const [cardInfo, setCardInfo] = useState<CardInfo>();
+    const [paypalApproved, setPaypalApproved] = useState<boolean>();
 
-    const [checkoutForm, setCheckoutForm] = useState<ICheckoutForm>();
+    const navigate = useNavigate();
+
+    const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>();
     const [isCheckoutReady, setIsCheckoutReady] = useState<boolean>(false);
 
     const handleOnPaymentClick = () => {
+        if(isCheckoutReady) {
+            if(mobilePayPhone) {
+                setPaymentForm({
+                    checkoutForm: checkoutForm,
+                    paymentMethod: paymentMethod,
+                    mobilePayPhone: mobilePayPhone,
+                });
+
+                // Save to Store
+                webshopStore.setCheckoutPayment(paymentForm);
+                // Navigate to Confirmation Page
+                navigate('/confirmation/' + paymentForm.id)
+            }
+            else if(cardInfo) {
+                setPaymentForm({
+                    checkoutForm: checkoutForm,
+                    paymentMethod: paymentMethod,
+                    cardInfo: cardInfo
+                });
+
+                // Save to Store
+                // Navigate to Confirmation Page
+            }
+            else if(paypalApproved) {
+                setPaymentForm({
+                    checkoutForm: checkoutForm,
+                    paymentMethod: paymentMethod,
+                    paypal: paypalApproved
+                });
+
+                // Save to Store
+                // Navigate to Confirmation Page
+            }
+            else {
+                alert("Error with payment");
+            }
+        }
+
 
     }
 
@@ -49,11 +79,11 @@ const PaymentPage = (props: IPaymentPageProps) => {
         if(selectedPaymentOption !== -1) {
             switch(selectedPaymentOption) {
                 case 0:
-                    return <PaymentMobilePayForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} />
+                    return <PaymentMobilePayForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} setMobilePayPhone={setMobilePayPhone} />
                 case 1:
-                    return <PaymentCreditCardForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick}/>
+                    return <PaymentCreditCardForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} setCardInfo={setCardInfo} />
                 case 2:
-                    return <PaymentPaypalForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} />
+                    return <PaymentPaypalForm ls={languageStore} handleOnSubmitClick={handleOnPaymentClick} setPaypalApproved={setPaypalApproved} />
                 default:
                     console.log("Unknown payment option");
                     break;

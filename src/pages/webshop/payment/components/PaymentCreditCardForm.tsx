@@ -6,6 +6,7 @@ import PaymentButton from "./PaymentButton";
 interface IPaymentCreditCardFormProps {
   ls: LanguageStore;
   handleOnSubmitClick: () => void;
+  setCardInfo : Dispatch<SetStateAction<ICardInfoForm>>;
 }
 
 interface CardOptions {
@@ -14,6 +15,12 @@ interface CardOptions {
   component: React.ReactNode;
 }
 
+interface ICardInfoForm {
+  cardNumber: string;
+  cardExpirationDate: string;
+  cardHolderName: string;
+  cardCVC: string;
+}
 
 const cardOptions: CardOptions[] = [
   {
@@ -47,7 +54,7 @@ const cardOptions: CardOptions[] = [
 
 
 
-const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: IPaymentCreditCardFormProps) => {
+const PaymentCreditCardForm = ({ ls, handleOnSubmitClick, setCardInfo }: IPaymentCreditCardFormProps) => {
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
@@ -89,9 +96,8 @@ const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: IPaymentCreditCardFo
 
   const handleOnSubmit = () => {
     if (expirationValid && cardNumberValid && cvcValid) {
-      alert(cardHolderName + " " + cardNumber + " " + expiration + " " + cvc);
-
-      // Navigate to Order
+      setCardInfo({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc });
+      handleOnSubmitClick();
     }
   }
 

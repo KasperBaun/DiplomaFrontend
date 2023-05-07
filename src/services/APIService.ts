@@ -20,6 +20,7 @@ import PriceHistory from "@models/PriceHistory";
 import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import OrderElements from "@models/OrderElements";
 import OrderDTO from "@models/DTO/OrderDTO";
+import Customer from "@models/Customer";
 
 class APIService implements IAPIService {
 
@@ -158,6 +159,15 @@ class APIService implements IAPIService {
     /* Sniper */
     async getSniping(searchValue: string): Promise<SniperModel[]> {
         return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?arg=" + searchValue, "SniperModel")
+    }
+
+    /* Customers */
+    async getCustomers(): Promise<Customer[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Customer`, "Customers");
+    }
+
+    async createCustomer(customer: Customer): Promise<Customer> {
+        return await this.crudHelper.create(`${this.apiBaseUrl}/Customer`, "Customer", customer);
     }
 }
 

@@ -88,7 +88,7 @@ const ProductCards = (productItems: ProductItemWeb[]) => {
                 // console.log(toJS(product))
                 return (
                     <Grid
-                        item xs={12} sm={6} md={4} lg={2} xl={2}
+                        item xs={12} sm={6} md={4} lg={3} xl={3}
                         padding={1}
                         display='flex'
                         key={"BackofficeCategoryCardItem" + index}
