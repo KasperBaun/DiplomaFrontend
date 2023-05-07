@@ -1,24 +1,14 @@
 import { Col, Container, ProgressBar, Row } from "react-bootstrap";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import Customer from "@models/Customer";
 
-interface ICheckoutForm {
-    email: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    countryCode: string;
-    phone: string;
+interface IShippingProgressProps { 
+    customer : Customer;
     deliveryMethod: string;
 }
 
-interface IShippingProgressProps { 
-    shippingDetails ?: ICheckoutForm;
-}
-
-const ShippingProgress = ( {shippingDetails} : IShippingProgressProps ) => {
+const ShippingProgress = ( {customer, deliveryMethod} : IShippingProgressProps ) => {
+    
     return (
         <Container>
             <Row className="ShippingProgressRow">
@@ -30,11 +20,12 @@ const ShippingProgress = ( {shippingDetails} : IShippingProgressProps ) => {
                     <Col md={12}>
                         <h3>Shipping</h3>
                         <Container>
-                            <Row>{`${shippingDetails?.firstName ? shippingDetails.firstName : ""} ${shippingDetails?.lastName ? shippingDetails.lastName : ""}`}</Row>
-                            <Row>{`${shippingDetails?.address}`}</Row>
-                            <Row>{`${shippingDetails?.zipCode} ${shippingDetails?.city}`}</Row>
-                            <Row>{`${shippingDetails?.country}`}</Row>
-                            <Row>{`${shippingDetails?.countryCode}${shippingDetails?.phone}`}</Row>
+                            <Row><b>{`${customer.firstName ? customer.firstName : ""} ${customer.lastName ? customer.lastName : ""}`}</b></Row>
+                            <Row>{`${customer.address}`}</Row>
+                            <Row>{`${customer.zipCode} ${customer.city}`}</Row>
+                            <Row>{`${customer.country}`}</Row>
+                            <Row>{`${customer.countryCode}${customer.phone}`}</Row>
+                            <Row>Delivery Method: {deliveryMethod}</Row>
                         </Container>
                     </Col>
 

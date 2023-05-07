@@ -10,55 +10,27 @@ import PaymentOptions from "./components/PaymentOptions";
 import PaymentMobilePayForm from "./components/PaymentMobilePayForm";
 import PaymentPaypalForm from "./components/PaymentPayPalForm";
 import PaymentCreditCardForm from "./components/PaymentCreditCardForm";
+import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
+import { useNavigate } from "react-router-dom";
 
 interface IPaymentPageProps {
     orders : OrderDetails[];
 }
 
-interface IPaymentForm {
-    checkoutForm : ICheckoutForm;
-    paymentMethod : string;
-    mobilePayPhone ?: string;
-    cardInfo ?: ICardInfoForm;
-    paypal ?: boolean;
-}
-
-interface ICheckoutForm {
-    email: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    zipCode: string;
-    city: string;
-    country: string;
-    countryCode: string;
-    phone: string;
-    deliveryMethod: string;
-}
-
-interface ICardInfoForm {
-    cardNumber: string;
-    cardExpirationDate: string;
-    cardHolderName: string;
-    cardCVC: string;
-}
-
-interface IMPInfoForm {
-    phoneNumber: string;
-}
-
 const PaymentPage = (props: IPaymentPageProps) => {
 
-    const { languageStore, basketStore } = useContext(MobXContext);
+    const { languageStore, basketStore, webshopStore } = useContext(MobXContext);
     const [selectedPaymentOption, setSelectedPaymentOption] = useState<number>(-1);
 
-    const [paymentForm, setPaymentForm] = useState<IPaymentForm>();
+    const [paymentForm, setPaymentForm] = useState<PaymentForm>();
     const [paymentMethod, setPaymentMethod] = useState<string>("");
-    const [mobilePayPhone, setMobilePayPhone] = useState<IMPInfoForm>();
-    const [cardInfo, setCardInfo] = useState<ICardInfoForm>();
+    const [mobilePayPhone, setMobilePayPhone] = useState<MobilePayForm>();
+    const [cardInfo, setCardInfo] = useState<CardInfo>();
     const [paypalApproved, setPaypalApproved] = useState<boolean>();
 
-    const [checkoutForm, setCheckoutForm] = useState<ICheckoutForm>();
+    const navigate = useNavigate();
+
+    const [checkoutForm, setCheckoutForm] = useState<CheckoutForm>();
     const [isCheckoutReady, setIsCheckoutReady] = useState<boolean>(false);
 
     const handleOnPaymentClick = () => {
@@ -67,20 +39,23 @@ const PaymentPage = (props: IPaymentPageProps) => {
                 setPaymentForm({
                     checkoutForm: checkoutForm,
                     paymentMethod: paymentMethod,
-                    mobilePayPhone: mobilePayPhone?.phoneNumber,
+                    mobilePayPhone: mobilePayPhone,
                 });
+
+                // Save to Store
+                webshopStore.setCheckoutPayment(paymentForm);
+                // Navigate to Confirmation Page
+                navigate('/confirmation/' + paymentForm.id)
             }
             else if(cardInfo) {
                 setPaymentForm({
                     checkoutForm: checkoutForm,
                     paymentMethod: paymentMethod,
-                    cardInfo: {
-                        cardNumber: cardInfo.cardNumber,
-                        cardExpirationDate: cardInfo.cardExpirationDate,
-                        cardHolderName: cardInfo.cardHolderName,
-                        cardCVC: cardInfo.cardCVC
-                    }
+                    cardInfo: cardInfo
                 });
+
+                // Save to Store
+                // Navigate to Confirmation Page
             }
             else if(paypalApproved) {
                 setPaymentForm({
@@ -88,6 +63,9 @@ const PaymentPage = (props: IPaymentPageProps) => {
                     paymentMethod: paymentMethod,
                     paypal: paypalApproved
                 });
+
+                // Save to Store
+                // Navigate to Confirmation Page
             }
             else {
                 alert("Error with payment");
