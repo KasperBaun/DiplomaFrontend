@@ -4,7 +4,6 @@ import { LanguageStore } from "./LanguageStore";
 import { BackofficeStore } from "./BackofficeStore";
 import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
-import { OrderStore } from "./OrderStore";
 import { BasketStore } from "./BasketStore";
 import { WebshopStore } from "./WebshopStore";
 
@@ -19,7 +18,6 @@ export interface IMobXContext {
     authStore: AuthStore;
     backofficeStore: BackofficeStore;
     sniperStore : SniperStore;
-    orderStore : OrderStore;
 }
 
 const MobXContext = React.createContext<IMobXContext>(undefined);

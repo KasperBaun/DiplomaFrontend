@@ -10,6 +10,7 @@ import Image from '@models/Image';
 import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
+import Order from '@models/Order';
 import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
 
@@ -296,5 +297,9 @@ export class WebshopStore {
 
     public getSubcategory(id: number): SubCategory {
         return this._subcategoryMap.get(id);
+    }
+
+    public async createOrder(order: Order): Promise<Order> {
+        return await this.apiService.createOrder(order);
     }
 }

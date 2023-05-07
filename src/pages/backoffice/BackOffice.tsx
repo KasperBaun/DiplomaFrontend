@@ -35,15 +35,15 @@ const Backoffice: React.FC = function Backoffice() {
     }
 
     const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-
-    const handleToggleSidebarOpenClicked = () => {
-        setSidebarOpen(!sidebarOpen);
-    }
+    const handleToggleSidebarOpenClicked = () => setSidebarOpen(!sidebarOpen);
 
     useEffect(() => {
-        if (!rootStore.backofficeStore.isLoaded) {
-            rootStore.backofficeStore.init();
+        const backofficeStoreLoaded = async () => {
+            if (!rootStore.isBackofficeLoaded && !rootStore.isBackofficeLoading) {
+                rootStore.loadBackoffice();
+            }
         }
+        backofficeStoreLoaded();
     });
 
     return (

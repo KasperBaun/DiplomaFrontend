@@ -14,7 +14,7 @@ const ConfirmationPage = () => {
 
     let { id } = useParams();
     const [customer, setCustomer] = useState<Customer>();
-    const { languageStore, orderStore, webshopStore } = useContext(MobXContext);
+    const { languageStore, webshopStore } = useContext(MobXContext);
     const paymentForm : PaymentForm = webshopStore.getCheckoutPaymentById(Number(id));
     // Create a user with the checkoutForm details
         // Check if user exists by email, if not create user. Return user info if user exists
@@ -30,7 +30,7 @@ const ConfirmationPage = () => {
 
     // Create an order and return the order number
     if(customer)
-        orderStore.createOrder({
+        webshopStore.createOrder({
             customerId: customer.id,
             paymentId: paymentForm.id,
             paymentStatus: "Approved",
