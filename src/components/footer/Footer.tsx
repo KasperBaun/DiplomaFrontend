@@ -5,6 +5,7 @@ import { observer } from "mobx-react-lite";
 import { CssBaseline, Grid, Typography, Link, Stack } from "@mui/material";
 import { Call, Email, Facebook, Instagram } from "@mui/icons-material";
 import { Constants } from "@utils/Constants";
+import "./footer.scss";
 
 export const Footer: React.FC = observer(function Footer() {
 
@@ -62,7 +63,7 @@ const CustomLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
   const { url, value, target } = props;
 
   return (
-    <Link href={url} target={target} rel="norefferer" color={Constants.primaryTextColor}>
+    <Link className="footerLink" href={url} target={target} rel="norefferer" color={Constants.primaryTextColor}>
       {value}
     </Link>
   )
