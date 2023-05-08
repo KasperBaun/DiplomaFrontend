@@ -11,9 +11,7 @@ import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
-import { ProductItemWeb } from '@models/ProductItemWeb';
 import React from 'react';
-import { SearchState } from '@models/SearchState';
 
 interface INavModel {
   path: string;
@@ -22,16 +20,8 @@ interface INavModel {
 
 const Header: React.FC = observer(function Header() {
 
-  const { languageStore, webshopStore } = useContext(MobXContext);
-  const [displayedProductItems, setDisplayedProductItems] = React.useState<ProductItemWeb[]>([]);
-  const [searchText, setSearchText] = React.useState<string>('');
+  const { languageStore, searchStore } = useContext(MobXContext);
   const navigate = useNavigate();
-
-  const handleItemsChanged = (productItems: ProductItemWeb[]) => {
-    setDisplayedProductItems(productItems);
-    console.log(displayedProductItems);
-  }
-
 
   const navPaths: INavModel[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
@@ -54,11 +44,10 @@ const Header: React.FC = observer(function Header() {
     //return  isActive ? "active" : isPending ? "inactive" : "header-links";
   }
 
-  function searchOnProducts(searchPar : string){
-    const searchState = new SearchState();
-    searchState.searchString = searchPar;
-    navigate('/productList', { state: { searchState } })
-  } 
+  function searchOnProducts(searchText: string) {
+    searchStore.filterBySearchText(searchText);
+    navigate(`/productList`);
+  }
 
   return (
     <Navbar expand="lg" className='header' key="navbar">
@@ -117,29 +106,7 @@ const Header: React.FC = observer(function Header() {
               aria-label="Search"
              /> 
           </Form>
-
-
-          {/* <ProductSearchBar
-            headerBar ={true}
-            searchText={searchText}
-            setSearchText={setSearchText}
-            productItems={webshopStore.productItems}
-            onItemsChanged={handleItemsChanged}
-            showSearchBar={true}
-            style={{ width: "30rem", backgroundColor: "white", borderRadius: '5px' }}
-          /> */}
-         
-
-          {/* <Button className='search-button'>
-              <NavLink
-                to={"/search"}
-                className={'search-button'}
-              >
-                {languageStore.currentLanguage.SearchBarText}
-              </NavLink>
-            </Button> */}
           <CartDrawer />
-          {/* </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

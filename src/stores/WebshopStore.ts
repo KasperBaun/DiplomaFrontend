@@ -11,7 +11,7 @@ import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import Order from '@models/Order';
-import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
+import { MobilePayForm, CardInfo, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
 import Payment from '@models/Payment';
 
@@ -61,7 +61,7 @@ export class WebshopStore {
         const subcategoryMap = this.createSubcategoryMap(subcategories);
         const subcategoryToCategoryMap = this.mapSubCategoriesToCategoryId(categories,subcategories);
         const images = await this.apiService.getImages();
-        const products = this.generateProducts(await this.apiService.getProductDTOs())
+        const products = this.generateProducts(await this.apiService.getProductDTOs(), subcategories)
         const productMap = this.createProductMap(products);
         const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
         const productItemMap = this.createProductItemsMap(productItems);
@@ -94,7 +94,6 @@ export class WebshopStore {
         }
         return WebshopStore._Instance;
     }
-
 
     /* Categories & Subcategories */
     private createCategoryMap(categories: Category[]): Map<number, Category> {
@@ -146,19 +145,19 @@ export class WebshopStore {
         }
     }
 
-    private getCategory (id: number): Category {
+    public getCategory (id: number): Category {
         return this._categoryMap.get(id);
     }
 
     /* Products & ProductItems */
-    private generateProducts(productDTOs: ProductDTO[]): Product[] {
+    private generateProducts(productDTOs: ProductDTO[], subcategories: SubCategory[]): Product[] {
         const products: Product[] = [];
         for (const productDTO of productDTOs) {
 
             const productSubcategories: SubCategory[] = [];
 
             for (const subcatId of productDTO.subcategoryIds) {
-                productSubcategories.push(this.getSubcategory(subcatId));
+                productSubcategories.push(subcategories.find(subcat => subcat.id === subcatId));
             }
 
             const product: Product = {

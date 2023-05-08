@@ -30,7 +30,6 @@ const Routing: React.FC = function Routing() {
                 <Route path="payment" element={<PaymentPage orders={[{ "id": 0, "active": false, "customerId": 4, "deliveryStatus": "Waiting for Payment", "paymentId": 0, "discountCode": "", "name": "Vase", "manufacturer": "Royal Copenhagen", "productItemId": 13, "paymentStatus": "Missing Payment" }]} />} />
                 <Route path="product/:id" element={<ProductPage />} />
                 <Route path="productList" element={<ProductListPage />} />
-                <Route path="productList/:id" element={<ProductListPage />} />
                 <Route path="aboutUs" element={<AboutUsPage />} />
                 <Route path="search" element={<SearchPage />} />
                 <Route path="*" element={<ErrorPage />} />
