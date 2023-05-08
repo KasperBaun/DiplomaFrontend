@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
 import { Translater } from "@utils/Translater";
 import { ProductItemWeb } from "@models/ProductItemWeb";
@@ -16,6 +16,16 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
     const { languageStore, webshopStore } = useContext(MobXContext);
 
     const location = useLocation();
+    // const searchState: SearchState = {};
+
+    // useEffect(() => {
+    //     if (location.state) {
+    //         searchState.categoryId = location.state.searchState.categoryId;
+    //         searchState.subcategoryId = location.state.searchState.subcategoryId;
+    //         searchState.searchText = location.state.searchState.searchText;
+    //         console.log("searchState", searchState);
+    //     }
+    // }, [location]);
     const { searchState } = location.state as { searchState: SearchState };
 
     /* Define state for products and inject stores */

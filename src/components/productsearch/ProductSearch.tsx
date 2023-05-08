@@ -46,7 +46,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
         if (currentState.items !== items && currentState.items !== null) {
             onItemsChanged(currentState.items);
         }
-    })
+    }, [props.searchState])
 
     /* Define the event handlers for the events */
     const handleSearchTextChanged = (newItems: ProductItem[] | ProductItemWeb[]): void => {
