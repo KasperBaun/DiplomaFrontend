@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductItem } from "@models/ProductItem";
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import { ProductSearchBar } from "./ProductSearchBar";
-import { SearchState } from "@webshop/product/ProductListPage";
+import { SearchState } from "@models/SearchState";
 
 export type ProductSearchProps = {
     showSearchBar?: boolean;
@@ -29,20 +29,24 @@ type ProductSearchState = {
 
 export const ProductSearch: React.FC<ProductSearchProps> = observer(function ProductSearch(props: ProductSearchProps) {
 
-    const { items, showSearchBar, categories, subcategories, searchState, onItemsChanged } = props;
-    const currentState: ProductSearchState = setState(searchState, items, categories, subcategories);
+    const { items, showSearchBar, categories, subcategories, onItemsChanged } = props;
+    const currentState: ProductSearchState = setState(props.searchState, items, categories, subcategories);
 
     /* Define state for products and selected category & subcategory - Inject stores */
     const { languageStore } = useContext(MobXContext);
-    const [selectedCategory, setSelectedCategory] = useState<Category>(currentState.selectedCategory);
-    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(currentState.selectedSubcategory);
-    const [displayedSubcategories, setDisplayedSubcategories] = useState<SubCategory[]>(currentState.displayedSubcategories);
-    const [searchText, setSearchText] = useState<string>(currentState.searchText);
+    const [selectedCategory, setSelectedCategory] = useState<Category>(props.searchState ? currentState.selectedCategory : null);
+    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(props.searchState ? currentState.selectedSubcategory : null);
+    const [displayedSubcategories, setDisplayedSubcategories] = useState<SubCategory[]>(props.searchState ? currentState.displayedSubcategories : null);
+    const [searchText, setSearchText] = useState<string>(props.searchState ? currentState.searchText : '');
 
-    /* Use callback function to return filtered items if state provided changed items */
-    if (currentState.items !== items && currentState.items.length !== 0 && currentState.items !== null) {
-        onItemsChanged(currentState.items);
-    }
+
+
+    useEffect(() => {
+        /* Use callback function to return filtered items if state provided changed items */
+        if (currentState.items !== items && currentState.items !== null) {
+            onItemsChanged(currentState.items);
+        }
+    })
 
     /* Define the event handlers for the events */
     const handleSearchTextChanged = (newItems: ProductItem[] | ProductItemWeb[]): void => {
@@ -98,7 +102,14 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
 
             <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                    <ProductSearchBar searchText={searchText} setSearchText={setSearchText} showSearchBar={showSearchBar} productItems={items} onItemsChanged={handleSearchTextChanged} />
+                    <ProductSearchBar
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                        showSearchBar={showSearchBar}
+                        productItems={items}
+                        onItemsChanged={handleSearchTextChanged}
+                        style={{ marginRight: '10px', minWidth: '15vw' }}
+                    />
 
                     <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
                         <InputLabel>{languageStore.currentLanguage.filterByCategory}</InputLabel>
@@ -136,33 +147,32 @@ export default ProductSearch;
 
 
 function setState(searchState: SearchState, allItems: ProductItem[] | ProductItemWeb[], categories: Category[], subcategories: SubCategory[]): ProductSearchState {
-    let items: ProductItem[] | ProductItemWeb[] = allItems;
-    let category: Category | null = null;
-    let subcategory: SubCategory | null = null;
-    let displayedSubcategories: SubCategory[] = [];
+    const productSearchState: ProductSearchState = {
+        items: allItems,
+        selectedCategory: null,
+        selectedSubcategory: null,
+        displayedSubcategories: [],
+        searchText: ""
+    };
+
+    if (searchState === null || undefined) {
+        return productSearchState;
+    }
 
     if (searchState.searchText && searchState.searchText.length > 0) {
         const filteredItems = allItems.filter(prodItem =>
             prodItem.product.name.toLowerCase().includes(searchState.searchText.toLowerCase())
             || prodItem.product.modelNumber.toLowerCase().includes(searchState.searchText.toLowerCase())
         );
-        items = filteredItems;
-    } else if (searchState.categoryId && searchState.categoryId > 0) {
-        const filteredItems = allItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === searchState.categoryId));
-        items = filteredItems;
-        category = categories.find(cat => cat.id === searchState.categoryId);
-        displayedSubcategories = subcategories.filter(subcat => subcat.categoryId === searchState.categoryId);
-
-
-    } else if (searchState.subcategoryId && searchState.subcategoryId > 0) {
-        const filteredItems = allItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === searchState.subcategoryId));
-        items = filteredItems;
+        productSearchState.items = filteredItems;
     }
-    return {
-        items: items,
-        searchText: searchState.searchText,
-        selectedCategory: category,
-        selectedSubcategory: subcategory,
-        displayedSubcategories: displayedSubcategories
-    };
+    if (searchState.subcategoryId && searchState.subcategoryId > 0) {
+        const subcategory = subcategories.find(c => c.id === searchState.subcategoryId);
+        const filteredItems = allItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === searchState.subcategoryId));
+        productSearchState.items = filteredItems;
+        productSearchState.selectedSubcategory = subcategories.find(subcat => subcat.id === searchState.subcategoryId);
+        productSearchState.selectedCategory = categories.find(cat => cat.id === subcategory.categoryId);
+        productSearchState.displayedSubcategories = subcategories.filter(subcat => subcat.categoryId === searchState.categoryId);
+    }
+    return productSearchState;
 }

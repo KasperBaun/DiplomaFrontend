@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Translater } from "@utils/Translater";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import Loading from "@components/loading/Loading";
@@ -9,17 +9,14 @@ import { Button, Grid, Typography } from "@mui/material";
 import ProductSearch from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
-
-export type SearchState = {
-    categoryId: number;
-    subcategoryId: number;
-    searchText: string;
-}
-
+import { SearchState } from "@models/SearchState";
 
 export const ProductListPage: React.FC = observer(function ProductListPage() {
     const translater = new Translater();
     const { languageStore, webshopStore } = useContext(MobXContext);
+
+    const location = useLocation();
+    const { searchState } = location.state as { searchState: SearchState };
 
     /* Define state for products and inject stores */
     const pageSizeAmount: number = 10;
@@ -49,9 +46,9 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
     } else {
         return (
             <Grid container >
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} >
+                {/* <Grid item xs={12} display={'flex'} justifyContent={'start'} >
                     <Typography variant="h4">{languageStore.currentLanguage.ProductTabText}</Typography>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                     <ProductSearch
                         categories={webshopStore.Categories}
@@ -59,7 +56,7 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
                         items={webshopStore.productItems}
                         onItemsChanged={handleItemsChanged}
                         showSearchBar={true}
-                        searchState={{ categoryId: 0, subcategoryId: 0, searchText: "" }}
+                        searchState={searchState}
                     />
                 </Grid>
 
