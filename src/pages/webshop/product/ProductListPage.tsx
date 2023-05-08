@@ -10,6 +10,12 @@ import ProductSearch from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 
+export type SearchState = {
+    categoryId: number;
+    subcategoryId: number;
+    searchText: string;
+}
+
 
 export const ProductListPage: React.FC = observer(function ProductListPage() {
     const translater = new Translater();
@@ -53,6 +59,7 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
                         items={webshopStore.productItems}
                         onItemsChanged={handleItemsChanged}
                         showSearchBar={true}
+                        searchState={{ categoryId: 0, subcategoryId: 0, searchText: "" }}
                     />
                 </Grid>
 

@@ -80,6 +80,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                         items={backofficeStore.productItems}
                         onItemsChanged={handleItemsChanged}
                         showSearchBar={true}
+                        searchState={{ searchText: '', categoryId: null, subcategoryId: null }}
                     />
                 </Grid>
 

@@ -7,25 +7,42 @@ import SubCategory from "@models/SubCategory";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import { ProductSearchBar } from "./ProductSearchBar";
-
+import { SearchState } from "@webshop/product/ProductListPage";
 
 export type ProductSearchProps = {
     showSearchBar?: boolean;
     categories: Category[];
     subcategories: SubCategory[];
     items: ProductItem[] | ProductItemWeb[];
+    searchState: SearchState;
     onItemsChanged: (items: ProductItem[] | ProductItemWeb[]) => void;
     onProductItemClicked?: (productItem: ProductItem) => void;
 }
 
+type ProductSearchState = {
+    selectedCategory: Category | null;
+    selectedSubcategory: SubCategory | null;
+    displayedSubcategories: SubCategory[];
+    searchText: string;
+    items: ProductItem[] | ProductItemWeb[];
+};
+
 export const ProductSearch: React.FC<ProductSearchProps> = observer(function ProductSearch(props: ProductSearchProps) {
-    const { items, showSearchBar, categories, subcategories, onItemsChanged } = props;
+
+    const { items, showSearchBar, categories, subcategories, searchState, onItemsChanged } = props;
+    const currentState: ProductSearchState = setState(searchState, items, categories, subcategories);
+
     /* Define state for products and selected category & subcategory - Inject stores */
     const { languageStore } = useContext(MobXContext);
-    const [selectedCategory, setSelectedCategory] = useState<Category>(null);
-    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
-    const [displayedSubcategories, setDisplayedSubcategories] = useState<SubCategory[]>(subcategories);
-    const [searchText, setSearchText] = useState<string>("");
+    const [selectedCategory, setSelectedCategory] = useState<Category>(currentState.selectedCategory);
+    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(currentState.selectedSubcategory);
+    const [displayedSubcategories, setDisplayedSubcategories] = useState<SubCategory[]>(currentState.displayedSubcategories);
+    const [searchText, setSearchText] = useState<string>(currentState.searchText);
+
+    /* Use callback function to return filtered items if state provided changed items */
+    if (currentState.items !== items && currentState.items.length !== 0 && currentState.items !== null) {
+        onItemsChanged(currentState.items);
+    }
 
     /* Define the event handlers for the events */
     const handleSearchTextChanged = (newItems: ProductItem[] | ProductItemWeb[]): void => {
@@ -103,7 +120,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                         >
                             {displayedSubcategories.map((subcategory) => (
                                 <MenuItem key={subcategory.id} value={subcategory.id}>
-                                {languageStore.getCurrentLanguageCode() === "da_DK" ? subcategory.name.split("|")[0] : subcategory.name.split("|")[1]}
+                                    {languageStore.getCurrentLanguageCode() === "da_DK" ? subcategory.name.split("|")[0] : subcategory.name.split("|")[1]}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -116,3 +133,36 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
 });
 
 export default ProductSearch;
+
+
+function setState(searchState: SearchState, allItems: ProductItem[] | ProductItemWeb[], categories: Category[], subcategories: SubCategory[]): ProductSearchState {
+    let items: ProductItem[] | ProductItemWeb[] = allItems;
+    let category: Category | null = null;
+    let subcategory: SubCategory | null = null;
+    let displayedSubcategories: SubCategory[] = [];
+
+    if (searchState.searchText && searchState.searchText.length > 0) {
+        const filteredItems = allItems.filter(prodItem =>
+            prodItem.product.name.toLowerCase().includes(searchState.searchText.toLowerCase())
+            || prodItem.product.modelNumber.toLowerCase().includes(searchState.searchText.toLowerCase())
+        );
+        items = filteredItems;
+    } else if (searchState.categoryId && searchState.categoryId > 0) {
+        const filteredItems = allItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === searchState.categoryId));
+        items = filteredItems;
+        category = categories.find(cat => cat.id === searchState.categoryId);
+        displayedSubcategories = subcategories.filter(subcat => subcat.categoryId === searchState.categoryId);
+
+
+    } else if (searchState.subcategoryId && searchState.subcategoryId > 0) {
+        const filteredItems = allItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === searchState.subcategoryId));
+        items = filteredItems;
+    }
+    return {
+        items: items,
+        searchText: searchState.searchText,
+        selectedCategory: category,
+        selectedSubcategory: subcategory,
+        displayedSubcategories: displayedSubcategories
+    };
+}
