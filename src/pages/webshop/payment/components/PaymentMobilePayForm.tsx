@@ -1,21 +1,22 @@
 import { LanguageStore } from "@stores/LanguageStore";
 import { Button, Container, Form } from "react-bootstrap";
 import PaymentButton from "./PaymentButton";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
+import MobXContext from "@stores/MobXContext";
 
 interface IPaymentMobilePayFormProps {
     ls : LanguageStore;
     handleOnSubmitClick : () => void;
-    setMobilePayPhone : Dispatch<SetStateAction<IMPInfoForm>>;
 }
 
 interface IMPInfoForm {
     phoneNumber: string;
 }
 
-const PaymentMobilePayForm = ( {ls, handleOnSubmitClick, setMobilePayPhone} : IPaymentMobilePayFormProps ) => {
+const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
 
     const [mobilePayNumber, setMobilePayNumber] = useState<string>(null);
+    const { webshopStore } = useContext(MobXContext);
 
     const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const temp = event.target.value;
@@ -23,7 +24,8 @@ const PaymentMobilePayForm = ( {ls, handleOnSubmitClick, setMobilePayPhone} : IP
     };
 
     const handleOnSubmit = () => {
-        setMobilePayPhone({phoneNumber: mobilePayNumber})
+        webshopStore.setMobilePayForm({phoneNumber: mobilePayNumber})
+        console.log({phoneNumber: mobilePayNumber})
         handleOnSubmitClick();
     }
 

@@ -18,9 +18,6 @@ export class MobilePayForm {
 
 export class PaymentForm {
     id ?: string;
-    checkoutForm : CheckoutForm;
+    deliveryMethod: string;
     paymentMethod : string;
-    mobilePayPhone ?: MobilePayForm;
-    cardInfo ?: CardInfo;
-    paypal ?: boolean;
 }

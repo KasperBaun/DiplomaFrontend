@@ -3,5 +3,5 @@ export default class Payment{
     amount: number;
     method: string;
     approved: boolean;
-    datePaid: number;
+    datePaid: string;
 }

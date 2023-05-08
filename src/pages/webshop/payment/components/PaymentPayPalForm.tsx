@@ -1,18 +1,19 @@
 import { LanguageStore } from "@stores/LanguageStore";
-import { Dispatch, SetStateAction } from "react";
+import MobXContext from "@stores/MobXContext";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 
 interface IPaymentPaypalFormProps {
     ls : LanguageStore;
     handleOnSubmitClick : () => void;
-    setPaypalApproved : Dispatch<SetStateAction<boolean>>;
 }
 
-const PaymentPaypalForm = ( {ls, handleOnSubmitClick, setPaypalApproved} : IPaymentPaypalFormProps ) => {
+const PaymentPaypalForm = ( {ls, handleOnSubmitClick} : IPaymentPaypalFormProps ) => {
 
+    const { webshopStore } = useContext(MobXContext);
 
     const handleOnSubmit = () => {
-        setPaypalApproved(true);
+        webshopStore.setPayPalForm(true);
         handleOnSubmitClick();
     }
 

@@ -1,11 +1,12 @@
 import { observer } from "mobx-react-lite";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import '../css/payment.scss';
 import { LanguageStore } from "@stores/LanguageStore";
 import React from "react";
 import validator from 'validator';
 import { CheckoutForm } from "@models/Checkout";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import MobXContext from "@stores/MobXContext";
 
 
 interface IpInfo {
@@ -33,6 +34,9 @@ const UserDetailForm = (props: IUserDetailFormProps) => {
         city: "",
         timezone: ""
     });
+
+    
+    const { webshopStore } = useContext(MobXContext);
 
     useEffect(() => {
         const getGeoInfo = async () => {
@@ -85,6 +89,20 @@ const UserDetailForm = (props: IUserDetailFormProps) => {
     const [countryValid, setCountryValid] = useState<boolean>(false);
     const [countryCodeValid, setCountryCodeValid] = useState<boolean>(false);
     const [phoneValid, setPhoneValid] = useState<boolean>(false);
+
+    const createCustomer = async () => {
+        await webshopStore.createCustomer({
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            address: address,
+            zipCode: zipCode,
+            city: city,
+            country: country,
+            countryCode: countryCode,
+            phone: phone
+        });
+    }
 
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
@@ -147,9 +165,8 @@ const UserDetailForm = (props: IUserDetailFormProps) => {
     };
 
     const handleOnInfoCorrectClick = () => {
-        console.log("Pre Info correct");
-        if(emailValid && addressValid && phoneValid) {
-            console.log("Checkout ready");
+        if(email !== "" && firstName !== "" && lastName !== "" && address !== "" && zipCode !== "" && city !== "" && country !== "" && countryCode !== "" && phone !== "") {
+            createCustomer();
             props.setIsCheckoutReady(true);
         }
     }

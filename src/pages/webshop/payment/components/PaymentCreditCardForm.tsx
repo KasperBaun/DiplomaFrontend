@@ -1,12 +1,13 @@
 import { LanguageStore } from "@stores/LanguageStore";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import PaymentButton from "./PaymentButton";
+import { WebshopStore } from "@stores/WebshopStore";
+import MobXContext from "@stores/MobXContext";
 
 interface IPaymentCreditCardFormProps {
   ls: LanguageStore;
   handleOnSubmitClick: () => void;
-  setCardInfo : Dispatch<SetStateAction<ICardInfoForm>>;
 }
 
 interface CardOptions {
@@ -54,7 +55,8 @@ const cardOptions: CardOptions[] = [
 
 
 
-const PaymentCreditCardForm = ({ ls, handleOnSubmitClick, setCardInfo }: IPaymentCreditCardFormProps) => {
+const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: IPaymentCreditCardFormProps) => {
+  const { webshopStore } = useContext(MobXContext);
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
@@ -96,7 +98,8 @@ const PaymentCreditCardForm = ({ ls, handleOnSubmitClick, setCardInfo }: IPaymen
 
   const handleOnSubmit = () => {
     if (expirationValid && cardNumberValid && cvcValid) {
-      setCardInfo({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc });
+      webshopStore.setCardInfo({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
+      console.log({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
       handleOnSubmitClick();
     }
   }
@@ -155,7 +158,7 @@ const PaymentCreditCardForm = ({ ls, handleOnSubmitClick, setCardInfo }: IPaymen
             className={cvcValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <PaymentButton ls={ls} handleOnSubmitClick={handleOnSubmitClick} />
+        <PaymentButton ls={ls} handleOnSubmitClick={handleOnSubmit} />
       </Form>
     </Container>
   )

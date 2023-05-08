@@ -69,7 +69,7 @@ const RecentSalesList = (props: IProps) => {
                         }:${new Date(payment.datePaid).getMinutes().toString().padStart(2, '0')}`}
                     </TableCell>
                     <TableCell align="center">
-                      {payment.datePaid === 1 ? (
+                      {payment.approved ? (
                         <CheckBoxIcon style={{ color: 'green' }} />
                       ) : (
                         <CancelPresentationIcon style={{ color: 'red' }} />
