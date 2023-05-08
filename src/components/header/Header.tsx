@@ -49,9 +49,14 @@ const Header: React.FC = observer(function Header() {
   }
 
   function searchOnProducts(searchPar: string) {
+
+
     const searchState = new SearchState();
     searchState.searchText = searchPar;
-    navigate('/productList', { state: { searchState } })
+
+
+    navigate(`/productList?searchText=${searchPar}&int1=${0}&int2=${0}`);
+    //navigate('/productList', { state: { searchState } })
   }
 
   return (

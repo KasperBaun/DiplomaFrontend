@@ -25,7 +25,8 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
         const searchState = new SearchState();
         searchState.subcategoryId = subCategory.id;
         searchState.categoryId = subCategory.category.id;
-        navigate('/productList' , { state: { searchState } })
+        navigate(`/productList?searchText=${""}&int1=${subCategory.category.id}&int2=${subCategory.id}`);
+       // navigate('/productList' , { state: { searchState } })
     }
 
 

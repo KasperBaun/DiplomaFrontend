@@ -2,6 +2,8 @@ import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom"
+import qs from 'qs';
+
 import { Translater } from "@utils/Translater";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import Loading from "@components/loading/Loading";
@@ -16,6 +18,17 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
     const { languageStore, webshopStore } = useContext(MobXContext);
 
     const location = useLocation();
+    const queryParams = qs.parse(location.search, { ignoreQueryPrefix: true });
+
+    const searchText = String(queryParams.searchText);
+    const int1 = Number(queryParams.int1);
+    const int2 = Number(queryParams.int2);
+
+    let searchState = new SearchState(); 
+    searchState.searchText = searchText; 
+    searchState.categoryId = int1; 
+    searchState.subcategoryId = int2; 
+
     // const searchState: SearchState = {};
 
     // useEffect(() => {
@@ -26,7 +39,7 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
     //         console.log("searchState", searchState);
     //     }
     // }, [location]);
-    const { searchState } = location.state as { searchState: SearchState };
+    //const { searchState } = location.state as { searchState: SearchState };
 
     /* Define state for products and inject stores */
     const pageSizeAmount: number = 10;
