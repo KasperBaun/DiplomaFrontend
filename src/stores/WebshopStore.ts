@@ -61,7 +61,7 @@ export class WebshopStore {
         const subcategoryMap = this.createSubcategoryMap(subcategories);
         const subcategoryToCategoryMap = this.mapSubCategoriesToCategoryId(categories,subcategories);
         const images = await this.apiService.getImages();
-        const products = this.generateProducts(await this.apiService.getProductDTOs())
+        const products = this.generateProducts(await this.apiService.getProductDTOs(), subcategories)
         const productMap = this.createProductMap(products);
         const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
         const productItemMap = this.createProductItemsMap(productItems);
@@ -151,14 +151,14 @@ export class WebshopStore {
     }
 
     /* Products & ProductItems */
-    private generateProducts(productDTOs: ProductDTO[]): Product[] {
+    private generateProducts(productDTOs: ProductDTO[], subcategories: SubCategory[]): Product[] {
         const products: Product[] = [];
         for (const productDTO of productDTOs) {
 
             const productSubcategories: SubCategory[] = [];
 
             for (const subcatId of productDTO.subcategoryIds) {
-                productSubcategories.push(this.getSubcategory(subcatId));
+                productSubcategories.push(subcategories.find(subcat => subcat.id === subcatId));
             }
 
             const product: Product = {
