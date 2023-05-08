@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './header.scss';
 import LionLogo from '../LionLogo';
 import { Dk, Us } from "react-flags-select";
@@ -11,6 +11,9 @@ import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
+import { ProductItemWeb } from '@models/ProductItemWeb';
+import React from 'react';
+import { SearchState } from '@models/SearchState';
 
 interface INavModel {
   path: string;
@@ -19,7 +22,15 @@ interface INavModel {
 
 const Header: React.FC = observer(function Header() {
 
-  const { languageStore } = useContext(MobXContext);
+  const { languageStore, webshopStore } = useContext(MobXContext);
+  const [displayedProductItems, setDisplayedProductItems] = React.useState<ProductItemWeb[]>([]);
+  const [searchText, setSearchText] = React.useState<string>('');
+  const navigate = useNavigate();
+
+  const handleItemsChanged = (productItems: ProductItemWeb[]) => {
+    setDisplayedProductItems(productItems);
+    console.log(displayedProductItems);
+  }
 
 
   const navPaths: INavModel[] = [];
@@ -43,16 +54,22 @@ const Header: React.FC = observer(function Header() {
     //return  isActive ? "active" : isPending ? "inactive" : "header-links";
   }
 
+  function searchOnProducts(searchPar : string){
+    const searchState = new SearchState();
+    searchState.searchString = searchPar;
+    navigate('/productList', { state: { searchState } })
+  } 
+
   return (
     <Navbar expand="lg" className='header' key="navbar">
       <Container fluid>
-      <Navbar.Brand>
+        <Navbar.Brand>
           <NavLink to={"/"} className="nav-brand">
             <LionLogo width={70} />
           </NavLink>
         </Navbar.Brand>
-      <Navbar.Toggle aria-controls="navbarScrolls" />
-      
+        <Navbar.Toggle aria-controls="navbarScrolls" />
+
         <Navbar.Collapse id="navbarScroll">
         <Button onClick={() => {
               languageStore.toggleLanguage();
@@ -66,7 +83,7 @@ const Header: React.FC = observer(function Header() {
             </Button>
           <Nav
             className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
-            style={{ maxHeight: '100px', width: '100%'}}
+            style={{ maxHeight: '100px', width: '100%' }}
             navbarScroll
           >
             {navPaths.map((navItem, index) => {
@@ -89,21 +106,40 @@ const Header: React.FC = observer(function Header() {
             <Form.Control
               type="search"
               style={{width:"20rem"}}
+              onKeyDown={(e)=>{
+                if (e.key === "Enter"){
+                  e.preventDefault();
+                  searchOnProducts(e.currentTarget.value);
+                }
+              }}
               placeholder={languageStore.currentLanguage.SearchBarText}
               className="me-2"
               aria-label="Search"
-            />
-          
-            <Button className='search-button'>
+             /> 
+          </Form>
+
+
+          {/* <ProductSearchBar
+            headerBar ={true}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            productItems={webshopStore.productItems}
+            onItemsChanged={handleItemsChanged}
+            showSearchBar={true}
+            style={{ width: "30rem", backgroundColor: "white", borderRadius: '5px' }}
+          /> */}
+         
+
+          {/* <Button className='search-button'>
               <NavLink
                 to={"/search"}
                 className={'search-button'}
               >
                 {languageStore.currentLanguage.SearchBarText}
               </NavLink>
-            </Button>
-            <CartDrawer />
-          </Form>
+            </Button> */}
+          <CartDrawer />
+          {/* </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -81,7 +81,15 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
 
             <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                    <ProductSearchBar searchText={searchText} setSearchText={setSearchText} showSearchBar={showSearchBar} productItems={items} onItemsChanged={handleSearchTextChanged} />
+                    <ProductSearchBar
+                        headerBar={false}
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                        showSearchBar={showSearchBar}
+                        productItems={items}
+                        onItemsChanged={handleSearchTextChanged}
+                        style={{ marginRight: '10px', minWidth: '15vw' }}
+                    />
 
                     <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
                         <InputLabel>{languageStore.currentLanguage.filterByCategory}</InputLabel>

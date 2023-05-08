@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Translater } from "@utils/Translater";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import Loading from "@components/loading/Loading";
@@ -9,11 +9,23 @@ import { Button, Grid, Typography } from "@mui/material";
 import ProductSearch from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
+import SubCategory from "@models/SubCategory";
 
+interface IProductListPage {
+   /* subcat ?: SubCategory;
+    productItems ?: ProductItemWeb; 
+    searchInput ?: String;*/
+}
 
-export const ProductListPage: React.FC = observer(function ProductListPage() {
+export const ProductListPage: React.FC = observer(function ProductListPage(props: IProductListPage) {
     const translater = new Translater();
     const { languageStore, webshopStore } = useContext(MobXContext);
+
+    /*Get potential values from either the searchbar or through category navigation */
+   // const location = useLocation();
+   // const { subcat } = location.state;
+   // const { searchItems } = location.state;
+   // const { searchInput } = location.state;
 
     /* Define state for products and inject stores */
     const pageSizeAmount: number = 10;
