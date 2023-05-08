@@ -4,7 +4,6 @@ import { TextField } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 
 export type ProductSearchBarProps = {
     searchText: string;
@@ -19,8 +18,7 @@ export type ProductSearchBarProps = {
 export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(function ProductSearchBar(props: ProductSearchBarProps) {
 
     const { languageStore } = useContext(MobXContext);
-    const { showSearchBar, productItems, onItemsChanged, headerBar } = props;
-    const navigate = useNavigate(); 
+    const { showSearchBar, productItems, onItemsChanged } = props;
 
     /* Define state for the searchbar component */
     const { searchText, setSearchText } = props;
@@ -50,21 +48,8 @@ export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(functi
         }
     }
 
-    function handleEnterKeyDownHeader(event: React.KeyboardEvent<HTMLDivElement>){
-        if (event.key === "Enter") {
-
-            let searchItems =  productItems; 
-            let searchInput = searchText; 
-            console.log("trigggered header search")
-
-            navigate('/productList' , {state: {searchItems, searchInput}} )
-        }
-    }
-
     if (!showSearchBar) return null;
     else {
-
-        if (headerBar === false){
             return (
                 <TextField
                     label={languageStore.currentLanguage.search}
@@ -77,22 +62,6 @@ export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(functi
                     onKeyDownCapture={handleEnterKeyDown}
                 />
             )
-        }
-        else if (headerBar === true){
-            return (
-                <div>
-                    <TextField
-                        label={languageStore.currentLanguage.search}
-                        type="search"
-                        variant="outlined"
-                        placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
-                        value={searchText}
-                        onChange={handleSearchTextChange}
-                        sx={props.style ? props.style : {}}
-                        onKeyDownCapture={handleEnterKeyDown}
-                    />
-                </div>
-            )
-        }
+        
     }
 });

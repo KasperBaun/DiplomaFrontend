@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import './header.scss';
 import LionLogo from '../LionLogo';
 import { Dk, Us } from "react-flags-select";
@@ -11,9 +11,9 @@ import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
-import { ProductSearchBar } from '@components/productsearch/ProductSearchBar';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import React from 'react';
+import { SearchState } from '@models/SearchState';
 
 interface INavModel {
   path: string;
@@ -23,9 +23,9 @@ interface INavModel {
 const Header: React.FC = observer(function Header() {
 
   const { languageStore, webshopStore } = useContext(MobXContext);
-
   const [displayedProductItems, setDisplayedProductItems] = React.useState<ProductItemWeb[]>([]);
   const [searchText, setSearchText] = React.useState<string>('');
+  const navigate = useNavigate();
 
   const handleItemsChanged = (productItems: ProductItemWeb[]) => {
     setDisplayedProductItems(productItems);
@@ -53,6 +53,12 @@ const Header: React.FC = observer(function Header() {
     return result;
     //return  isActive ? "active" : isPending ? "inactive" : "header-links";
   }
+
+  function searchOnProducts(searchPar : string){
+    const searchState = new SearchState();
+    searchState.searchString = searchPar;
+    navigate('/productList', { state: { searchState } })
+  } 
 
   return (
     <Navbar expand="lg" className='header' key="navbar">
@@ -96,7 +102,24 @@ const Header: React.FC = observer(function Header() {
             })}
 
           </Nav>
-          <ProductSearchBar
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              style={{width:"20rem"}}
+              onKeyDown={(e)=>{
+                if (e.key === "Enter"){
+                  e.preventDefault();
+                  searchOnProducts(e.currentTarget.value);
+                }
+              }}
+              placeholder={languageStore.currentLanguage.SearchBarText}
+              className="me-2"
+              aria-label="Search"
+             /> 
+          </Form>
+
+
+          {/* <ProductSearchBar
             headerBar ={true}
             searchText={searchText}
             setSearchText={setSearchText}
@@ -104,15 +127,8 @@ const Header: React.FC = observer(function Header() {
             onItemsChanged={handleItemsChanged}
             showSearchBar={true}
             style={{ width: "30rem", backgroundColor: "white", borderRadius: '5px' }}
-          />
-          {/* <Form className="d-flex">
-            <Form.Control
-              type="search"
-              style={{width:"20rem"}}
-              placeholder={languageStore.currentLanguage.SearchBarText}
-              className="me-2"
-              aria-label="Search"
-            /> */}
+          /> */}
+         
 
           {/* <Button className='search-button'>
               <NavLink
