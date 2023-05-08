@@ -33,7 +33,7 @@ const Webshop: React.FC = observer(function Webshop() {
         return (
             <div>
                 <Header />
-                <Container style={{ minHeight: "80vh", display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: 'auto' }}>
+                <Container style={{  display: 'flex' }}>
                     <Outlet />
                 </Container>
                 <Footer />

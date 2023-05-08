@@ -14,6 +14,7 @@ import Order from '@models/Order';
 import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
 import Payment from '@models/Payment';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -46,6 +47,16 @@ export class WebshopStore {
     private _productMap: Map<number, Product> = new Map();
     private _productItemMap: Map<number, ProductItemWeb> = new Map();
     private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
+
+    /* State for searching products */
+    private pageSizeAmount: number = 10;
+    private _displayedProductItems: ProductItemWeb[] = [];
+    private _displayedProductItemsCount: number = this.pageSizeAmount;
+    private _filteredProductItems: ProductItemWeb[] = [];
+    private _selectedCategory: Category = null;
+    private _selectedSubCategory: SubCategory = null;
+    private _selectedSubcategories: SubCategory[] = [];
+
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -93,6 +104,67 @@ export class WebshopStore {
             WebshopStore._Instance = new WebshopStore(_rootStore, _apiService);
         }
         return WebshopStore._Instance;
+    }
+
+    public get displayedProductItems(): ProductItemWeb[] {
+        return this._displayedProductItems;
+    }
+
+    public get displayedProductItemsCount(): number {
+        return this._displayedProductItemsCount;
+    }
+
+    public showMore(): void {
+        runInAction(() => {
+            this._displayedProductItemsCount += this.pageSizeAmount;
+            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
+        });
+    }
+
+    public setFilteredProductItems(items: ProductItemWeb[]) {
+        runInAction(() => {
+            this._filteredProductItems = items;
+            this._displayedProductItemsCount = this.pageSizeAmount;
+            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
+        });
+    }
+
+    public get selectedCategory(): Category {
+        return this._selectedCategory;
+    }
+
+    public set selectedCategory(category: Category) {
+        runInAction(() => {
+            this._selectedCategory = category;
+        });
+    }
+
+    public get selectedSubcategory(): SubCategory {
+        return this._selectedSubCategory;
+    }
+
+    public set selectedSubcategory(subcategory: SubCategory) {
+        runInAction(() => {
+            this._selectedSubCategory = subcategory;
+        });
+    }
+
+    public get selectedSubcategories(): SubCategory[] {
+        return this._selectedSubcategories;
+    }
+
+    public set selectedSubcategories(subcategories: SubCategory[]) {
+        runInAction(() => {
+            this._selectedSubcategories = subcategories;
+        });
+    }
+
+    public resetFilteredProductItems() {
+        runInAction(() => {
+            this._filteredProductItems = [];
+            this._displayedProductItemsCount = this.pageSizeAmount;
+            this._displayedProductItems = [];
+        });
     }
 
 

@@ -8,41 +8,35 @@ import { useContext } from "react";
 export type ProductSearchBarProps = {
     searchText: string;
     setSearchText: (searchText: string) => void;
+    onSearchTextChanged: (searchText: string) => void;
     showSearchBar?: boolean;
     style?: React.CSSProperties;
-    productItems: ProductItem[] | ProductItemWeb[];
-    onItemsChanged: (productItems: ProductItem[] | ProductItemWeb[]) => void;
 }
 
 export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(function ProductSearchBar(props: ProductSearchBarProps) {
 
-    const { languageStore } = useContext(MobXContext);
-    const { showSearchBar, productItems, onItemsChanged } = props;
+    const { languageStore, searchStore } = useContext(MobXContext);
+    const { showSearchBar, onSearchTextChanged } = props;
 
     /* Define state for the searchbar component */
     const { searchText, setSearchText } = props;
 
     /* Define handlers for actions */
-    const handleSearchTextChange = (event: any): React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> => {
+    function handleSearchTextChange(event: any): React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> {
+        if (event.target.value === "") {
+            onSearchTextChanged(event.target.value);
+            setSearchText(event.target.value);
+            searchStore.reset();
+        }
+        onSearchTextChanged(event.target.value);
         setSearchText(event.target.value);
-        const filteredProductItems = productItems.filter(
-            productItem =>
-                productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
-        );
-        onItemsChanged(filteredProductItems);
         return;
     }
 
     function handleEnterKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
         if (event.key === "Enter") {
             // Enter key was pressed
-            const filteredProductItems = productItems.filter(
-                productItem =>
-                    productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                    productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
-            );
-            onItemsChanged(filteredProductItems);
+            onSearchTextChanged(searchText);
         }
     }
 

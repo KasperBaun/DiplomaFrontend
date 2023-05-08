@@ -12,7 +12,6 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
 import React from 'react';
-import { SearchState } from '@models/SearchState';
 
 interface INavModel {
   path: string;
@@ -21,11 +20,8 @@ interface INavModel {
 
 const Header: React.FC = observer(function Header() {
 
-  const { languageStore } = useContext(MobXContext);
+  const { languageStore, searchStore } = useContext(MobXContext);
   const navigate = useNavigate();
-
-
-
 
   const navPaths: INavModel[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
@@ -48,14 +44,9 @@ const Header: React.FC = observer(function Header() {
     //return  isActive ? "active" : isPending ? "inactive" : "header-links";
   }
 
-  function searchOnProducts(searchPar: string) {
-
-
-    const searchState = new SearchState();
-    searchState.searchText = searchPar;
-
-
-    navigate(`/productList?searchText=${searchPar}&int1=${0}&int2=${0}`);
+  function searchOnProducts(searchText: string) {
+    searchStore.filterBySearchText(searchText);
+    navigate(`/productList`);
     //navigate('/productList', { state: { searchState } })
   }
 

@@ -5,7 +5,6 @@ import Loading from "@components/loading/Loading";
 import { Button, Grid, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
-import { ProductItemWeb } from "@models/ProductItemWeb";
 import ProductSearch from "@components/productsearch/ProductSearch";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 
@@ -25,12 +24,6 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
     /* Define the event handlers for the buttons */
     const updateDisplayedProductItems = (productItems: ProductItem[], amount: number) => {
         setDisplayedProductItems(ExtentionMethods.safeSlice(productItems, 0, amount * pageSizeAmount));
-    }
-
-    const handleItemsChanged = (productItems: ProductItem[] | ProductItemWeb[]) => {
-        const items: ProductItem[] = productItems as ProductItem[];
-        updateDisplayedProductItems(items, 1);
-        setProductItems(items);
     }
 
     const handleOnCreateClicked = (): void => props.onProductItemClicked(null);
@@ -78,9 +71,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                         subcategories={backofficeStore.subCategories}
                         onProductItemClicked={props.onProductItemClicked}
                         items={backofficeStore.productItems}
-                        onItemsChanged={handleItemsChanged}
                         showSearchBar={true}
-                        searchState={{ searchText: '', categoryId: null, subcategoryId: null }}
                     />
                 </Grid>
 

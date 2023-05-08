@@ -7,11 +7,9 @@ import { Grid } from "@mui/material";
 import CategoryCardWeb from "../categories/CategoryCardWeb";
 import SubCategory from "@models/SubCategory";
 import { Translater } from "@utils/Translater";
-import { SearchState } from "@models/SearchState";
-import Subcategories from "@backoffice/category/components/Subcategories";
 
 const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: any) {
-    const { webshopStore } = useContext(MobXContext);
+    const { webshopStore, searchStore } = useContext(MobXContext);
     const { languageStore } = useContext(MobXContext);
     const translater = new Translater();
 
@@ -21,12 +19,10 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
     const { name } = location.state;
     const subCategories = (webshopStore.subCategoriesByCategoryID(Number(id)))
 
-    function handleClick(subCategory: SubCategory, name: String) {
-        const searchState = new SearchState();
-        searchState.subcategoryId = subCategory.id;
-        searchState.categoryId = subCategory.category.id;
-        navigate(`/productList?searchText=${""}&int1=${subCategory.category.id}&int2=${subCategory.id}`);
-       // navigate('/productList' , { state: { searchState } })
+    function handleClick(subcategory: SubCategory, name: String) {
+        console.log("SUBCAT ID", subcategory.id);
+        searchStore.filterBySubcategory(subcategory.id);
+        navigate(`/productList`);
     }
 
 

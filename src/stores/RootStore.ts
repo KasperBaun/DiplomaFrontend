@@ -10,6 +10,7 @@ import { AuthStore } from "./AuthStore";
 import { AuthService } from "@services/AuthService";
 import { BasketStore } from "./BasketStore";
 import { WebshopStore } from "./WebshopStore";
+import { SearchStore } from "./SearchStore";
 
 
 export class RootStore implements IMobXContext {
@@ -27,6 +28,9 @@ export class RootStore implements IMobXContext {
     private backofficeLoading: boolean = false;
     private languageStoreLoaded: boolean = false;
     private languageStoreLoading: boolean = false;
+
+    /* Common store */
+    searchStore: SearchStore;
 
     /* Stores for webshop */
     languageStore: LanguageStore;
@@ -53,6 +57,8 @@ export class RootStore implements IMobXContext {
         this.authStore = AuthStore.GetInstance(this, this.authService);
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
+        this.searchStore = SearchStore.GetInstance(this);
+        this.searchStore.init();
         this.loadLanguageStore();
         makeAutoObservable(this);
     }
