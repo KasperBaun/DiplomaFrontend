@@ -22,7 +22,7 @@ interface INavModel {
 
 const Header: React.FC = observer(function Header() {
 
-  const { languageStore, productStore } = useContext(MobXContext);
+  const { languageStore, webshopStore } = useContext(MobXContext);
 
   const [displayedProductItems, setDisplayedProductItems] = React.useState<ProductItemWeb[]>([]);
   const [searchText, setSearchText] = React.useState<string>('');
@@ -99,10 +99,10 @@ const Header: React.FC = observer(function Header() {
           <ProductSearchBar
             searchText={searchText}
             setSearchText={setSearchText}
-            productItems={productStore.ProductItems}
+            productItems={webshopStore.productItems}
             onItemsChanged={handleItemsChanged}
             showSearchBar={true}
-            style={{ width: "20rem", backgroundColor: "white", borderRadius: '5px' }}
+            style={{ width: "30rem", backgroundColor: "white", borderRadius: '5px' }}
           />
           {/* <Form className="d-flex">
             <Form.Control
