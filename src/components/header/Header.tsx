@@ -97,6 +97,7 @@ const Header: React.FC = observer(function Header() {
 
           </Nav>
           <ProductSearchBar
+            headerBar ={true}
             searchText={searchText}
             setSearchText={setSearchText}
             productItems={webshopStore.productItems}

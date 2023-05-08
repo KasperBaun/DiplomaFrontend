@@ -12,13 +12,13 @@ export type ProductSearchBarProps = {
     style?: React.CSSProperties;
     productItems: ProductItem[] | ProductItemWeb[];
     onItemsChanged: (productItems: ProductItem[] | ProductItemWeb[]) => void;
-
+    headerBar: Boolean;
 }
 
 export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(function ProductSearchBar(props: ProductSearchBarProps) {
 
     const { languageStore } = useContext(MobXContext);
-    const { showSearchBar, productItems, onItemsChanged } = props;
+    const { showSearchBar, productItems, onItemsChanged, headerBar } = props;
 
     /* Define state for the searchbar component */
     const { searchText, setSearchText } = props;
@@ -44,22 +44,42 @@ export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(functi
                     productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
             );
             onItemsChanged(filteredProductItems);
+            
         }
     }
 
     if (!showSearchBar) return null;
     else {
-        return (
-            <TextField
-                label={languageStore.currentLanguage.search}
-                type="search"
-                variant="outlined"
-                placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
-                value={searchText}
-                onChange={handleSearchTextChange}
-                sx={props.style ? props.style : {}}
-                onKeyDownCapture={handleEnterKeyDown}
-            />
-        )
+
+        if (headerBar === false){
+            return (
+                <TextField
+                    label={languageStore.currentLanguage.search}
+                    type="search"
+                    variant="outlined"
+                    placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
+                    value={searchText}
+                    onChange={handleSearchTextChange}
+                    sx={props.style ? props.style : {}}
+                    onKeyDownCapture={handleEnterKeyDown}
+                />
+            )
+        }
+        else if (headerBar === true){
+            return (
+                <div>
+                    <TextField
+                        label={languageStore.currentLanguage.search}
+                        type="search"
+                        variant="outlined"
+                        placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
+                        value={searchText}
+                        onChange={handleSearchTextChange}
+                        sx={props.style ? props.style : {}}
+                        onKeyDownCapture={handleEnterKeyDown}
+                    />
+                </div>
+            )
+        }
     }
 });
