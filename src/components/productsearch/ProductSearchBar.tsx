@@ -12,6 +12,7 @@ export type ProductSearchBarProps = {
     style?: React.CSSProperties;
     productItems: ProductItem[] | ProductItemWeb[];
     onItemsChanged: (productItems: ProductItem[] | ProductItemWeb[]) => void;
+    headerBar: Boolean;
 }
 
 export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(function ProductSearchBar(props: ProductSearchBarProps) {
@@ -49,17 +50,18 @@ export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(functi
 
     if (!showSearchBar) return null;
     else {
-        return (
-            <TextField
-                label={languageStore.currentLanguage.search}
-                type="search"
-                variant="outlined"
-                placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
-                value={searchText}
-                onChange={handleSearchTextChange}
-                sx={props.style ? props.style : {}}
-                onKeyDownCapture={handleEnterKeyDown}
-            />
-        )
+            return (
+                <TextField
+                    label={languageStore.currentLanguage.search}
+                    type="search"
+                    variant="outlined"
+                    placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
+                    value={searchText}
+                    onChange={handleSearchTextChange}
+                    sx={props.style ? props.style : {}}
+                    onKeyDownCapture={handleEnterKeyDown}
+                />
+            )
+        
     }
 });

@@ -11,6 +11,7 @@ import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
+import { ProductItemWeb } from '@models/ProductItemWeb';
 import React from 'react';
 import { SearchState } from '@models/SearchState';
 
@@ -21,14 +22,15 @@ interface INavModel {
 
 const Header: React.FC = observer(function Header() {
 
-  const { languageStore } = useContext(MobXContext);
+  const { languageStore, webshopStore } = useContext(MobXContext);
+  const [displayedProductItems, setDisplayedProductItems] = React.useState<ProductItemWeb[]>([]);
+  const [searchText, setSearchText] = React.useState<string>('');
   const navigate = useNavigate();
 
   const handleItemsChanged = (productItems: ProductItemWeb[]) => {
     setDisplayedProductItems(productItems);
     console.log(displayedProductItems);
   }
-
 
 
   const navPaths: INavModel[] = [];
@@ -52,11 +54,11 @@ const Header: React.FC = observer(function Header() {
     //return  isActive ? "active" : isPending ? "inactive" : "header-links";
   }
 
-  function searchOnProducts(searchPar: string) {
+  function searchOnProducts(searchPar : string){
     const searchState = new SearchState();
-    searchState.searchText = searchPar;
+    searchState.searchString = searchPar;
     navigate('/productList', { state: { searchState } })
-  }
+  } 
 
   return (
     <Navbar expand="lg" className='header' key="navbar">
@@ -69,16 +71,16 @@ const Header: React.FC = observer(function Header() {
         <Navbar.Toggle aria-controls="navbarScrolls" />
 
         <Navbar.Collapse id="navbarScroll">
-          <Button onClick={() => {
-            languageStore.toggleLanguage();
-          }}>
-            <Dk />
-          </Button>
-          <Button style={{ paddingRight: '20rem' }} onClick={() => {
-            languageStore.toggleLanguage();
-          }}>
-            <Us />
-          </Button>
+        <Button onClick={() => {
+              languageStore.toggleLanguage();
+            }}>
+              <Dk />
+            </Button>
+            <Button style={{paddingRight:'20rem'}} onClick={() => {
+              languageStore.toggleLanguage();
+            }}>
+              <Us/>
+            </Button>
           <Nav
             className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
             style={{ maxHeight: '100px', width: '100%' }}
@@ -103,9 +105,9 @@ const Header: React.FC = observer(function Header() {
           <Form className="d-flex">
             <Form.Control
               type="search"
-              style={{ width: "20rem" }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
+              style={{width:"20rem"}}
+              onKeyDown={(e)=>{
+                if (e.key === "Enter"){
                   e.preventDefault();
                   searchOnProducts(e.currentTarget.value);
                 }
@@ -113,9 +115,31 @@ const Header: React.FC = observer(function Header() {
               placeholder={languageStore.currentLanguage.SearchBarText}
               className="me-2"
               aria-label="Search"
-            />
+             /> 
           </Form>
+
+
+          {/* <ProductSearchBar
+            headerBar ={true}
+            searchText={searchText}
+            setSearchText={setSearchText}
+            productItems={webshopStore.productItems}
+            onItemsChanged={handleItemsChanged}
+            showSearchBar={true}
+            style={{ width: "30rem", backgroundColor: "white", borderRadius: '5px' }}
+          /> */}
+         
+
+          {/* <Button className='search-button'>
+              <NavLink
+                to={"/search"}
+                className={'search-button'}
+              >
+                {languageStore.currentLanguage.SearchBarText}
+              </NavLink>
+            </Button> */}
           <CartDrawer />
+          {/* </Form> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
