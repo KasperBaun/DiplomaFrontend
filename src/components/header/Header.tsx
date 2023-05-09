@@ -1,5 +1,4 @@
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -12,6 +11,7 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
 import React from 'react';
+import { Grid } from '@mui/material';
 
 interface INavModel {
   path: string;
@@ -27,9 +27,9 @@ const Header: React.FC = observer(function Header() {
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
   navPaths.push({ path: "/productList", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
-  //navPaths.push({ path: "/payment", text: `${languageStore.currentLanguage.PaymentTabText}` });
-  //navPaths.push({ path: "/confirmation", text: `${languageStore.currentLanguage.ConfirmationTabText}` });
-  //navPaths.push({ path: "/backoffice", text: `${languageStore.currentLanguage.BackOfficeTabText}` })
+  navPaths.push({ path: "/contact", text: `${languageStore.currentLanguage.ContactTabText}` });
+  navPaths.push({ path: "/faq", text: `${languageStore.currentLanguage.FAQTabText}` });
+  navPaths.push({ path: "/aboutus", text: `${languageStore.currentLanguage.AboutUsTabText}` })
 
   const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
     let result = 'header-links';
@@ -51,52 +51,60 @@ const Header: React.FC = observer(function Header() {
 
   return (
     <Navbar expand="lg" className='header' key="navbar">
-      <Container fluid>
-        <Navbar.Brand>
-          <NavLink to={"/"} className="nav-brand">
-            <LionLogo width={70} />
-          </NavLink>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScrolls" />
+      <Grid container display={'flex'} flexDirection={'row'} alignItems={'center'}>
 
-        <Navbar.Collapse id="navbarScroll">
-        <Button onClick={() => {
-              languageStore.toggleLanguage();
-            }}>
-              <Dk />
-            </Button>
-            <Button style={{paddingRight:'20rem'}} onClick={() => {
-              languageStore.toggleLanguage();
-            }}>
-              <Us/>
-            </Button>
-          <Nav
-            className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
-            style={{ maxHeight: '100px', width: '100%' }}
-            navbarScroll
-          >
-            {navPaths.map((navItem, index) => {
-              return (
-                <NavLink
-                  to={navItem.path}
-                  key={navItem.text + index}
-                  className={({ isActive, isPending }) => {
-                    return navLinkStyling(isActive, isPending)
-                  }}
-                >
-                  {navItem.text}
-                </NavLink>
-              )
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'>
+          <Navbar.Brand>
+            <NavLink to={"/"} className="nav-brand">
+              <LionLogo width={70} />
+            </NavLink>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbarScrolls" />
+          <Button onClick={() => {
+            languageStore.toggleLanguage();
+          }}>
+            {languageStore.getCurrentLanguageCode() === "da_DK" ? <Dk /> : <Us />}
+          </Button>
 
-            })}
+        </Grid>
 
-          </Nav>
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'>
+          <Navbar.Collapse id="navbarScroll">
+
+            <Nav
+              className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
+              style={{ maxHeight: '100px', width: '100%' }}
+              navbarScroll
+            >
+              {navPaths.map((navItem, index) => {
+                return (
+                  <NavLink
+                    to={navItem.path}
+                    key={navItem.text + index}
+                    className={({ isActive, isPending }) => {
+                      return navLinkStyling(isActive, isPending)
+                    }}
+                  >
+                    {navItem.text}
+                  </NavLink>
+                )
+
+              })}
+
+
+            </Nav>
+          </Navbar.Collapse>
+
+        </Grid>
+        {/* <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'></Grid> */}
+
+        <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'end'}>
           <Form className="d-flex">
             <Form.Control
               type="search"
-              style={{width:"20rem"}}
-              onKeyDown={(e)=>{
-                if (e.key === "Enter"){
+              style={{ width: "20rem" }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
                   e.preventDefault();
                   searchOnProducts(e.currentTarget.value);
                 }
@@ -104,12 +112,14 @@ const Header: React.FC = observer(function Header() {
               placeholder={languageStore.currentLanguage.SearchBarText}
               className="me-2"
               aria-label="Search"
-             /> 
+            />
           </Form>
           <CartDrawer />
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Grid>
+
+      </Grid>
+
+    </Navbar >
   );
 });
 

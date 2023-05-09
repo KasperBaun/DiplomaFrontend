@@ -27,13 +27,13 @@ const ConfirmDeleteDialog: React.FC<IConfirmDeleteDialogProps> = observer(functi
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onCancelClicked}>
-                        {languageStore.currentLanguage.buttonCancelText}
+                        {languageStore.currentLanguage.cancel}
                     </Button>
                     <Button
                         variant="contained"
                         type="submit"
                         onClick={onConfirmDeleteClicked}>
-                        {languageStore.currentLanguage.buttonDeleteText}
+                        {languageStore.currentLanguage.delete}
                     </Button>
                 </DialogActions>
             </Dialog>

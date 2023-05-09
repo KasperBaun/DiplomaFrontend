@@ -1,16 +1,19 @@
 import { Footer } from "@components/footer/Footer";
 import Header from "@components/header/Header";
 import Loading from "@components/loading/Loading";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Constants } from "@utils/Constants";
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
+import { ColorModeContext, useMode } from "styling/mui-theme/web/WebTheme";
 
 const Webshop: React.FC = observer(function Webshop() {
 
     const { webshopStore, rootStore } = useContext<IMobXContext>(MobXContext);
+    const { theme, colorMode } = useMode();
 
     useEffect(() => {
         const webshopStoreLoaded = async () => {
@@ -31,13 +34,16 @@ const Webshop: React.FC = observer(function Webshop() {
         )
     } else {
         return (
-            <div>
-                <Header />
-                <Container style={{  display: 'flex' }}>
-                    <Outlet />
-                </Container>
-                <Footer />
-            </div>
+            <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Header />
+                    <Container style={{ display: 'flex', minHeight:'76.2vh' }}>
+                        <Outlet  />
+                    </Container>
+                    <Footer />
+                </ThemeProvider>
+            </ColorModeContext.Provider>
         );
     }
 });

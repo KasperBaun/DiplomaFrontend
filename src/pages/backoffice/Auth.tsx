@@ -3,7 +3,7 @@ import MobXContext from '@stores/MobXContext';
 import { observer } from 'mobx-react-lite';
 import AuthPage from './auth/AuthPage';
 import { useContext, useEffect } from 'react';
-import { ColorModeContext, useMode } from 'styling/Theme';
+import { ColorModeContext, useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Backoffice from './BackOffice';
 import Unauthorized from './auth/Unauthorized';
@@ -11,7 +11,7 @@ import Loading from '@components/loading/Loading';
 
 const Auth = observer(() => {
     const { authStore } = useContext(MobXContext);
-    const { theme, colorMode } = useMode();
+    const { theme, colorMode } = useBackofficeMode();
 
     useEffect(() => {
         if (!authStore.isLoaded && !authStore.isLoading) {

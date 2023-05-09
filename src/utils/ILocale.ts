@@ -1,9 +1,9 @@
 export interface ILocale {
-  id: string;
-  aboutUs: string;
-  aboutUsText: string;
 
-  // Standard text
+  getQuality(qualityType: number): string;
+  getCondition(conditionType: number): string;
+  getMaterialType(materialType: number): string;
+
   create: string;
   cancel: string;
   update: string;
@@ -28,6 +28,13 @@ export interface ILocale {
   selectMaterial: string;
   name: string;
   modelNumber: string;
+  callUs: string;
+  writeOnFacebook: string;
+  clickForMapsLocation: string;
+  city: string;
+  instagram: string;
+  facebook: string;
+  sendAnEmail: string;
 
   // Snackbar texts
   createSuccess: string;
@@ -37,15 +44,9 @@ export interface ILocale {
   deleteSuccess: string;
   deleteFailed: string;
 
-  // Button text
-  buttonCancelText: string;
-  buttonDeleteText: string;
   confirmDeleteText: string;
 
-  getQuality(qualityType: number): string;
-  getCondition(conditionType: number): string;
-
-  getMaterialType(materialType: number): string;
+ 
 
   // Category Admin
   createCategoryDialogTitle: string;
@@ -56,7 +57,6 @@ export interface ILocale {
   createCategorySubmit: string;
   createCategorySuccessMessage: string;
   createCategoryFailedMessage: string;
-
   updateCategoryDialogTitle: string;
   updateCategoryFormTitle: string;
   updateCategoryFormOrder: string;
@@ -67,11 +67,10 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
-
   deleteCategorySuccessMessage: string;
   deleteCategoryFailedMessage: string;
-
   ProductCommaSeperatedText: string;
+
   // BasketPage: 
   yourBasket: string;
   yourTotal: string;
@@ -86,30 +85,31 @@ export interface ILocale {
   addButton: string;
 
   // AboutUS page
-  copanyDescription: string; 
-  openingDays: string;
-  MondayText: string;
-  TuesdayText: string;
-  WendsayText:  string;
-  ThursdayText:  string;
-  FridayText: string;
-  SaturdayText:  string;
-  publicHollidayText:  string;
-  SundayText: string;
-  ClosedText: string;
-  PerAgreemtText:  string;
-  contactInformation : string; 
-  phoneText:  string;
-  emailText:  string;
-  addressText: string;
-  CVRNRText:  string;
-  FAQText:  string;
-  Q1Text: string;
-  Q1Awnser: string; 
-  Q2Text: string;
-  Q2Awnser: string; 
-  Q3Text: string;
-  Q3Awnser: string; 
+  company_description:string;
+  opening_days:string;
+  monday_text:string;
+  tuesday_text:string;
+  wednesday_text:string;
+  thursday_text:string;
+  friday_text:string;
+  saturday_text:string;
+  public_holiday_text:string;
+  sunday_text:string;
+  closed_text:string;
+  per_agreement_text:string;
+  contact_information:string;
+  phone_text:string;
+  email_text:string;
+  address_text:string;
+  post_code: string;
+  cvr_nr_text:string;
+  faq_text:string;
+  q1_text:string;
+  q1_answer:string;
+  q2_text:string;
+  q2_answer:string;
+  q3_text:string;
+  q3_answer:string;
 
   // Frontpage:
   seeProductBtn: string; 
@@ -245,14 +245,6 @@ export interface ILocale {
   OrderDetailsCompletionStatus: string;
   OrderDetailsListTitle: string;
 
-  // <TableCell align="left">Product Name</TableCell>
-  // <TableCell align="left">Manufacturer</TableCell>
-  // <TableCell align="left">Customer (Id)</TableCell>
-  // <TableCell align="left">Payment Status</TableCell>
-  // <TableCell align="left">Delivery Status</TableCell>
-  // <TableCell align="left">Discount used</TableCell>
-  // <TableCell align="left">Completed</TableCell>
-
   // Footer tabs
   BlogTabText: string;
   OldPageText: string;
@@ -281,12 +273,12 @@ export interface ILocale {
   InventoryWidgetTitle: string;
 
   // Loginpage
-  signInText: string;
-  signUpText: string;
-  forgotPasswordText: string;
-  alreadyHaveAccountText: string;
-  dontHaveAccountText: string;
-  rememberMeText: string;
+  signIn: string;
+  signUp: string;
+  forgotPassword: string;
+  alreadyHaveAccount: string;
+  dontHaveAccount: string;
+  rememberMe: string;
 
   // Signup page
   firstName: string;

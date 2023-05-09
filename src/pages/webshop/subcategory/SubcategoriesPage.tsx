@@ -18,7 +18,6 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
     const subCategories = (webshopStore.subCategoriesByCategoryID(Number(id)))
 
     function handleClick(subcategoryId: number) {
-        console.log("SUBCAT ID", subcategoryId);
         searchStore.filterBySubcategory(subcategoryId);
         navigate(`/productList`);
     }

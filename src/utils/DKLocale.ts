@@ -1,50 +1,7 @@
 import { ILocale } from "./ILocale";
 
 export default class DKLocale implements ILocale {
-  id = "da_DK";
-  aboutUs = "Om os";
-  aboutUsText = "Vi sælger porcelæn .....";
 
-  // Standard text
-  create = "Opret";
-  cancel = "Annuller";
-  update = "Opdater";
-  delete = "Slet";
-  product = "Produkt";
-  reset = "Nulstil";
-  search = "Søg";
-  showAll = "Vis alle";
-  showMore = "Vis flere";
-  sold = "Solgt";
-  forSale = "Til salg";
-  price = "Pris";
-  description = "Beskrivelse";
-  settings = "Indstillinger";
-  notifications = "Notifikationer";
-  noProductsAvailable = "Der er desvære ingen vare i denne kategori på nuværende tidspunkt";
-  createProduct = "Opret produkt";
-  editProduct = "Rediger produkt";
-  deleteProduct = "Slet produkt";
-  productImages = "Produkt billeder";
-  manufacturer = "Producent";
-  selectMaterial = "Vælg materiale";
-  name = "Navn";
-  modelNumber = "Model nummer";
-
-  // Snackbar texts
-  createSuccess = "Oprettelse succesfuld";
-  createFailed = "Oprettelse mislykkedes";
-  updateSuccess = "Opdatering succesfuld";
-  updateFailed = "Opdatering mislykkedes";
-  deleteSuccess = "Sletning succesfuld";
-  deleteFailed = "Sletning mislykkedes";
-
-
-
-  // Button text
-  buttonCancelText = "Annuller";
-  buttonDeleteText = "Slet";
-  confirmDeleteText = "Er du sikker på at du vil slette dette element?";
   getQuality(qualityType: number): string {
     switch (qualityType) {
       case 1: return "1. Sortering";
@@ -77,31 +34,76 @@ export default class DKLocale implements ILocale {
     }
   }
 
+  create = "Opret";
+  cancel = "Annuller";
+  update = "Opdater";
+  delete = "Slet";
+  product = "Produkt";
+  reset = "Nulstil";
+  search = "Søg";
+  showAll = "Vis alle";
+  showMore = "Vis flere";
+  sold = "Solgt";
+  forSale = "Til salg";
+  price = "Pris";
+  description = "Beskrivelse";
+  settings = "Indstillinger";
+  notifications = "Notifikationer";
+  noProductsAvailable = "Der er desvære ingen varer i denne kategori på nuværende tidspunkt";
+  createProduct = "Opret produkt";
+  editProduct = "Rediger produkt";
+  deleteProduct = "Slet produkt";
+  productImages = "Produkt billeder";
+  manufacturer = "Producent";
+  selectMaterial = "Vælg materiale";
+  name = "Navn";
+  modelNumber = "Model nummer";
+  callUs = "Ring til os";
+  writeOnFacebook = "Skriv til os på Facebook";
+  clickForMapsLocation = "Klik for at se vores lokation på Google Maps";
+  city = "By";
+  instagram = "Instagram";
+  facebook = "Facebook";
+  sendAnEmail = "Send en email";
+  
+
+  // Snackbar texts
+  createSuccess = "Oprettelse succesfuld";
+  createFailed = "Oprettelse mislykkedes";
+  updateSuccess = "Opdatering succesfuld";
+  updateFailed = "Opdatering mislykkedes";
+  deleteSuccess = "Sletning succesfuld";
+  deleteFailed = "Sletning mislykkedes";
+  confirmDeleteText = "Er du sikker på at du vil slette dette element?";
+
+ 
+
   // AboutUS page
-  copanyDescription = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg. Vi køber og sælger Guld & Sølv, dansk porcelæn og keramik, samt andre spændende antikviteter. "
-  openingDays = "Åbninstider"
-  MondayText = "Mandag"
-  TuesdayText = "Tirsdag";
-  WendsayText = "Onsdag";
-  ThursdayText = "Torsdag"; 
-  FridayText = "Fredag";
-  SaturdayText = "Lørdag"; 
-  publicHollidayText = "Helligdage";
-  SundayText = "Søndag"; 
-  ClosedText = "Lukket";
-  PerAgreemtText = "Per aftale";
-  contactInformation = "Kontakt information"
-  phoneText =  "Telefon";
-  emailText =  "Email";
-  addressText = "Addresse";
-  CVRNRText =  "CVR Nr";
-  FAQText =  "Ofte stillede spørgsmål:";
-  Q1Text = "Hvad er jeres retunerings politik?";
-  Q1Awnser = "Det er ikke muligt at retunere varer efter 24 timer."; 
-  Q2Text = "Er det muligt at få leveret vare til udlandet?";
-  Q2Awnser =  "Per aftale kan det arrangeres at få leveret vare til udlandet, dog med forbehold for varens pris samt distancen til landet." 
-  Q3Text = "Kan jeg afhente min varer i buttikken?"
-  Q3Awnser = "Det er altid en mulighed selv at hente varer i buttiken  inden for åbningstiderne." 
+  company_description = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg. Vi køber og sælger Guld & Sølv, dansk porcelæn og keramik, samt andre spændende antikviteter."
+  opening_days = "Åbningstider"
+  monday_text = "Mandag"
+  tuesday_text = "Tirsdag"
+  wednesday_text = "Onsdag"
+  thursday_text = "Torsdag"
+  friday_text = "Fredag"
+  saturday_text = "Lørdag"
+  public_holiday_text = "Helligdage"
+  sunday_text = "Søndag"
+  closed_text = "Lukket"
+  per_agreement_text = "Efter aftale"
+  contact_information = "Kontaktinformation"
+  phone_text = "Telefon"
+  email_text = "E-mail"
+  address_text = "Adresse"
+  post_code = "Postnummer"
+  cvr_nr_text = "CVR-nummer"
+  faq_text = "Ofte stillede spørgsmål:"
+  q1_text = "Hvad er jeres returpolitik?"
+  q1_answer = "Det er ikke muligt at returnere varer efter 24 timer."
+  q2_text = "Er det muligt at få leveret varer til udlandet?"
+  q2_answer = "Efter aftale kan vi arrangere for levering af varer til udlandet, med forbehold for varens pris og afstanden til landet."
+  q3_text = "Kan jeg afhente mine varer i butikken?"
+  q3_answer = "Det er altid muligt at afhente varer i butikken i åbningstiden."
 
 
   // Front page
@@ -303,12 +305,12 @@ export default class DKLocale implements ILocale {
   InventoryTitle = "Titel";
 
   // Loginpage
-  signInText = "Log ind";
-  signUpText = "Opret Konto";
-  forgotPasswordText = "Glemt password?";
-  alreadyHaveAccountText = "Har du allerede en konto? Log ind";
-  dontHaveAccountText = "Har du ikke en konto? Opret en";
-  rememberMeText = "Husk mig";
+  signIn = "Log ind";
+  signUp = "Opret Konto";
+  forgotPassword = "Glemt password?";
+  alreadyHaveAccount = "Har du allerede en konto? Log ind";
+  dontHaveAccount = "Har du ikke en konto? Opret en";
+  rememberMe = "Husk mig";
 
   // Signup page
   firstName = "Fornavn";

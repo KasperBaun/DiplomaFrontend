@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 import { CssBaseline, Grid, Typography, Link, Stack } from "@mui/material";
 import { Call, Email, Facebook, Instagram } from "@mui/icons-material";
 import { Constants } from "@utils/Constants";
-import "./footer.scss";
+import { NavLink } from "react-router-dom";
 
 export const Footer: React.FC = observer(function Footer() {
 
@@ -26,10 +26,10 @@ export const Footer: React.FC = observer(function Footer() {
       {/* Links */}
       <Grid item xs={12}>
         <Stack direction="row" spacing={2} justifyContent={'center'}>
-          <CustomLink url={"/"} value={languageStore.currentLanguage.HomeTabText} />
-          <CustomLink url={"/aboutUs"} value={languageStore.currentLanguage.FAQTabText} />
-          <CustomLink url={"/aboutUs"} value={languageStore.currentLanguage.AboutUsTabText} />
-          <CustomLink url={"/aboutUs"} value={languageStore.currentLanguage.ContactTabText} />
+          <CustomNavLink url={"/"} value={languageStore.currentLanguage.HomeTabText} />
+          <CustomNavLink url={"/faq"} value={languageStore.currentLanguage.FAQTabText} />
+          <CustomNavLink url={"/aboutUs"} value={languageStore.currentLanguage.AboutUsTabText} />
+          <CustomNavLink url={"/contact"} value={languageStore.currentLanguage.ContactTabText} />
           <CustomLink url={Constants.companyUrl} value={languageStore.currentLanguage.OldPageText} target="_blank" />
         </Stack >
       </Grid>
@@ -45,8 +45,8 @@ export const Footer: React.FC = observer(function Footer() {
       </Grid>
 
       {/* Copyright */}
-      <Grid item xs={12} >
-        <Typography variant="body1" color="white" align="center">© {year}</Typography>
+      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }} >
+        <CustomNavLink url={"/backoffice"} value={"© " + year} />
       </Grid>
     </Grid>
   )
@@ -63,9 +63,49 @@ const CustomLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
   const { url, value, target } = props;
 
   return (
-    <Link className="footerLink" href={url} target={target} rel="norefferer" color={Constants.primaryTextColor}>
+    <Link
+      href={url}
+      target={target}
+      rel="norefferer"
+      sx={{
+        color: Constants.primaryTextColor,
+        textDecoration: 'none',
+        '&:hover': {
+          color: "#dc8665"
+        },
+      }}
+    >
       {value}
     </Link>
   )
+}
 
+const CustomNavLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
+
+  const { url, value, target } = props;
+
+  return (
+    <NavLink
+      to={url}
+      className={({ isActive, isPending }) => {
+        return navLinkStyling(isActive, isPending)
+      }}
+      target={target}
+      rel="norefferer"
+      color={Constants.primaryTextColor}
+    >
+      {value}
+    </NavLink>
+  )
+}
+
+const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
+  let result = 'header-links';
+  if (isActive) {
+    result += ' active';
+
+  } else {
+    result += ' inactive';
+  }
+  return result;
 }

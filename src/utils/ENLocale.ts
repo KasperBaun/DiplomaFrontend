@@ -2,50 +2,6 @@ import { ILocale } from "./ILocale";
 
 export default class ENLocale implements ILocale {
 
-  id = "en_US";
-  aboutUs = "About Us";
-  aboutUsText = "We sell porcelain";
-
-  // Standard text
-  create = "Create";
-  cancel = "Cancel";
-  update = "Update";
-  delete = "Delete";
-  product = "Product";
-  reset = "Reset";
-  search = "Search";
-  showAll = "Show All";
-  showMore = "Show more";
-  sold = "Sold";
-  forSale = "For sale";
-  price = "Price";
-  description = "Description";
-  settings = "Settings";
-  notifications = "Notifications";
-  noProductsAvailable = "There is currrently no products available in this category";
-  createProduct = "Create Product";
-  editProduct = "Edit Product";
-  deleteProduct = "Delete Product";
-  productImages = "Product Images";
-  manufacturer = "Manufacturer";
-  selectMaterial = "Select Material";
-  name = "Name";
-  modelNumber = "Model Number";
-
-  // Snackbar texts
-  createSuccess = "Create Success";
-  createFailed = "Create Failed";
-  updateSuccess = "Update Success";
-  updateFailed = "Update Failed";
-  deleteSuccess = "Delete Success";
-  deleteFailed = "Delete Failed";
-
-
-  // Button text
-  buttonCancelText = "Cancel";
-  buttonDeleteText = "Delete";
-  confirmDeleteText = "Are you sure you want to delete this item?";
-
   getQuality(qualityType: number): string {
     switch (qualityType) {
       case 1: return "1. Quality";
@@ -78,6 +34,49 @@ export default class ENLocale implements ILocale {
     }
   }
 
+  create = "Create";
+  cancel = "Cancel";
+  update = "Update";
+  delete = "Delete";
+  product = "Product";
+  reset = "Reset";
+  search = "Search";
+  showAll = "Show All";
+  showMore = "Show more";
+  sold = "Sold";
+  forSale = "For sale";
+  price = "Price";
+  description = "Description";
+  settings = "Settings";
+  notifications = "Notifications";
+  noProductsAvailable = "There is currrently no products available in this category";
+  createProduct = "Create Product";
+  editProduct = "Edit Product";
+  deleteProduct = "Delete Product";
+  productImages = "Product Images";
+  manufacturer = "Manufacturer";
+  selectMaterial = "Select Material";
+  name = "Name";
+  modelNumber = "Model Number";
+  callUs = "Call us";
+  writeOnFacebook = "Write on Facebook";
+  clickForMapsLocation = "Click for maps location";
+  city = "City";
+  instagram = "Instagram";
+  facebook = "Facebook";
+  sendAnEmail = "Send an email";
+
+  // Snackbar texts
+  createSuccess = "Create Success";
+  createFailed = "Create Failed";
+  updateSuccess = "Update Success";
+  updateFailed = "Update Failed";
+  deleteSuccess = "Delete Success";
+  deleteFailed = "Delete Failed";
+  confirmDeleteText = "Are you sure you want to delete this item?";
+
+ 
+
   //Basket Page
   yourBasket = "Your basket";
   yourTotal = "Price"
@@ -92,30 +91,31 @@ export default class ENLocale implements ILocale {
   addButton = "Add"
 
   // AboutUS page
-  copanyDescription = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg. We buy and sell Gold & Silver, Danish porcelain and ceramics, as well as other exciting antiques"
-  openingDays = "Opening hours"
-  MondayText = "Monday"
-  TuesdayText = "Tuesday"
-  WendsayText = "Wednesday"
-  ThursdayText = "Thursday"
-  FridayText = "Friday"
-  SaturdayText = "Saturday"
-  publicHollidayText = "Public Hollidays"
-  SundayText = "Sunday"
-  ClosedText = "Closed"
-  PerAgreemtText = "Per agrement"
-  contactInformation = "Contact information"
-  phoneText = "Phone"
-  emailText = "Email"
-  addressText = "Address"
-  CVRNRText = "CVR Number"
-  FAQText = "Frequently asked questions:"
-  Q1Text = "What is your refund policy?"
-  Q1Awnser = "It is not possible to return goods after 24 hours."
-  Q2Text = "Is it possible to have goods delivered abroad?"
-  Q2Awnser = "By agreement, it can be arranged to have goods delivered abroad, however subject to the price of the goods and the distance to the country."
-  Q3Text = "Can I pick up my goods in the store?"
-  Q3Awnser = "It is always an option to pick up goods yourself in the shop during opening hours."
+  company_description = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg. We buy and sell gold & silver, Danish porcelain and ceramics, as well as other exciting antiques."
+  opening_days = "Opening Hours"
+  monday_text = "Monday"
+  tuesday_text = "Tuesday"
+  wednesday_text = "Wednesday"
+  thursday_text = "Thursday"
+  friday_text = "Friday"
+  saturday_text = "Saturday"
+  public_holiday_text = "Public Holidays"
+  sunday_text = "Sunday"
+  closed_text = "Closed"
+  per_agreement_text = "By appointment only"
+  contact_information = "Contact Information"
+  phone_text = "Phone"
+  email_text = "Email"
+  address_text = "Address"
+  post_code = "Post Code"
+  cvr_nr_text = "CVR Number"
+  faq_text = "Frequently Asked Questions:"
+  q1_text = "What is your return policy?"
+  q1_answer = "It is not possible to return goods after 24 hours."
+  q2_text = "Is it possible to have items delivered internationally?"
+  q2_answer = "By appointment, we can arrange for goods to be delivered internationally, subject to the price of the item and the distance to the destination."
+  q3_text = "Can I collect my items from the store?"
+  q3_answer = "It is always possible to collect items from the store during opening hours."
 
   // Front page
   seeProductBtn = "See product";
@@ -306,12 +306,12 @@ export default class ENLocale implements ILocale {
   InventoryTitle = "Title";
 
   // Loginpage
-  signInText = "SIGN IN";
-  signUpText = "Sign Up";
-  forgotPasswordText = "Forgot Password?";
-  alreadyHaveAccountText = "Already have an account? Sign in";
-  dontHaveAccountText = "Don't have an account? Sign Up";
-  rememberMeText = "Remember me";
+  signIn = "SIGN IN";
+  signUp = "Sign Up";
+  forgotPassword = "Forgot Password?";
+  alreadyHaveAccount = "Already have an account? Sign in";
+  dontHaveAccount = "Don't have an account? Sign Up";
+  rememberMe = "Remember me";
 
   // Signup page
   firstName = "First Name";
