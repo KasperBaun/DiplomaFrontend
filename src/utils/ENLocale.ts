@@ -58,6 +58,13 @@ export default class ENLocale implements ILocale {
   selectMaterial = "Select Material";
   name = "Name";
   modelNumber = "Model Number";
+  callUs = "Call us";
+  writeOnFacebook = "Write on Facebook";
+  clickForMapsLocation = "Click for maps location";
+  city = "City";
+  instagram = "Instagram";
+  facebook = "Facebook";
+  sendAnEmail = "Send an email";
 
   // Snackbar texts
   createSuccess = "Create Success";
@@ -100,6 +107,7 @@ export default class ENLocale implements ILocale {
   phone_text = "Phone"
   email_text = "Email"
   address_text = "Address"
+  post_code = "Post Code"
   cvr_nr_text = "CVR Number"
   faq_text = "Frequently Asked Questions:"
   q1_text = "What is your return policy?"

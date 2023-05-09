@@ -9,7 +9,7 @@ export const FAQPage: React.FC = () => {
     const primaryColor = Constants.primaryColor;
 
     return (
-        <Container sx={{ minHeight: '75vh' }}>
+        <Container sx={{ minHeight: '76.2vh' }}>
             <Typography variant="h1" color={primaryColor} align="center">FAQ</Typography>
             <Typography variant="body1" color={primaryColor} align="center">"Frequently asked questions"</Typography>
             <Box mt={4}>

@@ -28,6 +28,13 @@ export interface ILocale {
   selectMaterial: string;
   name: string;
   modelNumber: string;
+  callUs: string;
+  writeOnFacebook: string;
+  clickForMapsLocation: string;
+  city: string;
+  instagram: string;
+  facebook: string;
+  sendAnEmail: string;
 
   // Snackbar texts
   createSuccess: string;
@@ -94,6 +101,7 @@ export interface ILocale {
   phone_text:string;
   email_text:string;
   address_text:string;
+  post_code: string;
   cvr_nr_text:string;
   faq_text:string;
   q1_text:string;

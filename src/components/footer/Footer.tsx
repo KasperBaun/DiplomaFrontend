@@ -5,12 +5,9 @@ import { observer } from "mobx-react-lite";
 import { CssBaseline, Grid, Typography, Link, Stack } from "@mui/material";
 import { Call, Email, Facebook, Instagram } from "@mui/icons-material";
 import { Constants } from "@utils/Constants";
-import "./footer.scss";
 import { NavLink } from "react-router-dom";
 
 export const Footer: React.FC = observer(function Footer() {
-
-
 
   const { languageStore } = useContext(MobXContext);
   let year = new Date().getFullYear();
@@ -48,8 +45,8 @@ export const Footer: React.FC = observer(function Footer() {
       </Grid>
 
       {/* Copyright */}
-      <Grid item xs={12} >
-        <Typography variant="body1" color="white" align="center">© {year}</Typography>
+      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }} >
+        <CustomNavLink url={"/backoffice"} value={"© " + year} />
       </Grid>
     </Grid>
   )
@@ -66,7 +63,18 @@ const CustomLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
   const { url, value, target } = props;
 
   return (
-    <Link className="footerLink" href={url} target={target} rel="norefferer" color={Constants.primaryTextColor}>
+    <Link
+      href={url}
+      target={target}
+      rel="norefferer"
+      sx={{
+        color: Constants.primaryTextColor,
+        textDecoration: 'none',
+        '&:hover': {
+          color: "#dc8665"
+        },
+      }}
+    >
       {value}
     </Link>
   )

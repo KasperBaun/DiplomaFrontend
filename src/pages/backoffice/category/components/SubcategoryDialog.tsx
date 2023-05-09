@@ -171,7 +171,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onClose}>
-                        {languageStore.currentLanguage.buttonCancelText}
+                        {languageStore.currentLanguage.cancel}
                     </Button>
                     <Button
                         variant="contained"

@@ -6,7 +6,7 @@ export const AboutUsPage: React.FC = () => {
   const { languageStore } = useContext(MobXContext);
 
   return (
-    <Container sx={{ minHeight: '75vh' }}>
+    <Container sx={{ minHeight: '76.2vh' }}>
       <Typography variant="h1" color="primary" align="center">About Us</Typography>
 
       <Grid container spacing={4}>

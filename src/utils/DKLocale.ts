@@ -58,6 +58,14 @@ export default class DKLocale implements ILocale {
   selectMaterial = "Vælg materiale";
   name = "Navn";
   modelNumber = "Model nummer";
+  callUs = "Ring til os";
+  writeOnFacebook = "Skriv til os på Facebook";
+  clickForMapsLocation = "Klik for at se vores lokation på Google Maps";
+  city = "By";
+  instagram = "Instagram";
+  facebook = "Facebook";
+  sendAnEmail = "Send en email";
+  
 
   // Snackbar texts
   createSuccess = "Oprettelse succesfuld";
@@ -87,6 +95,7 @@ export default class DKLocale implements ILocale {
   phone_text = "Telefon"
   email_text = "E-mail"
   address_text = "Adresse"
+  post_code = "Postnummer"
   cvr_nr_text = "CVR-nummer"
   faq_text = "Ofte stillede spørgsmål:"
   q1_text = "Hvad er jeres returpolitik?"
