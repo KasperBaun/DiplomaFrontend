@@ -2,11 +2,38 @@ import { ILocale } from "./ILocale";
 
 export default class ENLocale implements ILocale {
 
-  id = "en_US";
-  aboutUs = "About Us";
-  aboutUsText = "We sell porcelain";
+  getQuality(qualityType: number): string {
+    switch (qualityType) {
+      case 1: return "1. Quality";
+      case 2: return "2. Quality";
+      case 3: return "3. Quality";
+      default: return "Sorting not defined";
+    }
+  }
 
-  // Standard text
+  getCondition(conditionType: number): string {
+    switch (conditionType) {
+      case 1: return "No shards";
+      case 2: return "Few shards";
+      case 3: return "Many shards";
+      default: return "Condition not defined";
+    }
+  }
+
+  getMaterialType(materialType: number): string {
+    switch (materialType) {
+      case 1: return "Porcelain";
+      case 2: return "Steel";
+      case 3: return "Glass";
+      case 4: return "Gold";
+      case 5: return "Silver";
+      case 6: return "Ceramics";
+      case 7: return "Stoneware";
+      case 8: return "Fajance";
+      default: return "Material not defined";
+    }
+  }
+
   create = "Create";
   cancel = "Cancel";
   update = "Update";
@@ -39,44 +66,9 @@ export default class ENLocale implements ILocale {
   updateFailed = "Update Failed";
   deleteSuccess = "Delete Success";
   deleteFailed = "Delete Failed";
-
-
-  // Button text
-  buttonCancelText = "Cancel";
-  buttonDeleteText = "Delete";
   confirmDeleteText = "Are you sure you want to delete this item?";
 
-  getQuality(qualityType: number): string {
-    switch (qualityType) {
-      case 1: return "1. Quality";
-      case 2: return "2. Quality";
-      case 3: return "3. Quality";
-      default: return "Sorting not defined";
-    }
-  }
-
-  getCondition(conditionType: number): string {
-    switch (conditionType) {
-      case 1: return "No shards";
-      case 2: return "Few shards";
-      case 3: return "Many shards";
-      default: return "Condition not defined";
-    }
-  }
-
-  getMaterialType(materialType: number): string {
-    switch (materialType) {
-      case 1: return "Porcelain";
-      case 2: return "Steel";
-      case 3: return "Glass";
-      case 4: return "Gold";
-      case 5: return "Silver";
-      case 6: return "Ceramics";
-      case 7: return "Stoneware";
-      case 8: return "Fajance";
-      default: return "Material not defined";
-    }
-  }
+ 
 
   //Basket Page
   yourBasket = "Your basket";
@@ -306,12 +298,12 @@ export default class ENLocale implements ILocale {
   InventoryTitle = "Title";
 
   // Loginpage
-  signInText = "SIGN IN";
-  signUpText = "Sign Up";
-  forgotPasswordText = "Forgot Password?";
-  alreadyHaveAccountText = "Already have an account? Sign in";
-  dontHaveAccountText = "Don't have an account? Sign Up";
-  rememberMeText = "Remember me";
+  signIn = "SIGN IN";
+  signUp = "Sign Up";
+  forgotPassword = "Forgot Password?";
+  alreadyHaveAccount = "Already have an account? Sign in";
+  dontHaveAccount = "Don't have an account? Sign Up";
+  rememberMe = "Remember me";
 
   // Signup page
   firstName = "First Name";

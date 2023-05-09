@@ -1,9 +1,9 @@
 export interface ILocale {
-  id: string;
-  aboutUs: string;
-  aboutUsText: string;
 
-  // Standard text
+  getQuality(qualityType: number): string;
+  getCondition(conditionType: number): string;
+  getMaterialType(materialType: number): string;
+
   create: string;
   cancel: string;
   update: string;
@@ -37,15 +37,9 @@ export interface ILocale {
   deleteSuccess: string;
   deleteFailed: string;
 
-  // Button text
-  buttonCancelText: string;
-  buttonDeleteText: string;
   confirmDeleteText: string;
 
-  getQuality(qualityType: number): string;
-  getCondition(conditionType: number): string;
-
-  getMaterialType(materialType: number): string;
+ 
 
   // Category Admin
   createCategoryDialogTitle: string;
@@ -56,7 +50,6 @@ export interface ILocale {
   createCategorySubmit: string;
   createCategorySuccessMessage: string;
   createCategoryFailedMessage: string;
-
   updateCategoryDialogTitle: string;
   updateCategoryFormTitle: string;
   updateCategoryFormOrder: string;
@@ -67,11 +60,10 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
-
   deleteCategorySuccessMessage: string;
   deleteCategoryFailedMessage: string;
-
   ProductCommaSeperatedText: string;
+
   // BasketPage: 
   yourBasket: string;
   yourTotal: string;
@@ -245,14 +237,6 @@ export interface ILocale {
   OrderDetailsCompletionStatus: string;
   OrderDetailsListTitle: string;
 
-  // <TableCell align="left">Product Name</TableCell>
-  // <TableCell align="left">Manufacturer</TableCell>
-  // <TableCell align="left">Customer (Id)</TableCell>
-  // <TableCell align="left">Payment Status</TableCell>
-  // <TableCell align="left">Delivery Status</TableCell>
-  // <TableCell align="left">Discount used</TableCell>
-  // <TableCell align="left">Completed</TableCell>
-
   // Footer tabs
   BlogTabText: string;
   OldPageText: string;
@@ -281,12 +265,12 @@ export interface ILocale {
   InventoryWidgetTitle: string;
 
   // Loginpage
-  signInText: string;
-  signUpText: string;
-  forgotPasswordText: string;
-  alreadyHaveAccountText: string;
-  dontHaveAccountText: string;
-  rememberMeText: string;
+  signIn: string;
+  signUp: string;
+  forgotPassword: string;
+  alreadyHaveAccount: string;
+  dontHaveAccount: string;
+  rememberMe: string;
 
   // Signup page
   firstName: string;
