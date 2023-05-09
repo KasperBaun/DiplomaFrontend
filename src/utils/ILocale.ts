@@ -86,30 +86,30 @@ export interface ILocale {
   addButton: string;
 
   // AboutUS page
-  copanyDescription: string; 
-  openingDays: string;
-  MondayText: string;
-  TuesdayText: string;
-  WendsayText:  string;
-  ThursdayText:  string;
-  FridayText: string;
-  SaturdayText:  string;
-  publicHollidayText:  string;
-  SundayText: string;
-  ClosedText: string;
-  PerAgreemtText:  string;
-  contactInformation : string; 
-  phoneText:  string;
-  emailText:  string;
-  addressText: string;
-  CVRNRText:  string;
-  FAQText:  string;
-  Q1Text: string;
-  Q1Awnser: string; 
-  Q2Text: string;
-  Q2Awnser: string; 
-  Q3Text: string;
-  Q3Awnser: string; 
+  company_description:string;
+  opening_days:string;
+  monday_text:string;
+  tuesday_text:string;
+  wednesday_text:string;
+  thursday_text:string;
+  friday_text:string;
+  saturday_text:string;
+  public_holiday_text:string;
+  sunday_text:string;
+  closed_text:string;
+  per_agreement_text:string;
+  contact_information:string;
+  phone_text:string;
+  email_text:string;
+  address_text:string;
+  cvr_nr_text:string;
+  faq_text:string;
+  q1_text:string;
+  q1_answer:string;
+  q2_text:string;
+  q2_answer:string;
+  q3_text:string;
+  q3_answer:string;
 
   // Frontpage:
   seeProductBtn: string; 

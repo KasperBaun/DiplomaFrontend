@@ -2,7 +2,7 @@ import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import { Container, Typography, Grid, Box, Card, CardContent, CardHeader } from '@mui/material';
 
-export const AboutUsPage: React.FC = () => {
+const AboutUsPage: React.FC = () => {
   const { languageStore } = useContext(MobXContext);
 
   return (
@@ -10,7 +10,7 @@ export const AboutUsPage: React.FC = () => {
       <Typography variant="h1" color="primary" align="center">About Us</Typography>
 
       <Grid container spacing={4}>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={6}>
           <img
             src="https://static.wixstatic.com/media/c38ac4_26cf61b8381d4f38a1fd2838b6d564b0~mv2.jpeg/v1/fill/w_443,h_591,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/IMG_6367.jpeg"
             alt="Webshop storefront"
@@ -58,4 +58,4 @@ export const AboutUsPage: React.FC = () => {
     </Container>
   );
 };
-
+export default AboutUsPage;
