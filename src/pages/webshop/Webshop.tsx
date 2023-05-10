@@ -1,4 +1,3 @@
-import { Footer } from "@components/footer/Footer";
 import Header from "@webshop/header/Header";
 import Loading from "@components/loading/Loading";
 import { CssBaseline, ThemeProvider } from "@mui/material";
@@ -9,6 +8,7 @@ import { useContext, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import { ColorModeContext, useMode } from "styling/mui-theme/web/WebTheme";
+import { Footer } from "./footer/Footer";
 
 const Webshop: React.FC = observer(function Webshop() {
 
@@ -38,8 +38,8 @@ const Webshop: React.FC = observer(function Webshop() {
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <Header />
-                    <Container style={{ display: 'flex', minHeight:'76.2vh' }}>
-                        <Outlet  />
+                    <Container style={{ display: 'flex', minHeight: '76.2vh' }}>
+                        <Outlet />
                     </Container>
                     <Footer />
                 </ThemeProvider>
