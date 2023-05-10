@@ -2,8 +2,7 @@ import { observer } from "mobx-react-lite"
 import { useNavigate, useParams } from 'react-router-dom';
 import { useContext } from "react";
 import MobXContext from "../../../stores/MobXContext";
-import { Container } from "react-bootstrap";
-import { Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { Translater } from "@utils/Translater";
 import { SubcategoryCard } from "./SubcategoryCard";
 
@@ -22,19 +21,18 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
         navigate(`/productList`);
     }
 
-
     if (subCategories && subCategories.length > 0)
         return (
-            <Container>
-                <h1>{translater.getCategoryBasedOnLanguage(languageStore, subcategory.name)}</h1>
-                <div className="container-cat">
-                    {subCategories.map((subCategory, index) => (
-                        <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
-                            <SubcategoryCard subcategory={subCategory} onCardClicked={handleClick} />
-                        </Grid>
-                    ))}
-                </div>
-            </Container>
+            <Grid container display={'flex'} justifyContent={'center'}>
+                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} padding={1} display='flex' justifyContent={'center'}>
+                    <Typography variant="h2">{translater.getCategoryBasedOnLanguage(languageStore, subcategory.name)}</Typography>
+                </Grid>
+                {subCategories.map((subCategory, index) => (
+                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'center'} key={"BackofficeCategoryCardItem" + index}>
+                        <SubcategoryCard subcategory={subCategory} onCardClicked={handleClick} />
+                    </Grid>
+                ))}
+            </Grid>
         )
     else
         return (

@@ -9,6 +9,7 @@ export interface ILocale {
   update: string;
   delete: string;
   product: string;
+  products: string;
   reset: string;
   search: string;
   showAll: string;

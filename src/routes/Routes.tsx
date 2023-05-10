@@ -23,10 +23,10 @@ const Routing: React.FC = function Routing() {
             </Route>
             <Route path="/" element={<Webshop />} errorElement={<ErrorPage />}>
                 <Route path="/" element={<HomePage />} />
-                <Route path="categories" element={<CategoriesPage />} />
-                <Route path="categories/:number" element={<CategoriesPage />} />
-                <Route path="subcategories/:id" element={<SubcategoriesPage />} />
-                <Route path="subcategories" element={<SubcategoriesPage />} />
+                <Route path="categories" element={<CategoriesPage />} >
+
+                </Route>
+                <Route path="categories/subcategories/:id" element={<SubcategoriesPage />} />
                 <Route path="basket" element={<BasketPage />} />
                 <Route path="confirmation/:id" element={<ConfirmationPage />} />
                 <Route path="payment" element={<PaymentPage orders={[{ "id": 0, "active": false, "customerId": 4, "deliveryStatus": "Waiting for Payment", "paymentId": 0, "discountCode": "", "name": "Vase", "manufacturer": "Royal Copenhagen", "productItemId": 13, "paymentStatus": "Missing Payment" }]} />} />

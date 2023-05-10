@@ -39,6 +39,7 @@ export default class ENLocale implements ILocale {
   update = "Update";
   delete = "Delete";
   product = "Product";
+  products = "Products";
   reset = "Reset";
   search = "Search";
   showAll = "Show All";

@@ -40,7 +40,7 @@ export const SelectedProductItems = observer(function SelectedProductItems() {
         navigate('/product/' + product.id)
     }
 
-    if (webshopStore.productItems) {
+    if (webshopStore.ProductItems) {
         //console.log(toJS(productStore.ProductItems))
         const handleSlide = () => {
             const caption = document.querySelector('.carousel-caption');
@@ -55,7 +55,7 @@ export const SelectedProductItems = observer(function SelectedProductItems() {
         return (
             <Cont>
                 <Carousel className="CarouselFrontpage" fade onSlide={handleSlide}>
-                    {webshopStore.productItems.map((product) => (
+                    {webshopStore.ProductItems.map((product) => (
                         <CarouselItem key={product.id}>
                             <div style={{ textAlign: 'center' }}>
                                 <img className="CarouselItemImg"

@@ -83,7 +83,7 @@ export class SearchStore {
     }
 
     public reset() {
-        const allProducts = this.rootStore.webshopStore.productItems;
+        const allProducts = this.rootStore.webshopStore.ProductItems;
         runInAction(() => {
             this._filteredProductItems = allProducts;
             this._displayedProductItemsCount = this.pageSizeAmount;
@@ -107,7 +107,7 @@ export class SearchStore {
             this._selectedSubcategories = this.rootStore.webshopStore.subCategories.filter(subcat => subcat.categoryId === subcategory.categoryId);
             this._selectedSubcategory = subcategory;
             this._selectedCategory = this.rootStore.webshopStore.Categories.find(cat => cat.id === subcategory.categoryId);
-            const filteredProducts = this.rootStore.webshopStore.productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
+            const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
             this._filteredProductItems = filteredProducts;
             this._displayedProductItemsCount = this.pageSizeAmount;
             this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
@@ -119,7 +119,7 @@ export class SearchStore {
             this._selectedSubcategory = null;
             this._selectedCategory = this.rootStore.webshopStore.Categories.find(cat => cat.id === categoryId);
             this._selectedSubcategories = this.rootStore.webshopStore.subCategories.filter(subcat => subcat.categoryId === categoryId);
-            const filteredProducts = this.rootStore.webshopStore.productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+            const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
             this._filteredProductItems = filteredProducts;
             this._displayedProductItemsCount = this.pageSizeAmount;
             this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
@@ -129,7 +129,7 @@ export class SearchStore {
     public filterBySearchText(searchText: string){
 
         runInAction(() => {
-            const filteredProducts = this.rootStore.webshopStore.productItems.filter(
+            const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(
                 productItem =>
                 productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
                 productItem.product.modelNumber.toString().includes(searchText.toLowerCase())

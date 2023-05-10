@@ -39,6 +39,7 @@ export default class DKLocale implements ILocale {
   update = "Opdater";
   delete = "Slet";
   product = "Produkt";
+  products = "Produkter";
   reset = "Nulstil";
   search = "Søg";
   showAll = "Vis alle";

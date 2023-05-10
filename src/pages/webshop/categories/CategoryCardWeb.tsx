@@ -44,8 +44,6 @@ const CategoryCardWeb: React.FC<CategoryCardProps> = observer(function CategoryC
                     {subcategoryCountTitle}
                 </Typography>
             </CardContent>
-            <CardActions style={{ display: 'flex', justifyContent: 'end' }}>
-            </CardActions>
         </Card>
     );
 

@@ -12,14 +12,14 @@ const CategoriesPage: React.FC = observer(function Categories() {
     const navigate = useNavigate();
 
     function handleClick(categoryId: number) {
-        navigate('/subcategories/' + categoryId)
+        navigate('subcategories/' + categoryId)
     }
 
     if (webshopStore.Categories) {
         return (
-            <Grid container display={'flex'} flexWrap={'wrap'} alignItems={'flex-start'}>
+            <Grid container display={'flex'} flexDirection={'row'} justifyContent={'space-between'} alignContent={'center'}>
                 {webshopStore.Categories.map((category, index) => (
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'center'} key={"BackofficeCategoryCardItem" + index}>
                         <CategoryCardWeb category={category} onCardClicked={handleClick} />
                     </Grid>
                 ))}

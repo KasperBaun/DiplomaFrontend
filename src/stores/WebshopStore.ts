@@ -243,8 +243,12 @@ export class WebshopStore {
         return this._checkoutPayments;
     }
 
-    public get productItems(): ProductItemWeb[] {
+    public get ProductItems(): ProductItemWeb[] {
         return this._productItems;
+    }
+
+    public getProductItemsInSubcategory(subcategoryId: number): ProductItemWeb[] {
+        return this._productItems.filter(prodItem => prodItem.product.subcategories.some(subcat => subcat.id === subcategoryId));
     }
 
     public get Categories(): Category[] {
