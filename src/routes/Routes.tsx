@@ -8,7 +8,6 @@ import BasketPage from "@webshop/basket/BasketPage"
 import ConfirmationPage from "@webshop/confirmation/ConfirmationPage"
 import PaymentPage from "@webshop/payment/PaymentPage"
 import ProductPage from "@webshop/product/ProductPage"
-import SearchPage from "@webshop/search/SearchPage"
 import Auth from "@backoffice/Auth"
 import { ProductListPage } from "@webshop/product/ProductListPage"
 import { AboutUsPage } from "@webshop/aboutUs/AboutUsPage"
@@ -23,9 +22,7 @@ const Routing: React.FC = function Routing() {
             </Route>
             <Route path="/" element={<Webshop />} errorElement={<ErrorPage />}>
                 <Route path="/" element={<HomePage />} />
-                <Route path="categories" element={<CategoriesPage />} >
-
-                </Route>
+                <Route path="categories" element={<CategoriesPage />} />
                 <Route path="categories/subcategories/:id" element={<SubcategoriesPage />} />
                 <Route path="basket" element={<BasketPage />} />
                 <Route path="confirmation/:id" element={<ConfirmationPage />} />
@@ -35,7 +32,6 @@ const Routing: React.FC = function Routing() {
                 <Route path="aboutUs" element={<AboutUsPage />} />
                 <Route path="faq" element={<FAQPage />} />
                 <Route path="contact" element={<ContactPage />} />
-                <Route path="search" element={<SearchPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
 

@@ -58,7 +58,7 @@ export class RootStore implements IMobXContext {
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         this.searchStore = SearchStore.GetInstance(this);
-        this.searchStore.init();
+       
         this.loadLanguageStore();
         makeAutoObservable(this);
     }
@@ -92,6 +92,7 @@ export class RootStore implements IMobXContext {
         
         const backofficeStoreLoaded = await this.backofficeStore.init();
         const sniperStoreLoaded = await this.sniperStore.init();
+        await this.loadSearchStore();
 
         runInAction(async () => {
             this.backofficeLoading = false;
@@ -119,6 +120,7 @@ export class RootStore implements IMobXContext {
    
         const webshopStoreLoaded = await this.webshopStore.init();
         const basketStoreLoaded = await this.basketStore.init();
+        await this.loadSearchStore();
 
         runInAction(async () => {
             this.webshopLoading = false;
@@ -130,6 +132,7 @@ export class RootStore implements IMobXContext {
         }
     }
 
-   
-
+    private loadSearchStore = async () => {
+        await this.searchStore.init();
+    }
 }

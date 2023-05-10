@@ -13,6 +13,10 @@ export class SearchStore {
     private prefix: string = `%c[SearchStore]`;
     private color: string = ComponentLoggingConfig.DarkGrey;
 
+    /* Loading states */
+    private _isLoading: boolean = false;
+    private _isLoaded: boolean = false;
+
     /* State for searching products */
     private pageSizeAmount: number = 10;
     private _displayedProductItems: ProductItemWeb[] = [];
@@ -30,10 +34,20 @@ export class SearchStore {
     }
 
     public async init(): Promise<boolean> {
-        this.reset();
+        runInAction(() => {
+            if(!this._isLoaded){
+                this._isLoading = true;
+                this.reset();
+            }
+        });
+
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
+        runInAction(() => {
+            this._isLoading = false;
+            this._isLoaded = true;
+        });
         return true;
     }
 
@@ -42,6 +56,10 @@ export class SearchStore {
             SearchStore._Instance = new SearchStore(_rootStore);
         }
         return SearchStore._Instance;
+    }
+
+    public get isLoaded(): boolean {
+        return this._isLoaded;
     }
 
     public get displayedProductItems(): ProductItemWeb[] {
@@ -84,10 +102,11 @@ export class SearchStore {
 
     public reset() {
         const allProducts = this.rootStore.webshopStore.ProductItems;
+        const randomStartIndex = Math.floor(Math.random() * allProducts.length);
         runInAction(() => {
-            this._filteredProductItems = allProducts;
             this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems,0, this.displayedProductItemsCount);
+            this._displayedProductItems = ExtentionMethods.safeSlice(allProducts,randomStartIndex, randomStartIndex+this.displayedProductItemsCount);
+            this._filteredProductItems = allProducts;
             this._selectedCategory = null;
             this._selectedSubcategory = null;
             this._selectedSubcategories = this.rootStore.webshopStore.subCategories;

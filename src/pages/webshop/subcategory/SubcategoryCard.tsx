@@ -1,5 +1,5 @@
 import SubCategory from "@models/SubCategory";
-import { Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Translater } from "@utils/Translater";
 import { useContext } from "react";

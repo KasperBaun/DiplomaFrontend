@@ -33,7 +33,7 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
         }
     }
 
-    if (!webshopStore.isLoaded) {
+    if (!webshopStore.isLoaded && !searchStore.isLoaded) {
         return <Loading />
     } else {
         return (

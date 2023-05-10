@@ -30,7 +30,6 @@ export class WebshopStore {
     private _subcategories: SubCategory[] = [];
     private _products: Product[] = [];
     private _productItems: ProductItemWeb[] = [];
-    private _images: Image[] = [];
     private _checkoutPayments : PaymentForm[] = [];
     private _customer : Customer = null;
     private _payment : Payment = null;
@@ -65,7 +64,6 @@ export class WebshopStore {
         const productMap = this.createProductMap(products);
         const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
         const productItemMap = this.createProductItemsMap(productItems);
-        const customers = await this.apiService.getCustomers();
 
         runInAction(() => {
             this._categories = categories;
@@ -73,7 +71,6 @@ export class WebshopStore {
             this._subcategories = subcategories;
             this._subcategoryMap = subcategoryMap;
             this.subcategoriesInCategoryMap = subcategoryToCategoryMap;
-            this._images = images;
             this._products = products;
             this._productMap = productMap;
             this._productItems = productItems;
@@ -100,14 +97,6 @@ export class WebshopStore {
         const map = new Map<number, Category>();
         for (const category of categories) {
             map.set(category.id, category);
-        }
-        return map;
-    }
-
-    private createCustomerMap(customers: Customer[]): Map<number, Customer> {
-        const map = new Map<number, Customer>();
-        for (const customer of customers) {
-            map.set(customer.id, customer);
         }
         return map;
     }
