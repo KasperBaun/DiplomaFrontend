@@ -143,7 +143,7 @@ export class BackofficeStore {
     private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
         const orders: Order[] = [];
         for (var orderDTO of ordersDTO) {
-            // const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+            const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
             const order: Order = new Order();
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
@@ -152,7 +152,7 @@ export class BackofficeStore {
             order.deliveryStatus = orderDTO.deliveryStatus;
             order.discountCode = orderDTO.discountCode;
             order.active = orderDTO.active;
-            //order.orderElements = orderOrderElements;
+            order.orderElements = orderOrderElements;
             orders.push(order);
         }
         return orders;
