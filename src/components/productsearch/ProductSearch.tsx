@@ -58,7 +58,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
     return (
         <Grid container >
 
-            <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
+            <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                     <ProductSearchBar
                         searchText={searchText}

@@ -62,6 +62,10 @@ export class SearchStore {
         return this._isLoaded;
     }
 
+    public get productItems(): ProductItemWeb[] {
+        return this._filteredProductItems;
+    }
+
     public get displayedProductItems(): ProductItemWeb[] {
         return this._displayedProductItems;
     }
