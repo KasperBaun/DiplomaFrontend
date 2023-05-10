@@ -9,6 +9,7 @@ export interface ILocale {
   update: string;
   delete: string;
   product: string;
+  products: string;
   reset: string;
   search: string;
   showAll: string;
@@ -35,6 +36,7 @@ export interface ILocale {
   instagram: string;
   facebook: string;
   sendAnEmail: string;
+  language: string;
 
   // Snackbar texts
   createSuccess: string;
@@ -85,7 +87,8 @@ export interface ILocale {
   addButton: string;
 
   // AboutUS page
-  company_description:string;
+  company_description1:string;
+  company_description2:string;
   opening_days:string;
   monday_text:string;
   tuesday_text:string;

@@ -3,7 +3,7 @@ import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import ColorConfigs from "@styles/ColorConfigs";
 import { observer } from "mobx-react-lite";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Dk, Us } from "react-flags-select";
 import { ColorModeContext } from "styling/mui-theme/backoffice/BackofficeTheme";
 
@@ -66,7 +66,7 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 justifyContent="center"
                 alignItems="center"
             >
-                <Tooltip title={"Language setting: " + languageStore.getCurrentLanguageCode()}>
+                <Tooltip title={languageStore.currentLanguage.language + languageStore.getCurrentLanguageCode()}>
                     <IconButton onClick={handleLanguageIconClicked}>
                         {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
                     </IconButton>

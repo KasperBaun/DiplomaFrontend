@@ -39,6 +39,7 @@ export default class ENLocale implements ILocale {
   update = "Update";
   delete = "Delete";
   product = "Product";
+  products = "Products";
   reset = "Reset";
   search = "Search";
   showAll = "Show All";
@@ -65,6 +66,7 @@ export default class ENLocale implements ILocale {
   instagram = "Instagram";
   facebook = "Facebook";
   sendAnEmail = "Send an email";
+  language = "Language";
 
   // Snackbar texts
   createSuccess = "Create Success";
@@ -79,47 +81,48 @@ export default class ENLocale implements ILocale {
 
   //Basket Page
   yourBasket = "Your basket";
-  yourTotal = "Price"
-  deliveryOptions = "Delivery Options:"
+  yourTotal = "Price";
+  deliveryOptions = "Delivery Options:";
   paymentOptions = "Payment Options";
   subTotal = "Subtotal:";
   procesFee = "Handling fees:";
-  totalIncMoms = "Price in total (including taxs):"
-  checkOutText = "Checkout"
-  addDiscountCode = "Add dicsount code"
-  discountCodeOptional = "Discount code (optional)"
-  addButton = "Add"
+  totalIncMoms = "Price in total (including taxs):";
+  checkOutText = "Checkout";
+  addDiscountCode = "Add discount code";
+  discountCodeOptional = "Discount code (optional)";
+  addButton = "Add";
 
   // AboutUS page
-  company_description = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg. We buy and sell gold & silver, Danish porcelain and ceramics, as well as other exciting antiques."
-  opening_days = "Opening Hours"
-  monday_text = "Monday"
-  tuesday_text = "Tuesday"
-  wednesday_text = "Wednesday"
-  thursday_text = "Thursday"
-  friday_text = "Friday"
-  saturday_text = "Saturday"
-  public_holiday_text = "Public Holidays"
-  sunday_text = "Sunday"
-  closed_text = "Closed"
-  per_agreement_text = "By appointment only"
-  contact_information = "Contact Information"
-  phone_text = "Phone"
-  email_text = "Email"
-  address_text = "Address"
-  post_code = "Post Code"
-  cvr_nr_text = "CVR Number"
-  faq_text = "Frequently Asked Questions:"
-  q1_text = "What is your return policy?"
-  q1_answer = "It is not possible to return goods after 24 hours."
-  q2_text = "Is it possible to have items delivered internationally?"
-  q2_answer = "By appointment, we can arrange for goods to be delivered internationally, subject to the price of the item and the distance to the destination."
-  q3_text = "Can I collect my items from the store?"
-  q3_answer = "It is always possible to collect items from the store during opening hours."
+  company_description1 = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg.";
+  company_description2 = "We buy and sell gold & silver, Danish porcelain and ceramics, as well as other exciting antiques.";
+  opening_days = "Opening Hours";
+  monday_text = "Monday";
+  tuesday_text = "Tuesday";
+  wednesday_text = "Wednesday";
+  thursday_text = "Thursday";
+  friday_text = "Friday";
+  saturday_text = "Saturday";
+  public_holiday_text = "Public Holidays";
+  sunday_text = "Sunday";
+  closed_text = "Closed";
+  per_agreement_text = "By appointment only";
+  contact_information = "Contact Information";
+  phone_text = "Phone";
+  email_text = "Email";
+  address_text = "Address";
+  post_code = "Post Code";
+  cvr_nr_text = "CVR Number";
+  faq_text = "Frequently Asked Questions:";
+  q1_text = "What is your return policy?";
+  q1_answer = "It is not possible to return goods after 24 hours.";
+  q2_text = "Is it possible to have items delivered internationally?";
+  q2_answer = "By appointment, we can arrange for goods to be delivered internationally, subject to the price of the item and the distance to the destination.";
+  q3_text = "Can I collect my items from the store?";
+  q3_answer = "It is always possible to collect items from the store during opening hours.";
 
   // Front page
   seeProductBtn = "See product";
-  chosenCategories = "Chosen Categories"
+  chosenCategories = "Chosen Categories";
 
   //Pop-up : cart
   shopButton = "Go to cart";

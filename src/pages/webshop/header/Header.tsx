@@ -4,14 +4,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './header.scss';
-import LionLogo from '../LionLogo';
+import LionLogo from '../../../components/LionLogo';
 import { Dk, Us } from "react-flags-select";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import CartDrawer from '@components/CartDrawer';
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, IconButton, Tooltip } from '@mui/material';
 
 interface INavModel {
   path: string;
@@ -48,10 +48,13 @@ const Header: React.FC = observer(function Header() {
     searchStore.filterBySearchText(searchText);
     navigate(`/productList`);
   }
+  const handleLanguageIconClicked = () => {
+    languageStore.toggleLanguage();
+  }
 
   return (
     <Navbar expand="lg" className='header' key="navbar">
-      <Grid container display={'flex'} flexDirection={'row'} alignItems={'center'}>
+      <Grid container display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
 
         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'>
           <Navbar.Brand>
@@ -60,11 +63,11 @@ const Header: React.FC = observer(function Header() {
             </NavLink>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScrolls" />
-          <Button onClick={() => {
-            languageStore.toggleLanguage();
-          }}>
-            {languageStore.getCurrentLanguageCode() === "da_DK" ? <Dk /> : <Us />}
-          </Button>
+          <Tooltip title={languageStore.currentLanguage.language + " " + languageStore.getCurrentLanguageCode()}>
+            <IconButton onClick={handleLanguageIconClicked}>
+              {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
+            </IconButton>
+          </Tooltip>
 
         </Grid>
 
