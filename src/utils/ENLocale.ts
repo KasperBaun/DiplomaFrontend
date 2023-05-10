@@ -70,8 +70,24 @@ export default class ENLocale implements ILocale {
   condition = "Condition";
   quality = "Quality";
   addToBasket = "Add to basket";
-
-  // Snackbar texts
+  design = "Design";
+  material = "Material";
+  modelSpecifications = "Model specifictations";
+  productInfoHeadline = "General info";
+  selectSubcategory = "Select subcategory";
+  filterBySubcategory = "Filter by subcategory";
+  selectCategory = "Select category";
+  filterByCategory = "Filter by category";
+  signIn = "SIGN IN";
+  signUp = "Sign Up";
+  forgotPassword = "Forgot Password?";
+  alreadyHaveAccount = "Already have an account? Sign in";
+  dontHaveAccount = "Don't have an account? Sign Up";
+  rememberMe = "Remember me";
+  firstName = "First Name";
+  lastName = "Last Name";
+  emailAdress = "Email Address";
+  password = "Password";
   createSuccess = "Create Success";
   createFailed = "Create Failed";
   updateSuccess = "Update Success";
@@ -79,8 +95,8 @@ export default class ENLocale implements ILocale {
   deleteSuccess = "Delete Success";
   deleteFailed = "Delete Failed";
   confirmDeleteText = "Are you sure you want to delete this item?";
-
- 
+  weight = "Weight";
+  dimension = "Dimension";
 
   //Basket Page
   yourBasket = "Your basket";
@@ -173,23 +189,6 @@ export default class ENLocale implements ILocale {
   createSubCategoryUpdateSuccessMessage = "Successfully updated subcategory";
   createSubCategoryUpdateFailedMessage = "Error. Could not update subcategory";
 
-  // Product
-  productPage_productName = "Title";
-  productPage_productModelNumber = "Model number";
-  productPage_productMaterial = "Material";
-  productPage_productDesign = "Design";
-  productPage_productCondition = "Condition";
-  productPage_productQuality = "Quality";
-  productPage_productDimension = "Dimension";
-  productPage_productCustomText = "Extra information";
-  productPage_weight = "Weight";
-  productPage_createProduct = "Create product";
-  productPage_modelSpecifications = "Model specifictations";
-  productPage_productInfoHeadline = "General info";
-  selectSubcategory = "Select subcategory";
-  filterBySubcategory = "Filter by subcategory";
-  selectCategory = "Select category";
-  filterByCategory = "Filter by category";
 
   // Analysis
   AnalysisTitle = "Gold and Silver";
@@ -311,17 +310,5 @@ export default class ENLocale implements ILocale {
   InventoryWidgetTitle = "Inventory";
   InventoryTitle = "Title";
 
-  // Loginpage
-  signIn = "SIGN IN";
-  signUp = "Sign Up";
-  forgotPassword = "Forgot Password?";
-  alreadyHaveAccount = "Already have an account? Sign in";
-  dontHaveAccount = "Don't have an account? Sign Up";
-  rememberMe = "Remember me";
-
-  // Signup page
-  firstName = "First Name";
-  lastName = "Last Name";
-  emailAdress = "Email Address";
-  password = "Password";
+ 
 }

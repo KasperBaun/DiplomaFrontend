@@ -3,7 +3,6 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import Category from '@models/Category';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
@@ -26,7 +25,16 @@ const CategoryCardWeb: React.FC<CategoryCardProps> = observer(function CategoryC
     }
 
     return (
-        <Card sx={{ width: '300px' }} onClick={handleOnCardClicked}>
+        <Card sx={{
+            width: '300px',
+            maxHeight: '300px',
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+            transition: "box-shadow 0.2s ease-in-out",
+            '&:hover': {
+                boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+                cursor: "pointer"
+            }
+        }} onClick={handleOnCardClicked}>
             <CardHeader>
             </CardHeader>
             <CardMedia

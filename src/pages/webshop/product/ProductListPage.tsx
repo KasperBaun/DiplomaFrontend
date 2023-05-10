@@ -38,7 +38,7 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
         return <Loading />
     } else {
         return (
-            <Grid container display={'flex'}>
+            <Grid container >
                 <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                     <ProductSearch
                         categories={webshopStore.Categories}
@@ -51,12 +51,13 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
                     <Typography variant="body2">{searchStore.displayedProductItems.length} {languageStore.currentLanguage.ProductTabText}</Typography>
                 </Grid>
 
-                <Grid container minHeight={'70vh'} >
+                <Grid container  >
                     {searchStore.displayedProductItems.map((product, index) => (
                         <Grid
                             item xs={12} sm={6} md={4} lg={3} xl={3}
                             padding={1}
                             display='flex'
+                            justifyContent={'center'}
                             key={"BackofficeCategoryCardItem" + index}
                             onClick={() => handleOnProductClicked(product.id)}
                         >

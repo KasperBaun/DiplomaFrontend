@@ -37,7 +37,7 @@ const BasketPageItem: React.FC<IBasketPageItemProps> = observer(function BasketP
             <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
                 <div style={{ padding: "1rem" }}>
                     <div style={{ fontWeight: "800" }}>{props.item.product.name}</div>
-                    <div className="productDe_modelNumber">{languageStore.currentLanguage.productPage_productModelNumber} : {props.item.product.modelNumber}</div>
+                    <div className="productDe_modelNumber">{languageStore.currentLanguage.modelNumber} : {props.item.product.modelNumber}</div>
                     <div className="B_Text">{languageStore.currentLanguage.OrderDetailsManufacturer} : {props.item.product.manufacturer}</div>
                     <div className="B_Text">{languageStore.currentLanguage.getCondition(props.item.condition)} </div>
                     <div className="B_Text">{languageStore.currentLanguage.getQuality(props.item.quality)} </div>

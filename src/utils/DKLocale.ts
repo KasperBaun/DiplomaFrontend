@@ -70,9 +70,24 @@ export default class DKLocale implements ILocale {
   condition = "Stand";
   quality = "Sortering";
   addToBasket = "Læg i kurv";
-  
-
-  // Snackbar texts
+  design = "Design";
+  material = "Materiale";
+  modelSpecifications = "Model specifikationer";
+  productInfoHeadline = "General information";
+  selectSubcategory = "Vælg underkategori";
+  filterBySubcategory = "Filtrer efter underkategori";
+  selectCategory = "Vælg kategori";
+  filterByCategory = "Filtrer efter kategori";
+  signIn = "Log ind";
+  signUp = "Opret Konto";
+  forgotPassword = "Glemt password?";
+  alreadyHaveAccount = "Har du allerede en konto? Log ind";
+  dontHaveAccount = "Har du ikke en konto? Opret en";
+  rememberMe = "Husk mig";
+  firstName = "Fornavn";
+  lastName = "Efternavn";
+  emailAdress = "Email";
+  password = "Kodeord";
   createSuccess = "Oprettelse succesfuld";
   createFailed = "Oprettelse mislykkedes";
   updateSuccess = "Opdatering succesfuld";
@@ -80,7 +95,8 @@ export default class DKLocale implements ILocale {
   deleteSuccess = "Sletning succesfuld";
   deleteFailed = "Sletning mislykkedes";
   confirmDeleteText = "Er du sikker på at du vil slette dette element?";
-
+  weight = "Vægt";
+  dimension = "Størrelse";
  
 
   // AboutUS page
@@ -174,25 +190,6 @@ export default class DKLocale implements ILocale {
   noSubCategoriesToShow = "Der er ikke endnu nogen subkategorier på denne side";
   createSubCategoryUpdateSuccessMessage = "Opdatering gennemført";
   createSubCategoryUpdateFailedMessage = "Kunne ikke gennemføre opdatering";
-
-  // Product
-  productPage_productName = "Titel";
-  productPage_productModelNumber = "Model nummer";
-  productPage_productMaterial = "Materiale";
-  productPage_productDesign = "Design";
-  productPage_productCondition = "Stand";
-  productPage_productQuality = "Sortering";
-  productPage_productDimension = "Størrelse";
-  productPage_productCustomText = "Ekstra information";
-  productPage_createProduct = "Opret produkt";
-  productPage_weight = "Vægt";
-
-  productPage_modelSpecifications = "Model specifikationer";
-  productPage_productInfoHeadline = "General information";
-  selectSubcategory = "Vælg underkategori";
-  filterBySubcategory = "Filtrer efter underkategori";
-  selectCategory = "Vælg kategori";
-  filterByCategory = "Filtrer efter kategori";
 
   // Analysis
   AnalysisTitle = "Guld & Sølv";
@@ -310,17 +307,5 @@ export default class DKLocale implements ILocale {
   InventoryWidgetTitle = "Lagerbeholdning";
   InventoryTitle = "Titel";
 
-  // Loginpage
-  signIn = "Log ind";
-  signUp = "Opret Konto";
-  forgotPassword = "Glemt password?";
-  alreadyHaveAccount = "Har du allerede en konto? Log ind";
-  dontHaveAccount = "Har du ikke en konto? Opret en";
-  rememberMe = "Husk mig";
-
-  // Signup page
-  firstName = "Fornavn";
-  lastName = "Efternavn";
-  emailAdress = "Email";
-  password = "Kodeord";
+ 
 }

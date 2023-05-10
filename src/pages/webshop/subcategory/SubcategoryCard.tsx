@@ -22,7 +22,16 @@ export const SubcategoryCard: React.FC<SubcategoryCardProps> = function Subcateg
     const subcategoryProductsCountTitle: string = subcategoryProductsCount + " " + productsText;
 
     return (
-        <Card sx={{ width: '300px' }} onClick={handleOnCardClicked}>
+        <Card sx={{
+            width: '300px',
+            maxHeight: '300px',
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
+            transition: "box-shadow 0.2s ease-in-out",
+            '&:hover': {
+                boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+                cursor: "pointer"
+            }
+        }} onClick={handleOnCardClicked}>
 
             <CardMedia
                 component="img"
