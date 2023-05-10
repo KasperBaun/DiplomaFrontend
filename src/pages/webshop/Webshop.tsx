@@ -1,5 +1,5 @@
 import { Footer } from "@components/footer/Footer";
-import Header from "@components/header/Header";
+import Header from "@webshop/header/Header";
 import Loading from "@components/loading/Loading";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";

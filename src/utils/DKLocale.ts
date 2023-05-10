@@ -65,6 +65,7 @@ export default class DKLocale implements ILocale {
   instagram = "Instagram";
   facebook = "Facebook";
   sendAnEmail = "Send en email";
+  language = "Sprog";
   
 
   // Snackbar texts
@@ -79,36 +80,37 @@ export default class DKLocale implements ILocale {
  
 
   // AboutUS page
-  company_description = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg. Vi køber og sælger Guld & Sølv, dansk porcelæn og keramik, samt andre spændende antikviteter."
-  opening_days = "Åbningstider"
-  monday_text = "Mandag"
-  tuesday_text = "Tirsdag"
-  wednesday_text = "Onsdag"
-  thursday_text = "Torsdag"
-  friday_text = "Fredag"
-  saturday_text = "Lørdag"
-  public_holiday_text = "Helligdage"
-  sunday_text = "Søndag"
-  closed_text = "Lukket"
-  per_agreement_text = "Efter aftale"
-  contact_information = "Kontaktinformation"
-  phone_text = "Telefon"
-  email_text = "E-mail"
-  address_text = "Adresse"
-  post_code = "Postnummer"
-  cvr_nr_text = "CVR-nummer"
-  faq_text = "Ofte stillede spørgsmål:"
-  q1_text = "Hvad er jeres returpolitik?"
-  q1_answer = "Det er ikke muligt at returnere varer efter 24 timer."
-  q2_text = "Er det muligt at få leveret varer til udlandet?"
-  q2_answer = "Efter aftale kan vi arrangere for levering af varer til udlandet, med forbehold for varens pris og afstanden til landet."
-  q3_text = "Kan jeg afhente mine varer i butikken?"
-  q3_answer = "Det er altid muligt at afhente varer i butikken i åbningstiden."
+  company_description1 = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg.";
+  company_description2 = "Vi køber og sælger guld og sølv, dansk porcelæn og keramik, samt andre spændende antikviteter.";
+  opening_days = "Åbningstider";
+  monday_text = "Mandag";
+  tuesday_text = "Tirsdag";
+  wednesday_text = "Onsdag";
+  thursday_text = "Torsdag";
+  friday_text = "Fredag";
+  saturday_text = "Lørdag";
+  public_holiday_text = "Helligdage";
+  sunday_text = "Søndag";
+  closed_text = "Lukket";
+  per_agreement_text = "Efter aftale";
+  contact_information = "Kontaktinformation";
+  phone_text = "Telefon";
+  email_text = "E-mail";
+  address_text = "Adresse";
+  post_code = "Postnummer";
+  cvr_nr_text = "CVR-nummer";
+  faq_text = "Ofte stillede spørgsmål:";
+  q1_text = "Hvad er jeres returpolitik?";
+  q1_answer = "Det er ikke muligt at returnere varer efter 24 timer.";
+  q2_text = "Er det muligt at få leveret varer til udlandet?";
+  q2_answer = "Efter aftale kan vi arrangere for levering af varer til udlandet, med forbehold for varens pris og afstanden til landet.";
+  q3_text = "Kan jeg afhente mine varer i butikken?";
+  q3_answer = "Det er altid muligt at afhente varer i butikken i åbningstiden.";
 
 
   // Front page
   seeProductBtn = "Se produkt"; 
-  chosenCategories = "Udvalgte kategorier"
+  chosenCategories = "Udvalgte kategorier";
 
    //Pop-up : cart
    shopButton = "Gå til kurv";  

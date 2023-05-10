@@ -12,7 +12,7 @@ export const ContactPage: React.FC = observer(() => {
     const primaryColor = Constants.primaryColor;
 
     return (
-        <Container sx={{ minHeight: '76.2vh' }}>
+        <Container>
             <Grid container
                 spacing={4}
                 justifyContent={'center'}
