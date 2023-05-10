@@ -47,8 +47,8 @@ const HomePage: React.FC = observer(function HomePage() {
 
 
         return (
-            <Grid container justifyContent="center">
-                <Grid item xs={12} textAlign="center" sx={{ mt: 2 }}>
+            <Grid container sx={{maxWidth:'1000px', marginX:'auto'}}>
+                <Grid item xs={12} textAlign="center" sx={{ mt: 2 }} >
                     <Carousel
                         showThumbs={false}
                         showStatus={false}

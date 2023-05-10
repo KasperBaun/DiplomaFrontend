@@ -40,18 +40,33 @@ export interface ILocale {
   condition: string;
   quality: string;
   addToBasket:string;
-
-  // Snackbar texts
+  design: string;
+  material: string;
+  modelSpecifications: string;
+  productInfoHeadline: string;
+  selectSubcategory: string;
+  filterBySubcategory: String;
+  selectCategory: string;
+  filterByCategory: string;
+  signIn: string;
+  signUp: string;
+  forgotPassword: string;
+  alreadyHaveAccount: string;
+  dontHaveAccount: string;
+  rememberMe: string;
+  firstName: string;
+  lastName: string;
+  emailAdress: string;
+  password: string;
   createSuccess: string;
   createFailed: string;
   updateSuccess: string;
   updateFailed: string;
   deleteSuccess: string;
   deleteFailed: string;
-
   confirmDeleteText: string;
-
- 
+  weight:string;
+  dimension: string;
 
   // Category Admin
   createCategoryDialogTitle: string;
@@ -143,24 +158,6 @@ export interface ILocale {
   noSubCategoriesToShow: string;
   createSubCategoryUpdateSuccessMessage: string;
   createSubCategoryUpdateFailedMessage: string;
-
-  // Product
-  productPage_productName: string;
-  productPage_productModelNumber: string;
-  productPage_productMaterial: string;
-  productPage_productDesign: string;
-  productPage_productCondition: string;
-  productPage_productQuality: string;
-  productPage_productDimension: string;
-  productPage_weight: string;
-  productPage_productCustomText: string;
-  productPage_createProduct: string;
-  productPage_modelSpecifications: string;
-  productPage_productInfoHeadline: string;
-  selectSubcategory: string;
-  filterBySubcategory: String;
-  selectCategory: string;
-  filterByCategory: string;
 
 
   // Admin Header 
@@ -278,17 +275,5 @@ export interface ILocale {
   InventoryTitle: string;
   InventoryWidgetTitle: string;
 
-  // Loginpage
-  signIn: string;
-  signUp: string;
-  forgotPassword: string;
-  alreadyHaveAccount: string;
-  dontHaveAccount: string;
-  rememberMe: string;
 
-  // Signup page
-  firstName: string;
-  lastName: string;
-  emailAdress: string;
-  password: string;
 }

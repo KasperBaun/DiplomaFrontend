@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Button, Box, Typography } from '@mui/material';
+import { Box, Grid, Typography } from '@mui/material';
 import MobXContext from '@stores/MobXContext';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 
@@ -11,13 +11,12 @@ type ProductDescriptionProps = {
 
 const ProductDescription: React.FC<ProductDescriptionProps> = observer(function ProductDescription(props: ProductDescriptionProps) {
 
-    const { languageStore, basketStore } = useContext(MobXContext);
+    const { languageStore } = useContext(MobXContext);
 
-    function handleClick() { basketStore.addToBasket(props.product); }
     function getWeight() {
         if (props.product.weight !== 0) {
             return (
-                <Typography>{languageStore.currentLanguage.productPage_weight} : {props.product.weight}</Typography>
+                <Typography><b>{languageStore.currentLanguage.weight} :</b> {props.product.weight}</Typography>
             );
         }
     }
@@ -25,7 +24,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = observer(function 
     function getHeight() {
         if (props.product.product.dimension) {
             return (
-                <Typography>{languageStore.currentLanguage.productPage_productDimension} :  {props.product.product.dimension}</Typography>
+                <Typography><b>{languageStore.currentLanguage.dimension} :</b>  {props.product.product.dimension}</Typography>
             );
         }
     }
@@ -33,7 +32,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = observer(function 
     function getMaterial() {
         if (props.product.product.material) {
             return (
-                <Typography>{languageStore.currentLanguage.productPage_productMaterial} : {languageStore.currentLanguage.getMaterialType(props.product.product.material)}</Typography>
+                <Typography><b>{languageStore.currentLanguage.material} :</b> {languageStore.currentLanguage.getMaterialType(props.product.product.material)}</Typography>
             );
         }
     }
@@ -41,37 +40,30 @@ const ProductDescription: React.FC<ProductDescriptionProps> = observer(function 
     function getDesigner() {
         if (props.product.product.design) {
             return (
-                <Typography>{languageStore.currentLanguage.productPage_productDesign} : {props.product.product.design}</Typography>
+                <Typography><b>{languageStore.currentLanguage.design} :</b> {props.product.product.design}</Typography>
             );
         }
     }
 
     return (
-        <Box>
+        <Grid item xs={12}>
             <Box>
                 <Typography variant="h3">{props.product.product.name}</Typography>
-                <Typography>{languageStore.currentLanguage.productPage_productModelNumber} : {props.product.product.modelNumber}</Typography>
+                <Typography>{languageStore.currentLanguage.modelNumber} : {props.product.product.modelNumber}</Typography>
                 <Typography>Kr {props.product.currentPrice} DKK</Typography>
             </Box>
 
             <Box>
-                <Typography>{languageStore.currentLanguage.getCondition(props.product.condition)}</Typography>
-                <Typography>{languageStore.currentLanguage.getQuality(props.product.quality)}</Typography>
-                <Typography>{props.product.customText}</Typography>
-            </Box>
-
-            <Box>
-                <Typography fontWeight={600}>{languageStore.currentLanguage.productPage_modelSpecifications}:</Typography>
+                <Typography fontWeight={600}>{languageStore.currentLanguage.modelSpecifications}:</Typography>
                 {getDesigner()}
                 {getMaterial()}
                 {getHeight()}
                 {getWeight()}
+                <Typography><b>{languageStore.currentLanguage.condition}: </b>{languageStore.currentLanguage.getCondition(props.product.condition)}</Typography>
+                <Typography><b>{languageStore.currentLanguage.quality}: </b>{languageStore.currentLanguage.getQuality(props.product.quality)}</Typography>
+                <Typography>{props.product.customText}</Typography>
             </Box>
-
-            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'start', alignItems: 'center', mt: '3rem' }}>
-                {props.source === "web" ? (<Button variant="outlined" onClick={() => handleClick()} sx={{ width: '12rem', minHeight: '3rem', justifyContent: 'center' }}>{languageStore.currentLanguage.addToBasket}</Button>) : (<></>)}
-            </Box>
-        </Box>
+        </Grid>
     );
 });
 export default ProductDescription;

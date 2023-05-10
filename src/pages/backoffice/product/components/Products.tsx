@@ -63,7 +63,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
         return (
             <Grid container >
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} >
-                    <Button style={{ width: "12rem", margin: '5px' }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.productPage_createProduct}</Button>
+                    <Button style={{ width: "12rem", margin: '5px' }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.create}</Button>
                 </Grid>
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                     <ProductSearch
