@@ -30,7 +30,7 @@ export const Footer: React.FC = observer(function Footer() {
 
       {/* Links */}
       <Grid item xs={12}>
-        <Stack direction="row" spacing={2} justifyContent={'center'}>
+        <Stack direction="row" spacing={2} justifyContent={'center'} alignItems={'center'}>
           <CustomNavLink url={"/"} value={languageStore.currentLanguage.HomeTabText} />
           <CustomNavLink url={"/faq"} value={languageStore.currentLanguage.FAQTabText} />
           <CustomNavLink url={"/aboutUs"} value={languageStore.currentLanguage.AboutUsTabText} />
