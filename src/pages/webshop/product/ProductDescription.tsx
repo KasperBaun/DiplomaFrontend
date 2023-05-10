@@ -1,84 +1,77 @@
-import { useContext } from "react";
-import Button from '@mui/material/Button';
-import MobXContext from "@stores/MobXContext"; import { observer } from "mobx-react-lite";
-import "./ProductPage.scss";
-import { ProductItemWeb } from "@models/ProductItemWeb";
+import React, { useContext } from 'react';
+import { observer } from 'mobx-react-lite';
+import { Button, Box, Typography } from '@mui/material';
+import MobXContext from '@stores/MobXContext';
+import { ProductItemWeb } from '@models/ProductItemWeb';
 
-
-interface IProductDescription {
-    Iproduct: ProductItemWeb;
+type ProductDescriptionProps = {
+    product: ProductItemWeb;
     source: string;
 }
 
-const ProductDescription: React.FC<IProductDescription> = observer(function ProductDescription(props: IProductDescription) {
+const ProductDescription: React.FC<ProductDescriptionProps> = observer(function ProductDescription(props: ProductDescriptionProps) {
 
     const { languageStore, basketStore } = useContext(MobXContext);
 
-    function handleClick() {
-        basketStore.addToBasket(props.Iproduct);
-    }
-
-
+    function handleClick() { basketStore.addToBasket(props.product); }
     function getWeight() {
-        if (props.Iproduct.weight !== 0) {
+        if (props.product.weight !== 0) {
             return (
-                <div className="P_Text">{languageStore.currentLanguage.productPage_weight} : {props.Iproduct.weight}</div>
+                <Typography>{languageStore.currentLanguage.productPage_weight} : {props.product.weight}</Typography>
             );
         }
     }
 
     function getHeight() {
-        if (props.Iproduct.product.dimension) {
+        if (props.product.product.dimension) {
             return (
-                <div className="P_Text">{languageStore.currentLanguage.productPage_productDimension} :  {props.Iproduct.product.dimension}</div>
+                <Typography>{languageStore.currentLanguage.productPage_productDimension} :  {props.product.product.dimension}</Typography>
             );
         }
     }
 
     function getMaterial() {
-        if (props.Iproduct.product.material) {
+        if (props.product.product.material) {
             return (
-                <div className="P_Text">{languageStore.currentLanguage.productPage_productMaterial} : {languageStore.currentLanguage.getMaterialType(props.Iproduct.product.material)} </div>
+                <Typography>{languageStore.currentLanguage.productPage_productMaterial} : {languageStore.currentLanguage.getMaterialType(props.product.product.material)}</Typography>
             );
         }
     }
 
     function getDesigner() {
-        if (props.Iproduct.product.design) {
+        if (props.product.product.design) {
             return (
-                <div className="P_Text">{languageStore.currentLanguage.productPage_productDesign} : {props.Iproduct.product.design} </div>
+                <Typography>{languageStore.currentLanguage.productPage_productDesign} : {props.product.product.design}</Typography>
             );
         }
     }
 
-
     return (
-        <div className="ProductDescription">
-            <div className="ProductDe_header">
-                <h3>{props.Iproduct.product.name}</h3>
-                <div className="productDe_modelNumber">{languageStore.currentLanguage.productPage_productModelNumber} : {props.Iproduct.product.modelNumber}</div>
+        <Box>
+            <Box>
+                <Typography variant="h3">{props.product.product.name}</Typography>
+                <Typography>{languageStore.currentLanguage.productPage_productModelNumber} : {props.product.product.modelNumber}</Typography>
+                <Typography>Kr {props.product.currentPrice} DKK</Typography>
+            </Box>
 
-                <div className="productDe_price">Kr {props.Iproduct.currentPrice} DKK</div>
-            </div>
+            <Box>
+                <Typography>{languageStore.currentLanguage.getCondition(props.product.condition)}</Typography>
+                <Typography>{languageStore.currentLanguage.getQuality(props.product.quality)}</Typography>
+                <Typography>{props.product.customText}</Typography>
+            </Box>
 
-            <div className="ProductDe_extraInfo">
-                <div className="P_Text">{languageStore.currentLanguage.getCondition(props.Iproduct.condition)} </div>
-                <div className="P_Text">{languageStore.currentLanguage.getQuality(props.Iproduct.quality)} </div>
-                <div className="P_Text">{props.Iproduct.customText} </div>
-            </div>
-
-            <div className="ProductDe_specifics">
-                <div style={{ fontWeight: 600 }}>{languageStore.currentLanguage.productPage_modelSpecifications}:</div>
+            <Box>
+                <Typography fontWeight={600}>{languageStore.currentLanguage.productPage_modelSpecifications}:</Typography>
                 {getDesigner()}
                 {getMaterial()}
                 {getHeight()}
                 {getWeight()}
-            </div>
+            </Box>
 
-            <div style={{ width: '100%', display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: '3rem' }}>
-                {props.source === "web" ? (<Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{ width: '12rem', minHeight: '3rem', justifyContent: 'center' }}>{languageStore.currentLanguage.addToBasket}</Button>) : (<></>)}
-            </div>
-        </div>
+            <Box sx={{ width: '100%', display: 'flex', justifyContent: 'start', alignItems: 'center', mt: '3rem' }}>
+                {props.source === "web" ? (<Button variant="outlined" onClick={() => handleClick()} sx={{ width: '12rem', minHeight: '3rem', justifyContent: 'center' }}>{languageStore.currentLanguage.addToBasket}</Button>) : (<></>)}
+            </Box>
+        </Box>
     );
 });
 export default ProductDescription;

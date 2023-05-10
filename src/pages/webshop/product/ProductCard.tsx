@@ -25,6 +25,7 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
   const hoverCardStyle = {
     ...cardStyle,
     boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+    cursor: "pointer"
   };
 
   const originalStyle = {

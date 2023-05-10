@@ -26,7 +26,7 @@ const ProductPage: React.FC<IProductPageProps> = observer(function ProductPage(p
         </Grid>
         <Grid item lg={6}>
 
-          <ProductDescription source={"web"} key={"productDes" + product.id} Iproduct={product} />
+          <ProductDescription source={"web"} key={"productDes" + product.id} product={product} />
         </Grid>
       </Grid>
     );
