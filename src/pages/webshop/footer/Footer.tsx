@@ -12,6 +12,11 @@ export const Footer: React.FC = observer(function Footer() {
   const { languageStore } = useContext(MobXContext);
   let year = new Date().getFullYear();
 
+  const iconStyling: React.CSSProperties = {
+    height: '28px',
+    width: '28px'
+  };
+
   return (
 
     <Grid container spacing={1} marginTop={1} style={{ backgroundColor: Constants.groenlundGreenColor }}>
@@ -37,10 +42,10 @@ export const Footer: React.FC = observer(function Footer() {
       {/* Icons */}
       <Grid item xs={12}>
         <Stack direction="row" spacing={1} justifyContent={'center'}>
-          <CustomLink url={Constants.facebookUrl} value={<Facebook />} target="_blank" />
-          <CustomLink url={Constants.instagramUrl} value={<Instagram />} target="_blank" />
-          <CustomLink url={`tel: ${Constants.companyTelephoneNumber}`} value={<Call />} />
-          <CustomLink url={`mailto:${Constants.companyEmail}`} value={<Email />} target="_blank" />
+          <CustomLink url={Constants.facebookUrl} value={<Facebook sx={iconStyling} />} target="_blank" />
+          <CustomLink url={Constants.instagramUrl} value={<Instagram sx={iconStyling} />} target="_blank" />
+          <CustomLink url={`tel: ${Constants.companyTelephoneNumber}`} value={<Call sx={iconStyling} />} />
+          <CustomLink url={`mailto:${Constants.companyEmail}`} value={<Email sx={iconStyling} />} target="_blank" />
         </Stack >
       </Grid>
 

@@ -22,7 +22,8 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
     }
 
     const ShowMoreButton: React.FC = () => {
-        if (searchStore.displayedProductItems.length > 0) {
+        const moreItemsAvailableToShow = searchStore.productItems.length > 0 && searchStore.productItems.length > searchStore.displayedProductItems.length;
+        if (moreItemsAvailableToShow) {
             return (
                 <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                     <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnShowMoreClicked}>{languageStore.currentLanguage.showMore}</Button>
@@ -37,8 +38,8 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
         return <Loading />
     } else {
         return (
-            <Grid container >
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
+            <Grid container display={'flex'}>
+                <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                     <ProductSearch
                         categories={webshopStore.Categories}
                         subcategories={searchStore.selectedSubcategories}

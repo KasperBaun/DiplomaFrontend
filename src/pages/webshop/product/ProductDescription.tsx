@@ -76,7 +76,7 @@ const ProductDescription: React.FC<IProductDescription> = observer(function Prod
             </div>
 
             <div style={{ width: '100%', display: 'flex', justifyContent: 'start', alignItems: 'center', marginTop: '3rem' }}>
-                {props.source === "web" ? (<Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{ width: '12rem', minHeight: '3rem', justifyContent: 'center' }}>Tilføj til kurv</Button>) : (<></>)}
+                {props.source === "web" ? (<Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{ width: '12rem', minHeight: '3rem', justifyContent: 'center' }}>{languageStore.currentLanguage.addToBasket}</Button>) : (<></>)}
             </div>
         </div>
     );

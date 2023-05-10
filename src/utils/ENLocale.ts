@@ -58,7 +58,7 @@ export default class ENLocale implements ILocale {
   manufacturer = "Manufacturer";
   selectMaterial = "Select Material";
   name = "Name";
-  modelNumber = "Model Number";
+  modelNumber = "Modelnumber";
   callUs = "Call us";
   writeOnFacebook = "Write on Facebook";
   clickForMapsLocation = "Click for maps location";
@@ -67,6 +67,9 @@ export default class ENLocale implements ILocale {
   facebook = "Facebook";
   sendAnEmail = "Send an email";
   language = "Language";
+  condition = "Condition";
+  quality = "Quality";
+  addToBasket = "Add to basket";
 
   // Snackbar texts
   createSuccess = "Create Success";
