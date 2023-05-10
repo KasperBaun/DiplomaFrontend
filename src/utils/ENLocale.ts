@@ -72,7 +72,7 @@ export default class ENLocale implements ILocale {
   addToBasket = "Add to basket";
   design = "Design";
   material = "Material";
-  modelSpecifications = "Model specifictations";
+  modelSpecifications = "Model specifications";
   productInfoHeadline = "General info";
   selectSubcategory = "Select subcategory";
   filterBySubcategory = "Filter by subcategory";

@@ -18,7 +18,7 @@ export class SearchStore {
     private _isLoaded: boolean = false;
 
     /* State for searching products */
-    private pageSizeAmount: number = 10;
+    private pageSizeAmount: number = 20;
     private _displayedProductItems: ProductItemWeb[] = [];
     private _displayedProductItemsCount: number = this.pageSizeAmount;
     private _filteredProductItems: ProductItemWeb[] = [];

@@ -20,7 +20,7 @@ export const SelectedCategories = observer(function SelectedCategories() {
     const navigate = useNavigate();
 
     function handleClick(category: Category, name: string) {
-        navigate('/subcategories/' + category.id, { state: { name } })
+        navigate('categories/subcategories/' + category.id, { state: { name } })
     }
 
     if (webshopStore.Categories)

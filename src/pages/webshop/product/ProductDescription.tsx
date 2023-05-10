@@ -6,12 +6,12 @@ import { ProductItemWeb } from '@models/ProductItemWeb';
 
 type ProductDescriptionProps = {
     product: ProductItemWeb;
-    source: string;
 }
 
 const ProductDescription: React.FC<ProductDescriptionProps> = observer(function ProductDescription(props: ProductDescriptionProps) {
 
     const { languageStore } = useContext(MobXContext);
+    const typographyVariant = "h4";
 
     function getWeight() {
         if (props.product.weight !== 0) {
@@ -21,48 +21,20 @@ const ProductDescription: React.FC<ProductDescriptionProps> = observer(function 
         }
     }
 
-    function getHeight() {
-        if (props.product.product.dimension) {
-            return (
-                <Typography><b>{languageStore.currentLanguage.dimension} :</b>  {props.product.product.dimension}</Typography>
-            );
-        }
-    }
-
-    function getMaterial() {
-        if (props.product.product.material) {
-            return (
-                <Typography><b>{languageStore.currentLanguage.material} :</b> {languageStore.currentLanguage.getMaterialType(props.product.product.material)}</Typography>
-            );
-        }
-    }
-
-    function getDesigner() {
-        if (props.product.product.design) {
-            return (
-                <Typography><b>{languageStore.currentLanguage.design} :</b> {props.product.product.design}</Typography>
-            );
-        }
-    }
-
     return (
         <Grid item xs={12}>
-            <Box>
-                <Typography variant="h3">{props.product.product.name}</Typography>
-                <Typography>{languageStore.currentLanguage.modelNumber} : {props.product.product.modelNumber}</Typography>
-                <Typography>Kr {props.product.currentPrice} DKK</Typography>
-            </Box>
+            <Typography variant="h2" sx={{ marginBottom: '10px' }}>{props.product.product.name}</Typography>
+            <Typography variant="h2" color="primary"> {props.product.currentPrice} DKK</Typography><br />
 
-            <Box>
-                <Typography fontWeight={600}>{languageStore.currentLanguage.modelSpecifications}:</Typography>
-                {getDesigner()}
-                {getMaterial()}
-                {getHeight()}
-                {getWeight()}
-                <Typography><b>{languageStore.currentLanguage.condition}: </b>{languageStore.currentLanguage.getCondition(props.product.condition)}</Typography>
-                <Typography><b>{languageStore.currentLanguage.quality}: </b>{languageStore.currentLanguage.getQuality(props.product.quality)}</Typography>
-                <Typography>{props.product.customText}</Typography>
-            </Box>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.modelNumber} :</b> {props.product.product.modelNumber}</Typography>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.manufacturer} :</b> {props.product.product.manufacturer}</Typography>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.design} :</b> {props.product.product.design}</Typography>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.material} :</b> {languageStore.currentLanguage.getMaterialType(props.product.product.material)}</Typography>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.dimension} :</b> {props.product.product.dimension}</Typography>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.condition}: </b>{languageStore.currentLanguage.getCondition(props.product.condition)}</Typography>
+            <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.quality}: </b>{languageStore.currentLanguage.getQuality(props.product.quality)}</Typography>
+            {/* {getWeight()} */}
+            <Typography variant={typographyVariant}>{props.product.customText}</Typography>
         </Grid>
     );
 });
