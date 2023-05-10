@@ -58,7 +58,7 @@ export default class DKLocale implements ILocale {
   manufacturer = "Producent";
   selectMaterial = "Vælg materiale";
   name = "Navn";
-  modelNumber = "Model nummer";
+  modelNumber = "Modelnummer";
   callUs = "Ring til os";
   writeOnFacebook = "Skriv til os på Facebook";
   clickForMapsLocation = "Klik for at se vores lokation på Google Maps";
@@ -67,6 +67,9 @@ export default class DKLocale implements ILocale {
   facebook = "Facebook";
   sendAnEmail = "Send en email";
   language = "Sprog";
+  condition = "Stand";
+  quality = "Sortering";
+  addToBasket = "Læg i kurv";
   
 
   // Snackbar texts

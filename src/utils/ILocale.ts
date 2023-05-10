@@ -37,6 +37,9 @@ export interface ILocale {
   facebook: string;
   sendAnEmail: string;
   language: string;
+  condition: string;
+  quality: string;
+  addToBasket:string;
 
   // Snackbar texts
   createSuccess: string;

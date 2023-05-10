@@ -1,5 +1,5 @@
 import { ProductItemWeb } from '@models/ProductItemWeb';
-import { Card, CardContent, CardMedia, Divider, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material';
 import MobXContext from '@stores/MobXContext';
 import React, { useContext } from 'react';
 import { useState } from "react";
@@ -15,6 +15,7 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
 
   const [cardStyle, setCardStyle] = useState({
     width: 300,
+    minHeight: 375,
     margin: "12px",
     borderRadius: 8,
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
@@ -30,6 +31,10 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
     ...cardStyle,
     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)"
   }
+
+  const slicedName = productItem.product.name.length > 28 ? productItem.product.name.slice(0, 28) + "..." : productItem.product.name;
+  const conditionText = languageStore.currentLanguage.getCondition(productItem.condition) !== "" ? languageStore.currentLanguage.getCondition(productItem.condition) : null;
+  const qualityText = languageStore.currentLanguage.getQuality(productItem.quality) !== "" ? languageStore.currentLanguage.getQuality(productItem.quality) : null;
 
   return (
     <Card
@@ -49,17 +54,30 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
         style={{ objectFit: "cover" }}
       />
       <CardContent>
-        <Typography variant="h5" component="h2">
-          {props.data.product.name}
-        </Typography>
-        <Typography color="textSecondary">
-          Model Number: {props.data.product.modelNumber}
-        </Typography>
-        <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
-        <Typography color="textPrimary">{languageStore.currentLanguage.price}: {productItem.currentPrice} DKK</Typography>
-        <Typography color="textSecondary"> {languageStore.currentLanguage.getQuality(productItem.condition)}</Typography>
-        <Typography color="textSecondary">{languageStore.currentLanguage.getQuality(productItem.quality)}</Typography>
+        <Grid container display={'flex'}>
+          <Grid item xs={12}>
+            <Typography variant="h5" component="h2">
+              {slicedName}
+            </Typography>
+            <Divider style={{ margin: "8px 0", backgroundColor: "black" }} variant="middle" />
+          </Grid>
+
+          <Grid item xs={12}>
+            {conditionText && <Typography color="textPrimary"><b>{languageStore.currentLanguage.condition}:</b> {languageStore.currentLanguage.getCondition(productItem.condition)}</Typography>}
+            {qualityText && <Typography color="textPrimary"><b>{languageStore.currentLanguage.quality}:</b> {languageStore.currentLanguage.getQuality(productItem.quality)}</Typography>}
+            <Typography color="textPrimary"> <b>{languageStore.currentLanguage.modelNumber}:</b> {props.data.product.modelNumber}</Typography>
+          </Grid>
+
+
+        </Grid>
+
+
       </CardContent>
+      <CardActionArea >
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }} >
+          <Typography variant="h4" color="primaryText"><b>{languageStore.currentLanguage.price}: {productItem.currentPrice} DKK</b></Typography>
+        </Grid>
+      </CardActionArea>
     </Card>
   );
 };
