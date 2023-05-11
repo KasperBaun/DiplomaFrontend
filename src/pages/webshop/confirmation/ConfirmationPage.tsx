@@ -96,7 +96,7 @@ const ConfirmationPage = () => {
             <Container>
                 <Row style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>
                     <Col md={12}><h1>Thank you!</h1></Col>
-                    <Col md={12}><h3>Your order {} has been placed!</h3></Col>
+                    <Col md={12}><h3>Your order {"O" + order.paymentId + "" + order.paymentId + "" + order.orderElements.length} has been placed!</h3></Col>
                     <Col md={12}><h5>Confirmation email has been sent to {webshopStore.Customer.email}</h5></Col>
                 </Row>
                 <Row style={{ justifyContent: "center" }}>
