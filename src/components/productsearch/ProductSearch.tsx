@@ -65,7 +65,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                         setSearchText={setSearchText}
                         showSearchBar={showSearchBar}
                         onSearchTextChanged={handleSearchTextChanged}
-                        style={{ marginRight: '10px', minWidth: '15vw' }}
+                        style={{ marginRight: '10px', minWidth: '15vw'}}
                     />
 
                     <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
@@ -100,7 +100,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                         </Select>
                     </FormControl>
                 </Box>
-                <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
+                <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw', maxHeight: '3.3rem' }} variant="contained" onClick={handleOnResetClicked}>{languageStore.currentLanguage.reset}</Button>
             </Grid>
         </Grid >
     )
