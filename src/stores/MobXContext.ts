@@ -6,9 +6,11 @@ import { SniperStore } from "./SniperStore";
 import { AuthStore } from "./AuthStore";
 import { BasketStore } from "./BasketStore";
 import { WebshopStore } from "./WebshopStore";
+import { SearchStore } from "./SearchStore";
 
 export interface IMobXContext {
     rootStore: RootStore;
+    searchStore: SearchStore;
     /* Webshop stores */
     languageStore: LanguageStore;
     webshopStore : WebshopStore;

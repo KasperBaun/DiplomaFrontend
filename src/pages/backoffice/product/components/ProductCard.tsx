@@ -49,16 +49,16 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
                     {/* <b>{languageStore.currentLanguage.productPage_productName}</b>: {name} */}<b>{name}</b>
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productModelNumber}</b>: {modelNumber}
+                    <b>{languageStore.currentLanguage.modelNumber}</b>: {modelNumber}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productMaterial}</b>: {material}
+                    <b>{languageStore.currentLanguage.material}</b>: {material}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productDesign}</b>: {design}
+                    <b>{languageStore.currentLanguage.design}</b>: {design}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productQuality}</b>: {quality}
+                    <b>{languageStore.currentLanguage.quality}</b>: {quality}
                 </Typography>
                 {/* <Typography variant="body1" color="text.primary">
                     <b>{languageStore.currentLanguage.productPage_productDimension}</b>: {dimension}

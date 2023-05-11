@@ -23,6 +23,7 @@ import { Avatar, Backdrop } from '@mui/material';
 import Loading from '@components/loading/Loading';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
+import { NavLink } from 'react-router-dom';
 
 export interface ILoginPageProps {
     onLoginClicked: (data: UserLoginDTO) => void;
@@ -96,7 +97,7 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                             />
                         </Backdrop>
 
-                        <GroendlundLogo width={400} color={Constants.primaryColor} />
+                        <NavLink to={"/"}><GroendlundLogo width={400} color={Constants.primaryColor} /></NavLink>
                         <Avatar sx={{ m: 1, bgcolor: Constants.primaryColor }}>
                             <LockOutlined style={{ backgroundColor: Constants.primaryColor }} />
                         </Avatar>
@@ -153,17 +154,17 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 style={{ backgroundColor: Constants.primaryColor }}
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                {languageStore.currentLanguage.signInText}
+                                {languageStore.currentLanguage.signIn}
                             </Button>
                             <Grid container>
                                 <Grid item xs>
                                     <Link onClick={() => props.onForgotPasswordClicked} variant="body2">
-                                        {languageStore.currentLanguage.forgotPasswordText}
+                                        {languageStore.currentLanguage.forgotPassword}
                                     </Link>
                                 </Grid>
                                 <Grid item>
                                     <Link onClick={() => props.onAuthNavClicked(1)} variant="body2">
-                                        {languageStore.currentLanguage.dontHaveAccountText}
+                                        {languageStore.currentLanguage.dontHaveAccount}
                                     </Link>
                                 </Grid>
                             </Grid>

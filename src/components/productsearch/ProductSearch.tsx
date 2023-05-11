@@ -8,84 +8,74 @@ import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from "@m
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import { ProductSearchBar } from "./ProductSearchBar";
 
-
 export type ProductSearchProps = {
     showSearchBar?: boolean;
     categories: Category[];
     subcategories: SubCategory[];
-    items: ProductItem[] | ProductItemWeb[];
-    onItemsChanged: (items: ProductItem[] | ProductItemWeb[]) => void;
     onProductItemClicked?: (productItem: ProductItem) => void;
 }
 
 export const ProductSearch: React.FC<ProductSearchProps> = observer(function ProductSearch(props: ProductSearchProps) {
-    const { items, showSearchBar, categories, subcategories, onItemsChanged } = props;
+
+    const { showSearchBar, categories, subcategories } = props;
+
     /* Define state for products and selected category & subcategory - Inject stores */
-    const { languageStore } = useContext(MobXContext);
-    const [selectedCategory, setSelectedCategory] = useState<Category>(null);
-    const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
-    const [displayedSubcategories, setDisplayedSubcategories] = useState<SubCategory[]>(subcategories);
-    const [searchText, setSearchText] = useState<string>("");
+    const { languageStore, searchStore } = useContext(MobXContext);
+    const [searchText, setSearchText] = useState<string>('');
+
+    searchStore.selectedSubcategories = subcategories;
 
     /* Define the event handlers for the events */
-    const handleSearchTextChanged = (newItems: ProductItem[] | ProductItemWeb[]): void => {
-        setSelectedCategory(null);
-        setSelectedSubcategory(null);
-        onItemsChanged(newItems);
+    const handleSearchTextChanged = (searchText: string): void => {
+        searchStore.filterBySearchText(searchText);
     }
 
     const handleOnResetClicked = (): void => {
-        setSearchText("");
-        setSelectedCategory(null);
-        setSelectedSubcategory(null);
-        onItemsChanged(items);
-    };
+        searchStore.reset();
+    }
 
     const handleCategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
         if (event.target.value === "initValue") {
-            if (selectedCategory !== null) {
-                setSelectedCategory(null);
-                setSelectedSubcategory(null);
-                setDisplayedSubcategories([]);
-                onItemsChanged(items);
-            }
-            return;
+            searchStore.reset();
         } else {
-            // Filter productitems by category
             const categoryId: number = event.target.value;
-            setSelectedSubcategory(null);
-            setSelectedCategory(categories.find(cat => cat.id === categoryId));
-            const filteredProducts = items.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
-            setDisplayedSubcategories(subcategories.filter(subcat => subcat.categoryId === categoryId));
-            onItemsChanged(filteredProducts);
+            searchStore.filterByCategory(categoryId);
         }
+        return;
     };
 
     const handleSubcategoryChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
         if (event.target.value === "initValue") {
-            setSelectedSubcategory(null);
-            return;
+            searchStore.selectedSubcategory = null;
         }
         else {
-            // Filter productitems by subcategory
             const subcategoryId: number = event.target.value;
-            setSelectedSubcategory(subcategories.find(s => s.id === subcategoryId));
-            const filteredProducts = items.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategoryId));
-            onItemsChanged(filteredProducts);
-            return;
+            searchStore.filterBySubcategory(subcategoryId);
         }
+        return;
     }
 
     return (
         <Grid container >
 
-            <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
+            <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                 <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                    <ProductSearchBar searchText={searchText} setSearchText={setSearchText} showSearchBar={showSearchBar} productItems={items} onItemsChanged={handleSearchTextChanged} />
+                    <ProductSearchBar
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                        showSearchBar={showSearchBar}
+                        onSearchTextChanged={handleSearchTextChanged}
+                        style={{ marginRight: '10px', minWidth: '15vw' }}
+                    />
 
                     <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
                         <InputLabel>{languageStore.currentLanguage.filterByCategory}</InputLabel>
-                        <Select value={selectedCategory ? selectedCategory.id : ''} onChange={handleCategoryChange} aria-label={languageStore.currentLanguage.selectCategory}>
+                        <Select
+                            value={searchStore.selectedCategory ? searchStore.selectedCategory.id : ''}
+                            onChange={handleCategoryChange}
+                            aria-label={languageStore.currentLanguage.selectCategory}
+                            label={languageStore.currentLanguage.filterByCategory}
+                        >
                             {categories.map((category) => (
                                 <MenuItem key={category.id} value={category.id}>
                                     {languageStore.getCurrentLanguageCode() === "da_DK" ? category.name.split("|")[0] : category.name.split("|")[1]}
@@ -97,11 +87,12 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                     <FormControl sx={{ marginRight: '10px', minWidth: '15vw' }}>
                         <InputLabel>{languageStore.currentLanguage.filterBySubcategory}</InputLabel>
                         <Select
-                            value={selectedSubcategory ? selectedSubcategory.id : ''}
+                            value={searchStore.selectedSubcategory ? searchStore.selectedSubcategory.id : ''}
                             onChange={handleSubcategoryChange}
                             aria-label={languageStore.currentLanguage.selectSubcategory}
+                            label={languageStore.currentLanguage.filterBySubcategory}
                         >
-                            {displayedSubcategories.map((subcategory) => (
+                            {searchStore.selectedSubcategories.map((subcategory) => (
                                 <MenuItem key={subcategory.id} value={subcategory.id}>
                                 {languageStore.getCurrentLanguageCode() === "da_DK" ? subcategory.name.split("|")[0] : subcategory.name.split("|")[1]}
                                 </MenuItem>

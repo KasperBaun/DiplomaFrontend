@@ -5,7 +5,6 @@ import Loading from "@components/loading/Loading";
 import { Button, Grid, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
-import { ProductItemWeb } from "@models/ProductItemWeb";
 import ProductSearch from "@components/productsearch/ProductSearch";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 
@@ -25,12 +24,6 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
     /* Define the event handlers for the buttons */
     const updateDisplayedProductItems = (productItems: ProductItem[], amount: number) => {
         setDisplayedProductItems(ExtentionMethods.safeSlice(productItems, 0, amount * pageSizeAmount));
-    }
-
-    const handleItemsChanged = (productItems: ProductItem[] | ProductItemWeb[]) => {
-        const items: ProductItem[] = productItems as ProductItem[];
-        updateDisplayedProductItems(items, 1);
-        setProductItems(items);
     }
 
     const handleOnCreateClicked = (): void => props.onProductItemClicked(null);
@@ -70,15 +63,13 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
         return (
             <Grid container >
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} >
-                    <Button style={{ width: "12rem", margin: '5px' }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.productPage_createProduct}</Button>
+                    <Button style={{ width: "12rem", margin: '5px' }} variant="contained" onClick={handleOnCreateClicked}>{languageStore.currentLanguage.create}</Button>
                 </Grid>
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                     <ProductSearch
                         categories={backofficeStore.Categories}
                         subcategories={backofficeStore.subCategories}
                         onProductItemClicked={props.onProductItemClicked}
-                        items={backofficeStore.productItems}
-                        onItemsChanged={handleItemsChanged}
                         showSearchBar={true}
                     />
                 </Grid>

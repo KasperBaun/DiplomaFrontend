@@ -140,7 +140,7 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onClose}>
-                        {languageStore.currentLanguage.buttonCancelText}
+                        {languageStore.currentLanguage.cancel}
                     </Button>
                     <Button
                         variant="contained"

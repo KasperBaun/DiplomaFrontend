@@ -11,7 +11,7 @@ import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import Order from '@models/Order';
-import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
+import { MobilePayForm, CardInfo, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
 import Payment from '@models/Payment';
 
@@ -30,7 +30,6 @@ export class WebshopStore {
     private _subcategories: SubCategory[] = [];
     private _products: Product[] = [];
     private _productItems: ProductItemWeb[] = [];
-    private _images: Image[] = [];
     private _checkoutPayments : PaymentForm[] = [];
     private _customer : Customer = null;
     private _payment : Payment = null;
@@ -61,11 +60,10 @@ export class WebshopStore {
         const subcategoryMap = this.createSubcategoryMap(subcategories);
         const subcategoryToCategoryMap = this.mapSubCategoriesToCategoryId(categories,subcategories);
         const images = await this.apiService.getImages();
-        const products = this.generateProducts(await this.apiService.getProductDTOs())
+        const products = this.generateProducts(await this.apiService.getProductDTOs(), subcategories)
         const productMap = this.createProductMap(products);
         const productItems = this.generateProductItems(await this.apiService.getProductItemWebs(), productMap, images);
         const productItemMap = this.createProductItemsMap(productItems);
-        const customers = await this.apiService.getCustomers();
 
         runInAction(() => {
             this._categories = categories;
@@ -73,7 +71,6 @@ export class WebshopStore {
             this._subcategories = subcategories;
             this._subcategoryMap = subcategoryMap;
             this.subcategoriesInCategoryMap = subcategoryToCategoryMap;
-            this._images = images;
             this._products = products;
             this._productMap = productMap;
             this._productItems = productItems;
@@ -95,20 +92,11 @@ export class WebshopStore {
         return WebshopStore._Instance;
     }
 
-
     /* Categories & Subcategories */
     private createCategoryMap(categories: Category[]): Map<number, Category> {
         const map = new Map<number, Category>();
         for (const category of categories) {
             map.set(category.id, category);
-        }
-        return map;
-    }
-
-    private createCustomerMap(customers: Customer[]): Map<number, Customer> {
-        const map = new Map<number, Customer>();
-        for (const customer of customers) {
-            map.set(customer.id, customer);
         }
         return map;
     }
@@ -146,19 +134,19 @@ export class WebshopStore {
         }
     }
 
-    private getCategory (id: number): Category {
+    public getCategory (id: number): Category {
         return this._categoryMap.get(id);
     }
 
     /* Products & ProductItems */
-    private generateProducts(productDTOs: ProductDTO[]): Product[] {
+    private generateProducts(productDTOs: ProductDTO[], subcategories: SubCategory[]): Product[] {
         const products: Product[] = [];
         for (const productDTO of productDTOs) {
 
             const productSubcategories: SubCategory[] = [];
 
             for (const subcatId of productDTO.subcategoryIds) {
-                productSubcategories.push(this.getSubcategory(subcatId));
+                productSubcategories.push(subcategories.find(subcat => subcat.id === subcatId));
             }
 
             const product: Product = {
@@ -244,8 +232,12 @@ export class WebshopStore {
         return this._checkoutPayments;
     }
 
-    public get productItems(): ProductItemWeb[] {
+    public get ProductItems(): ProductItemWeb[] {
         return this._productItems;
+    }
+
+    public getProductItemsInSubcategory(subcategoryId: number): ProductItemWeb[] {
+        return this._productItems.filter(prodItem => prodItem.product.subcategories.some(subcat => subcat.id === subcategoryId));
     }
 
     public get Categories(): Category[] {

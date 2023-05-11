@@ -56,7 +56,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductD
                 <TextField
                     fullWidth
                     variant="outlined"
-                    label={languageStore.currentLanguage.productPage_productName}
+                    label={languageStore.currentLanguage.name}
                     defaultValue={productItem?.product?.name ? productItem.product.name : ''}
                     onChange={(e) => { productItem.product.name = e.target.value; }}
                 />
@@ -65,7 +65,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductD
                 <TextField
                     fullWidth
                     variant="outlined"
-                    label={languageStore.currentLanguage.productPage_productModelNumber}
+                    label={languageStore.currentLanguage.modelNumber}
                     defaultValue={productItem?.product?.modelNumber ? productItem.product.modelNumber : ''}
                     onChange={(e) => { productItem.product.modelNumber = e.target.value; }}
                 />
@@ -82,8 +82,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductD
             </Grid>
             <Grid item xs={12} paddingBottom={2}>
                 <FormControl sx={{ minWidth: '100%' }}>
-                    <InputLabel>{languageStore.currentLanguage.productPage_productMaterial}</InputLabel>
-                    <Select label={languageStore.currentLanguage.productPage_productMaterial} value={selectedMaterial ? selectedMaterial : ''} onChange={handleMaterialChange} aria-label={languageStore.currentLanguage.selectMaterial}>
+                    <InputLabel>{languageStore.currentLanguage.material}</InputLabel>
+                    <Select label={languageStore.currentLanguage.material} value={selectedMaterial ? selectedMaterial : ''} onChange={handleMaterialChange} aria-label={languageStore.currentLanguage.selectMaterial}>
                         {Object.keys(materialType).map((material) => (
                             <MenuItem key={material} value={parseInt(material)}>
                                 {materialType[parseInt(material)]}
@@ -96,7 +96,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductD
                 <TextField
                     fullWidth
                     variant="outlined"
-                    label={languageStore.currentLanguage.productPage_productDesign}
+                    label={languageStore.currentLanguage.design}
                     defaultValue={productItem.product?.design ? productItem.product.design : ''}
                     onChange={(e) => { productItem.product.design = e.target.value; }}
                 />
@@ -105,7 +105,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductD
                 <TextField
                     fullWidth
                     variant="outlined"
-                    label={languageStore.currentLanguage.productPage_productDimension}
+                    label={languageStore.currentLanguage.dimension}
                     defaultValue={productItem.product?.dimension ? productItem.product.dimension : ''}
                     onChange={(e) => { productItem.product.dimension = e.target.value; }}
                 />

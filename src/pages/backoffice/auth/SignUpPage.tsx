@@ -93,7 +93,7 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                         <LockOutlined style={{ backgroundColor: Constants.primaryColor }} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        {languageStore.currentLanguage.signUpText}
+                        {languageStore.currentLanguage.signUp}
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -147,12 +147,12 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                             style={{ backgroundColor: Constants.primaryColor }}
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            {languageStore.currentLanguage.signUpText}
+                            {languageStore.currentLanguage.signUp}
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link onClick={() => props.onAuthNavClicked(0)} variant="body2">
-                                    {languageStore.currentLanguage.alreadyHaveAccountText}
+                                    {languageStore.currentLanguage.alreadyHaveAccount}
                                 </Link>
                             </Grid>
                         </Grid>
