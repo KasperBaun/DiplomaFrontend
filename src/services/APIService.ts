@@ -21,6 +21,8 @@ import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import OrderElements from "@models/OrderElements";
 import OrderDTO from "@models/DTO/OrderDTO";
 import Customer from "@models/Customer";
+import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
+import ConfirmationModel from "@models/ConfirmationModel";
 
 class APIService implements IAPIService {
 
@@ -128,9 +130,16 @@ class APIService implements IAPIService {
     async getOrderDetails(): Promise<OrderDetails[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
     }
-    async createOrder(order: Order): Promise<Order> {
-        return await this.crudHelper.create(`${this.apiBaseUrl}/Order`, "Order", order);
-    }
+    async createOrder(order: CreateOrderDTO): Promise<ConfirmationModel> {
+        try {
+          const response = await this.crudHelper.create(`${this.apiBaseUrl}/Order`, "CreateOrderDTO", order);
+          const confirmation: ConfirmationModel = response as ConfirmationModel;
+          return confirmation;
+        } catch (error) {
+          // Handle error if needed
+          throw error;
+        }
+      }
     async updateOrder(order: Order): Promise<Order> {
         return await this.crudHelper.update(`${this.apiBaseUrl}/Order/${order.id}`, "Order", order)
     }

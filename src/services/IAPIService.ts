@@ -11,6 +11,8 @@ import OrderDTO from "@models/DTO/OrderDTO";
 import OrderDetails from "@models/OrderDetails";
 import Order from "@models/Order";
 import OrderElements from "@models/OrderElements";
+import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
+import ConfirmationModel from "@models/ConfirmationModel";
 
 export interface WebAPIResponse {
     success: boolean;
@@ -49,7 +51,7 @@ interface IAPIService {
     getOrders(): Promise<OrderDTO[]>;
     getOrderDetails(): Promise<OrderDetails[]>;
     getOrderElements(): Promise<OrderElements[]>;
-    createOrder(order: Order): Promise<Order>;
+    createOrder(order: CreateOrderDTO): Promise<ConfirmationModel>;
     updateOrder(order: Order): Promise<Order>;
     deleteOrder(id: number): Promise<void>;
     

@@ -9,6 +9,8 @@ import Loading from "@components/loading/Loading";
 import Payment from "@models/Payment";
 import OrderElements from "@models/OrderElements";
 import Order from "@models/Order";
+import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
+import ConfirmationModel from "@models/ConfirmationModel";
 
 
 
@@ -17,65 +19,32 @@ const ConfirmationPage = () => {
     let { id } = useParams();
     const [payment, setPayment] = useState<Payment>();
     const [order, setOrder] = useState<Order>();
+
+    const [preOrder, setPreOrder] = useState<CreateOrderDTO>();
+    const [confirmation, setConfirmation] = useState<ConfirmationModel>();
     const { languageStore, webshopStore, basketStore } = useContext(MobXContext);
-    const paymentForm : PaymentForm = webshopStore.PaymentForm;
 
     let totalPrice = 0;
-    let orderElements : OrderElements[] = [];
 
     basketStore.Basket.map((item) => {
         totalPrice += item.currentPrice;
-        orderElements.push({
-            productItemId: item.id,
-        })
     })
 
-    // Create a user with the checkoutForm details
-    // Check if user exists by email, if not create user. Return user info if user exists
+    setPreOrder({
+        paymentForm : webshopStore.PaymentForm,
+        customerInfo : webshopStore.Customer,
+        productItemsWeb : basketStore.Basket,
+        totalPrice : totalPrice,
+    })
 
-    const createPayment = async () => {
-        if(webshopStore.PaymentForm)
-        return await webshopStore.createPayment({
-            amount : totalPrice,
-            datePaid : new Date().toISOString().slice(0, 19).replace('T', ' '),
-            method: webshopStore.PaymentForm.paymentMethod,
-            approved: true,
-        });
-    }
-
-    // Create an order and return the order number
-    // Get the order number from API as return from create or as a GET fetch
     const createOrder = async () => {
-        if(webshopStore.Customer && webshopStore.PaymentForm && payment) {
-            console.log({
-                customerId: webshopStore.Customer.id,
-                paymentId: payment.id,
-                paymentStatus: "Approved",
-                deliveryStatus: "Afhent",
-                active: true,
-                orderElements: []
-            })
-            return await webshopStore.createOrder({
-                customerId: webshopStore.Customer.id,
-                paymentId: payment.id,
-                paymentStatus: "Approved",
-                deliveryStatus: "Afhent",
-                active: true,
-                orderElements: orderElements
-            });
-        }
+        return await webshopStore.createOrder(preOrder);
     }
 
     useEffect(() => {
-        if(!payment)
-            createPayment().then((payment) => {
-                setPayment(payment);
-            });
-
-        if(!order)
-            createOrder().then((order) => {
-                setOrder(order);
-            })
+        createOrder().then((response) => {
+            setConfirmation(response);
+        })
     }, );
 
     if(webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
