@@ -31,7 +31,7 @@ export interface ILocale {
   modelNumber: string;
   callUs: string;
   writeOnFacebook: string;
-  clickForMapsLocation: string;
+  mapsLocation: string;
   city: string;
   instagram: string;
   facebook: string;

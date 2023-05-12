@@ -54,7 +54,7 @@ export const ContactPage: React.FC = observer(() => {
                             <Typography variant="body1"><EmailRounded /> <b>{languageStore.currentLanguage.email_text}:</b> {Constants.companyEmail}</Typography>
                             <Typography variant="body1"><DvrRounded /> <b>{languageStore.currentLanguage.cvr_nr_text}:</b> 39821044</Typography>
 
-                            <Tooltip title={languageStore.currentLanguage.clickForMapsLocation} >
+                            <Tooltip title={languageStore.currentLanguage.mapsLocation} >
                                 <Typography variant="body1">
 
 
@@ -66,23 +66,22 @@ export const ContactPage: React.FC = observer(() => {
                             </Tooltip>
 
                             <Typography variant="body1"><Instagram /> <b>{languageStore.currentLanguage.instagram}:</b> <a href={Constants.instagramUrl} target="_blank" rel="noreferrer">{Constants.instagramUrl}</a></Typography>
-                            <Typography variant="body1"><Facebook /> <b>{languageStore.currentLanguage.facebook}:</b> <a href={Constants.facebookUrl} target="_blank" rel="noreferrer">{Constants.facebookUrl}</a></Typography>
+                            <Typography variant="body1"><Facebook /> <b>{languageStore.currentLanguage.facebook}:</b> <a href={Constants.facebookUrl} target="_blank" rel="noreferrer">https://www.facebook.com</a></Typography>
 
 
                         </CardContent>
                     </Card>
                 </Grid>
-                <Grid item xs={12} md={12} display={'flex'} justifyContent={'space-around'}>
-                    <CustomButton url={Constants.mapsLink} text={languageStore.currentLanguage.clickForMapsLocation} icon={<LocationCityRounded />} />
-                    <CustomButton url={Constants.facebookUrl} text={languageStore.currentLanguage.writeOnFacebook} icon={<Facebook />} />
-                    <CustomButton url={"mailto:" + Constants.companyEmail} text={languageStore.currentLanguage.email_text} icon={<Mail />} />
 
-                    {/* <Button variant="contained" href={"tel:" + Constants.companyTelephoneNumber} target="_blank" rel="noopener noreferrer"><Call /> {languageStore.currentLanguage.callUs}</Button>
-                    <Button variant="contained" href={Constants.facebookUrl} target="_blank" rel="noopener noreferrer"><Facebook />{languageStore.currentLanguage.writeOnFacebook}</Button>
-                    <Button variant="contained" href={"mailto:" + Constants.companyEmail} target="_blank" rel="noopener noreferrer"><Mail />{languageStore.currentLanguage.email_text} </Button> */}
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
+                    <CustomButton url={Constants.mapsLink} text={languageStore.currentLanguage.mapsLocation} icon={<LocationCityRounded />} />
                 </Grid>
-
-
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
+                    <CustomButton url={Constants.facebookUrl} text={languageStore.currentLanguage.writeOnFacebook} icon={<Facebook />} />
+                </Grid>
+                <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
+                    <CustomButton url={"mailto:" + Constants.companyEmail} text={languageStore.currentLanguage.email_text} icon={<Mail />} />
+                </Grid>
 
                 {/* <Grid item xs={12} md={12} display={'flex'} justifyContent={'center'} sx={{
                     paddingBottom: '20px',
@@ -108,15 +107,20 @@ type CustomButtonProps = {
 
 const CustomButton: React.FC<CustomButtonProps> = ({ url, text, icon }: CustomButtonProps) => {
     return (
-        <Button variant="contained" href={url} target="_blank" rel="noopener noreferrer" sx={{ minWidth: '12vw' }}>
-            <div style={{ padding: '5px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <span style={{ marginRight: '5px' }}>
-                    {icon}
-                </span>
-                <span>
-                    {text}
-                </span>
-            </div>
+        <Button
+            variant="contained"
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+                width: '85%',
+                transition: "box-shadow 0.2s ease-in-out",
+                '&:hover': {
+                    boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+                    cursor: "pointer",
+                }
+            }}>
+            <Typography variant="body1" color="white" sx={{ padding: '5px' }}>{icon} {text}</Typography>
         </Button>
     )
 };

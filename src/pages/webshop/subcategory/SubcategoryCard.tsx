@@ -18,7 +18,7 @@ export const SubcategoryCard: React.FC<SubcategoryCardProps> = function Subcateg
         onCardClicked(props.subcategory.id);
     }
     const subcategoryProductsCount: number = webshopStore.getProductItemsInSubcategory(subcategory.id) ? webshopStore.getProductItemsInSubcategory(subcategory.id).length : 0;
-    const productsText: string = subcategoryProductsCount === 0 ? languageStore.currentLanguage.products.toLowerCase() : languageStore.currentLanguage.products.toLowerCase();
+    const productsText: string = subcategoryProductsCount === 1 ? languageStore.currentLanguage.product.toLowerCase() : languageStore.currentLanguage.products.toLowerCase();
     const subcategoryProductsCountTitle: string = subcategoryProductsCount + " " + productsText;
 
     return (
