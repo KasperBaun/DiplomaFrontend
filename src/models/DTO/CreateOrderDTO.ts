@@ -6,6 +6,6 @@ export default class CreateOrderDTO {
     id ?: number;
     paymentForm : PaymentForm;
     customer : Customer;
-    productItemsWeb : ProductItemWeb[];
+    productItemsId : number[];
     totalPrice : number;
   }

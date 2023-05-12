@@ -131,15 +131,24 @@ class APIService implements IAPIService {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
     }
     async createOrder(order: CreateOrderDTO): Promise<ConfirmationModel> {
-        try {
-          const response = await this.crudHelper.create(`${this.apiBaseUrl}/Order`, "CreateOrderDTO", order);
-          const confirmation: ConfirmationModel = response as ConfirmationModel;
-          return confirmation;
-        } catch (error) {
-          // Handle error if needed
-          throw error;
+        const response = await fetch(`${this.apiBaseUrl}/Order`, {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: {
+                'content-type': 'application/json',
+                'access-control-allow-origin': '*'
+            },
+            mode: 'cors'
+        });
+
+        if(response.ok) {
+            let confirmationModel : ConfirmationModel = await response.json();
+            return confirmationModel;
         }
-      }
+        else {
+            return null;
+        }
+    }
     async updateOrder(order: Order): Promise<Order> {
         return await this.crudHelper.update(`${this.apiBaseUrl}/Order/${order.id}`, "Order", order)
     }

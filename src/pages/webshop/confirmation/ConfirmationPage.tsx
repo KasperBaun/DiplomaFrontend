@@ -15,7 +15,6 @@ import ConfirmationModel from "@models/ConfirmationModel";
 
 
 const ConfirmationPage = () => {
-
     let { id } = useParams();
     const [payment, setPayment] = useState<Payment>();
     const [order, setOrder] = useState<Order>();
@@ -23,29 +22,35 @@ const ConfirmationPage = () => {
     const [preOrder, setPreOrder] = useState<CreateOrderDTO>();
     const [confirmation, setConfirmation] = useState<ConfirmationModel>();
     const { languageStore, webshopStore, basketStore } = useContext(MobXContext);
+    let productIds : number[] = [];
 
     let totalPrice = 0;
 
     basketStore.Basket.map((item) => {
         totalPrice += item.currentPrice;
-    })
+        productIds.push(item.id);
+    });
 
-    setPreOrder({
-        paymentForm : webshopStore.PaymentForm,
-        customerInfo : webshopStore.Customer,
-        productItemsWeb : basketStore.Basket,
-        totalPrice : totalPrice,
-    })
+    useEffect(() => {
+        setPreOrder({
+            paymentForm: webshopStore.PaymentForm,
+            customer: webshopStore.Customer,
+            productItemsId: productIds,
+            totalPrice: totalPrice,
+        });
+    }, [basketStore.Basket, webshopStore.PaymentForm, webshopStore.Customer, totalPrice]);
 
     const createOrder = async () => {
         return await webshopStore.createOrder(preOrder);
-    }
+    };
 
     useEffect(() => {
         createOrder().then((response) => {
             setConfirmation(response);
-        })
-    }, );
+        });
+
+        // get order from database
+    }, [id, createOrder]);
 
     if(webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
         return (
