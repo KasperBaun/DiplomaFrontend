@@ -14,6 +14,8 @@ import Order from '@models/Order';
 import { MobilePayForm, CardInfo, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
 import Payment from '@models/Payment';
+import ConfirmationModel from '@models/ConfirmationModel';
+import CreateOrderDTO from '@models/DTO/CreateOrderDTO';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -37,6 +39,8 @@ export class WebshopStore {
     private _mobilePayForm : MobilePayForm = null;
     private _paypalForm : boolean = false;
     private _paymentForm : PaymentForm = null;
+    private _confirmation : ConfirmationModel = null;
+    private _createOrderDTO : CreateOrderDTO = null;
 
     /* Maps for quick access */
     private _categoryMap: Map<number, Category> = new Map();
@@ -333,7 +337,7 @@ export class WebshopStore {
         return this._subcategoryMap.get(id);
     }
 
-    public async createOrder(order: Order): Promise<Order> {
+    public async createOrder(order: CreateOrderDTO): Promise<ConfirmationModel> {
         return await this.apiService.createOrder(order);
     }
 }
