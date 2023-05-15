@@ -1,6 +1,6 @@
 import Header from "@webshop/header/Header";
 import Loading from "@components/loading/Loading";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Constants } from "@utils/Constants";
 import { observer } from "mobx-react-lite";
@@ -37,13 +37,18 @@ const Webshop: React.FC = observer(function Webshop() {
             <ColorModeContext.Provider value={colorMode}>
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
-                    <Header />
-                    <Container style={{ display: 'flex', minHeight: '76.2vh' }}>
+                    <Box style={{ minHeight: '10vh', width: '100%' }}>
+                        <Header />
+                    </Box>
+                    <Container style={{ display: 'flex', minHeight: '80vh', width: '100%' }}>
                         <Outlet />
                     </Container>
-                    <Footer />
+                    <Box style={{ minHeight: '10vh', minWidth: '100%' }}>
+                        <Footer />
+
+                    </Box>
                 </ThemeProvider>
-            </ColorModeContext.Provider>
+            </ColorModeContext.Provider >
         );
     }
 });

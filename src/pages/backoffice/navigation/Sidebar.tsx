@@ -11,12 +11,12 @@ import { createNavPaths } from "./Navpaths";
 import { Navpath } from "@models/Navpath";
 
 
-export interface ISidebarProps {
+export type SidebarProps = {
     sidebarOpen: boolean;
     setNavKey: Dispatch<SetStateAction<number>>;
 }
 
-const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISidebarProps) {
+const Sidebar: React.FC<SidebarProps> = observer(function Sidebar(props: SidebarProps) {
 
     const { languageStore } = useContext(MobXContext);
     const navPaths: Navpath[] = createNavPaths(languageStore, props.setNavKey, props.sidebarOpen);
@@ -55,7 +55,7 @@ const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISideb
                         alignItems: "center",
                         marginTop: '30px',
                         backgroundColor: ColorConfigs.sidebar.bg,
-                        ":hover": {
+                        "&:hover": {
                             cursor: "pointer"
                         }
                     }}
