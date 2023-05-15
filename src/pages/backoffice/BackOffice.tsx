@@ -5,20 +5,22 @@ import ColorConfigs from "@styles/ColorConfigs";
 import Sidebar from "./navigation/Sidebar";
 import Topbar from "./navigation/Topbar";
 import { useEffect, useContext, useState } from "react";
-import Dashboard from "./Dashboard/dashboard";
+import { Dashboard } from "./Dashboard/dashboard";
 import SniperPage from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
-import SalesList from "./sales/SalesList";
+import { SalesList } from "./sales/SalesList";
 import Orders from "./orders/Orders";
 import Analysis from "./Dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
 import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
+import Loading from "@components/loading/Loading";
+import { observer } from "mobx-react-lite";
 
-const Backoffice: React.FC = function Backoffice() {
+export const Backoffice: React.FC = observer(() => {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { rootStore } = useContext(MobXContext);
+    const { rootStore, backofficeStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
@@ -46,40 +48,40 @@ const Backoffice: React.FC = function Backoffice() {
         backofficeStoreLoaded();
     });
 
-    return (
-        <Box sx={{ display: "flex" }}>
-            <Box
-                component="nav"
-                sx={{
-                    flexShrink: 0
-                }}
-            >
-                <Sidebar
-                    sidebarOpen={sidebarOpen}
-                    setNavKey={setActiveNavKey}
-                />
-            </Box>
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    backgroundColor: ColorConfigs.mainBg
-                }}
-            >
-                <Stack>
-                    <Item>
-                        <Topbar
-                            sidebarOpen={sidebarOpen}
-                            setSidebarOpen={handleToggleSidebarOpenClicked}
-                        />
-                    </Item>
-                    <Item>
-                        {navSwitch()}
-                    </Item>
-                </Stack>
-            </Box>
-        </Box >
-    );
-};
-
-export default Backoffice;
+ 
+        return (
+            <Box sx={{ display: "flex" }}>
+                <Box
+                    component="nav"
+                    sx={{
+                        flexShrink: 0
+                    }}
+                >
+                    <Sidebar
+                        sidebarOpen={sidebarOpen}
+                        setNavKey={setActiveNavKey}
+                    />
+                </Box>
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        backgroundColor: ColorConfigs.mainBg
+                    }}
+                >
+                    <Stack>
+                        <Item>
+                            <Topbar
+                                sidebarOpen={sidebarOpen}
+                                setSidebarOpen={handleToggleSidebarOpenClicked}
+                            />
+                        </Item>
+                        <Item>
+                            {navSwitch()}
+                        </Item>
+                    </Stack>
+                </Box>
+            </Box >
+        );
+    }
+);

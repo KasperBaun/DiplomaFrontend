@@ -11,7 +11,7 @@ import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
-import SalesSummary from "@models/SalesSummary";
+import { SalesSummary } from "@models/SalesSummary";
 import Order from "@models/Order";
 import OrderDetails from "@models/OrderDetails";
 import ProductItemDetails from "@models/ProductItemDetails";

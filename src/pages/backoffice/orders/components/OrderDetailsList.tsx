@@ -48,9 +48,9 @@ const OrderDetailsList = ({ tableHeight, origin }: IProps) => {
             return (
                 <TableCell className="tableCellOnClick" align="left"><b style={{ display: "flex" }}><u style={{ display: "flex" }}>
                     {order.orderElements.map((element, index) => (
-                    <div style={{ display: "flex", justifyContent: "space-between" }} key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
-                        <b><u>{element.productItemId} {","}</u></b>
-                    </div>))
+                        <div style={{ display: "flex", justifyContent: "space-between" }} key={index} className="tableCellOnClick" onClick={() => handleOnProductClick(element.productItemId)}>
+                            <b><u>{element.productItemId} {","}</u></b>
+                        </div>))
                     }</u></b>
                 </TableCell>
             )
@@ -100,7 +100,7 @@ const OrderDetailsList = ({ tableHeight, origin }: IProps) => {
             </React.Fragment>
         )
     else {
-        <Loading />
+        <Loading color="primary" />
     }
 }
 

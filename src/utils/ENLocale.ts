@@ -97,6 +97,23 @@ export default class ENLocale implements ILocale {
   confirmDeleteText = "Are you sure you want to delete this item?";
   weight = "Weight";
   dimension = "Dimension";
+  year = "Year";
+  select = "Select";
+  revenue = "Revenue";
+
+  // Months
+  january = "January";
+  february = "February";
+  march = "March";
+  april = "April";
+  may = "May";
+  june = "June";
+  july = "July";
+  august = "August";
+  september = "September";
+  october = "October";
+  november = "November";
+  december = "December";
 
   //Basket Page
   yourBasket = "Your basket";
@@ -310,5 +327,5 @@ export default class ENLocale implements ILocale {
   InventoryWidgetTitle = "Inventory";
   InventoryTitle = "Title";
 
- 
+
 }

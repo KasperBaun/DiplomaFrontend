@@ -97,6 +97,23 @@ export default class DKLocale implements ILocale {
   confirmDeleteText = "Er du sikker på at du vil slette dette element?";
   weight = "Vægt";
   dimension = "Størrelse";
+  year= "År";
+  select = "Vælg";
+  revenue = "Omsætning";
+
+  // Months
+  january = "Januar";
+  february = "Februar";
+  march = "Marts";
+  april = "April";
+  may = "Maj";
+  june = "Juni";
+  july = "Juli";
+  august = "August";
+  september = "September";
+  october = "Oktober";
+  november = "November";
+  december = "December";
  
 
   // AboutUS page

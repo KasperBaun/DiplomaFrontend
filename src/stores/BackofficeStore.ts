@@ -14,12 +14,12 @@ import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import ProductItemDetails from '@models/ProductItemDetails';
 import CategoryProductView from '@models/CategoryProductView';
 import Payment from '@models/Payment';
-import SalesSummary from '@models/SalesSummary';
+import { SalesSummary } from '@models/SalesSummary';
 import Order from '@models/Order';
 import OrderElements from '@models/OrderElements';
 import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
-
+import { ChartData } from '@models/ChartData';
 
 export class BackofficeStore {
     private static _Instance: BackofficeStore;
@@ -101,7 +101,7 @@ export class BackofficeStore {
             this._productItemMap = this.createProductItemsMap(this.productItems);
             this.productItemDetails = productItemDetails;
             this.categoryProducts = categoryProductViews;
-            
+
         });
 
         const payments = await this.apiService.getPayments()
@@ -110,12 +110,13 @@ export class BackofficeStore {
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
         const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
         const orderElements: OrderElements[] = await this.apiService.getOrderElements();
-        
+        const orders = this.generateOrders(orderDTOs, orderElements);
+
         runInAction(() => {
             this._payments = payments;
             this._salesSummary = salesSummary;
             this._orderElements = orderElements;
-            this._orders = this.generateOrders(orderDTOs, this._orderElements);
+            this._orders = orders;
             this.orderDetails = orderDetails;
             this.loading = false;
             this.loaded = true;
@@ -143,7 +144,7 @@ export class BackofficeStore {
     private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
         const orders: Order[] = [];
         for (var orderDTO of ordersDTO) {
-            const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+            const specificOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
             const order: Order = new Order();
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
@@ -152,7 +153,8 @@ export class BackofficeStore {
             order.deliveryStatus = orderDTO.deliveryStatus;
             order.discountCode = orderDTO.discountCode;
             order.active = orderDTO.active;
-            order.orderElements = orderOrderElements;
+            order.orderElements = specificOrderElements;
+            order.createdDate = new Date(orderDTO.createdDate);
             orders.push(order);
         }
         return orders;
@@ -167,12 +169,17 @@ export class BackofficeStore {
         return this._payments;
     }
 
-    public set Payments(value: Payment[]) {
-        this._payments = value;
-    }
-
     public get SalesSummaries(): SalesSummary[] {
         return this._salesSummary;
+    }
+
+    public getPaymentsSortedByDate(direction: 'asc' | 'desc', amount?: number) {
+        const directionCondition = direction === 'asc' ? 1 : -1;
+        const sortedPayments = [...this._payments].sort(
+            (a: Payment, b: Payment) =>
+                directionCondition * (new Date(b.datePaid).getTime() - new Date(a.datePaid).getTime())
+        );
+        return sortedPayments.slice(0, amount ? amount : undefined);
     }
 
     public getPayment(id: number): Payment {
@@ -181,12 +188,6 @@ export class BackofficeStore {
 
     public async createPayment(payment: Payment): Promise<Payment> {
         return await this.apiService.createPayment(payment);
-    }
-
-    private async refreshPayments(): Promise<void> {
-        await runInAction(async () => {
-            this._payments = await this.apiService.getPayments();
-        });
     }
 
     private async refreshSalesSummary(): Promise<void> {
@@ -443,4 +444,65 @@ export class BackofficeStore {
             this._categories = await this.apiService.getCategories();
         });
     }
+
+
+    /* Chartdata */
+    public getRevenueChartData(year: number) {
+        const orderData = this._orders.filter(o => o.createdDate.getFullYear() === year);
+        const months: string[] = [
+            this.rootStore.languageStore.currentLanguage.january,
+            this.rootStore.languageStore.currentLanguage.february,
+            this.rootStore.languageStore.currentLanguage.march,
+            this.rootStore.languageStore.currentLanguage.april,
+            this.rootStore.languageStore.currentLanguage.may,
+            this.rootStore.languageStore.currentLanguage.june,
+            this.rootStore.languageStore.currentLanguage.july,
+            this.rootStore.languageStore.currentLanguage.august,
+            this.rootStore.languageStore.currentLanguage.september,
+            this.rootStore.languageStore.currentLanguage.october,
+            this.rootStore.languageStore.currentLanguage.november,
+            this.rootStore.languageStore.currentLanguage.december,
+        ];
+
+        for (var month of months) {
+            const monthInt = months.indexOf(month) + 1;
+            const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() === monthInt);
+
+            let monthRevenue = 0;
+            for (var order of ordersInMonth) {
+                monthRevenue += this.getPayment(order.paymentId).amount;
+            }
+            console.log(month + ": " + monthRevenue);
+        }
+
+        const data = months.map((month, index) => {
+            const monthInt = index + 1;
+            const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() === monthInt);
+
+            let monthRevenue = 0;
+            for (var order of ordersInMonth) {
+                monthRevenue += this.getPayment(order.paymentId).amount;
+            }
+            return { x: month, y: monthRevenue };
+        });
+        // [
+        //     { x: this.rootStore.languageStore.currentLanguage.january, y: orderData.filter(o => o.createdDate.getMonth() === 1).reduce((a, b) => a + b.paymentId, 0) },
+        //     { x: this.rootStore.languageStore.currentLanguage.february, y: 3 },
+        //     { x: 3, y: 5 },
+        //     { x: 4, y: 4 },
+        //     { x: 5, y: 7 }
+        // ];
+        return data;
+    }
+
+    public getYearsAvailable(): number[] {
+        const years: number[] = [];
+        for (var order of this._orders) {
+            if (!years.includes(order.createdDate.getFullYear())) {
+                years.push(order.createdDate.getFullYear());
+            }
+        }
+        return years;
+    }
 }
+
