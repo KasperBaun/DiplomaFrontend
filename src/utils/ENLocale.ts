@@ -100,6 +100,19 @@ export default class ENLocale implements ILocale {
   year = "Year";
   select = "Select";
   revenue = "Revenue";
+  danishCurrency = "DKK";
+  kroner = "Kr."
+  more = "More";
+  than = "Than";
+  less = "Less";
+  month = "Month";
+  last = "Last";
+  storage = "Storage";
+  value = "Value";
+  inventory = "Inventory";
+  currency = "USD";
+  expenses = "Expenses";
+  result = "Result";
 
   // Months
   january = "January";

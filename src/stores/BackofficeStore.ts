@@ -22,6 +22,7 @@ import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
 
 export class BackofficeStore {
+
     private static _Instance: BackofficeStore;
     private rootStore: RootStore;
     private prefix: string = `%c[BackofficeStore]`;
@@ -448,6 +449,33 @@ export class BackofficeStore {
 
     /* Chartdata */
     public getRevenueChartData(year: number) {
+        return this.getRevenueData(year).map((data) => {
+            return {
+                x: data.month,
+                y: data.revenue
+            }
+        });
+    }
+
+    public getYearsAvailable(): number[] {
+        const years: number[] = [];
+        for (var order of this._orders) {
+            if (!years.includes(order.createdDate.getFullYear())) {
+                years.push(order.createdDate.getFullYear());
+            }
+        }
+        return years;
+    }
+
+    getStorageValue() {
+        let storageValue: number = 0;
+        for (var productItem of this._productItems.filter(p => p.soldDate === null && p.sold === false)) {
+            storageValue += productItem.currentPrice;
+        }
+        return storageValue;
+    }
+
+    public getRevenueData(year: number) {
         const orderData = this._orders.filter(o => o.createdDate.getFullYear() === year);
         const months: string[] = [
             this.rootStore.languageStore.currentLanguage.january,
@@ -483,26 +511,13 @@ export class BackofficeStore {
             for (var order of ordersInMonth) {
                 monthRevenue += this.getPayment(order.paymentId).amount;
             }
-            return { x: month, y: monthRevenue };
-        });
-        // [
-        //     { x: this.rootStore.languageStore.currentLanguage.january, y: orderData.filter(o => o.createdDate.getMonth() === 1).reduce((a, b) => a + b.paymentId, 0) },
-        //     { x: this.rootStore.languageStore.currentLanguage.february, y: 3 },
-        //     { x: 3, y: 5 },
-        //     { x: 4, y: 4 },
-        //     { x: 5, y: 7 }
-        // ];
-        return data;
-    }
 
-    public getYearsAvailable(): number[] {
-        const years: number[] = [];
-        for (var order of this._orders) {
-            if (!years.includes(order.createdDate.getFullYear())) {
-                years.push(order.createdDate.getFullYear());
-            }
-        }
-        return years;
+            const randomExpenseAmount = Math.random() * (1.4 - 0.7) + 0.7;
+
+            return { month: month, revenue: monthRevenue, expenses: monthRevenue * randomExpenseAmount };
+        });
+
+        return data;
     }
 }
 

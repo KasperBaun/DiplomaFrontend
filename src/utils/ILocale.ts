@@ -70,6 +70,19 @@ export interface ILocale {
   year: string;
   select: string;
   revenue: string;
+  danishCurrency: string;
+  kroner: string;
+  more: string;
+  than: string;
+  less: string;
+  month: string;
+  last: string;
+  storage: string;
+  value: string;
+  inventory: string;
+  currency: string;
+  expenses: string;
+  result: string;
 
   // Months
   january: string;
@@ -84,7 +97,7 @@ export interface ILocale {
   october: string;
   november: string;
   december: string;
-  
+
 
   // Category Admin
   createCategoryDialogTitle: string;

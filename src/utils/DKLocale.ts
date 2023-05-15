@@ -100,6 +100,19 @@ export default class DKLocale implements ILocale {
   year= "År";
   select = "Vælg";
   revenue = "Omsætning";
+  danishCurrency = "DKK";
+  kroner = "kr.";
+  more = "Mere";
+  than = "End";
+  less = "Mindre";
+  month = "Måned";
+  last = "Sidste";
+  storage = "Lager";
+  value = "Værdi";
+  inventory = "Lagerbeholdning";
+  currency = "DKK";
+  expenses = "Udgifter";
+  result = "Resultat";
 
   // Months
   january = "Januar";
