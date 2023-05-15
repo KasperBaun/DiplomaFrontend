@@ -1,4 +1,4 @@
-import { IconButton, Button, Drawer, Divider, Box, Badge, List } from "@mui/material";
+import { IconButton, Button, Drawer, Badge, List, ListItem, Container, Typography, Divider } from "@mui/material";
 import * as React from 'react';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useNavigate } from "react-router-dom"
@@ -7,98 +7,65 @@ import { useContext } from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
 
-
 const CartDrawer: React.FC = observer(function CartDrawer() {
 
   const { basketStore, languageStore } = useContext(MobXContext);
   const [drawerState, setDrawerState] = React.useState(false);
   const navigate = useNavigate();
-  const toggleDrawer =
-    (open: boolean) =>
-      (event: React.KeyboardEvent | React.MouseEvent) => {
-        if (
-          event &&
-          event.type === 'keydown' &&
-          ((event as React.KeyboardEvent).key === 'Tab')
-        ) {
-          return;
-        }
-        setDrawerState(open);
-      };
 
+  const toggleDrawer = () => setDrawerState(!drawerState);
+  const handleClick = () => navigate('/basket');
+  const getTotal = basketStore.Basket.reduce((acc, item) => acc + item.currentPrice, 0);
 
-  const getTotal = (bas = basketStore.Basket) => {
-    let sum = 0;
-    for (let i = 0; i < bas.length; i++) {
-      sum = sum + bas[i].currentPrice;
-    }
-    return sum;
-  }
+  return (
+    <>
+      {/* Button to toggle the basket and see how many items is in it */}
+      <IconButton onClick={toggleDrawer}>
+        <Badge
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right'
+          }}
+          badgeContent={basketStore.Basket.length} color="warning">
+          <ShoppingCartIcon style={{ color: 'white', fontSize: 40 }} />
+        </Badge>
+      </IconButton>
 
-  function handleClick() {
-    navigate('/basket', { state: {} })
-  }
-  const cartElements = () => (
-    <Box
-      role="presentation"
-    //onClick={toggleDrawer(false)}
-    //onKeyDown={toggleDrawer(false)}
-    >
+      {/* The basketmodal itself */}
+      <Drawer
+        variant="temporary"
+        anchor='right'
+        open={drawerState}
+        onClose={toggleDrawer}
 
-      {<div style={{ width: '18vw' }}>
-
-        <List style={{ maxHeight: "80vh", overflow: 'auto', marginBottom: '6rem' }}>
+      >
+        <List sx={{ width: '300px', height: '85vh' }} >
           {basketStore.Basket.map((item, index) => (
-            <div key={item.id}>
+            <ListItem key={'basketItem' + index} sx={{ padding: "1rem" }}>
               <CartItem key={item.id} item={item} />
-              <Divider style={{ paddingTop: "1rem" }} />
-            </div>
+              <Divider color={"primary"} />
+            </ListItem>
           ))}
         </List>
 
+        <List sx={{ width: '300px', marginTop: 'auto' }}>
+          <Divider color={"primary"} />
+          <ListItem sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 'auto' }}>
+            <Typography variant="body1">{'Subtotal (' + basketStore.Basket.length + ')'}</Typography>
+            <Typography variant="body1">{getTotal + ' DKK'}</Typography>
 
-        <div style={{ position: 'fixed', bottom: 0, marginBottom: '3vh' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '18vw', margin: 'auto' }}>
-            <div style={{ textAlign: 'start', marginLeft: '1.5rem', fontSize: '1.2 rem', fontWeight: "bold" }}>
-              {'Subtotal (' + basketStore.Basket.length + ')'}
-            </div>
-            <div style={{ textAlign: 'end', marginRight: '1.5rem', fontSize: '1.2 rem', fontWeight: "bold" }}>
-              {getTotal() + ' DKK'}
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
-            <Button className="cartButton" variant="outlined" onClick={() => handleClick()} style={{ width: '100%', minHeight: '5rem', marginLeft: '1.5rem', marginRight: '1.5rem', }}>{languageStore.currentLanguage.shopButton}</Button>
-          </div>
-        </div>
-
-      </div>
-      }
-    </Box>
-  );
-
-
-  return (
-    <div>
-      <React.Fragment>
-        <IconButton onClick={toggleDrawer(true)}>
-          <Badge
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'right'
-            }}
-            badgeContent={basketStore.Basket.length} color="warning">
-            <ShoppingCartIcon style={{ color: 'white', fontSize: 40 }} />
-          </Badge>
-        </IconButton>
-        <Drawer
-          anchor='right'
-          open={drawerState}
-          onClose={toggleDrawer(false)}>
-          {cartElements()}
-        </Drawer>
-      </React.Fragment>
-    </div>
+          </ListItem>
+          <ListItem sx={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
+            <Button className="cartButton" variant="contained" onClick={() => handleClick()} >{languageStore.currentLanguage.shopButton}</Button>
+          </ListItem>
+        </List>
+      </Drawer>
+    </>
   )
+
+
+
+
 });
 export default CartDrawer;
+
