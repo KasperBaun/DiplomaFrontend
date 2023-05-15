@@ -61,7 +61,7 @@ export default class DKLocale implements ILocale {
   modelNumber = "Modelnummer";
   callUs = "Ring til os";
   writeOnFacebook = "Skriv til os på Facebook";
-  clickForMapsLocation = "Klik for at se vores lokation på Google Maps";
+  mapsLocation = "Google Maps lokation";
   city = "By";
   instagram = "Instagram";
   facebook = "Facebook";

@@ -61,7 +61,7 @@ export default class ENLocale implements ILocale {
   modelNumber = "Modelnumber";
   callUs = "Call us";
   writeOnFacebook = "Write on Facebook";
-  clickForMapsLocation = "Click for maps location";
+  mapsLocation = "Google Maps location";
   city = "City";
   instagram = "Instagram";
   facebook = "Facebook";

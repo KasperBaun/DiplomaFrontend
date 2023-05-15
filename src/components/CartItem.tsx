@@ -15,16 +15,20 @@ export function CartItem({ item }: { item: ProductItemWeb }) {
         basketStore.removeFromBasket(item);
     }
 
-    // function navigateToItem(){
-    //     console.log("i navigate");
-    //     navigate('/product/' + item.id);
-    // }
+    function navigateToItem() {
+        navigate('/product/' + item.id);
+    }
 
     return (
         <div style={{ paddingTop: '0.5rem' }}>
             <Grid container>
                 <Stack direction="horizontal" gap={2} className="d-flex-align-items-center">
-                    <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
+                    <Grid item xs={12} sm={12} md={12} lg={5} xl={5} onClick={navigateToItem}
+                        sx={{
+                            '&:hover': {
+                                cursor: 'pointer'
+                            }
+                        }}>
                         <img
                             src={item.images[0].url}
                             style={{
@@ -35,9 +39,14 @@ export function CartItem({ item }: { item: ProductItemWeb }) {
                         />
                     </Grid>
 
-                    <Grid item xs={10} sm={10} md={10} lg={5} xl={5}>
+                    <Grid item xs={10} sm={10} md={10} lg={5} xl={5}
+                        sx={{
+                            '&:hover': {
+                                cursor: 'pointer'
+                            }
+                        }}>
                         <Stack direction="vertical">
-                            <Grid item>
+                            <Grid item onClick={navigateToItem}>
                                 <div style={{ fontSize: '14px' }}>
                                     {item.product.name}
                                 </div>
