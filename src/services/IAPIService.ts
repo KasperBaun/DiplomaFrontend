@@ -51,7 +51,7 @@ interface IAPIService {
     getOrders(): Promise<OrderDTO[]>;
     getOrderDetails(): Promise<OrderDetails[]>;
     getOrderElements(): Promise<OrderElements[]>;
-    createOrder(order: CreateOrderDTO): Promise<ConfirmationModel>;
+    createOrder(order: CreateOrderDTO): Promise<Order>;
     updateOrder(order: Order): Promise<Order>;
     deleteOrder(id: number): Promise<void>;
     

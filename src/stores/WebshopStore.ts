@@ -337,7 +337,7 @@ export class WebshopStore {
         return this._subcategoryMap.get(id);
     }
 
-    public async createOrder(order: CreateOrderDTO): Promise<ConfirmationModel> {
+    public async createOrder(order: CreateOrderDTO): Promise<Order> {
         return await this.apiService.createOrder(order);
     }
 }
