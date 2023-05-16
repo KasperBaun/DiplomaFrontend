@@ -130,7 +130,7 @@ class APIService implements IAPIService {
     async getOrderDetails(): Promise<OrderDetails[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
     }
-    async createOrder(order: CreateOrderDTO): Promise<ConfirmationModel> {
+    async createOrder(order: CreateOrderDTO): Promise<Order> {
         const response = await fetch(`${this.apiBaseUrl}/Order`, {
             method: 'POST',
             body: JSON.stringify(order),
@@ -142,7 +142,7 @@ class APIService implements IAPIService {
         });
 
         if(response.ok) {
-            let confirmationModel : ConfirmationModel = await response.json();
+            let confirmationModel : Order = await response.json();
             return confirmationModel;
         }
         else {

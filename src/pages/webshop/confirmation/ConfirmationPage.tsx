@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Table } from "react-bootstrap";
 import "./css/confirmationpage.scss"
 import ShippingProgress from "./components/ShippingProgress";
 import { useParams } from "react-router-dom";
@@ -20,7 +20,7 @@ const ConfirmationPage = () => {
     const [order, setOrder] = useState<Order>();
 
     const [preOrder, setPreOrder] = useState<CreateOrderDTO>();
-    const [confirmation, setConfirmation] = useState<ConfirmationModel>();
+    const [confirmation, setConfirmation] = useState<Order>();
     const { languageStore, webshopStore, basketStore } = useContext(MobXContext);
     let productIds : number[] = [];
 
@@ -68,10 +68,65 @@ const ConfirmationPage = () => {
                         <Row>
                             <h3>Order List</h3>
                         </Row>
+                        <Row>
+                            <Table striped bordered hover>
+                                <thead>
+                                    <tr>
+                                        <th>Produkt</th>
+                                        <th>Modelnummer</th>
+                                        <th>Pris</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {basketStore.Basket.map((item) => {
+                                        return (
+                                            <tr key={item.id}>
+                                                <td>{item.product.name}</td>
+                                                <td>{item.product.modelNumber}</td>
+                                                <td>{item.currentPrice}</td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </Table>
+                        </Row>
                     </Col>
                     <Col md={4}>
                         <Row>
                             <h3>Order Summary</h3>
+                        </Row>
+                        <hr />
+                        <Row>
+                            <Col md={10}>
+                                <p>Subtotal </p>
+                            </Col>
+                            <Col md={2}>
+                                {totalPrice} DKK
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={10}>
+                                <p>Shipping & Handling</p>
+                            </Col>
+                            <Col md={2}>
+                                {50} DKK
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={10}>
+                                <p>Heraf Moms 25%</p>
+                            </Col>
+                            <Col md={2}>
+                                {(totalPrice*0.25)} DKK
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md={10}>
+                                <p>Total</p>
+                            </Col>
+                            <Col md={2}>
+                                {totalPrice + (totalPrice*0.25)} DKK
+                            </Col>
                         </Row>
                     </Col>
                 </Row>
