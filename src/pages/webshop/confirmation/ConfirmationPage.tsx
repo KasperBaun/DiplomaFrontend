@@ -22,35 +22,48 @@ const ConfirmationPage = () => {
     const [preOrder, setPreOrder] = useState<CreateOrderDTO>();
     const [confirmation, setConfirmation] = useState<Order>();
     const { languageStore, webshopStore, basketStore } = useContext(MobXContext);
+  
     let productIds : number[] = [];
 
-    let totalPrice = 0;
-
     basketStore.Basket.map((item) => {
-        totalPrice += item.currentPrice;
         productIds.push(item.id);
     });
 
     useEffect(() => {
+        let isMounted = true;
+
         setPreOrder({
             paymentForm: webshopStore.PaymentForm,
             customer: webshopStore.Customer,
-            productItemsId: productIds,
-            totalPrice: totalPrice,
-        });
-    }, [basketStore.Basket, webshopStore.PaymentForm, webshopStore.Customer, totalPrice]);
-
-    const createOrder = async () => {
-        return await webshopStore.createOrder(preOrder);
-    };
-
-    useEffect(() => {
-        createOrder().then((response) => {
-            setConfirmation(response);
+            productItemsId: productIds
         });
 
-        // get order from database
-    }, [id, createOrder]);
+        const createOrder = async () => {
+            try{
+                const response = await webshopStore.createOrder(preOrder);
+                if (isMounted){
+                    setConfirmation(response);
+                    isMounted = false;
+                }
+            } catch (error){
+                console.log("Error: create order")
+            }
+        };
+
+        createOrder();
+        return () => {
+            isMounted = false;
+          };
+        },[preOrder, productIds, webshopStore]);
+      
+   
+    // useEffect(() => {
+    //     createOrder().then((response) => {
+    //         setConfirmation(response);
+    //     });
+
+    //     // get order from database
+    // }, [id, createOrder]);
 
     if(webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
         return (
@@ -101,7 +114,7 @@ const ConfirmationPage = () => {
                                 <p>Subtotal </p>
                             </Col>
                             <Col md={2}>
-                                {totalPrice} DKK
+                                {/* {totalPrice} DKK */}
                             </Col>
                         </Row>
                         <Row>
@@ -117,7 +130,7 @@ const ConfirmationPage = () => {
                                 <p>Heraf Moms 25%</p>
                             </Col>
                             <Col md={2}>
-                                {(totalPrice*0.25)} DKK
+                                {/* {(totalPrice*0.25)} DKK */}
                             </Col>
                         </Row>
                         <Row>
@@ -125,7 +138,7 @@ const ConfirmationPage = () => {
                                 <p>Total</p>
                             </Col>
                             <Col md={2}>
-                                {totalPrice + (totalPrice*0.25)} DKK
+                                {/* {totalPrice + (totalPrice*0.25)} DKK */}
                             </Col>
                         </Row>
                     </Col>
