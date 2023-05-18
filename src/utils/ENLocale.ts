@@ -113,6 +113,10 @@ export default class ENLocale implements ILocale {
   currency = "USD";
   expenses = "Expenses";
   result = "Result";
+  results = "Results";
+  inventoryValue = "Inventoryvalue";
+  yearToDate = "Year to date";
+  YTD = "YTD";
 
   // Months
   january = "January";
@@ -127,6 +131,17 @@ export default class ENLocale implements ILocale {
   october = "October";
   november = "November";
   december = "December";
+  jan = "Jan";
+  feb = "Feb";
+  mar = "Mar";
+  apr = "Apr";
+  jun = "Jun";
+  jul = "Jul";
+  aug = "Aug";
+  sep = "Sep";
+  oct = "Oct";
+  nov = "Nov";
+  dec = "Dec";
 
   //Basket Page
   yourBasket = "Your basket";

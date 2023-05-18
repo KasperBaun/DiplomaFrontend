@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Alert, Button, Grid, Snackbar } from "@mui/material";
 import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import CategoryDialog from "./components/CategoryDialog";
 import { observer } from "mobx-react-lite";
 import CategoryCard from "./components/CategoryCard";

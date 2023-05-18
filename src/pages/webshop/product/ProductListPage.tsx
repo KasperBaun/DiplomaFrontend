@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { Button, Grid, Typography } from "@mui/material";
 import ProductSearch from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 
 export const ProductListPage: React.FC = observer(function ProductListPage() {
     // const translater = new Translater();

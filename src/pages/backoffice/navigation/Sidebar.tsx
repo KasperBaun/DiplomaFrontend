@@ -75,7 +75,6 @@ const Sidebar: React.FC<SidebarProps> = observer(function Sidebar(props: Sidebar
                 >
 
                     {navPaths.slice(0, 7).map((navpath, index) => (
-
                         navpath.child ? (
                             <SidebarItemCollapse item={navpath} sidebarOpen={props.sidebarOpen} key={index} />
                         ) : (
@@ -91,8 +90,7 @@ const Sidebar: React.FC<SidebarProps> = observer(function Sidebar(props: Sidebar
                         backgroundColor: ColorConfigs.sidebar.bg,
                     }}
                 >
-                    {navPaths.slice(7, 9).map((navpath, index) => (
-
+                    {navPaths.slice(7, 8).map((navpath, index) => (
                         navpath.child ? (
                             <SidebarItemCollapse item={navpath} sidebarOpen={props.sidebarOpen} key={index} />
                         ) : (

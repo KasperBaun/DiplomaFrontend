@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { Grid } from "@mui/material";
 import MobXContext from "../../../stores/MobXContext";
 import CategoryCardWeb from "./CategoryCardWeb";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 
 const CategoriesPage: React.FC = observer(function Categories() {
 

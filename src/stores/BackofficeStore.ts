@@ -448,13 +448,15 @@ export class BackofficeStore {
 
 
     /* Chartdata */
-    public getRevenueChartData(year: number) {
-        return this.getRevenueData(year).map((data) => {
-            return {
-                x: data.month,
-                y: data.revenue
-            }
-        });
+    public getRevenueChartData(year: number, months?: number[]) {
+        let result: ChartData[] = [];
+        if (!months) {
+            result = this.getRevenueData(year);
+        } else {
+            result = this.getRevenueData(year).filter(data => months.includes(data.monthInt));
+        }
+
+        return result;
     }
 
     public getYearsAvailable(): number[] {
@@ -464,7 +466,7 @@ export class BackofficeStore {
                 years.push(order.createdDate.getFullYear());
             }
         }
-        return years;
+        return years.sort((a, b) => b - a);
     }
 
     getStorageValue() {
@@ -478,30 +480,19 @@ export class BackofficeStore {
     public getRevenueData(year: number) {
         const orderData = this._orders.filter(o => o.createdDate.getFullYear() === year);
         const months: string[] = [
-            this.rootStore.languageStore.currentLanguage.january,
-            this.rootStore.languageStore.currentLanguage.february,
-            this.rootStore.languageStore.currentLanguage.march,
-            this.rootStore.languageStore.currentLanguage.april,
+            this.rootStore.languageStore.currentLanguage.jan,
+            this.rootStore.languageStore.currentLanguage.feb,
+            this.rootStore.languageStore.currentLanguage.mar,
+            this.rootStore.languageStore.currentLanguage.apr,
             this.rootStore.languageStore.currentLanguage.may,
-            this.rootStore.languageStore.currentLanguage.june,
-            this.rootStore.languageStore.currentLanguage.july,
-            this.rootStore.languageStore.currentLanguage.august,
-            this.rootStore.languageStore.currentLanguage.september,
-            this.rootStore.languageStore.currentLanguage.october,
-            this.rootStore.languageStore.currentLanguage.november,
-            this.rootStore.languageStore.currentLanguage.december,
+            this.rootStore.languageStore.currentLanguage.jun,
+            this.rootStore.languageStore.currentLanguage.jul,
+            this.rootStore.languageStore.currentLanguage.aug,
+            this.rootStore.languageStore.currentLanguage.sep,
+            this.rootStore.languageStore.currentLanguage.oct,
+            this.rootStore.languageStore.currentLanguage.nov,
+            this.rootStore.languageStore.currentLanguage.dec,
         ];
-
-        for (var month of months) {
-            const monthInt = months.indexOf(month) + 1;
-            const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() === monthInt);
-
-            let monthRevenue = 0;
-            for (var order of ordersInMonth) {
-                monthRevenue += this.getPayment(order.paymentId).amount;
-            }
-            console.log(month + ": " + monthRevenue);
-        }
 
         const data = months.map((month, index) => {
             const monthInt = index + 1;
@@ -514,7 +505,7 @@ export class BackofficeStore {
 
             const randomExpenseAmount = Math.random() * (1.4 - 0.7) + 0.7;
 
-            return { month: month, revenue: monthRevenue, expenses: monthRevenue * randomExpenseAmount };
+            return { month: month, monthInt: monthInt, revenue: monthRevenue, expenses: monthRevenue * randomExpenseAmount };
         });
 
         return data;

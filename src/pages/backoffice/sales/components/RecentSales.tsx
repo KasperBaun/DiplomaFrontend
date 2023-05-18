@@ -5,7 +5,7 @@ import React, { useContext, useState } from "react";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import Payment from "@models/Payment";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 
 export type RecentSalesListProps = {
   tableHeight?: number;

@@ -1,64 +1,72 @@
-import { ArrowDownward, ArrowUpward, Paid } from "@mui/icons-material";
+import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import { Grid, Typography } from "@mui/material";
+import { LanguageStore } from "@stores/LanguageStore";
 import MobXContext from "@stores/MobXContext";
-import { Constants } from "@utils/Constants";
+import { ExtentionMethods } from "@utils/ExtentionMethods";
+import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 
-export const RevenueInfoBox = () => {
+export type RevenueInfoBoxProps = {
+    year: number;
+}
+
+export const RevenueInfoBox: React.FC<RevenueInfoBoxProps> = observer(({ year }: RevenueInfoBoxProps) => {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+    const currency = languageStore.currentLanguage.currency;
 
-    const currentYear = new Date().getFullYear();
-    const currentMonth = new Date().getMonth() + 1;
-    const revenueCurrentMonth = backofficeStore.getRevenueChartData(currentYear)[currentMonth - 1].y;
+    const yearRevenue = backofficeStore.getRevenueChartData(year).map((item) => item.revenue).reduce((prev, next) => prev + next);
+    const monthsCount = countMonthsPassed(year);
+    const thanLastYear = languageStore.currentLanguage.than + " " + languageStore.currentLanguage.last + " " + languageStore.currentLanguage.year;
+    let lastYearsRevenue = 0;
+    const yearsAvailable = backofficeStore.getYearsAvailable();
+    if (yearsAvailable.includes(year - 1)) {
+        lastYearsRevenue = backofficeStore.getRevenueChartData(year - 1, monthsCount).map((item) => item.revenue).reduce((prev, next) => prev + next);
+    }
 
-    const lastMonth = currentMonth - 1;
-    const revenueLastMonth = backofficeStore.getRevenueChartData(currentYear)[lastMonth - 1].y;
-
-    const titleStyling: React.CSSProperties = {
-        display: 'flex',
-        flexDirection: 'row',
-        padding: '1rem',
-        borderRadius: '1rem',
-        alignItems: 'self-end',
-
-    };
-    const valueStyling: React.CSSProperties = {
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '1rem',
-        borderRadius: '1rem',
-
-    };
-
-    const resultComponent = () => {
-        if (revenueCurrentMonth > revenueLastMonth) {
-            return <Typography variant="h5" sx={{ color: "primary" }} gutterBottom>
-                <ArrowUpward sx={{ color: 'green' }} /> {revenueCurrentMonth - revenueLastMonth} {languageStore.currentLanguage.kroner} {languageStore.currentLanguage.more} {languageStore.currentLanguage.than} {languageStore.currentLanguage.last} {languageStore.currentLanguage.month}
-            </Typography>
-        } else {
-            return <Typography variant="h5" sx={{ color: "primary" }} gutterBottom>
-                <ArrowDownward sx={{ color: 'red' }} /> {revenueLastMonth - revenueCurrentMonth} {languageStore.currentLanguage.kroner} {languageStore.currentLanguage.less} {languageStore.currentLanguage.than} {languageStore.currentLanguage.last} {languageStore.currentLanguage.month}
-            </Typography>
-        }
-    };
+    const monthRevenue = backofficeStore.getRevenueChartData(year)[new Date().getMonth()].revenue;
 
     return (
-        <Grid container>
-            <Grid item xs={12} sx={titleStyling} >
-                <Paid sx={{ color: Constants.primaryColor }} />
-                <Typography variant="h3" sx={{ color: "primary" }} gutterBottom>
-                    {languageStore.currentLanguage.revenue}
+        <Grid item xs={12} sx={{
+            display: 'flex',
+            justifyContent: 'start',
+            flexDirection: 'column'
+        }}
+        >
+            <Typography variant="h6" >
+                <b>{languageStore.currentLanguage.YTD}:</b> {ExtentionMethods.formatPrice(yearRevenue, currentLanguagecode, currency)}
+            </Typography>
+            {lastYearsRevenue > 0 &&
+                <Typography variant="h6" >
+                    {comparisonComponent(yearRevenue, lastYearsRevenue, thanLastYear.toLowerCase(), currentLanguagecode, currency, languageStore)}
                 </Typography>
-            </Grid>
-            <Grid item xs={12} sx={valueStyling}>
-                <Typography variant="h3" sx={{ color: "primary" }} gutterBottom>
-                    {revenueCurrentMonth} {languageStore.currentLanguage.kroner}
-                </Typography>
-            </Grid>
-            <Grid item xs={12} sx={valueStyling}>
-                {resultComponent()}
-            </Grid>
-        </Grid>
+            }
+
+            <Typography variant="h6" >
+                <b>{languageStore.currentLanguage.month}:</b> {ExtentionMethods.formatPrice(monthRevenue, currentLanguagecode, currency)}
+            </Typography>
+        </Grid >
     )
+});
+
+
+const comparisonComponent = (value1: number, value2: number, text: string, locale: string, currency: string, languageStore: LanguageStore) => {
+    if (value1 > value2) {
+        return <><ArrowUpward sx={{ color: 'green' }} /> {ExtentionMethods.formatPrice((value1 - value2), locale, currency)} {languageStore.currentLanguage.more.toLowerCase()} {text} </>
+    } else {
+        return <><ArrowDownward sx={{ color: 'red' }} /> {ExtentionMethods.formatPrice((value2 - value1), locale, currency)} {languageStore.currentLanguage.less.toLowerCase()} {text}</>
+    }
+};
+
+function countMonthsPassed(year: number): number[] {
+    const currentYear = new Date().getFullYear();
+    const monthsArray = Array.from({ length: 12 }, (_, i) => i + 1);
+
+    if (year === currentYear) {
+        const currentMonth = new Date().getMonth();
+        return monthsArray.slice(0, currentMonth + 1);
+    }
+
+    return monthsArray;
 }

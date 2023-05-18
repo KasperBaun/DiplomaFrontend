@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { PaymentForm } from "@models/Checkout";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useEffect, useState } from "react";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import Payment from "@models/Payment";
 import OrderElements from "@models/OrderElements";
 import Order from "@models/Order";

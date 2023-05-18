@@ -1,5 +1,5 @@
 import Header from "@webshop/header/Header";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Constants } from "@utils/Constants";

@@ -14,17 +14,18 @@ import Analysis from "./Dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
 import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
-import Loading from "@components/loading/Loading";
 import { observer } from "mobx-react-lite";
+import LoadingLion from "@components/loading/LoadingLion";
+import { Constants } from "@utils/Constants";
 
 export const Backoffice: React.FC = observer(() => {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
-    const { rootStore, backofficeStore } = useContext(MobXContext);
+    const { rootStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
-            case 0: return (<Dashboard />)
+            case 0: return (<Dashboard setNavKey={setActiveNavKey} />)
             case 1: return (<CategoryManager />)
             // case 2: return (<Subcategories />)
             case 3: return (<ProductManager />)
@@ -48,7 +49,12 @@ export const Backoffice: React.FC = observer(() => {
         backofficeStoreLoaded();
     });
 
- 
+    if (!rootStore.isBackofficeLoaded) {
+        return <LoadingLion color={Constants.primaryColor} />
+    }
+    else {
+
+
         return (
             <Box sx={{ display: "flex" }}>
                 <Box
@@ -84,4 +90,5 @@ export const Backoffice: React.FC = observer(() => {
             </Box >
         );
     }
+}
 );

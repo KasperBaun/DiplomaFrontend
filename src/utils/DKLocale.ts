@@ -97,7 +97,7 @@ export default class DKLocale implements ILocale {
   confirmDeleteText = "Er du sikker på at du vil slette dette element?";
   weight = "Vægt";
   dimension = "Størrelse";
-  year= "År";
+  year = "År";
   select = "Vælg";
   revenue = "Omsætning";
   danishCurrency = "DKK";
@@ -113,6 +113,10 @@ export default class DKLocale implements ILocale {
   currency = "DKK";
   expenses = "Udgifter";
   result = "Resultat";
+  results = "Resultater";
+  inventoryValue = "Lagerværdi";
+  yearToDate = "År til dato";
+  YTD = "ÅTD";
 
   // Months
   january = "Januar";
@@ -127,7 +131,19 @@ export default class DKLocale implements ILocale {
   october = "Oktober";
   november = "November";
   december = "December";
- 
+  jan = "Jan";
+  feb = "Feb";
+  mar = "Mar";
+  apr = "Apr";
+  jun = "Jun";
+  jul = "Jul";
+  aug = "Aug";
+  sep = "Sep";
+  oct = "Okt";
+  nov = "Nov";
+  dec = "Dec";
+
+
 
   // AboutUS page
   company_description1 = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg.";
@@ -159,11 +175,11 @@ export default class DKLocale implements ILocale {
 
 
   // Front page
-  seeProductBtn = "Se produkt"; 
+  seeProductBtn = "Se produkt";
   chosenCategories = "Udvalgte kategorier";
 
-   //Pop-up : cart
-   shopButton = "Gå til kurv";  
+  //Pop-up : cart
+  shopButton = "Gå til kurv";
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
@@ -337,5 +353,5 @@ export default class DKLocale implements ILocale {
   InventoryWidgetTitle = "Lagerbeholdning";
   InventoryTitle = "Titel";
 
- 
+
 }

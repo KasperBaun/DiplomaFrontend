@@ -4,7 +4,7 @@ import MobXContext from "@stores/MobXContext";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import SniperImageModal from "./SniperImageModal";
 import { observer } from "mobx-react-lite";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 
 interface IProps {
     snipedResults : SniperModel[];

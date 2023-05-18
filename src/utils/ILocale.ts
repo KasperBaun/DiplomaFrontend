@@ -39,7 +39,7 @@ export interface ILocale {
   language: string;
   condition: string;
   quality: string;
-  addToBasket:string;
+  addToBasket: string;
   design: string;
   material: string;
   modelSpecifications: string;
@@ -65,7 +65,7 @@ export interface ILocale {
   deleteSuccess: string;
   deleteFailed: string;
   confirmDeleteText: string;
-  weight:string;
+  weight: string;
   dimension: string;
   year: string;
   select: string;
@@ -83,6 +83,10 @@ export interface ILocale {
   currency: string;
   expenses: string;
   result: string;
+  results: string;
+  inventoryValue: string;
+  yearToDate: string;
+  YTD: string;
 
   // Months
   january: string;
@@ -97,6 +101,17 @@ export interface ILocale {
   october: string;
   november: string;
   december: string;
+  jan: string;
+  feb: string;
+  mar: string;
+  apr: string;
+  jun: string;
+  jul: string;
+  aug: string;
+  sep: string;
+  oct: string;
+  nov: string;
+  dec: string;
 
 
   // Category Admin
@@ -136,39 +151,39 @@ export interface ILocale {
   addButton: string;
 
   // AboutUS page
-  company_description1:string;
-  company_description2:string;
-  opening_days:string;
-  monday_text:string;
-  tuesday_text:string;
-  wednesday_text:string;
-  thursday_text:string;
-  friday_text:string;
-  saturday_text:string;
-  public_holiday_text:string;
-  sunday_text:string;
-  closed_text:string;
-  per_agreement_text:string;
-  contact_information:string;
-  phone_text:string;
-  email_text:string;
-  address_text:string;
+  company_description1: string;
+  company_description2: string;
+  opening_days: string;
+  monday_text: string;
+  tuesday_text: string;
+  wednesday_text: string;
+  thursday_text: string;
+  friday_text: string;
+  saturday_text: string;
+  public_holiday_text: string;
+  sunday_text: string;
+  closed_text: string;
+  per_agreement_text: string;
+  contact_information: string;
+  phone_text: string;
+  email_text: string;
+  address_text: string;
   post_code: string;
-  cvr_nr_text:string;
-  faq_text:string;
-  q1_text:string;
-  q1_answer:string;
-  q2_text:string;
-  q2_answer:string;
-  q3_text:string;
-  q3_answer:string;
+  cvr_nr_text: string;
+  faq_text: string;
+  q1_text: string;
+  q1_answer: string;
+  q2_text: string;
+  q2_answer: string;
+  q3_text: string;
+  q3_answer: string;
 
   // Frontpage:
-  seeProductBtn: string; 
+  seeProductBtn: string;
   chosenCategories: string;
 
   //Pop-up : cart
-  shopButton: string; 
+  shopButton: string;
 
   // BACKOFFICE
 
@@ -251,12 +266,12 @@ export interface ILocale {
   CheckoutFormDeliveryOptionSendLabel: string;
   CheckoutFormSubmitButton: string;
 
-  CheckoutPaymentWidgetPayButtonText : string;
-  CheckoutPaymentWidgetPayFormMPLabel : string;
-  CheckoutPaymentWidgetPayFormCardLabel : string;
-  CheckoutPaymentWidgetPayFormMMYYLabel : string;
-  CheckoutPaymentWidgetPayFormCardHolderLabel : string;
-  CheckoutPaymentWidgetPayFormSecureLabel : string;
+  CheckoutPaymentWidgetPayButtonText: string;
+  CheckoutPaymentWidgetPayFormMPLabel: string;
+  CheckoutPaymentWidgetPayFormCardLabel: string;
+  CheckoutPaymentWidgetPayFormMMYYLabel: string;
+  CheckoutPaymentWidgetPayFormCardHolderLabel: string;
+  CheckoutPaymentWidgetPayFormSecureLabel: string;
 
   // Analysis
   AnalysisTitle: string;

@@ -1,4 +1,4 @@
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
@@ -60,7 +60,6 @@ const OrderDetailsList = ({ tableHeight, origin }: IProps) => {
     if (backofficeStore.Orders)
         return (
             <React.Fragment>
-                <h4>{languageStore.currentLanguage.OrderDetailsListTitle}</h4>
                 <TableContainer sx={{ height: tableHeight }}>
                     <Table size="small">
                         <TableHead>
