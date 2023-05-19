@@ -133,6 +133,8 @@ export default class DKLocale implements ILocale {
   conversionRateExplanation = "Beskriver hvor mange af de besøgende, der bliver til kunder. Jo højere tallet er, jo bedre.";
   aovExplanation = "Beskriver den gennemsnitlige ordreværdi. Jo højere tallet er, jo bedre.";
   bestSellingProducts = "Bedst sælgende produkter";
+  worstSellingProducts = "Dårligst sælgende produkter";
+  inventoryValueExplanation = "Beskriver den samlede værdi af dit lager.";
 
   // Months
   january = "Januar";

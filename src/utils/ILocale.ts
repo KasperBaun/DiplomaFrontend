@@ -103,6 +103,8 @@ export interface ILocale {
   aovExplanation: string;
   conversionRateExplanation: string;
   bestSellingProducts: string;
+  worstSellingProducts: string;
+  inventoryValueExplanation: string;
 
 
   // Months

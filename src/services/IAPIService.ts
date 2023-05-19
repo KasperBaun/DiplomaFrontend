@@ -24,6 +24,8 @@ export interface WebAPIResponse {
 interface IAPIService {
 
     /* Backoffice */
+    getBestSellingProducts(amount:number): Promise<Product[]>;
+
     createCategory(category: Category): Promise<Category>;
     deleteCategory(id: number): Promise<void>;
     

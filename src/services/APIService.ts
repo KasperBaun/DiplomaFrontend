@@ -41,6 +41,10 @@ class APIService implements IAPIService {
     }
 
     /* Backoffice */
+    async getBestSellingProducts(amount: number): Promise<Product[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/GetBestSellerProducts?amountOfBestSellers=${amount}`, "Products");
+    }
+
     async getProductItemDTOs(): Promise<ProductItemDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/ProductItem`, "ProductItems");
     }

@@ -16,16 +16,8 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer((props: Re
     const valueStyling: React.CSSProperties = {
         display: 'flex',
         flexDirection: 'column',
-        padding: '1rem',
-        borderRadius: '1rem',
         width: '100%',
-        height: '100%',
-        fontSize: '1.5rem',
-        color: '#000',
-        fontWeight: 'bold',
-        textAlign: 'center',
-        justifyContent: 'center',
-        alignItems: 'center'
+        height: '95%'
     };
 
 

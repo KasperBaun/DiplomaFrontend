@@ -133,7 +133,8 @@ export default class ENLocale implements ILocale {
   aovExplanation = "The average order value is the average amount of money each customer spends per order. The higher the number, the better.";
   conversionRateExplanation = "The conversion rate is the percentage of visitors who make a purchase. The higher the number, the better.";
   bestSellingProducts = "Best selling products";
-
+  worstSellingProducts = "Worst selling products";
+  inventoryValueExplanation = "The inventory value is the total value of all products in stock.";
 
   // Months
   january = "January";

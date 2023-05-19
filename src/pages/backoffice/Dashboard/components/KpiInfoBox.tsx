@@ -1,5 +1,6 @@
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 
@@ -44,6 +45,9 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
     inventoryTurnoverRate = inventoryTurnoverRate / inventorySoldCount;
     let conversionRate = (Math.random() * 2 + 1).toFixed(2);
 
+    const storageValue = backofficeStore.getStorageValue();
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+
 
     return (
         <Grid item xs={12} sx={valueStyling}>
@@ -81,6 +85,14 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
                                     <Typography>
                                         <b>{languageStore.currentLanguage.avg} {languageStore.currentLanguage.inventoryTurnover}:</b> {inventoryTurnoverRate.toFixed(2)} {languageStore.currentLanguage.days.toLowerCase()} {languageStore.currentLanguage.average.toLowerCase()}
                                     </Typography>
+                                </Tooltip>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Tooltip title={languageStore.currentLanguage.inventoryValueExplanation}>
+                                    <Typography>
+                                        <b> {languageStore.currentLanguage.inventoryValue}:</b> {ExtentionMethods.formatPrice(storageValue, currentLanguagecode, languageStore.currentLanguage.currency)} </Typography>
                                 </Tooltip>
                             </TableCell>
                         </TableRow>
