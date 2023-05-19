@@ -44,6 +44,7 @@ export class BackofficeStore {
     private _salesSummary: SalesSummary[] = [];
     private _orders: Order[] = [];
     private _orderElements: OrderElements[] = [];
+    private months: string[] = [];
 
     /* Views */
     public categoryProducts: CategoryProductView[] = [];
@@ -57,6 +58,10 @@ export class BackofficeStore {
     private _productMap: Map<number, Product> = new Map();
     private _productItemMap: Map<number, ProductItem> = new Map();
     private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
+
+    /* Chart data */
+    private _chartDataByYearMap: Map<number, ChartData[]> = new Map();
+    private _availableYears: number[] = [];
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -78,6 +83,7 @@ export class BackofficeStore {
         // Get Pricehistories
         const pricehistories = await this.apiService.getPriceHistories();
         runInAction(() => {
+            this.months = this.getMonths();
             this._categories = categories;
             this._categoryMap = this.createCategoryMap(this._categories);
 
@@ -114,12 +120,24 @@ export class BackofficeStore {
         orderElements = this.mapOrderElementsToProductItems(orderElements, this.productItems);
         const orders = this.generateOrders(orderDTOs, orderElements);
 
+
         runInAction(() => {
             this._payments = payments;
             this._salesSummary = salesSummary;
             this._orderElements = orderElements;
             this._orders = orders;
             this.orderDetails = orderDetails;
+        })
+
+        const availableYears = this.calculateYearsAvailable(orders);
+        const chartDataMap: Map<number, ChartData[]> = new Map<number, ChartData[]>();
+        for (let year of availableYears) {
+            chartDataMap.set(year, this.createChartDataByYear(year, orders, this.months));
+        }
+
+        runInAction(() => {
+            this._availableYears = availableYears;
+            this._chartDataByYearMap = chartDataMap;
             this.loading = false;
             this.loaded = true;
         })
@@ -145,8 +163,8 @@ export class BackofficeStore {
     /* Orders */
     private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
         const orders: Order[] = [];
-        for (var orderDTO of ordersDTO) {
-            const specificOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+        for (let orderDTO of ordersDTO) {
+
             const order: Order = new Order();
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
@@ -155,8 +173,15 @@ export class BackofficeStore {
             order.deliveryStatus = orderDTO.deliveryStatus;
             order.discountCode = orderDTO.discountCode;
             order.active = orderDTO.active;
-            order.orderElements = specificOrderElements;
+            order.orderElements = [];
             order.createdDate = new Date(orderDTO.createdDate);
+            for (let orderElementId of orderDTO.orderElementIDs) {
+                const orderElement = orderElements.find(oe => oe.id === orderElementId);
+                if (orderElement) {
+                    order.orderElements.push(orderElement);
+                }
+
+            }
             orders.push(order);
         }
         return orders;
@@ -164,7 +189,7 @@ export class BackofficeStore {
 
     private mapOrderElementsToProductItems(orderElementsDTO: OrderElements[], productItems: ProductItem[]): OrderElements[] {
         const orderElements: OrderElements[] = [];
-        for (var orderElementDTO of orderElementsDTO) {
+        for (let orderElementDTO of orderElementsDTO) {
             const productItem = productItems.find(pi => pi.id === orderElementDTO.productItemId);
             if (productItem) {
                 const orderElement: OrderElements = new OrderElements();
@@ -341,6 +366,8 @@ export class BackofficeStore {
 
             const poImages: Image[] = this._images.filter(img => img.productItemId === productItemDTO.id);
             const poPriceHistory: PriceHistory[] = this._pricehistories.filter(ph => ph.productItemId === productItemDTO.id);
+            const createdDate = productItemDTO.createdDate ? new Date(productItemDTO.createdDate) : undefined;
+            const soldDate = productItemDTO.soldDate ? new Date(productItemDTO.soldDate) : undefined;
 
             const productItem: ProductItem = {
                 id: productItemDTO.id,
@@ -353,8 +380,8 @@ export class BackofficeStore {
                 product: productMap.get(productItemDTO.productId),
                 purchasePrice: productItemDTO.purchasePrice,
                 currentPrice: productItemDTO.currentPrice,
-                createdDate: new Date(productItemDTO.createdDate),
-                soldDate: new Date(productItemDTO.soldDate),
+                createdDate: createdDate,
+                soldDate: soldDate,
                 images: poImages,
                 priceHistories: poPriceHistory
 
@@ -465,20 +492,20 @@ export class BackofficeStore {
 
 
     /* Chartdata */
-    public getRevenueChartData(year: number, months?: number[]) {
+    public getChartData(year: number, months?: number[]) {
         let result: ChartData[] = [];
         if (!months) {
-            result = this.getRevenueData(year);
+            result = this._chartDataByYearMap.get(year);
         } else {
-            result = this.getRevenueData(year).filter(data => months.includes(data.monthInt));
+            result = this._chartDataByYearMap.get(year).filter(data => months.includes(data.monthInt));
         }
 
         return result;
     }
 
-    public getYearsAvailable(): number[] {
+    private calculateYearsAvailable(orders: Order[]): number[] {
         const years: number[] = [];
-        for (var order of this._orders) {
+        for (var order of orders) {
             if (!years.includes(order.createdDate.getFullYear())) {
                 years.push(order.createdDate.getFullYear());
             }
@@ -486,17 +513,89 @@ export class BackofficeStore {
         return years.sort((a, b) => b - a);
     }
 
+    public getYearsAvailable(): number[] {
+        return this._availableYears;
+    }
+
     getStorageValue() {
         let storageValue: number = 0;
-        for (var productItem of this._productItems.filter(p => p.soldDate === null && p.sold === false)) {
+        for (var productItem of this._productItems.filter(p => p.soldDate === null || p.soldDate === undefined)) {
             storageValue += productItem.currentPrice;
         }
         return storageValue;
     }
 
-    public getRevenueData(year: number) {
-        const orderData = this._orders.filter(o => o.createdDate.getFullYear() === year);
-        const months: string[] = [
+    // public getRevenueData(year: number): ChartData[] {
+    //     const orderData = this._orders.filter(o => o.createdDate.getFullYear() === year);
+    //     const months: string[] = [
+    //         this.rootStore.languageStore.currentLanguage.jan,
+    //         this.rootStore.languageStore.currentLanguage.feb,
+    //         this.rootStore.languageStore.currentLanguage.mar,
+    //         this.rootStore.languageStore.currentLanguage.apr,
+    //         this.rootStore.languageStore.currentLanguage.may,
+    //         this.rootStore.languageStore.currentLanguage.jun,
+    //         this.rootStore.languageStore.currentLanguage.jul,
+    //         this.rootStore.languageStore.currentLanguage.aug,
+    //         this.rootStore.languageStore.currentLanguage.sep,
+    //         this.rootStore.languageStore.currentLanguage.oct,
+    //         this.rootStore.languageStore.currentLanguage.nov,
+    //         this.rootStore.languageStore.currentLanguage.dec,
+    //     ];
+
+    //     const revenueData: ChartData[] = [];
+
+    //     for (var month in months) {
+    //         const currentMonth = new Date().getMonth() + 1; // Adding 1 since getMonth() returns a zero-based index
+    //         const monthInt = months.indexOf(month) + 1;
+    //         let data: ChartData;
+    //         if (currentMonth < monthInt) {
+    //             data = { month: "", monthInt: 0, revenue: 0, expenses: 0 };
+    //         }
+    //         else {
+    //             const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() === monthInt);
+
+    //             let monthRevenue = 0;
+    //             for (var order of ordersInMonth) {
+    //                 monthRevenue += this.getPayment(order.paymentId).amount;
+    //             }
+
+    //             const percentage = Math.random() * (0.85 - 0.35) + 0.35;
+    //             data = { month: month, monthInt: monthInt, revenue: monthRevenue, expenses: monthRevenue * percentage };
+
+    //         }
+    //         revenueData.push(data);
+
+    //     }
+
+    //     return revenueData;
+    // }
+    public createChartDataByYear(year: number, orders: Order[], months: string[]): ChartData[] {
+        const orderData = orders.filter(o => o.createdDate.getFullYear() === year);
+
+        const data = months.map((month, index) => {
+            const monthInt = index + 1;
+            const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() + 1 === monthInt);
+            console.log(month, monthInt);
+
+            let monthRevenue = 0;
+            for (var order of ordersInMonth) {
+                monthRevenue += this.getPayment(order.paymentId).amount;
+            }
+
+            const randomExpenseAmount = monthRevenue * (Math.random() * (0.85 - 0.35) + 0.35);
+
+            return { month: month, monthInt: monthInt, revenue: monthRevenue, expenses: randomExpenseAmount };
+        });
+
+        return data;
+    }
+
+    public getOrdersByYear(year: number): Order[] {
+        return this._orders.filter(o => o.createdDate.getFullYear() === year);
+    }
+
+    private getMonths(): string[] {
+        return [
             this.rootStore.languageStore.currentLanguage.jan,
             this.rootStore.languageStore.currentLanguage.feb,
             this.rootStore.languageStore.currentLanguage.mar,
@@ -510,26 +609,6 @@ export class BackofficeStore {
             this.rootStore.languageStore.currentLanguage.nov,
             this.rootStore.languageStore.currentLanguage.dec,
         ];
-
-        const data = months.map((month, index) => {
-            const monthInt = index + 1;
-            const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() === monthInt);
-
-            let monthRevenue = 0;
-            for (var order of ordersInMonth) {
-                monthRevenue += this.getPayment(order.paymentId).amount;
-            }
-
-            const randomExpenseAmount = Math.random() * (1.4 - 0.7) + 0.7;
-
-            return { month: month, monthInt: monthInt, revenue: monthRevenue, expenses: monthRevenue * randomExpenseAmount };
-        });
-
-        return data;
-    }
-
-    public getOrdersByYear(year: number): Order[] {
-        return this._orders.filter(o => o.createdDate.getFullYear() === year);
     }
 }
 

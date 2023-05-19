@@ -258,7 +258,7 @@ export interface ILocale {
   CatalogTabText: string;
 
   // Payments
-  GoToSales: string;
+  goToSales: string;
   SalesSummaryTitle: string;
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
@@ -300,7 +300,7 @@ export interface ILocale {
   AnalysisGold: string;
 
   // Orders
-  GoToOrders: string;
+  goToOrders: string;
   OrderDetailsProductName: string;
   OrderDetailsManufacturer: string;
   OrderDetailsCustomerId: string;

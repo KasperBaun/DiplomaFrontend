@@ -16,16 +16,16 @@ export const RevenueInfoBox: React.FC<RevenueInfoBoxProps> = observer(({ year }:
     const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
     const currency = languageStore.currentLanguage.currency;
 
-    const yearRevenue = backofficeStore.getRevenueChartData(year).map((item) => item.revenue).reduce((prev, next) => prev + next);
+    const yearRevenue = backofficeStore.getChartData(year).map((item) => item.revenue).reduce((prev, next) => prev + next);
     const monthsCount = countMonthsPassed(year);
     const thanLastYear = languageStore.currentLanguage.than + " " + languageStore.currentLanguage.last + " " + languageStore.currentLanguage.year;
     let lastYearsRevenue = 0;
     const yearsAvailable = backofficeStore.getYearsAvailable();
     if (yearsAvailable.includes(year - 1)) {
-        lastYearsRevenue = backofficeStore.getRevenueChartData(year - 1, monthsCount).map((item) => item.revenue).reduce((prev, next) => prev + next);
+        lastYearsRevenue = backofficeStore.getChartData(year - 1, monthsCount).map((item) => item.revenue).reduce((prev, next) => prev + next);
     }
 
-    const monthRevenue = backofficeStore.getRevenueChartData(year)[new Date().getMonth()].revenue;
+    const monthRevenue = backofficeStore.getChartData(year)[new Date().getMonth()].revenue;
 
     return (
         <Grid item xs={12} sx={{

@@ -306,7 +306,7 @@ export default class DKLocale implements ILocale {
   ContactTabText = "Kontakt";
 
   // Payments
-  GoToSales = "Se flere salg";
+  goToSales = "Se flere salg";
   SalesSummaryTitle = "Salgs oversigt";
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
@@ -338,7 +338,7 @@ export default class DKLocale implements ILocale {
   CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
 
   // Orders
-  GoToOrders = "Se flere Ordre";
+  goToOrders = "Se flere Ordre";
   OrderDetailsProductName = "Produkt(er)";
   OrderDetailsManufacturer = "Mærke";
   OrderDetailsCustomerId = "Kunde (Id)";

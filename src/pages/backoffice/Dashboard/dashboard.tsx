@@ -3,13 +3,13 @@ import MobXContext from "@stores/MobXContext";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { RecentSalesList } from "@backoffice/sales/components/RecentSales";
 import { observer } from "mobx-react-lite";
-import { LineChart } from "./components/LineChart";
 import { RevenueInfoBox } from "./components/RevenueInfoBox";
 import { StorageValueInfoBox } from "./components/StorageValueInfoBox";
 import { ResultsInfoBox } from "./components/ResultsInfoBox";
 import OrderDetailsList from "@backoffice/orders/components/OrderDetailsList";
 import { ChartData } from "@models/ChartData";
 import { KpiInfoBox } from "./components/KpiInfoBox";
+import { EconomyWidget } from "./components/EconomyWidget";
 
 export type DashboardProps = {
     setNavKey: Dispatch<SetStateAction<number>>;
@@ -18,7 +18,7 @@ export type DashboardProps = {
 export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardProps) => {
     const { languageStore, backofficeStore } = useContext(MobXContext);
     const [year, setYear] = useState<number>(2023);
-    const [data, setData] = useState<ChartData[]>(backofficeStore.getRevenueChartData(year));
+    const [data, setData] = useState<ChartData[]>(backofficeStore.getChartData(year));
 
     const navigateToSales = () => {
         props.setNavKey(6);
@@ -30,7 +30,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
 
     const yearsAvailable = backofficeStore.getYearsAvailable();
     const handleYearChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
-        setData(backofficeStore.getRevenueChartData(event.target.value));
+        setData(backofficeStore.getChartData(event.target.value));
         setYear(event.target.value as number);
         return;
     };
@@ -83,7 +83,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3} >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4">{languageStore.currentLanguage.revenue + " " + languageStore.currentLanguage.and.toLowerCase() + " " + languageStore.currentLanguage.expenses.toLowerCase()}</Typography>
-                        <LineChart data={data} />
+                        <EconomyWidget year={year} />
                     </Box>
                 </Grid>
 
@@ -107,15 +107,29 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
             <Grid container sx={containerStyling} spacing={1} >
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} overflow={'auto'}>
                     <Typography variant="h4">{languageStore.currentLanguage.OrdersTabText}</Typography>
-                        <OrderDetailsList origin="MainPage" tableHeight={450} />
-                        <Link color="primary" href="#" onClick={navigateToOrders} sx={{ mt: 3 }}>
-                            {languageStore.currentLanguage.GoToOrders}
-                        </Link>
+                    <EconomyWidget year={year} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
                     <RecentSalesList displayNumberOfItems={20} />
-                    <Link color="primary" href="#" onClick={navigateToSales} sx={{ mt: 3 }}>
-                        {languageStore.currentLanguage.GoToSales}
+                    <Link color="primary" onClick={navigateToSales} sx={{ mt: 3 }}>
+                        {languageStore.currentLanguage.goToSales}
+                    </Link>
+                </Grid>
+            </Grid >
+
+            {/* Fourth row*/}
+            <Grid container sx={containerStyling} spacing={1} >
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} overflow={'auto'}>
+                    <Typography variant="h4">{languageStore.currentLanguage.OrdersTabText}</Typography>
+                    <OrderDetailsList origin="MainPage" tableHeight={450} />
+                    <Link color="primary" onClick={navigateToOrders} sx={{ mt: 3 }}>
+                        {languageStore.currentLanguage.goToOrders}
+                    </Link>
+                </Grid>
+                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
+                    <RecentSalesList displayNumberOfItems={20} />
+                    <Link color="primary" onClick={navigateToSales} sx={{ mt: 3 }}>
+                        {languageStore.currentLanguage.goToSales}
                     </Link>
                 </Grid>
             </Grid >

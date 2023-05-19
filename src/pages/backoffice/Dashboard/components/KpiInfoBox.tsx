@@ -42,6 +42,7 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
     }
     aov = aov / ordersForYear.length;
     inventoryTurnoverRate = inventoryTurnoverRate / inventorySoldCount;
+    let conversionRate = (Math.random() * 2 + 1).toFixed(2);
 
 
     return (
@@ -69,7 +70,7 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
                             <TableCell>
                                 <Tooltip title={languageStore.currentLanguage.conversionRateExplanation}>
                                     <Typography>
-                                        <b>{languageStore.currentLanguage.conversionRate}:</b>  2%
+                                        <b>{languageStore.currentLanguage.conversionRate}:</b>  {conversionRate}%
                                     </Typography>
                                 </Tooltip>
                             </TableCell>

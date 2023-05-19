@@ -300,7 +300,7 @@ export default class ENLocale implements ILocale {
   CatalogTabText = "Catalog";
 
   // Payments
-  GoToSales = "See more sales";
+  goToSales = "See more sales";
   SalesSummaryTitle = "Sales Summary";
   SalesSummaryTotalSales = "Sales (total)";
   SalesSummaryTotalAmount = "Amount (total)";
@@ -332,7 +332,7 @@ export default class ENLocale implements ILocale {
   CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
 
   // Orders
-  GoToOrders = "See more Orders";
+  goToOrders = "See more Orders";
   OrderDetailsProductName = "Product(s)";
   OrderDetailsManufacturer = "Fabricator";
   OrderDetailsCustomerId = "Customer (Id)";

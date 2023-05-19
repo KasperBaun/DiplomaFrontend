@@ -9,7 +9,7 @@ export type ResultsInfoBoxProps = {
     year: number;
 }
 
-export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }: ResultsInfoBoxProps) => {
+export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer((props: ResultsInfoBoxProps) => {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
 
@@ -29,7 +29,7 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }:
     };
 
 
-    const results = backofficeStore.getRevenueData(year);
+    const results = backofficeStore.getChartData(props.year);
     const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
     const currency = languageStore.currentLanguage.currency;
 
@@ -53,7 +53,7 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }:
                                 <TableCell style={{ color: 'green' }}>{ExtentionMethods.formatPrice(month.revenue, currentLanguagecode, currency)}</TableCell>
                                 <TableCell style={{ color: 'red' }}>{ExtentionMethods.formatPrice(month.expenses, currentLanguagecode, currency)}</TableCell>
                                 <TableCell style={{ color: month.revenue - month.expenses > 0 ? 'green' : 'red' }}><b>{ExtentionMethods.formatPrice(month.revenue - month.expenses, currentLanguagecode, currency)}</b></TableCell>
-                                {index === 0 ? <TableCell>-</TableCell> : resultIcon(month.revenue, month.expenses)}
+                                {resultIcon(month.revenue, month.expenses)}
                             </TableRow>
                         ))}
                     </TableBody>
@@ -61,7 +61,7 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }:
             </TableContainer>
         </Grid>
     )
-}); 
+});
 
 
 const resultIcon = (revenue: number, expenses: number) => {

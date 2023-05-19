@@ -1,6 +1,6 @@
 export type ChartData = {
-    month: string,
-    monthInt: number,
-    revenue: number,
-    expenses: number
+    month: string;
+    monthInt: number;
+    revenue: number;
+    expenses: number;
 }
