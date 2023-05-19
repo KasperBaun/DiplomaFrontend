@@ -102,6 +102,7 @@ export interface ILocale {
   inventoryTurnoverExplanation: string;
   aovExplanation: string;
   conversionRateExplanation: string;
+  bestSellingProducts: string;
 
 
   // Months

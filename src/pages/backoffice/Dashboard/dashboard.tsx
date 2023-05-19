@@ -7,7 +7,6 @@ import { RevenueInfoBox } from "./components/RevenueInfoBox";
 import { StorageValueInfoBox } from "./components/StorageValueInfoBox";
 import { ResultsInfoBox } from "./components/ResultsInfoBox";
 import OrderDetailsList from "@backoffice/orders/components/OrderDetailsList";
-import { ChartData } from "@models/ChartData";
 import { KpiInfoBox } from "./components/KpiInfoBox";
 import { EconomyWidget } from "./components/EconomyWidget";
 
@@ -18,19 +17,11 @@ export type DashboardProps = {
 export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardProps) => {
     const { languageStore, backofficeStore } = useContext(MobXContext);
     const [year, setYear] = useState<number>(2023);
-    const [data, setData] = useState<ChartData[]>(backofficeStore.getChartData(year));
 
-    const navigateToSales = () => {
-        props.setNavKey(6);
-    }
-    const navigateToOrders = () => {
-        props.setNavKey(7);
-    }
+    const navigateToSales = () => props.setNavKey(6);
+    const navigateToOrders = () => props.setNavKey(7);
 
-
-    const yearsAvailable = backofficeStore.getYearsAvailable();
     const handleYearChange = (event: any): React.ChangeEventHandler<HTMLSelectElement> => {
-        setData(backofficeStore.getChartData(event.target.value));
         setYear(event.target.value as number);
         return;
     };
@@ -66,7 +57,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                                 value={year ? year : ''}
                                 onChange={handleYearChange}
                                 aria-label={languageStore.currentLanguage.select + languageStore.currentLanguage.year}>
-                                {yearsAvailable.map((year) => (
+                                {backofficeStore.getYearsAvailable().map((year) => (
                                     <MenuItem key={year} value={year}>
                                         {year}
                                     </MenuItem>
@@ -106,31 +97,38 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
             {/* Third row with current state of the business orders and sales*/}
             <Grid container sx={containerStyling} spacing={1} >
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} overflow={'auto'}>
-                    <Typography variant="h4">{languageStore.currentLanguage.OrdersTabText}</Typography>
-                    <EconomyWidget year={year} />
+                    <Box sx={dashboardItemStyling} >
+                        <Typography variant="h4">{languageStore.currentLanguage.bestSellingProducts}</Typography>
+                    </Box>
                 </Grid>
+
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
-                    <RecentSalesList displayNumberOfItems={20} />
-                    <Link color="primary" onClick={navigateToSales} sx={{ mt: 3 }}>
-                        {languageStore.currentLanguage.goToSales}
-                    </Link>
+                    <Box sx={dashboardItemStyling} >
+                        <Typography variant="h4">{languageStore.currentLanguage.bestSellingProducts}</Typography>
+                    </Box>
                 </Grid>
             </Grid >
 
             {/* Fourth row*/}
             <Grid container sx={containerStyling} spacing={1} >
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} overflow={'auto'}>
-                    <Typography variant="h4">{languageStore.currentLanguage.OrdersTabText}</Typography>
-                    <OrderDetailsList origin="MainPage" tableHeight={450} />
-                    <Link color="primary" onClick={navigateToOrders} sx={{ mt: 3 }}>
-                        {languageStore.currentLanguage.goToOrders}
-                    </Link>
+                    <Box sx={dashboardItemStyling} >
+                        <Typography variant="h4">{languageStore.currentLanguage.OrderDetailsListTitle}</Typography>
+                        <OrderDetailsList tableHeight={450} origin={""} />
+                        <Link color="primary" onClick={navigateToOrders} sx={{ mt: 3 }}>
+                            {languageStore.currentLanguage.goToOrders}
+                        </Link>
+                    </Box>
                 </Grid>
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
-                    <RecentSalesList displayNumberOfItems={20} />
-                    <Link color="primary" onClick={navigateToSales} sx={{ mt: 3 }}>
-                        {languageStore.currentLanguage.goToSales}
-                    </Link>
+                    <Box sx={dashboardItemStyling} >
+                        <Typography variant="h4">{languageStore.currentLanguage.RecentSalesWidgetTitle}</Typography>
+                        <RecentSalesList displayNumberOfItems={20} />
+                        <Link color="primary" onClick={navigateToSales} sx={{ mt: 3 }}>
+                            {languageStore.currentLanguage.goToSales}
+                        </Link>
+                    </Box>
+
                 </Grid>
             </Grid >
         </>
@@ -144,7 +142,7 @@ const informationItemStyling: React.CSSProperties = {
     padding: '10px',
     boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
 };
 
 const dashboardItemStyling: React.CSSProperties = {

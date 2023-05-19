@@ -15,9 +15,7 @@ export const SalesList = observer(() => {
             <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
                 <Grid item xs={11.9}>
                     <div className="DashBoardGridContainer">
-                        <RecentSalesList
-                            tableHeight={750}
-                        />
+                        <RecentSalesList />
                     </div>
                 </Grid>
             </Grid>

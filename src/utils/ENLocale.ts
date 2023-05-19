@@ -132,6 +132,7 @@ export default class ENLocale implements ILocale {
   inventoryTurnoverExplanation = "Describes on average how long each product is in stock before being shipped to a customer. The lower the number, the better.";
   aovExplanation = "The average order value is the average amount of money each customer spends per order. The higher the number, the better.";
   conversionRateExplanation = "The conversion rate is the percentage of visitors who make a purchase. The higher the number, the better.";
+  bestSellingProducts = "Best selling products";
 
 
   // Months

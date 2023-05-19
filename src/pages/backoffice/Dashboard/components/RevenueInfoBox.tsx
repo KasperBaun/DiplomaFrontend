@@ -42,10 +42,11 @@ export const RevenueInfoBox: React.FC<RevenueInfoBoxProps> = observer(({ year }:
                     {comparisonComponent(yearRevenue, lastYearsRevenue, thanLastYear.toLowerCase(), currentLanguagecode, currency, languageStore)}
                 </Typography>
             }
-
-            <Typography variant="h6" >
-                <b>{languageStore.currentLanguage.month}:</b> {ExtentionMethods.formatPrice(monthRevenue, currentLanguagecode, currency)}
-            </Typography>
+            {year === new Date().getFullYear() &&
+                <Typography variant="h6" >
+                    <b>{languageStore.currentLanguage.month}:</b> {ExtentionMethods.formatPrice(monthRevenue, currentLanguagecode, currency)}
+                </Typography>
+            }
         </Grid >
     )
 });
