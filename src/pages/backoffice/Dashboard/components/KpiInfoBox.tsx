@@ -1,7 +1,5 @@
-import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
-import { ExtentionMethods } from "@utils/ExtentionMethods";
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 
@@ -28,13 +26,23 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
         alignItems: 'center'
     };
 
-    const aov = 1;
-    const inventoryTurnoverRate = 1;
+    const ordersForYear = backofficeStore.getOrdersByYear(year);
+    let inventorySoldCount = 0;
+    let inventoryTurnoverRate = 0;
+    let aov = 0;
+    for (const order of ordersForYear) {
+        for (const orderElement of order.orderElements) {
+            aov += orderElement.productItem.currentPrice;
+            inventorySoldCount += 1;
+            const soldDate = orderElement.productItem.soldDate;
+            const createdDate = orderElement.productItem.createdDate;
+            const daysBetween = (soldDate.getTime() - createdDate.getTime()) / (1000 * 3600 * 24);
+            inventoryTurnoverRate += daysBetween;
+        }
+    }
+    aov = aov / ordersForYear.length;
+    inventoryTurnoverRate = inventoryTurnoverRate / inventorySoldCount;
 
-
-    const results = backofficeStore.getRevenueData(year);
-    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
-    const currency = languageStore.currentLanguage.currency;
 
     return (
         <Grid item xs={12} sx={valueStyling}>
@@ -49,13 +57,31 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
                     </TableHead>
                     <TableBody>
                         <TableRow >
-                            <TableCell><b>{languageStore.currentLanguage.aov}:</b>  {aov}</TableCell>
+                            <TableCell>
+                                <Tooltip title={languageStore.currentLanguage.aovExplanation}>
+                                    <Typography>
+                                        <b>{languageStore.currentLanguage.aov}:</b> {aov.toFixed(2)} kr.
+                                    </Typography>
+                                </Tooltip>
+                            </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell><b>{languageStore.currentLanguage.conversionRate}:</b>  2%</TableCell>
+                            <TableCell>
+                                <Tooltip title={languageStore.currentLanguage.conversionRateExplanation}>
+                                    <Typography>
+                                        <b>{languageStore.currentLanguage.conversionRate}:</b>  2%
+                                    </Typography>
+                                </Tooltip>
+                            </TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell><b>{languageStore.currentLanguage.avg} {languageStore.currentLanguage.inventoryTurnover}:</b> {inventoryTurnoverRate} {languageStore.currentLanguage.days.toLowerCase()} {languageStore.currentLanguage.average.toLowerCase()}</TableCell>
+                            <TableCell>
+                                <Tooltip title={languageStore.currentLanguage.inventoryTurnoverExplanation}>
+                                    <Typography>
+                                        <b>{languageStore.currentLanguage.avg} {languageStore.currentLanguage.inventoryTurnover}:</b> {inventoryTurnoverRate.toFixed(2)} {languageStore.currentLanguage.days.toLowerCase()} {languageStore.currentLanguage.average.toLowerCase()}
+                                    </Typography>
+                                </Tooltip>
+                            </TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -63,27 +89,3 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
         </Grid>
     )
 });
-
-
-const resultIcon = (revenue: number, expenses: number) => {
-    if (revenue === 0 && expenses === 0) {
-        return (
-            <TableCell style={{ color: 'black' }}>
-                -
-            </TableCell>
-        )
-    }
-    if (revenue > expenses) {
-        return (
-            <TableCell style={{ color: 'green' }}>
-                <ArrowUpward sx={{ color: 'green' }} />
-            </TableCell>
-        )
-    } else {
-        return (
-            <TableCell style={{ color: 'red' }}>
-                <ArrowDownward sx={{ color: 'red' }} />
-            </TableCell>
-        )
-    }
-};

@@ -110,7 +110,8 @@ export class BackofficeStore {
 
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
         const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
-        const orderElements: OrderElements[] = await this.apiService.getOrderElements();
+        let orderElements: OrderElements[] = await this.apiService.getOrderElements();
+        orderElements = this.mapOrderElementsToProductItems(orderElements, this.productItems);
         const orders = this.generateOrders(orderDTOs, orderElements);
 
         runInAction(() => {
@@ -159,6 +160,22 @@ export class BackofficeStore {
             orders.push(order);
         }
         return orders;
+    }
+
+    private mapOrderElementsToProductItems(orderElementsDTO: OrderElements[], productItems: ProductItem[]): OrderElements[] {
+        const orderElements: OrderElements[] = [];
+        for (var orderElementDTO of orderElementsDTO) {
+            const productItem = productItems.find(pi => pi.id === orderElementDTO.productItemId);
+            if (productItem) {
+                const orderElement: OrderElements = new OrderElements();
+                orderElement.id = orderElementDTO.id;
+                orderElement.orderId = orderElementDTO.orderId;
+                orderElement.productItemId = orderElementDTO.productItemId;
+                orderElement.productItem = productItem;
+                orderElements.push(orderElement);
+            }
+        }
+        return orderElements;
     }
 
     public get Orders(): Order[] {
@@ -336,8 +353,8 @@ export class BackofficeStore {
                 product: productMap.get(productItemDTO.productId),
                 purchasePrice: productItemDTO.purchasePrice,
                 currentPrice: productItemDTO.currentPrice,
-                createdDate: productItemDTO.createdDate,
-                soldDate: productItemDTO.soldDate,
+                createdDate: new Date(productItemDTO.createdDate),
+                soldDate: new Date(productItemDTO.soldDate),
                 images: poImages,
                 priceHistories: poPriceHistory
 
@@ -509,6 +526,10 @@ export class BackofficeStore {
         });
 
         return data;
+    }
+
+    public getOrdersByYear(year: number): Order[] {
+        return this._orders.filter(o => o.createdDate.getFullYear() === year);
     }
 }
 

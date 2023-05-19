@@ -121,7 +121,7 @@ export default class DKLocale implements ILocale {
   light = "Lys";
   dark = "Mørk";
   and = "Og";
-  kpi = "Key performance indicators";
+  kpi = "Nøgleværdier";
   aov = "Gennemsnitlig ordreværdi";
   conversionRate = "Konverteringsrate";
   inventoryTurnover = "Lageromsætningshastighed";
@@ -129,6 +129,9 @@ export default class DKLocale implements ILocale {
   average = "Gennemsnit";
   total = "Total";
   avg = "Gns.";
+  inventoryTurnoverExplanation =   "Beskriver i gennemsnit, hvor længe hvert produkt er på lager, før det bliver sendt til en kunde. Jo lavere tallet er, jo bedre.";
+  conversionRateExplanation = "Beskriver hvor mange af de besøgende, der bliver til kunder. Jo højere tallet er, jo bedre.";
+  aovExplanation = "Beskriver den gennemsnitlige ordreværdi. Jo højere tallet er, jo bedre.";
 
   // Months
   january = "Januar";

@@ -99,6 +99,9 @@ export interface ILocale {
   average: string;
   total: string;
   avg: string;
+  inventoryTurnoverExplanation: string;
+  aovExplanation: string;
+  conversionRateExplanation: string;
 
 
   // Months
