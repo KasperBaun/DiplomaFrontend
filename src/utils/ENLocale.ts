@@ -135,6 +135,10 @@ export default class ENLocale implements ILocale {
   bestSellingProducts = "Best selling products";
   worstSellingProducts = "Worst selling products";
   inventoryValueExplanation = "The inventory value is the total value of all products in stock.";
+  startSniper = "Start Sniper";
+  show = "Show";
+  newSniperResults = "New sniper results";
+  sniperStarted = "Sniper started";
 
   // Months
   january = "January";

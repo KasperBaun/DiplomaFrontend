@@ -20,6 +20,8 @@ import OrderElements from '@models/OrderElements';
 import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
+import { SniperResult } from '@models/SniperResult';
+import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
 
 export class BackofficeStore {
 
@@ -69,6 +71,12 @@ export class BackofficeStore {
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
+
+    /* Sniperresults */
+    private _sniperResults: SniperResult[] = [];
+
+    /* Notifications */
+    private _notifications: Notification[] = [];
 
     public async init(): Promise<boolean> {
         runInAction(() => {
@@ -535,8 +543,6 @@ export class BackofficeStore {
         const data = months.map((month, index) => {
             const monthInt = index + 1;
             const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() + 1 === monthInt);
-            console.log(month, monthInt);
-
             let monthRevenue = 0;
             for (var order of ordersInMonth) {
                 monthRevenue += this.getPayment(order.paymentId).amount;
@@ -573,6 +579,42 @@ export class BackofficeStore {
 
     public get BestSellingProducts(): Product[] {
         return this._bestSellingProducts;
+    }
+
+    public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
+        const startNotification: Notification = {
+            message: this.rootStore.languageStore.currentLanguage.sniperStarted + "...",
+            action: null
+        };
+        runInAction(() => {
+            this._notifications.push(startNotification);
+        });
+
+        const sniperResults = await this.rootStore.sniperStore.SnipeMultiple(products);
+        const notification: Notification = {
+            message: this.rootStore.languageStore.currentLanguage.newSniperResults,
+            action: () => navigateTo(4)
+        }
+
+        runInAction(() => {
+            this.removeNotification(startNotification);
+            this._sniperResults = sniperResults
+            this._notifications.push(notification);
+        })
+    }
+
+    public removeNotification(notification: Notification): void {
+        runInAction(() => {
+            this._notifications = this._notifications.filter(n => n !== notification);
+        })
+    }
+
+    public get Notifications(): Notification[] {
+        return this._notifications;
+    }
+
+    public get SniperResults(): SniperResult[] {
+        return this._sniperResults;
     }
 }
 

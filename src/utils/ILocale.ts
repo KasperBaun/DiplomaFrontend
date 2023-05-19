@@ -105,6 +105,10 @@ export interface ILocale {
   bestSellingProducts: string;
   worstSellingProducts: string;
   inventoryValueExplanation: string;
+  startSniper: string;
+  show: string;
+  newSniperResults: string;
+  sniperStarted: string;
 
 
   // Months

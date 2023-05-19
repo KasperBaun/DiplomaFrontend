@@ -1,4 +1,4 @@
-import { Box, FormControl, Grid, InputLabel, Link, MenuItem, Select, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, Link, MenuItem, Select, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { RecentSalesList } from "@backoffice/sales/components/RecentSales";
@@ -26,6 +26,11 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
         setYear(event.target.value as number);
         return;
     };
+
+    const handleOnStartSniperClicked = () => {
+        // Only 2 items since it takes 15-20 seconds for each..
+        backofficeStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 2),props.setNavKey);
+    }
 
     const spacing = 2;
     const worstSellingProducts = backofficeStore.ProductItems.filter(p => p.sold === false).sort((a, b) => a.createdDate.getTime() - b.createdDate.getTime()).slice(0, 20).map(p => p.product);
@@ -74,7 +79,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
             </Grid>
 
 
-            {/* Second row with 2 charts containing revenue and expenses. And then resultstable*/}
+            {/* Second row with 2 charts containing revenue and expenses. And then results table*/}
             <Grid container sx={containerStyling} spacing={spacing}>
 
                 <Grid item xs={12} sm={12} md={3} lg={3} xl={3} >
@@ -106,7 +111,12 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
             <Grid container sx={containerStyling} spacing={spacing} >
                 <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
                     <Box sx={dashboardItemStyling} >
-                        <Typography variant="h4">{languageStore.currentLanguage.bestSellingProducts}</Typography>
+                        <Typography variant="h4" display='flex' justifyContent={'space-between'}>
+                            {languageStore.currentLanguage.bestSellingProducts}
+                            <Button variant="contained" onClick={handleOnStartSniperClicked} sx={{ mt: 0, '&:hover': { cursor: 'pointer' } }}>
+                                {languageStore.currentLanguage.startSniper}
+                            </Button>
+                        </Typography>
                         <ProductsTable products={backofficeStore.BestSellingProducts} />
                     </Box>
                 </Grid>

@@ -5,11 +5,13 @@ import { Constants } from '@utils/Constants';
 
 import { RootStore } from './RootStore';
 import SniperModel from '@models/SniperModel';
+import { Product } from '@models/Product';
+import { SniperResult } from '@models/SniperResult';
 
 
 export class SniperStore {
     private static _Instance: SniperStore;
-    private rootStore : RootStore;
+    private rootStore: RootStore;
     private prefix: string = `%c[SniperStore]`;
     private color: string = ComponentLoggingConfig.DarkChocolate;
     private loaded: boolean = false;
@@ -43,8 +45,24 @@ export class SniperStore {
         return this.loaded;
     }
 
-    public async GetSniping(searchValue : string) : Promise<SniperModel[]> {
+    public async GetSniping(searchValue: string): Promise<SniperModel[]> {
         this._sniperData = await this.apiService.getSniping(searchValue);
         return this._sniperData;
+    }
+
+    public async SnipeMultiple(products: Product[]): Promise<SniperResult[]> {
+
+        let sniperResults: SniperResult[] = [];
+
+        for (let i = 0; i < products.length; i++) {
+            let sniperResult: SniperResult = {
+                product: products[i],
+                sniperResult: await this.apiService.getSniping(products[i].name)
+            }
+            sniperResults.push(sniperResult);
+        }
+
+        return sniperResults;
+
     }
 }

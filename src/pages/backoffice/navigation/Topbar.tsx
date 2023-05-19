@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight, DarkModeOutlined, LightModeOutlined, Logout, Notifications, Settings } from "@mui/icons-material";
-import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
+import { Badge, Box, IconButton, Tooltip, useTheme } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import ColorConfigs from "@styles/ColorConfigs";
 import { observer } from "mobx-react-lite";
@@ -7,20 +7,24 @@ import { useContext } from "react";
 import { Dk, Us } from "react-flags-select";
 import { ColorModeContext } from "styling/mui-theme/backoffice/BackofficeTheme";
 
-export interface ITopbarProps {
+export type TopbarProps = {
     sidebarOpen: boolean;
     setSidebarOpen: () => void;
+    navigateTo: (key: number) => void;
 }
 
-const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarProps) {
+const Topbar: React.FC<TopbarProps> = observer(function Topbar(props: TopbarProps) {
 
-    const { authStore, languageStore } = useContext(MobXContext);
+    const { authStore, languageStore, backofficeStore } = useContext(MobXContext);
     const theme = useTheme();
     // const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
 
     const handleLanguageIconClicked = () => {
         languageStore.toggleLanguage();
+    }
+    const handleNotificationsClicked = () => {
+        props.navigateTo(4);
     }
 
     const toggleSideBar = (sidebarOpen: boolean, setSidebarOpen: () => void): JSX.Element => {
@@ -87,7 +91,7 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 </Tooltip>
 
                 <Tooltip title={languageStore.currentLanguage.notifications}>
-                    <IconButton
+                    {/* <IconButton
                         sx={{
                             color: ColorConfigs.topbar.color,
                             "&:hover": {
@@ -96,6 +100,23 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                         }}
                     >
                         <Notifications />
+                    </IconButton> */}
+                    <IconButton onClick={handleNotificationsClicked}>
+                        <Badge
+                            sx={{
+                                fontSize: '12px',
+                                color: ColorConfigs.topbar.color,
+                                "&:hover": {
+                                    background: ColorConfigs.topbar.hoverBg,
+                                }
+                            }}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'right'
+                            }}
+                            badgeContent={backofficeStore.Notifications.length} color="warning">
+                            <Notifications />
+                        </Badge>
                     </IconButton>
                 </Tooltip>
 

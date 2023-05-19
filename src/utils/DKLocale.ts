@@ -129,12 +129,16 @@ export default class DKLocale implements ILocale {
   average = "Gennemsnit";
   total = "Total";
   avg = "Gns.";
-  inventoryTurnoverExplanation =   "Beskriver i gennemsnit, hvor længe hvert produkt er på lager, før det bliver sendt til en kunde. Jo lavere tallet er, jo bedre.";
+  inventoryTurnoverExplanation = "Beskriver i gennemsnit, hvor længe hvert produkt er på lager, før det bliver sendt til en kunde. Jo lavere tallet er, jo bedre.";
   conversionRateExplanation = "Beskriver hvor mange af de besøgende, der bliver til kunder. Jo højere tallet er, jo bedre.";
   aovExplanation = "Beskriver den gennemsnitlige ordreværdi. Jo højere tallet er, jo bedre.";
   bestSellingProducts = "Bedst sælgende produkter";
   worstSellingProducts = "Dårligst sælgende produkter";
   inventoryValueExplanation = "Beskriver den samlede værdi af dit lager.";
+  startSniper = "Start Sniper";
+  show = "Vis";
+  newSniperResults = "Nye Sniper resultater";
+  sniperStarted = "Sniper startet";
 
   // Months
   january = "Januar";

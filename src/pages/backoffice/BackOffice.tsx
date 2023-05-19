@@ -6,7 +6,7 @@ import Sidebar from "./navigation/Sidebar";
 import Topbar from "./navigation/Topbar";
 import { useEffect, useContext, useState } from "react";
 import { Dashboard } from "./Dashboard/dashboard";
-import SniperPage from "./sniper/SniperPage";
+import { SniperPage } from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import { SalesList } from "./sales/SalesList";
 import Orders from "./orders/Orders";
@@ -80,6 +80,7 @@ export const Backoffice: React.FC = observer(() => {
                             <Topbar
                                 sidebarOpen={sidebarOpen}
                                 setSidebarOpen={handleToggleSidebarOpenClicked}
+                                navigateTo={setActiveNavKey}
                             />
                         </Item>
                         <Item>
