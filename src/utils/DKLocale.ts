@@ -117,6 +117,18 @@ export default class DKLocale implements ILocale {
   inventoryValue = "Lagerværdi";
   yearToDate = "År til dato";
   YTD = "ÅTD";
+  theme = "Tema";
+  light = "Lys";
+  dark = "Mørk";
+  and = "Og";
+  kpi = "Key performance indicators";
+  aov = "Gennemsnitlig ordreværdi";
+  conversionRate = "Konverteringsrate";
+  inventoryTurnover = "Lageromsætningshastighed";
+  days = "Dage";
+  average = "Gennemsnit";
+  total = "Total";
+  avg = "Gns.";
 
   // Months
   january = "Januar";

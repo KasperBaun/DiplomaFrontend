@@ -117,6 +117,19 @@ export default class ENLocale implements ILocale {
   inventoryValue = "Inventoryvalue";
   yearToDate = "Year to date";
   YTD = "YTD";
+  theme = "Theme";
+  light = "Light";
+  dark = "Dark";
+  and = "And";
+  kpi = "Key performance indicators";
+  aov = "Average order value";
+  conversionRate = "Conversion rate";
+  inventoryTurnover = "Inventory turnover";
+  days = "Days";
+  average = "Average";
+  total = "Total";
+  avg = "Avg.";
+
 
   // Months
   january = "January";

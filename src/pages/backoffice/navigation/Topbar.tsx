@@ -66,7 +66,7 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 justifyContent="center"
                 alignItems="center"
             >
-                <Tooltip title={languageStore.currentLanguage.language + languageStore.getCurrentLanguageCode()}>
+                <Tooltip title={languageStore.currentLanguage.language + ": " + languageStore.getCurrentLanguageCode()}>
                     <IconButton onClick={handleLanguageIconClicked}>
                         {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
                     </IconButton>
@@ -74,7 +74,7 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
 
 
                 <Tooltip title={
-                    "Colormode: " + (theme.palette.mode === 'dark' ? "dark" : "light")
+                    languageStore.currentLanguage.theme + ": " + (theme.palette.mode === 'dark' ? languageStore.currentLanguage.dark : languageStore.currentLanguage.light)
                 }>
                     <IconButton onClick={colorMode.toggleColorMode}>
                         {theme.palette.mode === 'dark' ? (

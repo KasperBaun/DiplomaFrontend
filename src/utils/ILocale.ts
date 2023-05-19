@@ -87,6 +87,19 @@ export interface ILocale {
   inventoryValue: string;
   yearToDate: string;
   YTD: string;
+  theme: string;
+  light: string;
+  dark: string;
+  and: string;
+  kpi: string;
+  aov: string;
+  conversionRate: string;
+  inventoryTurnover: string;
+  days: string;
+  average: string;
+  total: string;
+  avg: string;
+
 
   // Months
   january: string;

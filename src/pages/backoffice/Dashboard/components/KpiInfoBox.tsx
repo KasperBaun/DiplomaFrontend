@@ -5,11 +5,11 @@ import { ExtentionMethods } from "@utils/ExtentionMethods";
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 
-export type ResultsInfoBoxProps = {
+export type KpiInfoBoxProps = {
     year: number;
 }
 
-export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }: ResultsInfoBoxProps) => {
+export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfoBoxProps) => {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
 
@@ -28,6 +28,9 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }:
         alignItems: 'center'
     };
 
+    const aov = 1;
+    const inventoryTurnoverRate = 1;
+
 
     const results = backofficeStore.getRevenueData(year);
     const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
@@ -39,29 +42,27 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer(({ year }:
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell><b>{languageStore.currentLanguage.month}</b></TableCell>
-                            <TableCell><b>{languageStore.currentLanguage.revenue}</b></TableCell>
-                            <TableCell><b>{languageStore.currentLanguage.expenses}</b></TableCell>
-                            <TableCell><b>{languageStore.currentLanguage.result}</b></TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {results.map((month, index) => (
-                            <TableRow key={index}>
-                                <TableCell>{month.month}</TableCell>
-                                <TableCell style={{ color: 'green' }}>{ExtentionMethods.formatPrice(month.revenue, currentLanguagecode, currency)}</TableCell>
-                                <TableCell style={{ color: 'red' }}>{ExtentionMethods.formatPrice(month.expenses, currentLanguagecode, currency)}</TableCell>
-                                <TableCell style={{ color: month.revenue - month.expenses > 0 ? 'green' : 'red' }}><b>{ExtentionMethods.formatPrice(month.revenue - month.expenses, currentLanguagecode, currency)}</b></TableCell>
-                                {index === 0 ? <TableCell>-</TableCell> : resultIcon(month.revenue, month.expenses)}
-                            </TableRow>
-                        ))}
+                        <TableRow >
+                            <TableCell><b>{languageStore.currentLanguage.aov}:</b>  {aov}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell><b>{languageStore.currentLanguage.conversionRate}:</b>  2%</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell><b>{languageStore.currentLanguage.avg} {languageStore.currentLanguage.inventoryTurnover}:</b> {inventoryTurnoverRate} {languageStore.currentLanguage.days.toLowerCase()} {languageStore.currentLanguage.average.toLowerCase()}</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
         </Grid>
     )
-}); 
+});
 
 
 const resultIcon = (revenue: number, expenses: number) => {
