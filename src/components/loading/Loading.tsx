@@ -4,11 +4,13 @@ import { CircularProgress, Container } from "@mui/material";
 export interface ILoadingProps {
     size?: number;
     color?: string;
+    height?: string;
 }
 
 export const Loading: React.FC<ILoadingProps> = (props: ILoadingProps) => {
     const size: number = props.size ? props.size : 24;
     const color: string = props.color ? props.color : '#000000';
+    const height: string = props.height ? props.height : '100vh';
 
     return (
         <Container sx={{
@@ -16,7 +18,7 @@ export const Loading: React.FC<ILoadingProps> = (props: ILoadingProps) => {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            height: '100vh',
+            height: height,
         }} >
 
             <CircularProgress

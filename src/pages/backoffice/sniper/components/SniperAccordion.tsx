@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { SnipedTable } from "./SnipedTable";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState } from "react";
-import { NewReleases } from "@mui/icons-material";
+import { FiberNew } from "@mui/icons-material";
 
 
 export type SniperAccordionProps = {
@@ -30,7 +30,7 @@ export const SniperAccordion: React.FC<SniperAccordionProps> = observer(({ resul
             >
                 <Typography display='flex' justifyContent={'space-between'} >
                     {result.product.name}
-                    {!isOpened && <NewReleases sx={{ marginLeft: 5 }} />}
+                    {!isOpened && <FiberNew sx={{ marginLeft: 5 }} />}
                 </Typography>
             </AccordionSummary>
             <AccordionDetails key={"accdetails" + result.product.name + idx}>

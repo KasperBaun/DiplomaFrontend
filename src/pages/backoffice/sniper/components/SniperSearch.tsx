@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { SniperResult } from "@models/SniperResult";
+import Loading from "@components/loading/Loading";
 
 type SniperSearchProps = {
   onSnipeComplete: (result: SniperResult) => void;
@@ -111,12 +112,14 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
           />
         </Box>
 
-        <Box marginBottom={3}>
+        <Box marginBottom={1}>
           <Typography variant="body2" color="text.secondary">
             {languageStore.currentLanguage.SniperFormMutedText}
           </Typography>
         </Box>
+        {isSniping && <Loading height={'50px'} />}
       </Box>
+
     </Container>
   )
 });

@@ -3,7 +3,7 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { SniperResult } from "@models/SniperResult";
-import { SniperSearch } from "./components/SniperForm";
+import { SniperSearch } from "./components/SniperSearch";
 import { SniperResults } from "./components/SniperResults";
 
 export const SniperPage = observer(() => {
