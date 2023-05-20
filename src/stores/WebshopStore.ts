@@ -15,6 +15,7 @@ import Customer from '@models/Customer';
 import Payment from '@models/Payment';
 import ConfirmationModel from '@models/ConfirmationModel';
 import CreateOrderDTO from '@models/DTO/CreateOrderDTO';
+import Order from '@models/Order';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
