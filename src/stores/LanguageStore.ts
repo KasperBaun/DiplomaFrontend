@@ -28,12 +28,12 @@ export class LanguageStore {
             this.locales.set("da_DK", new DKLocale());
             this.locales.set("en_US", new ENLocale());
         })
-        
+
         runInAction(() => {
             // Reads values from localstorage to determine previously set preffered language by user ->
-        // If no preffered language was set by user -> default to da-DK locale
-        this._previousLanguageSet = localStorage['locale'];
-        this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da_DK');
+            // If no preffered language was set by user -> default to da-DK locale
+            this._previousLanguageSet = localStorage['locale'];
+            this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da_DK');
             this.loaded = true;
         })
         if (Constants.loggingEnabled) {
@@ -65,6 +65,12 @@ export class LanguageStore {
         this.setCurrentLanguage(lang);
     }
 
+    public setLanguage(language: string): void {
+        runInAction(() => {
+            this.setCurrentLanguage(language);
+        })
+    }
+
     public get isLoaded(): boolean {
         return this.loaded;
     }
@@ -83,5 +89,13 @@ export class LanguageStore {
             return "en_US";
         }
         return "";
+    }
+
+    public getLanguages(): string[] {
+        let languages: string[] = [];
+        this.locales.forEach((value: ILocale, key: string) => {
+            languages.push(key);
+        })
+        return languages;
     }
 }

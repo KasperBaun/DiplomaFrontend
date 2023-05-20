@@ -111,6 +111,7 @@ export interface ILocale {
   sniperStarted: string;
   clearAll: string;
   noNotifications: string;
+  selectLanguage: string;
 
 
   // Months

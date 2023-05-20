@@ -6,14 +6,18 @@ import MobXContext from "@stores/MobXContext";
 import ColorConfigs from "@styles/ColorConfigs";
 import { useContext } from "react";
 
-export const SettingsButton: React.FC = observer(() => {
+export type SettingsButtonProps = {
+    onButtonClicked: () => void;
+}
 
+export const SettingsButton: React.FC<SettingsButtonProps> = observer(({ onButtonClicked }: SettingsButtonProps) => {
 
     const { languageStore } = useContext(MobXContext);
 
     return (
         <Tooltip title={languageStore.currentLanguage.settings}>
             <IconButton
+                onClick={onButtonClicked}
                 sx={{
                     color: ColorConfigs.topbar.color,
                     "&:hover": {

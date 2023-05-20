@@ -17,17 +17,20 @@ import { observer } from "mobx-react-lite";
 import LoadingLion from "@components/loading/LoadingLion";
 import { Constants } from "@utils/Constants";
 import { Dashboard } from "./dashboard/Dashboard";
+import { SettingsPage } from "@components/settings/SettingsPage";
+import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme";
 
 export const Backoffice: React.FC = observer(() => {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
     const { rootStore } = useContext(MobXContext);
+    const { theme, colorMode } = useBackofficeMode();
 
     const navSwitch = () => {
         switch (activeNavKey) {
             case 0: return (<Dashboard setNavKey={setActiveNavKey} />)
             case 1: return (<CategoryManager />)
-            // case 2: return (<Subcategories />)
+            case 2: return (<SettingsPage />)
             case 3: return (<ProductManager />)
             case 4: return (<SniperPage />)
             case 5: return (<InventoryMain />)
@@ -50,7 +53,7 @@ export const Backoffice: React.FC = observer(() => {
     });
 
     if (!rootStore.isBackofficeLoaded) {
-        return <LoadingLion color={Constants.primaryColor} />
+        return <LoadingLion color={theme.palette.primary.main} />
     }
     else {
 

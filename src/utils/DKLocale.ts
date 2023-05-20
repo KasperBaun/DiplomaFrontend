@@ -141,6 +141,7 @@ export default class DKLocale implements ILocale {
   sniperStarted = "Sniper startet";
   clearAll = "Ryd alle";
   noNotifications = "Ingen notifikationer";
+  selectLanguage = "Vælg sprog";
 
   // Months
   january = "Januar";

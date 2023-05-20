@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {  ThemeProvider } from '@mui/material/styles';
 import { Constants } from '@utils/Constants';
 import Copyright from './Copyright';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
@@ -17,12 +17,12 @@ import LockOutlined from '@mui/icons-material/LockOutlined';
 import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
 import UserFeedback from './UserFeedback';
 import { WebAPIResponse } from '@services/IAPIService';
+import { useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
 
 export interface ISignUpProps {
     onAuthNavClicked: (key: number) => void;
 }
 
-const theme = createTheme();
 
 const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpProps) {
 
@@ -31,6 +31,7 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
     const [message, setMessage] = useState<string>("");
     const [variant, setVariant] = useState<'error' | 'warning' | 'success'>('success');
     const [navigateBack, setNavigateBack] = useState<boolean>(false);
+    const {theme} = useBackofficeMode();
 
     const handleClose = () => {
         setShowFeedback(!showFeedback)
@@ -89,8 +90,8 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: Constants.primaryColor }}>
-                        <LockOutlined style={{ backgroundColor: Constants.primaryColor }} />
+                    <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+                        <LockOutlined style={{ backgroundColor: theme.palette.primary.main }} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         {languageStore.currentLanguage.signUp}
@@ -144,7 +145,7 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                             type="submit"
                             fullWidth
                             variant="contained"
-                            style={{ backgroundColor: Constants.primaryColor }}
+                            style={{ backgroundColor: theme.palette.primary.main }}
                             sx={{ mt: 3, mb: 2 }}
                         >
                             {languageStore.currentLanguage.signUp}

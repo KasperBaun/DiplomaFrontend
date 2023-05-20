@@ -32,6 +32,10 @@ export const Topbar: React.FC<TopbarProps> = observer((props: TopbarProps) => {
         )
     }
 
+    const handleOnSettingsButtonClicked = () => {
+        props.navigateTo(2);
+    };
+
     return (
         <Box
             display='flex'
@@ -62,9 +66,9 @@ export const Topbar: React.FC<TopbarProps> = observer((props: TopbarProps) => {
                 <LanguageSwitch />
                 <ThemeSwitch />
                 <NotificationModal />
-                <SettingsButton />
+                <SettingsButton onButtonClicked={handleOnSettingsButtonClicked} />
                 <LogoutButton />
-               
+
             </Box>
         </Box>
     );
