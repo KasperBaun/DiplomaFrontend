@@ -1,4 +1,4 @@
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import { Card, CardContent, Grid, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
@@ -29,7 +29,7 @@ const InventoryCards = () => {
             </Grid>
         )
     } else {
-        return <Loading />
+        return <LoadingLion />
     }
 }
 

@@ -7,7 +7,7 @@ import { ColorModeContext, useBackofficeMode } from 'styling/mui-theme/backoffic
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Backoffice } from './BackOffice';
 import Unauthorized from './auth/Unauthorized';
-import Loading from '@components/loading/LoadingLion';
+import LoadingLion from '@components/loading/LoadingLion';
 
 const Auth = observer(() => {
     const { authStore } = useContext(MobXContext);
@@ -21,7 +21,7 @@ const Auth = observer(() => {
     });
 
     if (!authStore.isLoaded && !authStore.isLoading) {
-        return <Loading color={theme.palette.primary.main} />
+        return <LoadingLion color={theme.palette.primary.main} />
     } else {
 
         return (

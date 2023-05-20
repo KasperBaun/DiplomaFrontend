@@ -1,4 +1,4 @@
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
@@ -99,7 +99,7 @@ const OrderDetailsList = ({ tableHeight, origin }: IProps) => {
             </React.Fragment>
         )
     else {
-        <Loading color="primary" />
+        <LoadingLion color="primary" />
     }
 }
 

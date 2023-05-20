@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
 import Payment from "@models/Payment";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 
 export type RecentSalesListProps = {
   displayNumberOfItems?: number;
@@ -15,7 +15,7 @@ export const RecentSalesList = observer((props: RecentSalesListProps) => {
   const { backofficeStore, languageStore } = useContext(MobXContext);
 
   if (!backofficeStore.isLoaded) {
-    return <Loading size={50} />;
+    return <LoadingLion size={50} />;
   }
   else {
     const [toggleDirection, setToggleDirection] = useState<'asc' | 'desc'>('asc');

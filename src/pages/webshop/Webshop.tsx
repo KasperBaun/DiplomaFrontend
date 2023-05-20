@@ -1,5 +1,5 @@
 import Header from "@webshop/header/Header";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Constants } from "@utils/Constants";
@@ -26,7 +26,7 @@ const Webshop: React.FC = observer(function Webshop() {
 
     if (!webshopStore.isLoaded) {
         return (
-            <Loading
+            <LoadingLion
                 size={50}
                 color={Constants.primaryColor}
                 loadingText="Loading..."

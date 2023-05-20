@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import { Button, Grid, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
@@ -55,7 +55,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
     if (!backofficeStore.isLoaded) {
         return (
-            <Loading />
+            <LoadingLion />
         )
     }
 

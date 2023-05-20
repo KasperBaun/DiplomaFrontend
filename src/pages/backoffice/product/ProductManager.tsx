@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import Products from "./components/Products";
 import { ProductItem } from "@models/ProductItem";
 import ProductEditor from "./components/ProductEditor";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 
 const ProductManager: React.FC = observer(function ProductManager() {
 
@@ -36,7 +36,7 @@ const ProductManager: React.FC = observer(function ProductManager() {
     }
 
     if (backofficeStore.isLoaded === false) {
-        return <Loading />;
+        return <LoadingLion />;
     } else {
 
         return (

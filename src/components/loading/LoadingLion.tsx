@@ -1,15 +1,15 @@
 import * as React from "react"
 import { Constants } from "../../utils/Constants"
 import { CircularProgress, Container } from "@mui/material";
-import LionLogo from "@components/LionLogo";
+import LionLogo from "@components/svgs/LionLogo";
 
-export interface ILoadingProps {
+type LoadingLionProps = {
     loadingText?: string;
     size?: number;
     color?: string;
 }
 
-export const Loading: React.FC<ILoadingProps> = (props: ILoadingProps) => {
+export const LoadingLion: React.FC<LoadingLionProps> = (props: LoadingLionProps) => {
     const size: number = props.size ? props.size : 24;
     const color: string = props.color ? props.color : '#000000';
 
@@ -35,4 +35,4 @@ export const Loading: React.FC<ILoadingProps> = (props: ILoadingProps) => {
     )
 }
 
-export default Loading;
+export default LoadingLion;

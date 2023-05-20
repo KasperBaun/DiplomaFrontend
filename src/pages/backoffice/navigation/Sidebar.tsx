@@ -1,6 +1,6 @@
 import MobXContext from "@stores/MobXContext";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import LionLogo from "@components/LionLogo";
+import LionLogo from "@components/svgs/LionLogo";
 import { Box, Drawer } from "@mui/material";
 import ColorConfigs from "@styles/ColorConfigs";
 import SizeConfigs from "@styles/SizeConfigs";

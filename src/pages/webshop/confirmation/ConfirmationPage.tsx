@@ -4,7 +4,7 @@ import ShippingProgress from "./components/ShippingProgress";
 import { useParams } from "react-router-dom";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useEffect, useState } from "react";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import Payment from "@models/Payment";
 import Order from "@models/Order";
 import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
@@ -132,7 +132,7 @@ const ConfirmationPage = () => {
         );
     }
     else {
-        <Loading />
+        <LoadingLion />
     }
 }
 

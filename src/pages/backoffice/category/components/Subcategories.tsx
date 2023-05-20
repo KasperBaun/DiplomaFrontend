@@ -5,7 +5,7 @@ import Table from "react-bootstrap/esm/Table";
 import SubCategory from "@models/SubCategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
 import Category from "@models/Category";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import SubcategoryDialog from "./SubcategoryDialog";
 import { Button, Grid } from "@mui/material";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
@@ -102,7 +102,7 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
     }
     else
         return (
-            <Loading />
+            <LoadingLion />
         )
 });
 

@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import { ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
-import GroendlundLogo from '@components/GroenlundLogo';
+import GroendlundLogo from '@components/svgs/GroenlundLogo';
 import FormControl from '@mui/material/FormControl/FormControl';
 import InputLabel from '@mui/material/InputLabel/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput';
@@ -19,7 +19,7 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
 import { useContext, useState } from 'react';
 import { Avatar, Backdrop } from '@mui/material';
-import Loading from '@components/loading/LoadingLion';
+import LoadingLion from '@components/loading/LoadingLion';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
 import { NavLink } from 'react-router-dom';
@@ -89,7 +89,7 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                             open={props.showBackdrop}
                             onClick={() => props.setShowBackdrop(false)}
                         >
-                            <Loading
+                            <LoadingLion
                                 size={100}
                                 color={theme.palette.primary.main}
                             />

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Alert, Button, Grid, Snackbar } from "@mui/material";
 import Category from "@models/Category";
 import MobXContext from "@stores/MobXContext";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import CategoryDialog from "./components/CategoryDialog";
 import { observer } from "mobx-react-lite";
 import CategoryCard from "./components/CategoryCard";
@@ -79,7 +79,7 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
             </Grid>
         )
     }
-    else return <Loading />
+    else return <LoadingLion />
 });
 
 export default Categories;

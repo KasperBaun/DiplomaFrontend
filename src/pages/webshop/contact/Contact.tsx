@@ -1,4 +1,4 @@
-import GroendlundLogo from "@components/GroenlundLogo";
+import GroendlundLogo from "@components/svgs/GroenlundLogo";
 import { CallRounded, DvrRounded, EmailRounded, Facebook, HomeRounded, Instagram, LocationCityRounded, Mail } from "@mui/icons-material";
 import { Button, Card, CardContent, CardHeader, Container, Grid, Tooltip, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";

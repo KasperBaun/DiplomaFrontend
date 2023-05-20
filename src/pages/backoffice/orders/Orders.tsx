@@ -1,4 +1,4 @@
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
@@ -20,7 +20,7 @@ const Orders = () => {
             </Grid>
         )
     else {
-        <Loading />
+        <LoadingLion />
     }
 }
 
