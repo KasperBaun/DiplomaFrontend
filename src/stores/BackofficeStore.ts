@@ -20,7 +20,7 @@ import OrderElements from '@models/OrderElements';
 import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
-import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
+import { Notification } from '@models/types/Notification';
 
 export class BackofficeStore {
 

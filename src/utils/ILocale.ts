@@ -110,6 +110,7 @@ export interface ILocale {
   newSniperResults: string;
   sniperStarted: string;
   clearAll: string;
+  noNotifications: string;
 
 
   // Months

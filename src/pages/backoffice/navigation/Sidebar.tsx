@@ -2,13 +2,13 @@ import MobXContext from "@stores/MobXContext";
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import LionLogo from "@components/LionLogo";
 import { Box, Drawer } from "@mui/material";
-import SidebarItemCollapse from "./SidebarItemCollapse";
-import SidebarItem from "./SidebarItem";
 import ColorConfigs from "@styles/ColorConfigs";
 import SizeConfigs from "@styles/SizeConfigs";
 import { observer } from "mobx-react-lite";
-import { createNavPaths } from "./Navpaths";
+import { createNavPaths } from "./components/Navpaths";
 import { Navpath } from "@models/Navpath";
+import SidebarItemCollapse from "./components/SidebarItemCollapse";
+import SidebarItem from "./components/SidebarItem";
 
 
 export type SidebarProps = {

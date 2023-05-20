@@ -3,20 +3,20 @@ import Stack from '@mui/material/Stack';
 import Item from '@mui/material/Stack';
 import ColorConfigs from "@styles/ColorConfigs";
 import Sidebar from "./navigation/Sidebar";
-import Topbar from "./navigation/Topbar";
+import { Topbar } from "./navigation/Topbar";
 import { useEffect, useContext, useState } from "react";
-import { Dashboard } from "./Dashboard/dashboard";
 import { SniperPage } from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import { SalesList } from "./sales/SalesList";
 import Orders from "./orders/Orders";
-import Analysis from "./Dashboard/analysis/Analysis";
+import Analysis from "./dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
 import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import LoadingLion from "@components/loading/LoadingLion";
 import { Constants } from "@utils/Constants";
+import { Dashboard } from "./dashboard/Dashboard";
 
 export const Backoffice: React.FC = observer(() => {
 
