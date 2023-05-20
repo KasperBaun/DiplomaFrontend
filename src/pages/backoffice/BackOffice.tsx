@@ -37,7 +37,7 @@ export const Backoffice: React.FC = observer(() => {
         }
     }
 
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
     const handleToggleSidebarOpenClicked = () => setSidebarOpen(!sidebarOpen);
 
     useEffect(() => {

@@ -44,7 +44,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
             <Grid container sx={containerStyling} spacing={spacing} >
 
                 {/* First row with 3 information boxes - revenue, storagevalue, tbd */}
-                <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
                     <Box sx={informationItemStyling} >
                         <FormControl >
                             <InputLabel>{languageStore.currentLanguage.select + " " + languageStore.currentLanguage.year}</InputLabel>
@@ -65,7 +65,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
 
 
 
-                <Grid item xs={12} sm={12} md={4} lg={4} xl={4} >
+                <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
                     <Box sx={informationItemStyling} >
                         <Typography variant="h4" display='flex' justifyContent={'space-between'}>
                             {languageStore.currentLanguage.notifications}
@@ -77,7 +77,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
                     <Box sx={informationItemStyling}>
                         <Typography variant="h4" > {languageStore.currentLanguage.revenue} </Typography>
                         <RevenueInfoBox year={year} />
@@ -91,7 +91,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
             {/* Second row with 2 charts containing revenue and expenses. And then results table*/}
             <Grid container sx={containerStyling} spacing={spacing}>
 
-                <Grid item xs={12} sm={12} md={3} lg={3} xl={3} >
+                <Grid item xs={12} sm={12} md={12} lg={3} xl={3} >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4">{languageStore.currentLanguage.kpi}</Typography>
                         <KpiInfoBox year={year} />
@@ -99,13 +99,13 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                 </Grid>
 
 
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}  >
+                <Grid item xs={12} sm={12} md={12} lg={6} xl={6}  >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4" >{languageStore.currentLanguage.results}</Typography>
                         <ResultsInfoBox year={year} />
                     </Box>
                 </Grid>
-                <Grid item xs={12} sm={12} md={3} lg={3} xl={3} >
+                <Grid item xs={12} sm={12} md={12} lg={3} xl={3} >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4">{languageStore.currentLanguage.revenue + " " + languageStore.currentLanguage.and.toLowerCase() + " " + languageStore.currentLanguage.expenses.toLowerCase()}</Typography>
                         <EconomyWidget year={year} />
@@ -118,7 +118,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
 
             {/* Third row with best selling products and the products that have been on the shelf the longest*/}
             <Grid container sx={containerStyling} spacing={spacing} >
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
+                <Grid item xs={12} sm={12} md={12} lg={6} xl={6} >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4" display='flex' justifyContent={'space-between'}>
                             {languageStore.currentLanguage.bestSellingProducts}
@@ -130,7 +130,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                     </Box>
                 </Grid>
 
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
+                <Grid item xs={12} sm={12} md={12} lg={6} xl={6} >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4">{languageStore.currentLanguage.worstSellingProducts}</Typography>
                         <ProductsTable products={worstSellingProducts} />
@@ -140,7 +140,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
 
             {/* Fourth row with current state of the business orders and sales*/}
             <Grid container sx={containerStyling} spacing={spacing} style={{ marginBottom: 2 }} >
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
+                <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4" display='flex' justifyContent={'space-between'}>
                             {languageStore.currentLanguage.OrderDetailsListTitle}
@@ -152,7 +152,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
 
                     </Box>
                 </Grid>
-                <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
+                <Grid item xs={12} sm={12} md={12} lg={6} xl={6} >
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4" display='flex' justifyContent={'space-between'}>
                             {languageStore.currentLanguage.RecentSalesWidgetTitle}
