@@ -3,39 +3,34 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { SniperResult } from "@models/SniperResult";
-import SniperForm from "./components/SniperForm";
-import Loading from "@components/loading/Loading";
+import { SniperSearch } from "./components/SniperForm";
+import { SniperResults } from "./components/SniperResults";
 
 export const SniperPage = observer(() => {
-    const { backofficeStore } = useContext(MobXContext);
-    const [snipedResults, setSnipedResults] = useState<SniperResult[]>(backofficeStore.SniperResults);
+    const { sniperStore } = useContext(MobXContext);
     const [isSniping, setIsSniping] = useState<boolean>(false);
 
     const handleOnSnipingComplete = (result: SniperResult) => {
-        setSnipedResults([...snipedResults, result]);
+        sniperStore.addSniperResult(result);
         setIsSniping(false);
-
     }
 
     return (
-        <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
-            <Grid item xs={11.9}>
-                <div className="DashBoardGridContainer">
-                    <SniperForm isSniping={isSniping} setIsSniping={setIsSniping} onSnipeComplete={handleOnSnipingComplete} />
-                    {isSniping && <Loading />}
-                    {/* {
-                        snipedResults.length > 0 &&
-                        <div className="sniperResults">
-                            <h2>Sniper Results</h2>
-                            {snipedResults.map(snipeResult => {
-                                <SnipedTable snipedResults={snipeResult.sniperResult} isSniping={isSniping} setIsSniping={setIsSniping} />
-
-                            })}
-                        </div>
-
-                    } */}
-                </div>
+        <Grid container sx={containerStyling} spacing={1} >
+            <Grid item xs={12}>
+                <SniperSearch isSniping={isSniping} setIsSniping={setIsSniping} onSnipeComplete={handleOnSnipingComplete} />
+                <SniperResults />
             </Grid>
         </Grid>
     )
 });
+
+const containerStyling: React.CSSProperties = {
+    margin: 0,
+    padding: 0,
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+};

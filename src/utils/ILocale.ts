@@ -109,6 +109,7 @@ export interface ILocale {
   show: string;
   newSniperResults: string;
   sniperStarted: string;
+  clearAll: string;
 
 
   // Months

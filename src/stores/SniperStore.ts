@@ -2,11 +2,11 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import APIService from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
-
 import { RootStore } from './RootStore';
 import SniperModel from '@models/SniperModel';
 import { Product } from '@models/Product';
 import { SniperResult } from '@models/SniperResult';
+import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
 
 
 export class SniperStore {
@@ -17,6 +17,9 @@ export class SniperStore {
     private loaded: boolean = false;
     private apiService: APIService;
     private _sniperData: SniperModel[] = [];
+
+    /* Sniperresults */
+    private _sniperResults: SniperResult[] = [];
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -50,19 +53,44 @@ export class SniperStore {
         return this._sniperData;
     }
 
-    public async SnipeMultiple(products: Product[]): Promise<SniperResult[]> {
-
-        let sniperResults: SniperResult[] = [];
-
+    public async SnipeMultiple(products: Product[]): Promise<void> {
         for (let i = 0; i < products.length; i++) {
             let sniperResult: SniperResult = {
                 product: products[i],
                 sniperResult: await this.apiService.getSniping(products[i].name)
             }
-            sniperResults.push(sniperResult);
+            this.addSniperResult(sniperResult);
+        }
+    }
+
+    public get SniperResults(): SniperResult[] {
+        return this._sniperResults;
+    }
+
+    public addSniperResult(sniperResult: SniperResult): void {
+        runInAction(() => {
+            this._sniperResults.push(sniperResult);
+        });
+    }
+
+    public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
+        const startNotification: Notification = {
+            message: this.rootStore.languageStore.currentLanguage.sniperStarted + "...",
+            action: null
+        };
+        runInAction(() => {
+            this.rootStore.backofficeStore.addNotification(startNotification);
+        });
+
+        await this.rootStore.sniperStore.SnipeMultiple(products);
+        const notification: Notification = {
+            message: this.rootStore.languageStore.currentLanguage.newSniperResults,
+            action: () => navigateTo(4)
         }
 
-        return sniperResults;
-
+        runInAction(() => {
+            this.rootStore.backofficeStore.removeNotification(startNotification);
+            this.rootStore.backofficeStore.addNotification(notification);
+        })
     }
 }

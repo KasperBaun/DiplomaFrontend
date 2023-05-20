@@ -139,6 +139,7 @@ export default class ENLocale implements ILocale {
   show = "Show";
   newSniperResults = "New sniper results";
   sniperStarted = "Sniper started";
+  clearAll = "Clear all";
 
   // Months
   january = "January";

@@ -20,7 +20,6 @@ import OrderElements from '@models/OrderElements';
 import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
-import { SniperResult } from '@models/SniperResult';
 import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
 
 export class BackofficeStore {
@@ -72,8 +71,7 @@ export class BackofficeStore {
         makeAutoObservable(this);
     }
 
-    /* Sniperresults */
-    private _sniperResults: SniperResult[] = [];
+
 
     /* Notifications */
     private _notifications: Notification[] = [];
@@ -581,40 +579,24 @@ export class BackofficeStore {
         return this._bestSellingProducts;
     }
 
-    public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
-        const startNotification: Notification = {
-            message: this.rootStore.languageStore.currentLanguage.sniperStarted + "...",
-            action: null
-        };
-        runInAction(() => {
-            this._notifications.push(startNotification);
-        });
-
-        const sniperResults = await this.rootStore.sniperStore.SnipeMultiple(products);
-        const notification: Notification = {
-            message: this.rootStore.languageStore.currentLanguage.newSniperResults,
-            action: () => navigateTo(4)
-        }
-
-        runInAction(() => {
-            this.removeNotification(startNotification);
-            this._sniperResults = sniperResults
-            this._notifications.push(notification);
-        })
+    /* Notfications */
+    public get Notifications(): Notification[] {
+        return this._notifications;
     }
-
     public removeNotification(notification: Notification): void {
         runInAction(() => {
             this._notifications = this._notifications.filter(n => n !== notification);
         })
     }
-
-    public get Notifications(): Notification[] {
-        return this._notifications;
+    public addNotification(notification: Notification): void {
+        runInAction(() => {
+            this._notifications.push(notification);
+        })
     }
-
-    public get SniperResults(): SniperResult[] {
-        return this._sniperResults;
+    public clearAllNotifications(): void {
+        runInAction(() => {
+            this._notifications = [];
+        })
     }
 }
 

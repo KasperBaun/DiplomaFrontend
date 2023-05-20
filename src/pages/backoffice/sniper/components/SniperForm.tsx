@@ -1,32 +1,21 @@
-import { Container } from "@mui/material";
+import { Container, Box, TextField, Button, Typography, InputAdornment } from "@mui/material";
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { SniperResult } from "@models/SniperResult";
 
-interface IProps {
+type SniperSearchProps = {
   onSnipeComplete: (result: SniperResult) => void;
   isSniping: boolean;
   setIsSniping: Dispatch<SetStateAction<boolean>>;
 }
 
-const SniperForm = ({ onSnipeComplete, isSniping, setIsSniping }: IProps) => {
-  const placeholders: string[] = [
-    "Royal Copenhagen Musselmalet Stel",
-    "Bing og Grøndal Frokosttallerken",
-    "Rosenborg Sterling Sølv",
-    "Isbjørn Figur",
-    "Kâhler Vase",
-    "Aluminia Tenera Spejl",
-    "Georg Jensen Julepynt",
-    "O.V. Mogensen sølv",
-    "Holmegaard Viol"];
+export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComplete, isSniping, setIsSniping }: SniperSearchProps) => {
+
   const [currentPlaceholder, setCurrentPlaceholder] = useState<number>(0);
   const [typedPlaceholder, setTypedPlaceholder] = useState<string>("");
   const [searchValue, setSearchValue] = useState<string>("");
   const { languageStore, sniperStore } = useContext(MobXContext);
-
   const placeholder = `${typedPlaceholder}`
 
   useEffect(() => {
@@ -35,7 +24,7 @@ const SniperForm = ({ onSnipeComplete, isSniping, setIsSniping }: IProps) => {
       setTypedPlaceholder("");
     }, 6000);
     return () => clearTimeout(timeoutId);
-  }, [currentPlaceholder, placeholders.length]);
+  });
 
   useEffect(() => {
     let typingTimerId: NodeJS.Timeout;
@@ -54,7 +43,7 @@ const SniperForm = ({ onSnipeComplete, isSniping, setIsSniping }: IProps) => {
     };
     typingTimerId = setTimeout(typeNextChar, 100);
     return () => clearTimeout(typingTimerId);
-  }, [currentPlaceholder, typedPlaceholder, placeholders.length]);
+  });
 
   const handleOnSubmitClicked = async () => {
     setIsSniping(true);
@@ -78,47 +67,68 @@ const SniperForm = ({ onSnipeComplete, isSniping, setIsSniping }: IProps) => {
 
   return (
     <Container>
-      <h2 style={{ textAlign: "center" }}>{languageStore.currentLanguage.SniperFormTitleText}</h2>
-      <Form>
-        <Form.Label>{languageStore.currentLanguage.SniperFormLabelText}</Form.Label>
-        <InputGroup className="mb-3">
-          {isSniping ? (
-            <Form.Control
-              type="text"
-              disabled
-              placeholder={placeholder}
-              onChange={(event) => {
-                let temp = event.currentTarget.value;
-                setSearchValue(temp);
-              }}
-            />
-          ) : (
-            <Form.Control
-              type="text"
-              placeholder={placeholder}
-              onChange={(event) => {
-                let temp = event.currentTarget.value;
-                setSearchValue(temp);
-              }}
-            />
-          )
-          }
+      <Box style={{ textAlign: 'center', marginBottom: 3 }}>
+        <Typography variant="h2">
+          {languageStore.currentLanguage.SniperFormTitleText}
+        </Typography>
+      </Box>
 
-          {isSniping ? (
-            <Button variant="outline-primary" disabled
-              onClick={() => { handleOnSubmitClicked() }}
-            >{languageStore.currentLanguage.SniperFormButtonText}</Button>) : (
-            <Button variant="outline-primary"
-              onClick={() => { handleOnSubmitClicked() }}
-            >{languageStore.currentLanguage.SniperFormButtonText}</Button>)
-          }
-        </InputGroup>
-        <Form.Text className="text-muted">
-          {languageStore.currentLanguage.SniperFormMutedText}
-        </Form.Text>
-      </Form>
+      <Box component="form" noValidate>
+        {/* <Box >
+          <Typography variant="caption">
+            {languageStore.currentLanguage.SniperFormLabelText}
+          </Typography>
+        </Box> */}
+
+        <Box marginBottom={1} display="flex" alignItems="flex-end">
+          <TextField
+            fullWidth
+            disabled={isSniping}
+            placeholder={placeholder}
+            label={languageStore.currentLanguage.SniperFormLabelText}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(event) => {
+              let temp = event.target.value;
+              setSearchValue(temp);
+            }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button
+                    variant="contained"
+                    disabled={isSniping}
+                    onClick={handleOnSubmitClicked}
+                  >
+                    <Typography variant="body2">
+                      {languageStore.currentLanguage.search}
+                    </Typography>
+                  </Button>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Box>
+
+        <Box marginBottom={3}>
+          <Typography variant="body2" color="text.secondary">
+            {languageStore.currentLanguage.SniperFormMutedText}
+          </Typography>
+        </Box>
+      </Box>
     </Container>
   )
-}
+});
 
-export default observer(SniperForm);
+
+const placeholders: string[] = [
+  "Royal Copenhagen Musselmalet Stel",
+  "Bing og Grøndal Frokosttallerken",
+  "Rosenborg Sterling Sølv",
+  "Isbjørn Figur",
+  "Kâhler Vase",
+  "Aluminia Tenera Spejl",
+  "Georg Jensen Julepynt",
+  "O.V. Mogensen sølv",
+  "Holmegaard Viol"];

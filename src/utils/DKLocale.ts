@@ -139,6 +139,7 @@ export default class DKLocale implements ILocale {
   show = "Vis";
   newSniperResults = "Nye Sniper resultater";
   sniperStarted = "Sniper startet";
+  clearAll = "Ryd alle";
 
   // Months
   january = "Januar";

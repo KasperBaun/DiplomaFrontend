@@ -20,18 +20,21 @@ export const NotificationInfoBox = observer(() => {
     };
 
     return (
-        <Grid item xs={12} sx={valueStyling}>
+        <Grid item xs={12} sx={valueStyling} overflow='auto'>
             {
                 backofficeStore.Notifications.map((notification, index) => {
                     return (
-                        <Typography variant="h5" key={"notif" + index} display='flex' justifyContent={'space-between'}>
-                            {notification.message}
-                            <Button variant="contained" onClick={() => {
-                                backofficeStore.removeNotification(notification);
-                                notification.action();
-                            }} key={"notif" + index} >
-                                {languageStore.currentLanguage.show}
-                            </Button>
+                        <Typography variant="h5" key={"notif" + index} display='flex' justifyContent={'space-between'} sx={{ margin: 1 }}>
+                            {notification.message}{
+                                notification.action &&
+                                <Button variant="contained" onClick={() => {
+                                    backofficeStore.removeNotification(notification);
+                                    notification.action();
+                                }} key={"notif" + index} >
+                                    {languageStore.currentLanguage.show}
+                                </Button>
+                            }
+
                         </Typography>
 
                     )

@@ -16,7 +16,7 @@ export type DashboardProps = {
 }
 
 export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardProps) => {
-    const { languageStore, backofficeStore } = useContext(MobXContext);
+    const { languageStore, backofficeStore, sniperStore } = useContext(MobXContext);
     const [year, setYear] = useState<number>(2023);
 
     const navigateToSales = () => props.setNavKey(6);
@@ -27,9 +27,13 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
         return;
     };
 
+    const handleOnClearAllClicked = () => {
+        backofficeStore.clearAllNotifications();
+    }
+
     const handleOnStartSniperClicked = () => {
         // Only 2 items since it takes 15-20 seconds for each..
-        backofficeStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 2),props.setNavKey);
+        sniperStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 2), props.setNavKey);
     }
 
     const spacing = 2;
@@ -63,7 +67,12 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
 
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} >
                     <Box sx={informationItemStyling} >
-                        <Typography variant="h4" > {languageStore.currentLanguage.notifications} </Typography>
+                        <Typography variant="h4" display='flex' justifyContent={'space-between'}>
+                            {languageStore.currentLanguage.notifications}
+                            <Button variant="contained" onClick={handleOnClearAllClicked} sx={{ mt: 0, '&:hover': { cursor: 'pointer' } }}>
+                                {languageStore.currentLanguage.clearAll}
+                            </Button>
+                        </Typography>
                         <NotificationInfoBox />
                     </Box>
                 </Grid>
