@@ -1,24 +1,24 @@
 import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { SniperResult } from "@models/SniperResult";
 import { SniperSearch } from "./components/SniperSearch";
 import { SniperResults } from "./components/SniperResults";
 
 export const SniperPage = observer(() => {
+
     const { sniperStore } = useContext(MobXContext);
-    const [isSniping, setIsSniping] = useState<boolean>(false);
 
     const handleOnSnipingComplete = (result: SniperResult) => {
         sniperStore.addSniperResult(result);
-        setIsSniping(false);
+        sniperStore.isSniping = false;
     }
 
     return (
         <Grid container sx={containerStyling} spacing={1} >
             <Grid item xs={12}>
-                <SniperSearch isSniping={isSniping} setIsSniping={setIsSniping} onSnipeComplete={handleOnSnipingComplete} />
+                <SniperSearch onSnipeComplete={handleOnSnipingComplete} />
                 <SniperResults />
             </Grid>
         </Grid>

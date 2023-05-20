@@ -21,6 +21,10 @@ export class SniperStore {
     /* Sniperresults */
     private _sniperResults: SniperResult[] = [];
 
+    /* State */
+    private _isSniping: boolean = false;
+
+
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
         this.rootStore = _rootStore;
@@ -74,6 +78,7 @@ export class SniperStore {
     }
 
     public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
+        this._isSniping = true;
         const startNotification: Notification = {
             message: this.rootStore.languageStore.currentLanguage.sniperStarted + "...",
             action: null,
@@ -94,5 +99,17 @@ export class SniperStore {
             this.rootStore.backofficeStore.removeNotification(startNotification);
             this.rootStore.backofficeStore.addNotification(notification);
         })
+        this._isSniping = false;
     }
+
+    public get isSniping(): boolean {
+        return this._isSniping;
+    }
+
+    public set isSniping(value: boolean) {
+        runInAction(() => {
+            this._isSniping = value;
+        });
+    }
+
 }

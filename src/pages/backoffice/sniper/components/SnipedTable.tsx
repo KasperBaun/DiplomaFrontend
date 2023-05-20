@@ -47,7 +47,7 @@ export const SnipedTable = observer(({ results }: SnipedTableProps) => {
                         </TableHead>
                         <TableBody>
                             {results?.map((result, index) => (
-                                <TableRow>
+                                <TableRow key={"snipertr" + index}>
                                     <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`src_${index + "_" + result.source.split(".")[0]}`}>{result.source}</TableCell>
                                     <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`title_${index + "_" + result.source.split(".")[0]}}`}>{result.description ? result.description.slice(0, 100) : result.dbaItemDescription.slice(0, 100)}</TableCell>
                                     {result.priceEstimate !== null && result.priceEstimate !== "" ? (

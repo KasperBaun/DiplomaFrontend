@@ -122,7 +122,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                     <Box sx={dashboardItemStyling} >
                         <Typography variant="h4" display='flex' justifyContent={'space-between'}>
                             {languageStore.currentLanguage.bestSellingProducts}
-                            <Button variant="contained" onClick={handleOnStartSniperClicked} sx={{ mt: 0, '&:hover': { cursor: 'pointer' } }}>
+                            <Button variant="contained" disabled={sniperStore.isSniping} onClick={handleOnStartSniperClicked} sx={{ mt: 0, '&:hover': { cursor: 'pointer' } }}>
                                 {languageStore.currentLanguage.startSniper}
                             </Button>
                         </Typography>
