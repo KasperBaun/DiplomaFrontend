@@ -14,7 +14,10 @@ const CartDrawer: React.FC = observer(function CartDrawer() {
   const navigate = useNavigate();
 
   const toggleDrawer = () => setDrawerState(!drawerState);
-  const handleClick = () => navigate('/basket');
+  const handleClick = () => {
+    navigate('/basket')
+    toggleDrawer();
+  };
   const getTotal = basketStore.Basket.reduce((acc, item) => acc + item.currentPrice, 0);
 
   return (
