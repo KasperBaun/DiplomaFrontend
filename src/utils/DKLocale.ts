@@ -142,6 +142,8 @@ export default class DKLocale implements ILocale {
   clearAll = "Ryd alle";
   noNotifications = "Ingen notifikationer";
   selectLanguage = "Vælg sprog";
+  updateSubcategory = "Opdater underkategori";
+  chooseCategory = "Vælg kategori";
 
   // Months
   january = "Januar";

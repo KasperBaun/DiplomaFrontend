@@ -27,12 +27,12 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
         try {
             await backofficeStore.createCategory(category)
             setAlertType("success");
-            setAlertText(languageStore.currentLanguage.createCategorySuccessMessage);
+            setAlertText(languageStore.currentLanguage.createSuccess);
         }
         catch (err) {
             console.log(err);
             setAlertType("warning");
-            setAlertText(languageStore.currentLanguage.createCategoryFailedMessage);
+            setAlertText(languageStore.currentLanguage.createFailed);
         }
         setShowSnackbar(true);
     }

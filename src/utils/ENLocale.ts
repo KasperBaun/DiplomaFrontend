@@ -142,6 +142,8 @@ export default class ENLocale implements ILocale {
   clearAll = "Clear all";
   noNotifications = "No notifications";
   selectLanguage = "Select language";
+  updateSubcategory = "Update Subcategory";
+  chooseCategory = "Choose category";
 
   // Months
   january = "January";
