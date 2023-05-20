@@ -1,17 +1,18 @@
 
 import MobXContext from '@stores/MobXContext';
 import { observer } from 'mobx-react-lite';
-import AuthPage from './auth/AuthPage';
+import { AuthPage } from './auth/AuthPage';
 import { useContext, useEffect } from 'react';
 import { ColorModeContext, useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Backoffice } from './BackOffice';
 import Unauthorized from './auth/Unauthorized';
-import Loading from '@components/loading/LoadingLion';
+import LoadingLion from '@components/loading/LoadingLion';
 
 const Auth = observer(() => {
     const { authStore } = useContext(MobXContext);
     const { theme, colorMode } = useBackofficeMode();
+
 
     useEffect(() => {
         if (!authStore.isLoaded && !authStore.isLoading) {
@@ -20,7 +21,7 @@ const Auth = observer(() => {
     });
 
     if (!authStore.isLoaded && !authStore.isLoading) {
-        return <Loading />
+        return <LoadingLion color={theme.palette.primary.main} />
     } else {
 
         return (

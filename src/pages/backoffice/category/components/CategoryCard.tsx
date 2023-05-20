@@ -42,6 +42,7 @@ const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: 
                 image={props.category.imageUrl ? props.category.imageUrl : "https://picsum.photos/200/300?grayscale"}
                 alt="Category image for category card"
                 style={{ objectFit: "cover" }}
+                sx={{ '&:hover': { cursor: 'pointer' } }}
             />
             <CardContent>
                 <Typography variant="h3" color="text.primary" sx={{ maxHeight: '40px', overflow: 'hidden' }}>

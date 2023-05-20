@@ -110,6 +110,10 @@ export interface ILocale {
   newSniperResults: string;
   sniperStarted: string;
   clearAll: string;
+  noNotifications: string;
+  selectLanguage: string;
+  updateSubcategory: string;
+  chooseCategory: string;
 
 
   // Months
@@ -212,7 +216,6 @@ export interface ILocale {
   // BACKOFFICE
 
   // Subcategory
-  createSubCategoryCategoryTitle: string;
   createSubCategoryDialogTitle: string;
   createSubCategoryTitle: string;
   createSubCategoryOrder: string;

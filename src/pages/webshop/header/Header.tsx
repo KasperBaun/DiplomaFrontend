@@ -3,12 +3,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './header.scss';
-import LionLogo from '../../../components/LionLogo';
+import LionLogo from '../../../components/svgs/LionLogo';
 import { Dk, Us } from "react-flags-select";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
-import CartDrawer from '@components/CartDrawer';
+import CartDrawer from '@components/cart/CartDrawer';
 import React from 'react';
 import { Grid, IconButton, Tooltip } from '@mui/material';
 

@@ -6,7 +6,7 @@ import UserFeedback from "./UserFeedback";
 import UserLoginDTO from "@models/DTO/UserLoginDTO";
 import { observer } from "mobx-react-lite";
 
-const AuthPage: React.FC = observer(function AuthPage() {
+export const AuthPage: React.FC = observer(() => {
 
     const { authStore } = useContext<IMobXContext>(MobXContext);
     const [activeKey, setActiveKey] = useState<number>(0);
@@ -14,6 +14,7 @@ const AuthPage: React.FC = observer(function AuthPage() {
     const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
     const [variant, setVariant] = useState<'error' | 'warning' | 'success'>('success');
+    
 
     const handleAuthNav = (key: number) => { setActiveKey(key); }
     const handleCloseFeedback = () => setShowFeedback(!showFeedback);
@@ -57,6 +58,7 @@ const AuthPage: React.FC = observer(function AuthPage() {
 
     return (
         <div>
+            {navSwitch()}
             <UserFeedback
                 message={message}
                 open={showFeedback}
@@ -65,10 +67,7 @@ const AuthPage: React.FC = observer(function AuthPage() {
                 horizontalPosition='right'
                 verticalPosition='top'
             />
-            {navSwitch()}
 
         </div>
     )
 });
-
-export default AuthPage;

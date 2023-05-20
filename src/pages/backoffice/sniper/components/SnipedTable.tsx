@@ -31,45 +31,48 @@ export const SnipedTable = observer(({ results }: SnipedTableProps) => {
         }
         handleOpen();
     }
-
-    return (
-        <Container>
-            <TableContainer>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell> {languageStore.currentLanguage.TableEntrySniperSource} </TableCell>
-                            <TableCell> {languageStore.currentLanguage.TableEntrySniperTitle} </TableCell>
-                            <TableCell> {languageStore.currentLanguage.TableEntrySniperBuyNowPrice} </TableCell>
-                            <TableCell> {languageStore.currentLanguage.TableEntrySniperDescription} </TableCell>
-                            <TableCell> {languageStore.currentLanguage.TableEntrySniperImages} </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {results.map((result, index) => (
+    if (results) {
+        return (
+            <Container>
+                <TableContainer>
+                    <Table>
+                        <TableHead>
                             <TableRow>
-                                <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`src_${index + "_" + result.source.split(".")[0]}`}>{result.source}</TableCell>
-                                <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`title_${index + "_" + result.source.split(".")[0]}}`}>{result.description ? result.description.slice(0, 100) : result.dbaItemDescription.slice(0, 100)}</TableCell>
-                                {result.priceEstimate !== null && result.priceEstimate !== "" ? (
-                                    <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`bnp_${index + "_" + result.source.split(".")[0]}}`}>{result.priceEstimate}</TableCell>
-                                ) : (
-                                    result.buyNowPrice !== null ? (
-                                        <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`bnp_${index + "_" + result.source.split(".")[0]}}`}>{result.buyNowPrice}</TableCell>
-                                    ) : (
-                                        <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`bnp_${index + "_" + result.source.split(".")[0]}}`}>{"DKK " + result.dbaItemPrice}</TableCell>
-                                    )
-                                )}
-                                <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`desc_${index + "_" + result.source.split(".")[0]}}`}>{result.description ? result.description : result.dbaItemDescription}</TableCell>
-                                {result.imageUrls[0] ? (
-                                    <TableCell onClick={() => openImageModal(result.imageUrls[0] ? result.imageUrls[0] : result.dbaItemImages[0])} size="small" key={`im_${index}`}>{languageStore.currentLanguage.TableEntrySniperItemUrl}</TableCell>
-                                ) : (<></>)}
+                                <TableCell> {languageStore.currentLanguage.TableEntrySniperSource} </TableCell>
+                                <TableCell> {languageStore.currentLanguage.TableEntrySniperTitle} </TableCell>
+                                <TableCell> {languageStore.currentLanguage.TableEntrySniperBuyNowPrice} </TableCell>
+                                <TableCell> {languageStore.currentLanguage.TableEntrySniperDescription} </TableCell>
+                                <TableCell> {languageStore.currentLanguage.TableEntrySniperImages} </TableCell>
                             </TableRow>
-                        ))}
+                        </TableHead>
+                        <TableBody>
+                            {results?.map((result, index) => (
+                                <TableRow key={"snipertr" + index}>
+                                    <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`src_${index + "_" + result.source.split(".")[0]}`}>{result.source}</TableCell>
+                                    <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`title_${index + "_" + result.source.split(".")[0]}}`}>{result.description ? result.description.slice(0, 100) : result.dbaItemDescription.slice(0, 100)}</TableCell>
+                                    {result.priceEstimate !== null && result.priceEstimate !== "" ? (
+                                        <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`bnp_${index + "_" + result.source.split(".")[0]}}`}>{result.priceEstimate}</TableCell>
+                                    ) : (
+                                        result.buyNowPrice !== null ? (
+                                            <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`bnp_${index + "_" + result.source.split(".")[0]}}`}>{result.buyNowPrice}</TableCell>
+                                        ) : (
+                                            <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`bnp_${index + "_" + result.source.split(".")[0]}}`}>{"DKK " + result.dbaItemPrice}</TableCell>
+                                        )
+                                    )}
+                                    <TableCell onClick={() => handleUrlClick(result.itemUrl ? result.itemUrl : result.dbaItemLink)} key={`desc_${index + "_" + result.source.split(".")[0]}}`}>{result.description ? result.description : result.dbaItemDescription}</TableCell>
+                                    {result.imageUrls[0] ? (
+                                        <TableCell onClick={() => openImageModal(result.imageUrls[0] ? result.imageUrls[0] : result.dbaItemImages[0])} size="small" key={`im_${index}`}>{languageStore.currentLanguage.TableEntrySniperItemUrl}</TableCell>
+                                    ) : (<></>)}
+                                </TableRow>
+                            ))}
 
-                    </TableBody>
-                </Table>
-            </TableContainer>
-            <SniperImageModal show={show} handleClose={handleClose} imageUrl={imageUrl} />
-        </Container>
-    )
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <SniperImageModal show={show} handleClose={handleClose} imageUrl={imageUrl} />
+            </Container>
+        )
+    }
+    return (<></>);
+
 });

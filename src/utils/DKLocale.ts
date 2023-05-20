@@ -140,6 +140,10 @@ export default class DKLocale implements ILocale {
   newSniperResults = "Nye Sniper resultater";
   sniperStarted = "Sniper startet";
   clearAll = "Ryd alle";
+  noNotifications = "Ingen notifikationer";
+  selectLanguage = "Vælg sprog";
+  updateSubcategory = "Opdater underkategori";
+  chooseCategory = "Vælg kategori";
 
   // Months
   january = "Januar";
@@ -368,7 +372,7 @@ export default class DKLocale implements ILocale {
   TableEntrySniperItemUrl = "URL";
   SniperFormMutedText = "Søgeresultater kommer fra lauritz.com og dba.dk";
   SniperFormButtonText = "Søg";
-  SniperFormLabelText = "Indtast produkt du vil søge efter";
+  SniperFormLabelText = "Indtast det produkt du vil søge efter";
   SniperFormTitleText = "Pris Sniper";
 
   // Inventory

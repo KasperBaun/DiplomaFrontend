@@ -1,5 +1,5 @@
 import { Container, Box, TextField, Button, Typography, InputAdornment } from "@mui/material";
-import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { SniperResult } from "@models/SniperResult";
@@ -7,11 +7,9 @@ import Loading from "@components/loading/Loading";
 
 type SniperSearchProps = {
   onSnipeComplete: (result: SniperResult) => void;
-  isSniping: boolean;
-  setIsSniping: Dispatch<SetStateAction<boolean>>;
 }
 
-export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComplete, isSniping, setIsSniping }: SniperSearchProps) => {
+export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComplete }: SniperSearchProps) => {
 
   const [currentPlaceholder, setCurrentPlaceholder] = useState<number>(0);
   const [typedPlaceholder, setTypedPlaceholder] = useState<string>("");
@@ -47,7 +45,7 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
   });
 
   const handleOnSubmitClicked = async () => {
-    setIsSniping(true);
+    sniperStore.isSniping = true;
     const snipedResults: SniperResult = {
       product: {
         name: searchValue,
@@ -75,16 +73,11 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
       </Box>
 
       <Box component="form" noValidate>
-        {/* <Box >
-          <Typography variant="caption">
-            {languageStore.currentLanguage.SniperFormLabelText}
-          </Typography>
-        </Box> */}
 
         <Box marginBottom={1} display="flex" alignItems="flex-end">
           <TextField
             fullWidth
-            disabled={isSniping}
+            disabled={sniperStore.isSniping}
             placeholder={placeholder}
             label={languageStore.currentLanguage.SniperFormLabelText}
             InputLabelProps={{
@@ -99,7 +92,7 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
                 <InputAdornment position="end">
                   <Button
                     variant="contained"
-                    disabled={isSniping}
+                    disabled={sniperStore.isSniping}
                     onClick={handleOnSubmitClicked}
                   >
                     <Typography variant="body2">
@@ -117,7 +110,7 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
             {languageStore.currentLanguage.SniperFormMutedText}
           </Typography>
         </Box>
-        {isSniping && <Loading height={'50px'} />}
+        {sniperStore.isSniping && <Loading height={'50px'} />}
       </Box>
 
     </Container>

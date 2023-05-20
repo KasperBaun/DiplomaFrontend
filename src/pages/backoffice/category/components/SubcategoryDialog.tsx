@@ -1,24 +1,28 @@
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
+import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Snackbar, TextField } from "@mui/material";
 import SubCategory from "@models/SubCategory";
 import Category from "@models/Category";
+import { observer } from "mobx-react-lite";
 
-export interface IProps {
+export interface SubcategoryDialogProps {
     visible: boolean;
     onClose: () => void;
     create?: boolean;
     subcategory?: SubCategory;
 }
 
-const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) => {
+export const SubcategoryDialog = observer(({ onClose, visible, create, subcategory }: SubcategoryDialogProps) => {
 
     const { backofficeStore, languageStore } = useContext(MobXContext);
     const [title, setTitle] = useState<string>("");
     const [url, setUrl] = useState<string>("");
     const [order, setOrder] = useState<number>(0);
     const [description, setDescription] = useState<string>("");
-    const [selectedCategory, setSelectedCategory] = useState<Category>(subcategory ? subcategory : null);
+    const [selectedCategory, setSelectedCategory] = useState<Category>(subcategory ? subcategory.category : null);
+    const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+    const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
+    const [alertText, setAlertText] = useState<string>("");
 
     async function createSubcategory() {
         const subCategory: SubCategory = {
@@ -33,44 +37,53 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
 
         try {
             await backofficeStore.createSubCategory(subCategory)
-            alert(languageStore.currentLanguage.createSubCategorySuccessMessage);
+            setAlertType("success");
+            setAlertText(languageStore.currentLanguage.createSuccess);
         }
         catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createSubCategoryFailedMessage);
+            setAlertType("warning");
+            setAlertText(languageStore.currentLanguage.createFailed);
         }
+        setShowSnackbar(true);
+        
     }
 
     async function updateSubcategory(): Promise<void> {
-        const subCategory: SubCategory = {
-            id: subcategory.id,
-            name: title,
-            imageUrl: url,
-            order: order,
-            description: description,
-            categoryId: selectedCategory.id,
-            category: selectedCategory
-        };
+        subcategory.name = title === "" ? subcategory.name : title;
+        subcategory.imageUrl = url === "" ? subcategory.imageUrl : url;
+        subcategory.order = order === 0 ? subcategory.order : order;
+        subcategory.description = description === "" ? subcategory.description : description;
 
         try {
-            await backofficeStore.updateSubCategory(subCategory)
-            // TODO: Change this notification to a toast or something that does not require the user to click a button to confirm.
-            alert(languageStore.currentLanguage.createSubCategoryUpdateSuccessMessage);
+            await backofficeStore.updateSubCategory(subcategory)
+            setAlertType("success");
+            setAlertText(languageStore.currentLanguage.updateSuccess);
         }
         catch (err) {
             console.log(err);
-            alert(languageStore.currentLanguage.createSubCategoryUpdateFailedMessage);
+            setAlertType("warning");
+            setAlertText(languageStore.currentLanguage.createFailed);
         }
+        onClose();
+    }
+
+    const handleCloseDialog = () => {
+        setShowSnackbar(false);
         onClose();
     }
 
 
     const handleSelectedCategoryChange = (event: SelectChangeEvent) => {
-        //console.log(event.target.value);
         const categoryId: number = parseInt(event.target.value);
         const category: Category = backofficeStore.getCategory(categoryId);
         if (category) {
-            setSelectedCategory(category);
+            if (subcategory) {
+                subcategory.category = category;
+                subcategory.categoryId = categoryId;
+            } else {
+                setSelectedCategory(category);
+            }
         }
     };
 
@@ -83,7 +96,7 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
         return (
             <Dialog open={visible} onClose={onClose}>
                 <DialogTitle variant="h2">
-                    {create ? languageStore.currentLanguage.createSubCategoryDialogTitle : languageStore.currentLanguage.updateCategoryDialogTitle}
+                    {create ? languageStore.currentLanguage.createSubCategoryDialogTitle : languageStore.currentLanguage.updateSubcategory}
                 </DialogTitle>
                 <DialogContent>
 
@@ -100,13 +113,14 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
                         <Grid item xs={12} marginTop={'20px'}>
                             <FormControl fullWidth>
                                 <InputLabel id="category-select-label">
-                                    {languageStore.currentLanguage.createSubCategoryCategoryTitle}
+                                    {languageStore.currentLanguage.chooseCategory}
                                 </InputLabel>
                                 <Select
                                     labelId="category-select-label"
                                     id="category-select"
-                                    value={selectedCategory ? selectedCategory.id.toString() : ''}
-                                    label={languageStore.currentLanguage.createSubCategoryCategoryTitle}
+                                    value={subcategory ? subcategory.categoryId.toString() : selectedCategory ? selectedCategory.id.toString() : ''}
+                                    defaultValue={''}
+                                    label={languageStore.currentLanguage.chooseCategory}
                                     onChange={handleSelectedCategoryChange}
                                 >
                                     {backofficeStore.Categories.map((category, index) => (
@@ -180,9 +194,10 @@ const SubcategoryDialog = ({ onClose, visible, create, subcategory }: IProps) =>
                         {create ? languageStore.currentLanguage.create : languageStore.currentLanguage.update}
                     </Button>
                 </DialogActions>
+                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={showSnackbar} autoHideDuration={2000} onClose={handleCloseDialog}>
+                    <Alert severity={alertType}>{alertText}</Alert>
+                </Snackbar>
             </Dialog>
         )
     }
-}
-
-export default SubcategoryDialog;
+});

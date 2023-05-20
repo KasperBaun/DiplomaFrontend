@@ -20,7 +20,7 @@ import OrderElements from '@models/OrderElements';
 import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
-import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
+import { Notification } from '@models/types/Notification';
 
 export class BackofficeStore {
 
@@ -293,8 +293,11 @@ export class BackofficeStore {
 
     public async deleteSubCategory(id: number): Promise<boolean> {
         try {
-            await this.apiService.deleteSubCategory(id);
-            this.refreshSubCategories();
+            const result = await this.apiService.deleteSubCategory(id);
+            runInAction(() => {
+                const index = this._subcategories.findIndex(subcat => subcat.id === id);
+                this._subcategories.splice(index, 1);
+            });
         } catch (error) {
             console.log(error);
             return false;
@@ -304,31 +307,31 @@ export class BackofficeStore {
 
     public async createSubCategory(subCategory: SubCategory): Promise<void> {
         try {
-            await this.apiService.createSubCategory(subCategory);
-            runInAction(async () => await this.refreshSubCategories());
+            const result = await this.apiService.createSubCategory(subCategory);
+            result.category = this.getCategory(result.categoryId);
+
+            runInAction(() => {
+                this._subcategories.push(result);
+            });
+            return Promise.resolve();
         }
         catch (error) {
-            console.log("Failed updating subcategory: ", error);
+            console.log("Failed creating subcategory: ", error);
         }
-        return;
     }
     public async updateSubCategory(subCategory: SubCategory): Promise<boolean> {
         try {
-            await this.apiService.updateSubCategory(subCategory);
-            runInAction(async () => await this.refreshSubCategories());
+            const result = await this.apiService.updateSubCategory(subCategory);
+            result.category = this.getCategory(result.categoryId);
+            runInAction(() => {
+                const index = this._subcategories.findIndex(subcat => subcat.id === result.id);
+                this._subcategories[index] = result;
+            });
         }
         catch (error) {
             console.log("Failed updating subcategory: ", error);
         }
         return;
-    }
-
-    private async refreshSubCategories(): Promise<void> {
-        await runInAction(async () => {
-            this._subcategories = await this.apiService.getSubCategories();
-            this.mapCategoryToSubcategory(this._subcategories);
-            this.mapSubCategoriesToCategoryId(this._subcategories);
-        });
     }
 
 
@@ -463,13 +466,12 @@ export class BackofficeStore {
 
     public async createCategory(category: Category): Promise<void> {
         try {
-            await this.apiService.createCategory(category).then(() => {
+            await this.apiService.createCategory(category).then((result) => {
                 runInAction(() => {
-                    this._categories.push(category);
+                    this._categories.push(result);
                 }
                 )
             });
-            return;
         } catch (err) {
             console.log("Failed creating new category. Error: ", err);
         }
@@ -480,26 +482,19 @@ export class BackofficeStore {
         runInAction(() => {
             this._categories = this._categories.filter(c => c.id !== id);
         })
-        return;
     }
 
     public async updateCategory(category: Category): Promise<void> {
         try {
-            await this.apiService.updateCategory(category)
-                .then(async () => await this.refreshCategories());
-            return;
+            await this.apiService.updateCategory(category);
+            runInAction(() => {
+                const index = this._categories.findIndex(c => c.id === category.id);
+                this._categories[index] = category;
+            });
         } catch (err) {
             console.log("Failed creating new category. Error: ", err);
         }
-        return;
     }
-
-    private async refreshCategories(): Promise<void> {
-        await runInAction(async () => {
-            this._categories = await this.apiService.getCategories();
-        });
-    }
-
 
     /* Chartdata */
     public getChartData(year: number, months?: number[]) {

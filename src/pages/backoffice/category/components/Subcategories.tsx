@@ -5,9 +5,9 @@ import Table from "react-bootstrap/esm/Table";
 import SubCategory from "@models/SubCategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
 import Category from "@models/Category";
-import Loading from "@components/loading/LoadingLion";
-import SubcategoryDialog from "./SubcategoryDialog";
-import { Button, Grid } from "@mui/material";
+import LoadingLion from "@components/loading/LoadingLion";
+import { SubcategoryDialog } from "./SubcategoryDialog";
+import { Alert, Button, Grid, Snackbar } from "@mui/material";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
 
 export interface ISubcategoriesProps {
@@ -26,6 +26,9 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
     const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
     const onOpenCreate = () => { setSelectedSubcategory(null); setCreate(true); setShowDialog(true); };
     const onClose = () => setShowDialog(false);
+    const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
+    const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
+    const [alertText, setAlertText] = useState<string>("");
 
     /* Define the event handlers for the buttons */
     const handleUpdateClick = (subCat: SubCategory) => {
@@ -39,13 +42,17 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
         if (subCatToBeDeleted !== null) {
             const deleted = await backofficeStore.deleteSubCategory(subCatToBeDeleted.id);
             if (deleted) {
-                alert("Successfully deleted category: " + subCatToBeDeleted.name)
+                setAlertType("success");
+                setAlertText(languageStore.currentLanguage.deleteSuccess);
             } else {
-                alert("Failed to delete category: " + subCatToBeDeleted.name)
+                setAlertType("error");
+                setAlertText(languageStore.currentLanguage.deleteFailed + subCatToBeDeleted.name);
             }
         } else {
-            alert("Could not find subcategory with id: " + selectedSubcategory.id);
+            setAlertType("error");
+            setAlertText(languageStore.currentLanguage.deleteFailed + "Could not find subcategory with id: " + selectedSubcategory.id);
         }
+        setShowSnackbar(true);
         setShowConfirmDelete(false);
     }
 
@@ -54,21 +61,24 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
         setShowConfirmDelete(true);
     }
 
+    const handleCloseDialog = () => {
+        setShowSnackbar(false);
+        onClose();
+    }
+
 
     if (backofficeStore.subCategories) {
         const subcats = props.selectedCategory ? backofficeStore.subCategoriesByCategoryID(props.selectedCategory.id) : backofficeStore.subCategories;
 
         return (
 
-            <Grid container >
+            <Grid container margin={'0'} >
                 {/* Modals for creating/updating */}
                 <SubcategoryDialog visible={showDialog} onClose={onClose} create={create} subcategory={selectedSubcategory} />
                 <ConfirmDeleteDialog visible={showConfirmDelete} objectName={selectedSubcategory ? selectedSubcategory.name : ''} onConfirmDeleteClicked={handleOnConfirmDeleteClick} onCancelClicked={() => setShowConfirmDelete(false)} />
 
-                <Grid item xs={12} display={'flex'} justifyContent={'end'} margin='10px'>
-                    <Grid item xs={4} display={'flex'} justifyContent={'end'} alignContent={'end'}>
-                        <Button style={{ width: "12rem" }} variant="contained" onClick={onOpenCreate}>{languageStore.currentLanguage.createSubCategoryDialogTitle}</Button>
-                    </Grid>
+                <Grid item xs={12} display={'flex'} justifyContent={'start'} my='10px'>
+                    <Button style={{ width: "12rem" }} variant="contained" onClick={onOpenCreate}>{languageStore.currentLanguage.createSubCategoryDialogTitle}</Button>
                 </Grid>
 
                 {/* Subcategorycards */}
@@ -97,12 +107,15 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
                         ))}
                     </tbody>
                 </Table>
+                <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={showSnackbar} autoHideDuration={2000} onClose={handleCloseDialog}>
+                    <Alert severity={alertType}>{alertText}</Alert>
+                </Snackbar>
             </Grid>
         )
     }
     else
         return (
-            <Loading />
+            <LoadingLion />
         )
 });
 

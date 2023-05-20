@@ -6,7 +6,7 @@ import { RootStore } from './RootStore';
 import SniperModel from '@models/SniperModel';
 import { Product } from '@models/Product';
 import { SniperResult } from '@models/SniperResult';
-import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
+import { Notification } from '@models/types/Notification';
 
 
 export class SniperStore {
@@ -20,6 +20,10 @@ export class SniperStore {
 
     /* Sniperresults */
     private _sniperResults: SniperResult[] = [];
+
+    /* State */
+    private _isSniping: boolean = false;
+
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
@@ -74,9 +78,11 @@ export class SniperStore {
     }
 
     public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
+        this._isSniping = true;
         const startNotification: Notification = {
             message: this.rootStore.languageStore.currentLanguage.sniperStarted + "...",
-            action: null
+            action: null,
+            actionMessage: null
         };
         runInAction(() => {
             this.rootStore.backofficeStore.addNotification(startNotification);
@@ -85,12 +91,25 @@ export class SniperStore {
         await this.rootStore.sniperStore.SnipeMultiple(products);
         const notification: Notification = {
             message: this.rootStore.languageStore.currentLanguage.newSniperResults,
-            action: () => navigateTo(4)
+            action: () => navigateTo(4),
+            actionMessage: this.rootStore.languageStore.currentLanguage.show
         }
 
         runInAction(() => {
             this.rootStore.backofficeStore.removeNotification(startNotification);
             this.rootStore.backofficeStore.addNotification(notification);
         })
+        this._isSniping = false;
     }
+
+    public get isSniping(): boolean {
+        return this._isSniping;
+    }
+
+    public set isSniping(value: boolean) {
+        runInAction(() => {
+            this._isSniping = value;
+        });
+    }
+
 }

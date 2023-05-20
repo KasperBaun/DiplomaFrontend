@@ -1,4 +1,4 @@
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -65,7 +65,7 @@ const SilverAndGold = () => {
         )
     } else
         return (
-            <Loading />
+            <LoadingLion />
         )
 }
 

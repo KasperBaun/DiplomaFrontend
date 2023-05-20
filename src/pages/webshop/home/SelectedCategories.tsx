@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import Category from "@models/Category";
 import { useNavigate } from "react-router-dom";
-import Loading from "@components/loading/LoadingLion";
+import LoadingLion from "@components/loading/LoadingLion";
 
 export const SelectedCategories = observer(function SelectedCategories() {
 
@@ -56,6 +56,6 @@ export const SelectedCategories = observer(function SelectedCategories() {
             </Container>
         )
     else {
-        return <Loading />
+        return <LoadingLion />
     }
 });

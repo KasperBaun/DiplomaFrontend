@@ -140,6 +140,10 @@ export default class ENLocale implements ILocale {
   newSniperResults = "New sniper results";
   sniperStarted = "Sniper started";
   clearAll = "Clear all";
+  noNotifications = "No notifications";
+  selectLanguage = "Select language";
+  updateSubcategory = "Update Subcategory";
+  chooseCategory = "Choose category";
 
   // Months
   january = "January";

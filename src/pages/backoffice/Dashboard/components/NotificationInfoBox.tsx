@@ -3,21 +3,9 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
 
-export type Notification = {
-    message: string;
-    action: () => void;
-}
-
 export const NotificationInfoBox = observer(() => {
 
     const { backofficeStore, languageStore } = useContext(MobXContext);
-
-    const valueStyling: React.CSSProperties = {
-        display: 'flex',
-        flexDirection: 'column',
-        borderRadius: '1rem',
-
-    };
 
     return (
         <Grid item xs={12} sx={valueStyling} overflow='auto'>
@@ -43,3 +31,11 @@ export const NotificationInfoBox = observer(() => {
         </Grid>
     )
 });
+
+
+const valueStyling: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: '1rem',
+
+};
