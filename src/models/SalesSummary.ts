@@ -1,4 +1,4 @@
-export default class SalesSummary{
+export class SalesSummary{
     totalSales?: number;
     totalAmount? : number;
 }

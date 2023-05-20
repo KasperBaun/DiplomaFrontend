@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import { Button, Grid, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
@@ -17,7 +17,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
     /* Define state for products and inject stores */
     const pageSizeAmount: number = 10;
     const { languageStore, backofficeStore } = useContext(MobXContext);
-    const [productItems, setProductItems] = useState<ProductItem[]>(backofficeStore.ProductItems);
+    const [productItems] = useState<ProductItem[]>(backofficeStore.ProductItems);
     const [displayedProductItems, setDisplayedProductItems] = useState<ProductItem[]>(productItems.slice(0, pageSizeAmount))
     const [currentDisplayValue, setCurrentDisplayValue] = useState<number>(1);
 

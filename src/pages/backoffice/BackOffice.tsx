@@ -5,24 +5,27 @@ import ColorConfigs from "@styles/ColorConfigs";
 import Sidebar from "./navigation/Sidebar";
 import Topbar from "./navigation/Topbar";
 import { useEffect, useContext, useState } from "react";
-import Dashboard from "./Dashboard/dashboard";
-import SniperPage from "./sniper/SniperPage";
+import { Dashboard } from "./Dashboard/dashboard";
+import { SniperPage } from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
-import SalesList from "./sales/SalesList";
+import { SalesList } from "./sales/SalesList";
 import Orders from "./orders/Orders";
 import Analysis from "./Dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
 import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
+import { observer } from "mobx-react-lite";
+import LoadingLion from "@components/loading/LoadingLion";
+import { Constants } from "@utils/Constants";
 
-const Backoffice: React.FC = function Backoffice() {
+export const Backoffice: React.FC = observer(() => {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
     const { rootStore } = useContext(MobXContext);
 
     const navSwitch = () => {
         switch (activeNavKey) {
-            case 0: return (<Dashboard />)
+            case 0: return (<Dashboard setNavKey={setActiveNavKey} />)
             case 1: return (<CategoryManager />)
             // case 2: return (<Subcategories />)
             case 3: return (<ProductManager />)
@@ -34,7 +37,7 @@ const Backoffice: React.FC = function Backoffice() {
         }
     }
 
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
     const handleToggleSidebarOpenClicked = () => setSidebarOpen(!sidebarOpen);
 
     useEffect(() => {
@@ -46,40 +49,47 @@ const Backoffice: React.FC = function Backoffice() {
         backofficeStoreLoaded();
     });
 
-    return (
-        <Box sx={{ display: "flex" }}>
-            <Box
-                component="nav"
-                sx={{
-                    flexShrink: 0
-                }}
-            >
-                <Sidebar
-                    sidebarOpen={sidebarOpen}
-                    setNavKey={setActiveNavKey}
-                />
-            </Box>
-            <Box
-                component="main"
-                sx={{
-                    flexGrow: 1,
-                    backgroundColor: ColorConfigs.mainBg
-                }}
-            >
-                <Stack>
-                    <Item>
-                        <Topbar
-                            sidebarOpen={sidebarOpen}
-                            setSidebarOpen={handleToggleSidebarOpenClicked}
-                        />
-                    </Item>
-                    <Item>
-                        {navSwitch()}
-                    </Item>
-                </Stack>
-            </Box>
-        </Box >
-    );
-};
+    if (!rootStore.isBackofficeLoaded) {
+        return <LoadingLion color={Constants.primaryColor} />
+    }
+    else {
 
-export default Backoffice;
+
+        return (
+            <Box sx={{ display: "flex" }}>
+                <Box
+                    component="nav"
+                    sx={{
+                        flexShrink: 0
+                    }}
+                >
+                    <Sidebar
+                        sidebarOpen={sidebarOpen}
+                        setNavKey={setActiveNavKey}
+                    />
+                </Box>
+                <Box
+                    component="main"
+                    sx={{
+                        flexGrow: 1,
+                        backgroundColor: ColorConfigs.mainBg
+                    }}
+                >
+                    <Stack>
+                        <Item>
+                            <Topbar
+                                sidebarOpen={sidebarOpen}
+                                setSidebarOpen={handleToggleSidebarOpenClicked}
+                                navigateTo={setActiveNavKey}
+                            />
+                        </Item>
+                        <Item>
+                            {navSwitch()}
+                        </Item>
+                    </Stack>
+                </Box>
+            </Box >
+        );
+    }
+}
+);

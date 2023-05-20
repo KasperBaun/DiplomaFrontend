@@ -1,4 +1,4 @@
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import { Grid } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";

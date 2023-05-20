@@ -5,7 +5,7 @@ import Table from "react-bootstrap/esm/Table";
 import SubCategory from "@models/SubCategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
 import Category from "@models/Category";
-import Loading from "@components/loading/Loading";
+import Loading from "@components/loading/LoadingLion";
 import SubcategoryDialog from "./SubcategoryDialog";
 import { Button, Grid } from "@mui/material";
 import ConfirmDeleteDialog from "./ConfirmDeleteDialog";

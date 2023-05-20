@@ -20,7 +20,7 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
 import { useContext, useState } from 'react';
 import { Avatar, Backdrop } from '@mui/material';
-import Loading from '@components/loading/Loading';
+import Loading from '@components/loading/LoadingLion';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import UserLoginDTO from '@models/DTO/UserLoginDTO';
 import { NavLink } from 'react-router-dom';

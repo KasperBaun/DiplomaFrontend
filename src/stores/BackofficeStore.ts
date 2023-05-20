@@ -14,14 +14,16 @@ import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import ProductItemDetails from '@models/ProductItemDetails';
 import CategoryProductView from '@models/CategoryProductView';
 import Payment from '@models/Payment';
-import SalesSummary from '@models/SalesSummary';
+import { SalesSummary } from '@models/SalesSummary';
 import Order from '@models/Order';
 import OrderElements from '@models/OrderElements';
 import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
-
+import { ChartData } from '@models/ChartData';
+import { Notification } from '@backoffice/Dashboard/components/NotificationInfoBox';
 
 export class BackofficeStore {
+
     private static _Instance: BackofficeStore;
     private rootStore: RootStore;
     private prefix: string = `%c[BackofficeStore]`;
@@ -43,6 +45,8 @@ export class BackofficeStore {
     private _salesSummary: SalesSummary[] = [];
     private _orders: Order[] = [];
     private _orderElements: OrderElements[] = [];
+    private months: string[] = [];
+    private _bestSellingProducts: Product[] = [];
 
     /* Views */
     public categoryProducts: CategoryProductView[] = [];
@@ -57,11 +61,20 @@ export class BackofficeStore {
     private _productItemMap: Map<number, ProductItem> = new Map();
     private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
 
+    /* Chart data */
+    private _chartDataByYearMap: Map<number, ChartData[]> = new Map();
+    private _availableYears: number[] = [];
+
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
+
+
+
+    /* Notifications */
+    private _notifications: Notification[] = [];
 
     public async init(): Promise<boolean> {
         runInAction(() => {
@@ -77,6 +90,7 @@ export class BackofficeStore {
         // Get Pricehistories
         const pricehistories = await this.apiService.getPriceHistories();
         runInAction(() => {
+            this.months = this.getMonths();
             this._categories = categories;
             this._categoryMap = this.createCategoryMap(this._categories);
 
@@ -101,7 +115,7 @@ export class BackofficeStore {
             this._productItemMap = this.createProductItemsMap(this.productItems);
             this.productItemDetails = productItemDetails;
             this.categoryProducts = categoryProductViews;
-            
+
         });
 
         const payments = await this.apiService.getPayments()
@@ -109,14 +123,31 @@ export class BackofficeStore {
 
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
         const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
-        const orderElements: OrderElements[] = await this.apiService.getOrderElements();
-        
+        let orderElements: OrderElements[] = await this.apiService.getOrderElements();
+        orderElements = this.mapOrderElementsToProductItems(orderElements, this.productItems);
+        const orders = this.generateOrders(orderDTOs, orderElements);
+
+
         runInAction(() => {
             this._payments = payments;
             this._salesSummary = salesSummary;
             this._orderElements = orderElements;
-            this._orders = this.generateOrders(orderDTOs, this._orderElements);
+            this._orders = orders;
             this.orderDetails = orderDetails;
+        })
+
+        const availableYears = this.calculateYearsAvailable(orders);
+        const chartDataMap: Map<number, ChartData[]> = new Map<number, ChartData[]>();
+        for (let year of availableYears) {
+            chartDataMap.set(year, this.createChartDataByYear(year, orders, this.months));
+        }
+
+        const bestSellingProducts = await this.apiService.getBestSellingProducts(20);
+
+        runInAction(() => {
+            this._availableYears = availableYears;
+            this._chartDataByYearMap = chartDataMap;
+            this._bestSellingProducts = bestSellingProducts;
             this.loading = false;
             this.loaded = true;
         })
@@ -142,8 +173,8 @@ export class BackofficeStore {
     /* Orders */
     private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
         const orders: Order[] = [];
-        for (var orderDTO of ordersDTO) {
-            const orderOrderElements = orderElements.filter(oe => oe.orderId === orderDTO.id);
+        for (let orderDTO of ordersDTO) {
+
             const order: Order = new Order();
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
@@ -152,10 +183,34 @@ export class BackofficeStore {
             order.deliveryStatus = orderDTO.deliveryStatus;
             order.discountCode = orderDTO.discountCode;
             order.active = orderDTO.active;
-            order.orderElements = orderOrderElements;
+            order.orderElements = [];
+            order.createdDate = new Date(orderDTO.createdDate);
+            for (let orderElementId of orderDTO.orderElementIDs) {
+                const orderElement = orderElements.find(oe => oe.id === orderElementId);
+                if (orderElement) {
+                    order.orderElements.push(orderElement);
+                }
+
+            }
             orders.push(order);
         }
         return orders;
+    }
+
+    private mapOrderElementsToProductItems(orderElementsDTO: OrderElements[], productItems: ProductItem[]): OrderElements[] {
+        const orderElements: OrderElements[] = [];
+        for (let orderElementDTO of orderElementsDTO) {
+            const productItem = productItems.find(pi => pi.id === orderElementDTO.productItemId);
+            if (productItem) {
+                const orderElement: OrderElements = new OrderElements();
+                orderElement.id = orderElementDTO.id;
+                orderElement.orderId = orderElementDTO.orderId;
+                orderElement.productItemId = orderElementDTO.productItemId;
+                orderElement.productItem = productItem;
+                orderElements.push(orderElement);
+            }
+        }
+        return orderElements;
     }
 
     public get Orders(): Order[] {
@@ -167,12 +222,17 @@ export class BackofficeStore {
         return this._payments;
     }
 
-    public set Payments(value: Payment[]) {
-        this._payments = value;
-    }
-
     public get SalesSummaries(): SalesSummary[] {
         return this._salesSummary;
+    }
+
+    public getPaymentsSortedByDate(direction: 'asc' | 'desc', amount?: number) {
+        const directionCondition = direction === 'asc' ? 1 : -1;
+        const sortedPayments = [...this._payments].sort(
+            (a: Payment, b: Payment) =>
+                directionCondition * (new Date(b.datePaid).getTime() - new Date(a.datePaid).getTime())
+        );
+        return sortedPayments.slice(0, amount ? amount : undefined);
     }
 
     public getPayment(id: number): Payment {
@@ -181,12 +241,6 @@ export class BackofficeStore {
 
     public async createPayment(payment: Payment): Promise<Payment> {
         return await this.apiService.createPayment(payment);
-    }
-
-    private async refreshPayments(): Promise<void> {
-        await runInAction(async () => {
-            this._payments = await this.apiService.getPayments();
-        });
     }
 
     private async refreshSalesSummary(): Promise<void> {
@@ -322,6 +376,8 @@ export class BackofficeStore {
 
             const poImages: Image[] = this._images.filter(img => img.productItemId === productItemDTO.id);
             const poPriceHistory: PriceHistory[] = this._pricehistories.filter(ph => ph.productItemId === productItemDTO.id);
+            const createdDate = productItemDTO.createdDate ? new Date(productItemDTO.createdDate) : undefined;
+            const soldDate = productItemDTO.soldDate ? new Date(productItemDTO.soldDate) : undefined;
 
             const productItem: ProductItem = {
                 id: productItemDTO.id,
@@ -334,8 +390,8 @@ export class BackofficeStore {
                 product: productMap.get(productItemDTO.productId),
                 purchasePrice: productItemDTO.purchasePrice,
                 currentPrice: productItemDTO.currentPrice,
-                createdDate: productItemDTO.createdDate,
-                soldDate: productItemDTO.soldDate,
+                createdDate: createdDate,
+                soldDate: soldDate,
                 images: poImages,
                 priceHistories: poPriceHistory
 
@@ -443,4 +499,104 @@ export class BackofficeStore {
             this._categories = await this.apiService.getCategories();
         });
     }
+
+
+    /* Chartdata */
+    public getChartData(year: number, months?: number[]) {
+        let result: ChartData[] = [];
+        if (!months) {
+            result = this._chartDataByYearMap.get(year);
+        } else {
+            result = this._chartDataByYearMap.get(year).filter(data => months.includes(data.monthInt));
+        }
+
+        return result;
+    }
+
+    private calculateYearsAvailable(orders: Order[]): number[] {
+        const years: number[] = [];
+        for (var order of orders) {
+            if (!years.includes(order.createdDate.getFullYear())) {
+                years.push(order.createdDate.getFullYear());
+            }
+        }
+        return years.sort((a, b) => b - a);
+    }
+
+    public getYearsAvailable(): number[] {
+        return this._availableYears;
+    }
+
+    getStorageValue() {
+        let storageValue: number = 0;
+        for (var productItem of this._productItems.filter(p => p.soldDate === null || p.soldDate === undefined)) {
+            storageValue += productItem.currentPrice;
+        }
+        return storageValue;
+    }
+
+    public createChartDataByYear(year: number, orders: Order[], months: string[]): ChartData[] {
+        const orderData = orders.filter(o => o.createdDate.getFullYear() === year);
+
+        const data = months.map((month, index) => {
+            const monthInt = index + 1;
+            const ordersInMonth = orderData.filter(o => o.createdDate.getMonth() + 1 === monthInt);
+            let monthRevenue = 0;
+            for (var order of ordersInMonth) {
+                monthRevenue += this.getPayment(order.paymentId).amount;
+            }
+
+            const randomExpenseAmount = monthRevenue * (Math.random() * (0.85 - 0.35) + 0.35);
+
+            return { month: month, monthInt: monthInt, revenue: monthRevenue, expenses: randomExpenseAmount };
+        });
+
+        return data;
+    }
+
+    public getOrdersByYear(year: number): Order[] {
+        return this._orders.filter(o => o.createdDate.getFullYear() === year);
+    }
+
+    private getMonths(): string[] {
+        return [
+            this.rootStore.languageStore.currentLanguage.jan,
+            this.rootStore.languageStore.currentLanguage.feb,
+            this.rootStore.languageStore.currentLanguage.mar,
+            this.rootStore.languageStore.currentLanguage.apr,
+            this.rootStore.languageStore.currentLanguage.may,
+            this.rootStore.languageStore.currentLanguage.jun,
+            this.rootStore.languageStore.currentLanguage.jul,
+            this.rootStore.languageStore.currentLanguage.aug,
+            this.rootStore.languageStore.currentLanguage.sep,
+            this.rootStore.languageStore.currentLanguage.oct,
+            this.rootStore.languageStore.currentLanguage.nov,
+            this.rootStore.languageStore.currentLanguage.dec,
+        ];
+    }
+
+    public get BestSellingProducts(): Product[] {
+        return this._bestSellingProducts;
+    }
+
+    /* Notfications */
+    public get Notifications(): Notification[] {
+        return this._notifications;
+    }
+    public removeNotification(notification: Notification): void {
+        runInAction(() => {
+            this._notifications = this._notifications.filter(n => n !== notification);
+        })
+    }
+    public addNotification(notification: Notification): void {
+        runInAction(() => {
+            this._notifications.push(notification);
+        })
+    }
+    public clearAllNotifications(): void {
+        runInAction(() => {
+            this._notifications = [];
+        })
+    }
 }
+

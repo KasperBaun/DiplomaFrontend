@@ -1,70 +1,96 @@
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import React from "react";
+import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
+import { useContext } from "react";
+import { observer } from 'mobx-react-lite';
+import MobXContext from '@stores/MobXContext';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
+import { Box, Typography } from '@mui/material';
 
-function createData(date: string, sale?: number, purchase?: number) {
-    return { date, sale, purchase };
+export type EconomyWidgetProps = {
+    year: number;
 }
-  
-const data = [
-    createData('3/03-2023', 0, 20000),
-    createData('4/03-2023', 4000, 300),
-    createData('5/03-2023', 600, 4000),
-    createData('6/03-2023', 8000, 1200),
-    createData('7/03-2023', 1500, 2450),
-    createData('8/03-2023', 2000, 100),
-    createData('9/03-2023', 2400, 1000),
-    createData('10/03-2023', 24000, 10000),
-    createData('11/03-2023', 1000, 1000),
-];
 
-
-interface IProps {
-    title : string;
-    salgsformat : string;
+interface CustomTooltipProps {
+    payload?: any[];
+    label?: string;
+    active?: boolean;
 }
-const EconomyWidget = ({title, salgsformat} : IProps) => {
+
+export const EconomyWidget = observer(({ year }: EconomyWidgetProps) => {
+    const { backofficeStore, languageStore } = useContext(MobXContext);
+    const data = backofficeStore.getChartData(year);
+
+
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+    const currency = languageStore.currentLanguage.currency;
+
+    const CustomTooltip: React.FC<CustomTooltipProps> = ({ payload, label, active }) => {
+
+        if (active) {
+            return (
+                <Box sx={{ margin: '10px' }}>
+                    <Typography>
+                        {label}
+                    </Typography>
+                    <Typography sx={{ color: 'green' }}>
+                        {languageStore.currentLanguage.revenue}: {ExtentionMethods.formatPrice(parseInt((payload[0]?.value?.toString())), currentLanguagecode, currency)}
+                    </Typography>
+                    <Typography sx={{ color: 'red' }}>
+                        {languageStore.currentLanguage.expenses}: {ExtentionMethods.formatPrice(parseInt((payload[1]?.value?.toString())), currentLanguagecode, currency)}
+                    </Typography>
+                </Box>
+            );
+        }
+        return null;
+    }
+
     return (
-        <React.Fragment>
-            <h3>{title}</h3>
-            <ResponsiveContainer width="95%" height="80%">
-                <LineChart
+        <ResponsiveContainer width="95%" height="80%">
+            <LineChart
                 width={500} height={250}
-                data={data}
+                data={data.map((chartData => {
+                    return {
+                        date: chartData.month,
+                        revenue: chartData.revenue,
+                        expenses: chartData.expenses
+                    }
+                }))}
                 margin={{
                     top: 16,
                     right: 16,
                     bottom: 0,
                     left: 24,
                 }}
-                >
-                <XAxis dataKey="date"/>
+            >
+                <XAxis dataKey="date" />
                 <YAxis>
                     <Label
-                    angle={270}
-                    position="left"
-                    style={{
-                        textAnchor: 'middle',
-                    }}
+                        angle={270}
+                        position="left"
+                        alignmentBaseline='middle'
+                        style={{
+                            textAnchor: 'middle',
+
+                        }}
+
                     >
-                        { salgsformat }
                     </Label>
                 </YAxis>
                 <Line
-                    isAnimationActive={false}
+                    isAnimationActive={true}
                     type="monotone"
-                    dataKey="sale"
+                    dataKey="revenue"
                     stroke="#0AC527"
                 />
                 <Line
-                    isAnimationActive={false}
+                    isAnimationActive={true}
                     type="monotone"
-                    dataKey="purchase"
+                    dataKey="expenses"
                     stroke="#ED2E2E"
                 />
-                </LineChart>
-            </ResponsiveContainer>
-        </React.Fragment>
+                <Tooltip
+                    content={<CustomTooltip />}
+                />
+            </LineChart>
+        </ResponsiveContainer >
     )
-}
-
-export default EconomyWidget;
+});

@@ -5,7 +5,6 @@ import { ProductItem } from "@models/ProductItem";
 import Category from "@models/Category";
 import SubCategory from "@models/SubCategory";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/material";
-import { ProductItemWeb } from "@models/ProductItemWeb";
 import { ProductSearchBar } from "./ProductSearchBar";
 
 export type ProductSearchProps = {

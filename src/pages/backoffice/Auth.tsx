@@ -5,9 +5,9 @@ import AuthPage from './auth/AuthPage';
 import { useContext, useEffect } from 'react';
 import { ColorModeContext, useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Backoffice from './BackOffice';
+import { Backoffice } from './BackOffice';
 import Unauthorized from './auth/Unauthorized';
-import Loading from '@components/loading/Loading';
+import Loading from '@components/loading/LoadingLion';
 
 const Auth = observer(() => {
     const { authStore } = useContext(MobXContext);

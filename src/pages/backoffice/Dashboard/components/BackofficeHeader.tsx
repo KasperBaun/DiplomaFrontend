@@ -1,12 +1,12 @@
 import { Box, Typography } from "@mui/material";
 
-export interface IHeaderProps {
+export type HeaderProps = {
     title: string;
     subtitle: string;
     onClick?: () => void;
 }
 
-const BackofficeHeader: React.FC<IHeaderProps> = function BackofficeHeader(props: IHeaderProps) {
+const BackofficeHeader: React.FC<HeaderProps> = function BackofficeHeader(props: HeaderProps) {
 
     return (
         <Box onClick={props.onClick}>
@@ -19,7 +19,9 @@ const BackofficeHeader: React.FC<IHeaderProps> = function BackofficeHeader(props
             </Typography>
             <Typography
                 variant="h5"
-            >{props.subtitle}</Typography>
+            >
+                {props.subtitle}
+            </Typography>
         </Box>
     )
 }

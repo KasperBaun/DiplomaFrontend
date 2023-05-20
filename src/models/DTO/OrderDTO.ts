@@ -7,4 +7,5 @@ export default class OrderDTO {
     discountCode: string | null;
     active: Boolean;
     orderElementIDs: number[];
+    createdDate: Date;
 }

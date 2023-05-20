@@ -97,7 +97,76 @@ export default class DKLocale implements ILocale {
   confirmDeleteText = "Er du sikker på at du vil slette dette element?";
   weight = "Vægt";
   dimension = "Størrelse";
- 
+  year = "År";
+  select = "Vælg";
+  revenue = "Omsætning";
+  danishCurrency = "DKK";
+  kroner = "kr.";
+  more = "Mere";
+  than = "End";
+  less = "Mindre";
+  month = "Måned";
+  last = "Sidste";
+  storage = "Lager";
+  value = "Værdi";
+  inventory = "Lagerbeholdning";
+  currency = "DKK";
+  expenses = "Udgifter";
+  result = "Resultat";
+  results = "Resultater";
+  inventoryValue = "Lagerværdi";
+  yearToDate = "År til dato";
+  YTD = "ÅTD";
+  theme = "Tema";
+  light = "Lys";
+  dark = "Mørk";
+  and = "Og";
+  kpi = "Nøgleværdier";
+  aov = "Gennemsnitlig ordreværdi";
+  conversionRate = "Konverteringsrate";
+  inventoryTurnover = "Lageromsætningshastighed";
+  days = "Dage";
+  average = "Gennemsnit";
+  total = "Total";
+  avg = "Gns.";
+  inventoryTurnoverExplanation = "Beskriver i gennemsnit, hvor længe hvert produkt er på lager, før det bliver sendt til en kunde. Jo lavere tallet er, jo bedre.";
+  conversionRateExplanation = "Beskriver hvor mange af de besøgende, der bliver til kunder. Jo højere tallet er, jo bedre.";
+  aovExplanation = "Beskriver den gennemsnitlige ordreværdi. Jo højere tallet er, jo bedre.";
+  bestSellingProducts = "Bedst sælgende produkter";
+  worstSellingProducts = "Dårligst sælgende produkter";
+  inventoryValueExplanation = "Beskriver den samlede værdi af dit lager.";
+  startSniper = "Start Sniper";
+  show = "Vis";
+  newSniperResults = "Nye Sniper resultater";
+  sniperStarted = "Sniper startet";
+  clearAll = "Ryd alle";
+
+  // Months
+  january = "Januar";
+  february = "Februar";
+  march = "Marts";
+  april = "April";
+  may = "Maj";
+  june = "Juni";
+  july = "Juli";
+  august = "August";
+  september = "September";
+  october = "Oktober";
+  november = "November";
+  december = "December";
+  jan = "Jan";
+  feb = "Feb";
+  mar = "Mar";
+  apr = "Apr";
+  jun = "Jun";
+  jul = "Jul";
+  aug = "Aug";
+  sep = "Sep";
+  oct = "Okt";
+  nov = "Nov";
+  dec = "Dec";
+
+
 
   // AboutUS page
   company_description1 = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg.";
@@ -129,11 +198,11 @@ export default class DKLocale implements ILocale {
 
 
   // Front page
-  seeProductBtn = "Se produkt"; 
+  seeProductBtn = "Se produkt";
   chosenCategories = "Udvalgte kategorier";
 
-   //Pop-up : cart
-   shopButton = "Gå til kurv";  
+  //Pop-up : cart
+  shopButton = "Gå til kurv";
 
   //Basket Page
   yourBasket = "Din indkøbskurv";
@@ -245,7 +314,7 @@ export default class DKLocale implements ILocale {
   ContactTabText = "Kontakt";
 
   // Payments
-  GoToSales = "Se flere salg";
+  goToSales = "Se flere salg";
   SalesSummaryTitle = "Salgs oversigt";
   SalesSummaryTotalSales = "Salg (total)";
   SalesSummaryTotalAmount = "Sum (total)";
@@ -277,7 +346,7 @@ export default class DKLocale implements ILocale {
   CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
 
   // Orders
-  GoToOrders = "Se flere Ordre";
+  goToOrders = "Se flere Ordre";
   OrderDetailsProductName = "Produkt(er)";
   OrderDetailsManufacturer = "Mærke";
   OrderDetailsCustomerId = "Kunde (Id)";
@@ -307,5 +376,5 @@ export default class DKLocale implements ILocale {
   InventoryWidgetTitle = "Lagerbeholdning";
   InventoryTitle = "Titel";
 
- 
+
 }

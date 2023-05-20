@@ -11,7 +11,7 @@ import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
-import SalesSummary from "@models/SalesSummary";
+import { SalesSummary } from "@models/SalesSummary";
 import Order from "@models/Order";
 import OrderDetails from "@models/OrderDetails";
 import ProductItemDetails from "@models/ProductItemDetails";
@@ -41,6 +41,10 @@ class APIService implements IAPIService {
     }
 
     /* Backoffice */
+    async getBestSellingProducts(amount: number): Promise<Product[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/GetBestSellerProducts?amountOfBestSellers=${amount}`, "Products");
+    }
+
     async getProductItemDTOs(): Promise<ProductItemDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/ProductItem`, "ProductItems");
     }

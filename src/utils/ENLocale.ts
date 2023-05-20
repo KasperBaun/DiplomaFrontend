@@ -97,6 +97,74 @@ export default class ENLocale implements ILocale {
   confirmDeleteText = "Are you sure you want to delete this item?";
   weight = "Weight";
   dimension = "Dimension";
+  year = "Year";
+  select = "Select";
+  revenue = "Revenue";
+  danishCurrency = "DKK";
+  kroner = "Kr."
+  more = "More";
+  than = "Than";
+  less = "Less";
+  month = "Month";
+  last = "Last";
+  storage = "Storage";
+  value = "Value";
+  inventory = "Inventory";
+  currency = "USD";
+  expenses = "Expenses";
+  result = "Result";
+  results = "Results";
+  inventoryValue = "Inventoryvalue";
+  yearToDate = "Year to date";
+  YTD = "YTD";
+  theme = "Theme";
+  light = "Light";
+  dark = "Dark";
+  and = "And";
+  kpi = "Key performance indicators";
+  aov = "Average order value";
+  conversionRate = "Conversion rate";
+  inventoryTurnover = "Inventory turnover";
+  days = "Days";
+  average = "Average";
+  total = "Total";
+  avg = "Avg.";
+  inventoryTurnoverExplanation = "Describes on average how long each product is in stock before being shipped to a customer. The lower the number, the better.";
+  aovExplanation = "The average order value is the average amount of money each customer spends per order. The higher the number, the better.";
+  conversionRateExplanation = "The conversion rate is the percentage of visitors who make a purchase. The higher the number, the better.";
+  bestSellingProducts = "Best selling products";
+  worstSellingProducts = "Worst selling products";
+  inventoryValueExplanation = "The inventory value is the total value of all products in stock.";
+  startSniper = "Start Sniper";
+  show = "Show";
+  newSniperResults = "New sniper results";
+  sniperStarted = "Sniper started";
+  clearAll = "Clear all";
+
+  // Months
+  january = "January";
+  february = "February";
+  march = "March";
+  april = "April";
+  may = "May";
+  june = "June";
+  july = "July";
+  august = "August";
+  september = "September";
+  october = "October";
+  november = "November";
+  december = "December";
+  jan = "Jan";
+  feb = "Feb";
+  mar = "Mar";
+  apr = "Apr";
+  jun = "Jun";
+  jul = "Jul";
+  aug = "Aug";
+  sep = "Sep";
+  oct = "Oct";
+  nov = "Nov";
+  dec = "Dec";
 
   //Basket Page
   yourBasket = "Your basket";
@@ -239,7 +307,7 @@ export default class ENLocale implements ILocale {
   CatalogTabText = "Catalog";
 
   // Payments
-  GoToSales = "See more sales";
+  goToSales = "See more sales";
   SalesSummaryTitle = "Sales Summary";
   SalesSummaryTotalSales = "Sales (total)";
   SalesSummaryTotalAmount = "Amount (total)";
@@ -271,7 +339,7 @@ export default class ENLocale implements ILocale {
   CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
 
   // Orders
-  GoToOrders = "See more Orders";
+  goToOrders = "See more Orders";
   OrderDetailsProductName = "Product(s)";
   OrderDetailsManufacturer = "Fabricator";
   OrderDetailsCustomerId = "Customer (Id)";
@@ -310,5 +378,5 @@ export default class ENLocale implements ILocale {
   InventoryWidgetTitle = "Inventory";
   InventoryTitle = "Title";
 
- 
+
 }

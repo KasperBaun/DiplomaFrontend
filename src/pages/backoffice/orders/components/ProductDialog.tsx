@@ -2,7 +2,7 @@ import { Dialog, DialogContent, DialogTitle, Grid } from "@mui/material";
 import { LanguageStore } from "@stores/LanguageStore";
 import MobXContext from "@stores/MobXContext";
 import ImageGallery from "@webshop/product/ImageGallery";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 
 interface IProps {
     id: number;
@@ -14,15 +14,6 @@ interface IProps {
 const ProductDialog = ( props : IProps ) => {
     const { backofficeStore } = useContext(MobXContext);
     const product = (backofficeStore.getProductItem(Number(props.id)));
-    const [open, setOpen] = useState(false);
-
-    const handleOpen = () => {
-      setOpen(true);
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
 
     if (product) {
         return (
