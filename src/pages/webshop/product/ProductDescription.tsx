@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Box, Grid, Typography } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 import MobXContext from '@stores/MobXContext';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 
@@ -13,13 +13,13 @@ const ProductDescription: React.FC<ProductDescriptionProps> = observer(function 
     const { languageStore } = useContext(MobXContext);
     const typographyVariant = "h4";
 
-    function getWeight() {
-        if (props.product.weight !== 0) {
-            return (
-                <Typography><b>{languageStore.currentLanguage.weight} :</b> {props.product.weight}</Typography>
-            );
-        }
-    }
+    // function getWeight() {
+    //     if (props.product.weight !== 0) {
+    //         return (
+    //             <Typography><b>{languageStore.currentLanguage.weight} :</b> {props.product.weight}</Typography>
+    //         );
+    //     }
+    // }
 
     return (
         <Grid item xs={12}>

@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { useParams } from "react-router-dom";
 import ProductDescription from "./ProductDescription";
-import { Button, Grid, ImageList, ImageListItem, Typography } from "@mui/material";
+import { Button, Grid, ImageList, ImageListItem } from "@mui/material";
 
 const ProductPage: React.FC = observer(() => {
 

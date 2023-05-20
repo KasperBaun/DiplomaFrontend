@@ -1,14 +1,14 @@
 import { LanguageStore } from "@stores/LanguageStore";
 import MobXContext from "@stores/MobXContext";
-import { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 
 interface IPaymentPaypalFormProps {
-    ls : LanguageStore;
-    handleOnSubmitClick : () => void;
+    ls: LanguageStore;
+    handleOnSubmitClick: () => void;
 }
 
-const PaymentPaypalForm = ( {ls, handleOnSubmitClick} : IPaymentPaypalFormProps ) => {
+const PaymentPaypalForm = ({ ls, handleOnSubmitClick }: IPaymentPaypalFormProps) => {
 
     const { webshopStore } = useContext(MobXContext);
 
@@ -22,7 +22,7 @@ const PaymentPaypalForm = ( {ls, handleOnSubmitClick} : IPaymentPaypalFormProps 
             <Form>
                 <Form.Group style={{ textAlign: "center", margin: "0 auto", padding: "0.5rem" }}>
                     <Button style={{ width: "10rem" }} variant="outline-primary" onClick={handleOnSubmit}>
-                        { ls.currentLanguage.CheckoutPaymentWidgetPayButtonText } med Paypal
+                        {ls.currentLanguage.CheckoutPaymentWidgetPayButtonText} med Paypal
                     </Button>
                 </Form.Group>
             </Form>

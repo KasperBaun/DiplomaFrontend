@@ -1,16 +1,12 @@
 import { LanguageStore } from "@stores/LanguageStore";
-import { Button, Container, Form } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import PaymentButton from "./PaymentButton";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 
 interface IPaymentMobilePayFormProps {
     ls : LanguageStore;
     handleOnSubmitClick : () => void;
-}
-
-interface IMPInfoForm {
-    phoneNumber: string;
 }
 
 const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {

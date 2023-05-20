@@ -1,5 +1,4 @@
-import { LanguageStore } from "@stores/LanguageStore"
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap"
 
 interface IPaymentOptionsProps {

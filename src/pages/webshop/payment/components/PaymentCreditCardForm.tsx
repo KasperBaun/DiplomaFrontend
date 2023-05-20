@@ -1,8 +1,7 @@
 import { LanguageStore } from "@stores/LanguageStore";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import PaymentButton from "./PaymentButton";
-import { WebshopStore } from "@stores/WebshopStore";
 import MobXContext from "@stores/MobXContext";
 
 interface IPaymentCreditCardFormProps {
@@ -14,13 +13,6 @@ interface CardOptions {
   name: string;
   id: number;
   component: React.ReactNode;
-}
-
-interface ICardInfoForm {
-  cardNumber: string;
-  cardExpirationDate: string;
-  cardHolderName: string;
-  cardCVC: string;
 }
 
 const cardOptions: CardOptions[] = [

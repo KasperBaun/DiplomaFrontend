@@ -10,7 +10,6 @@ import Image from '@models/Image';
 import ProductDTO from '@models/DTO/ProductDTO';
 import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
-import Order from '@models/Order';
 import { MobilePayForm, CardInfo, PaymentForm } from "@models/Checkout";
 import Customer from '@models/Customer';
 import Payment from '@models/Payment';
