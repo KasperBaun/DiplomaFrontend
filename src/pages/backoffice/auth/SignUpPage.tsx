@@ -9,7 +9,6 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {  ThemeProvider } from '@mui/material/styles';
-import { Constants } from '@utils/Constants';
 import Copyright from './Copyright';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext, useState } from 'react';

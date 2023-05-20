@@ -6,10 +6,10 @@ import { observer } from "mobx-react-lite";
 import { RevenueInfoBox } from "./components/RevenueInfoBox";
 import { NotificationInfoBox } from "./components/NotificationInfoBox";
 import { ResultsInfoBox } from "./components/ResultsInfoBox";
-import OrderDetailsList from "@backoffice/orders/components/OrderDetailsList";
 import { KpiInfoBox } from "./components/KpiInfoBox";
 import { EconomyWidget } from "./components/EconomyWidget";
 import { ProductsTable } from "./components/ProductsTable";
+import { Orders } from "@backoffice/orders/Orders";
 
 export type DashboardProps = {
     setNavKey: Dispatch<SetStateAction<number>>;
@@ -148,7 +148,7 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                                 {languageStore.currentLanguage.goToOrders}
                             </Link>
                         </Typography>
-                        <OrderDetailsList tableHeight={450} origin={""} />
+                        <Orders displayItemsAmount={20} />
 
                     </Box>
                 </Grid>

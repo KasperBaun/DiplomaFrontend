@@ -8,23 +8,22 @@ import { useEffect, useContext, useState } from "react";
 import { SniperPage } from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import { SalesList } from "./sales/SalesList";
-import Orders from "./orders/Orders";
 import Analysis from "./dashboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
 import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import LoadingLion from "@components/loading/LoadingLion";
-import { Constants } from "@utils/Constants";
 import { Dashboard } from "./dashboard/Dashboard";
 import { SettingsPage } from "@components/settings/SettingsPage";
 import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme";
+import {Orders} from "./orders/Orders";
 
 export const Backoffice: React.FC = observer(() => {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
     const { rootStore } = useContext(MobXContext);
-    const { theme, colorMode } = useBackofficeMode();
+    const { theme } = useBackofficeMode();
 
     const navSwitch = () => {
         switch (activeNavKey) {

@@ -1,4 +1,4 @@
-import ImageIcon from "@components/ImageIcon";
+import ImageIcon from "@components/svgs/ImageIcon";
 import Image from "@models/Image";
 import { Grid, Typography } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
