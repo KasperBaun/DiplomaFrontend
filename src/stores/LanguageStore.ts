@@ -25,15 +25,15 @@ export class LanguageStore {
     public async init(): Promise<boolean> {
         runInAction(() => {
             // Load available languages
-            this.locales.set("da_DK", new DKLocale());
-            this.locales.set("en_US", new ENLocale());
+            this.locales.set("da-DK", new DKLocale());
+            this.locales.set("en-US", new ENLocale());
         })
 
         runInAction(() => {
             // Reads values from localstorage to determine previously set preffered language by user ->
             // If no preffered language was set by user -> default to da-DK locale
             this._previousLanguageSet = localStorage['locale'];
-            this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da_DK');
+            this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da-DK');
             this.loaded = true;
         })
         if (Constants.loggingEnabled) {
@@ -57,10 +57,10 @@ export class LanguageStore {
 
     public toggleLanguage(): void {
         let lang: string = "";
-        if (this._currentLanguage === "da_DK") {
-            lang = "en_US";
+        if (this._currentLanguage === "da-DK") {
+            lang = "en-US";
         } else {
-            lang = "da_DK"
+            lang = "da-DK"
         }
         this.setCurrentLanguage(lang);
     }
@@ -79,16 +79,18 @@ export class LanguageStore {
         return this.locales.get(this._currentLanguage);
     }
 
-    public getCurrentLanguageCode(): "da_DK" | "en_US" | "" {
-        if (this.locales.get(this._currentLanguage) instanceof DKLocale) {
-            // Dansk
-            return "da_DK";
+    public getCurrentLanguageCode(): string {
+        return this._currentLanguage;
+    }
+
+    public getCurrency(): string {
+        let curr: string = "";
+        switch (this._currentLanguage) {
+            case "da-DK": curr = "DKK"; break;
+            case "en-US": curr = "USD"; break;
+            default: curr = "DKK";
         }
-        if (this.locales.get(this._currentLanguage) instanceof ENLocale) {
-            // English
-            return "en_US";
-        }
-        return "";
+        return curr;
     }
 
     public getLanguages(): string[] {

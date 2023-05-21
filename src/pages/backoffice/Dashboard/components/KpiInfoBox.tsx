@@ -46,7 +46,7 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
     let conversionRate = (Math.random() * 2 + 1).toFixed(2);
 
     const storageValue = backofficeStore.getStorageValue();
-    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en-US" ? "en-US" : "da-DK";
 
 
     return (
