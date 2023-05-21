@@ -62,6 +62,9 @@ export class BackofficeStore {
     private _productItemMap: Map<number, ProductItem> = new Map();
     private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
 
+    /* Notifications */
+    private _notifications: Notification[] = [];
+
     /* Chart data */
     private _chartDataByYearMap: Map<number, ChartData[]> = new Map();
     private _availableYears: number[] = [];
@@ -81,11 +84,6 @@ export class BackofficeStore {
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
-
-
-
-    /* Notifications */
-    private _notifications: Notification[] = [];
 
     public async init(): Promise<boolean> {
         runInAction(() => {
@@ -146,6 +144,7 @@ export class BackofficeStore {
             this._orders = orders;
             this.orderDetails = orderDetails;
         })
+        this.reset();
 
         const availableYears = this.calculateYearsAvailable(orders);
         const chartDataMap: Map<number, ChartData[]> = new Map<number, ChartData[]>();
@@ -622,25 +621,21 @@ export class BackofficeStore {
     }
 
     public set selectedCategory(category: Category) {
-        runInAction(() => {
-            this._selectedCategory = category;
-        });
+        this._selectedCategory = category;
     }
 
     public get selectedSubcategory(): SubCategory {
         return this._selectedSubcategory;
     }
 
-    public setSelectedSubcategory(subcategory: SubCategory) {
-        runInAction(() => {
-            this._selectedSubcategory = subcategory;
-        });
-    }
-
     public set selectedSubcategories(subcategories: SubCategory[]) {
         runInAction(() => {
             this._selectedSubcategories = subcategories;
         });
+    }
+
+    public setSelectedSubcategory = (subcategory: SubCategory) => {
+        this._selectedSubcategory = subcategory;
     }
 
     public reset = () => {
@@ -654,53 +649,45 @@ export class BackofficeStore {
         this._selectedSubcategories = this.subCategories;
     }
 
-    public showMore(): void {
-        runInAction(() => {
-            this._displayedProductItemsCount += this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
-        });
+    public showMore = (): void => {
+        this._displayedProductItemsCount += this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
     }
 
-    public filterBySubcategory(subcategoryId: number) {
-        runInAction(() => {
-            const subcategory = this._subcategories.find(subcat => subcat.id === subcategoryId);
-            this._selectedSubcategories = this._subcategories.filter(subcat => subcat.categoryId === subcategory.categoryId);
-            this._selectedSubcategory = subcategory;
-            this._selectedCategory = this._categories.find(cat => cat.id === subcategory.categoryId);
-            const filteredProducts = this._productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
-            this._filteredProductItems = filteredProducts;
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
-        });
+    public filterBySubcategory = (subcategoryId: number) => {
+        const subcategory = this._subcategories.find(subcat => subcat.id === subcategoryId);
+        this._selectedSubcategories = this._subcategories.filter(subcat => subcat.categoryId === subcategory.categoryId);
+        this._selectedSubcategory = subcategory;
+        this._selectedCategory = this._categories.find(cat => cat.id === subcategory.categoryId);
+        const filteredProducts = this._productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
     }
 
-    public filterByCategory(categoryId: number) {
-        runInAction(() => {
-            this._selectedSubcategory = null;
-            this._selectedCategory = this._categories.find(cat => cat.id === categoryId);
-            this._selectedSubcategories = this._subcategories.filter(subcat => subcat.categoryId === categoryId);
-            const filteredProducts = this._productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
-            this._filteredProductItems = filteredProducts;
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
-        });
+    public filterByCategory = (categoryId: number) => {
+        this._selectedSubcategory = null;
+        this._selectedCategory = this._categories.find(cat => cat.id === categoryId);
+        this._selectedSubcategories = this._subcategories.filter(subcat => subcat.categoryId === categoryId);
+        const filteredProducts = this._productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
     }
 
-    public filterBySearchText(searchText: string) {
+    public filterBySearchText = (searchText: string) => {
 
-        runInAction(() => {
-            const filteredProducts = this._productItems.filter(
-                productItem =>
-                    productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                    productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
-            );
-            this._filteredProductItems = filteredProducts;
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
-            this._selectedCategory = null;
-            this._selectedSubcategory = null;
-            this._selectedSubcategories = this._subcategories;
-        });
+        const filteredProducts = this._productItems.filter(
+            productItem =>
+                productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
+        );
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
+        this._selectedCategory = null;
+        this._selectedSubcategory = null;
+        this._selectedSubcategories = this._subcategories;
     }
 
     public get displayedProductItems(): ProductItem[] {
