@@ -75,7 +75,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                 </Grid>
 
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
-                    <Typography variant="body2">{displayedProductItems.length} {languageStore.currentLanguage.ProductTabText}</Typography>
+                    <Typography variant="body2">{displayedProductItems.length} {languageStore.currentLanguage.ProductTabText.toLowerCase()}</Typography>
                 </Grid>
 
                 {/* Productcards */}
