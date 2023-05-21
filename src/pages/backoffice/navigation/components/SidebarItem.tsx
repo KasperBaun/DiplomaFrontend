@@ -1,6 +1,6 @@
 import { Navpath } from "@models/Navpath";
 import { ListItemButton, ListItemIcon } from "@mui/material";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 
 export interface ISidebarItemProps {
     item: Navpath;

@@ -1,7 +1,7 @@
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
 import { IconButton, Tooltip, useTheme } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { ColorModeContext } from "styling/mui-theme/backoffice/BackofficeTheme";

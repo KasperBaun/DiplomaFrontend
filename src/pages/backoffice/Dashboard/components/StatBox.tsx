@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 import ProgressCircle from "./ProgressCircle";
 
 export interface IStatBoxProps {

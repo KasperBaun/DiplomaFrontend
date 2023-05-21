@@ -3,7 +3,7 @@ import { useState } from "react";
 import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
 import SidebarItem, { ISidebarItemProps } from "./SidebarItem";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 import { Navpath } from "@models/Navpath";
 
 export interface ISidebarItemCollapseProps {
