@@ -32,8 +32,8 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
     }
 
     const handleOnStartSniperClicked = () => {
-        // Only 2 items since it takes 15-20 seconds for each..
-        sniperStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 2), props.setNavKey);
+        // Only 5 items since it takes 15-20 seconds for each..
+        sniperStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 5), props.setNavKey);
     }
 
     const spacing = 2;
@@ -69,9 +69,11 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
                     <Box sx={informationItemStyling} >
                         <Typography variant="h4" display='flex' justifyContent={'space-between'}>
                             {languageStore.currentLanguage.notifications}
-                            <Button variant="contained" onClick={handleOnClearAllClicked} sx={{ mt: 0, '&:hover': { cursor: 'pointer' } }}>
-                                {languageStore.currentLanguage.clearAll}
-                            </Button>
+                            {backofficeStore.Notifications.length > 0 &&
+                                <Button variant="contained" onClick={handleOnClearAllClicked} sx={{ mt: 0, '&:hover': { cursor: 'pointer' } }}>
+                                    {languageStore.currentLanguage.clearAll}
+                                </Button>
+                            }
                         </Typography>
                         <NotificationInfoBox />
                     </Box>

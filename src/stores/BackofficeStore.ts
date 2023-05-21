@@ -293,10 +293,9 @@ export class BackofficeStore {
 
     public async deleteSubCategory(id: number): Promise<boolean> {
         try {
-            const result = await this.apiService.deleteSubCategory(id);
+            await this.apiService.deleteSubCategory(id);
             runInAction(() => {
-                const index = this._subcategories.findIndex(subcat => subcat.id === id);
-                this._subcategories.splice(index, 1);
+                this._subcategories = this._subcategories.filter(subcat => subcat.id !== id);
             });
         } catch (error) {
             console.log(error);
