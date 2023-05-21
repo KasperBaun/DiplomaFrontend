@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# Grønlund Webshop Repository
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Grønlund Webshop Repository! This repository contains the codebase for the development of a new webshop for Grønlund, a physical antique store located in Frederiksberg. The existing webshop has several limitations, prompting the company to develop a completely new webshop with enhanced functionality and a new design that prioritizes a "mobile first" approach. This decision stems from the increasing number of visits to the website from mobile devices and tablets.
 
-## Available Scripts
+## Objectives
 
-In the project directory, you can run:
+The primary objectives of this webshop development project are as follows:
 
-### `npm start`
+1. Create a new webshop with improved functionality and a modern design.
+2. Prioritize mobile responsiveness to accommodate the growing number of visitors using mobile devices.
+3. Facilitate the daily operations of the antique store, including monitoring new orders, processing and shipping paid orders, responding to inquiries, and adding newly acquired antiques to the webshop inventory for sale.
+4. Enable the differentiation of orders originating from in-store sales versus online sales, as the current system lacks this capability.
+5. Address the rising operational costs faced by the company, particularly regarding the viability of the physical store.
+6. Implement logic in the webshop to help the store owner identify fast-selling products with high profitability. It should be accessible via mobile devices to assist the owner during product sourcing trips.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Business Value
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The development of this new webshop aims to provide the following business benefits to Grønlund:
 
-### `npm test`
+1. Enhanced visibility and tracking of sales sources, enabling a better understanding of revenue streams.
+2. Improved inventory management, offering a clearer picture of stock availability and facilitating efficient stock replenishment decisions.
+3. Increased insights into the profitability of different products, allowing the store owner to optimize the product portfolio and focus on items with higher profit margins.
+4. Time savings for the company by streamlining and automating various webshop-related tasks, enabling the team to allocate more time to crucial business activities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+To set up the development environment and contribute to the Grønlund Webshop Repository, please follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository to your local machine using the following command:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/KasperBaun/DiplomaFrontend.git
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install the necessary dependencies by running the appropriate command for your development environment.
 
-### `npm run eject`
+3. Start the webshop development server by executing the command:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```bash
+   npm start
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Open your web browser and navigate to `http://localhost:3000` to access the webshop.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute the codebase according to the terms of this license.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Contact
+Currently unavailable.
+Thank you for your interest in the Grønlund og Lefort Webshop Repository. 
