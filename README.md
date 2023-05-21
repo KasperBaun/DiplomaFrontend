@@ -48,4 +48,4 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use, mod
 
 ## Contact
 Currently unavailable.
-Thank you for your interest in the Grønlund og Lefort Webshop Repository. 
+Thank you for your interest in the Grønlund Webshop Repository. 
