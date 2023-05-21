@@ -114,6 +114,7 @@ export interface ILocale {
   selectLanguage: string;
   updateSubcategory: string;
   chooseCategory: string;
+  showing: string;
 
 
   // Months

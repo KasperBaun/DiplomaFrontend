@@ -3,7 +3,7 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
-export type ProductSearchBarProps = {
+type ProductSearchBarProps = {
     searchText: string;
     setSearchText: (searchText: string) => void;
     onSearchTextChanged: (searchText: string) => void;
@@ -14,10 +14,9 @@ export type ProductSearchBarProps = {
 export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(function ProductSearchBar(props: ProductSearchBarProps) {
 
     const { languageStore, searchStore } = useContext(MobXContext);
-    const { showSearchBar, onSearchTextChanged } = props;
 
     /* Define state for the searchbar component */
-    const { searchText, setSearchText } = props;
+    const { searchText, setSearchText, showSearchBar, onSearchTextChanged } = props;
 
     /* Define handlers for actions */
     function handleSearchTextChange(event: any): React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> {
@@ -41,18 +40,17 @@ export const ProductSearchBar: React.FC<ProductSearchBarProps> = observer(functi
 
     if (!showSearchBar) return null;
     else {
-            return (
-                <TextField
-                    label={languageStore.currentLanguage.search}
-                    type="search"
-                    variant="outlined"
-                    placeholder={languageStore.currentLanguage.search.toLowerCase() + "..."}
-                    value={searchText}
-                    onChange={handleSearchTextChange}
-                    sx={props.style ? props.style : {}}
-                    onKeyDownCapture={handleEnterKeyDown}
-                />
-            )
-        
+        return (
+            <TextField
+                label={languageStore.currentLanguage.search}
+                type="search"
+                variant="outlined"
+                placeholder={languageStore.currentLanguage.search + "..."}
+                value={searchText}
+                onChange={handleSearchTextChange}
+                sx={props.style ? props.style : {}}
+                onKeyDownCapture={handleEnterKeyDown}
+            />
+        )
     }
 });

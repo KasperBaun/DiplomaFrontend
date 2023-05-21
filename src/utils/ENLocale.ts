@@ -144,6 +144,7 @@ export default class ENLocale implements ILocale {
   selectLanguage = "Select language";
   updateSubcategory = "Update Subcategory";
   chooseCategory = "Choose category";
+  showing = "Showing";
 
   // Months
   january = "January";
