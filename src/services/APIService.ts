@@ -11,9 +11,7 @@ import CrudHelper from "./CrudHelper";
 import SniperModel from "@models/SniperModel";
 import ProductDTO from "@models/DTO/ProductDTO";
 import CategoryProductView from "@models/CategoryProductView";
-import { SalesSummary } from "@models/SalesSummary";
 import Order from "@models/Order";
-import OrderDetails from "@models/OrderDetails";
 import ProductItemDetails from "@models/ProductItemDetails";
 import Image from '@models/Image';
 import PriceHistory from "@models/PriceHistory";
@@ -130,9 +128,6 @@ class APIService implements IAPIService {
     async getOrders(): Promise<OrderDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Order`, "Orders");
     }
-    async getOrderDetails(): Promise<OrderDetails[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
-    }
     async createOrder(order: CreateOrderDTO): Promise<Order> {
         const response = await fetch(`${this.apiBaseUrl}/Order`, {
             method: 'POST',
@@ -175,10 +170,6 @@ class APIService implements IAPIService {
         return await this.crudHelper.readSingle(this.apiBaseUrl + "/Payment/" + id, "Payment");
     }
 
-    /* Sales */
-    async getSalesSummary(): Promise<SalesSummary[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/SalesSummary`, "Sales");
-    }
 
     /* Sniper */
     async getSniping(searchValue: string): Promise<SniperModel[]> {

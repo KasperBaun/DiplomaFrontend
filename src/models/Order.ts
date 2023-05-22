@@ -1,10 +1,11 @@
 import OrderElements from "./OrderElements";
+import Payment from "./Payment";
 
 export default class Order {
   id?: number;
   customerId: number;
   paymentId: number;
-  paymentStatus: string;
+  payment: Payment;
   deliveryStatus: string;
   active: Boolean;
   discountCode?: string;

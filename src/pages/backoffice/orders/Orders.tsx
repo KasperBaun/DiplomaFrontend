@@ -68,7 +68,7 @@ export const Orders = observer(({ displayItemsAmount }: OrdersProps) => {
                                 <TableRow key={order.id + "_orderDetail_" + index}>
                                     {renderProductIdUI(order)}
                                     <TableCell sx={tableCellStyling} >{order.customerId}</TableCell>
-                                    <TableCell sx={tableCellStyling} >{order.paymentStatus}</TableCell>
+                                    <TableCell sx={tableCellStyling} >{order.payment.approved ? "Approved" : "Pending"}</TableCell>
                                     <TableCell sx={tableCellStyling} >{order.deliveryStatus}</TableCell>
                                     <TableCell sx={tableCellStyling} >{order.discountCode}</TableCell>
                                     <TableCell sx={tableCellStyling} >

@@ -27,7 +27,7 @@ export class AuthStateProvider {
   //private userRole: "SuperAdmin" | "Admin" | "User" | "Guest";
 
 
-  public async trySilentAuthenticateUser(): Promise<IAuthState> {
+  public trySilentAuthenticateUser = async (): Promise<IAuthState> => {
     let result: IAuthState;
     // Look in local-storage for a token that grants authorization
     this.accessToken = this.tryFindPreviousToken();
@@ -38,7 +38,7 @@ export class AuthStateProvider {
     return result;
   }
 
-  public async signIn(token: string): Promise<IAuthState> {
+  public signIn = (token: string): IAuthState => {
     this.setToken(token);
     const decodedjwt: JwtToken = jwt_decode(token);
 
@@ -61,20 +61,18 @@ export class AuthStateProvider {
     return state;
   }
 
-  public async signOut(): Promise<IAuthState> {
+  public signOut = (): IAuthState => {
     this.removeToken();
 
     const state: IAuthState = {
       user: new User(),
       expiration: "",
     }
-    // const user = new ClaimsPrincipal(new ClaimsIdentity());
-    // const state = new AuthenticationState(user);
 
     return state;
   }
 
-  private setToken(token: string): void {
+  private setToken = (token: string): void => {
     this.accessToken = token;
     localStorage.setItem(this.tokenKey, token);
   }

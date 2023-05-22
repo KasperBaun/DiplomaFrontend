@@ -1,10 +1,9 @@
 import { Constants } from "@utils/Constants";
-import "./ErrorPage.scss";
 
 export default function ErrorPage() {
 
   return (
-    <div id="error-page" >
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%', marginTop: '50px' }}>
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>

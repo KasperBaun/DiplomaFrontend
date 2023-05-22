@@ -14,10 +14,8 @@ import ProductItemDTO from '@models/DTO/ProductItemDTO';
 import ProductItemDetails from '@models/ProductItemDetails';
 import CategoryProductView from '@models/CategoryProductView';
 import Payment from '@models/Payment';
-import { SalesSummary } from '@models/SalesSummary';
 import Order from '@models/Order';
 import OrderElements from '@models/OrderElements';
-import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
 import { Notification } from '@models/types/Notification';
@@ -43,7 +41,6 @@ export class BackofficeStore {
     private _images: Image[] = [];
     private _pricehistories: PriceHistory[] = [];
     private _payments: Payment[] = [];
-    private _salesSummary: SalesSummary[] = [];
     private _orders: Order[] = [];
     private _orderElements: OrderElements[] = [];
     private months: string[] = [];
@@ -52,7 +49,6 @@ export class BackofficeStore {
     /* Views */
     public categoryProducts: CategoryProductView[] = [];
     public productItemDetails: ProductItemDetails[] = [];
-    public orderDetails: OrderDetails[] = [];
 
 
     /* Maps for quick access */
@@ -128,21 +124,16 @@ export class BackofficeStore {
         });
 
         const payments = await this.apiService.getPayments()
-        const salesSummary = await this.apiService.getSalesSummary();
-
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
-        const orderDetails: OrderDetails[] = await this.apiService.getOrderDetails();
         let orderElements: OrderElements[] = await this.apiService.getOrderElements();
         orderElements = this.mapOrderElementsToProductItems(orderElements, this.productItems);
-        const orders = this.generateOrders(orderDTOs, orderElements);
+        const orders = this.generateOrders(orderDTOs, orderElements, payments);
 
 
         runInAction(() => {
             this._payments = payments;
-            this._salesSummary = salesSummary;
             this._orderElements = orderElements;
             this._orders = orders;
-            this.orderDetails = orderDetails;
         })
         this.reset();
 
@@ -181,15 +172,15 @@ export class BackofficeStore {
     }
 
     /* Orders */
-    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[]): Order[] {
+    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[], payments:Payment[]): Order[] {
         const orders: Order[] = [];
         for (let orderDTO of ordersDTO) {
-
+            const orderPayment = payments.find(p => p.id === orderDTO.paymentId);
             const order: Order = new Order();
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
             order.paymentId = orderDTO.paymentId;
-            order.paymentStatus = orderDTO.paymentStatus;
+            order.payment = orderPayment? orderPayment : null;
             order.deliveryStatus = orderDTO.deliveryStatus;
             order.discountCode = orderDTO.discountCode;
             order.active = orderDTO.active;
@@ -232,9 +223,6 @@ export class BackofficeStore {
         return this._payments;
     }
 
-    public get SalesSummaries(): SalesSummary[] {
-        return this._salesSummary;
-    }
 
     public getPaymentsSortedByDate(direction: 'asc' | 'desc', amount?: number) {
         const directionCondition = direction === 'asc' ? 1 : -1;
@@ -251,12 +239,6 @@ export class BackofficeStore {
 
     public async createPayment(payment: Payment): Promise<Payment> {
         return await this.apiService.createPayment(payment);
-    }
-
-    private async refreshSalesSummary(): Promise<void> {
-        await runInAction(async () => {
-            this._salesSummary = await this.apiService.getSalesSummary();
-        });
     }
 
 

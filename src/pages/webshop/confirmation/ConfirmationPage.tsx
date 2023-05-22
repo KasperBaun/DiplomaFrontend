@@ -1,5 +1,4 @@
 import { Col, Container, Row, Table } from "react-bootstrap";
-import "./css/confirmationpage.scss"
 import ShippingProgress from "./components/ShippingProgress";
 import { useParams } from "react-router-dom";
 import MobXContext from "@stores/MobXContext";

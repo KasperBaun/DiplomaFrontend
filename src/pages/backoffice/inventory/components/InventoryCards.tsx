@@ -3,7 +3,6 @@ import { Card, CardContent, Grid, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import '../inventory.scss';
 
 const InventoryCards = () => {
 

@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
 import { ProductSearch } from "@components/productsearch/ProductSearch";

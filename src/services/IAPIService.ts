@@ -8,11 +8,9 @@ import Image from '@models/Image';
 import PriceHistory from "@models/PriceHistory";
 import ProductItemDTO from "@models/DTO/ProductItemDTO";
 import OrderDTO from "@models/DTO/OrderDTO";
-import OrderDetails from "@models/OrderDetails";
 import Order from "@models/Order";
 import OrderElements from "@models/OrderElements";
 import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
-import ConfirmationModel from "@models/ConfirmationModel";
 
 export interface WebAPIResponse {
     success: boolean;
@@ -51,7 +49,6 @@ interface IAPIService {
     getPriceHistories(): Promise<PriceHistory[]>;
 
     getOrders(): Promise<OrderDTO[]>;
-    getOrderDetails(): Promise<OrderDetails[]>;
     getOrderElements(): Promise<OrderElements[]>;
     createOrder(order: CreateOrderDTO): Promise<Order>;
     updateOrder(order: Order): Promise<Order>;

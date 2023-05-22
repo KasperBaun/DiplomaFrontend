@@ -1,4 +1,3 @@
-import OrderDetails from "@models/OrderDetails";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Col, Container, Row } from "react-bootstrap";
@@ -6,7 +5,6 @@ import { Col, Container, Row } from "react-bootstrap";
 interface IShopCart {
     ls: LanguageStore;
     basket: ProductItemWeb[];
-    order: OrderDetails[];
 }
 
 const ShoppingCartWidget = (props: IShopCart) => {

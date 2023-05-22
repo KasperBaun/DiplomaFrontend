@@ -1,6 +1,5 @@
 import { observer } from "mobx-react-lite";
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
-import '../css/payment.scss';
 import { LanguageStore } from "@stores/LanguageStore";
 import React from "react";
 import validator from 'validator';
@@ -307,7 +306,7 @@ const UserDetailForm = (props: IUserDetailFormProps) => {
                 <Row>
                 <Form.Check 
                     type="switch"
-                    label={"Jeg acceptere at de data jeg har indtastet er korrekte"}
+                    label={"Jeg accepterer at de data jeg har indtastet er korrekte"}
                     onClick={handleOnInfoCorrectClick}
                 />
                 </Row>
