@@ -19,6 +19,7 @@ export class SearchStore {
 
     /* State for searching products */
     private pageSizeAmount: number = 20;
+    private _searchText: string = "";
     private _displayedProductItems: ProductItemWeb[] = [];
     private _displayedProductItemsCount: number = this.pageSizeAmount;
     private _filteredProductItems: ProductItemWeb[] = [];
@@ -60,6 +61,10 @@ export class SearchStore {
 
     public get isLoaded(): boolean {
         return this._isLoaded;
+    }
+
+    public get searchText(): string {
+        return this._searchText;
     }
 
     public get productItems(): ProductItemWeb[] {
@@ -104,6 +109,12 @@ export class SearchStore {
     public set selectedSubcategories(subcategories: SubCategory[]) {
         runInAction(() => {
             this._selectedSubcategories = subcategories;
+        });
+    }
+
+    public setSearchText(value: string): void {
+        runInAction(() => {
+            this._searchText = value;
         });
     }
 
@@ -153,7 +164,7 @@ export class SearchStore {
     }
 
     public filterBySearchText = (searchText: string) => {
-
+        this._searchText = searchText;
         const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(
             productItem =>
                 productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||

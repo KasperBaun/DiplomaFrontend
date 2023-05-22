@@ -73,6 +73,7 @@ export class BackofficeStore {
     private _selectedCategory: Category = null;
     private _selectedSubcategory: SubCategory = null;
     private _selectedSubcategories: SubCategory[] = [];
+    private _searchText: string = "";
 
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
@@ -674,6 +675,16 @@ export class BackofficeStore {
 
     public get displayedProductItems(): ProductItem[] {
         return this._displayedProductItems;
+    }
+
+    public setSearchText(value: string): void {
+        runInAction(() => {
+            this._searchText = value;
+        });
+    }
+
+    public get searchText(): string {
+        return this._searchText;
     }
 }
 

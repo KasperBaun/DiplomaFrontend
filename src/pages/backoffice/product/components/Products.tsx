@@ -54,6 +54,8 @@ export const Products: React.FC<ProductsProps> = observer((props: ProductsProps)
                     <ProductSearch
                         showSearchBar={true}
                         reset={backofficeStore.reset}
+                        searchText={backofficeStore.searchText}
+                        setSearchText={backofficeStore.setSearchText}
                         categories={backofficeStore.Categories}
                         selectedCategory={backofficeStore.selectedCategory}
                         subcategories={backofficeStore.selectedSubcategories}

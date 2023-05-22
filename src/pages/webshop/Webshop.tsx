@@ -1,7 +1,7 @@
-import Header from "@webshop/header/Header";
 import LoadingLion from "@components/loading/LoadingLion";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { Header } from "@webshop/header/Header";
 import { Constants } from "@utils/Constants";
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect } from "react";

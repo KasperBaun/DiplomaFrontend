@@ -40,6 +40,8 @@ export const ProductsPage: React.FC = observer(function ProductListPage() {
             <Grid container >
                 <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                     <ProductSearch
+                        searchText={searchStore.searchText}
+                        setSearchText={searchStore.setSearchText}
                         categories={webshopStore.Categories}
                         subcategories={searchStore.selectedSubcategories}
                         displayItemsCount={searchStore.displayedProductItemsLength}

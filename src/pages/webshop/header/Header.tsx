@@ -17,7 +17,7 @@ interface INavModel {
   text: string;
 }
 
-const Header: React.FC = observer(function Header() {
+export const Header: React.FC = observer(function Header() {
 
   const { languageStore, searchStore } = useContext(MobXContext);
   const navigate = useNavigate();
@@ -99,8 +99,6 @@ const Header: React.FC = observer(function Header() {
           </Navbar.Collapse>
 
         </Grid>
-        {/* <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'></Grid> */}
-
         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'end'}>
           {location.pathname !== "/productList" &&
             <Form className="d-flex">
@@ -119,14 +117,9 @@ const Header: React.FC = observer(function Header() {
               />
             </Form>
           }
-
           <CartDrawer />
         </Grid>
-
       </Grid>
-
     </Navbar >
   );
 });
-
-export default Header;
