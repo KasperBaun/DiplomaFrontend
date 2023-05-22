@@ -22,7 +22,6 @@ import OrderElements from "@models/OrderElements";
 import OrderDTO from "@models/DTO/OrderDTO";
 import Customer from "@models/Customer";
 import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
-import ConfirmationModel from "@models/ConfirmationModel";
 
 class APIService implements IAPIService {
 

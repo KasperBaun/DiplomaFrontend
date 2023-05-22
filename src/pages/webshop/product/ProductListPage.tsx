@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { ProductSearch } from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
 import LoadingLion from "@components/loading/LoadingLion";
