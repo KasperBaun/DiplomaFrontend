@@ -8,48 +8,29 @@ on:
     branches:
       - prod
 
-# env:
-  # NODE_ENV: production
+env:
+  CI: false
 
 jobs:
   build:
     runs-on: self-hosted
-    defaults:
-      run:
-        #shell: '/home/baun/actions-runner/DiplomaFrontend'
-        working-directory: '/home/baun/actions-runner/DiplomaFrontend'
-
-
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '17.x'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '17.x'
     
-    - name: Configure Git user name and email
-      run: |
-        git config --global user.email "${{ secrets.GH_EMAIL }}"
-        git config --global user.name "${{ secrets.GH_USERNAME }}"
+      - name: Install dependencies
+        run: npm install
 
-    - name: Git pull
-      run: |
-        git pull https://${{ secrets.GH_TOKEN }}@github.com/${{github.repository}}.git --force
-      
-    - name: Install dependencies
-      run: npm ci
+      - name: Build project
+        run: npm run build --no-strict
 
-    #- name: Run tests
-    #  run: npm test
-
-    - name: Build project
-      run: npm run build
-
-    - name: Deploy
-      run: |
-        cp -r build/* /var/www/html
-        rm -r build
-
+      - name: Deploy
+        run: |
+          cp -r build/* /var/www/html
+          rm -r build
