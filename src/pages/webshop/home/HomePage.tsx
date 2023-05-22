@@ -1,7 +1,7 @@
-import { observer } from "mobx-react-lite"
 import React from "react";
-import { SelectedCategories } from "./SelectedCategories";
 import MobXContext from "@stores/MobXContext";
+import { observer } from "mobx-react-lite"
+import { SelectedCategories } from "./SelectedCategories";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProductItemWeb } from "@models/ProductItemWeb";
@@ -10,7 +10,7 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
-const HomePage: React.FC = observer(function HomePage() {
+export const HomePage: React.FC = observer(function HomePage() {
 
     const { webshopStore, languageStore } = useContext(MobXContext);
     const navigate = useNavigate();
@@ -33,7 +33,6 @@ const HomePage: React.FC = observer(function HomePage() {
 
 
     if (webshopStore.ProductItems) {
-        //console.log(toJS(productStore.ProductItems))
         const handleSlide = () => {
             const caption = document.querySelector('.carousel-caption');
             if (caption) {
@@ -47,7 +46,7 @@ const HomePage: React.FC = observer(function HomePage() {
 
 
         return (
-            <Grid container sx={{maxWidth:'1000px', marginX:'auto'}}>
+            <Grid container sx={{ maxWidth: '1000px', marginX: 'auto' }}>
                 <Grid item xs={12} textAlign="center" sx={{ mt: 2 }} >
                     <Carousel
                         showThumbs={false}
@@ -111,8 +110,3 @@ const HomePage: React.FC = observer(function HomePage() {
         );
     }
 });
-
-export default HomePage;
-
-
-

@@ -4,10 +4,10 @@ import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
-import Payment from "@models/Payment";
+import { Payment } from "@models/Payment";
 import LoadingLion from "@components/loading/LoadingLion";
 
-export type RecentSalesListProps = {
+type RecentSalesListProps = {
   displayNumberOfItems?: number;
 }
 

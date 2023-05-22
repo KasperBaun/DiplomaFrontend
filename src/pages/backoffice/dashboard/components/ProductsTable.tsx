@@ -1,10 +1,10 @@
+import MobXContext from "@stores/MobXContext";
 import { Product } from "@models/Product";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
-export type ProductsTableProps = {
+type ProductsTableProps = {
     products: Product[];
 }
 

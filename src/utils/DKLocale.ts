@@ -1,6 +1,6 @@
 import { ILocale } from "./ILocale";
 
-export default class DKLocale implements ILocale {
+export class DKLocale implements ILocale {
 
   getQuality(qualityType: number): string {
     switch (qualityType) {

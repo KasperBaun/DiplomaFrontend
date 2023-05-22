@@ -1,10 +1,10 @@
 import ImageIcon from "@components/svgs/ImageIcon";
-import Image from "@models/Image";
+import { Image } from "@models/Image";
 import { Grid, Typography } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { useContext } from "react";
 
-const ProductImages: React.FC<{ images: Image[] }> = (props) => {
+export const ProductImages: React.FC<{ images: Image[] }> = (props) => {
 
     const { images } = props;
     const { languageStore } = useContext<IMobXContext>(MobXContext);
@@ -35,5 +35,3 @@ const ProductImages: React.FC<{ images: Image[] }> = (props) => {
         </Grid>
     )
 };
-
-export default ProductImages;

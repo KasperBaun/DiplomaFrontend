@@ -9,7 +9,7 @@ import {
     CardMedia,
     CardContent,
 } from "@mui/material";
-import Category from "@models/Category";
+import { Category } from "@models/Category";
 import { useNavigate } from "react-router-dom";
 import LoadingLion from "@components/loading/LoadingLion";
 
@@ -18,7 +18,7 @@ export const SelectedCategories = observer(function SelectedCategories() {
     const { webshopStore, languageStore } = useContext(MobXContext);
     const navigate = useNavigate();
 
-    function handleClick(category: Category, name: string) {
+    const handleClick = (category: Category, name: string) => {
         navigate('categories/subcategories/' + category.id, { state: { name } })
     }
 

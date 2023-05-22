@@ -1,23 +1,23 @@
-import { Box } from "@mui/material";
+import MobXContext from "@stores/MobXContext";
+import LoadingLion from "@components/loading/LoadingLion";
 import Stack from '@mui/material/Stack';
 import Item from '@mui/material/Stack';
 import ColorConfigs from "styling/ColorConfigs";
-import Sidebar from "./navigation/Sidebar";
+import { Sidebar } from "./navigation/Sidebar";
+import { InventoryMain } from './inventory/Inventory';
+import { CategoryManager } from "./category/CategoryManager";
+import { ProductManager } from "./product/ProductManager";
+import { Box } from "@mui/material";
 import { Topbar } from "./navigation/Topbar";
 import { useEffect, useContext, useState } from "react";
 import { SniperPage } from "./sniper/SniperPage";
-import InventoryMain from './inventory/Inventory';
 import { SalesList } from "./sales/SalesList";
-import Analysis from "./dashboard/analysis/Analysis";
-import CategoryManager from "./category/CategoryManager";
-import ProductManager from "./product/ProductManager";
-import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import LoadingLion from "@components/loading/LoadingLion";
 import { Dashboard } from "./dashboard/Dashboard";
 import { SettingsPage } from "@components/settings/SettingsPage";
 import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme";
 import { Orders } from "./orders/Orders";
+import { Analysis } from "./dashboard/components/Analysis";
 
 export const Backoffice: React.FC = observer(() => {
 
@@ -39,16 +39,16 @@ export const Backoffice: React.FC = observer(() => {
         }
     }
 
-    const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+    const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
     const handleToggleSidebarOpenClicked = () => setSidebarOpen(!sidebarOpen);
 
     useEffect(() => {
-        const backofficeStoreLoaded = async () => {
+        const loadBackofficeStore = async () => {
             if (!rootStore.isBackofficeLoaded && !rootStore.isBackofficeLoading) {
                 rootStore.loadBackoffice();
             }
         }
-        backofficeStoreLoaded();
+        loadBackofficeStore();
     });
 
     if (!rootStore.isBackofficeLoaded) {
@@ -93,5 +93,4 @@ export const Backoffice: React.FC = observer(() => {
             </Box >
         );
     }
-}
-);
+});

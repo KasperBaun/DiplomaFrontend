@@ -1,15 +1,15 @@
 import { Col, Container, ProgressBar, Row } from "react-bootstrap";
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import Customer from "@models/Customer";
+import { Customer } from "@models/Customer";
 import { CreditCard, LocationOn } from "@mui/icons-material";
 
-interface IShippingProgressProps { 
-    customer : Customer;
+type ShippingProgressProps = {
+    customer: Customer;
     deliveryMethod: string;
 }
 
-const ShippingProgress = ( {customer, deliveryMethod} : IShippingProgressProps ) => {
-    
+export const ShippingProgress = ({ customer, deliveryMethod }: ShippingProgressProps) => {
+
     return (
         <Container>
             <Row className="ShippingProgressRow">
@@ -68,5 +68,3 @@ const ShippingProgress = ( {customer, deliveryMethod} : IShippingProgressProps )
         </Container>
     )
 }
-
-export default ShippingProgress;

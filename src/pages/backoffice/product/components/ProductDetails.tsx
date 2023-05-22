@@ -2,16 +2,16 @@ import React, { useContext, useState } from 'react';
 import TextField from '@mui/material/TextField';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import SubCategory from '@models/SubCategory';
+import { SubCategory } from '@models/SubCategory';
 import { materialType } from '@models/Enums';
 import { ProductItem } from '@models/ProductItem';
 import { observer } from 'mobx-react-lite';
 
-export type ProductDetailsProps = {
+type ProductDetailsProps = {
     productItem?: ProductItem;
 }
 
-const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductDetails(props: ProductDetailsProps) {
+export const ProductDetails: React.FC<ProductDetailsProps> = observer((props: ProductDetailsProps) => {
     const { productItem } = props;
     const { languageStore, backofficeStore } = useContext<IMobXContext>(MobXContext);
     const [selectedSubcategory, setSelectedSubcategory] = useState<SubCategory>(null);
@@ -143,5 +143,3 @@ const ProductDetails: React.FC<ProductDetailsProps> = observer(function ProductD
         </Grid>
     );
 });
-
-export default ProductDetails;

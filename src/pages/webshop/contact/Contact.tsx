@@ -82,18 +82,6 @@ export const ContactPage: React.FC = observer(() => {
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
                     <CustomButton url={"mailto:" + Constants.companyEmail} text={languageStore.currentLanguage.email_text} icon={<Mail />} />
                 </Grid>
-
-                {/* <Grid item xs={12} md={12} display={'flex'} justifyContent={'center'} sx={{
-                    paddingBottom: '20px',
-                    '& img:hover': {
-                        cursor: 'pointer'
-                    }
-                }} >
-                    <Tooltip title={languageStore.currentLanguage.clickForMapsLocation} >
-                        <img src={process.env.PUBLIC_URL + '/maps.png'} width="70%" alt="" onClick={() => window.open(Constants.mapsLink, "_blank")} />
-                    </Tooltip>
-                </Grid> */}
-
             </Grid>
         </Container>
     )

@@ -2,8 +2,8 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
-import Category from '@models/Category';
-import SubCategory from '@models/SubCategory';
+import { Category } from '@models/Category';
+import { SubCategory } from '@models/SubCategory';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
 

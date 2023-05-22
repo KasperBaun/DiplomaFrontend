@@ -1,28 +1,26 @@
+import MobXContext from '@stores/MobXContext';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer, Tooltip } from 'recharts';
 import { useContext } from "react";
 import { observer } from 'mobx-react-lite';
-import MobXContext from '@stores/MobXContext';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
 import { Box, Typography } from '@mui/material';
 
-export type EconomyWidgetProps = {
+type EconomyWidgetProps = {
     year: number;
 }
 
-interface CustomTooltipProps {
+type CustomTooltipProps = {
     payload?: any[];
     label?: string;
     active?: boolean;
 }
 
 export const EconomyWidget = observer(({ year }: EconomyWidgetProps) => {
+
     const { backofficeStore, languageStore } = useContext(MobXContext);
     const data = backofficeStore.getChartData(year);
-
-
     const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en-US" ? "en-US" : "da-DK";
     const currency = languageStore.currentLanguage.currency;
-
     const CustomTooltip: React.FC<CustomTooltipProps> = ({ payload, label, active }) => {
 
         if (active) {

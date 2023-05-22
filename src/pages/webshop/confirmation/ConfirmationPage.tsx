@@ -1,17 +1,17 @@
 import { Col, Container, Row, Table } from "react-bootstrap";
-import ShippingProgress from "./components/ShippingProgress";
+import { ShippingProgress } from "./components/ShippingProgress";
 import { useParams } from "react-router-dom";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useEffect, useState } from "react";
 import LoadingLion from "@components/loading/LoadingLion";
-import Payment from "@models/Payment";
-import Order from "@models/Order";
-import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
-import ConfirmationModel from "@models/ConfirmationModel";
+import { Payment } from "@models/Payment";
+import { Order } from "@models/Order";
+import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
+import { observer } from "mobx-react-lite";
 
 
 
-const ConfirmationPage = () => {
+export const ConfirmationPage = observer(() => {
     let { id } = useParams();
     const [payment, setPayment] = useState<Payment>();
     const [order, setOrder] = useState<Order>();
@@ -19,7 +19,7 @@ const ConfirmationPage = () => {
     const [preOrder, setPreOrder] = useState<CreateOrderDTO>();
     const [confirmation, setConfirmation] = useState<Order>();
     const { languageStore, webshopStore, basketStore } = useContext(MobXContext);
-    let productIds : number[] = [];
+    let productIds: number[] = [];
 
     let totalPrice = 0;
 
@@ -49,7 +49,7 @@ const ConfirmationPage = () => {
         // get order from database
     }, [id, createOrder]);
 
-    if(webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
+    if (webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
         return (
             <Container>
                 <Row style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>
@@ -114,7 +114,7 @@ const ConfirmationPage = () => {
                                 <p>Heraf Moms 25%</p>
                             </Col>
                             <Col md={2}>
-                                {(totalPrice*0.25)} DKK
+                                {(totalPrice * 0.25)} DKK
                             </Col>
                         </Row>
                         <Row>
@@ -122,7 +122,7 @@ const ConfirmationPage = () => {
                                 <p>Total</p>
                             </Col>
                             <Col md={2}>
-                                {totalPrice + (totalPrice*0.25)} DKK
+                                {totalPrice + (totalPrice * 0.25)} DKK
                             </Col>
                         </Row>
                     </Col>
@@ -133,6 +133,4 @@ const ConfirmationPage = () => {
     else {
         <LoadingLion />
     }
-}
-
-export default ConfirmationPage;
+});

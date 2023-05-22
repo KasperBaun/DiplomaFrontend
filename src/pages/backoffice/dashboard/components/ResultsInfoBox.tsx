@@ -1,11 +1,11 @@
+import MobXContext from "@stores/MobXContext";
+import React, { useContext } from "react";
 import { ArrowDownward, ArrowUpward } from "@mui/icons-material";
 import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
 
-export type ResultsInfoBoxProps = {
+type ResultsInfoBoxProps = {
     year: number;
 }
 

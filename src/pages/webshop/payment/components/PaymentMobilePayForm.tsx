@@ -1,15 +1,15 @@
 import { LanguageStore } from "@stores/LanguageStore";
 import { Container, Form } from "react-bootstrap";
-import PaymentButton from "./PaymentButton";
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
+import { PaymentButton } from "./PaymentButton";
 
 interface IPaymentMobilePayFormProps {
     ls : LanguageStore;
     handleOnSubmitClick : () => void;
 }
 
-const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
+export const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
 
     const [mobilePayNumber, setMobilePayNumber] = useState<string>(null);
     const { webshopStore } = useContext(MobXContext);
@@ -37,5 +37,3 @@ const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayForm
         </Container>
     )
 }
-
-export default PaymentMobilePayForm;

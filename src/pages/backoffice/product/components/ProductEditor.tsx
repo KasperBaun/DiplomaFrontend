@@ -1,26 +1,26 @@
-import ConfirmDeleteDialog from "@backoffice/category/components/ConfirmDeleteDialog";
+import { ConfirmDeleteDialog } from "@backoffice/category/components/ConfirmDeleteDialog";
 import { ProductItem } from "@models/ProductItem";
-import { Alert, Button, Container, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, Paper, Snackbar, Typography } from "@mui/material";
+import { ProductDetails } from "./ProductDetails";
+import { ImageGallery } from "@webshop/product/ImageGallery";
 import MobXContext from "@stores/MobXContext";
+import { Alert, Button, Container, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, Paper, Snackbar, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { Product } from "@models/Product";
 import { observer } from "mobx-react-lite";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Constants } from "@utils/Constants";
-import ProductDetails from "./ProductDetails";
-import ImageGallery from "@webshop/product/ImageGallery";
 import { toJS } from "mobx";
 import { Delete } from "@mui/icons-material";
-import SubCategory from "@models/SubCategory";
-import Image from "@models/Image";
+import { SubCategory } from "@models/SubCategory";
+import { Image } from "@models/Image";
 
-export interface IProductEditorProps {
+type ProductEditorProps = {
     productItem?: ProductItem;
     create?: boolean;
     copy?: boolean;
 }
 
-const ProductEditor: React.FC<IProductEditorProps> = observer(function ProductEditor(props: IProductEditorProps) {
+export const ProductEditor: React.FC<ProductEditorProps> = observer((props: ProductEditorProps) => {
 
     /* Define state for modals */
     const [showConfirmDelete, setShowConfirmDelete] = useState<boolean>(false);
@@ -135,8 +135,6 @@ const ProductEditor: React.FC<IProductEditorProps> = observer(function ProductEd
         </Grid >
     );
 });
-
-export default ProductEditor;
 
 const configureProductItem = (create?: boolean, copy?: boolean, productItemFromProps?: ProductItem): ProductItem => {
 

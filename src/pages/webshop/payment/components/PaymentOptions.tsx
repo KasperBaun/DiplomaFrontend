@@ -50,7 +50,7 @@ interface PaymentOption {
     },
   ];
 
-const PaymentOptions = ( props : IPaymentOptionsProps ) => {
+export const PaymentOptions = ( props : IPaymentOptionsProps ) => {
 
     const handlePaymentOptionClick = (paymentOption: number) => {
         props.setSelectedPaymentOption(paymentOption);
@@ -68,5 +68,3 @@ const PaymentOptions = ( props : IPaymentOptionsProps ) => {
         </Container>
     )
 }
-
-export default PaymentOptions

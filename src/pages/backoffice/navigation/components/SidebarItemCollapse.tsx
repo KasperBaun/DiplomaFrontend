@@ -2,20 +2,20 @@ import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography 
 import { useState } from "react";
 import ExpandLessOutlinedIcon from '@mui/icons-material/ExpandLessOutlined';
 import ExpandMoreOutlinedIcon from '@mui/icons-material/ExpandMoreOutlined';
-import SidebarItem, { ISidebarItemProps } from "./SidebarItem";
+import { SidebarItem } from "./SidebarItem";
 import ColorConfigs from "styling/ColorConfigs";
 import { Navpath } from "@models/Navpath";
+import { observer } from "mobx-react-lite";
 
-export interface ISidebarItemCollapseProps {
+type Props = {
     item: Navpath;
     sidebarOpen: boolean;
 }
 
-const SidebarItemCollapse: React.FC<ISidebarItemProps> = function SidebarItemCollapse(props: ISidebarItemProps) {
+export const SidebarItemCollapse: React.FC<Props> = observer((props: Props) => {
     const [open, setOpen] = useState(false);
 
     return (
-
         <>
             <ListItemButton
                 onClick={() => setOpen(!open)}
@@ -59,6 +59,4 @@ const SidebarItemCollapse: React.FC<ISidebarItemProps> = function SidebarItemCol
             </Collapse>
         </>
     );
-};
-
-export default SidebarItemCollapse;
+});

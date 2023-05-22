@@ -2,7 +2,7 @@ import { Container, Box, TextField, Button, Typography, InputAdornment } from "@
 import { useContext, useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
-import { SniperResult } from "@models/SniperResult";
+import { SniperResult } from "@models/types/SniperResult";
 import Loading from "@components/loading/Loading";
 
 type SniperSearchProps = {

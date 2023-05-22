@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
 import { Modal, Container, Carousel } from "react-bootstrap";
 
-interface IProps {
-    imageUrl : string
-    handleClose : Dispatch<SetStateAction<void>>;
-    show : boolean;
+type Props = {
+    imageUrl: string
+    handleClose: Dispatch<SetStateAction<void>>;
+    show: boolean;
 }
 
-const ImageModal = ({imageUrl, handleClose, show} : IProps) => {
+export const SniperImageModal = ({ imageUrl, handleClose, show }: Props) => {
 
     return (
         <Modal show={show} onHide={handleClose}>
@@ -18,9 +18,9 @@ const ImageModal = ({imageUrl, handleClose, show} : IProps) => {
                     <Carousel>
                         <Carousel.Item>
                             <img style={{ objectFit: "fill" }}
-                            className="d-block w-100"
-                            src={imageUrl}
-                            alt="First slide"
+                                className="d-block w-100"
+                                src={imageUrl}
+                                alt="First slide"
                             />
                         </Carousel.Item>
                     </Carousel>
@@ -29,5 +29,3 @@ const ImageModal = ({imageUrl, handleClose, show} : IProps) => {
         </Modal>
     )
 }
-
-export default ImageModal;

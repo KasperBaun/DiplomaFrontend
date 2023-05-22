@@ -2,12 +2,12 @@ import { ProductItemWeb } from "@models/ProductItemWeb";
 import { LanguageStore } from "@stores/LanguageStore";
 import { Col, Container, Row } from "react-bootstrap";
 
-interface IShopCart {
+type ShopCartProps = {
     ls: LanguageStore;
     basket: ProductItemWeb[];
 }
 
-const ShoppingCartWidget = (props: IShopCart) => {
+export const ShoppingCartWidget = (props: ShopCartProps) => {
 
     let totalPriceNoDiscount = props.basket.map((product) => product.currentPrice).reduce((a, b) => a + b, 0);
 
@@ -39,5 +39,3 @@ const ShoppingCartWidget = (props: IShopCart) => {
         </Container>
     )
 }
-
-export default ShoppingCartWidget;

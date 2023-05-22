@@ -1,7 +1,7 @@
-import { Button, Grid, Typography } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
-import { observer } from "mobx-react-lite";
 import React, { useContext } from "react";
+import MobXContext from "@stores/MobXContext";
+import { Button, Grid, Typography } from "@mui/material";
+import { observer } from "mobx-react-lite";
 
 export const NotificationInfoBox = observer(() => {
 
@@ -31,7 +31,6 @@ export const NotificationInfoBox = observer(() => {
         </Grid>
     )
 });
-
 
 const valueStyling: React.CSSProperties = {
     display: 'flex',

@@ -1,23 +1,23 @@
+import CategoryProductView from '@models/types/CategoryProductView';
 import { makeAutoObservable, runInAction } from 'mobx';
-import APIService from '@services/APIService';
+import { APIService } from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
 import { ProductItem } from '@models/ProductItem';
 import { Product } from '@models/Product';
-import Category from '@models/Category';
-import SubCategory from '@models/SubCategory';
-import Image from '@models/Image';
-import PriceHistory from '@models/PriceHistory';
-import ProductDTO from '@models/DTO/ProductDTO';
-import ProductItemDTO from '@models/DTO/ProductItemDTO';
-import ProductItemDetails from '@models/ProductItemDetails';
-import CategoryProductView from '@models/CategoryProductView';
-import Payment from '@models/Payment';
-import Order from '@models/Order';
-import OrderElements from '@models/OrderElements';
-import OrderDTO from '@models/DTO/OrderDTO';
-import { ChartData } from '@models/ChartData';
+import { Category } from '@models/Category';
+import { SubCategory } from '@models/SubCategory';
+import { Image } from '@models/Image';
+import { PriceHistory } from '@models/PriceHistory';
+import { ProductDTO } from '@models/DTO/ProductDTO';
+import { ProductItemDTO } from '@models/DTO/ProductItemDTO';
+import { ProductItemDetails } from '@models/ProductItemDetails';
+import { Payment } from '@models/Payment';
+import { Order } from '@models/Order';
+import { OrderElements } from '@models/OrderElements';
+import { OrderDTO } from '@models/DTO/OrderDTO';
+import { ChartData } from '@models/types/ChartData';
 import { Notification } from '@models/types/Notification';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
 
@@ -172,7 +172,7 @@ export class BackofficeStore {
     }
 
     /* Orders */
-    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[], payments:Payment[]): Order[] {
+    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[], payments: Payment[]): Order[] {
         const orders: Order[] = [];
         for (let orderDTO of ordersDTO) {
             const orderPayment = payments.find(p => p.id === orderDTO.paymentId);
@@ -180,7 +180,7 @@ export class BackofficeStore {
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
             order.paymentId = orderDTO.paymentId;
-            order.payment = orderPayment? orderPayment : null;
+            order.payment = orderPayment ? orderPayment : null;
             order.deliveryStatus = orderDTO.deliveryStatus;
             order.discountCode = orderDTO.discountCode;
             order.active = orderDTO.active;

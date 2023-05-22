@@ -1,18 +1,18 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, Grid, Snackbar } from "@mui/material";
-import Category from "@models/Category";
+import { Category } from "@models/Category";
 import MobXContext from "@stores/MobXContext";
 import LoadingLion from "@components/loading/LoadingLion";
-import CategoryDialog from "./components/CategoryDialog";
+import { CategoryDialog } from "./components/CategoryDialog";
 import { observer } from "mobx-react-lite";
-import CategoryCard from "./components/CategoryCard";
-import ConfirmDeleteDialog from "./components/ConfirmDeleteDialog";
+import { CategoryCard } from "./components/CategoryCard";
+import { ConfirmDeleteDialog } from "./components/ConfirmDeleteDialog";
 
-export interface ICategoriesProps {
+type CategoriesProps = {
     onCategoryClicked: (category: Category) => void;
 }
 
-const Categories: React.FC<ICategoriesProps> = observer(function Categories(props: ICategoriesProps) {
+export const Categories: React.FC<CategoriesProps> = observer((props: CategoriesProps) => {
 
     /* Define state for categories and selected category - Inject stores */
     const { backofficeStore, languageStore } = useContext(MobXContext);
@@ -81,6 +81,3 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
     }
     else return <LoadingLion />
 });
-
-export default Categories;
-

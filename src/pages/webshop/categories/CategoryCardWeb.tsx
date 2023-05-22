@@ -4,17 +4,18 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import Category from '@models/Category';
+import { Category } from '@models/Category';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext } from 'react';
 import { observer } from "mobx-react-lite";
 import { Translater } from "utils/Translater";
-export type CategoryCardProps = {
+
+type CategoryCardProps = {
     category: Category;
     onCardClicked: (categoryId: number) => void;
 }
 
-const CategoryCardWeb: React.FC<CategoryCardProps> = observer(function CategoryCard(props: CategoryCardProps) {
+export const CategoryCardWeb: React.FC<CategoryCardProps> = observer((props: CategoryCardProps) => {
 
     const { webshopStore, languageStore } = useContext<IMobXContext>(MobXContext);
     const subcategoryCount: number = webshopStore.subCategoriesByCategoryID(props.category.id) ? webshopStore.subCategoriesByCategoryID(props.category.id).length : 0;
@@ -54,6 +55,4 @@ const CategoryCardWeb: React.FC<CategoryCardProps> = observer(function CategoryC
             </CardContent>
         </Card>
     );
-
 });
-export default CategoryCardWeb;

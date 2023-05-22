@@ -1,22 +1,21 @@
 import MobXContext from "@stores/MobXContext";
-import React, { Dispatch, SetStateAction, useContext } from "react";
 import LionLogo from "@components/svgs/LionLogo";
-import { Box, Drawer } from "@mui/material";
 import ColorConfigs from "styling/ColorConfigs";
 import SizeConfigs from "styling/SizeConfigs";
+import React, { Dispatch, SetStateAction, useContext } from "react";
+import { Box, Drawer } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { createNavPaths } from "./components/Navpaths";
 import { Navpath } from "@models/Navpath";
-import SidebarItemCollapse from "./components/SidebarItemCollapse";
-import SidebarItem from "./components/SidebarItem";
+import { SidebarItemCollapse } from "./components/SidebarItemCollapse";
+import { SidebarItem } from "./components/SidebarItem";
 
-
-export type SidebarProps = {
+type SidebarProps = {
     sidebarOpen: boolean;
     setNavKey: Dispatch<SetStateAction<number>>;
 }
 
-const Sidebar: React.FC<SidebarProps> = observer(function Sidebar(props: SidebarProps) {
+export const Sidebar: React.FC<SidebarProps> = observer((props: SidebarProps) => {
 
     const { languageStore } = useContext(MobXContext);
     const navPaths: Navpath[] = createNavPaths(languageStore, props.setNavKey, props.sidebarOpen);
@@ -60,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = observer(function Sidebar(props: Sidebar
                         }
                     }}
                     onClick={() => {
-                        window.location.href = "/";
+                        props.setNavKey(0);
                     }}
                 >
                     <LionLogo color={ColorConfigs.sidebar.color} width={props.sidebarOpen ? 100 : 60} />
@@ -103,7 +102,3 @@ const Sidebar: React.FC<SidebarProps> = observer(function Sidebar(props: Sidebar
         </Drawer >
     )
 });
-
-export default Sidebar;
-
-

@@ -6,12 +6,12 @@ import { Card, CardActions, CardContent, CardHeader, CardMedia, Typography } fro
 import { FiberManualRecord } from "@mui/icons-material";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 
-export interface IProductCardProps {
+type ProductCardProps = {
     productItem: ProductItem;
     onProductItemClicked: (productItem: ProductItem) => void;
 }
 
-const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(props: IProductCardProps) {
+export const ProductCard: React.FC<ProductCardProps> = observer((props: ProductCardProps) => {
 
     const { languageStore } = useContext<IMobXContext>(MobXContext);
 
@@ -78,5 +78,3 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
         </Card>
     )
 });
-
-export default ProductCard;

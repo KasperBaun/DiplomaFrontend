@@ -4,7 +4,7 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
-const InventoryCards = () => {
+export const InventoryCards = observer(() => {
 
     const { backofficeStore, languageStore } = useContext(MobXContext);
 
@@ -30,6 +30,4 @@ const InventoryCards = () => {
     } else {
         return <LoadingLion />
     }
-}
-
-export default observer(InventoryCards);
+});

@@ -1,21 +1,21 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import APIService from '@services/APIService';
+import { APIService } from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
 import { Product } from '@models/Product';
-import Category from '@models/Category';
-import SubCategory from '@models/SubCategory';
-import Image from '@models/Image';
-import ProductDTO from '@models/DTO/ProductDTO';
-import ProductItemDTO from '@models/DTO/ProductItemDTO';
+import { Category } from '@models/Category';
+import { SubCategory } from '@models/SubCategory';
+import { Image } from '@models/Image';
+import { ProductDTO } from '@models/DTO/ProductDTO';
+import { ProductItemDTO } from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import { MobilePayForm, CardInfo, PaymentForm } from "@models/Checkout";
-import Customer from '@models/Customer';
-import Payment from '@models/Payment';
-import ConfirmationModel from '@models/ConfirmationModel';
-import CreateOrderDTO from '@models/DTO/CreateOrderDTO';
-import Order from '@models/Order';
+import { Customer } from '@models/Customer';
+import { Payment } from '@models/Payment';
+import { ConfirmationModel } from '@models/ConfirmationModel';
+import { CreateOrderDTO } from '@models/DTO/CreateOrderDTO';
+import { Order } from '@models/Order';
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -32,15 +32,15 @@ export class WebshopStore {
     private _subcategories: SubCategory[] = [];
     private _products: Product[] = [];
     private _productItems: ProductItemWeb[] = [];
-    private _checkoutPayments : PaymentForm[] = [];
-    private _customer : Customer = null;
-    private _payment : Payment = null;
-    private _cardInfo : CardInfo = null;
-    private _mobilePayForm : MobilePayForm = null;
-    private _paypalForm : boolean = false;
-    private _paymentForm : PaymentForm = null;
-    private _confirmation : ConfirmationModel = null;
-    private _createOrderDTO : CreateOrderDTO = null;
+    private _checkoutPayments: PaymentForm[] = [];
+    private _customer: Customer = null;
+    private _payment: Payment = null;
+    private _cardInfo: CardInfo = null;
+    private _mobilePayForm: MobilePayForm = null;
+    private _paypalForm: boolean = false;
+    private _paymentForm: PaymentForm = null;
+    private _confirmation: ConfirmationModel = null;
+    private _createOrderDTO: CreateOrderDTO = null;
 
     /* Maps for quick access */
     private _categoryMap: Map<number, Category> = new Map();
@@ -60,9 +60,9 @@ export class WebshopStore {
         const categories = await this.apiService.getCategories();
         const categoryMap = this.createCategoryMap(categories);
         const subcategories = await this.apiService.getSubCategories();
-        this.mapCategoryToSubcategory(categories,subcategories);
+        this.mapCategoryToSubcategory(categories, subcategories);
         const subcategoryMap = this.createSubcategoryMap(subcategories);
-        const subcategoryToCategoryMap = this.mapSubCategoriesToCategoryId(categories,subcategories);
+        const subcategoryToCategoryMap = this.mapSubCategoriesToCategoryId(categories, subcategories);
         const images = await this.apiService.getImages();
         const products = this.generateProducts(await this.apiService.getProductDTOs(), subcategories)
         const productMap = this.createProductMap(products);
@@ -131,14 +131,14 @@ export class WebshopStore {
         return subcategoryMap;
     }
 
-    private mapCategoryToSubcategory(categories: Category[],subCategories: SubCategory[]): void {
+    private mapCategoryToSubcategory(categories: Category[], subCategories: SubCategory[]): void {
 
         for (let subCat of subCategories) {
             subCat.category = categories.find(cat => cat.id === subCat.categoryId);
         }
     }
 
-    public getCategory (id: number): Category {
+    public getCategory(id: number): Category {
         return this._categoryMap.get(id);
     }
 
@@ -232,7 +232,7 @@ export class WebshopStore {
         return this.loaded;
     }
 
-    public get CheckoutPayments() : PaymentForm[] {
+    public get CheckoutPayments(): PaymentForm[] {
         return this._checkoutPayments;
     }
 
@@ -252,7 +252,7 @@ export class WebshopStore {
         return this._subcategories;
     }
 
-    public get Customer() : Customer {
+    public get Customer(): Customer {
         return this._customer;
     }
 
@@ -260,7 +260,7 @@ export class WebshopStore {
         this._customer = customer;
     }
 
-    public get Payment() : Payment {
+    public get Payment(): Payment {
         return this._payment;
     }
 
@@ -268,11 +268,11 @@ export class WebshopStore {
         this._payment = payment;
     }
 
-    public get CardInfo() : CardInfo {
+    public get CardInfo(): CardInfo {
         return this._cardInfo;
     }
 
-    public get MobilePayForm() : MobilePayForm {
+    public get MobilePayForm(): MobilePayForm {
         return this._mobilePayForm;
     }
 
@@ -280,7 +280,7 @@ export class WebshopStore {
         this._mobilePayForm = mobilePayForm;
     }
 
-    public get PayPalForm() : boolean {
+    public get PayPalForm(): boolean {
         return this._paypalForm;
     }
 
@@ -302,7 +302,7 @@ export class WebshopStore {
         return payment;
     }
 
-    public get PaymentForm() : PaymentForm {
+    public get PaymentForm(): PaymentForm {
         return this._paymentForm;
     }
 
@@ -310,7 +310,7 @@ export class WebshopStore {
         this._paymentForm = paymentForm;
     }
 
-    public getPaymentForm(id : string) : PaymentForm {
+    public getPaymentForm(id: string): PaymentForm {
         return this._checkoutPayments.find(p => p.id === id);
     }
 

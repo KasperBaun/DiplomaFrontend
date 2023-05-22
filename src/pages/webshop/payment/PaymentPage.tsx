@@ -1,13 +1,13 @@
 import { observer } from "mobx-react-lite"
-import UserDetailForm from "./components/UserDetailForm";
+import { UserDetailForm } from "./components/UserDetailForm";
 import { Grid } from "@mui/material";
-import ShoppingCartWidget from "./components/ShopCart";
+import { ShoppingCartWidget } from "./components/ShopCart";
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
-import PaymentOptions from "./components/PaymentOptions";
-import PaymentMobilePayForm from "./components/PaymentMobilePayForm";
-import PaymentPaypalForm from "./components/PaymentPayPalForm";
-import PaymentCreditCardForm from "./components/PaymentCreditCardForm";
+import { PaymentOptions } from "./components/PaymentOptions";
+import { PaymentMobilePayForm } from "./components/PaymentMobilePayForm";
+import { PaymentPaypalForm } from "./components/PaymentPayPalForm";
+import { PaymentCreditCardForm } from "./components/PaymentCreditCardForm";
 import { MobilePayForm, CardInfo, CheckoutForm, PaymentForm } from "@models/Checkout";
 import { useNavigate } from "react-router-dom";
 
@@ -15,7 +15,7 @@ interface IPaymentPageProps {
     // orders : OrderDetails[];
 }
 
-const PaymentPage = (props: IPaymentPageProps) => {
+export const PaymentPage = observer((props: IPaymentPageProps) => {
 
     const { languageStore, basketStore, webshopStore } = useContext(MobXContext);
     const [selectedPaymentOption, setSelectedPaymentOption] = useState<number>(-1);
@@ -127,6 +127,4 @@ const PaymentPage = (props: IPaymentPageProps) => {
         </Grid>
     )
 
-};
-
-export default observer(PaymentPage);
+});

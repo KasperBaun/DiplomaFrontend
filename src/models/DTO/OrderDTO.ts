@@ -1,4 +1,4 @@
-export default class OrderDTO {
+export class OrderDTO {
     id: number;
     customerId: number;
     paymentId: number;

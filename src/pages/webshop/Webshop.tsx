@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 import { ColorModeContext, useMode } from "styling/mui-theme/web/WebTheme";
 import { Footer } from "./footer/Footer";
 
-const Webshop: React.FC = observer(function Webshop() {
+export const Webshop: React.FC = observer(() => {
 
     const { webshopStore, rootStore } = useContext<IMobXContext>(MobXContext);
     const { theme, colorMode } = useMode();
@@ -52,5 +52,3 @@ const Webshop: React.FC = observer(function Webshop() {
         );
     }
 });
-
-export default Webshop;

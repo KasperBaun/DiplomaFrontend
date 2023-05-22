@@ -8,7 +8,7 @@ import { Box, IconButton } from "@mui/material";
 import ColorConfigs from "styling/ColorConfigs";
 import { observer } from "mobx-react-lite";
 
-export type TopbarProps = {
+type TopbarProps = {
     sidebarOpen: boolean;
     setSidebarOpen: () => void;
     navigateTo: (key: number) => void;

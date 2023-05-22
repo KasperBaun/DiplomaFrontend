@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { IMobXContext } from "./MobXContext";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
-import APIService from "@services/APIService";
+import { APIService } from "@services/APIService";
 import { Constants } from "@utils/Constants";
 import { LanguageStore } from "./LanguageStore";
 import { BackofficeStore } from "./BackofficeStore";
@@ -36,7 +36,7 @@ export class RootStore implements IMobXContext {
     languageStore: LanguageStore;
     webshopStore: WebshopStore;
     basketStore: BasketStore;
-    
+
     /* Stores for backoffice */
     authStore: AuthStore;
     backofficeStore: BackofficeStore;
@@ -58,13 +58,13 @@ export class RootStore implements IMobXContext {
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
         this.searchStore = SearchStore.GetInstance(this);
-       
+
         this.loadLanguageStore();
         makeAutoObservable(this);
     }
 
     private loadLanguageStore(): Promise<boolean> {
-        runInAction(() => {this.languageStoreLoading = true;});
+        runInAction(() => { this.languageStoreLoading = true; });
         return new Promise((resolve) => {
             this.languageStore.init().then((loaded) => {
                 runInAction(() => {
@@ -85,18 +85,18 @@ export class RootStore implements IMobXContext {
 
     public async loadBackoffice(): Promise<void> {
         const t1 = performance.now();
-        runInAction(() => {this.backofficeLoading = true;});
+        runInAction(() => { this.backofficeLoading = true; });
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} loading backoffice`, this.color)
         }
-        
+
         const backofficeStoreLoaded = await this.backofficeStore.init();
         const sniperStoreLoaded = await this.sniperStore.init();
         await this.loadSearchStore();
 
         runInAction(async () => {
             this.backofficeLoading = false;
-            this.backofficeLoaded =  backofficeStoreLoaded && sniperStoreLoaded;
+            this.backofficeLoaded = backofficeStoreLoaded && sniperStoreLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();
@@ -113,18 +113,18 @@ export class RootStore implements IMobXContext {
 
     public async loadWebShop(): Promise<void> {
         const t1 = performance.now();
-        runInAction(() => {this.webshopLoading = true;});
+        runInAction(() => { this.webshopLoading = true; });
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} loading webshop`, this.color)
         }
-   
+
         const webshopStoreLoaded = await this.webshopStore.init();
         const basketStoreLoaded = await this.basketStore.init();
         await this.loadSearchStore();
 
         runInAction(async () => {
             this.webshopLoading = false;
-            this.webshopLoaded =  webshopStoreLoaded && basketStoreLoaded;
+            this.webshopLoaded = webshopStoreLoaded && basketStoreLoaded;
         })
         if (Constants.loggingEnabled) {
             const t2 = performance.now();

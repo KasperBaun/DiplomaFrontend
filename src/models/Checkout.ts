@@ -1,7 +1,7 @@
-import Customer from "./Customer";
+import { Customer } from "./Customer";
 
 export class CheckoutForm {
-    customer : Customer;
+    customer: Customer;
     deliveryMethod: string;
 }
 
@@ -17,7 +17,7 @@ export class MobilePayForm {
 }
 
 export class PaymentForm {
-    id ?: string;
+    id?: string;
     deliveryMethod: string;
-    paymentMethod : string;
+    paymentMethod: string;
 }

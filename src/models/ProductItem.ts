@@ -1,7 +1,7 @@
 import { conditionType, qualityType } from "./Enums";
-import Image from "./Image";
-import PriceHistory from "./PriceHistory"
-import {Product} from "./Product";
+import { Image } from "./Image";
+import { PriceHistory} from "./PriceHistory"
+import { Product } from "./Product";
 import { ProductItemWeb } from "./ProductItemWeb";
 
 export class ProductItem implements ProductItemWeb {

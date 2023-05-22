@@ -1,5 +1,5 @@
-import { Box, Button, FormControl, Grid, InputLabel, Link, MenuItem, Select, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
+import { Box, Button, FormControl, Grid, InputLabel, Link, MenuItem, Select, Typography } from "@mui/material";
 import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { RecentSalesList } from "@backoffice/sales/components/RecentSales";
 import { observer } from "mobx-react-lite";
@@ -11,13 +11,13 @@ import { EconomyWidget } from "./components/EconomyWidget";
 import { ProductsTable } from "./components/ProductsTable";
 import { Orders } from "@backoffice/orders/Orders";
 
-export type DashboardProps = {
+type DashboardProps = {
     setNavKey: Dispatch<SetStateAction<number>>;
 }
 
 export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardProps) => {
     const { languageStore, backofficeStore, sniperStore } = useContext(MobXContext);
-    const [year, setYear] = useState<number>(2023);
+    const [year, setYear] = useState<number>(new Date().getFullYear());
 
     const navigateToSales = () => props.setNavKey(6);
     const navigateToOrders = () => props.setNavKey(7);

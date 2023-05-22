@@ -7,13 +7,11 @@ import { IconButton } from "@mui/material";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 
 
-interface IBasketPageItemProps {
+type BasketPageItemProps = {
     item: ProductItemWeb
 }
 
-
-
-const BasketPageItem: React.FC<IBasketPageItemProps> = observer(function BasketPage(props: IBasketPageItemProps) {
+export const BasketPageItem: React.FC<BasketPageItemProps> = observer(function BasketPage(props: BasketPageItemProps) {
     const { languageStore, basketStore } = useContext(MobXContext);
 
     function removeFromCart(item: ProductItemWeb) {
@@ -59,5 +57,3 @@ const BasketPageItem: React.FC<IBasketPageItemProps> = observer(function BasketP
     )
 
 });
-
-export default BasketPageItem;

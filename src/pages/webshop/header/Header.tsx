@@ -8,7 +8,7 @@ import { Dk, Us } from "react-flags-select";
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
-import CartDrawer from '@components/cart/CartDrawer';
+import { CartDrawer } from '@components/cart/CartDrawer';
 import React from 'react';
 import { Grid, IconButton, Tooltip } from '@mui/material';
 
@@ -25,7 +25,7 @@ const Header: React.FC = observer(function Header() {
 
   const navPaths: INavModel[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
-  navPaths.push({ path: "/productList", text: `${languageStore.currentLanguage.ProductTabText}` });
+  navPaths.push({ path: "/products", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
   navPaths.push({ path: "/contact", text: `${languageStore.currentLanguage.ContactTabText}` });
   navPaths.push({ path: "/faq", text: `${languageStore.currentLanguage.FAQTabText}` });
@@ -46,7 +46,7 @@ const Header: React.FC = observer(function Header() {
 
   function searchOnProducts(searchText: string) {
     searchStore.filterBySearchText(searchText);
-    navigate(`/productList`);
+    navigate(`/products`);
   }
   const handleLanguageIconClicked = () => {
     languageStore.toggleLanguage();
@@ -102,7 +102,7 @@ const Header: React.FC = observer(function Header() {
         {/* <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'></Grid> */}
 
         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'end'}>
-          { location.pathname !== "/productList" &&
+          {location.pathname !== "/productList" &&
             <Form className="d-flex">
               <Form.Control
                 type="search"

@@ -21,11 +21,12 @@ import { useContext, useState } from 'react';
 import { Avatar, Backdrop } from '@mui/material';
 import LoadingLion from '@components/loading/LoadingLion';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
-import UserLoginDTO from '@models/DTO/UserLoginDTO';
+import { UserLoginDTO } from '@models/DTO/UserLoginDTO';
 import { NavLink } from 'react-router-dom';
 import { useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
+import { observer } from 'mobx-react-lite';
 
-export interface ILoginPageProps {
+type LoginPageProps = {
     onLoginClicked: (data: UserLoginDTO) => void;
     onAuthNavClicked: (key: number) => void;
     onForgotPasswordClicked: () => void;
@@ -34,7 +35,7 @@ export interface ILoginPageProps {
     backgroundImageUrl: string;
 }
 
-const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPageProps) {
+export const LoginPage: React.FC<LoginPageProps> = observer((props: LoginPageProps) => {
 
     const { languageStore } = useContext<IMobXContext>(MobXContext);
     const { theme } = useBackofficeMode();
@@ -173,6 +174,4 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
             </Grid>
         </ThemeProvider>
     );
-}
-
-export default LoginPage;
+});

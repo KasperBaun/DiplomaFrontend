@@ -1,4 +1,4 @@
-export default class Customer {
+export class Customer {
     id ?: number;
     email: string;
     firstName: string;

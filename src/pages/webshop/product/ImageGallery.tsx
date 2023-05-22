@@ -3,11 +3,11 @@ import { Image } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { Grid } from "@mui/material";
 
-interface IImageGalleryProps {
+type ImageGalleryProps = {
   imageURLs: string[];
 }
 
-const ImageGallery: React.FC<IImageGalleryProps> = observer(function ImageGallery(props: IImageGalleryProps) {
+export const ImageGallery: React.FC<ImageGalleryProps> = observer((props: ImageGalleryProps) => {
   const [mainImage, setMainImage] = useState(props.imageURLs[0]);
   const image1 = (props.imageURLs[0]);
   const image2 = (props.imageURLs[1]);
@@ -15,24 +15,6 @@ const ImageGallery: React.FC<IImageGalleryProps> = observer(function ImageGaller
   const image4 = (props.imageURLs[3]);
 
   const tempImages: Array<string> = [mainImage, image1, image2, image3, image4]
-
-  // Outdated - not very intuative. 
-  /* function rearangeOrder(index : number){
-   const val = tempImages[index];
-    // Remove the value from its current position
-    tempImages.splice(index, 1);
-    // Add the value at the beginning of the array
-    tempImages.unshift(val);
-    return tempImages
-  }
-
-  function setImages(images : Array<string>){
-    setMainImage(images[0]);
-    setImage1(images[1]);
-    setImage2(images[2]);
-    setImage3(images[3]);
-    setImage4(images[4]);
-  }*/
 
   const [image1Clicked, setImage1Clicked] = useState(true);
   const [image2Clicked, setImage2Clicked] = useState(false);

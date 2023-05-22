@@ -1,14 +1,14 @@
+import Loading from "@components/loading/Loading";
+import MobXContext from "@stores/MobXContext";
 import { NavigateNext } from "@mui/icons-material";
 import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import Products from "./components/Products";
+import { Products } from "./components/Products";
 import { ProductItem } from "@models/ProductItem";
-import ProductEditor from "./components/ProductEditor";
-import Loading from "@components/loading/Loading";
+import { ProductEditor } from "./components/ProductEditor";
 
-const ProductManager: React.FC = observer(function ProductManager() {
+export const ProductManager: React.FC = observer(function ProductManager() {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
     const [selectedProductItem, setSelectedProductItem] = useState<ProductItem | null>(null);
@@ -65,5 +65,3 @@ const ProductManager: React.FC = observer(function ProductManager() {
         );
     }
 });
-
-export default ProductManager;

@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
 
-const CartDrawer: React.FC = observer(function CartDrawer() {
+export const CartDrawer: React.FC = observer(function CartDrawer() {
 
   const { basketStore, languageStore } = useContext(MobXContext);
   const [drawerState, setDrawerState] = React.useState(false);
@@ -70,5 +70,4 @@ const CartDrawer: React.FC = observer(function CartDrawer() {
 
 
 });
-export default CartDrawer;
 

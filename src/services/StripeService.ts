@@ -1,7 +1,7 @@
 import { loadStripe, Stripe } from "@stripe/stripe-js";
-import CrudHelper from "./CrudHelper";
+import { CrudHelper } from "./CrudHelper";
 import { Constants } from "@utils/Constants";
-import Payment from "@models/Payment";
+import { Payment } from "@models/Payment";
 
 interface CreatePaymentIntentRequest {
   amount: number;
@@ -32,7 +32,7 @@ class StripeService {
 
   public async createPaymentIntent(amount: number, currency: string, paymentMethodId: string, customerId: string): Promise<Payment> {
     await this.initialize();
-  
+
     const response = await fetch(`${this.apiBaseUrl}/Payment`, {
       method: 'POST',
       headers: {
@@ -40,12 +40,12 @@ class StripeService {
       },
       body: JSON.stringify({ amount, currency, paymentMethodId, customerId }),
     });
-  
+
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error);
     }
-  
+
     return await response.json();
   }
 }

@@ -9,7 +9,7 @@ import { observer } from "mobx-react-lite"
 import React from "react";
 import { useContext } from "react";
 
-const SilverAndGold = () => {
+export const SilverAndGold = observer(() => {
     const { languageStore, backofficeStore } = useContext(MobXContext);
 
     if (backofficeStore.productItemDetails) {
@@ -67,6 +67,4 @@ const SilverAndGold = () => {
         return (
             <LoadingLion />
         )
-}
-
-export default observer(SilverAndGold);
+});

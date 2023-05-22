@@ -35,67 +35,63 @@ export const AboutUsPage: React.FC = observer(() => {
         </Grid>
 
         <Grid item xs={12} md={6} lg={6} xl={6} display={'flex'} justifyContent={'center'} alignContent={'center'}>
-          <Typography variant="body1" fontSize={16}>
-            <table style={{ borderCollapse: 'collapse' }}>
-              <thead>
-                <tr>
-                  <th style={{ columnCount: '2', padding: '10px' }}>Mærker</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ padding: '10px' }}>Royal Copenhagen</td>
-                  <td style={{ padding: '10px' }}>B&G</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '10px' }}>Dahl Jensen</td>
-                  <td style={{ padding: '10px' }}>Arne Bang</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '10px' }}>Saxbo</td>
-                  <td style={{ padding: '10px' }}>Michael Andersen</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '10px' }}>Axel Salto</td>
-                  <td style={{ padding: '10px' }}>Palshus Keramik</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '10px' }}>Kähler keramik</td>
-                  <td style={{ padding: '10px' }}>Lyngby Porcelæn</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '10px' }}>Lyngby Glasværk</td>
-                  <td style={{ padding: '10px' }}>Søholm</td>
-                </tr>
-              </tbody>
-            </table>
-          </Typography>
+          <table style={{ borderCollapse: 'collapse' }}>
+            <thead>
+              <tr>
+                <th style={{ columnCount: '2', padding: '10px' }}>Mærker</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style={{ padding: '10px' }}>Royal Copenhagen</td>
+                <td style={{ padding: '10px' }}>B&G</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '10px' }}>Dahl Jensen</td>
+                <td style={{ padding: '10px' }}>Arne Bang</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '10px' }}>Saxbo</td>
+                <td style={{ padding: '10px' }}>Michael Andersen</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '10px' }}>Axel Salto</td>
+                <td style={{ padding: '10px' }}>Palshus Keramik</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '10px' }}>Kähler keramik</td>
+                <td style={{ padding: '10px' }}>Lyngby Porcelæn</td>
+              </tr>
+              <tr>
+                <td style={{ padding: '10px' }}>Lyngby Glasværk</td>
+                <td style={{ padding: '10px' }}>Søholm</td>
+              </tr>
+            </tbody>
+          </table>
         </Grid>
 
         <Grid item xs={12} md={6} lg={6} xl={6} display={'flex'} justifyContent={'center'} alignContent={'center'}>
-          <Typography variant="body1" fontSize={16}>
-            <b>Vi køber følgende og giver Danmarks bedste priser:</b><br />
-            <ul>
+          <b>Vi køber følgende og giver Danmarks bedste priser:</b><br />
+          <ul>
 
 
-              <li>Guld & sølv</li>
-              <li>Musselmalet porcelæn</li>
-              <li>Halvblonde</li>
-              <li>Helblonde</li>
-              <li>Mega</li>
-              <li>Figur</li>
-              <li>Keramik</li>
-              <li>Stentøj</li>
-              <li>B&G</li>
-              <li>Royal Copenhagen</li>
-              <li>Dahl Jensen</li>
-              <li>Saxbo</li>
-              <li>Arne Bang</li>
-              <li>Salto</li>
-            </ul>
+            <li>Guld & sølv</li>
+            <li>Musselmalet porcelæn</li>
+            <li>Halvblonde</li>
+            <li>Helblonde</li>
+            <li>Mega</li>
+            <li>Figur</li>
+            <li>Keramik</li>
+            <li>Stentøj</li>
+            <li>B&G</li>
+            <li>Royal Copenhagen</li>
+            <li>Dahl Jensen</li>
+            <li>Saxbo</li>
+            <li>Arne Bang</li>
+            <li>Salto</li>
+          </ul>
 
-            Vi køber ikke alt, vedhæft derfor billeder eller aftal en dag med os, så kigger vi forbi eller du kommer ned til os.
-          </Typography>
+          Vi køber ikke alt, vedhæft derfor billeder eller aftal en dag med os, så kigger vi forbi eller du kommer ned til os.
         </Grid>
 
         <Grid item xs={12} md={12} lg={12} xl={12} display={'flex'} justifyContent={'center'} alignContent={'center'} marginBottom={'20px'}>

@@ -1,25 +1,8 @@
 
-import User from '@models/User';
+import { User } from '@models/User';
+import { AuthState } from '@models/types/AuthState';
+import { JwtToken } from '@models/types/JwtToken';
 import jwt_decode from 'jwt-decode';
-
-
-export interface IAuthState {
-  user: User;
-  expiration: string;
-  claims?: Claim[];
-}
-
-export interface JwtToken {
-  exp: string;
-  'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': string;
-  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress': string;
-  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': string;
-  'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier': string;
-}
-
-class Claim {
-  constructor(public type: string, public value: string) { }
-}
 
 export class AuthStateProvider {
   private tokenKey: string = "groenlundAuthToken";
@@ -27,18 +10,18 @@ export class AuthStateProvider {
   //private userRole: "SuperAdmin" | "Admin" | "User" | "Guest";
 
 
-  public trySilentAuthenticateUser = async (): Promise<IAuthState> => {
-    let result: IAuthState;
+  public trySilentAuthenticateUser = async (): Promise<AuthState> => {
+    let result: AuthState;
     // Look in local-storage for a token that grants authorization
     this.accessToken = this.tryFindPreviousToken();
     if (this.accessToken && this.accessToken !== "") {
-      result = await this.signIn(this.accessToken);
+      result = this.signIn(this.accessToken);
     }
 
     return result;
   }
 
-  public signIn = (token: string): IAuthState => {
+  public signIn = (token: string): AuthState => {
     this.setToken(token);
     const decodedjwt: JwtToken = jwt_decode(token);
 
@@ -49,22 +32,18 @@ export class AuthStateProvider {
       role: decodedjwt['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
     }
 
-    const state: IAuthState = {
+    const state: AuthState = {
       user: user,
       expiration: decodedjwt.exp
     }
 
-    // const identity = new ClaimsIdentity(claims, 'jwt');
-    // const user = new ClaimsPrincipal(identity);
-    // const state = new AuthenticationState(user, await this.getAccessToken());
-
     return state;
   }
 
-  public signOut = (): IAuthState => {
+  public signOut = (): AuthState => {
     this.removeToken();
 
-    const state: IAuthState = {
+    const state: AuthState = {
       user: new User(),
       expiration: "",
     }
@@ -89,5 +68,3 @@ export class AuthStateProvider {
     return "";
   }
 }
-
-export default AuthStateProvider;

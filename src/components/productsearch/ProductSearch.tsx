@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import Category from "@models/Category";
-import SubCategory from "@models/SubCategory";
+import { Category } from "@models/Category";
+import { SubCategory } from "@models/SubCategory";
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { ProductSearchBar } from "./ProductSearchBar";
 

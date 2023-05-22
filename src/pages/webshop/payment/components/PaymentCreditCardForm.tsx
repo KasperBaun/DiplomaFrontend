@@ -1,10 +1,10 @@
 import { LanguageStore } from "@stores/LanguageStore";
 import { useContext, useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
-import PaymentButton from "./PaymentButton";
 import MobXContext from "@stores/MobXContext";
+import { PaymentButton } from "./PaymentButton";
 
-interface IPaymentCreditCardFormProps {
+type PaymentCreditCardFormProps = {
   ls: LanguageStore;
   handleOnSubmitClick: () => void;
 }
@@ -47,7 +47,7 @@ const cardOptions: CardOptions[] = [
 
 
 
-const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: IPaymentCreditCardFormProps) => {
+export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCreditCardFormProps) => {
   const { webshopStore } = useContext(MobXContext);
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
@@ -155,5 +155,3 @@ const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: IPaymentCreditCardFo
     </Container>
   )
 }
-
-export default PaymentCreditCardForm;

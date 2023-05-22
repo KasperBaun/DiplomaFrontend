@@ -1,7 +1,7 @@
-import OrderElements from "./OrderElements";
-import Payment from "./Payment";
+import { OrderElements } from "./OrderElements";
+import { Payment } from "./Payment";
 
-export default class Order {
+export class Order {
   id?: number;
   customerId: number;
   paymentId: number;

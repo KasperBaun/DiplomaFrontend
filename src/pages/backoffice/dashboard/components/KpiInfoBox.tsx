@@ -1,8 +1,8 @@
-import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@mui/material";
+import React, { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@mui/material";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 import { observer } from "mobx-react-lite";
-import React, { useContext } from "react";
 
 export type KpiInfoBoxProps = {
     year: number;

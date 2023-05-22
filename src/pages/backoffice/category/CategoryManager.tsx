@@ -3,14 +3,11 @@ import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import Categories from "./Categories";
-import Category from "@models/Category";
-import Subcategories from "./components/Subcategories";
+import { Categories } from "./Categories";
+import { Category } from "@models/Category";
+import { Subcategories } from "./components/Subcategories";
 
-export interface ICategoryManagerProps {
-}
-
-const CategoryManager: React.FC<ICategoryManagerProps> = observer(function CategoryManager(props: ICategoryManagerProps) {
+export const CategoryManager: React.FC = observer(() => {
 
     const { languageStore } = useContext(MobXContext);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
@@ -58,5 +55,3 @@ const CategoryManager: React.FC<ICategoryManagerProps> = observer(function Categ
         </Grid>
     );
 });
-
-export default CategoryManager;
