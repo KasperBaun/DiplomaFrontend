@@ -13,7 +13,7 @@ export const AboutUsPage: React.FC = observer(() => {
 
         <Grid item xs={12} md={3} lg={3} xl={3} display={'flex'} justifyContent={'center'} alignContent={'center'}>
           <img
-            src="https://static.wixstatic.com/media/c38ac4_26cf61b8381d4f38a1fd2838b6d564b0~mv2.jpeg/v1/fill/w_443,h_591,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/IMG_6367.jpeg"
+            src="https://static.wixstatic.com/media/c38ac4_681b92cd05c64347b266f6895725d617~mv2.jpeg/v1/fill/w_443,h_591,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/IMG_6367.jpeg"
             alt="Webshop storefront"
             style={{ width: '100%', height: 'auto' }}
           />
@@ -21,7 +21,7 @@ export const AboutUsPage: React.FC = observer(() => {
 
         <Grid item xs={12} md={3} lg={3} xl={3}>
           <img
-            src="https://static.wixstatic.com/media/c38ac4_306f939b9a0c42488278ea64778344ee~mv2.jpeg/v1/fill/w_443,h_591,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/IMG_5544.jpeg"
+            src="https://static.wixstatic.com/media/c38ac4_dad9bd475d2e4663a8a2af144182a235~mv2.jpeg/v1/fill/w_443,h_591,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/IMG_5544.jpeg"
             alt="Silverware"
             style={{ width: '100%', height: 'auto' }}
           />
