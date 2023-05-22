@@ -14,10 +14,12 @@ import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import LoadingLion from "@components/loading/LoadingLion";
-import { Dashboard } from "./dashboard/Dashboard";
 import { SettingsPage } from "@components/settings/SettingsPage";
 import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme";
 import {Orders} from "./orders/Orders";
+// Changes
+import { Dashboard } from "./dashboard/Dashboard";
+// Changes
 
 export const Backoffice: React.FC = observer(() => {
 
