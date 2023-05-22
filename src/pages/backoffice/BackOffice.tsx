@@ -8,7 +8,7 @@ import { useEffect, useContext, useState } from "react";
 import { SniperPage } from "./sniper/SniperPage";
 import InventoryMain from './inventory/Inventory';
 import { SalesList } from "./sales/SalesList";
-import Analysis from "./dashboard/analysis/Analysis";
+import Analysis from "./dboard/analysis/Analysis";
 import CategoryManager from "./category/CategoryManager";
 import ProductManager from "./product/ProductManager";
 import MobXContext from "@stores/MobXContext";
@@ -18,7 +18,7 @@ import { SettingsPage } from "@components/settings/SettingsPage";
 import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme";
 import {Orders} from "./orders/Orders";
 // Changes
-import { Dashboard } from "./dashboard/Dashboard";
+import { Dashboard } from "./dboard/Dashboard";
 // Changes
 
 export const Backoffice: React.FC = observer(() => {
