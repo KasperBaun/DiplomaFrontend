@@ -1,36 +1,25 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useState } from "react";
-import LoadingLion from "@components/loading/LoadingLion";
+import { useContext } from "react";
 import { Button, Grid, Typography } from "@mui/material";
 import ProductCard from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
-import ProductSearch from "@components/productsearch/ProductSearch";
-import { ExtentionMethods } from "@utils/ExtentionMethods";
+import { ProductSearch } from "@components/productsearch/ProductSearch";
+import Loading from "@components/loading/Loading";
 
-export type IProductsProps = {
+type ProductsProps = {
     onProductItemClicked: (productItem: ProductItem) => void;
 }
 
-const Products: React.FC<IProductsProps> = observer(function Products(props: IProductsProps) {
+const Products: React.FC<ProductsProps> = observer(function Products(props: ProductsProps) {
 
-    /* Define state for products and inject stores */
-    const pageSizeAmount: number = 10;
+    /* Inject stores */
     const { languageStore, backofficeStore } = useContext(MobXContext);
-    const [productItems] = useState<ProductItem[]>(backofficeStore.ProductItems);
-    const [displayedProductItems, setDisplayedProductItems] = useState<ProductItem[]>(productItems.slice(0, pageSizeAmount))
-    const [currentDisplayValue, setCurrentDisplayValue] = useState<number>(1);
-
-    /* Define the event handlers for the buttons */
-    const updateDisplayedProductItems = (productItems: ProductItem[], amount: number) => {
-        setDisplayedProductItems(ExtentionMethods.safeSlice(productItems, 0, amount * pageSizeAmount));
-    }
 
     const handleOnCreateClicked = (): void => props.onProductItemClicked(null);
 
     const handleOnShowMoreClicked = (): void => {
-        updateDisplayedProductItems(productItems, currentDisplayValue + 1);
-        setCurrentDisplayValue(currentDisplayValue + 1);
+        backofficeStore.showMore();
     }
 
     const ProductCards = (productItems: ProductItem[]) => {
@@ -55,7 +44,7 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
 
     if (!backofficeStore.isLoaded) {
         return (
-            <LoadingLion />
+            <Loading />
         )
     }
 
@@ -67,19 +56,23 @@ const Products: React.FC<IProductsProps> = observer(function Products(props: IPr
                 </Grid>
                 <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
                     <ProductSearch
-                        categories={backofficeStore.Categories}
-                        subcategories={backofficeStore.subCategories}
-                        onProductItemClicked={props.onProductItemClicked}
                         showSearchBar={true}
+                        reset={backofficeStore.reset}
+                        categories={backofficeStore.Categories}
+                        selectedCategory={backofficeStore.selectedCategory}
+                        subcategories={backofficeStore.selectedSubcategories}
+                        selectedSubcategory={backofficeStore.selectedSubcategory}
+                        displayItemsCount={backofficeStore.displayedProductItems.length}
+                        totalItemsCount={backofficeStore.totalItemsCount}
+                        setSelectedSubcategory={backofficeStore.setSelectedSubcategory}
+                        filterBySearchText={backofficeStore.filterBySearchText}
+                        filterByCategory={backofficeStore.filterByCategory}
+                        filterBySubcategory={backofficeStore.filterBySubcategory}
                     />
                 </Grid>
 
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
-                    <Typography variant="body2">{displayedProductItems.length} {languageStore.currentLanguage.ProductTabText}</Typography>
-                </Grid>
-
                 {/* Productcards */}
-                {ProductCards(displayedProductItems)}
+                {ProductCards(backofficeStore.displayedProductItems)}
                 <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                     <Button style={{ width: "12rem", marginRight: '10px', minWidth: '15vw' }} variant="contained" onClick={handleOnShowMoreClicked}>{languageStore.currentLanguage.showMore}</Button>
                 </Grid>

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 
 export interface IProgressCircleProps {
     progress: number;

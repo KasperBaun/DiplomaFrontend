@@ -3,8 +3,8 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/
 import { observer } from "mobx-react-lite";
 import { SnipedTable } from "./SnipedTable";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState } from "react";
 import { FiberNew } from "@mui/icons-material";
+import { runInAction } from "mobx";
 
 
 export type SniperAccordionProps = {
@@ -13,11 +13,14 @@ export type SniperAccordionProps = {
 }
 
 export const SniperAccordion: React.FC<SniperAccordionProps> = observer(({ result, idx }: SniperAccordionProps) => {
-    const [isOpened, setIsOpened] = useState(false);
 
-    const handleAccordionChange = () => {
-        setIsOpened(true);
-    };
+    const handleAccordionChange = () => runInAction(() => {
+        result.open = !result.open
+        if (result.new) {
+            result.new = false;
+        }
+    });;
+
 
     return (
         <Accordion
@@ -30,7 +33,7 @@ export const SniperAccordion: React.FC<SniperAccordionProps> = observer(({ resul
             >
                 <Typography display='flex' justifyContent={'space-between'} >
                     {result.product.name}
-                    {!isOpened && <FiberNew sx={{ marginLeft: 5 }} />}
+                    {result.new && <FiberNew sx={{ marginLeft: 5 }} />}
                 </Typography>
             </AccordionSummary>
             <AccordionDetails key={"accdetails" + result.product.name + idx}>

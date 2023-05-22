@@ -144,6 +144,7 @@ export default class DKLocale implements ILocale {
   selectLanguage = "Vælg sprog";
   updateSubcategory = "Opdater underkategori";
   chooseCategory = "Vælg kategori";
+  showing = "Viser";
 
   // Months
   january = "Januar";

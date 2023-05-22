@@ -21,6 +21,7 @@ import OrderDetails from '@models/OrderDetails';
 import OrderDTO from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/ChartData';
 import { Notification } from '@models/types/Notification';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
 
 export class BackofficeStore {
 
@@ -61,20 +62,28 @@ export class BackofficeStore {
     private _productItemMap: Map<number, ProductItem> = new Map();
     private subcategoriesInCategoryMap: Map<Number, SubCategory[]> = new Map();
 
+    /* Notifications */
+    private _notifications: Notification[] = [];
+
     /* Chart data */
     private _chartDataByYearMap: Map<number, ChartData[]> = new Map();
     private _availableYears: number[] = [];
+
+    /* State for searching products */
+    private pageSizeAmount: number = 20;
+    private _displayedProductItems: ProductItem[] = [];
+    private _displayedProductItemsCount: number = this.pageSizeAmount;
+    private _filteredProductItems: ProductItem[] = [];
+    private _selectedCategory: Category = null;
+    private _selectedSubcategory: SubCategory = null;
+    private _selectedSubcategories: SubCategory[] = [];
+
 
     constructor(_rootStore: RootStore, _apiService: APIService) {
         this.apiService = _apiService;
         this.rootStore = _rootStore;
         makeAutoObservable(this);
     }
-
-
-
-    /* Notifications */
-    private _notifications: Notification[] = [];
 
     public async init(): Promise<boolean> {
         runInAction(() => {
@@ -135,6 +144,7 @@ export class BackofficeStore {
             this._orders = orders;
             this.orderDetails = orderDetails;
         })
+        this.reset();
 
         const availableYears = this.calculateYearsAvailable(orders);
         const chartDataMap: Map<number, ChartData[]> = new Map<number, ChartData[]>();
@@ -293,10 +303,9 @@ export class BackofficeStore {
 
     public async deleteSubCategory(id: number): Promise<boolean> {
         try {
-            const result = await this.apiService.deleteSubCategory(id);
+            await this.apiService.deleteSubCategory(id);
             runInAction(() => {
-                const index = this._subcategories.findIndex(subcat => subcat.id === id);
-                this._subcategories.splice(index, 1);
+                this._subcategories = this._subcategories.filter(subcat => subcat.id !== id);
             });
         } catch (error) {
             console.log(error);
@@ -592,6 +601,97 @@ export class BackofficeStore {
         runInAction(() => {
             this._notifications = [];
         })
+    }
+
+    /* Search logic */
+    public get selectedSubcategories(): SubCategory[] {
+        return this._selectedSubcategories;
+    }
+
+    public get displayedProductItemsCount(): number {
+        return this._displayedProductItemsCount;
+    }
+
+    public get totalItemsCount(): number {
+        return this._filteredProductItems.length;
+    }
+
+    public get selectedCategory(): Category {
+        return this._selectedCategory;
+    }
+
+    public set selectedCategory(category: Category) {
+        this._selectedCategory = category;
+    }
+
+    public get selectedSubcategory(): SubCategory {
+        return this._selectedSubcategory;
+    }
+
+    public set selectedSubcategories(subcategories: SubCategory[]) {
+        runInAction(() => {
+            this._selectedSubcategories = subcategories;
+        });
+    }
+
+    public setSelectedSubcategory = (subcategory: SubCategory) => {
+        this._selectedSubcategory = subcategory;
+    }
+
+    public reset = () => {
+        const allProducts = this._productItems;
+        const randomStartIndex = Math.floor(Math.random() * allProducts.length);
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(allProducts, randomStartIndex, randomStartIndex + this.displayedProductItemsCount);
+        this._filteredProductItems = allProducts;
+        this._selectedCategory = null;
+        this._selectedSubcategory = null;
+        this._selectedSubcategories = this.subCategories;
+    }
+
+    public showMore = (): void => {
+        this._displayedProductItemsCount += this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
+    }
+
+    public filterBySubcategory = (subcategoryId: number) => {
+        const subcategory = this._subcategories.find(subcat => subcat.id === subcategoryId);
+        this._selectedSubcategories = this._subcategories.filter(subcat => subcat.categoryId === subcategory.categoryId);
+        this._selectedSubcategory = subcategory;
+        this._selectedCategory = this._categories.find(cat => cat.id === subcategory.categoryId);
+        const filteredProducts = this._productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
+    }
+
+    public filterByCategory = (categoryId: number) => {
+        this._selectedSubcategory = null;
+        this._selectedCategory = this._categories.find(cat => cat.id === categoryId);
+        this._selectedSubcategories = this._subcategories.filter(subcat => subcat.categoryId === categoryId);
+        const filteredProducts = this._productItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
+    }
+
+    public filterBySearchText = (searchText: string) => {
+
+        const filteredProducts = this._productItems.filter(
+            productItem =>
+                productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
+        );
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this._displayedProductItemsCount);
+        this._selectedCategory = null;
+        this._selectedSubcategory = null;
+        this._selectedSubcategories = this._subcategories;
+    }
+
+    public get displayedProductItems(): ProductItem[] {
+        return this._displayedProductItems;
     }
 }
 

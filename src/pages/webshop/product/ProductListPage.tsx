@@ -3,7 +3,7 @@ import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import { Button, Grid, Typography } from "@mui/material";
-import ProductSearch from "@components/productsearch/ProductSearch";
+import { ProductSearch } from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
 import LoadingLion from "@components/loading/LoadingLion";
 
@@ -43,12 +43,17 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
                     <ProductSearch
                         categories={webshopStore.Categories}
                         subcategories={searchStore.selectedSubcategories}
-                        showSearchBar={false}
+                        displayItemsCount={searchStore.displayedProductItemsLength}
+                        totalItemsCount={searchStore.totalItemsCount}
+                        filterBySearchText={searchStore.filterBySearchText}
+                        filterByCategory={searchStore.filterByCategory}
+                        filterBySubcategory={searchStore.filterBySubcategory}
+                        selectedCategory={searchStore.selectedCategory}
+                        selectedSubcategory={searchStore.selectedSubcategory}
+                        setSelectedSubcategory={searchStore.setSelectedSubcategory}
+                        reset={searchStore.reset}
+                        showSearchBar={true}
                     />
-                </Grid>
-
-                <Grid item xs={12} display={'flex'} justifyContent={'start'} style={{ margin: '10px' }} >
-                    <Typography variant="body2">{searchStore.displayedProductItems.length} {languageStore.currentLanguage.ProductTabText}</Typography>
                 </Grid>
 
                 <Grid container  >

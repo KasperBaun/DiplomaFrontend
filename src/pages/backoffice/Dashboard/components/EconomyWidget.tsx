@@ -20,7 +20,7 @@ export const EconomyWidget = observer(({ year }: EconomyWidgetProps) => {
     const data = backofficeStore.getChartData(year);
 
 
-    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en-US" ? "en-US" : "da-DK";
     const currency = languageStore.currentLanguage.currency;
 
     const CustomTooltip: React.FC<CustomTooltipProps> = ({ payload, label, active }) => {

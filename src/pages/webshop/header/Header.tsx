@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import './header.scss';
 import LionLogo from '../../../components/svgs/LionLogo';
 import { Dk, Us } from "react-flags-select";
@@ -21,6 +21,7 @@ const Header: React.FC = observer(function Header() {
 
   const { languageStore, searchStore } = useContext(MobXContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const navPaths: INavModel[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
@@ -64,7 +65,7 @@ const Header: React.FC = observer(function Header() {
           <Navbar.Toggle aria-controls="navbarScrolls" />
           <Tooltip title={languageStore.currentLanguage.language + " " + languageStore.getCurrentLanguageCode()}>
             <IconButton onClick={handleLanguageIconClicked}>
-              {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
+              {languageStore.getCurrentLanguageCode() === 'da-DK' ? <Dk /> : <Us />}
             </IconButton>
           </Tooltip>
 
@@ -101,21 +102,24 @@ const Header: React.FC = observer(function Header() {
         {/* <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'></Grid> */}
 
         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'end'}>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              style={{ width: "20rem" }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  e.preventDefault();
-                  searchOnProducts(e.currentTarget.value);
-                }
-              }}
-              placeholder={languageStore.currentLanguage.SearchBarText}
-              className="me-2"
-              aria-label="Search"
-            />
-          </Form>
+          { location.pathname !== "/productList" &&
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                style={{ width: "20rem" }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    searchOnProducts(e.currentTarget.value);
+                  }
+                }}
+                placeholder={languageStore.currentLanguage.SearchBarText}
+                className="me-2"
+                aria-label="Search"
+              />
+            </Form>
+          }
+
           <CartDrawer />
         </Grid>
 

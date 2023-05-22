@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import Products from "./components/Products";
 import { ProductItem } from "@models/ProductItem";
 import ProductEditor from "./components/ProductEditor";
-import LoadingLion from "@components/loading/LoadingLion";
+import Loading from "@components/loading/Loading";
 
 const ProductManager: React.FC = observer(function ProductManager() {
 
@@ -26,7 +26,7 @@ const ProductManager: React.FC = observer(function ProductManager() {
     const handleOnProductItemClicked = (productItem: ProductItem) => {
         if (productItem === null) {
             setCreate(true);
-            setSelectedProductItem(productItem);
+            setSelectedProductItem(null);
         } else {
             setCreate(false);
             setSelectedProductItem(productItem);
@@ -36,7 +36,7 @@ const ProductManager: React.FC = observer(function ProductManager() {
     }
 
     if (backofficeStore.isLoaded === false) {
-        return <LoadingLion />;
+        return <Loading />;
     } else {
 
         return (

@@ -46,7 +46,7 @@ export const SelectedCategories = observer(function SelectedCategories() {
                                 <CardMedia component="img" height="140" src={category.imageUrl} />
                                 <CardContent>
                                     <Typography variant="h5" >
-                                        {languageStore.getCurrentLanguageCode() === "da_DK" ? category.name.split("|")[0] : category.name.split("|")[1]}
+                                        {languageStore.getCurrentLanguageCode() === "da-DK" ? category.name.split("|")[0] : category.name.split("|")[1]}
                                     </Typography>
                                 </CardContent>
                             </Card>

@@ -22,7 +22,7 @@ export const ResultsInfoBox: React.FC<ResultsInfoBoxProps> = observer((props: Re
 
 
     const results = backofficeStore.getChartData(props.year);
-    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en-US" ? "en-US" : "da-DK";
     const currency = languageStore.currentLanguage.currency;
 
     return (

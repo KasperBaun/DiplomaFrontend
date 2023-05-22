@@ -35,7 +35,7 @@ export class SearchStore {
 
     public async init(): Promise<boolean> {
         runInAction(() => {
-            if(!this._isLoaded){
+            if (!this._isLoaded && !this._isLoading) {
                 this._isLoading = true;
                 this.reset();
             }
@@ -73,25 +73,28 @@ export class SearchStore {
     public get displayedProductItemsCount(): number {
         return this._displayedProductItemsCount;
     }
+    public get displayedProductItemsLength(): number {
+        return this._displayedProductItems.length;
+    }
+
+    public get pageSize(): number {
+        return this.pageSizeAmount;
+    }
+
+    public get totalItemsCount(): number {
+        return this._filteredProductItems.length;
+    }
 
     public get selectedCategory(): Category {
         return this._selectedCategory;
     }
 
     public set selectedCategory(category: Category) {
-        runInAction(() => {
-            this._selectedCategory = category;
-        });
+        this._selectedCategory = category;
     }
 
     public get selectedSubcategory(): SubCategory {
         return this._selectedSubcategory;
-    }
-
-    public set selectedSubcategory(subcategory: SubCategory) {
-        runInAction(() => {
-            this._selectedSubcategory = subcategory;
-        });
     }
 
     public get selectedSubcategories(): SubCategory[] {
@@ -104,65 +107,63 @@ export class SearchStore {
         });
     }
 
-    public reset() {
-        const allProducts = this.rootStore.webshopStore.ProductItems;
-        const randomStartIndex = Math.floor(Math.random() * allProducts.length);
+    public setSelectedSubcategory = (subcategory: SubCategory) => {
         runInAction(() => {
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(allProducts,randomStartIndex, randomStartIndex+this.displayedProductItemsCount);
-            this._filteredProductItems = allProducts;
-            this._selectedCategory = null;
-            this._selectedSubcategory = null;
-            this._selectedSubcategories = this.rootStore.webshopStore.subCategories;
+            this._selectedSubcategory = subcategory;
         });
     }
 
-    public showMore(): void {
+    public reset = () => {
+        const allProducts = this.rootStore.webshopStore.ProductItems;
+        const randomStartIndex = Math.floor(Math.random() * allProducts.length);
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(allProducts, randomStartIndex, randomStartIndex + this.displayedProductItemsCount);
+        this._filteredProductItems = allProducts;
+        this._selectedCategory = null;
+        this._selectedSubcategory = null;
+        this._selectedSubcategories = this.rootStore.webshopStore.subCategories;
+    }
+
+    public showMore = (): void => {
         runInAction(() => {
             this._displayedProductItemsCount += this.pageSizeAmount;
             this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
         });
     }
 
-    public filterBySubcategory(subcategoryId: number){
-        runInAction(() => {
-            const subcategory = this.rootStore.webshopStore.subCategories.find(subcat => subcat.id === subcategoryId);
-            this._selectedSubcategories = this.rootStore.webshopStore.subCategories.filter(subcat => subcat.categoryId === subcategory.categoryId);
-            this._selectedSubcategory = subcategory;
-            this._selectedCategory = this.rootStore.webshopStore.Categories.find(cat => cat.id === subcategory.categoryId);
-            const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
-            this._filteredProductItems = filteredProducts;
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
-        });
+    public filterBySubcategory = (subcategoryId: number) => {
+        const subcategory = this.rootStore.webshopStore.subCategories.find(subcat => subcat.id === subcategoryId);
+        this._selectedSubcategories = this.rootStore.webshopStore.subCategories.filter(subcat => subcat.categoryId === subcategory.categoryId);
+        this._selectedSubcategory = subcategory;
+        this._selectedCategory = this.rootStore.webshopStore.Categories.find(cat => cat.id === subcategory.categoryId);
+        const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.id === subcategory.id));
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
     }
 
-    public filterByCategory(categoryId: number){
-        runInAction(() => {
-            this._selectedSubcategory = null;
-            this._selectedCategory = this.rootStore.webshopStore.Categories.find(cat => cat.id === categoryId);
-            this._selectedSubcategories = this.rootStore.webshopStore.subCategories.filter(subcat => subcat.categoryId === categoryId);
-            const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
-            this._filteredProductItems = filteredProducts;
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
-        });
+    public filterByCategory = (categoryId: number) => {
+        this._selectedSubcategory = null;
+        this._selectedCategory = this.rootStore.webshopStore.Categories.find(cat => cat.id === categoryId);
+        this._selectedSubcategories = this.rootStore.webshopStore.subCategories.filter(subcat => subcat.categoryId === categoryId);
+        const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(prodItem => prodItem.product.subcategories.some(s => s.categoryId === categoryId));
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
     }
 
-    public filterBySearchText(searchText: string){
+    public filterBySearchText = (searchText: string) => {
 
-        runInAction(() => {
-            const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(
-                productItem =>
+        const filteredProducts = this.rootStore.webshopStore.ProductItems.filter(
+            productItem =>
                 productItem.product.name.toLowerCase().includes(searchText.toLowerCase()) ||
                 productItem.product.modelNumber.toString().includes(searchText.toLowerCase())
-                );
-            this._filteredProductItems = filteredProducts;
-            this._displayedProductItemsCount = this.pageSizeAmount;
-            this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
-            this._selectedCategory = null;
-            this._selectedSubcategory = null;
-            this._selectedSubcategories = this.rootStore.webshopStore.subCategories;
-        });
+        );
+        this._filteredProductItems = filteredProducts;
+        this._displayedProductItemsCount = this.pageSizeAmount;
+        this._displayedProductItems = ExtentionMethods.safeSlice(this._filteredProductItems, 0, this.displayedProductItemsCount);
+        this._selectedCategory = null;
+        this._selectedSubcategory = null;
+        this._selectedSubcategories = this.rootStore.webshopStore.subCategories;
     }
 }

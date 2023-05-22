@@ -13,7 +13,7 @@ export type RevenueInfoBoxProps = {
 export const RevenueInfoBox: React.FC<RevenueInfoBoxProps> = observer(({ year }: RevenueInfoBoxProps) => {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
-    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en_US" ? "en-US" : "da-DK";
+    const currentLanguagecode = languageStore.getCurrentLanguageCode() === "en-US" ? "en-US" : "da-DK";
     const currency = languageStore.currentLanguage.currency;
 
     const yearRevenue = backofficeStore.getChartData(year).map((item) => item.revenue).reduce((prev, next) => prev + next);

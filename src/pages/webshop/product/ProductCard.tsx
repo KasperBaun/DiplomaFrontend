@@ -1,6 +1,7 @@
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import { Card, CardActionArea, CardContent, CardMedia, Divider, Grid, Typography } from '@mui/material';
 import MobXContext from '@stores/MobXContext';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
 import React, { useContext } from 'react';
 import { useState } from "react";
 
@@ -76,7 +77,9 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
       </CardContent>
       <CardActionArea >
         <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }} >
-          <Typography variant="h4" color="primaryText"><b>{languageStore.currentLanguage.price}: {productItem.currentPrice} DKK</b></Typography>
+          <Typography variant="h4" color="primaryText">
+            <b>{languageStore.currentLanguage.price}:</b> { ExtentionMethods.formatPrice(productItem.currentPrice, languageStore.getCurrentLanguageCode(), languageStore.getCurrency())}
+          </Typography>
         </Grid>
       </CardActionArea>
     </Card>

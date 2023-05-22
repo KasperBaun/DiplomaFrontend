@@ -57,7 +57,9 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
         design: "",
         dimension: "",
       },
-      sniperResult: await sniperStore.GetSniping(searchValue)
+      sniperResult: await sniperStore.GetSniping(searchValue),
+      new: true,
+      open: false
     }
     onSnipeComplete(snipedResults);
   }

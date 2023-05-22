@@ -61,7 +61,9 @@ export class SniperStore {
         for (let i = 0; i < products.length; i++) {
             let sniperResult: SniperResult = {
                 product: products[i],
-                sniperResult: await this.apiService.getSniping(products[i].name)
+                sniperResult: await this.apiService.getSniping(products[i].name),
+                new: true,
+                open: false
             }
             this.addSniperResult(sniperResult);
         }
@@ -78,16 +80,8 @@ export class SniperStore {
     }
 
     public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
-        this._isSniping = true;
-        const startNotification: Notification = {
-            message: this.rootStore.languageStore.currentLanguage.sniperStarted + "...",
-            action: null,
-            actionMessage: null
-        };
-        runInAction(() => {
-            this.rootStore.backofficeStore.addNotification(startNotification);
-        });
 
+        this._isSniping = true;
         await this.rootStore.sniperStore.SnipeMultiple(products);
         const notification: Notification = {
             message: this.rootStore.languageStore.currentLanguage.newSniperResults,
@@ -96,10 +90,9 @@ export class SniperStore {
         }
 
         runInAction(() => {
-            this.rootStore.backofficeStore.removeNotification(startNotification);
             this.rootStore.backofficeStore.addNotification(notification);
+            this._isSniping = false;
         })
-        this._isSniping = false;
     }
 
     public get isSniping(): boolean {

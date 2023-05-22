@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import Item from '@mui/material/Stack';
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 import Sidebar from "./navigation/Sidebar";
 import { Topbar } from "./navigation/Topbar";
 import { useEffect, useContext, useState } from "react";

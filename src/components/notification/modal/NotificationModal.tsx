@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
 import { Notifications } from "@mui/icons-material";
 import { Badge, Button, IconButton, Paper, Popover, Tooltip, Typography } from "@mui/material";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 
 
 export const NotificationModal: React.FC = observer(() => {

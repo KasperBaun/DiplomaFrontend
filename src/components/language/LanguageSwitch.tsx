@@ -15,7 +15,7 @@ export const LanguageSwitch: React.FC = observer(() => {
     return (
         <Tooltip title={languageStore.currentLanguage.language + ": " + languageStore.getCurrentLanguageCode()}>
             <IconButton onClick={handleLanguageIconClicked}>
-                {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
+                {languageStore.getCurrentLanguageCode() === 'da-DK' ? <Dk /> : <Us />}
             </IconButton>
         </Tooltip>
     )

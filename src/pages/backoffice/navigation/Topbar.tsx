@@ -5,7 +5,7 @@ import { SettingsButton } from "@components/settings/SettingsButton";
 import { ThemeSwitch } from "@components/theme/ThemeSwitch";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Box, IconButton } from "@mui/material";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 import { observer } from "mobx-react-lite";
 
 export type TopbarProps = {

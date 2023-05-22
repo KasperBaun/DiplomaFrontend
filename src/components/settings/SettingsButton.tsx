@@ -3,7 +3,7 @@ import { observer } from "mobx-react-lite";
 import { Settings } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
-import ColorConfigs from "@styles/ColorConfigs";
+import ColorConfigs from "styling/ColorConfigs";
 import { useContext } from "react";
 
 export type SettingsButtonProps = {
