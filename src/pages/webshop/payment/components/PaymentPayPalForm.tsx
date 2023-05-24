@@ -8,7 +8,7 @@ interface IPaymentPaypalFormProps {
     handleOnSubmitClick: () => void;
 }
 
-const PaymentPaypalForm = ({ ls, handleOnSubmitClick }: IPaymentPaypalFormProps) => {
+export const PaymentPaypalForm = ({ ls, handleOnSubmitClick }: IPaymentPaypalFormProps) => {
 
     const { webshopStore } = useContext(MobXContext);
 
@@ -29,5 +29,3 @@ const PaymentPaypalForm = ({ ls, handleOnSubmitClick }: IPaymentPaypalFormProps)
         </Container>
     )
 }
-
-export default PaymentPaypalForm;

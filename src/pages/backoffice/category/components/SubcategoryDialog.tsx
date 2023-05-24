@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Snackbar, TextField } from "@mui/material";
-import SubCategory from "@models/SubCategory";
-import Category from "@models/Category";
+import { SubCategory } from "@models/SubCategory";
+import { Category } from "@models/Category";
 import { observer } from "mobx-react-lite";
 
-export interface SubcategoryDialogProps {
+type SubcategoryDialogProps = {
     visible: boolean;
     onClose: () => void;
     create?: boolean;
@@ -46,7 +46,7 @@ export const SubcategoryDialog = observer(({ onClose, visible, create, subcatego
             setAlertText(languageStore.currentLanguage.createFailed);
         }
         setShowSnackbar(true);
-        
+
     }
 
     async function updateSubcategory(): Promise<void> {

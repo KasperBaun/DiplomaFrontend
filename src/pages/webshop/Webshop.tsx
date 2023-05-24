@@ -1,7 +1,7 @@
-import Header from "@webshop/header/Header";
 import LoadingLion from "@components/loading/LoadingLion";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { Header } from "@webshop/header/Header";
 import { Constants } from "@utils/Constants";
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect } from "react";
@@ -10,7 +10,7 @@ import { Outlet } from "react-router-dom";
 import { ColorModeContext, useMode } from "styling/mui-theme/web/WebTheme";
 import { Footer } from "./footer/Footer";
 
-const Webshop: React.FC = observer(function Webshop() {
+export const Webshop: React.FC = observer(() => {
 
     const { webshopStore, rootStore } = useContext<IMobXContext>(MobXContext);
     const { theme, colorMode } = useMode();
@@ -52,5 +52,3 @@ const Webshop: React.FC = observer(function Webshop() {
         );
     }
 });
-
-export default Webshop;

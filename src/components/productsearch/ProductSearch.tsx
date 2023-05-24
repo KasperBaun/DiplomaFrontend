@@ -1,12 +1,14 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useState } from "react";
-import Category from "@models/Category";
-import SubCategory from "@models/SubCategory";
+import { useContext } from "react";
+import { Category } from "@models/Category";
+import { SubCategory } from "@models/SubCategory";
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from "@mui/material";
 import { ProductSearchBar } from "./ProductSearchBar";
 
 type ProductSearchProps = {
+    searchText: string;
+    setSearchText: (searchText: string) => void;
     categories: Category[];
     subcategories: SubCategory[];
     selectedCategory: Category;
@@ -40,7 +42,6 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
 
     /* Define state for products and selected category & subcategory - Inject stores */
     const { languageStore } = useContext(MobXContext);
-    const [searchText, setSearchText] = useState<string>('');
 
     /* Define the event handlers for the events */
     const handleSearchTextChanged = (searchText: string): void => {
@@ -82,8 +83,8 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                 sx={gridItemStyling}
             >
                 <ProductSearchBar
-                    searchText={searchText}
-                    setSearchText={setSearchText}
+                    searchText={props.searchText}
+                    setSearchText={props.setSearchText}
                     showSearchBar={showSearchBar}
                     onSearchTextChanged={handleSearchTextChanged}
                     style={{ width: '100%' }}

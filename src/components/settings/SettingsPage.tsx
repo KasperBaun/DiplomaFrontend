@@ -8,14 +8,16 @@ import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import MobXContext from "@stores/MobXContext";
-import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme";
+import { ColorModeContext } from "styling/mui-theme/backoffice/BackofficeTheme";
+import { useTheme } from "@mui/material";
 
 
 export const SettingsPage: React.FC = observer(() => {
 
-    const { languageStore } = useContext(MobXContext);
 
-    const { theme, colorMode } = useBackofficeMode();
+    const { languageStore } = useContext(MobXContext);
+    const theme = useTheme();
+    const colorMode = useContext(ColorModeContext);
 
     const handleThemeChange = () => {
         colorMode.toggleColorMode();

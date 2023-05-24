@@ -1,4 +1,4 @@
-export default class ProductItemDetails{
+export class ProductItemDetails{
     name : string;
     material : number;
     weight : number;

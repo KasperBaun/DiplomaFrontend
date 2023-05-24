@@ -1,18 +1,18 @@
 import * as React from 'react';
 import { Card, CardHeader, CardMedia, CardContent, CardActions, IconButton, Typography } from '@mui/material';
-import Category from '@models/Category';
+import { Category } from '@models/Category';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext } from 'react';
 import { Delete, Edit, FiberManualRecord } from "@mui/icons-material";
 
-export interface ICategoryCardProps {
+type CategoryCardProps = {
     category: Category;
     goToSubcategories: (category: Category) => void;
     updateCategory: (category: Category) => void;
     deleteCategory: (category: Category) => Promise<void>;
 }
 
-const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: ICategoryCardProps) {
+export const CategoryCard: React.FC<CategoryCardProps> = (props: CategoryCardProps) => {
 
     const { backofficeStore, languageStore } = useContext<IMobXContext>(MobXContext);
     const subcategoryCount: number = backofficeStore.subCategoriesByCategoryID(props.category.id) ? backofficeStore.subCategoriesByCategoryID(props.category.id).length : 0;
@@ -60,5 +60,3 @@ const CategoryCard: React.FC<ICategoryCardProps> = function CategoryCard(props: 
         </Card>
     );
 }
-
-export default CategoryCard;

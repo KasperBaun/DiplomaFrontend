@@ -1,6 +1,6 @@
 import React from "react";
-import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
+import { useContext } from "react";
 import { observer } from "mobx-react-lite";
 import { CssBaseline, Grid, Typography, Link, Stack } from "@mui/material";
 import { Call, Email, Facebook, Instagram } from "@mui/icons-material";
@@ -11,11 +11,6 @@ export const Footer: React.FC = observer(function Footer() {
 
   const { languageStore } = useContext(MobXContext);
   let year = new Date().getFullYear();
-
-  const iconStyling: React.CSSProperties = {
-    height: '28px',
-    width: '28px'
-  };
 
   return (
 
@@ -33,7 +28,7 @@ export const Footer: React.FC = observer(function Footer() {
         <Stack direction="row" spacing={2} justifyContent={'center'} alignItems={'center'}>
           <CustomNavLink url={"/"} value={languageStore.currentLanguage.HomeTabText} />
           <CustomNavLink url={"/faq"} value={languageStore.currentLanguage.FAQTabText} />
-          <CustomNavLink url={"/aboutUs"} value={languageStore.currentLanguage.AboutUsTabText} />
+          <CustomNavLink url={"/aboutus"} value={languageStore.currentLanguage.AboutUsTabText} />
           <CustomNavLink url={"/contact"} value={languageStore.currentLanguage.ContactTabText} />
           <CustomLink url={Constants.companyUrl} value={languageStore.currentLanguage.OldPageText} target="_blank" />
         </Stack >
@@ -114,3 +109,8 @@ const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
   }
   return result;
 }
+
+const iconStyling: React.CSSProperties = {
+  height: '28px',
+  width: '28px'
+};

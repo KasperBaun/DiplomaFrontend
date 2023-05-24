@@ -1,6 +1,5 @@
-// Icons: https://icons.getbootstrap.com/#usage
 
-export abstract class Constants {
+export class Constants {
     public static readonly loggingEnabled = true;
 
     /* Styling */

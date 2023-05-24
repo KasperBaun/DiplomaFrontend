@@ -1,8 +1,8 @@
-import SniperModel from "@models/SniperModel";
+import { SniperModel } from "@models/SniperModel";
 import { Container, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import SniperImageModal from "./SniperImageModal";
+import { SniperImageModal } from "./SniperImageModal";
 import { observer } from "mobx-react-lite";
 
 type SnipedTableProps = {

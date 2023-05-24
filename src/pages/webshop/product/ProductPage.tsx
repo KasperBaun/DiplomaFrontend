@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import ProductDescription from "./ProductDescription";
 import { Button, Grid, ImageList, ImageListItem } from "@mui/material";
 
-const ProductPage: React.FC = observer(() => {
+export const ProductPage: React.FC = observer(() => {
 
   const { webshopStore, basketStore, languageStore } = useContext(MobXContext);
 
@@ -37,7 +37,7 @@ const ProductPage: React.FC = observer(() => {
                     src={`${item}?w="${smallImageSize}"&h="${smallImageSize}"fit=crop&auto=format`}
                     srcSet={`${item}?w="${smallImageSize}"&h="${smallImageSize}"&fit=crop&auto=format`}
                     alt={item}
-                    style={{ width: smallImageSize, height: smallImageSize, alignSelf: "center", border:"none"}}
+                    style={{ width: smallImageSize, height: smallImageSize, alignSelf: "center", border: "none" }}
                     loading="lazy"
 
                     onClick={() => setLargeImageUrl(item)}
@@ -75,5 +75,3 @@ const ProductPage: React.FC = observer(() => {
   }
 
 });
-
-export default ProductPage;

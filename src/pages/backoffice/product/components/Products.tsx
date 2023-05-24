@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
-import { Button, Grid, Typography } from "@mui/material";
-import ProductCard from "./ProductCard";
+import { Button, Grid } from "@mui/material";
+import { ProductCard } from "./ProductCard";
 import { ProductItem } from "@models/ProductItem";
 import { ProductSearch } from "@components/productsearch/ProductSearch";
 import Loading from "@components/loading/Loading";
@@ -11,13 +11,10 @@ type ProductsProps = {
     onProductItemClicked: (productItem: ProductItem) => void;
 }
 
-const Products: React.FC<ProductsProps> = observer(function Products(props: ProductsProps) {
+export const Products: React.FC<ProductsProps> = observer((props: ProductsProps) => {
 
-    /* Inject stores */
     const { languageStore, backofficeStore } = useContext(MobXContext);
-
     const handleOnCreateClicked = (): void => props.onProductItemClicked(null);
-
     const handleOnShowMoreClicked = (): void => {
         backofficeStore.showMore();
     }
@@ -28,7 +25,6 @@ const Products: React.FC<ProductsProps> = observer(function Products(props: Prod
         } else {
             return (
                 productItems.map((product, index) => {
-                    // console.log(toJS(product))
                     return (
                         <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                             <ProductCard
@@ -58,6 +54,8 @@ const Products: React.FC<ProductsProps> = observer(function Products(props: Prod
                     <ProductSearch
                         showSearchBar={true}
                         reset={backofficeStore.reset}
+                        searchText={backofficeStore.searchText}
+                        setSearchText={backofficeStore.setSearchText}
                         categories={backofficeStore.Categories}
                         selectedCategory={backofficeStore.selectedCategory}
                         subcategories={backofficeStore.selectedSubcategories}
@@ -80,6 +78,3 @@ const Products: React.FC<ProductsProps> = observer(function Products(props: Prod
         )
     }
 });
-
-export default Products;
-

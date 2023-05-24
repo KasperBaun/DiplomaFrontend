@@ -1,6 +1,6 @@
 import { conditionType, qualityType } from "./Enums";
-import Image from "./Image";
-import {Product} from "./Product";
+import { Image } from "./Image";
+import { Product } from "./Product";
 
 export abstract class ProductItemWeb {
     id: number;

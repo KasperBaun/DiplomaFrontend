@@ -4,8 +4,8 @@ import { observer } from "mobx-react-lite";
 import React, { useContext, useState } from "react";
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CancelPresentationIcon from '@mui/icons-material/CancelPresentation';
-import Order from "@models/Order";
-import ProductDialog from "./components/ProductDialog";
+import { Order } from "@models/Order";
+import { ProductDialog } from "./components/ProductDialog";
 import Loading from "@components/loading/Loading";
 
 type OrdersProps = {
@@ -68,7 +68,7 @@ export const Orders = observer(({ displayItemsAmount }: OrdersProps) => {
                                 <TableRow key={order.id + "_orderDetail_" + index}>
                                     {renderProductIdUI(order)}
                                     <TableCell sx={tableCellStyling} >{order.customerId}</TableCell>
-                                    <TableCell sx={tableCellStyling} >{order.paymentStatus}</TableCell>
+                                    <TableCell sx={tableCellStyling} >{order.payment.approved ? "Approved" : "Pending"}</TableCell>
                                     <TableCell sx={tableCellStyling} >{order.deliveryStatus}</TableCell>
                                     <TableCell sx={tableCellStyling} >{order.discountCode}</TableCell>
                                     <TableCell sx={tableCellStyling} >

@@ -1,34 +1,25 @@
-import Category from "@models/Category";
-import SubCategory from "@models/SubCategory";
-import Payment from "@models/Payment";
+import { Category } from "@models/Category";
+import { SubCategory } from "@models/SubCategory";
+import { Payment } from "@models/Payment";
 import { Product } from "@models/Product";
 import { ProductItem } from "@models/ProductItem";
-import ProductDTO from "@models/DTO/ProductDTO";
-import Image from '@models/Image';
-import PriceHistory from "@models/PriceHistory";
-import ProductItemDTO from "@models/DTO/ProductItemDTO";
-import OrderDTO from "@models/DTO/OrderDTO";
-import OrderDetails from "@models/OrderDetails";
-import Order from "@models/Order";
-import OrderElements from "@models/OrderElements";
-import CreateOrderDTO from "@models/DTO/CreateOrderDTO";
-import ConfirmationModel from "@models/ConfirmationModel";
+import { ProductDTO } from "@models/DTO/ProductDTO";
+import { Image } from '@models/Image';
+import { PriceHistory } from "@models/PriceHistory";
+import { ProductItemDTO } from "@models/DTO/ProductItemDTO";
+import { OrderDTO } from "@models/DTO/OrderDTO";
+import { Order } from "@models/Order";
+import { OrderElements } from "@models/OrderElements";
+import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
 
-export interface WebAPIResponse {
-    success: boolean;
-    message?: string;
-    statusCode: number;
-    data?: any | any[];
-}
-
-interface IAPIService {
+export interface IAPIService {
 
     /* Backoffice */
-    getBestSellingProducts(amount:number): Promise<Product[]>;
+    getBestSellingProducts(amount: number): Promise<Product[]>;
 
     createCategory(category: Category): Promise<Category>;
     deleteCategory(id: number): Promise<void>;
-    
+
     createSubCategory(subcategory: SubCategory): Promise<SubCategory>;
     updateSubCategory(subcategory: SubCategory): Promise<SubCategory>;
     deleteSubCategory(id: number): Promise<void>;
@@ -51,12 +42,11 @@ interface IAPIService {
     getPriceHistories(): Promise<PriceHistory[]>;
 
     getOrders(): Promise<OrderDTO[]>;
-    getOrderDetails(): Promise<OrderDetails[]>;
     getOrderElements(): Promise<OrderElements[]>;
     createOrder(order: CreateOrderDTO): Promise<Order>;
     updateOrder(order: Order): Promise<Order>;
     deleteOrder(id: number): Promise<void>;
-    
+
     /* Webshop */
     getCategories: () => Promise<Category[]>
     getSubCategories(): Promise<SubCategory[]>;
@@ -65,5 +55,3 @@ interface IAPIService {
     getProductItemWebs(): Promise<ProductItemDTO[]>;
 
 }
-
-export default IAPIService;

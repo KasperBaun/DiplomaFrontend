@@ -8,29 +8,29 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {  ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext, useState } from 'react';
 import LockOutlined from '@mui/icons-material/LockOutlined';
-import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
-import UserFeedback from './UserFeedback';
-import { WebAPIResponse } from '@services/IAPIService';
+import { UserRegistrationDTO } from '@models/DTO/UserRegistrationDTO';
+import { UserFeedback } from './UserFeedback';
 import { useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
+import { WebAPIResponse } from '@models/types/WebApiResponse';
+import { observer } from 'mobx-react-lite';
 
-export interface ISignUpProps {
+type SignUpProps = {
     onAuthNavClicked: (key: number) => void;
 }
 
-
-const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpProps) {
+export const SignUpPage: React.FC<SignUpProps> = observer((props: SignUpProps) => {
 
     const { languageStore, authStore } = useContext<IMobXContext>(MobXContext);
     const [showFeedback, setShowFeedback] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
     const [variant, setVariant] = useState<'error' | 'warning' | 'success'>('success');
     const [navigateBack, setNavigateBack] = useState<boolean>(false);
-    const {theme} = useBackofficeMode();
+    const { theme } = useBackofficeMode();
 
     const handleClose = () => {
         setShowFeedback(!showFeedback)
@@ -162,6 +162,4 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
             </Container>
         </ThemeProvider>
     );
-}
-
-export default SignUpPage;
+});

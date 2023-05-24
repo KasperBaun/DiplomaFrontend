@@ -1,16 +1,17 @@
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Snackbar, TextField } from "@mui/material";
-import Category from "@models/Category";
+import { Category } from "@models/Category";
+import { observer } from "mobx-react-lite";
 
-export interface IProps {
+type CategoryDialogProps = {
     visible: boolean;
     onClose: () => void;
     create?: boolean;
     category?: Category;
 }
 
-const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
+export const CategoryDialog = observer(({ onClose, visible, create, category }: CategoryDialogProps) => {
 
     const { backofficeStore, languageStore } = useContext(MobXContext);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
@@ -157,6 +158,4 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
             </Dialog>
         )
     }
-}
-
-export default CategoryDialog;
+});

@@ -1,15 +1,15 @@
-import SubCategory from "@models/SubCategory";
+import { SubCategory } from "@models/SubCategory";
 import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { Translater } from "@utils/Translater";
 import { useContext } from "react";
 
-export type SubcategoryCardProps = {
+type SubcategoryCardProps = {
     subcategory: SubCategory;
     onCardClicked?: (subcategoryId: number) => void;
 }
 
-export const SubcategoryCard: React.FC<SubcategoryCardProps> = function SubcategoryCard(props: SubcategoryCardProps) {
+export const SubcategoryCard: React.FC<SubcategoryCardProps> = (props: SubcategoryCardProps) => {
 
     const { subcategory, onCardClicked } = props;
     const { languageStore, webshopStore } = useContext<IMobXContext>(MobXContext);

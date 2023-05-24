@@ -1,5 +1,5 @@
-import { Product } from "./Product";
-import SniperModel from "./SniperModel";
+import { Product } from "../Product";
+import { SniperModel } from "../SniperModel";
 
 export type SniperResult = {
     product: Product;

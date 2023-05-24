@@ -1,9 +1,9 @@
-import LoginPage from "@backoffice/auth/LoginPage";
-import SignUpPage from "@backoffice/auth/SignUpPage";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
+import { LoginPage } from "@backoffice/auth/LoginPage";
+import { SignUpPage } from "@backoffice/auth/SignUpPage";
 import { useContext, useState } from "react";
-import UserFeedback from "./UserFeedback";
-import UserLoginDTO from "@models/DTO/UserLoginDTO";
+import { UserFeedback } from "./UserFeedback";
+import { UserLoginDTO } from "@models/DTO/UserLoginDTO";
 import { observer } from "mobx-react-lite";
 
 export const AuthPage: React.FC = observer(() => {
@@ -14,7 +14,7 @@ export const AuthPage: React.FC = observer(() => {
     const [showBackdrop, setShowBackdrop] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
     const [variant, setVariant] = useState<'error' | 'warning' | 'success'>('success');
-    
+
 
     const handleAuthNav = (key: number) => { setActiveKey(key); }
     const handleCloseFeedback = () => setShowFeedback(!showFeedback);

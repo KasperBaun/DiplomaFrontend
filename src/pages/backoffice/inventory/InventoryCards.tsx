@@ -3,9 +3,8 @@ import { Card, CardContent, Grid, Typography } from "@mui/material";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import '../inventory.scss';
 
-const InventoryCards = () => {
+export const InventoryCards = observer(() => {
 
     const { backofficeStore, languageStore } = useContext(MobXContext);
 
@@ -31,6 +30,4 @@ const InventoryCards = () => {
     } else {
         return <LoadingLion />
     }
-}
-
-export default observer(InventoryCards);
+});

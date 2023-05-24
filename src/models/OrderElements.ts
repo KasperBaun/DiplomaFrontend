@@ -1,6 +1,6 @@
 import { ProductItem } from "./ProductItem";
 
-export default class OrderElements {
+export class OrderElements {
     id ?: number;
     orderId ?: number;
     productItemId: number;

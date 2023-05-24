@@ -3,8 +3,8 @@ import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { RootStore } from './RootStore';
 import { Constants } from '@utils/Constants';
 import { ILocale } from '@utils/ILocale';
-import DKLocale from '@utils/DKLocale';
-import ENLocale from '@utils/ENLocale';
+import { DKLocale } from '@utils/DKLocale';
+import { ENLocale } from '@utils/ENLocale';
 
 export class LanguageStore {
 

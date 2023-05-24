@@ -1,16 +1,16 @@
 import { Navpath } from "@models/Navpath";
 import { ListItemButton, ListItemIcon } from "@mui/material";
+import { observer } from "mobx-react-lite";
 import ColorConfigs from "styling/ColorConfigs";
 
-export interface ISidebarItemProps {
+type Props = {
     item: Navpath;
     sidebarOpen: boolean;
 }
 
-const SidebarItem: React.FC<ISidebarItemProps> = function SidebarItem(props: ISidebarItemProps) {
+export const SidebarItem: React.FC<Props> = observer((props: Props) => {
 
     return (
-
         <ListItemButton
             onClick={props.item.navigationClick}
             sx={{
@@ -34,6 +34,4 @@ const SidebarItem: React.FC<ISidebarItemProps> = function SidebarItem(props: ISi
         </ListItemButton>
 
     );
-};
-
-export default SidebarItem;
+});

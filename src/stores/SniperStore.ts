@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import APIService from '@services/APIService';
+import { APIService } from '@services/APIService';
 import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { Constants } from '@utils/Constants';
 import { RootStore } from './RootStore';
-import SniperModel from '@models/SniperModel';
+import { SniperModel } from '@models/SniperModel';
 import { Product } from '@models/Product';
-import { SniperResult } from '@models/SniperResult';
+import { SniperResult } from '@models/types/SniperResult';
 import { Notification } from '@models/types/Notification';
 
 

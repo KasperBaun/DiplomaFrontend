@@ -7,8 +7,7 @@ import { ProductSearch } from "@components/productsearch/ProductSearch";
 import { ProductCardWeb } from "./ProductCard";
 import LoadingLion from "@components/loading/LoadingLion";
 
-export const ProductListPage: React.FC = observer(function ProductListPage() {
-    // const translater = new Translater();
+export const ProductsPage: React.FC = observer(function ProductListPage() {
     const { languageStore, webshopStore, searchStore } = useContext(MobXContext);
 
     /* Define the event handlers for the buttons */
@@ -41,6 +40,8 @@ export const ProductListPage: React.FC = observer(function ProductListPage() {
             <Grid container >
                 <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
                     <ProductSearch
+                        searchText={searchStore.searchText}
+                        setSearchText={searchStore.setSearchText}
                         categories={webshopStore.Categories}
                         subcategories={searchStore.selectedSubcategories}
                         displayItemsCount={searchStore.displayedProductItemsLength}

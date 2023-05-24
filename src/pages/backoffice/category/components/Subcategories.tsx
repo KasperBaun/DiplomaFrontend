@@ -1,20 +1,19 @@
 import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
-import Table from "react-bootstrap/esm/Table";
-import SubCategory from "@models/SubCategory";
+import { SubCategory } from "@models/SubCategory";
 import { Pencil, XLg } from "react-bootstrap-icons";
-import Category from "@models/Category";
+import { Category } from "@models/Category";
 import LoadingLion from "@components/loading/LoadingLion";
 import { SubcategoryDialog } from "./SubcategoryDialog";
-import { Alert, Button, Grid, Snackbar } from "@mui/material";
-import ConfirmDeleteDialog from "./ConfirmDeleteDialog";
+import { Alert, Button, Grid, Snackbar, Table } from "@mui/material";
+import { ConfirmDeleteDialog } from "./ConfirmDeleteDialog";
 
-export interface ISubcategoriesProps {
+type SubcategoriesProps = {
     selectedCategory?: Category;
 }
 
-const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcategories(props: ISubcategoriesProps) {
+export const Subcategories: React.FC<SubcategoriesProps> = observer(function Subcategories(props: SubcategoriesProps) {
 
     /* Define state for categories and selected category - Inject stores */
     const { backofficeStore, languageStore } = useContext(MobXContext)
@@ -82,7 +81,7 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
                 </Grid>
 
                 {/* Subcategorycards */}
-                <Table striped bordered hover>
+                <Table >
                     <thead>
                         <tr>
                             <th className="CenterAligned_th">{languageStore.currentLanguage.createCategoryTitle}</th>
@@ -118,5 +117,3 @@ const Subcategories: React.FC<ISubcategoriesProps> = observer(function Subcatego
             <LoadingLion />
         )
 });
-
-export default Subcategories;

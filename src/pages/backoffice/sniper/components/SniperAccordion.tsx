@@ -1,4 +1,4 @@
-import { SniperResult } from "@models/SniperResult"
+import { SniperResult } from "@models/types/SniperResult"
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { SnipedTable } from "./SnipedTable";
@@ -7,7 +7,7 @@ import { FiberNew } from "@mui/icons-material";
 import { runInAction } from "mobx";
 
 
-export type SniperAccordionProps = {
+type SniperAccordionProps = {
     result: SniperResult;
     idx: number;
 }

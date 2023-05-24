@@ -6,7 +6,7 @@ import { Container, Grid, Typography } from "@mui/material";
 import { Translater } from "@utils/Translater";
 import { SubcategoryCard } from "./SubcategoryCard";
 
-const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: any) {
+export const SubcategoriesPage: React.FC = observer(function SubCategoriesPage(this: any) {
     const { webshopStore, searchStore } = useContext(MobXContext);
     const { languageStore } = useContext(MobXContext);
     const translater = new Translater();
@@ -18,7 +18,7 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
 
     function handleClick(subcategoryId: number) {
         searchStore.filterBySubcategory(subcategoryId);
-        navigate(`/productList`);
+        navigate(`/products`);
     }
 
     if (subCategories && subCategories.length > 0)
@@ -44,5 +44,3 @@ const SubCategoriesPage: React.FC = observer(function SubCategoriesPage(this: an
             </Container>
         )
 })
-
-export default SubCategoriesPage;
