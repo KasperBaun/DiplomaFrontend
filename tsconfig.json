@@ -58,6 +58,6 @@
     "twin.d.ts",
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
   ],
 }

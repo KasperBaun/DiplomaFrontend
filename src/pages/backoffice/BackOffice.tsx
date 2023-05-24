@@ -19,6 +19,7 @@ import { useBackofficeMode } from "styling/mui-theme/backoffice/BackofficeTheme"
 import { Orders } from "./orders/Orders";
 import { Analysis } from "./dashboard/components/Analysis";
 
+
 export const Backoffice: React.FC = observer(() => {
 
     const [activeNavKey, setActiveNavKey] = useState<number>(0);
