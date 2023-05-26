@@ -145,6 +145,21 @@ export class ENLocale implements ILocale {
   updateSubcategory = "Update Subcategory";
   chooseCategory = "Choose category";
   showing = "Showing";
+  back = "back";
+  country = "Country";
+  state = "State";
+  shippingAddress = "Shipping address";
+  paymentDetails = "Payment details";
+  reviewOrder = "Review order";
+  thankYouForYourOrder = "Thank you for your order";
+  firstNameShouldOnlyBeCharacters = "First name should only be characters";
+  lastNameShouldOnlyBeCharacters = "Last name should only be characters";
+  addressCannotBeEmpty = "Address can not be empty";
+  cityCannotBeEmpty = "City can not be empty";
+  emailNotCorrect = "Email must be in the format example@example.com";
+  phoneNotCorrect = "Phone can only contain numbers";
+  postcodeErrorMessage = "Postcode can only contain numbers";
+  countryErrorMessage = "Country can only contain letters";
 
   // Months
   january = "January";

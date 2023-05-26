@@ -100,7 +100,7 @@ export const Header: React.FC = observer(function Header() {
 
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'end'}>
-          {location.pathname !== "/productList" &&
+          {location.pathname !== "/products" &&
             <Form className="d-flex">
               <Form.Control
                 type="search"

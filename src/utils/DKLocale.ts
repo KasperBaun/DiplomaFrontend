@@ -145,6 +145,14 @@ export class DKLocale implements ILocale {
   updateSubcategory = "Opdater underkategori";
   chooseCategory = "Vælg kategori";
   showing = "Viser";
+  firstNameShouldOnlyBeCharacters = "Fornavn kan kun indeholde bogstaver";
+  lastNameShouldOnlyBeCharacters = "Efternavn kan kun indeholde bogstaver";
+  addressCannotBeEmpty = "Addresse kan ikke være tom";
+  cityCannotBeEmpty = "By kan ikke være tom";
+  emailNotCorrect = "Email skal være i formattet eksempel@eksempel.com";
+  phoneNotCorrect = "Telefon kan kun indeholde tal";
+  postcodeErrorMessage = "Postnummer kan kun indeholde tal";
+  countryErrorMessage = "Land kan kun indeholde bogstaver";
 
   // Months
   january = "Januar";
@@ -170,6 +178,13 @@ export class DKLocale implements ILocale {
   oct = "Okt";
   nov = "Nov";
   dec = "Dec";
+  back = "Tilbage";
+  country = "Land";
+  state = "Stat";
+  shippingAddress = "Forsendelsesinformationer";
+  paymentDetails = "Betalingsinformationer";
+  reviewOrder = "Gennemgå ordre";
+  thankYouForYourOrder = "Tak for din ordre";
 
 
 

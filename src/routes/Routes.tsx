@@ -10,7 +10,7 @@ import { PaymentPage } from "@webshop/payment/PaymentPage"
 import { ProductPage } from "@webshop/product/ProductPage"
 import { Auth } from "@backoffice/Auth"
 import { ProductsPage } from "@webshop/product/ProductsPage"
-import { AboutUsPage } from "@webshop/aboutUs/AboutUsPage"
+import { AboutUsPage } from "@webshop/aboutus/AboutUsPage"
 import { FAQPage } from "@webshop/faq/FAQPage"
 import { ContactPage } from "@webshop/contact/Contact"
 

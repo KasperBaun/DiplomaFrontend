@@ -1,8 +1,8 @@
 import Grid from "@mui/material/Grid";
+import Card from '@mui/material/Card';
+import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite"
 import { useContext } from "react";
-import MobXContext from "@stores/MobXContext";
-import Card from '@mui/material/Card';
 import { BasketPageItem } from "./BasketPageItem";
 import { Button, Divider, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom"
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 export const BasketPage: React.FC = observer(function BasketPage() {
     const { basketStore, languageStore } = useContext(MobXContext);
     const navigate = useNavigate();
-    const handleClick = () => { navigate('/Payment') }
+    const handleClick = () => { navigate('/payment') }
 
     const getTotal = (bas = basketStore.Basket) => {
         let sum = 0;

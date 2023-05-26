@@ -115,6 +115,21 @@ export interface ILocale {
   updateSubcategory: string;
   chooseCategory: string;
   showing: string;
+  back: string;
+  country: string;
+  state: string;
+  shippingAddress: string;
+  paymentDetails: string;
+  reviewOrder: string;
+  thankYouForYourOrder: string;
+  firstNameShouldOnlyBeCharacters: string;
+  lastNameShouldOnlyBeCharacters: string;
+  addressCannotBeEmpty: string;
+  cityCannotBeEmpty: string;
+  emailNotCorrect: string;
+  phoneNotCorrect: string;
+  postcodeErrorMessage: string;
+  countryErrorMessage: string;
 
 
   // Months
