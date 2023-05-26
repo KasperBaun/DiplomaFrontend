@@ -11,29 +11,21 @@ import { AddressForm } from './components/AdressForm';
 import { PaymentForm } from './components/PaymentForm';
 import { Review } from './components/Review';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Confirmation } from './components/Confirmation';
-import { PaymentCreditCardForm } from './components/PaymentCreditCardForm';
-
-type StepProps = {
-    step: number;
-}
 
 export const CheckoutPage = observer(() => {
 
     const { basketStore, languageStore } = useContext<IMobXContext>(MobXContext);
     const steps = [
         languageStore.currentLanguage.shippingAddress,
-        languageStore.currentLanguage.paymentDetails, languageStore.currentLanguage.reviewOrder
+        languageStore.currentLanguage.paymentDetails,
+        languageStore.currentLanguage.reviewOrder
     ];
     const [activeStep, setActiveStep] = React.useState(0);
 
-    const handleOnSubmitClick = () => {
-
-    }
-
-    const StepContent: React.FC<StepProps> = ({ step }: StepProps) => {
+    const StepContent: React.FC<{ step: number }> = ({ step }: { step: number }) => {
         switch (step) {
             case 0:
                 return <AddressForm />;

@@ -88,7 +88,6 @@ export const PaymentCreditCardForm = ({handleOnSubmitClick }: PaymentCreditCardF
 
   const handleOnSubmit = () => {
     if (expirationValid && cardNumberValid && cvcValid) {
-      webshopStore.setCardInfo({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
       console.log({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
       handleOnSubmitClick();
     }

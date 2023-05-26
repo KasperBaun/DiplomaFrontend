@@ -1,4 +1,3 @@
-import { LanguageStore } from "@stores/LanguageStore";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
@@ -12,7 +11,6 @@ export const PaymentPaypalForm = ({ handleOnSubmitClick }: IPaymentPaypalFormPro
     const { webshopStore, languageStore: ls } = useContext(MobXContext);
 
     const handleOnSubmit = () => {
-        webshopStore.setPayPalForm(true);
         handleOnSubmitClick();
     }
 

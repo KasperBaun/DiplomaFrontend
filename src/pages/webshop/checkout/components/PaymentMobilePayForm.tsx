@@ -4,10 +4,10 @@ import MobXContext from "@stores/MobXContext";
 import { PaymentButton } from "./PaymentButton";
 
 interface IPaymentMobilePayFormProps {
-    handleOnSubmitClick : () => void;
+    handleOnSubmitClick: () => void;
 }
 
-export const PaymentMobilePayForm = ( { handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
+export const PaymentMobilePayForm = ({ handleOnSubmitClick }: IPaymentMobilePayFormProps) => {
 
     const [mobilePayNumber, setMobilePayNumber] = useState<string>(null);
     const { webshopStore, languageStore: ls } = useContext(MobXContext);
@@ -18,8 +18,6 @@ export const PaymentMobilePayForm = ( { handleOnSubmitClick} : IPaymentMobilePay
     };
 
     const handleOnSubmit = () => {
-        webshopStore.setMobilePayForm({phoneNumber: mobilePayNumber})
-        console.log({phoneNumber: mobilePayNumber})
         handleOnSubmitClick();
     }
 

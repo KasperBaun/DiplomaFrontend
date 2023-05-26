@@ -10,12 +10,8 @@ import { Image } from '@models/Image';
 import { ProductDTO } from '@models/DTO/ProductDTO';
 import { ProductItemDTO } from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
-import { MobilePayForm, CardInfo, PaymentForm } from "@models/Checkout";
 import { Customer } from '@models/Customer';
-import { Payment } from '@models/Payment';
-import { ConfirmationModel } from '@models/ConfirmationModel';
-import { CreateOrderDTO } from '@models/DTO/CreateOrderDTO';
-import { Order } from '@models/Order';
+
 
 export class WebshopStore {
     private static _Instance: WebshopStore;
@@ -30,21 +26,10 @@ export class WebshopStore {
     /* Data arrays */
     private _categories: Category[] = [];
     private _subcategories: SubCategory[] = [];
-    private _products: Product[] = [];
     private _productItems: ProductItemWeb[] = [];
-    private _checkoutPayments: PaymentForm[] = [];
-    private _customer: Customer = null;
-    private _payment: Payment = null;
-    private _cardInfo: CardInfo = null;
-    private _mobilePayForm: MobilePayForm = null;
-    private _paypalForm: boolean = false;
-    private _paymentForm: PaymentForm = null;
-    private _confirmation: ConfirmationModel = null;
-    private _createOrderDTO: CreateOrderDTO = null;
 
     /* Maps for quick access */
     private _categoryMap: Map<number, Category> = new Map();
-    private _checkoutPaymentMap: Map<string, PaymentForm> = new Map();
     private _subcategoryMap: Map<Number, SubCategory> = new Map();
     private _productMap: Map<number, Product> = new Map();
     private _productItemMap: Map<number, ProductItemWeb> = new Map();
@@ -75,7 +60,6 @@ export class WebshopStore {
             this._subcategories = subcategories;
             this._subcategoryMap = subcategoryMap;
             this.subcategoriesInCategoryMap = subcategoryToCategoryMap;
-            this._products = products;
             this._productMap = productMap;
             this._productItems = productItems;
             this._productItemMap = productItemMap;
@@ -232,10 +216,6 @@ export class WebshopStore {
         return this.loaded;
     }
 
-    public get CheckoutPayments(): PaymentForm[] {
-        return this._checkoutPayments;
-    }
-
     public get ProductItems(): ProductItemWeb[] {
         return this._productItems;
     }
@@ -252,78 +232,6 @@ export class WebshopStore {
         return this._subcategories;
     }
 
-    public get Customer(): Customer {
-        return this._customer;
-    }
-
-    public setCustomer(customer: Customer) {
-        this._customer = customer;
-    }
-
-    public get Payment(): Payment {
-        return this._payment;
-    }
-
-    public set Payment(payment: Payment) {
-        this._payment = payment;
-    }
-
-    public get CardInfo(): CardInfo {
-        return this._cardInfo;
-    }
-
-    public get MobilePayForm(): MobilePayForm {
-        return this._mobilePayForm;
-    }
-
-    public setMobilePayForm(mobilePayForm: MobilePayForm) {
-        this._mobilePayForm = mobilePayForm;
-    }
-
-    public get PayPalForm(): boolean {
-        return this._paypalForm;
-    }
-
-    public setPayPalForm(paypalForm: boolean) {
-        this._paypalForm = paypalForm;
-    }
-
-    public setCardInfo(cardInfo: CardInfo) {
-        this._cardInfo = cardInfo;
-    }
-
-    public async createPayment(payment: Payment): Promise<Payment> {
-        const createdPayment = await this.apiService.createPayment(payment);
-        return createdPayment;
-    }
-
-    public async getPaymentById(id: number): Promise<Payment> {
-        const payment = await this.apiService.getPaymentById(id);
-        return payment;
-    }
-
-    public get PaymentForm(): PaymentForm {
-        return this._paymentForm;
-    }
-
-    public set PaymentForm(paymentForm: PaymentForm) {
-        this._paymentForm = paymentForm;
-    }
-
-    public getPaymentForm(id: string): PaymentForm {
-        return this._checkoutPayments.find(p => p.id === id);
-    }
-
-    public setCheckoutPayment(payment: PaymentForm) {
-        this._checkoutPayments.push(payment);
-    }
-
-    public async createCustomer(customer: Customer): Promise<Customer> {
-        const createdCustomer = await this.apiService.createCustomer(customer);
-        this.setCustomer(createdCustomer)
-        return createdCustomer;
-    }
-
     public subCategoriesByCategoryID(categoryId: Number): SubCategory[] {
         const result = this.subcategoriesInCategoryMap.get(categoryId);
         if (!result) {
@@ -336,6 +244,5 @@ export class WebshopStore {
     public getSubcategory(id: number): SubCategory {
         return this._subcategoryMap.get(id);
     }
-
    
 }
