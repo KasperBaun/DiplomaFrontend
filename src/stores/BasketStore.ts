@@ -5,6 +5,7 @@ import { RootStore } from './RootStore';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 import { Customer } from '@models/Customer';
 import { IpInfo } from '@models/types/IpInfo';
+import { Order } from '@models/Order';
 
 
 export class BasketStore {
@@ -15,7 +16,9 @@ export class BasketStore {
     private loaded: boolean = false;
     private _basket: ProductItemWeb[] = [];
     private _customer: Customer = new Customer();
+    private _customerInputValidated: boolean = false;
     private _ipInfo: IpInfo;
+    private _order: Order;
 
     constructor(_rootStore: RootStore) {
         this.rootStore = _rootStore;
@@ -85,5 +88,41 @@ export class BasketStore {
 
     public createCustomer = async (): Promise<Customer> => {
         return await this.rootStore.webshopStore.createCustomer(this._customer)
+    }
+
+    public get CustomerInputValidated(): boolean {
+        return this._customerInputValidated;
+    }
+
+    public set CustomerInputValidated(value: boolean) {
+        this._customerInputValidated = value;
+    }
+
+    public customerPropertiesEmpty = (): boolean => {
+        const { email, firstName, lastName, address, zipCode, city, country, countryCode, phone } = this._customer;
+
+        if (
+            email === '' || email === undefined ||
+            firstName === '' || firstName === undefined ||
+            lastName === '' || lastName === undefined ||
+            address === '' || address === undefined ||
+            zipCode === '' || zipCode === undefined ||
+            city === '' || city === undefined ||
+            country === '' || country === undefined ||
+            // countryCode === '' || countryCode === undefined ||
+            phone === '' || phone === undefined
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public get Order(): Order {
+        return this._order;
+    }
+
+    public set Order(order: Order) {
+        this._order = order;
     }
 }

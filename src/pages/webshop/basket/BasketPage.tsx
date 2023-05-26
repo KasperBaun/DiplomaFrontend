@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 export const BasketPage: React.FC = observer(function BasketPage() {
     const { basketStore, languageStore } = useContext(MobXContext);
     const navigate = useNavigate();
-    const handleClick = () => { navigate('/payment') }
+    const handleClick = () => { navigate('/checkout') }
 
     const getTotal = (bas = basketStore.Basket) => {
         let sum = 0;

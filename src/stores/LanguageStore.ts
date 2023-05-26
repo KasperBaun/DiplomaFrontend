@@ -80,13 +80,11 @@ export class LanguageStore {
     }
 
     public getCurrentLanguageCode(): "da-DK" | "en-US" {
-        let lang: "da-DK" | "en-US";
         if (this._currentLanguage === "da-DK") {
-            lang = "en-US";
+            return "da-DK"
         } else {
-            lang = "da-DK"
+            return "en-US"
         }
-        return lang;
     }
 
     public getCurrency(): string {
