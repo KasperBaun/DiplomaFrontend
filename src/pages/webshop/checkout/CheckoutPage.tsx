@@ -14,6 +14,7 @@ import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Confirmation } from './components/Confirmation';
+import { PaymentCreditCardForm } from './components/PaymentCreditCardForm';
 
 type StepProps = {
     step: number;
@@ -28,12 +29,16 @@ export const CheckoutPage = observer(() => {
     ];
     const [activeStep, setActiveStep] = React.useState(0);
 
+    const handleOnSubmitClick = () => {
+
+    }
+
     const StepContent: React.FC<StepProps> = ({ step }: StepProps) => {
         switch (step) {
             case 0:
                 return <AddressForm />;
             case 1:
-                return <PaymentForm />;
+                return <PaymentForm  />;
             case 2:
                 return <Review />;
             case 3:
