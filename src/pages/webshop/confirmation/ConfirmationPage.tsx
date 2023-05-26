@@ -28,26 +28,10 @@ export const ConfirmationPage = observer(() => {
         productIds.push(item.id);
     });
 
-    useEffect(() => {
-        setPreOrder({
-            paymentForm: webshopStore.PaymentForm,
-            customer: webshopStore.Customer,
-            productItemsId: productIds,
-            totalPrice: totalPrice,
-        });
-    }, [basketStore.Basket, webshopStore.PaymentForm, webshopStore.Customer, totalPrice]);
-
     const createOrder = async () => {
-        return await webshopStore.createOrder(preOrder);
+        return await basketStore.createOrder();
     };
 
-    useEffect(() => {
-        createOrder().then((response) => {
-            setConfirmation(response);
-        });
-
-        // get order from database
-    }, [id, createOrder]);
 
     if (webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
         return (

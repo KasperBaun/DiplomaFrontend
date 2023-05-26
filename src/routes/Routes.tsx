@@ -27,7 +27,7 @@ export const Routing: React.FC = function Routing() {
                 <Route path="categories" element={<CategoriesPage />} />
                 <Route path="categories/subcategories/:id" element={<SubcategoriesPage />} />
                 <Route path="basket" element={<BasketPage />} />
-                <Route path="confirmation/:id" element={<ConfirmationPage />} />
+                <Route path="confirmation" element={<ConfirmationPage />} />
                 <Route path="checkout" element={<CheckoutPage />} />
                 <Route path="aboutus" element={<AboutUsPage />} />
                 <Route path="faq" element={<FAQPage />} />

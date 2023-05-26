@@ -1,11 +1,10 @@
-import { PaymentForm } from "@models/Checkout";
+import { PaymentForm as Payment } from "@models/Checkout";
 import { Customer } from "@models/Customer";
-import { ProductItemWeb } from "@models/ProductItemWeb";
+import { DiscountCode } from "@models/DiscountCode";
 
 export class CreateOrderDTO {
-  id?: number;
-  paymentForm: PaymentForm;
   customer: Customer;
+  discountCode: DiscountCode;
+  payment: Payment;
   productItemsId: number[];
-  totalPrice: number;
 }

@@ -4,13 +4,12 @@ import { useContext } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 
 interface IPaymentPaypalFormProps {
-    ls: LanguageStore;
     handleOnSubmitClick: () => void;
 }
 
-export const PaymentPaypalForm = ({ ls, handleOnSubmitClick }: IPaymentPaypalFormProps) => {
+export const PaymentPaypalForm = ({ handleOnSubmitClick }: IPaymentPaypalFormProps) => {
 
-    const { webshopStore } = useContext(MobXContext);
+    const { webshopStore, languageStore: ls } = useContext(MobXContext);
 
     const handleOnSubmit = () => {
         webshopStore.setPayPalForm(true);

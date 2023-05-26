@@ -1,18 +1,16 @@
-import { LanguageStore } from "@stores/LanguageStore";
 import { Container, Form } from "react-bootstrap";
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { PaymentButton } from "./PaymentButton";
 
 interface IPaymentMobilePayFormProps {
-    ls : LanguageStore;
     handleOnSubmitClick : () => void;
 }
 
-export const PaymentMobilePayForm = ( {ls, handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
+export const PaymentMobilePayForm = ( { handleOnSubmitClick} : IPaymentMobilePayFormProps ) => {
 
     const [mobilePayNumber, setMobilePayNumber] = useState<string>(null);
-    const { webshopStore } = useContext(MobXContext);
+    const { webshopStore, languageStore: ls } = useContext(MobXContext);
 
     const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const temp = event.target.value;

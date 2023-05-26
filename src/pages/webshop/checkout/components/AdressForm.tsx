@@ -218,7 +218,9 @@ export const AddressForm = observer(() => {
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             basketStore.Customer.phone = event.target.value;
                             setPhoneError(basketStore.Customer.phone === "" ? false :
-                                validator.isNumeric(basketStore.Customer.phone) ? false : true
+                                validator.isMobilePhone(basketStore.Customer.phone, langCode, {
+                                    strictMode: false
+                                }) ? false : true
                             );
                             setPhone(event.target.value);
                         }}
