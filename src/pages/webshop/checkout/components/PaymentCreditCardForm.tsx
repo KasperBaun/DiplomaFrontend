@@ -3,9 +3,6 @@ import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import MobXContext from "@stores/MobXContext";
 import { PaymentButton } from "./PaymentButton";
 
-type PaymentCreditCardFormProps = {
-  handleOnSubmitClick: () => void;
-}
 
 interface CardOptions {
   name: string;
@@ -45,8 +42,8 @@ const cardOptions: CardOptions[] = [
 
 
 
-export const PaymentCreditCardForm = ({handleOnSubmitClick }: PaymentCreditCardFormProps) => {
-  const { webshopStore, languageStore: ls } = useContext(MobXContext);
+export const PaymentCreditCardForm = () => {
+  const { basketStore, languageStore: ls } = useContext(MobXContext);
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
@@ -58,6 +55,7 @@ export const PaymentCreditCardForm = ({handleOnSubmitClick }: PaymentCreditCardF
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const handlePaymentOptionClick = (cardId: number) => {
+    basketStore.OrderDTO.payment.method = "Creditcard";
     setSelectedCard(cardId);
   };
 
@@ -85,13 +83,6 @@ export const PaymentCreditCardForm = ({handleOnSubmitClick }: PaymentCreditCardF
     setCvc(formattedCvc);
     setCvcValid(/^\d{3}$/.test(formattedCvc)); // Validate that the CVC is exactly 3 digits long
   };
-
-  const handleOnSubmit = () => {
-    if (expirationValid && cardNumberValid && cvcValid) {
-      console.log({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
-      handleOnSubmitClick();
-    }
-  }
 
   return (
     <Container className="checkoutShoppingCart">
@@ -147,7 +138,6 @@ export const PaymentCreditCardForm = ({handleOnSubmitClick }: PaymentCreditCardF
             className={cvcValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <PaymentButton ls={ls} handleOnSubmitClick={handleOnSubmit} />
       </Form>
     </Container>
   )

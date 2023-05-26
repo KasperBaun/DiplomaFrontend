@@ -48,6 +48,17 @@ export const CheckoutPage = observer(() => {
             }
             basketStore.updateOrder();
         }
+        if (activeStep === 1) {
+            if (basketStore.OrderDTO.payment !== null || basketStore.OrderDTO.payment !== undefined) {
+                basketStore.updateOrder();
+            }
+        }
+        if (activeStep === 2) {
+            const createOrder = async () => {
+                await basketStore.createOrder();
+            }
+            createOrder();
+        }
         setActiveStep(activeStep + 1);
     };
 

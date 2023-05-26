@@ -1,6 +1,6 @@
-import { PaymentForm as Payment } from "@models/Checkout";
 import { Customer } from "@models/Customer";
 import { DiscountCode } from "@models/DiscountCode";
+import { Payment } from "@models/Payment";
 
 export class CreateOrderDTO {
   customer: Customer;

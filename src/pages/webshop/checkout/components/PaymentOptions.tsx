@@ -32,10 +32,10 @@ const paymentOptions: PaymentOption[] = [
 
 export const PaymentOptions = (props: IPaymentOptionsProps) => {
 
-  const [selectedPaymentId, setSelectedPaymetnId] = useState(-1);
+  const [selectedPaymentId, setSelectedPaymentId] = useState(-1);
 
   const handlePaymentOptionClick = (paymentOption: number) => {
-    setSelectedPaymetnId(paymentOption);
+    setSelectedPaymentId(paymentOption);
     props.setSelectedPaymentOption(paymentOption);
   };
 

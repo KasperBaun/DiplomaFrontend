@@ -8,6 +8,7 @@ import { IpInfo } from '@models/types/IpInfo';
 import { Order } from '@models/Order';
 import { CreateOrderDTO } from '@models/DTO/CreateOrderDTO';
 import { APIService } from '@services/APIService';
+import { Payment } from '@models/Payment';
 
 
 export class BasketStore {
@@ -19,13 +20,23 @@ export class BasketStore {
     private loaded: boolean = false;
     private _basket: ProductItemWeb[] = [];
     private _customer: Customer = new Customer();
+    private _payment: Payment = new Payment();
     private _customerInputValidated: boolean = false;
     private _ipInfo: IpInfo;
-    private _order: CreateOrderDTO = new CreateOrderDTO();
+    private _orderDTO: CreateOrderDTO = new CreateOrderDTO();
+    private _order: Order = new Order();
+
 
     constructor(_rootStore: RootStore, apiService: APIService) {
         this.rootStore = _rootStore;
         this._apiService = apiService;
+        this._orderDTO.payment = this._payment;
+        this._orderDTO.discountCode = {
+            code: "None",
+            discountPercentage: 13,
+            id: 0
+        };
+        this._orderDTO.customer = this._customer;
         makeAutoObservable(this);
     }
     public static GetInstance = (_rootStore: RootStore, apiService: APIService): BasketStore => {
@@ -90,15 +101,18 @@ export class BasketStore {
     public set CustomerInputValidated(value: boolean) {
         this._customerInputValidated = value;
     }
-    public get Order(): CreateOrderDTO {
+    public get Order(): Order {
         return this._order;
     }
-    public set Order(order: CreateOrderDTO) {
-        this._order = order;
+    public get OrderDTO(): CreateOrderDTO {
+        return this._orderDTO;
+    }
+    public set OrderDTO(order: CreateOrderDTO) {
+        this._orderDTO = order;
     }
     public updateOrder = (): void => {
         runInAction(() => {
-            this._order.customer = this._customer;
+            this._orderDTO.customer = this._customer;
             console.log("Order updated successfully");
         })
     }
@@ -122,7 +136,25 @@ export class BasketStore {
         return false;
     }
 
-    public async createOrder(): Promise<Order> {
-        return await this._apiService.createOrder(this._order);
+    public createOrder = async (): Promise<void> => {
+        console.log("OrderDTO state:", this._orderDTO);
+        if (this._basket.length === 0) {
+            alert("No items in basket!");
+            return;
+        }
+        if (!this._orderDTO.productItemsId) {
+            this._orderDTO.productItemsId = [];
+        }
+        for (var productItem of this._basket) {
+            this._orderDTO.productItemsId.push(productItem.id);
+        }
+        const result = await this._apiService.createOrder(this._orderDTO);
+        if (result !== null || result !== undefined) {
+            runInAction(() => {
+                this._order = result;
+            })
+        } else {
+            alert("Failed to create order. No money has been paid. Please try again later.");
+        }
     }
 }
