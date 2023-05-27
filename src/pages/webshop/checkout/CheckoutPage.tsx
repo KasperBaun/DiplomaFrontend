@@ -7,17 +7,18 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { AddressForm } from './components/AdressForm';
 import { PaymentForm } from './components/PaymentForm';
 import { Review } from './components/Review';
-import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Confirmation } from './components/Confirmation';
+import { useNavigate } from 'react-router-dom';
 
 export const CheckoutPage = observer(() => {
 
     const { basketStore, languageStore } = useContext<IMobXContext>(MobXContext);
+    const navigate = useNavigate();
     const steps = [
         languageStore.currentLanguage.shippingAddress,
         languageStore.currentLanguage.paymentDetails,
@@ -33,8 +34,6 @@ export const CheckoutPage = observer(() => {
                 return <PaymentForm />;
             case 2:
                 return <Review />;
-            case 3:
-                return <Confirmation />;
             default:
                 throw new Error('Unknown step');
         }
@@ -58,6 +57,7 @@ export const CheckoutPage = observer(() => {
                 await basketStore.createOrder();
             }
             createOrder();
+            navigate("/confirmation");
         }
         setActiveStep(activeStep + 1);
     };

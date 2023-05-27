@@ -216,12 +216,13 @@ export const AddressForm = observer(() => {
                         error={phoneError}
                         helperText={phoneError ? languageStore.currentLanguage.phoneNotCorrect : ""}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            basketStore.Customer.phone = event.target.value;
-                            setPhoneError(basketStore.Customer.phone === "" ? false :
-                                validator.isMobilePhone(basketStore.Customer.phone, langCode, {
-                                    strictMode: false
-                                }) ? false : true
-                            );
+                            if (basketStore.Customer.phone && basketStore.Customer.phone !== undefined) {
+                                const error = basketStore.Customer.phone === 0 ? false :
+                                    validator.isNumeric(basketStore.Customer.phone.toString()) ? false : true;
+                                setPhoneError(error);
+                            }
+
+                            basketStore.Customer.phone = parseInt(event.target.value);
                             setPhone(event.target.value);
                         }}
                     />

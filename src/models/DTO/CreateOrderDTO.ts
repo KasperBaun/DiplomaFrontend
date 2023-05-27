@@ -6,5 +6,5 @@ export class CreateOrderDTO {
   customer: Customer;
   discountCode: DiscountCode;
   payment: Payment;
-  productItemsId: number[];
+  productItemIds: number[];
 }

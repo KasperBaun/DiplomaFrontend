@@ -1,7 +1,8 @@
-export class Payment{
-    id ?: number;
-    amount: number;
+export class Payment {
+    id: number;
+    status: string;
     method: string;
-    approved: boolean;
+    amount: number;
+    transactionId: string;
     datePaid: string;
 }

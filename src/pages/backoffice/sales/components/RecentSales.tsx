@@ -53,7 +53,7 @@ export const RecentSalesList = observer((props: RecentSalesListProps) => {
                     }:${new Date(payment.datePaid).getMinutes().toString().padStart(2, '0')}`}
                 </TableCell>
                 <TableCell align="center">
-                  {payment.approved ? (
+                  {payment.status ? (
                     <CheckBoxIcon style={{ color: 'green' }} />
                   ) : (
                     <CancelPresentationIcon style={{ color: 'red' }} />

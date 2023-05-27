@@ -17,11 +17,16 @@ export class BasketStore {
     private _apiService: APIService;
     private prefix: string = `%c[BasketStore]`;
     private color: string = ComponentLoggingConfig.DarkRed;
+
+    /* Loading states */
     private loaded: boolean = false;
+    private _orderCreated: boolean = false;
+    private _customerInputValidated: boolean = false;
+
+    /* Data models */
     private _basket: ProductItemWeb[] = [];
     private _customer: Customer = new Customer();
     private _payment: Payment = new Payment();
-    private _customerInputValidated: boolean = false;
     private _ipInfo: IpInfo;
     private _orderDTO: CreateOrderDTO = new CreateOrderDTO();
     private _order: Order = new Order();
@@ -101,6 +106,9 @@ export class BasketStore {
     public set CustomerInputValidated(value: boolean) {
         this._customerInputValidated = value;
     }
+    public get OrderCreated(): boolean {
+        return this._orderCreated;
+    }
     public get Order(): Order {
         return this._order;
     }
@@ -129,7 +137,7 @@ export class BasketStore {
             city === '' || city === undefined ||
             country === '' || country === undefined ||
             // countryCode === '' || countryCode === undefined ||
-            phone === '' || phone === undefined
+            phone === 0 || phone === undefined
         ) {
             return true;
         }
@@ -142,16 +150,19 @@ export class BasketStore {
             alert("No items in basket!");
             return;
         }
-        if (!this._orderDTO.productItemsId) {
-            this._orderDTO.productItemsId = [];
+        if (!this._orderDTO.productItemIds) {
+            this._orderDTO.productItemIds = [];
         }
         for (var productItem of this._basket) {
-            this._orderDTO.productItemsId.push(productItem.id);
+            console.log("po id:", productItem.id);
+            this._orderDTO.productItemIds.push(productItem.id);
         }
         const result = await this._apiService.createOrder(this._orderDTO);
         if (result !== null || result !== undefined) {
             runInAction(() => {
                 this._order = result;
+                this._orderCreated = true;
+                console.log("Order created", result);
             })
         } else {
             alert("Failed to create order. No money has been paid. Please try again later.");

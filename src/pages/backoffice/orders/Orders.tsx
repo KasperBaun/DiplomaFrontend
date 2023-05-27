@@ -35,9 +35,9 @@ export const Orders = observer(({ displayItemsAmount }: OrdersProps) => {
 
         return (
             <TableCell sx={tableCellStyling} ><b><u>
-                {order.orderElements.map((element, index) => (
-                    <div style={{ display: "flex", justifyContent: "space-between" }} key={index} onClick={() => handleOnProductClick(element.productItemId)}>
-                        <b><u>{element.productItemId} {","}</u></b>
+                {order.productItems.map((element, index) => (
+                    <div style={{ display: "flex", justifyContent: "space-between" }} key={index} onClick={() => handleOnProductClick(element.id)}>
+                        <b><u>{element.id} {","}</u></b>
                     </div>))
                 }</u></b>
             </TableCell>
@@ -68,9 +68,9 @@ export const Orders = observer(({ displayItemsAmount }: OrdersProps) => {
                                 <TableRow key={order.id + "_orderDetail_" + index}>
                                     {renderProductIdUI(order)}
                                     <TableCell sx={tableCellStyling} >{order.customerId}</TableCell>
-                                    <TableCell sx={tableCellStyling} >{order.payment.approved ? "Approved" : "Pending"}</TableCell>
+                                    <TableCell sx={tableCellStyling} >{order.payment.status ? "Approved" : "Pending"}</TableCell>
                                     <TableCell sx={tableCellStyling} >{order.deliveryStatus}</TableCell>
-                                    <TableCell sx={tableCellStyling} >{order.discountCode}</TableCell>
+                                    <TableCell sx={tableCellStyling} >{order.discountCode?.code}</TableCell>
                                     <TableCell sx={tableCellStyling} >
                                         {order.active ? (
                                             <CheckBoxIcon style={{ color: 'green' }} />

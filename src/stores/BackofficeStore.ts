@@ -20,6 +20,7 @@ import { OrderDTO } from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/types/ChartData';
 import { Notification } from '@models/types/Notification';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
+import { DiscountCode } from '@models/DiscountCode';
 
 export class BackofficeStore {
 
@@ -45,6 +46,7 @@ export class BackofficeStore {
     private _orderElements: OrderElements[] = [];
     private months: string[] = [];
     private _bestSellingProducts: Product[] = [];
+    private _discountCodes: DiscountCode[] = [];
 
     /* Views */
     public categoryProducts: CategoryProductView[] = [];
@@ -95,6 +97,7 @@ export class BackofficeStore {
         const images = await this.apiService.getImages();
         // Get Pricehistories
         const pricehistories = await this.apiService.getPriceHistories();
+        const discountCodes = await this.apiService.getDiscountCodes();
         runInAction(() => {
             this.months = this.getMonths();
             this._categories = categories;
@@ -106,6 +109,7 @@ export class BackofficeStore {
             this._subcategoryMap = this.createSubcategoryMap(this._subcategories);
             this._images = images;
             this._pricehistories = pricehistories;
+            this._discountCodes = discountCodes;
         })
 
         const productDTOs: ProductDTO[] = await this.apiService.getProductDTOs();
@@ -128,7 +132,7 @@ export class BackofficeStore {
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
         let orderElements: OrderElements[] = await this.apiService.getOrderElements();
         orderElements = this.mapOrderElementsToProductItems(orderElements, this.productItems);
-        const orders = this.generateOrders(orderDTOs, orderElements, payments);
+        const orders = this.generateOrders(orderDTOs, this.productItems, payments, discountCodes);
 
 
         runInAction(() => {
@@ -173,24 +177,25 @@ export class BackofficeStore {
     }
 
     /* Orders */
-    private generateOrders(ordersDTO: OrderDTO[], orderElements: OrderElements[], payments: Payment[]): Order[] {
+    private generateOrders(ordersDTO: OrderDTO[], productItems: ProductItem[], payments: Payment[], discountCodes: DiscountCode[]): Order[] {
         const orders: Order[] = [];
         for (let orderDTO of ordersDTO) {
             const orderPayment = payments.find(p => p.id === orderDTO.paymentId);
+            const orderDiscountCode = discountCodes.find(c => c.id === orderDTO.discountCodeId);
             const order: Order = new Order();
             order.id = orderDTO.id;
             order.customerId = orderDTO.customerId;
             order.paymentId = orderDTO.paymentId;
             order.payment = orderPayment ? orderPayment : null;
             order.deliveryStatus = orderDTO.deliveryStatus;
-            order.discountCode = orderDTO.discountCode;
+            order.discountCode = orderDiscountCode ? orderDiscountCode : null
             order.active = orderDTO.active;
-            order.orderElements = [];
+            order.productItems = [];
             order.createdDate = new Date(orderDTO.createdDate);
-            for (let orderElementId of orderDTO.orderElementIDs) {
-                const orderElement = orderElements.find(oe => oe.id === orderElementId);
-                if (orderElement) {
-                    order.orderElements.push(orderElement);
+            for (let productItemId of orderDTO.productItemIds) {
+                const productItem = productItems.find(oe => oe.id === productItemId);
+                if (productItem) {
+                    order.productItems.push(productItem);
                 }
 
             }
