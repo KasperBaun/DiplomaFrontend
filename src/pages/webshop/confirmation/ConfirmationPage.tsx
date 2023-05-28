@@ -4,6 +4,8 @@ import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Col, Container, Row, Table } from "react-bootstrap";
 import { ShippingProgress } from "./components/ShippingProgress";
+import Loading from "@components/loading/Loading";
+import { Grid, Typography } from "@mui/material";
 
 
 
@@ -105,6 +107,12 @@ export const ConfirmationPage = observer(() => {
         );
     }
     else {
-        <LoadingLion />
+        return <Container fluid>
+            <Grid container display='flex' justifyContent='center'>
+                <Typography variant="h4">
+                    No order is being processed at the moment
+                </Typography>
+            </Grid>
+        </Container>
     }
 });
