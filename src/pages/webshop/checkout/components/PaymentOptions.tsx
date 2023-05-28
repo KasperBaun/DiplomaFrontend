@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Image } from "react-bootstrap";
 
 interface IPaymentOptionsProps {
   setSelectedPaymentOption: Dispatch<SetStateAction<number>>;
@@ -71,10 +70,11 @@ export const PaymentOptions = (props: IPaymentOptionsProps) => {
             }
           }}
         >
-          <Image
+          <img
             style={{
               maxHeight: '8vh', maxWidth: '10vh'
             }}
+            alt={"Payment option possibility"}
             src={paymentOption.imgUrl}
             key={paymentOption.id} />
         </Grid>

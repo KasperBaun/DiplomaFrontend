@@ -160,6 +160,12 @@ export class ENLocale implements ILocale {
   phoneNotCorrect = "Phone can only contain numbers";
   postcodeErrorMessage = "Postcode can only contain numbers";
   countryErrorMessage = "Country can only contain letters";
+  next = "Next";
+  placeOrder = "Place order";
+  noItemsInBasket = "No items in basket!";
+  shipping = "Shipping";
+  orderSummary = "Order summary";
+  method = "Method";
 
   // Months
   january = "January";

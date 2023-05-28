@@ -9,6 +9,7 @@ import { Order } from '@models/Order';
 import { CreateOrderDTO } from '@models/DTO/CreateOrderDTO';
 import { APIService } from '@services/APIService';
 import { Payment } from '@models/Payment';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
 
 
 export class BasketStore {
@@ -167,5 +168,13 @@ export class BasketStore {
         } else {
             alert("Failed to create order. No money has been paid. Please try again later.");
         }
+    }
+
+    public getTotal(): string {
+        return ExtentionMethods.formatPrice(
+            this._basket.reduce((acc, item) => acc + item.currentPrice, 0),
+            this.rootStore.languageStore.getCurrentLanguageCode(),
+            'DKK'
+        );
     }
 }

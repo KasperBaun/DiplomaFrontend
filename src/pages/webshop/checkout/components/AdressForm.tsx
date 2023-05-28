@@ -79,6 +79,8 @@ export const AddressForm = observer(() => {
         handleCustomerPropsChange();
     }, [firstNameError, lastNameError, address1Error, postcodeError, cityError, countryError, phoneError, emailError]);
 
+    const variant = "outlined";
+
 
     return (
         <React.Fragment>
@@ -91,7 +93,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.firstName}
                         fullWidth
                         autoComplete="given-name"
-                        variant="standard"
+                        variant={variant}
                         value={firstName}
                         error={firstNameError}
                         helperText={firstNameError ? languageStore.currentLanguage.firstNameShouldOnlyBeCharacters : ""}
@@ -113,7 +115,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.lastName}
                         fullWidth
                         autoComplete="family-name"
-                        variant="standard"
+                        variant={variant}
                         value={lastName}
                         error={lastNameError}
                         helperText={lastNameError ? languageStore.currentLanguage.lastNameShouldOnlyBeCharacters : ""}
@@ -135,7 +137,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.address_text}
                         fullWidth
                         autoComplete="shipping address-line1"
-                        variant="standard"
+                        variant={variant}
                         value={address}
                         error={address1Error}
                         helperText={address1Error ? languageStore.currentLanguage.addressCannotBeEmpty : ""}
@@ -154,7 +156,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.post_code}
                         fullWidth
                         autoComplete="shipping postal-code"
-                        variant="standard"
+                        variant={variant}
                         value={zip}
                         error={postcodeError}
                         helperText={postcodeError ? languageStore.currentLanguage.postcodeErrorMessage : ""}
@@ -173,7 +175,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.city}
                         fullWidth
                         autoComplete="shipping address-level2"
-                        variant="standard"
+                        variant={variant}
                         value={city}
                         error={cityError}
                         helperText={cityError ? languageStore.currentLanguage.cityCannotBeEmpty : ""}
@@ -192,7 +194,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.country}
                         fullWidth
                         autoComplete="shipping country"
-                        variant="standard"
+                        variant={variant}
                         value={country}
                         error={countryError}
                         helperText={countryError ? languageStore.currentLanguage.countryErrorMessage : ""}
@@ -211,21 +213,31 @@ export const AddressForm = observer(() => {
                         name="phone"
                         label={languageStore.currentLanguage.phone_text}
                         fullWidth
-                        variant="standard"
+                        variant={variant}
                         value={phone}
                         error={phoneError}
                         helperText={phoneError ? languageStore.currentLanguage.phoneNotCorrect : ""}
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                            if (basketStore.Customer.phone && basketStore.Customer.phone !== undefined) {
-                                const error = basketStore.Customer.phone === 0 ? false :
-                                    validator.isNumeric(basketStore.Customer.phone.toString()) ? false : true;
-                                setPhoneError(error);
+                            const inputPhoneNumber = event.target.value;
+                            const countryCodeRegex = /^(\+?\d{2}|\+\d{3})[\s-]?/;
+                            const match = inputPhoneNumber.match(countryCodeRegex);
+
+                            if (match && match[0]) {
+                                const extractedCountryCode = match[0];/*.startsWith('+') ? match[0].substring(1) : match[0];*/
+                                basketStore.Customer.countryCode = extractedCountryCode;
                             }
 
-                            basketStore.Customer.phone = parseInt(event.target.value);
+                            const phoneNumber = inputPhoneNumber.replace(countryCodeRegex, '').trim();
+                            const phoneRegex = /^\d+$/; // Regex to match only digits
+                            const isValidPhone = phoneRegex.test(phoneNumber);
+                            basketStore.Customer.phone = isValidPhone ? parseInt(phoneNumber) : 0;
                             setPhone(event.target.value);
+                            setPhoneError(!isValidPhone);
                         }}
                     />
+
+
+
                 </Grid>
                 <Grid item xs={12}>
                     <TextField
@@ -235,7 +247,7 @@ export const AddressForm = observer(() => {
                         label={languageStore.currentLanguage.emailAdress}
                         fullWidth
                         autoComplete="shipping address-line2"
-                        variant="standard"
+                        variant={variant}
                         value={email}
                         error={emailError}
                         helperText={emailError ? languageStore.currentLanguage.emailNotCorrect : ""}

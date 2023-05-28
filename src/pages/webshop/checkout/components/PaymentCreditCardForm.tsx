@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import MobXContext from "@stores/MobXContext";
-import { PaymentButton } from "./PaymentButton";
 
 
 interface CardOptions {
@@ -85,7 +84,7 @@ export const PaymentCreditCardForm = () => {
   };
 
   return (
-    <Container className="checkoutShoppingCart">
+    <Container style={{ marginTop: '1rem' }}>
       <Form>
         <Form.Group>
           <Row>
@@ -98,7 +97,7 @@ export const PaymentCreditCardForm = () => {
             ))}
           </Row>
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group style={{ marginTop: '1rem' }}>
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormCardLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -108,7 +107,7 @@ export const PaymentCreditCardForm = () => {
             className={cardNumberValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group >
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormMMYYLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -118,7 +117,7 @@ export const PaymentCreditCardForm = () => {
             className={expirationValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group >
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormCardHolderLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -128,7 +127,7 @@ export const PaymentCreditCardForm = () => {
             className={cardHolderNameValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group >
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormSecureLabel} </Form.Label>
           <Form.Control
             type="text"

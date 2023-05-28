@@ -130,6 +130,12 @@ export interface ILocale {
   phoneNotCorrect: string;
   postcodeErrorMessage: string;
   countryErrorMessage: string;
+  next: string;
+  placeOrder: string;
+  noItemsInBasket: string;
+  shipping: string;
+  orderSummary: string;
+  method: string;
 
 
   // Months

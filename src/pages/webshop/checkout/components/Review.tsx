@@ -4,30 +4,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
+import { useContext } from 'react';
+import MobXContext, { IMobXContext } from '@stores/MobXContext';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
+import { useNavigate } from 'react-router-dom';
+import { Constants } from '@utils/Constants';
 
-const products = [
-  {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
-  },
-  {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
-  },
-  {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
-  },
-  {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
-  },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 const payments = [
   { name: 'Card type', detail: 'Visa' },
@@ -37,39 +19,65 @@ const payments = [
 ];
 
 export function Review() {
+  const { basketStore, languageStore } = useContext<IMobXContext>(MobXContext);
+  const navigate = useNavigate();
+
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Order summary
+      <Typography variant="h3" color={Constants.primaryColor} gutterBottom>
+        {languageStore.currentLanguage.orderSummary}
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {basketStore.Basket.map((productItem) => (
+          <ListItem key={productItem.product.name} onClick={() => navigate("/product/" + productItem.id)} sx={{
+            py: 1, px: 0,
+            '&:hover': {
+              cursor: 'pointer'
+            }
+          }}>
+            <ListItemText primary={productItem.product.name} secondary={`${languageStore.currentLanguage.modelNumber} ${productItem.product.modelNumber}`} />
+            <Typography variant="body2" fontWeight={'bold'}>{ExtentionMethods.formatPrice(productItem.currentPrice, languageStore.getCurrentLanguageCode(), 'DKK')}</Typography>
           </ListItem>
         ))}
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+            {basketStore.getTotal()}
           </Typography>
         </ListItem>
       </List>
+
       <Grid container spacing={2}>
+
         <Grid item xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Shipping
+          <Typography variant="h5" fontWeight={'bold'} gutterBottom sx={{ mt: 2 }}>
+            {languageStore.currentLanguage.shipping}
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography variant="body1">
+            {`${basketStore.OrderDTO.customer.firstName ? basketStore.OrderDTO.customer.firstName : ""} ${basketStore.OrderDTO.customer.lastName ? basketStore.OrderDTO.customer.lastName : ""}`}
+          </Typography>
+          <Typography variant="body1">{`${basketStore.OrderDTO.customer.address}`}</Typography>
+          <Typography variant="body1">{`${basketStore.OrderDTO.customer.zipCode} ${basketStore.OrderDTO.customer.city}`}</Typography>
+          <Typography variant="body1">{`${basketStore.OrderDTO.customer.country}`}</Typography>
+          <Typography variant="body1">{`${basketStore.OrderDTO.customer.countryCode ? basketStore.OrderDTO.customer.countryCode : ''} ${basketStore.OrderDTO.customer.phone}`}</Typography>
+          {/* <Typography variant="body1">Delivery Method: {basketStore.OrderDTO.deliveryMethod}</Typography> */}
+          {/* <Typography gutterBottom>{addresses.join(', ')}</Typography> */}
         </Grid>
+
+
+
         <Grid item container direction="column" xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Payment details
+          <Typography variant="h5" fontWeight={'bold'} gutterBottom sx={{ mt: 2 }}>
+            {languageStore.currentLanguage.paymentDetails}
           </Typography>
           <Grid container>
-            {payments.map((payment) => (
+            <Grid item xs={6} >
+              <Typography gutterBottom>{languageStore.currentLanguage.method} </Typography>
+            </Grid>
+            <Grid item xs={6} >
+              <Typography gutterBottom> {basketStore.OrderDTO.payment.method}</Typography>
+            </Grid>
+            {/* {payments.map((payment) => (
               <React.Fragment key={payment.name}>
                 <Grid item xs={6}>
                   <Typography gutterBottom>{payment.name}</Typography>
@@ -78,7 +86,7 @@ export function Review() {
                   <Typography gutterBottom>{payment.detail}</Typography>
                 </Grid>
               </React.Fragment>
-            ))}
+            ))} */}
           </Grid>
         </Grid>
       </Grid>

@@ -6,6 +6,7 @@ import { useContext } from "react";
 import { BasketPageItem } from "./BasketPageItem";
 import { Button, Divider, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom"
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 export const BasketPage: React.FC = observer(function BasketPage() {
     const { basketStore, languageStore } = useContext(MobXContext);
@@ -17,7 +18,7 @@ export const BasketPage: React.FC = observer(function BasketPage() {
         for (let i = 0; i < bas.length; i++) {
             sum = sum + bas[i].currentPrice;
         }
-        return sum;
+        return ExtentionMethods.formatPrice(sum, languageStore.getCurrentLanguageCode(), "DKK");
     }
 
     return (
@@ -34,11 +35,11 @@ export const BasketPage: React.FC = observer(function BasketPage() {
                 <Card style={{ marginTop: "2rem" }}>
                     <div style={{ marginLeft: "1rem" }}>
                         <h3 style={{ paddingTop: "1rem" }}>{languageStore.currentLanguage.yourTotal}</h3>
-                        <div className="b_PriceText">{languageStore.currentLanguage.subTotal} {getTotal(basketStore.Basket)} DKK</div>
+                        <div className="b_PriceText">{languageStore.currentLanguage.subTotal} {getTotal(basketStore.Basket)} </div>
                         <div className="b_PriceText">{languageStore.currentLanguage.procesFee} {0} </div>
                     </div>
                     <Divider />
-                    <div className="b_PriceText" style={{ fontWeight: "700", margin: "1rem" }}>{languageStore.currentLanguage.totalIncMoms} {getTotal(basketStore.Basket)} DKK </div>
+                    <div className="b_PriceText" style={{ fontWeight: "700", margin: "1rem" }}>{languageStore.currentLanguage.totalIncMoms} {getTotal(basketStore.Basket)} </div>
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '1rem' }}>
                         <Button className="checkoutButton" variant="contained" onClick={() => handleClick()} style={{ width: '50%', minHeight: '2rem', margin: '1.5rem', }}>{languageStore.currentLanguage.checkOutText} </Button>
                     </div>

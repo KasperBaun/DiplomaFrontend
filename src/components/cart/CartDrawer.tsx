@@ -6,6 +6,7 @@ import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 export const CartDrawer: React.FC = observer(function CartDrawer() {
 
@@ -18,7 +19,11 @@ export const CartDrawer: React.FC = observer(function CartDrawer() {
     navigate('/basket')
     toggleDrawer();
   };
-  const getTotal = basketStore.Basket.reduce((acc, item) => acc + item.currentPrice, 0);
+  const getTotal = ExtentionMethods.formatPrice(
+    basketStore.Basket.reduce((acc, item) => acc + item.currentPrice, 0),
+    languageStore.getCurrentLanguageCode(),
+    'DKK'
+  );
 
   return (
     <>
@@ -42,7 +47,7 @@ export const CartDrawer: React.FC = observer(function CartDrawer() {
         onClose={toggleDrawer}
 
       >
-        <List sx={{ width: '300px', height: '85vh' }} >
+        <List sx={{ width: '300px', height: '85vh', overflow: 'auto' }} >
           {basketStore.Basket.map((item, index) => (
             <ListItem key={'basketItem' + index} sx={{ padding: "1rem" }}>
               <CartItem key={item.id} item={item} />
@@ -55,7 +60,7 @@ export const CartDrawer: React.FC = observer(function CartDrawer() {
           <Divider color={"primary"} />
           <ListItem sx={{ display: 'flex', justifyContent: 'space-between', marginTop: 'auto' }}>
             <Typography variant="body1">{'Subtotal (' + basketStore.Basket.length + ')'}</Typography>
-            <Typography variant="body1">{getTotal + ' DKK'}</Typography>
+            <Typography variant="body1">{getTotal}</Typography>
 
           </ListItem>
           <ListItem sx={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>

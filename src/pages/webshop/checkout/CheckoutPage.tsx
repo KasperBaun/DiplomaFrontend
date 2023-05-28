@@ -63,6 +63,16 @@ export const CheckoutPage = observer(() => {
     };
 
     const handleBack = () => { setActiveStep(activeStep - 1); };
+    if (basketStore.Basket.length === 0) {
+        return <Container>
+            <Typography
+                variant="h2"
+                sx={{ display: 'flex', justifyContent: 'center' }}
+            >
+                {languageStore.currentLanguage.noItemsInBasket}
+            </Typography>
+        </Container>
+    }
 
     return (
         <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
@@ -90,7 +100,7 @@ export const CheckoutPage = observer(() => {
                             onClick={handleNext}
                             sx={{ mt: 3, ml: 1 }}
                         >
-                            {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                            {activeStep === steps.length - 1 ? languageStore.currentLanguage.placeOrder : languageStore.currentLanguage.next}
                         </Button>
                     </Box>
                 </React.Fragment>

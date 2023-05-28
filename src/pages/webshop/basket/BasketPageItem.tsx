@@ -5,6 +5,7 @@ import { useContext } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton } from "@mui/material";
 import { ProductItemWeb } from "@models/ProductItemWeb";
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 
 type BasketPageItemProps = {
@@ -33,7 +34,7 @@ export const BasketPageItem: React.FC<BasketPageItemProps> = observer(function B
                 />
             </Grid>
             <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
-                <div style={{ padding: "1rem" }}>
+                <div >
                     <div style={{ fontWeight: "800" }}>{props.item.product.name}</div>
                     <div className="productDe_modelNumber">{languageStore.currentLanguage.modelNumber} : {props.item.product.modelNumber}</div>
                     <div className="B_Text">{languageStore.currentLanguage.OrderDetailsManufacturer} : {props.item.product.manufacturer}</div>
@@ -44,8 +45,8 @@ export const BasketPageItem: React.FC<BasketPageItemProps> = observer(function B
             </Grid>
 
             <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
-                <div style={{ padding: "1rem" }}>
-                    <div style={{ fontWeight: '700' }}>{props.item.currentPrice} Kr </div>
+                <div>
+                    <div style={{ fontWeight: '700' }}>{ExtentionMethods.formatPrice(props.item.currentPrice, languageStore.getCurrentLanguageCode(), "DKK")} </div>
 
                     <IconButton onClick={() => removeFromCart(props.item)}>
                         <DeleteIcon style={{ color: 'Grey', fontSize: 30 }} />

@@ -2,12 +2,12 @@ import { observer } from "mobx-react-lite";
 import MobXContext from "@stores/MobXContext";
 import { useContext, useState } from "react";
 import { SubCategory } from "@models/SubCategory";
-import { Pencil, XLg } from "react-bootstrap-icons";
 import { Category } from "@models/Category";
 import LoadingLion from "@components/loading/LoadingLion";
 import { SubcategoryDialog } from "./SubcategoryDialog";
 import { Alert, Button, Grid, Snackbar, Table } from "@mui/material";
 import { ConfirmDeleteDialog } from "./ConfirmDeleteDialog";
+import { Delete, Edit } from "@mui/icons-material";
 
 type SubcategoriesProps = {
     selectedCategory?: Category;
@@ -98,8 +98,8 @@ export const Subcategories: React.FC<SubcategoriesProps> = observer(function Sub
                                 <td style={{ width: "8rem" }}>{subCat.order ? subCat.order : null}</td>
                                 <td style={{ width: "10rem" }}>
                                     <div>
-                                        <Button variant="outlined" onClick={() => handleUpdateClick(subCat)}><Pencil /></Button>
-                                        <Button variant="outlined" onClick={() => handleOnDeleteClick(subCat)}><XLg /></Button>
+                                        <Button variant="outlined" onClick={() => handleUpdateClick(subCat)}><Edit /></Button>
+                                        <Button variant="outlined" onClick={() => handleOnDeleteClick(subCat)}><Delete /></Button>
                                     </div>
                                 </td>
                             </tr>

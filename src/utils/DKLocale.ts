@@ -153,6 +153,12 @@ export class DKLocale implements ILocale {
   phoneNotCorrect = "Telefon kan kun indeholde tal";
   postcodeErrorMessage = "Postnummer kan kun indeholde tal";
   countryErrorMessage = "Land kan kun indeholde bogstaver";
+  next = "Næste";
+  placeOrder = "Afgiv bestilling";
+  noItemsInBasket = "Du har ingen varer i kurven";
+  shipping = "Forsendelse";
+  orderSummary = "Ordre oversigt";
+  method = "Metode";
 
   // Months
   january = "Januar";
