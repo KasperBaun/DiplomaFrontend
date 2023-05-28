@@ -23,6 +23,7 @@ export const ConfirmationPage = observer(() => {
 
 
     if (basketStore.OrderCreated) {
+        basketStore.resetBasket();
         return (
             <Container>
                 <Row style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>

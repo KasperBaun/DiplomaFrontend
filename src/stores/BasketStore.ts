@@ -119,6 +119,9 @@ export class BasketStore {
     public set OrderDTO(order: CreateOrderDTO) {
         this._orderDTO = order;
     }
+    public resetBasket(): void {
+        this._basket = [];
+    }
     public updateOrder = (): void => {
         runInAction(() => {
             this._orderDTO.customer = this._customer;
