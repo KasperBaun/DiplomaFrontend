@@ -145,6 +145,21 @@ export class DKLocale implements ILocale {
   updateSubcategory = "Opdater underkategori";
   chooseCategory = "Vælg kategori";
   showing = "Viser";
+  firstNameShouldOnlyBeCharacters = "Fornavn kan kun indeholde bogstaver";
+  lastNameShouldOnlyBeCharacters = "Efternavn kan kun indeholde bogstaver";
+  addressCannotBeEmpty = "Addresse kan ikke være tom";
+  cityCannotBeEmpty = "By kan ikke være tom";
+  emailNotCorrect = "Email skal være i formattet eksempel@eksempel.com";
+  phoneNotCorrect = "Telefon kan kun indeholde tal";
+  postcodeErrorMessage = "Postnummer kan kun indeholde tal";
+  countryErrorMessage = "Land kan kun indeholde bogstaver";
+  next = "Næste";
+  placeOrder = "Afgiv bestilling";
+  noItemsInBasket = "Du har ingen varer i kurven";
+  shipping = "Forsendelse";
+  orderSummary = "Ordre oversigt";
+  method = "Metode";
+  thankYou = "Tak";
 
   // Months
   january = "Januar";
@@ -170,7 +185,26 @@ export class DKLocale implements ILocale {
   oct = "Okt";
   nov = "Nov";
   dec = "Dec";
-
+  back = "Tilbage";
+  country = "Land";
+  state = "Stat";
+  shippingAddress = "Forsendelsesinformationer";
+  paymentDetails = "Betalingsinformationer";
+  reviewOrder = "Gennemgå ordre";
+  thankYouForYourOrder = "Tak for din ordre";
+  yourOrder = "Din ordre";
+  hasBeenPlaced = "er modtaget";
+  confirmationEmailHasBeenSentTo = "Bekræftelsesemail er blevet sendt til";
+  billingDetails = "Betalingsinformationer";
+  shippingMethod = "Forsendelsesmetode";
+  orderList = "Ordreliste";
+  shippingAndHandling = "Forsendelse og håndtering";
+  vat25 = "Heraf moms (25%)";
+  estimatedDeliveryTime = "Normal leveringstid er 4-5 hverdage";
+  selectDelivery = "Vælg leveringsmetode";
+  delivery = "Levering";
+  selectPaymentMethod = "Vælg betalingsmetode";
+  status = "Status";
 
 
   // AboutUS page

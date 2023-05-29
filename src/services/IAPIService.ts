@@ -11,6 +11,7 @@ import { OrderDTO } from "@models/DTO/OrderDTO";
 import { Order } from "@models/Order";
 import { OrderElements } from "@models/OrderElements";
 import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
+import { DiscountCode } from "@models/DiscountCode";
 
 export interface IAPIService {
 
@@ -53,5 +54,6 @@ export interface IAPIService {
     getProducts(): Promise<Product[]>;
     getProductDTOs(): Promise<ProductDTO[]>;
     getProductItemWebs(): Promise<ProductItemDTO[]>;
+    getDiscountCodes(): Promise<DiscountCode[]>;
 
 }

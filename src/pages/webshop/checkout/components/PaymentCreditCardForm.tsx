@@ -1,13 +1,7 @@
-import { LanguageStore } from "@stores/LanguageStore";
 import { useContext, useState } from "react";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
 import MobXContext from "@stores/MobXContext";
-import { PaymentButton } from "./PaymentButton";
 
-type PaymentCreditCardFormProps = {
-  ls: LanguageStore;
-  handleOnSubmitClick: () => void;
-}
 
 interface CardOptions {
   name: string;
@@ -47,8 +41,8 @@ const cardOptions: CardOptions[] = [
 
 
 
-export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCreditCardFormProps) => {
-  const { webshopStore } = useContext(MobXContext);
+export const PaymentCreditCardForm = () => {
+  const { basketStore, languageStore: ls } = useContext(MobXContext);
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
@@ -60,6 +54,7 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
 
   const handlePaymentOptionClick = (cardId: number) => {
+    basketStore.OrderDTO.payment.method = "Creditcard";
     setSelectedCard(cardId);
   };
 
@@ -88,16 +83,8 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
     setCvcValid(/^\d{3}$/.test(formattedCvc)); // Validate that the CVC is exactly 3 digits long
   };
 
-  const handleOnSubmit = () => {
-    if (expirationValid && cardNumberValid && cvcValid) {
-      webshopStore.setCardInfo({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
-      console.log({ cardNumber: cardNumber, cardExpirationDate: expiration, cardHolderName: cardHolderName, cardCVC: cvc })
-      handleOnSubmitClick();
-    }
-  }
-
   return (
-    <Container className="checkoutShoppingCart">
+    <Container style={{ marginTop: '1rem' }}>
       <Form>
         <Form.Group>
           <Row>
@@ -110,7 +97,7 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
             ))}
           </Row>
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group style={{ marginTop: '1rem' }}>
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormCardLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -120,7 +107,7 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
             className={cardNumberValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group >
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormMMYYLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -130,7 +117,7 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
             className={expirationValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group >
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormCardHolderLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -140,7 +127,7 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
             className={cardHolderNameValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <Form.Group className="PaymentCreditCardFormGroup">
+        <Form.Group >
           <Form.Label> {ls.currentLanguage.CheckoutPaymentWidgetPayFormSecureLabel} </Form.Label>
           <Form.Control
             type="text"
@@ -150,7 +137,6 @@ export const PaymentCreditCardForm = ({ ls, handleOnSubmitClick }: PaymentCredit
             className={cvcValid ? 'is-valid' : 'is-invalid'}
           />
         </Form.Group>
-        <PaymentButton ls={ls} handleOnSubmitClick={handleOnSubmit} />
       </Form>
     </Container>
   )

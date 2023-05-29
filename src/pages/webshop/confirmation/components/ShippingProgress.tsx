@@ -1,70 +1,96 @@
-import { Col, Container, ProgressBar, Row } from "react-bootstrap";
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Customer } from "@models/Customer";
-import { CreditCard, LocationOn } from "@mui/icons-material";
+import { Payment } from "@models/Payment";
+import { CreditCard, LocalShipping, LocationOn } from "@mui/icons-material";
+import { Container, Grid, LinearProgress, Typography } from "@mui/material";
+import MobXContext from "@stores/MobXContext";
+import { Constants } from "@utils/Constants";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 type ShippingProgressProps = {
     customer: Customer;
+    payment: Payment;
     deliveryMethod: string;
+    deliveryStatus: string;
 }
 
-export const ShippingProgress = ({ customer, deliveryMethod }: ShippingProgressProps) => {
+export const ShippingProgress = ({ customer, payment, deliveryMethod, deliveryStatus }: ShippingProgressProps) => {
+
+    const { languageStore } = useContext(MobXContext);
+    const headlineColor = Constants.primaryColor;
 
     return (
         <Container>
-            <Row className="ShippingProgressRow">
-                <Col className="ShippingProgressBox" md={4}>
-                    {/* Shipping Info & Method */}
-                    <Col md={12}>
-                        <LocationOn className="ShippingProgressBoxIcons" />
-                    </Col>
-                    <Col md={12}>
-                        <h3>Shipping</h3>
-                        <Container>
-                            <Row><b>{`${customer.firstName ? customer.firstName : ""} ${customer.lastName ? customer.lastName : ""}`}</b></Row>
-                            <Row>{`${customer.address}`}</Row>
-                            <Row>{`${customer.zipCode} ${customer.city}`}</Row>
-                            <Row>{`${customer.country}`}</Row>
-                            <Row>{`${customer.countryCode}${customer.phone}`}</Row>
-                            <Row>Delivery Method: {deliveryMethod}</Row>
-                        </Container>
-                    </Col>
+            <Grid container spacing={2} sx={{ marginBottom: '1rem' }}>
+                <Grid item md={4}>
+                    {/* Shipping Info*/}
+                    <Grid container spacing={1}>
+                        <Grid item md={12}>
+                            <LocationOn />
+                        </Grid>
+                        <Grid item md={12}>
+                            <Typography variant="h4" color={headlineColor} fontWeight={'bold'}>{languageStore.currentLanguage.address_text}</Typography>
+                            <Grid item>{`${customer.firstName} ${customer.lastName}`}</Grid>
+                            <Grid item>{`${customer.address}`}</Grid>
+                            <Grid item>{`${customer.zipCode} ${customer.city}`}</Grid>
+                            <Grid item>{`${customer.country}`}</Grid>
+                            <Grid item>{`${customer.countryCode} ${customer.phone}`}</Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
 
-                </Col>
-                <Col className="ShippingProgressBox" md={4}>
-                    {/* Recipient Info */}
-                    <Col md={12}>
-                        <CreditCard className="ShippingProgressBoxIcons" />
-                    </Col>
-                    <Col md={12}>
-                        <h3>Billing Details</h3>
-                        <Container>
-                            <Row><b>{`${customer.firstName ? customer.firstName : ""} ${customer.lastName ? customer.lastName : ""}`}</b></Row>
-                            <Row>{`${customer.address}`}</Row>
-                            <Row>{`${customer.zipCode} ${customer.city}`}</Row>
-                            <Row>{`${customer.country}`}</Row>
-                            <Row>{`${customer.countryCode}${customer.phone}`}</Row>
-                        </Container>
-                    </Col>
-                </Col>
-                <Col className="ShippingProgressBox" md={4}>
-                    {/* Shipping Status */}
-                    <Col md={12}>
-                        <LocalShippingIcon className="ShippingProgressBoxIcons" />
-                    </Col>
-                    <Col md={12}>
-                        <h3>Shipping Method</h3>
-                        <Container>
-                            <Row>Fortrukket Leveringsmetode</Row>
-                            <Row>{deliveryMethod}</Row>
-                            <Row>(Normal leveringstid er 4-5 hverdage)</Row>
-                        </Container>
-                    </Col>
-                </Col>
-            </Row>
-            <Row className="ShippingProgressRow">
-                <ProgressBar className="ShippingProgressBar" animated striped variant="warning" now={33} />
-            </Row>
+                <Grid item md={4}>
+                    {/* Shipping Method */}
+                    <Grid container spacing={1}>
+                        <Grid item md={12}>
+                            <LocalShipping />
+                        </Grid>
+                        <Grid item md={12}>
+                            <Typography variant="h4" color={headlineColor} fontWeight={'bold'}>{languageStore.currentLanguage.shipping}</Typography>
+                            <Grid item md={12} >
+                                <Typography gutterBottom>{languageStore.currentLanguage.method}: {deliveryMethod} </Typography>
+                            </Grid>
+                            <Grid item md={12} >
+                                <Typography gutterBottom>{languageStore.currentLanguage.status}: {deliveryStatus} </Typography>
+                            </Grid>
+                            {
+                                deliveryMethod === "Afhentning" &&
+                                <Grid item><Link to="/contact">{languageStore.currentLanguage.opening_days}</Link></Grid>
+                            }
+                            {
+                                deliveryMethod === "Levering" &&
+                                <Grid item>({languageStore.currentLanguage.estimatedDeliveryTime})</Grid>
+                            }
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid item md={4}>
+                    {/* Payment information */}
+                    <Grid container spacing={1}>
+                        <Grid item md={12}>
+                            <CreditCard />
+                        </Grid>
+                        <Grid item md={12}>
+                            <Typography variant="h4" color={headlineColor} fontWeight={'bold'}>{languageStore.currentLanguage.billingDetails}</Typography>
+                            <Grid item md={12} >
+                                <Typography gutterBottom>{languageStore.currentLanguage.method}: {payment.method} </Typography>
+                            </Grid>
+                            {/* <Grid item>{`${customer.firstName} ${customer.lastName}`}</Grid>
+                            <Grid item>{`${customer.address}`}</Grid>
+                            <Grid item>{`${customer.zipCode} ${customer.city}`}</Grid>
+                            <Grid item>{`${customer.country}`}</Grid>
+                            <Grid item>{`${customer.countryCode} ${customer.phone}`}</Grid> */}
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <Grid container >
+                <Grid item xs={12}>
+                    <LinearProgress variant="determinate" value={33} />
+                </Grid>
+            </Grid>
         </Container>
-    )
+    );
 }

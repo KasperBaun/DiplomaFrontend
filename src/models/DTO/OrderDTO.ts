@@ -2,10 +2,11 @@ export class OrderDTO {
     id: number;
     customerId: number;
     paymentId: number;
-    paymentStatus: string;
+    discountCodeId: number;
     deliveryStatus: string;
-    discountCode: string | null;
+    orderStatus: string;
+    totalPrice: number;
     active: Boolean;
-    orderElementIDs: number[];
     createdDate: Date;
+    productItemIds: number[];
 }

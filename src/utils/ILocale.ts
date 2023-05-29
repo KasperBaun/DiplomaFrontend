@@ -115,7 +115,41 @@ export interface ILocale {
   updateSubcategory: string;
   chooseCategory: string;
   showing: string;
-
+  back: string;
+  country: string;
+  state: string;
+  shippingAddress: string;
+  paymentDetails: string;
+  reviewOrder: string;
+  thankYouForYourOrder: string;
+  firstNameShouldOnlyBeCharacters: string;
+  lastNameShouldOnlyBeCharacters: string;
+  addressCannotBeEmpty: string;
+  cityCannotBeEmpty: string;
+  emailNotCorrect: string;
+  phoneNotCorrect: string;
+  postcodeErrorMessage: string;
+  countryErrorMessage: string;
+  next: string;
+  placeOrder: string;
+  noItemsInBasket: string;
+  shipping: string;
+  orderSummary: string;
+  method: string;
+  thankYou: string;
+  yourOrder: string;
+  hasBeenPlaced: string;
+  confirmationEmailHasBeenSentTo: string;
+  billingDetails: string;
+  shippingMethod: string;
+  orderList: string;
+  shippingAndHandling: string;
+  vat25: string;
+  estimatedDeliveryTime: string;
+  selectDelivery: string;
+  delivery: string;
+  selectPaymentMethod: string;
+  status: string;
 
   // Months
   january: string;
