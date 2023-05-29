@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
+import { Constants } from '@utils/Constants';
 
 export const CartDrawer: React.FC = observer(() => {
 
@@ -56,7 +57,12 @@ export const CartDrawer: React.FC = observer(() => {
 
       >
         <List sx={{ width: '300px', height: '85vh', overflow: 'auto' }} >
-          {basketStore.Basket.map((item, index) => (
+          {basketStore.Basket.length === 0 &&
+            <ListItem key={'noItems'} sx={{ padding: "1rem", display: 'flex', justifyContent: 'center' }}>
+              <Typography variant="h4" fontWeight={'bold'}>{languageStore.currentLanguage.noItemsInBasket}</Typography>
+            </ListItem>
+          }
+          {basketStore.Basket.length > 0 && basketStore.Basket.map((item, index) => (
             <ListItem key={'basketItem' + index} sx={{ padding: "1rem" }}>
               <CartItem key={item.id} item={item} />
               <Divider color={"primary"} />
