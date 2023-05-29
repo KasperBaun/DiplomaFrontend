@@ -1,5 +1,4 @@
 import { observer } from "mobx-react-lite";
-import { Image } from 'react-bootstrap';
 import React, { useState } from 'react';
 import { Grid } from "@mui/material";
 
@@ -57,15 +56,15 @@ export const ImageGallery: React.FC<ImageGalleryProps> = observer((props: ImageG
     <Grid container display={'flex'}>
       <Grid item lg={3}>
         <div className="small-images">
-          <Image src={image1} key={"1productImgGalSelImg"} onClick={() => handleClick(1)} fluid className={image1Clicked ? "small-images clicked" : "small-images"} />
-          <Image src={image2} key={"2productImgGalSelImg"} onClick={() => handleClick(2)} fluid className={image2Clicked ? "small-images clicked" : "small-images"} />
-          <Image src={image3} key={"3productImgGalSelImg"} onClick={() => handleClick(3)} fluid className={image3Clicked ? "small-images clicked" : "small-images"} />
-          <Image src={image4} key={"4productImgGalSelImg"} onClick={() => handleClick(4)} fluid className={image4Clicked ? "small-images clicked" : "small-images"} />
+          <img src={image1} key={"1productImgGalSelImg"} onClick={() => handleClick(1)} className={image1Clicked ? "small-images clicked" : "small-images"} alt="" />
+          <img src={image2} key={"2productImgGalSelImg"} onClick={() => handleClick(2)} className={image2Clicked ? "small-images clicked" : "small-images"} alt="" />
+          <img src={image3} key={"3productImgGalSelImg"} onClick={() => handleClick(3)} className={image3Clicked ? "small-images clicked" : "small-images"} alt="" />
+          <img src={image4} key={"4productImgGalSelImg"} onClick={() => handleClick(4)} className={image4Clicked ? "small-images clicked" : "small-images"} alt="" />
         </div>
       </Grid>
       <Grid item lg={9}>
         <div className="big-image">
-          <Image src={mainImage} key={"MainproductImgGalSelImg"} fluid className="big-image" />
+          <img src={mainImage} key={"MainproductImgGalSelImg"} className="big-image" alt="" />
         </div>
       </Grid>
     </Grid>

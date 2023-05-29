@@ -44,7 +44,6 @@ export const Webshop: React.FC = observer(() => {
                     </Container>
                     <Box style={{ minHeight: '10vh', minWidth: '100%' }}>
                         <Footer />
-
                     </Box>
                 </ThemeProvider>
             </ColorModeContext.Provider >
