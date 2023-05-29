@@ -12,6 +12,7 @@ export class Order {
   discountCodeId: number;
   discountCode: DiscountCode;
   deliveryStatus: string;
+  deliveryMethod: string;
   orderStatus: string;
   totalPrice: number;
   active: Boolean;

@@ -159,6 +159,7 @@ export class DKLocale implements ILocale {
   shipping = "Forsendelse";
   orderSummary = "Ordre oversigt";
   method = "Metode";
+  thankYou = "Tak";
 
   // Months
   january = "Januar";
@@ -191,7 +192,19 @@ export class DKLocale implements ILocale {
   paymentDetails = "Betalingsinformationer";
   reviewOrder = "Gennemgå ordre";
   thankYouForYourOrder = "Tak for din ordre";
-
+  yourOrder = "Din ordre";
+  hasBeenPlaced = "er modtaget";
+  confirmationEmailHasBeenSentTo = "Bekræftelsesemail er blevet sendt til";
+  billingDetails = "Betalingsinformationer";
+  shippingMethod = "Forsendelsesmetode";
+  orderList = "Ordreliste";
+  shippingAndHandling = "Forsendelse og håndtering";
+  vat25 = "Heraf moms (25%)";
+  estimatedDeliveryTime = "Normal leveringstid er 4-5 hverdage";
+  selectDelivery = "Vælg leveringsmetode";
+  delivery = "Levering";
+  selectPaymentMethod = "Vælg betalingsmetode";
+  status = "Status";
 
 
   // AboutUS page

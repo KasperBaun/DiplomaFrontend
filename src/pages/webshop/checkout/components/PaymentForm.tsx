@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite"
-import { Grid, TextField } from "@mui/material";
+import { FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { PaymentOptions } from "./PaymentOptions";
 import { PaymentCreditCardForm } from "./PaymentCreditCardForm";
-import { Container} from '@mui/material';
+import { Container } from '@mui/material';
 import MobXContext from "@stores/MobXContext";
 
 
@@ -37,10 +37,30 @@ export const PaymentForm = observer(() => {
       flexDirection: 'column'
     }}
     >
-      <Grid item xs={12} sx={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}>
+      <Container>
+        <Grid item xs={12} sx={{ marginBottom: '5px' }}>
+          <Typography variant="h5" fontWeight={'bold'} gutterBottom sx={{ mt: 2 }}>{languageStore.currentLanguage.selectDelivery}</Typography>
+        </Grid>
+        <Grid item xs={12} sx={{ marginBottom: '10px' }}>
+          <FormControl>
+            <RadioGroup
+              defaultValue="Afhentning"
+              name="delivery-buttons-group"
+              onChange={(event) => {
+                basketStore.OrderDTO.deliveryMethod = event.target.value;
+              }}
+            >
+              <FormControlLabel value="Afhentning" control={<Radio />} label="Afhentning" />
+              <FormControlLabel value="Levering" control={<Radio />} label="Levering (+50 DKK)" />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+      </Container>
+
+      <Grid item xs={12} sx={{ marginBottom: '10px', marginTop: '10px' }}>
         <PaymentOptions setSelectedPaymentOption={setSelectedPaymentOption} />
       </Grid>
-      <Grid item xs={12} sx={{ display: 'flex' }}>
+      <Grid item xs={12} >
         {selectPaymentExecutor()}
       </Grid>
     </Grid>
@@ -51,7 +71,7 @@ const PhoneInput: React.FC<{ onInputChanged: (evt: any) => void }> = observer((p
   const { languageStore } = useContext(MobXContext);
 
   return (
-    <Container sx={{ marginTop: '1rem' }}>
+    <Container sx={{ marginTop: '1rem', padding: 0 }}>
       <TextField
         variant="outlined"
         label={languageStore.currentLanguage.phone_text}

@@ -10,6 +10,7 @@ import { CreateOrderDTO } from '@models/DTO/CreateOrderDTO';
 import { APIService } from '@services/APIService';
 import { Payment } from '@models/Payment';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
+import { ProductItem } from '@models/ProductItem';
 
 
 export class BasketStore {
@@ -173,11 +174,18 @@ export class BasketStore {
         }
     }
 
-    public getTotal(): string {
+    public getTotal(productItems: ProductItem[], addExtraCost?: number): string {
+        const amount = productItems.reduce((acc, item) => acc + item.currentPrice, 0) + (addExtraCost ? addExtraCost : 0);
+        return ExtentionMethods.formatPrice(amount, this.rootStore.languageStore.getCurrentLanguageCode(), 'DKK');
+    }
+
+    public getVAT(productItems: ProductItem[]): string {
+        const vat = productItems.reduce((acc, item) => acc + item.currentPrice, 0) * 0.25;
         return ExtentionMethods.formatPrice(
-            this._basket.reduce((acc, item) => acc + item.currentPrice, 0),
+            vat,
             this.rootStore.languageStore.getCurrentLanguageCode(),
             'DKK'
         );
     }
+
 }

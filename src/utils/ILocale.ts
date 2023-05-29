@@ -136,7 +136,20 @@ export interface ILocale {
   shipping: string;
   orderSummary: string;
   method: string;
-
+  thankYou: string;
+  yourOrder: string;
+  hasBeenPlaced: string;
+  confirmationEmailHasBeenSentTo: string;
+  billingDetails: string;
+  shippingMethod: string;
+  orderList: string;
+  shippingAndHandling: string;
+  vat25: string;
+  estimatedDeliveryTime: string;
+  selectDelivery: string;
+  delivery: string;
+  selectPaymentMethod: string;
+  status: string;
 
   // Months
   january: string;

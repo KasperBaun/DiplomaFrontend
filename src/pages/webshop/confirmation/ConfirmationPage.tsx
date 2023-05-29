@@ -1,32 +1,105 @@
-import LoadingLion from "@components/loading/LoadingLion";
 import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
-import { Col, Container, Row, Table } from "react-bootstrap";
 import { ShippingProgress } from "./components/ShippingProgress";
-import Loading from "@components/loading/Loading";
-import { Grid, Typography } from "@mui/material";
+import { Box, Container, Grid, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 
 
 export const ConfirmationPage = observer(() => {
 
-    const { basketStore } = useContext(MobXContext);
-    let productIds: number[] = [];
-
-    let totalPrice = 0;
-
-    for (var i = 0; i < basketStore.Basket.length; i++) {
-        var item = basketStore.Basket[i];
-        totalPrice += item.currentPrice;
-        productIds.push(item.id);
-
-    }
-
+    const { basketStore, languageStore } = useContext(MobXContext);
 
     if (basketStore.OrderCreated) {
-        basketStore.resetBasket();
+        // basketStore.resetBasket();
         return (
+            <Container>
+                <Grid container style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>
+                    <Grid item xs={12}><Typography variant="h1">{languageStore.currentLanguage.thankYou}!</Typography></Grid>
+                    <Grid item xs={12}><Typography variant="h3">{languageStore.currentLanguage.yourOrder} {"# " + basketStore.Order.id} {languageStore.currentLanguage.hasBeenPlaced}</Typography></Grid>
+                    <Grid item xs={12}><Typography variant="h5">{languageStore.currentLanguage.confirmationEmailHasBeenSentTo} {basketStore.Order.customer.email}</Typography></Grid>
+                </Grid>
+
+                <Box display="flex" justifyContent="center" m={1} p={1}>
+                    <ShippingProgress
+                        customer={basketStore.Order.customer}
+                        payment={basketStore.Order.payment}
+                        deliveryMethod={basketStore.Order.deliveryMethod ? basketStore.Order.deliveryMethod : "Afhent"}
+                        deliveryStatus={basketStore.Order.deliveryStatus ? basketStore.Order.deliveryStatus : "Afventer"}
+                    />
+                </Box>
+
+                <Grid container justifyContent="center" sx={{ marginTop: '1rem' }} spacing={2}>
+                    <Grid item xs={8}>
+                        <Paper sx={{ padding: '1rem' }}>
+                            <Typography variant="h3">{languageStore.currentLanguage.orderList}</Typography>
+                            <TableContainer >
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>{languageStore.currentLanguage.product}</TableCell>
+                                            <TableCell>{languageStore.currentLanguage.modelNumber}</TableCell>
+                                            <TableCell>{languageStore.currentLanguage.price}</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {basketStore.Basket.map((item) => {
+                                            return (
+                                                <TableRow key={item.id}>
+                                                    <TableCell>{item.product.name}</TableCell>
+                                                    <TableCell>{item.product.modelNumber}</TableCell>
+                                                    <TableCell>{item.currentPrice}</TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <Paper sx={{ padding: '1rem' }}>
+                            <Typography variant="h3">{languageStore.currentLanguage.orderSummary}</Typography>
+                            <hr />
+                            <Grid container>
+                                <Grid item xs={10}><Typography>{languageStore.currentLanguage.subTotal}</Typography></Grid>
+                                <Grid item xs={2}>{basketStore.getTotal(basketStore.Order.productItems)}</Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={10}><Typography>{languageStore.currentLanguage.shippingAndHandling}</Typography></Grid>
+                                <Grid item xs={2}>{ExtentionMethods.formatPrice(50, languageStore.getCurrentLanguageCode(), 'DKK')} </Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={10}><Typography>{languageStore.currentLanguage.vat25}</Typography></Grid>
+                                <Grid item xs={2}>{basketStore.getVAT(basketStore.Order.productItems)}</Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={10}><Typography fontWeight={'bold'}>{languageStore.currentLanguage.total}</Typography></Grid>
+                                <Grid item xs={2}><Typography fontWeight={'bold'}>{basketStore.getTotal(basketStore.Order.productItems, 50)}</Typography></Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Container>
+        );
+    }
+    else {
+        return (
+            <Container >
+                <Grid container display='flex' justifyContent='center'>
+                    <Typography variant="h4">
+                        No order is being processed at the moment
+                    </Typography>
+                </Grid>
+            </Container>
+        )
+    }
+});
+
+/*
+return (
             <Container>
                 <Row style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>
                     <Col md={12}><h1>Thank you!</h1></Col>
@@ -74,7 +147,7 @@ export const ConfirmationPage = observer(() => {
                                 <p>Subtotal </p>
                             </Col>
                             <Col md={2}>
-                                {totalPrice} DKK
+                                {basketStore.getTotal()} DKK
                             </Col>
                         </Row>
                         <Row>
@@ -90,7 +163,7 @@ export const ConfirmationPage = observer(() => {
                                 <p>Heraf Moms 25%</p>
                             </Col>
                             <Col md={2}>
-                                {(totalPrice * 0.25)} DKK
+                                {basketStore.getVAT()}
                             </Col>
                         </Row>
                         <Row>
@@ -105,14 +178,4 @@ export const ConfirmationPage = observer(() => {
                 </Row>
             </Container>
         );
-    }
-    else {
-        return <Container fluid>
-            <Grid container display='flex' justifyContent='center'>
-                <Typography variant="h4">
-                    No order is being processed at the moment
-                </Typography>
-            </Grid>
-        </Container>
-    }
-});
+        */

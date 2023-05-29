@@ -166,6 +166,20 @@ export class ENLocale implements ILocale {
   shipping = "Shipping";
   orderSummary = "Order summary";
   method = "Method";
+  thankYou = "Thank you";
+  yourOrder = "Your order";
+  hasBeenPlaced = "has been placed";
+  confirmationEmailHasBeenSentTo = "Confirmation email has been sent to";
+  billingDetails = "Billing details";
+  shippingMethod = "Shipping Method";
+  orderList = "Order list";
+  shippingAndHandling = "Shipping and handling";
+  vat25 = "VAT (Value Added Tax) 25%";
+  estimatedDeliveryTime ="Expected delivery time is 4-5 days";
+  selectDelivery = "Select delivery method";
+  delivery = "Delivery";
+  selectPaymentMethod ="Select payment method";
+  status = "Status";
 
   // Months
   january = "January";

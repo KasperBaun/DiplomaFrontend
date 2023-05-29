@@ -9,6 +9,7 @@ import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
 import { useNavigate } from 'react-router-dom';
 import { Constants } from '@utils/Constants';
+import { Paper, Table, TableBody, TableCell, TableRow } from '@mui/material';
 
 
 export function Review() {
@@ -20,7 +21,7 @@ export function Review() {
       <Typography variant="h3" color={Constants.primaryColor} gutterBottom>
         {languageStore.currentLanguage.orderSummary}
       </Typography>
-      <List disablePadding>
+      {/* <List disablePadding>
         {basketStore.Basket.map((productItem) => (
           <ListItem key={productItem.product.name} onClick={() => navigate("/product/" + productItem.id)} sx={{
             py: 1, px: 0,
@@ -35,10 +36,56 @@ export function Review() {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {basketStore.getTotal()}
+            {ExtentionMethods.formatPrice(basketStore.Basket.reduce((acc, item) => acc + item.currentPrice, 0), languageStore.getCurrentLanguageCode(), 'DKK')}
           </Typography>
         </ListItem>
-      </List>
+      </List> */}
+      <Table >
+        <TableBody>
+          {basketStore.Basket.map((productItem) => (
+            <TableRow
+              key={productItem.product.name}
+              onClick={() => navigate("/product/" + productItem.id)}
+              sx={{
+                '&:hover': {
+                  cursor: 'pointer'
+                }
+              }}
+            >
+              <TableCell>
+                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                  {productItem.product.name}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {`${languageStore.currentLanguage.modelNumber} ${productItem.product.modelNumber}`}
+                </Typography>
+              </TableCell>
+              <TableCell align="right">
+                <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                  {ExtentionMethods.formatPrice(productItem.currentPrice, languageStore.getCurrentLanguageCode(), 'DKK')}
+                </Typography>
+              </TableCell>
+            </TableRow>
+          ))}
+          <TableRow>
+            <TableCell>
+              <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
+                Total
+              </Typography>
+            </TableCell>
+            <TableCell align="right">
+              <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                {ExtentionMethods.formatPrice(
+                  basketStore.Basket.reduce((acc, item) => acc + item.currentPrice, 0),
+                  languageStore.getCurrentLanguageCode(),
+                  'DKK'
+                )}
+              </Typography>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+
 
       <Grid container spacing={2}>
 
@@ -46,6 +93,7 @@ export function Review() {
           <Typography variant="h5" fontWeight={'bold'} gutterBottom sx={{ mt: 2 }}>
             {languageStore.currentLanguage.shipping}
           </Typography>
+          <Typography variant="body1" fontWeight={'bold'}>{`${basketStore.OrderDTO.deliveryMethod}`}</Typography>
           <Typography variant="body1">
             {`${basketStore.OrderDTO.customer.firstName ? basketStore.OrderDTO.customer.firstName : ""} ${basketStore.OrderDTO.customer.lastName ? basketStore.OrderDTO.customer.lastName : ""}`}
           </Typography>

@@ -1,5 +1,6 @@
-import { Grid } from "@mui/material";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Grid, Typography } from "@mui/material";
+import MobXContext from "@stores/MobXContext";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 
 interface IPaymentOptionsProps {
   setSelectedPaymentOption: Dispatch<SetStateAction<number>>;
@@ -32,6 +33,7 @@ const paymentOptions: PaymentOption[] = [
 export const PaymentOptions = (props: IPaymentOptionsProps) => {
 
   const [selectedPaymentId, setSelectedPaymentId] = useState(-1);
+  const { languageStore } = useContext(MobXContext);
 
   const handlePaymentOptionClick = (paymentOption: number) => {
     setSelectedPaymentId(paymentOption);
@@ -49,6 +51,9 @@ export const PaymentOptions = (props: IPaymentOptionsProps) => {
         margin: 1
       }}
     >
+      <Grid item xs={12}>
+        <Typography variant="h5" fontWeight={'bold'} gutterBottom sx={{ mt: 2 }}>{languageStore.currentLanguage.selectPaymentMethod}</Typography>
+      </Grid>
       {paymentOptions.map((paymentOption, index) => (
         <Grid item
           xs={4}
