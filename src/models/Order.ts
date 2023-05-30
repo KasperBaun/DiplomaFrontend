@@ -1,13 +1,21 @@
-import OrderElements from "./OrderElements";
+import { Customer } from "./Customer";
+import { DiscountCode } from "./DiscountCode";
+import { Payment } from "./Payment";
+import { ProductItem } from "./ProductItem";
 
-export default class Order {
-    id: number;
-    customerId: number;
-    paymentId: number;
-    paymentStatus: string;
-    deliveryStatus: string;
-    discountCode: string | null;
-    active: Boolean;
-    orderElements: OrderElements[];
-  }
-  
+export class Order {
+  id?: number;
+  customerId: number;
+  customer: Customer;
+  paymentId: number;
+  payment: Payment;
+  discountCodeId: number;
+  discountCode: DiscountCode;
+  deliveryStatus: string;
+  deliveryMethod: string;
+  orderStatus: string;
+  totalPrice: number;
+  active: Boolean;
+  createdDate: Date;
+  productItems: ProductItem[];
+}

@@ -1,39 +1,52 @@
-import Footer from "@components/footer/Footer";
-import Header from "@components/header/Header";
-import Loading from "@components/loading/Loading";
+import LoadingLion from "@components/loading/LoadingLion";
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
+import { Box, Container, CssBaseline, ThemeProvider } from "@mui/material";
+import { Header } from "@webshop/header/Header";
 import { Constants } from "@utils/Constants";
 import { observer } from "mobx-react-lite";
-import { FunctionComponent, useContext } from "react";
-import { Container } from "react-bootstrap";
+import { useContext, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { ColorModeContext, useMode } from "styling/mui-theme/web/WebTheme";
+import { Footer } from "./footer/Footer";
 
-interface WebshopProps {
+export const Webshop: React.FC = observer(() => {
 
-}
+    const { webshopStore, rootStore } = useContext<IMobXContext>(MobXContext);
+    const { theme, colorMode } = useMode();
 
-const Webshop: FunctionComponent<WebshopProps> = observer(function Webshop() {
+    useEffect(() => {
+        const webshopStoreLoaded = async () => {
+            if (!rootStore.isWebshopLoaded && !rootStore.isWebshopLoading) {
+                await rootStore.loadWebShop();
+            }
+        }
+        webshopStoreLoaded();
+    });
 
-    const { rootStore } = useContext<IMobXContext>(MobXContext);
-
-    if (!rootStore.isLoaded) {
+    if (!webshopStore.isLoaded) {
         return (
-            <Loading
-                size={100}
+            <LoadingLion
+                size={50}
                 color={Constants.primaryColor}
+                loadingText="Loading..."
             />
         )
     } else {
         return (
-            <div>
-                <Header />
-                <Container style={{ display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: 'auto' }}>
-                    <Outlet />
-                </Container>
-                <Footer />
-            </div>
+            <ColorModeContext.Provider value={colorMode}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Box style={{ minHeight: '10vh', width: '100%' }}>
+                        <Header />
+                    </Box>
+                    <Container style={{ display: 'flex', minHeight: '80vh', width: '100%' }}>
+                        <Outlet />
+                    </Container>
+                    <Box style={{ minHeight: '10vh', minWidth: '100%' }}>
+                        <Footer />
+                    </Box>
+                </ThemeProvider>
+            </ColorModeContext.Provider >
         );
     }
 });
-
-export default Webshop;

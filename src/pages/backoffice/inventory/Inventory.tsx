@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material';
-import InventoryCards from "./components/InventoryCards";
+import { InventoryCards } from "./InventoryCards";
 
-const InventoryMain = () => {
+export const InventoryMain = () => {
     return (
-            <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
+        <Grid container rowGap={2} columnGap={2} justifyContent={"center"}>
             <Grid item xs={11.9}>
                 <div className="DashBoardGridContainer">
                     <InventoryCards />
@@ -12,5 +12,3 @@ const InventoryMain = () => {
         </Grid>
     )
 }
-
-export default InventoryMain;

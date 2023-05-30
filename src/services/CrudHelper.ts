@@ -1,7 +1,7 @@
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { ICrudHelper } from "./ICrudHelper";
 
-class CrudHelper implements ICrudHelper {
+export class CrudHelper implements ICrudHelper {
 
     private prefix: string = `%c[CrudHelper]`;
     private color: string = ComponentLoggingConfig.Lightkhaki;
@@ -167,5 +167,3 @@ class CrudHelper implements ICrudHelper {
         }
     }
 }
-
-export default CrudHelper;

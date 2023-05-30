@@ -1,9 +1,9 @@
 import { Constants } from "@utils/Constants";
 import { IAuthService } from "./IAuthService";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
-import UserLoginDTO from "@models/DTO/UserLoginDTO";
-import UserRegistrationDTO from "@models/DTO/UserRegistrationDTO";
-import { WebAPIResponse } from "./IAPIService";
+import { UserLoginDTO } from "@models/DTO/UserLoginDTO";
+import { UserRegistrationDTO } from "@models/DTO/UserRegistrationDTO";
+import { WebAPIResponse } from "@models/types/WebApiResponse";
 
 export class AuthService implements IAuthService {
 

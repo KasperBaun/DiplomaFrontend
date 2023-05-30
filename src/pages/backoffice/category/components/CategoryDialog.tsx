@@ -1,18 +1,19 @@
 import { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Snackbar, TextField } from "@mui/material";
-import Category from "@models/Category";
+import { Category } from "@models/Category";
+import { observer } from "mobx-react-lite";
 
-export interface IProps {
+type CategoryDialogProps = {
     visible: boolean;
     onClose: () => void;
     create?: boolean;
     category?: Category;
 }
 
-const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
+export const CategoryDialog = observer(({ onClose, visible, create, category }: CategoryDialogProps) => {
 
-    const { categoryStore, languageStore } = useContext(MobXContext);
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
     const [alertType, setAlertType] = useState<"success" | "error" | "warning" | "info">("success");
     const [alertText, setAlertText] = useState<string>("");
@@ -25,14 +26,14 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
         const category: Category = ({ id: 0, name: title, imageUrl: url, order, description: description })
 
         try {
-            await categoryStore.createCategory(category)
+            await backofficeStore.createCategory(category)
             setAlertType("success");
-            setAlertText(languageStore.currentLanguage.createCategorySuccessMessage);
+            setAlertText(languageStore.currentLanguage.createSuccess);
         }
         catch (err) {
             console.log(err);
             setAlertType("warning");
-            setAlertText(languageStore.currentLanguage.createCategoryFailedMessage);
+            setAlertText(languageStore.currentLanguage.createFailed);
         }
         setShowSnackbar(true);
     }
@@ -52,7 +53,7 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
         };
 
         try {
-            await categoryStore.updateCategory(updateAction);
+            await backofficeStore.updateCategory(updateAction);
             setAlertType("success");
             setAlertText(languageStore.currentLanguage.updateCategorySuccessMessage);
         } catch (err) {
@@ -140,7 +141,7 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onClose}>
-                        {languageStore.currentLanguage.buttonCancelText}
+                        {languageStore.currentLanguage.cancel}
                     </Button>
                     <Button
                         variant="contained"
@@ -157,6 +158,4 @@ const CategoryDialog = ({ onClose, visible, create, category }: IProps) => {
             </Dialog>
         )
     }
-}
-
-export default CategoryDialog;
+});

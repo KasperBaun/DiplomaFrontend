@@ -1,19 +1,14 @@
+import Loading from "@components/loading/Loading";
+import MobXContext from "@stores/MobXContext";
 import { NavigateNext } from "@mui/icons-material";
 import { Breadcrumbs, Grid, Link, Typography } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useState } from "react";
-import Products from "./components/Products";
-import ProductItem from "@models/ProductItem";
-import ProductEditor from "./components/ProductEditor";
-import Loading from "@components/loading/Loading";
-import { toJS } from "mobx";
+import { Products } from "./components/Products";
+import { ProductItem } from "@models/ProductItem";
+import { ProductEditor } from "./components/ProductEditor";
 
-export interface IProductManagerProps {
-
-}
-
-const ProductManager: React.FC<IProductManagerProps> = observer(function ProductManager(props: IProductManagerProps) {
+export const ProductManager: React.FC = observer(function ProductManager() {
 
     const { languageStore, backofficeStore } = useContext(MobXContext);
     const [selectedProductItem, setSelectedProductItem] = useState<ProductItem | null>(null);
@@ -31,7 +26,7 @@ const ProductManager: React.FC<IProductManagerProps> = observer(function Product
     const handleOnProductItemClicked = (productItem: ProductItem) => {
         if (productItem === null) {
             setCreate(true);
-            setSelectedProductItem(productItem);
+            setSelectedProductItem(null);
         } else {
             setCreate(false);
             setSelectedProductItem(productItem);
@@ -70,5 +65,3 @@ const ProductManager: React.FC<IProductManagerProps> = observer(function Product
         );
     }
 });
-
-export default ProductManager;

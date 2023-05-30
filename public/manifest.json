@@ -1,11 +1,11 @@
 {
   "short_name": "Gl-antik",
-  "name": "Grønlund og Lefort",
+  "name": "Grønlund",
   "icons": [
     {
       "src": "logo.svg",
       "type": "image/svg",
-      "sizes": "393x231"
+      "sizes": "39x23"
     }
   ],
   "start_url": ".",

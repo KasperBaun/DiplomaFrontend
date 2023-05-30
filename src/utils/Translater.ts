@@ -5,7 +5,7 @@ export class Translater{
     getCategoryBasedOnLanguage(languageStore : LanguageStore , name: string){   
         const splitIndex = name.indexOf('|');
 
-        if (languageStore.getCurrentLanguageCode() === "da_DK"){
+        if (languageStore.getCurrentLanguageCode() === "da-DK"){
             if (splitIndex > 0){
            let nameval = name.slice(0, splitIndex);
            return nameval;
@@ -20,5 +20,4 @@ export class Translater{
             else return name;
         }
     }
-
 }

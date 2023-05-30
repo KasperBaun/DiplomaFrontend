@@ -54,11 +54,10 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "src/**/*.scss.d.ts",
     "next-env.d.ts",
     "twin.d.ts",
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
   ],
 }

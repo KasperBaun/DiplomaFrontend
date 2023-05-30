@@ -1,31 +1,6 @@
 import { ILocale } from "./ILocale";
 
-export default class ENLocale implements ILocale {
-
-  id = "en_US";
-  aboutUs = "About Us";
-  aboutUsText = "We sell porcelain";
-
-  // Standard text
-  create = "Create";
-  cancel = "Cancel";
-  update = "Update";
-  product = "Product";
-  reset = "Reset";
-  search = "Search";
-  showAll = "Show All";
-  showMore = "Show more";
-  sold = "Sold";
-  forSale = "For sale";
-  price = "Price";
-  description = "Description";
-  settings = "Settings";
-  notifications = "Notifications";
-
-  // Button text
-  buttonCancelText = "Cancel";
-  buttonDeleteText = "Delete";
-  confirmDeleteText = "Are you sure you want to delete this item?";
+export class ENLocale implements ILocale {
 
   getQuality(qualityType: number): string {
     switch (qualityType) {
@@ -59,19 +34,225 @@ export default class ENLocale implements ILocale {
     }
   }
 
+  create = "Create";
+  cancel = "Cancel";
+  update = "Update";
+  delete = "Delete";
+  product = "Product";
+  products = "Products";
+  reset = "Reset";
+  search = "Search";
+  showAll = "Show All";
+  showMore = "Show more";
+  sold = "Sold";
+  forSale = "For sale";
+  price = "Price";
+  description = "Description";
+  settings = "Settings";
+  notifications = "Notifications";
+  noProductsAvailable = "There is currrently no products available in this category";
+  createProduct = "Create Product";
+  editProduct = "Edit Product";
+  deleteProduct = "Delete Product";
+  productImages = "Product Images";
+  manufacturer = "Manufacturer";
+  selectMaterial = "Select Material";
+  name = "Name";
+  modelNumber = "Modelnumber";
+  callUs = "Call us";
+  writeOnFacebook = "Write on Facebook";
+  mapsLocation = "Google Maps location";
+  city = "City";
+  instagram = "Instagram";
+  facebook = "Facebook";
+  sendAnEmail = "Send an email";
+  language = "Language";
+  condition = "Condition";
+  quality = "Quality";
+  addToBasket = "Add to basket";
+  design = "Design";
+  material = "Material";
+  modelSpecifications = "Model specifications";
+  productInfoHeadline = "General info";
+  selectSubcategory = "Select subcategory";
+  filterBySubcategory = "Filter by subcategory";
+  selectCategory = "Select category";
+  filterByCategory = "Filter by category";
+  signIn = "SIGN IN";
+  signUp = "Sign Up";
+  forgotPassword = "Forgot Password?";
+  alreadyHaveAccount = "Already have an account? Sign in";
+  dontHaveAccount = "Don't have an account? Sign Up";
+  rememberMe = "Remember me";
+  firstName = "First Name";
+  lastName = "Last Name";
+  emailAdress = "Email Address";
+  password = "Password";
+  createSuccess = "Create Success";
+  createFailed = "Create Failed";
+  updateSuccess = "Update Success";
+  updateFailed = "Update Failed";
+  deleteSuccess = "Delete Success";
+  deleteFailed = "Delete Failed";
+  confirmDeleteText = "Are you sure you want to delete this item?";
+  weight = "Weight";
+  dimension = "Dimension";
+  year = "Year";
+  select = "Select";
+  revenue = "Revenue";
+  danishCurrency = "DKK";
+  kroner = "Kr."
+  more = "More";
+  than = "Than";
+  less = "Less";
+  month = "Month";
+  last = "Last";
+  storage = "Storage";
+  value = "Value";
+  inventory = "Inventory";
+  currency = "USD";
+  expenses = "Expenses";
+  result = "Result";
+  results = "Results";
+  inventoryValue = "Inventoryvalue";
+  yearToDate = "Year to date";
+  YTD = "YTD";
+  theme = "Theme";
+  light = "Light";
+  dark = "Dark";
+  and = "And";
+  kpi = "Key performance indicators";
+  aov = "Average order value";
+  conversionRate = "Conversion rate";
+  inventoryTurnover = "Inventory turnover";
+  days = "Days";
+  average = "Average";
+  total = "Total";
+  avg = "Avg.";
+  inventoryTurnoverExplanation = "Describes on average how long each product is in stock before being shipped to a customer. The lower the number, the better.";
+  aovExplanation = "The average order value is the average amount of money each customer spends per order. The higher the number, the better.";
+  conversionRateExplanation = "The conversion rate is the percentage of visitors who make a purchase. The higher the number, the better.";
+  bestSellingProducts = "Best selling products";
+  worstSellingProducts = "Worst selling products";
+  inventoryValueExplanation = "The inventory value is the total value of all products in stock.";
+  startSniper = "Start Sniper";
+  show = "Show";
+  newSniperResults = "New sniper results";
+  sniperStarted = "Sniper started";
+  clearAll = "Clear all";
+  noNotifications = "No notifications";
+  selectLanguage = "Select language";
+  updateSubcategory = "Update Subcategory";
+  chooseCategory = "Choose category";
+  showing = "Showing";
+  back = "back";
+  country = "Country";
+  state = "State";
+  shippingAddress = "Shipping address";
+  paymentDetails = "Payment details";
+  reviewOrder = "Review order";
+  thankYouForYourOrder = "Thank you for your order";
+  firstNameShouldOnlyBeCharacters = "First name should only be characters";
+  lastNameShouldOnlyBeCharacters = "Last name should only be characters";
+  addressCannotBeEmpty = "Address can not be empty";
+  cityCannotBeEmpty = "City can not be empty";
+  emailNotCorrect = "Email must be in the format example@example.com";
+  phoneNotCorrect = "Phone can only contain numbers";
+  postcodeErrorMessage = "Postcode can only contain numbers";
+  countryErrorMessage = "Country can only contain letters";
+  next = "Next";
+  placeOrder = "Place order";
+  noItemsInBasket = "No items in basket!";
+  shipping = "Shipping";
+  orderSummary = "Order summary";
+  method = "Method";
+  thankYou = "Thank you";
+  yourOrder = "Your order";
+  hasBeenPlaced = "has been placed";
+  confirmationEmailHasBeenSentTo = "Confirmation email has been sent to";
+  billingDetails = "Billing details";
+  shippingMethod = "Shipping Method";
+  orderList = "Order list";
+  shippingAndHandling = "Shipping and handling";
+  vat25 = "VAT (Value Added Tax) 25%";
+  estimatedDeliveryTime ="Expected delivery time is 4-5 days";
+  selectDelivery = "Select delivery method";
+  delivery = "Delivery";
+  selectPaymentMethod ="Select payment method";
+  status = "Status";
+
+  // Months
+  january = "January";
+  february = "February";
+  march = "March";
+  april = "April";
+  may = "May";
+  june = "June";
+  july = "July";
+  august = "August";
+  september = "September";
+  october = "October";
+  november = "November";
+  december = "December";
+  jan = "Jan";
+  feb = "Feb";
+  mar = "Mar";
+  apr = "Apr";
+  jun = "Jun";
+  jul = "Jul";
+  aug = "Aug";
+  sep = "Sep";
+  oct = "Oct";
+  nov = "Nov";
+  dec = "Dec";
+
   //Basket Page
   yourBasket = "Your basket";
-  yourTotal = "Price"
-  deliveryOptions = "Delivery Options:"
+  yourTotal = "Price";
+  deliveryOptions = "Delivery Options:";
   paymentOptions = "Payment Options";
   subTotal = "Subtotal:";
   procesFee = "Handling fees:";
-  totalIncMoms = "Price in total (including taxs):"
-  checkOutText = "Checkout"
-  addDiscountCode = "Add dicsount code"
-  discountCodeOptional = "Discount code (optional)"
-  addButton = "Add"
+  totalIncMoms = "Price in total (including taxs):";
+  checkOutText = "Checkout";
+  addDiscountCode = "Add discount code";
+  discountCodeOptional = "Discount code (optional)";
+  addButton = "Add";
 
+  // AboutUS page
+  company_description1 = "Our physical store is located at Gammel Kongevej 94a, 1850 Frederiksberg.";
+  company_description2 = "We buy and sell gold & silver, Danish porcelain and ceramics, as well as other exciting antiques.";
+  opening_days = "Opening Hours";
+  monday_text = "Monday";
+  tuesday_text = "Tuesday";
+  wednesday_text = "Wednesday";
+  thursday_text = "Thursday";
+  friday_text = "Friday";
+  saturday_text = "Saturday";
+  public_holiday_text = "Public Holidays";
+  sunday_text = "Sunday";
+  closed_text = "Closed";
+  per_agreement_text = "By appointment only";
+  contact_information = "Contact Information";
+  phone_text = "Phone";
+  email_text = "Email";
+  address_text = "Address";
+  post_code = "Post Code";
+  cvr_nr_text = "CVR Number";
+  faq_text = "Frequently Asked Questions:";
+  q1_text = "What is your return policy?";
+  q1_answer = "It is not possible to return goods after 24 hours.";
+  q2_text = "Is it possible to have items delivered internationally?";
+  q2_answer = "By appointment, we can arrange for goods to be delivered internationally, subject to the price of the item and the distance to the destination.";
+  q3_text = "Can I collect my items from the store?";
+  q3_answer = "It is always possible to collect items from the store during opening hours.";
+
+  // Front page
+  seeProductBtn = "See product";
+  chosenCategories = "Chosen Categories";
+
+  //Pop-up : cart
+  shopButton = "Go to cart";
 
   // Category Admin
   createCategoryDialogTitle = "Create Category";
@@ -116,23 +297,6 @@ export default class ENLocale implements ILocale {
   createSubCategoryUpdateSuccessMessage = "Successfully updated subcategory";
   createSubCategoryUpdateFailedMessage = "Error. Could not update subcategory";
 
-  // Product
-  productPage_productName = "Title";
-  productPage_productModelNumber = "Model number";
-  productPage_productMaterial = "Material";
-  productPage_productDesign = "Design";
-  productPage_productCondition = "Condition";
-  productPage_productQuality = "Quality";
-  productPage_productDimension = "Dimension";
-  productPage_productCustomText = "Extra information";
-  productPage_weight = "Weight";
-  productPage_createProduct = "create product";
-  productPage_modelSpecifications = "Model specifictations";
-  productPage_productInfoHeadline = "General info";
-  selectSubcategory = "Select subcategory";
-  filterBySubcategory = "Filter by subcategory";
-  selectCategory = "Select category";
-  filterByCategory = "Filter by category";
 
   // Analysis
   AnalysisTitle = "Gold and Silver";
@@ -183,7 +347,7 @@ export default class ENLocale implements ILocale {
   CatalogTabText = "Catalog";
 
   // Payments
-  GoToSales = "See more sales";
+  goToSales = "See more sales";
   SalesSummaryTitle = "Sales Summary";
   SalesSummaryTotalSales = "Sales (total)";
   SalesSummaryTotalAmount = "Amount (total)";
@@ -202,10 +366,21 @@ export default class ENLocale implements ILocale {
   CheckoutFormCountryLabel = "Country";
   CheckoutFormCountryCodeLabel = "Countrycode";
   CheckoutFormPhoneLabel = "Phonenumber";
+  CheckoutFormDeliveryLabel = "Delivery method";
+  CheckoutFormDeliveryOptionCollectLabel = "Collect at store";
+  CheckoutFormDeliveryOptionSendLabel = "Ship to Billing Address";
   CheckoutFormSubmitButton = "Continue to payment";
+  cardNumber = "Card number";
+
+  CheckoutPaymentWidgetPayButtonText = "Pay";
+  CheckoutPaymentWidgetPayFormMPLabel = "Phone number";
+  CheckoutPaymentWidgetPayFormCardLabel = "Choose card type";
+  CheckoutPaymentWidgetPayFormMMYYLabel = "MM/YY";
+  CheckoutPaymentWidgetPayFormCardHolderLabel = "Cardholders name";
+  CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
 
   // Orders
-  GoToOrders = "See more Orders";
+  goToOrders = "See more Orders";
   OrderDetailsProductName = "Product(s)";
   OrderDetailsManufacturer = "Fabricator";
   OrderDetailsCustomerId = "Customer (Id)";
@@ -217,7 +392,7 @@ export default class ENLocale implements ILocale {
 
   // Footer tabs
   BlogTabText = "Blog";
-  PricingTabText = "Prices";
+  OldPageText = "Old webpage";
   AboutUsTabText = "About us";
   FAQTabText = "FAQ";
   ContactTabText = "Contact";
@@ -244,17 +419,5 @@ export default class ENLocale implements ILocale {
   InventoryWidgetTitle = "Inventory";
   InventoryTitle = "Title";
 
-  // Loginpage
-  signInText = "SIGN IN";
-  signUpText = "Sign Up";
-  forgotPasswordText = "Forgot Password?";
-  alreadyHaveAccountText = "Already have an account? Sign in";
-  dontHaveAccountText = "Don't have an account? Sign Up";
-  rememberMeText = "Remember me";
 
-  // Signup page
-  firstName = "First Name";
-  lastName = "Last Name";
-  emailAdress = "Email Address";
-  password = "Password";
 }

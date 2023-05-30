@@ -1,27 +1,20 @@
-import { ChevronLeft, ChevronRight, DarkModeOutlined, LightModeOutlined, Logout, Notifications, Settings } from "@mui/icons-material";
-import { Box, IconButton, Tooltip, useTheme } from "@mui/material";
-import MobXContext from "@stores/MobXContext";
-import ColorConfigs from "@styles/ColorConfigs";
+import { LanguageSwitch } from "@components/language/LanguageSwitch";
+import { LogoutButton } from "@components/logout/LogoutButton";
+import { NotificationModal } from "@components/notification/modal/NotificationModal";
+import { SettingsButton } from "@components/settings/SettingsButton";
+import { ThemeSwitch } from "@components/theme/ThemeSwitch";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { Box, IconButton } from "@mui/material";
+import ColorConfigs from "styling/ColorConfigs";
 import { observer } from "mobx-react-lite";
-import { useContext, useState } from "react";
-import { Dk, Us } from "react-flags-select";
-import { ColorModeContext } from "styling/Theme";
 
-export interface ITopbarProps {
+type TopbarProps = {
     sidebarOpen: boolean;
     setSidebarOpen: () => void;
+    navigateTo: (key: number) => void;
 }
 
-const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarProps) {
-
-    const { authStore, languageStore } = useContext(MobXContext);
-    const theme = useTheme();
-    // const colors = tokens(theme.palette.mode);
-    const colorMode = useContext(ColorModeContext);
-
-    const handleLanguageIconClicked = () => {
-        languageStore.toggleLanguage();
-    }
+export const Topbar: React.FC<TopbarProps> = observer((props: TopbarProps) => {
 
     const toggleSideBar = (sidebarOpen: boolean, setSidebarOpen: () => void): JSX.Element => {
         return (
@@ -38,6 +31,10 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
             </IconButton>
         )
     }
+
+    const handleOnSettingsButtonClicked = () => {
+        props.navigateTo(2);
+    };
 
     return (
         <Box
@@ -66,68 +63,13 @@ const Topbar: React.FC<ITopbarProps> = observer(function Topbar(props: ITopbarPr
                 justifyContent="center"
                 alignItems="center"
             >
-                <Tooltip title={"Language setting: " + languageStore.getCurrentLanguageCode()}>
-                    <IconButton onClick={handleLanguageIconClicked}>
-                        {languageStore.getCurrentLanguageCode() === 'da_DK' ? <Dk /> : <Us />}
-                    </IconButton>
-                </Tooltip>
+                <LanguageSwitch />
+                <ThemeSwitch />
+                <NotificationModal />
+                <SettingsButton onButtonClicked={handleOnSettingsButtonClicked} />
+                <LogoutButton />
 
-
-                <Tooltip title={
-                    "Colormode: " + (theme.palette.mode === 'dark' ? "dark" : "light")
-                }>
-                    <IconButton onClick={colorMode.toggleColorMode}>
-                        {theme.palette.mode === 'dark' ? (
-                            <DarkModeOutlined sx={{ color: ColorConfigs.topbar.color, }} />
-                        ) : (
-                            <LightModeOutlined sx={{ color: ColorConfigs.topbar.color }} />
-                        )
-                        }
-                    </IconButton>
-                </Tooltip>
-
-                <Tooltip title={languageStore.currentLanguage.notifications}>
-                    <IconButton
-                        sx={{
-                            color: ColorConfigs.topbar.color,
-                            "&:hover": {
-                                background: ColorConfigs.topbar.hoverBg,
-                            }
-                        }}
-                    >
-                        <Notifications />
-                    </IconButton>
-                </Tooltip>
-
-                <Tooltip title={languageStore.currentLanguage.settings}>
-                    <IconButton
-                        sx={{
-                            color: ColorConfigs.topbar.color,
-                            "&:hover": {
-                                background: ColorConfigs.topbar.hoverBg,
-                            }
-                        }}
-                    >
-                        <Settings />
-                    </IconButton>
-                </Tooltip>
-
-                <Tooltip title={languageStore.currentLanguage.LogoutTabText}>
-                    <IconButton
-                        sx={{
-                            color: ColorConfigs.topbar.color,
-                            "&:hover": {
-                                background: ColorConfigs.topbar.hoverBg,
-                            }
-                        }}
-                        onClick={() => authStore.signOut()}
-                    >
-                        <Logout />
-                    </IconButton>
-                </Tooltip>
             </Box>
         </Box>
     );
 });
-
-export default Topbar;

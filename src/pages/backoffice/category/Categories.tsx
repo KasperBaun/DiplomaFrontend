@@ -1,21 +1,21 @@
 import React, { useContext, useState } from "react";
 import { Alert, Button, Grid, Snackbar } from "@mui/material";
-import Category from "@models/Category";
+import { Category } from "@models/Category";
 import MobXContext from "@stores/MobXContext";
-import Loading from "@components/loading/Loading";
-import CategoryDialog from "./components/CategoryDialog";
+import LoadingLion from "@components/loading/LoadingLion";
+import { CategoryDialog } from "./components/CategoryDialog";
 import { observer } from "mobx-react-lite";
-import CategoryCard from "./components/CategoryCard";
-import ConfirmDeleteDialog from "./components/ConfirmDeleteDialog";
+import { CategoryCard } from "./components/CategoryCard";
+import { ConfirmDeleteDialog } from "./components/ConfirmDeleteDialog";
 
-export interface ICategoriesProps {
+type CategoriesProps = {
     onCategoryClicked: (category: Category) => void;
 }
 
-const Categories: React.FC<ICategoriesProps> = observer(function Categories(props: ICategoriesProps) {
+export const Categories: React.FC<CategoriesProps> = observer((props: CategoriesProps) => {
 
     /* Define state for categories and selected category - Inject stores */
-    const { categoryStore, languageStore } = useContext(MobXContext);
+    const { backofficeStore, languageStore } = useContext(MobXContext);
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
     /* Define state for modals */
@@ -33,9 +33,9 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
     };
 
     const handleOnConfirmDeleteClick = async () => {
-        const catToBeDeleted = categoryStore.getCategory(selectedCategory.id);
+        const catToBeDeleted = backofficeStore.getCategory(selectedCategory.id);
         if (catToBeDeleted !== null) {
-            await categoryStore.deleteCategory(selectedCategory.id);
+            await backofficeStore.deleteCategory(selectedCategory.id);
             setAlertType("success");
         } else {
             setAlertType("warning");
@@ -53,7 +53,7 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
         props.onCategoryClicked(category);
     }
 
-    if (categoryStore.Categories && categoryStore.Categories.length > 0) {
+    if (backofficeStore.Categories && backofficeStore.Categories.length > 0) {
         return (
             <Grid container >
                 {/* Modals for creating/updating and user feedback */}
@@ -68,7 +68,7 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
                 </Grid>
 
                 {/* Categorycards */}
-                {categoryStore.Categories.map((cat, index) => {
+                {backofficeStore.Categories.map((cat, index) => {
                     return (
                         <Grid item xs={12} sm={6} md={4} lg={2} xl={2} padding={1} display='flex' key={"BackofficeCategoryCardItem" + index}>
                             <CategoryCard category={cat} updateCategory={handleUpdateClick} deleteCategory={handleOnDeleteClick} goToSubcategories={handleOnCategoryClicked} />
@@ -79,8 +79,5 @@ const Categories: React.FC<ICategoriesProps> = observer(function Categories(prop
             </Grid>
         )
     }
-    else return <Loading />
+    else return <LoadingLion />
 });
-
-export default Categories;
-

@@ -1,4 +1,4 @@
-export default class SniperModel{
+export class SniperModel{
     source : string;
     varenummer: number;
     itemTitle: string;

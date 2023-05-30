@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Alert, Snackbar, SnackbarOrigin } from '@mui/material';
 
-export interface ISnackbarProps {
+type UserFeedbackProps = {
     variant?: 'success' | 'warning' | 'error';
     verticalPosition?: 'top' | 'bottom';
     horizontalPosition?: 'left' | 'center' | 'right';
@@ -11,7 +11,7 @@ export interface ISnackbarProps {
     onClose: () => void;
 }
 
-const UserFeedback: React.FC<ISnackbarProps> = function UserFeedback(props: ISnackbarProps) {
+export const UserFeedback: React.FC<UserFeedbackProps> = function UserFeedback(props: UserFeedbackProps) {
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
@@ -44,5 +44,3 @@ const UserFeedback: React.FC<ISnackbarProps> = function UserFeedback(props: ISna
         </Snackbar>
     )
 }
-
-export default UserFeedback;

@@ -1,22 +1,21 @@
 import MobXContext from "@stores/MobXContext";
+import LionLogo from "@components/svgs/LionLogo";
+import ColorConfigs from "styling/ColorConfigs";
+import SizeConfigs from "styling/SizeConfigs";
 import React, { Dispatch, SetStateAction, useContext } from "react";
-import LionLogo from "@components/LionLogo";
 import { Box, Drawer } from "@mui/material";
-import SidebarItemCollapse from "./SidebarItemCollapse";
-import SidebarItem from "./SidebarItem";
-import ColorConfigs from "@styles/ColorConfigs";
-import SizeConfigs from "@styles/SizeConfigs";
 import { observer } from "mobx-react-lite";
-import { createNavPaths } from "./Navpaths";
+import { createNavPaths } from "./components/Navpaths";
 import { Navpath } from "@models/Navpath";
+import { SidebarItemCollapse } from "./components/SidebarItemCollapse";
+import { SidebarItem } from "./components/SidebarItem";
 
-
-export interface ISidebarProps {
+type SidebarProps = {
     sidebarOpen: boolean;
     setNavKey: Dispatch<SetStateAction<number>>;
 }
 
-const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISidebarProps) {
+export const Sidebar: React.FC<SidebarProps> = observer((props: SidebarProps) => {
 
     const { languageStore } = useContext(MobXContext);
     const navPaths: Navpath[] = createNavPaths(languageStore, props.setNavKey, props.sidebarOpen);
@@ -55,12 +54,12 @@ const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISideb
                         alignItems: "center",
                         marginTop: '30px',
                         backgroundColor: ColorConfigs.sidebar.bg,
-                        ":hover": {
+                        "&:hover": {
                             cursor: "pointer"
                         }
                     }}
                     onClick={() => {
-                        window.location.href = "/";
+                        props.setNavKey(0);
                     }}
                 >
                     <LionLogo color={ColorConfigs.sidebar.color} width={props.sidebarOpen ? 100 : 60} />
@@ -75,7 +74,6 @@ const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISideb
                 >
 
                     {navPaths.slice(0, 7).map((navpath, index) => (
-
                         navpath.child ? (
                             <SidebarItemCollapse item={navpath} sidebarOpen={props.sidebarOpen} key={index} />
                         ) : (
@@ -91,8 +89,7 @@ const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISideb
                         backgroundColor: ColorConfigs.sidebar.bg,
                     }}
                 >
-                    {navPaths.slice(7, 9).map((navpath, index) => (
-
+                    {navPaths.slice(7, 8).map((navpath, index) => (
                         navpath.child ? (
                             <SidebarItemCollapse item={navpath} sidebarOpen={props.sidebarOpen} key={index} />
                         ) : (
@@ -105,7 +102,3 @@ const Sidebar: React.FC<ISidebarProps> = observer(function Sidebar(props: ISideb
         </Drawer >
     )
 });
-
-export default Sidebar;
-
-

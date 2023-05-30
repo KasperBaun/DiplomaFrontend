@@ -3,8 +3,8 @@ import { ComponentLoggingConfig } from '@utils/ComponentLoggingConfig';
 import { RootStore } from './RootStore';
 import { Constants } from '@utils/Constants';
 import { ILocale } from '@utils/ILocale';
-import DKLocale from '@utils/DKLocale';
-import ENLocale from '@utils/ENLocale';
+import { DKLocale } from '@utils/DKLocale';
+import { ENLocale } from '@utils/ENLocale';
 
 export class LanguageStore {
 
@@ -25,21 +25,20 @@ export class LanguageStore {
     public async init(): Promise<boolean> {
         runInAction(() => {
             // Load available languages
-            this.locales.set("da_DK", new DKLocale());
-            this.locales.set("en_US", new ENLocale());
+            this.locales.set("da-DK", new DKLocale());
+            this.locales.set("en-US", new ENLocale());
         })
 
-        // Reads values from localstorage to determine previously set preffered language by user ->
-        // If no preffered language was set by user -> default to da-DK locale
-        this._previousLanguageSet = localStorage['locale'];
-        this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da_DK');
-
+        runInAction(() => {
+            // Reads values from localstorage to determine previously set preffered language by user ->
+            // If no preffered language was set by user -> default to da-DK locale
+            this._previousLanguageSet = localStorage['locale'];
+            this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da-DK');
+            this.loaded = true;
+        })
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
-        runInAction(() => {
-            this.loaded = true;
-        })
         return this.loaded;
     }
 
@@ -49,11 +48,6 @@ export class LanguageStore {
         }
         return LanguageStore._Instance;
     }
-    // public changeLanguage(lang: string): void {
-    //     if (lang !== this._currentLanguage) {
-    //         this.setCurrentLanguage(lang);
-    //     }
-    // }
 
     private setCurrentLanguage(language: string): void {
         this._currentLanguage = language;
@@ -63,12 +57,18 @@ export class LanguageStore {
 
     public toggleLanguage(): void {
         let lang: string = "";
-        if (this._currentLanguage === "da_DK") {
-            lang = "en_US";
+        if (this._currentLanguage === "da-DK") {
+            lang = "en-US";
         } else {
-            lang = "da_DK"
+            lang = "da-DK"
         }
         this.setCurrentLanguage(lang);
+    }
+
+    public setLanguage(language: string): void {
+        runInAction(() => {
+            this.setCurrentLanguage(language);
+        })
     }
 
     public get isLoaded(): boolean {
@@ -79,15 +79,29 @@ export class LanguageStore {
         return this.locales.get(this._currentLanguage);
     }
 
-    public getCurrentLanguageCode(): "da_DK" | "en_US" | "" {
-        if (this.locales.get(this._currentLanguage) instanceof DKLocale) {
-            // Dansk
-            return "da_DK";
+    public getCurrentLanguageCode(): "da-DK" | "en-US" {
+        if (this._currentLanguage === "da-DK") {
+            return "da-DK"
+        } else {
+            return "en-US"
         }
-        if (this.locales.get(this._currentLanguage) instanceof ENLocale) {
-            // English
-            return "en_US";
+    }
+
+    public getCurrency(): string {
+        let curr: string = "";
+        switch (this._currentLanguage) {
+            case "da-DK": curr = "DKK"; break;
+            case "en-US": curr = "USD"; break;
+            default: curr = "DKK";
         }
-        return "";
+        return curr;
+    }
+
+    public getLanguages(): string[] {
+        let languages: string[] = [];
+        this.locales.forEach((value: ILocale, key: string) => {
+            languages.push(key);
+        })
+        return languages;
     }
 }

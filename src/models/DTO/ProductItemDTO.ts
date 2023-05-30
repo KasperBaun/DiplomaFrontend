@@ -1,6 +1,6 @@
 import { conditionType, qualityType } from "../Enums";
 
-export default class ProductItemDTO {
+export class ProductItemDTO {
     id: number;
     productId: number;
     condition: conditionType;

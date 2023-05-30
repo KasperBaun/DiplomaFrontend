@@ -8,29 +8,29 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Constants } from '@utils/Constants';
+import { ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
 import { useContext, useState } from 'react';
 import LockOutlined from '@mui/icons-material/LockOutlined';
-import UserRegistrationDTO from '@models/DTO/UserRegistrationDTO';
-import UserFeedback from './UserFeedback';
-import { WebAPIResponse } from '@services/IAPIService';
+import { UserRegistrationDTO } from '@models/DTO/UserRegistrationDTO';
+import { UserFeedback } from './UserFeedback';
+import { useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
+import { WebAPIResponse } from '@models/types/WebApiResponse';
+import { observer } from 'mobx-react-lite';
 
-export interface ISignUpProps {
+type SignUpProps = {
     onAuthNavClicked: (key: number) => void;
 }
 
-const theme = createTheme();
-
-const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpProps) {
+export const SignUpPage: React.FC<SignUpProps> = observer((props: SignUpProps) => {
 
     const { languageStore, authStore } = useContext<IMobXContext>(MobXContext);
     const [showFeedback, setShowFeedback] = useState<boolean>(false);
     const [message, setMessage] = useState<string>("");
     const [variant, setVariant] = useState<'error' | 'warning' | 'success'>('success');
     const [navigateBack, setNavigateBack] = useState<boolean>(false);
+    const { theme } = useBackofficeMode();
 
     const handleClose = () => {
         setShowFeedback(!showFeedback)
@@ -89,11 +89,11 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                         alignItems: 'center',
                     }}
                 >
-                    <Avatar sx={{ m: 1, bgcolor: Constants.primaryColor }}>
-                        <LockOutlined style={{ backgroundColor: Constants.primaryColor }} />
+                    <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+                        <LockOutlined style={{ backgroundColor: theme.palette.primary.main }} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        {languageStore.currentLanguage.signUpText}
+                        {languageStore.currentLanguage.signUp}
                     </Typography>
                     <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
@@ -144,15 +144,15 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
                             type="submit"
                             fullWidth
                             variant="contained"
-                            style={{ backgroundColor: Constants.primaryColor }}
+                            style={{ backgroundColor: theme.palette.primary.main }}
                             sx={{ mt: 3, mb: 2 }}
                         >
-                            {languageStore.currentLanguage.signUpText}
+                            {languageStore.currentLanguage.signUp}
                         </Button>
                         <Grid container justifyContent="flex-end">
                             <Grid item>
                                 <Link onClick={() => props.onAuthNavClicked(0)} variant="body2">
-                                    {languageStore.currentLanguage.alreadyHaveAccountText}
+                                    {languageStore.currentLanguage.alreadyHaveAccount}
                                 </Link>
                             </Grid>
                         </Grid>
@@ -162,6 +162,4 @@ const SignUpPage: React.FC<ISignUpProps> = function SignUpPage(props: ISignUpPro
             </Container>
         </ThemeProvider>
     );
-}
-
-export default SignUpPage;
+});

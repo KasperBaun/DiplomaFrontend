@@ -1,13 +1,15 @@
 export interface ILocale {
-  id: string;
-  aboutUs: string;
-  aboutUsText: string;
 
-  // Standard text
+  getQuality(qualityType: number): string;
+  getCondition(conditionType: number): string;
+  getMaterialType(materialType: number): string;
+
   create: string;
   cancel: string;
   update: string;
+  delete: string;
   product: string;
+  products: string;
   reset: string;
   search: string;
   showAll: string;
@@ -18,16 +20,162 @@ export interface ILocale {
   description: string;
   settings: string;
   notifications: string;
-
-  // Button text
-  buttonCancelText: string;
-  buttonDeleteText: string;
+  noProductsAvailable: string;
+  createProduct: string;
+  editProduct: string;
+  deleteProduct: string;
+  productImages: string;
+  manufacturer: string;
+  selectMaterial: string;
+  name: string;
+  modelNumber: string;
+  callUs: string;
+  writeOnFacebook: string;
+  mapsLocation: string;
+  city: string;
+  instagram: string;
+  facebook: string;
+  sendAnEmail: string;
+  language: string;
+  condition: string;
+  quality: string;
+  addToBasket: string;
+  design: string;
+  material: string;
+  modelSpecifications: string;
+  productInfoHeadline: string;
+  selectSubcategory: string;
+  filterBySubcategory: String;
+  selectCategory: string;
+  filterByCategory: string;
+  signIn: string;
+  signUp: string;
+  forgotPassword: string;
+  alreadyHaveAccount: string;
+  dontHaveAccount: string;
+  rememberMe: string;
+  firstName: string;
+  lastName: string;
+  emailAdress: string;
+  password: string;
+  createSuccess: string;
+  createFailed: string;
+  updateSuccess: string;
+  updateFailed: string;
+  deleteSuccess: string;
+  deleteFailed: string;
   confirmDeleteText: string;
+  weight: string;
+  dimension: string;
+  year: string;
+  select: string;
+  revenue: string;
+  danishCurrency: string;
+  kroner: string;
+  more: string;
+  than: string;
+  less: string;
+  month: string;
+  last: string;
+  storage: string;
+  value: string;
+  inventory: string;
+  currency: string;
+  expenses: string;
+  result: string;
+  results: string;
+  inventoryValue: string;
+  yearToDate: string;
+  YTD: string;
+  theme: string;
+  light: string;
+  dark: string;
+  and: string;
+  kpi: string;
+  aov: string;
+  conversionRate: string;
+  inventoryTurnover: string;
+  days: string;
+  average: string;
+  total: string;
+  avg: string;
+  inventoryTurnoverExplanation: string;
+  aovExplanation: string;
+  conversionRateExplanation: string;
+  bestSellingProducts: string;
+  worstSellingProducts: string;
+  inventoryValueExplanation: string;
+  startSniper: string;
+  show: string;
+  newSniperResults: string;
+  sniperStarted: string;
+  clearAll: string;
+  noNotifications: string;
+  selectLanguage: string;
+  updateSubcategory: string;
+  chooseCategory: string;
+  showing: string;
+  back: string;
+  country: string;
+  state: string;
+  shippingAddress: string;
+  paymentDetails: string;
+  reviewOrder: string;
+  thankYouForYourOrder: string;
+  firstNameShouldOnlyBeCharacters: string;
+  lastNameShouldOnlyBeCharacters: string;
+  addressCannotBeEmpty: string;
+  cityCannotBeEmpty: string;
+  emailNotCorrect: string;
+  phoneNotCorrect: string;
+  postcodeErrorMessage: string;
+  countryErrorMessage: string;
+  next: string;
+  placeOrder: string;
+  noItemsInBasket: string;
+  shipping: string;
+  orderSummary: string;
+  method: string;
+  thankYou: string;
+  yourOrder: string;
+  hasBeenPlaced: string;
+  confirmationEmailHasBeenSentTo: string;
+  billingDetails: string;
+  shippingMethod: string;
+  orderList: string;
+  shippingAndHandling: string;
+  vat25: string;
+  estimatedDeliveryTime: string;
+  selectDelivery: string;
+  delivery: string;
+  selectPaymentMethod: string;
+  status: string;
 
-  getQuality(qualityType: number): string;
-  getCondition(conditionType: number): string;
+  // Months
+  january: string;
+  february: string;
+  march: string;
+  april: string;
+  may: string;
+  june: string;
+  july: string;
+  august: string;
+  september: string;
+  october: string;
+  november: string;
+  december: string;
+  jan: string;
+  feb: string;
+  mar: string;
+  apr: string;
+  jun: string;
+  jul: string;
+  aug: string;
+  sep: string;
+  oct: string;
+  nov: string;
+  dec: string;
 
-  getMaterialType(materialType: number): string;
 
   // Category Admin
   createCategoryDialogTitle: string;
@@ -38,7 +186,6 @@ export interface ILocale {
   createCategorySubmit: string;
   createCategorySuccessMessage: string;
   createCategoryFailedMessage: string;
-
   updateCategoryDialogTitle: string;
   updateCategoryFormTitle: string;
   updateCategoryFormOrder: string;
@@ -49,11 +196,10 @@ export interface ILocale {
   updateCategorySubmit: string;
   updateCategorySuccessMessage: string;
   updateCategoryFailedMessage: string;
-
   deleteCategorySuccessMessage: string;
   deleteCategoryFailedMessage: string;
-
   ProductCommaSeperatedText: string;
+
   // BasketPage: 
   yourBasket: string;
   yourTotal: string;
@@ -67,11 +213,44 @@ export interface ILocale {
   discountCodeOptional: string;
   addButton: string;
 
+  // AboutUS page
+  company_description1: string;
+  company_description2: string;
+  opening_days: string;
+  monday_text: string;
+  tuesday_text: string;
+  wednesday_text: string;
+  thursday_text: string;
+  friday_text: string;
+  saturday_text: string;
+  public_holiday_text: string;
+  sunday_text: string;
+  closed_text: string;
+  per_agreement_text: string;
+  contact_information: string;
+  phone_text: string;
+  email_text: string;
+  address_text: string;
+  post_code: string;
+  cvr_nr_text: string;
+  faq_text: string;
+  q1_text: string;
+  q1_answer: string;
+  q2_text: string;
+  q2_answer: string;
+  q3_text: string;
+  q3_answer: string;
+
+  // Frontpage:
+  seeProductBtn: string;
+  chosenCategories: string;
+
+  //Pop-up : cart
+  shopButton: string;
 
   // BACKOFFICE
 
   // Subcategory
-  createSubCategoryCategoryTitle: string;
   createSubCategoryDialogTitle: string;
   createSubCategoryTitle: string;
   createSubCategoryOrder: string;
@@ -87,24 +266,6 @@ export interface ILocale {
   noSubCategoriesToShow: string;
   createSubCategoryUpdateSuccessMessage: string;
   createSubCategoryUpdateFailedMessage: string;
-
-  // Product
-  productPage_productName: string;
-  productPage_productModelNumber: string;
-  productPage_productMaterial: string;
-  productPage_productDesign: string;
-  productPage_productCondition: string;
-  productPage_productQuality: string;
-  productPage_productDimension: string;
-  productPage_weight: string;
-  productPage_productCustomText: string;
-  productPage_createProduct: string;
-  productPage_modelSpecifications: string;
-  productPage_productInfoHeadline: string;
-  selectSubcategory: string;
-  filterBySubcategory: String;
-  selectCategory: string;
-  filterByCategory: string;
 
 
   // Admin Header 
@@ -143,7 +304,7 @@ export interface ILocale {
   CatalogTabText: string;
 
   // Payments
-  GoToSales: string;
+  goToSales: string;
   SalesSummaryTitle: string;
   SalesSummaryTotalSales: string;
   SalesSummaryTotalAmount: string;
@@ -162,7 +323,18 @@ export interface ILocale {
   CheckoutFormCountryLabel: string;
   CheckoutFormCountryCodeLabel: string;
   CheckoutFormPhoneLabel: string;
+  CheckoutFormDeliveryLabel: string;
+  CheckoutFormDeliveryOptionCollectLabel: string;
+  CheckoutFormDeliveryOptionSendLabel: string;
   CheckoutFormSubmitButton: string;
+
+  CheckoutPaymentWidgetPayButtonText: string;
+  CheckoutPaymentWidgetPayFormMPLabel: string;
+  CheckoutPaymentWidgetPayFormCardLabel: string;
+  CheckoutPaymentWidgetPayFormMMYYLabel: string;
+  CheckoutPaymentWidgetPayFormCardHolderLabel: string;
+  CheckoutPaymentWidgetPayFormSecureLabel: string;
+  cardNumber: string;
 
   // Analysis
   AnalysisTitle: string;
@@ -175,7 +347,7 @@ export interface ILocale {
   AnalysisGold: string;
 
   // Orders
-  GoToOrders: string;
+  goToOrders: string;
   OrderDetailsProductName: string;
   OrderDetailsManufacturer: string;
   OrderDetailsCustomerId: string;
@@ -185,17 +357,9 @@ export interface ILocale {
   OrderDetailsCompletionStatus: string;
   OrderDetailsListTitle: string;
 
-  // <TableCell align="left">Product Name</TableCell>
-  // <TableCell align="left">Manufacturer</TableCell>
-  // <TableCell align="left">Customer (Id)</TableCell>
-  // <TableCell align="left">Payment Status</TableCell>
-  // <TableCell align="left">Delivery Status</TableCell>
-  // <TableCell align="left">Discount used</TableCell>
-  // <TableCell align="left">Completed</TableCell>
-
   // Footer tabs
   BlogTabText: string;
-  PricingTabText: string;
+  OldPageText: string;
   AboutUsTabText: string;
   FAQTabText: string;
   ContactTabText: string;
@@ -220,17 +384,5 @@ export interface ILocale {
   InventoryTitle: string;
   InventoryWidgetTitle: string;
 
-  // Loginpage
-  signInText: string;
-  signUpText: string;
-  forgotPasswordText: string;
-  alreadyHaveAccountText: string;
-  dontHaveAccountText: string;
-  rememberMeText: string;
 
-  // Signup page
-  firstName: string;
-  lastName: string;
-  emailAdress: string;
-  password: string;
 }

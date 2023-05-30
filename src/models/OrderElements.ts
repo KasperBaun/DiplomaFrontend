@@ -1,9 +1,9 @@
-import ProductItem from "./ProductItem";
+import { ProductItem } from "./ProductItem";
 
-export default class OrderElements {
-    id: number;
-    orderId: number;
+export class OrderElements {
+    id ?: number;
+    orderId ?: number;
     productItemId: number;
-    productItem: ProductItem;
+    productItem ?: ProductItem;
   }
   

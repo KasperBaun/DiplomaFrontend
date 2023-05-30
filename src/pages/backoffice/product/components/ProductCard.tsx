@@ -1,16 +1,17 @@
 import MobXContext, { IMobXContext } from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
-import ProductItem from "@models/ProductItem";
+import { ProductItem } from "@models/ProductItem";
 import { useContext } from "react";
 import { Card, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
 import { FiberManualRecord } from "@mui/icons-material";
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
-export interface IProductCardProps {
+type ProductCardProps = {
     productItem: ProductItem;
     onProductItemClicked: (productItem: ProductItem) => void;
 }
 
-const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(props: IProductCardProps) {
+export const ProductCard: React.FC<ProductCardProps> = observer((props: ProductCardProps) => {
 
     const { languageStore } = useContext<IMobXContext>(MobXContext);
 
@@ -19,7 +20,7 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
     };
 
     const name: string = props.productItem.product.name ? props.productItem.product.name : '';
-    const price: string = props.productItem.currentPrice ? props.productItem.currentPrice.toString() : '0';
+    const price: number = props.productItem.currentPrice ? props.productItem.currentPrice : 0;
     const modelNumber: string = props.productItem.product.modelNumber ? props.productItem.product.modelNumber : '';
     const material: string = props.productItem.product.material ? languageStore.currentLanguage.getMaterialType(props.productItem.product.material) : '';
     const design: string = props.productItem.product.design ? props.productItem.product.design : '';
@@ -49,22 +50,22 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
                     {/* <b>{languageStore.currentLanguage.productPage_productName}</b>: {name} */}<b>{name}</b>
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productModelNumber}</b>: {modelNumber}
+                    <b>{languageStore.currentLanguage.modelNumber}</b>: {modelNumber}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productMaterial}</b>: {material}
+                    <b>{languageStore.currentLanguage.material}</b>: {material}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productDesign}</b>: {design}
+                    <b>{languageStore.currentLanguage.design}</b>: {design}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.productPage_productQuality}</b>: {quality}
+                    <b>{languageStore.currentLanguage.quality}</b>: {quality}
                 </Typography>
                 {/* <Typography variant="body1" color="text.primary">
                     <b>{languageStore.currentLanguage.productPage_productDimension}</b>: {dimension}
                 </Typography> */}
                 <Typography variant="body1" color="text.primary">
-                    <b>{languageStore.currentLanguage.price}</b>: {price}
+                    <b>{languageStore.currentLanguage.price}</b>: {ExtentionMethods.formatPrice(price, languageStore.getCurrentLanguageCode(), languageStore.getCurrency())}
                 </Typography>
                 {description.length > 0 &&
                     <Typography variant="body1" color="text.primary">
@@ -77,5 +78,3 @@ const ProductCard: React.FC<IProductCardProps> = observer(function ProductCard(p
         </Card>
     )
 });
-
-export default ProductCard;

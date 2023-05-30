@@ -1,6 +1,6 @@
 import { Container, Typography } from "@mui/material";
 
-const Unauthorized: React.FC = () => {
+export const Unauthorized: React.FC = () => {
     return (
         <Container style={{ display: 'flex', justifyContent: 'center', height: '100%', width: '100%', marginTop: '30px', flexDirection: 'column' }}>
             <Typography variant="h1" component="h2" gutterBottom style={{ display: 'flex', justifyContent: 'center' }}> You shall not pass! </Typography>
@@ -13,5 +13,3 @@ const Unauthorized: React.FC = () => {
         </Container>
     )
 }
-
-export default Unauthorized;

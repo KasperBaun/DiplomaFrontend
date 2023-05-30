@@ -8,10 +8,9 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Copyright from './Copyright';
-import { Constants } from '@utils/Constants';
-import GroendlundLogo from '@components/GroenlundLogo';
+import GroendlundLogo from '@components/svgs/GroenlundLogo';
 import FormControl from '@mui/material/FormControl/FormControl';
 import InputLabel from '@mui/material/InputLabel/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput/OutlinedInput';
@@ -20,11 +19,14 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import { Visibility, VisibilityOff, LockOutlined } from '@mui/icons-material';
 import { useContext, useState } from 'react';
 import { Avatar, Backdrop } from '@mui/material';
-import Loading from '@components/loading/Loading';
+import LoadingLion from '@components/loading/LoadingLion';
 import MobXContext, { IMobXContext } from '@stores/MobXContext';
-import UserLoginDTO from '@models/DTO/UserLoginDTO';
+import { UserLoginDTO } from '@models/DTO/UserLoginDTO';
+import { NavLink } from 'react-router-dom';
+import { useBackofficeMode } from 'styling/mui-theme/backoffice/BackofficeTheme';
+import { observer } from 'mobx-react-lite';
 
-export interface ILoginPageProps {
+type LoginPageProps = {
     onLoginClicked: (data: UserLoginDTO) => void;
     onAuthNavClicked: (key: number) => void;
     onForgotPasswordClicked: () => void;
@@ -33,11 +35,10 @@ export interface ILoginPageProps {
     backgroundImageUrl: string;
 }
 
-const theme = createTheme();
-
-const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPageProps) {
+export const LoginPage: React.FC<LoginPageProps> = observer((props: LoginPageProps) => {
 
     const { languageStore } = useContext<IMobXContext>(MobXContext);
+    const { theme } = useBackofficeMode();
     const [email, setEmail] = useState<string>("test@example.com");
     const [password, setPassword] = useState<string>("testPassword1");
     const [showPassword, setShowPassword] = React.useState(false);
@@ -69,8 +70,7 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                     sx={{
                         backgroundImage: `url(${props.backgroundImageUrl})`,
                         backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                        backgroundColor: theme.palette.background.default,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}
@@ -90,15 +90,15 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                             open={props.showBackdrop}
                             onClick={() => props.setShowBackdrop(false)}
                         >
-                            <Loading
+                            <LoadingLion
                                 size={100}
-                                color={Constants.primaryColor}
+                                color={theme.palette.primary.main}
                             />
                         </Backdrop>
 
-                        <GroendlundLogo width={400} color={Constants.primaryColor} />
-                        <Avatar sx={{ m: 1, bgcolor: Constants.primaryColor }}>
-                            <LockOutlined style={{ backgroundColor: Constants.primaryColor }} />
+                        <NavLink to={"/"}><GroendlundLogo width={400} color={theme.palette.primary.main} /></NavLink>
+                        <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+                            <LockOutlined style={{ backgroundColor: theme.palette.primary.main }} />
                         </Avatar>
                         <Box component="form" noValidate={false} onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
@@ -150,20 +150,20 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
                                 type="submit"
                                 fullWidth
                                 variant="contained"
-                                style={{ backgroundColor: Constants.primaryColor }}
+                                style={{ backgroundColor: theme.palette.primary.main }}
                                 sx={{ mt: 3, mb: 2 }}
                             >
-                                {languageStore.currentLanguage.signInText}
+                                {languageStore.currentLanguage.signIn}
                             </Button>
                             <Grid container>
                                 <Grid item xs>
                                     <Link onClick={() => props.onForgotPasswordClicked} variant="body2">
-                                        {languageStore.currentLanguage.forgotPasswordText}
+                                        {languageStore.currentLanguage.forgotPassword}
                                     </Link>
                                 </Grid>
                                 <Grid item>
                                     <Link onClick={() => props.onAuthNavClicked(1)} variant="body2">
-                                        {languageStore.currentLanguage.dontHaveAccountText}
+                                        {languageStore.currentLanguage.dontHaveAccount}
                                     </Link>
                                 </Grid>
                             </Grid>
@@ -174,6 +174,4 @@ const LoginPage: React.FC<ILoginPageProps> = function LoginPage(props: ILoginPag
             </Grid>
         </ThemeProvider>
     );
-}
-
-export default LoginPage;
+});

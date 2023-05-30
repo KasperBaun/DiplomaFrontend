@@ -1,27 +1,28 @@
 
-import Category from "@models/Category";
+import { Category } from "@models/Category";
 import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { Constants } from "@utils/Constants";
-import IAPIService from "./IAPIService";
-import SubCategory from "@models/SubCategory";
-import Payment from "@models/Payment";
-import Product from "@models/Product";
-import ProductItem from "@models/ProductItem";
-import CrudHelper from "./CrudHelper";
-import SniperModel from "@models/SniperModel";
-import ProductDTO from "@models/DTO/ProductDTO";
-import CategoryProductView from "@models/CategoryProductView";
-import SalesSummary from "@models/SalesSummary";
-import Order from "@models/Order";
-import OrderDetails from "@models/OrderDetails";
-import ProductItemDetails from "@models/ProductItemDetails";
-import Image from '@models/Image';
-import PriceHistory from "@models/PriceHistory";
-import ProductItemDTO from "@models/DTO/ProductItemDTO";
-import OrderElements from "@models/OrderElements";
-import OrderDTO from "@models/DTO/OrderDTO";
+import { IAPIService } from "./IAPIService";
+import { CrudHelper } from "./CrudHelper";
+import CategoryProductView from "@models/types/CategoryProductView";
+import { SubCategory } from "@models/SubCategory";
+import { Payment } from "@models/Payment";
+import { Product } from "@models/Product";
+import { ProductItem } from "@models/ProductItem";
+import { SniperModel } from "@models/SniperModel";
+import { ProductDTO } from "@models/DTO/ProductDTO";
+import { Order } from "@models/Order";
+import { ProductItemDetails } from "@models/ProductItemDetails";
+import { Image } from '@models/Image';
+import { PriceHistory } from "@models/PriceHistory";
+import { ProductItemDTO } from "@models/DTO/ProductItemDTO";
+import { OrderElements } from "@models/OrderElements";
+import { OrderDTO } from "@models/DTO/OrderDTO";
+import { Customer } from "@models/Customer";
+import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
+import { DiscountCode } from "@models/DiscountCode";
 
-class APIService implements IAPIService {
+export class APIService implements IAPIService {
 
     private prefix: string = `%c[APIService]`;
     private color: string = ComponentLoggingConfig.DarkBlue;
@@ -36,8 +37,15 @@ class APIService implements IAPIService {
             console.log(`${this.prefix} initialized!`, this.color);
         }
     }
+    async getDiscountCodes(): Promise<DiscountCode[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Payment/DiscountCodes`, "DiscountCodes");
+    }
 
     /* Backoffice */
+    async getBestSellingProducts(amount: number): Promise<Product[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/GetBestSellerProducts?amountOfBestSellers=${amount}`, "Products");
+    }
+
     async getProductItemDTOs(): Promise<ProductItemDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/ProductItem`, "ProductItems");
     }
@@ -124,11 +132,24 @@ class APIService implements IAPIService {
     async getOrders(): Promise<OrderDTO[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Order`, "Orders");
     }
-    async getOrderDetails(): Promise<OrderDetails[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/OrderDetails`, "OrderDetails");
-    }
-    async createOrder(order: Order): Promise<Order> {
-        return await this.crudHelper.create(`${this.apiBaseUrl}/Order`, "Order", order);
+    async createOrder(order: CreateOrderDTO): Promise<Order> {
+        const response = await fetch(`${this.apiBaseUrl}/Order`, {
+            method: 'POST',
+            body: JSON.stringify(order),
+            headers: {
+                'content-type': 'application/json',
+                'access-control-allow-origin': '*'
+            },
+            mode: 'cors'
+        });
+
+        if (response.ok) {
+            let confirmationModel: Order = await response.json();
+            return confirmationModel;
+        }
+        else {
+            return null;
+        }
     }
     async updateOrder(order: Order): Promise<Order> {
         return await this.crudHelper.update(`${this.apiBaseUrl}/Order/${order.id}`, "Order", order)
@@ -149,16 +170,22 @@ class APIService implements IAPIService {
     async createPayment(payment: Payment): Promise<Payment> {
         return await this.crudHelper.create(this.apiBaseUrl + "/Payment", "Payment", payment);
     }
-
-    /* Sales */
-    async getSalesSummary(): Promise<SalesSummary[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/SalesSummary`, "Sales");
+    async getPaymentById(id: number): Promise<Payment> {
+        return await this.crudHelper.readSingle(this.apiBaseUrl + "/Payment/" + id, "Payment");
     }
+
 
     /* Sniper */
     async getSniping(searchValue: string): Promise<SniperModel[]> {
         return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?arg=" + searchValue, "SniperModel")
     }
-}
 
-export default APIService;
+    /* Customers */
+    async getCustomers(): Promise<Customer[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Customer`, "Customers");
+    }
+
+    async createCustomer(customer: Customer): Promise<Customer> {
+        return await this.crudHelper.create(`${this.apiBaseUrl}/Customer`, "Customer", customer);
+    }
+}

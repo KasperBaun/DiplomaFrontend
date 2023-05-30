@@ -1,7 +1,8 @@
-export default class Payment{
+export class Payment {
     id: number;
-    datePaid? : Date;
-    amount? : number;
-    approved? : number;
-    method? : number;
+    status: string;
+    method: string;
+    amount: number;
+    transactionId: string;
+    datePaid: string;
 }

@@ -1,6 +1,6 @@
 import { materialType } from "@models/Enums";
 
-export default class ProductDTO {
+export class ProductDTO {
     id: number;
     name: string;
     modelNumber: string;

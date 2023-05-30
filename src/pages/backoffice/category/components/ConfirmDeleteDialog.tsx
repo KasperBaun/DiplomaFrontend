@@ -3,14 +3,14 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
-export interface IConfirmDeleteDialogProps {
+type ConfirmDeleteDialogProps = {
     visible: boolean;
     objectName: string;
     onConfirmDeleteClicked: () => void;
     onCancelClicked: () => void;
 }
 
-const ConfirmDeleteDialog: React.FC<IConfirmDeleteDialogProps> = observer(function ConfirmDeleteDialog({visible, objectName, onConfirmDeleteClicked, onCancelClicked}: IConfirmDeleteDialogProps) {
+export const ConfirmDeleteDialog: React.FC<ConfirmDeleteDialogProps> = observer(({ visible, objectName, onConfirmDeleteClicked, onCancelClicked }: ConfirmDeleteDialogProps) => {
 
     const { languageStore } = useContext(MobXContext);
     if (!visible) {
@@ -27,18 +27,16 @@ const ConfirmDeleteDialog: React.FC<IConfirmDeleteDialogProps> = observer(functi
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={onCancelClicked}>
-                        {languageStore.currentLanguage.buttonCancelText}
+                        {languageStore.currentLanguage.cancel}
                     </Button>
                     <Button
                         variant="contained"
                         type="submit"
                         onClick={onConfirmDeleteClicked}>
-                        {languageStore.currentLanguage.buttonDeleteText}
+                        {languageStore.currentLanguage.delete}
                     </Button>
                 </DialogActions>
             </Dialog>
         )
     }
 });
-
-export default ConfirmDeleteDialog;
