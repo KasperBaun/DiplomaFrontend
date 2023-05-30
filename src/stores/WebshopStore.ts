@@ -10,7 +10,6 @@ import { Image } from '@models/Image';
 import { ProductDTO } from '@models/DTO/ProductDTO';
 import { ProductItemDTO } from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
-import { Customer } from '@models/Customer';
 
 
 export class WebshopStore {

@@ -3,10 +3,9 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite"
 import { useContext } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import { ProductItemWeb } from "@models/ProductItemWeb";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
-
 
 type BasketPageItemProps = {
     item: ProductItemWeb
@@ -34,27 +33,21 @@ export const BasketPageItem: React.FC<BasketPageItemProps> = observer(function B
                 />
             </Grid>
             <Grid item xs={7} sm={7} md={7} lg={7} xl={7}>
-                <div >
-                    <div style={{ fontWeight: "800" }}>{props.item.product.name}</div>
-                    <div className="productDe_modelNumber">{languageStore.currentLanguage.modelNumber} : {props.item.product.modelNumber}</div>
-                    <div className="B_Text">{languageStore.currentLanguage.OrderDetailsManufacturer} : {props.item.product.manufacturer}</div>
-                    <div className="B_Text">{languageStore.currentLanguage.getCondition(props.item.condition)} </div>
-                    <div className="B_Text">{languageStore.currentLanguage.getQuality(props.item.quality)} </div>
-                    <div className="B_Text">{props.item.customText}</div>
-                </div>
+                <Typography variant="h5" fontWeight={'600'}>{props.item.product.name}</Typography>
+                <Typography variant="body1">{languageStore.currentLanguage.modelNumber} : {props.item.product.modelNumber}</Typography>
+                <Typography variant="body1">{languageStore.currentLanguage.OrderDetailsManufacturer} : {props.item.product.manufacturer}</Typography>
+                <Typography variant="body1">{languageStore.currentLanguage.getCondition(props.item.condition)} </Typography>
+                <Typography variant="body1">{languageStore.currentLanguage.getQuality(props.item.quality)} </Typography>
+                <Typography variant="body1">{props.item.customText}</Typography>
             </Grid>
 
             <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
-                <div>
-                    <div style={{ fontWeight: '700' }}>{ExtentionMethods.formatPrice(props.item.currentPrice, languageStore.getCurrentLanguageCode(), "DKK")} </div>
+                <Typography variant="body1" fontWeight={'700'}>{ExtentionMethods.formatPrice(props.item.currentPrice, languageStore.getCurrentLanguageCode(), "DKK")} </Typography>
 
-                    <IconButton onClick={() => removeFromCart(props.item)}>
-                        <DeleteIcon style={{ color: 'Grey', fontSize: 30 }} />
-                    </IconButton>
-                </div>
-
+                <IconButton onClick={() => removeFromCart(props.item)}>
+                    <DeleteIcon style={{ color: 'Grey', fontSize: 30 }} />
+                </IconButton>
             </Grid>
         </Grid>
     )
-
 });

@@ -3,15 +3,6 @@ import { CrudHelper } from "./CrudHelper";
 import { Constants } from "@utils/Constants";
 import { Payment } from "@models/Payment";
 
-interface CreatePaymentIntentRequest {
-  amount: number;
-  currency: string;
-  paymentMethodId: string;
-  customerId: number;
-  paymentMethodOptions?: string;
-  setupFutureUsage?: "on_session" | "off_session";
-}
-
 class StripeService {
   private stripe: Stripe;
   private apiBaseUrl: string;

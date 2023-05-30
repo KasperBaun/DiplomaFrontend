@@ -73,7 +73,6 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
 
     return (
         <Grid container spacing={1} display='flex' flexDirection='row' justifyContent={'space-between'}>
-
             <Grid item
                 xs={breakpoints.xs}
                 sm={breakpoints.sm}
@@ -152,7 +151,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
             </Grid>
 
             <Grid item xs={12} >
-                <Typography variant="body2">
+                <Typography variant="body2" sx={{ paddingLeft: '10px' }}>
                     {languageStore.currentLanguage.showing} {displayItemsCount}/{totalItemsCount} {languageStore.currentLanguage.products.toLocaleLowerCase()}
                 </Typography>
             </Grid>
@@ -161,7 +160,7 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
 });
 
 const gridItemStyling: React.CSSProperties = {
-    minWidth: '15vw',
+    minWidth: '8vw',
     width: '100%'
 }
 

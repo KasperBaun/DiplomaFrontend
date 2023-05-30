@@ -7,7 +7,7 @@ import {
 import MobXContext from '@stores/MobXContext';
 
 export const PaymentCreditCardForm = () => {
-  const { basketStore, languageStore: ls } = useContext(MobXContext);
+  const { languageStore } = useContext(MobXContext);
   const [cardNumber, setCardNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cardHolderName, setCardHolderName] = useState('');
@@ -50,7 +50,7 @@ export const PaymentCreditCardForm = () => {
             placeholder="Enter Card Holder Name"
             value={cardHolderName}
             onChange={handleCardHolderNameChange}
-            label={ls.currentLanguage.CheckoutPaymentWidgetPayFormCardHolderLabel}
+            label={languageStore.currentLanguage.CheckoutPaymentWidgetPayFormCardHolderLabel}
             className={cardHolderNameValid ? 'is-valid' : 'is-invalid'}
           />
         </FormControl>
@@ -59,7 +59,7 @@ export const PaymentCreditCardForm = () => {
             type="text"
             placeholder="1234 5678 9123 4567"
             value={cardNumber}
-            label={ls.currentLanguage.cardNumber}
+            label={languageStore.currentLanguage.cardNumber}
             onChange={handleCardNumberChange}
             className={cardNumberValid ? 'is-valid' : 'is-invalid'}
           />
@@ -70,7 +70,7 @@ export const PaymentCreditCardForm = () => {
             placeholder="MM/YY"
             value={expiration}
             onChange={handleExpirationChange}
-            label={ls.currentLanguage.CheckoutPaymentWidgetPayFormMMYYLabel}
+            label={languageStore.currentLanguage.CheckoutPaymentWidgetPayFormMMYYLabel}
             className={expirationValid ? 'is-valid' : 'is-invalid'}
           />
         </FormControl>
@@ -80,7 +80,7 @@ export const PaymentCreditCardForm = () => {
             placeholder="Enter CVC"
             value={cvc}
             onChange={handleCvcChange}
-            label={ls.currentLanguage.CheckoutPaymentWidgetPayFormSecureLabel}
+            label={languageStore.currentLanguage.CheckoutPaymentWidgetPayFormSecureLabel}
             className={cvcValid ? 'is-valid' : 'is-invalid'}
           />
         </FormControl>
