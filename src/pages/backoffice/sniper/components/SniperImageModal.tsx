@@ -1,31 +1,31 @@
-import { Dispatch, SetStateAction } from "react";
-import { Modal, Container, Carousel } from "react-bootstrap";
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close'
 
 type Props = {
     imageUrl: string
-    handleClose: Dispatch<SetStateAction<void>>;
+    handleClose: () => void;
     show: boolean;
 }
 
 export const SniperImageModal = ({ imageUrl, handleClose, show }: Props) => {
 
+
     return (
-        <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-            </Modal.Header>
-            <Modal.Body>
-                <Container style={{ textAlign: "center" }}>
-                    <Carousel>
-                        <Carousel.Item>
-                            <img style={{ objectFit: "fill" }}
-                                className="d-block w-100"
-                                src={imageUrl}
-                                alt="First slide"
-                            />
-                        </Carousel.Item>
-                    </Carousel>
-                </Container>
-            </Modal.Body>
-        </Modal>
+        <Dialog open={show} onClose={handleClose} fullWidth maxWidth="md">
+            <IconButton edge="end" color="inherit" onClick={handleClose} aria-label="close">
+                <CloseIcon />
+            </IconButton>
+            <DialogContent>
+                {/* <Carousel>
+                    <img
+                        style={{ objectFit: "fill", height: '100%', width: '100%' }}
+                        src={imageUrl}
+                        alt="First slide"
+                    />
+                </Carousel> */}
+            </DialogContent>
+        </Dialog>
     )
 }

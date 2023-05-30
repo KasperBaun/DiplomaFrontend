@@ -7,7 +7,6 @@ import { useContext } from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
-import { Constants } from '@utils/Constants';
 
 export const CartDrawer: React.FC = observer(() => {
 

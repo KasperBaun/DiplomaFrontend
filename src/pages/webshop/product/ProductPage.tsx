@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite"
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { useParams } from "react-router-dom";
 import ProductDescription from "./ProductDescription";
@@ -14,30 +14,59 @@ export const ProductPage: React.FC = observer(() => {
   function handleClick() { basketStore.addToBasket(product); }
   const imageUrlArray: string[] = product.images.map(i => i.url);
   const [largeImageUrl, setLargeImageUrl] = useState(imageUrlArray[0]);
-  const smallImageSize = 120;
+
+  const smallImageStyling: React.CSSProperties = {
+    borderRadius: '5px',
+    transition: "box-shadow 0.2s ease-in-out",
+  }
+  const selectedSmallImageStyling: React.CSSProperties = {
+    ...smallImageStyling,
+    boxShadow: "0px 12px 24px rgba(0, 0, 0, 0.6)"
+  }
 
 
   if (product) {
+
+    // var matchingProductItems = webshopStore.ProductItems.filter(p =>
+    //   p.product.subcategories.some(subcategory =>
+    //     product.product.subcategories.map(sub => sub.id).includes(subcategory.id)
+    //   )
+    // ).slice(0, 2);
+
     return (
-      <Grid container margin={'auto'} spacing={2} sx={{ maxWidth: '1000px' }}>
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} display={'flex'} flexDirection={'row'}>
-          <Grid item xs={3} >
-            <ImageList cols={1} rowHeight={smallImageSize} sx={{ paddingX: '10px' }}>
+      <Grid container >
+        {/* Large and small images */}
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} >
+          <Grid item display={'flex'} justifyContent={'center'}>
+            <img
+              style={{ display: 'flex', maxWidth: '100%', maxHeight: '100%', borderRadius: '5px' }}
+              src={`${largeImageUrl}?w=300&h=250&fit=crop&auto=format`}
+              alt={largeImageUrl}
+            />
+          </Grid>
+          <Grid item display={'flex'} justifyContent={'center'}>
+            <ImageList cols={6} sx={{ marginTop: 0, display: 'flex', padding: 3, borderRadius: '5px' }} >
               {imageUrlArray.map((item) => (
                 <ImageListItem
                   key={"imageListItem" + item}
-                  sx={{
-                    transition: "box-shadow 0.2s ease-in-out",
-                    '&:hover': {
-                      cursor: "pointer",
-                      transform: "scale(1.1)"
+                  sx={
+                    largeImageUrl === item ? {
+                      ...selectedSmallImageStyling, '&:hover': {
+                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+                        cursor: "pointer"
+                      }
+                    } : {
+                      ...smallImageStyling, '&:hover': {
+                        boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
+                        cursor: "pointer"
+                      }
                     }
-                  }}>
+                  }>
                   <img
-                    src={`${item}?w="${smallImageSize}"&h="${smallImageSize}"fit=crop&auto=format`}
-                    srcSet={`${item}?w="${smallImageSize}"&h="${smallImageSize}"&fit=crop&auto=format`}
+                    src={`${item}?w=auto&h=auto&fit=crop&auto=format`}
+                    srcSet={`${item}?w=auto&h=auto&fit=crop&auto=format`}
                     alt={item}
-                    style={{ width: smallImageSize, height: smallImageSize, alignSelf: "center", border: "none" }}
+                    style={{ maxWidth: '100%', alignSelf: "center", border: "none", borderRadius: '5px' }}
                     loading="lazy"
 
                     onClick={() => setLargeImageUrl(item)}
@@ -46,31 +75,37 @@ export const ProductPage: React.FC = observer(() => {
               ))}
             </ImageList>
           </Grid>
-          <Grid item xs={9} >
-            <img
-              style={{ display: 'flex', maxWidth: '100%', maxHeight: '100%' }}
-              src={`${largeImageUrl}?w=300&h=250&fit=crop&auto=format`}
-              alt={largeImageUrl}
-            />
-
-          </Grid>
         </Grid>
 
-
-        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} display={'flex'} flexDirection={'column'} justifyContent={'space-between'}>
-          <Grid item xs={12} display={'flex'} justifyContent={'start'} >
+        <Grid item xs={12} sm={12} md={6} lg={6} xl={6} padding={1} >
+          <Grid item  >
             <ProductDescription key={"productDes" + product.id} product={product} />
           </Grid>
-
-          <Grid item xs={12} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}  >
-            <Grid item xs={12} display={'flex'} alignItems={'end'}>
-            </Grid>
-            <Grid item xs={12} display={'flex'} alignItems={'start'}>
-              <Button variant="contained" onClick={() => handleClick()} sx={{ width: '12rem', maxHeight: '4rem', minHeight: '3rem', marginY: '10px' }}>{languageStore.currentLanguage.addToBasket}</Button>
-            </Grid>
+          <Grid item sx={{ paddingTop: 6, display: 'flex', justifyContent: 'center' }} >
+            <Button variant="contained" onClick={() => handleClick()} sx={{ width: '12rem', maxHeight: '4rem', minHeight: '3rem', marginY: '10px' }}>{languageStore.currentLanguage.addToBasket}</Button>
           </Grid>
+
+
+
+          {/* 
+          <Grid item sx={{ height: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}  >
+            <Grid item>
+              <Typography variant="h3" fontWeight={'bold'} color={Constants.primaryColor}>Similar items</Typography>
+            </Grid>
+            <Grid item display={'flex'} justifyContent={'center'} flexDirection={'row'}>
+              {matchingProductItems.map(p => {
+                return (
+                  <Grid item display={'flex'} justifyContent={'center'}>
+                    <ProductCardWeb data={p} key={"p" + p.id} />
+                  </Grid>
+                )
+              })}
+            </Grid>
+
+          </Grid> */}
         </Grid>
-      </Grid>
+
+      </Grid >
     );
   }
 

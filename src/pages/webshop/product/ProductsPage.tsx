@@ -38,7 +38,7 @@ export const ProductsPage: React.FC = observer(function ProductListPage() {
     } else {
         return (
             <Grid container >
-                <Grid item xs={12} display={'flex'} justifyContent={'center'} style={{ margin: '10px' }} >
+                <Grid item xs={12}  >
                     <ProductSearch
                         searchText={searchStore.searchText}
                         setSearchText={searchStore.setSearchText}
