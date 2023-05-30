@@ -382,6 +382,7 @@ export class DKLocale implements ILocale {
   CheckoutPaymentWidgetPayFormCardLabel = "Vælg betalingskort";
   CheckoutPaymentWidgetPayFormMMYYLabel = "MM/YY";
   CheckoutPaymentWidgetPayFormCardHolderLabel = "Kortholderens navn";
+  cardNumber = "Kortnummer";
   CheckoutPaymentWidgetPayFormSecureLabel = "CVC";
 
   // Orders

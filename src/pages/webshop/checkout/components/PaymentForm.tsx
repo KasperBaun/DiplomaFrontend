@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
-import { FormControl, FormControlLabel, FormLabel, Grid, Radio, RadioGroup, TextField, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { FormControl, FormControlLabel, Grid, Radio, RadioGroup, TextField, Typography } from "@mui/material";
+import { MouseEventHandler, useContext, useState } from "react";
 import { PaymentOptions } from "./PaymentOptions";
 import { PaymentCreditCardForm } from "./PaymentCreditCardForm";
 import { Container } from '@mui/material';
@@ -16,11 +16,14 @@ export const PaymentForm = observer(() => {
     if (selectedPaymentOption !== -1) {
       switch (selectedPaymentOption) {
         case 0:
-          return <PhoneInput onInputChanged={handleMobilePayClicked} />
+          basketStore.OrderDTO.payment.method = "MobilePay";
+          return <PhoneInput />
         case 1:
+          basketStore.OrderDTO.payment.method = "Credit card";
           return <PaymentCreditCardForm />
         case 2:
-          return <PhoneInput onInputChanged={handlePayPalClicked} />
+          basketStore.OrderDTO.payment.method = "PayPal";
+          return <PhoneInput />
         default:
           console.log("Unknown payment option");
           break;
@@ -28,8 +31,12 @@ export const PaymentForm = observer(() => {
     }
   }
 
-  const handleMobilePayClicked = (event: React.ChangeEvent<HTMLInputElement>) => { basketStore.OrderDTO.payment.method = "MobilePay"; };
-  const handlePayPalClicked = (event: React.ChangeEvent<HTMLInputElement>) => { basketStore.OrderDTO.payment.method = "PayPal"; };
+  const handleDeliveryClicked = () => {
+    basketStore.OrderDTO.deliveryMethod = "Levering";
+  }
+  const handlePickupClicked = () => {
+    basketStore.OrderDTO.deliveryMethod = "Afhentning";
+  }
 
   return (
     <Grid container sx={{
@@ -50,8 +57,8 @@ export const PaymentForm = observer(() => {
                 basketStore.OrderDTO.deliveryMethod = event.target.value;
               }}
             >
-              <FormControlLabel value="Afhentning" control={<Radio />} label="Afhentning" />
-              <FormControlLabel value="Levering" control={<Radio />} label="Levering (+50 DKK)" />
+              <FormControlLabel value="Afhentning" control={<Radio />} label="Afhentning" onClick={handlePickupClicked} />
+              <FormControlLabel value="Levering" control={<Radio />} label="Levering (+50 DKK)" onClick={handleDeliveryClicked} />
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -67,7 +74,7 @@ export const PaymentForm = observer(() => {
   )
 });
 
-const PhoneInput: React.FC<{ onInputChanged: (evt: any) => void }> = observer((props: { onInputChanged: (evt: any) => void }) => {
+const PhoneInput: React.FC = observer(() => {
   const { languageStore } = useContext(MobXContext);
 
   return (
@@ -75,7 +82,6 @@ const PhoneInput: React.FC<{ onInputChanged: (evt: any) => void }> = observer((p
       <TextField
         variant="outlined"
         label={languageStore.currentLanguage.phone_text}
-        onChange={props.onInputChanged}
         defaultValue="+45 12345678"
         sx={{
           width: '100%'

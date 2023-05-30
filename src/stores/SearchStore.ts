@@ -112,7 +112,7 @@ export class SearchStore {
         });
     }
 
-    public setSearchText(value: string): void {
+    public setSearchText = (value: string): void => {
         runInAction(() => {
             this._searchText = value;
         });

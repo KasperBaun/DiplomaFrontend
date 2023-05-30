@@ -334,6 +334,7 @@ export interface ILocale {
   CheckoutPaymentWidgetPayFormMMYYLabel: string;
   CheckoutPaymentWidgetPayFormCardHolderLabel: string;
   CheckoutPaymentWidgetPayFormSecureLabel: string;
+  cardNumber: string;
 
   // Analysis
   AnalysisTitle: string;
