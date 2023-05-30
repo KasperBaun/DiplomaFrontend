@@ -1,4 +1,3 @@
-import './styling/scss/Main.scss';
 import { Routing } from './routes/Routes';
 import MobXContext from './stores/MobXContext';
 import { RootStore } from './stores/RootStore';

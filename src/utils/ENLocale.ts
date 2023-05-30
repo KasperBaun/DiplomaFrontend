@@ -370,6 +370,7 @@ export class ENLocale implements ILocale {
   CheckoutFormDeliveryOptionCollectLabel = "Collect at store";
   CheckoutFormDeliveryOptionSendLabel = "Ship to Billing Address";
   CheckoutFormSubmitButton = "Continue to payment";
+  cardNumber = "Card number";
 
   CheckoutPaymentWidgetPayButtonText = "Pay";
   CheckoutPaymentWidgetPayFormMPLabel = "Phone number";

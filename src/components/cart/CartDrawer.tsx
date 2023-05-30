@@ -1,14 +1,15 @@
-import { IconButton, Button, Drawer, Badge, List, ListItem, Typography, Divider } from "@mui/material";
 import * as React from 'react';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { useNavigate } from "react-router-dom"
 import MobXContext from "@stores/MobXContext";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { IconButton, Button, Drawer, Badge, List, ListItem, Typography, Divider, Tooltip } from "@mui/material";
+import { useNavigate } from "react-router-dom"
 import { useContext } from "react";
 import { CartItem } from "./CartItem";
 import { observer } from "mobx-react-lite";
 import { ExtentionMethods } from "@utils/ExtentionMethods";
+import { Constants } from '@utils/Constants';
 
-export const CartDrawer: React.FC = observer(function CartDrawer() {
+export const CartDrawer: React.FC = observer(() => {
 
   const { basketStore, languageStore } = useContext(MobXContext);
   const [drawerState, setDrawerState] = React.useState(false);
@@ -28,16 +29,24 @@ export const CartDrawer: React.FC = observer(function CartDrawer() {
   return (
     <>
       {/* Button to toggle the basket and see how many items is in it */}
-      <IconButton onClick={toggleDrawer}>
-        <Badge
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'right'
-          }}
-          badgeContent={basketStore.Basket.length} color="warning">
-          <ShoppingCartIcon style={{ color: 'white', fontSize: 40 }} />
-        </Badge>
-      </IconButton>
+      <Tooltip title={languageStore.currentLanguage.BasketTabText}>
+        <IconButton onClick={toggleDrawer}
+        >
+          <Badge
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right'
+            }}
+            badgeContent={basketStore.Basket.length} color="warning">
+            <ShoppingCartIcon style={{ color: 'white', fontSize: 24 }} onMouseEnter={(e) => {
+              e.currentTarget.style.color = '#dc8665';
+            }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'white';
+              }} />
+          </Badge>
+        </IconButton>
+      </Tooltip>
 
       {/* The basketmodal itself */}
       <Drawer
@@ -48,7 +57,12 @@ export const CartDrawer: React.FC = observer(function CartDrawer() {
 
       >
         <List sx={{ width: '300px', height: '85vh', overflow: 'auto' }} >
-          {basketStore.Basket.map((item, index) => (
+          {basketStore.Basket.length === 0 &&
+            <ListItem key={'noItems'} sx={{ padding: "1rem", display: 'flex', justifyContent: 'center' }}>
+              <Typography variant="h4" fontWeight={'bold'}>{languageStore.currentLanguage.noItemsInBasket}</Typography>
+            </ListItem>
+          }
+          {basketStore.Basket.length > 0 && basketStore.Basket.map((item, index) => (
             <ListItem key={'basketItem' + index} sx={{ padding: "1rem" }}>
               <CartItem key={item.id} item={item} />
               <Divider color={"primary"} />
@@ -70,9 +84,5 @@ export const CartDrawer: React.FC = observer(function CartDrawer() {
       </Drawer>
     </>
   )
-
-
-
-
 });
 
