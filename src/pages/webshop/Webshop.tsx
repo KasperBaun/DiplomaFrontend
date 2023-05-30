@@ -39,7 +39,7 @@ export const Webshop: React.FC = observer(() => {
                     <Box style={{ minHeight: '10vh', width: '100%' }}>
                         <Header />
                     </Box>
-                    <Container style={{ display: 'flex', minHeight: '80vh', width: '100%' }}>
+                    <Container style={{ display: 'flex', minHeight: '80vh', width: '100%', maxWidth: '1400px' }}>
                         <Outlet />
                     </Container>
                     <Box style={{ minHeight: '10vh', minWidth: '100%' }}>

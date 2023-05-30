@@ -29,10 +29,9 @@ export const ContactPage: React.FC = observer(() => {
                 display={'flex'}
             >
 
-
-                <Grid item xs={12} md={6} lg={6} xl={6} display={'flex'} justifyContent={'center'} alignItems={'end'}  >
+                <Grid item xs={12} md={6} lg={6} xl={6} display={'flex'} justifyContent={'center'} >
                     <Card sx={{ minHeight: '30vh', minWidth: '80%', boxShadow: 'none' }}>
-                        <CardHeader title={<Typography variant="h4" color={primaryColor} align="center">{languageStore.currentLanguage.opening_days}</Typography>} />
+                        <CardHeader title={<Typography variant="h4" color={primaryColor}>{languageStore.currentLanguage.opening_days}</Typography>} />
                         <CardContent>
                             <Typography variant="body1"><b>{languageStore.currentLanguage.monday_text} :</b> {languageStore.currentLanguage.closed_text}</Typography>
                             <Typography variant="body1"><b>{languageStore.currentLanguage.tuesday_text} :</b> 12.00-17.00</Typography>
@@ -46,9 +45,9 @@ export const ContactPage: React.FC = observer(() => {
                     </Card>
                 </Grid>
 
-                <Grid item xs={12} md={6} lg={6} xl={6} display={'flex'} justifyContent={'center'} alignItems={'end'}  >
+                <Grid item xs={12} md={6} lg={6} xl={6} display={'flex'} justifyContent={'center'} >
                     <Card sx={{ minHeight: '30vh', minWidth: '80%', boxShadow: 'none' }}>
-                        <CardHeader title={<Typography variant="h4" color={primaryColor} align="center">{languageStore.currentLanguage.contact_information}</Typography>} />
+                        <CardHeader title={<Typography variant="h4" color={primaryColor} >{languageStore.currentLanguage.contact_information}</Typography>} />
                         <CardContent>
                             <Typography variant="body1"><CallRounded /> <b>{languageStore.currentLanguage.phone_text}:</b> {Constants.companyTelephoneNumber}</Typography>
                             <Typography variant="body1"><EmailRounded /> <b>{languageStore.currentLanguage.email_text}:</b> {Constants.companyEmail}</Typography>
@@ -74,13 +73,13 @@ export const ContactPage: React.FC = observer(() => {
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
-                    <CustomButton url={Constants.mapsLink} text={languageStore.currentLanguage.mapsLocation} icon={<LocationCityRounded />} />
+                    <CustomButton url={Constants.mapsLink} text={languageStore.currentLanguage.mapsLocation} icon={<LocationCityRounded sx={{ paddingRight: '5px' }} />} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
-                    <CustomButton url={Constants.facebookUrl} text={languageStore.currentLanguage.writeOnFacebook} icon={<Facebook />} />
+                    <CustomButton url={Constants.facebookUrl} text={languageStore.currentLanguage.writeOnFacebook} icon={<Facebook sx={{ paddingRight: '5px' }} />} />
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4} xl={4} display="flex" justifyContent={'center'}>
-                    <CustomButton url={"mailto:" + Constants.companyEmail} text={languageStore.currentLanguage.email_text} icon={<Mail />} />
+                    <CustomButton url={"mailto:" + Constants.companyEmail} text={languageStore.currentLanguage.email_text} icon={<Mail sx={{ paddingRight: '5px' }} />} />
                 </Grid>
             </Grid>
         </Container>
@@ -108,7 +107,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({ url, text, icon }: CustomBu
                     cursor: "pointer",
                 }
             }}>
-            <Typography variant="body1" color="white" sx={{ padding: '5px' }}>{icon} {text}</Typography>
+            <Typography variant="body1" color="white" sx={{ padding: '5px', display: 'flex' }}>{icon} {text}</Typography>
         </Button>
     )
 };

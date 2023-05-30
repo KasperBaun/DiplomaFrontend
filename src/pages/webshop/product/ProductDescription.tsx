@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Grid, Typography } from '@mui/material';
 import MobXContext from '@stores/MobXContext';
 import { ProductItemWeb } from '@models/ProductItemWeb';
+import { ExtentionMethods } from '@utils/ExtentionMethods';
 
 type ProductDescriptionProps = {
     product: ProductItemWeb;
@@ -24,7 +25,7 @@ const ProductDescription: React.FC<ProductDescriptionProps> = observer(function 
     return (
         <Grid item xs={12}>
             <Typography variant="h2" sx={{ marginBottom: '10px' }}>{props.product.product.name}</Typography>
-            <Typography variant="h2" color="primary"> {props.product.currentPrice} DKK</Typography><br />
+            <Typography variant="h2" color="primary"> {ExtentionMethods.formatPrice(props.product.currentPrice, languageStore.getCurrentLanguageCode(), 'DKK')}</Typography><br />
 
             <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.modelNumber} :</b> {props.product.product.modelNumber}</Typography>
             <Typography variant={typographyVariant}><b>{languageStore.currentLanguage.manufacturer} :</b> {props.product.product.manufacturer}</Typography>
