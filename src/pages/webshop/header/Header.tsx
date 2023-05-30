@@ -1,21 +1,24 @@
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import './header.scss';
-import LionLogo from '../../../components/svgs/LionLogo';
-import { Dk, Us } from "react-flags-select";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Box, alpha, styled } from '@mui/material';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import { useContext } from "react";
 import MobXContext from "@stores/MobXContext";
 import { observer } from 'mobx-react-lite';
 import { CartDrawer } from '@components/cart/CartDrawer';
-import React from 'react';
-import { Grid, IconButton, Tooltip } from '@mui/material';
+import LionLogo from '../../../components/svgs/LionLogo';
+import { LanguageSwitch } from '@components/language/LanguageSwitch';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import { Constants } from '@utils/Constants';
+import React, { useState } from 'react';
+import { Hidden, List, ListItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import { NavPath } from '@models/Navpath';
+import { MobileNav } from './components/MobileNav';
+import { DesktopNav } from './components/DesktopNav';
 
-interface INavModel {
-  path: string;
-  text: string;
-}
+
 
 export const Header: React.FC = observer(function Header() {
 
@@ -23,7 +26,7 @@ export const Header: React.FC = observer(function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navPaths: INavModel[] = [];
+  const navPaths: NavPath[] = [];
   navPaths.push({ path: "/", text: `${languageStore.currentLanguage.HomeTabText}` });
   navPaths.push({ path: "/products", text: `${languageStore.currentLanguage.ProductTabText}` });
   navPaths.push({ path: "/categories", text: `${languageStore.currentLanguage.CategoriesTabText}` });
@@ -31,95 +34,140 @@ export const Header: React.FC = observer(function Header() {
   navPaths.push({ path: "/faq", text: `${languageStore.currentLanguage.FAQTabText}` });
   navPaths.push({ path: "/aboutus", text: `${languageStore.currentLanguage.AboutUsTabText}` })
 
-  const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
-    let result = 'header-links';
-    if (isActive) {
-      result += ' active';
-
-    } else {
-      result += ' inactive';
-    }
-    //if(isPending) result += ' pending';
-    return result;
-    //return  isActive ? "active" : isPending ? "inactive" : "header-links";
-  }
-
   function searchOnProducts(searchText: string) {
     searchStore.filterBySearchText(searchText);
     navigate(`/products`);
   }
-  const handleLanguageIconClicked = () => {
-    languageStore.toggleLanguage();
-  }
+
+  const Search = styled('div')(({ theme }) => ({
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
+    },
+  }));
+
+  const SearchIconWrapper = styled('div')(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    '& .MuiInputBase-input': {
+      padding: theme.spacing(1, 1, 1, 0),
+      // vertical padding + font size from searchIcon
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create('width'),
+      width: '100%',
+      [theme.breakpoints.up('sm')]: {
+        width: '12ch',
+        '&:focus': {
+          width: '20ch',
+        },
+      },
+    },
+  }));
 
   return (
-    <Navbar expand="lg" className='header' key="navbar">
-      <Grid container display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
+    <Box sx={{ flexGrow: 1 }} >
+      <AppBar position="static">
+        <Toolbar sx={{ display: 'flex', justifyContent: 'center', alignContent: 'center' }}>
+          <Hidden mdUp>
+            <MobileNav navPaths={navPaths} />
+          </Hidden>
+          <Hidden mdDown>
+            <DesktopNav navPaths={navPaths} />
+          </Hidden>
 
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'>
-          <Navbar.Brand>
-            <NavLink to={"/"} className="nav-brand">
-              <LionLogo width={70} />
-            </NavLink>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScrolls" />
-          <Tooltip title={languageStore.currentLanguage.language + " " + languageStore.getCurrentLanguageCode()}>
-            <IconButton onClick={handleLanguageIconClicked}>
-              {languageStore.getCurrentLanguageCode() === 'da-DK' ? <Dk /> : <Us />}
-            </IconButton>
-          </Tooltip>
-
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex'>
-          <Navbar.Collapse id="navbarScroll">
-
-            <Nav
-              className="me-auto my-2 my-lg-0 header-container d-flex justify-content-center"
-              style={{ maxHeight: '100px', width: '100%' }}
-              navbarScroll
-            >
-              {navPaths.map((navItem, index) => {
-                return (
-                  <NavLink
-                    to={navItem.path}
-                    key={navItem.text + index}
-                    className={({ isActive, isPending }) => {
-                      return navLinkStyling(isActive, isPending)
-                    }}
-                  >
-                    {navItem.text}
-                  </NavLink>
-                )
-
-              })}
-
-
-            </Nav>
-          </Navbar.Collapse>
-
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} xl={3} padding={1} display='flex' justifyContent={'end'}>
-          {location.pathname !== "/productList" &&
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                style={{ width: "20rem" }}
+          {location.pathname !== "/products" &&
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder={languageStore.currentLanguage.SearchBarText}
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  event.preventDefault();
+                  searchStore.setSearchText(event.target.value);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") {
                     e.preventDefault();
-                    searchOnProducts(e.currentTarget.value);
+                    searchOnProducts(searchStore.searchText);
                   }
                 }}
-                placeholder={languageStore.currentLanguage.SearchBarText}
-                className="me-2"
-                aria-label="Search"
               />
-            </Form>
+            </Search>
           }
+          <LanguageSwitch />
           <CartDrawer />
-        </Grid>
-      </Grid>
-    </Navbar >
+        </Toolbar>
+      </AppBar>
+    </Box >
   );
 });
+
+// <AppBar position="static" color="primary" elevation={0}>
+//   <Grid container display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
+//     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+//       <Toolbar>
+//         <NavLink to={"/"} >
+//           <LionLogo width={70} />
+//         </NavLink>
+//         <LanguageSwitch />
+//       </Toolbar>
+//     </Grid>
+
+//     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+//       <Box sx={{ flexGrow: 1 }}>
+//         <Toolbar>
+//           {navPaths.map((navItem, index) => (
+//             <NavLink
+//               to={navItem.path}
+//               key={navItem.text + index}
+//               className={({ isActive, isPending }) => navLinkStyling(isActive, isPending)}
+//               style={HeaderLinkStyling}
+//             >
+//               {navItem.text}
+//             </NavLink>
+//           ))}
+//         </Toolbar>
+//       </Box>
+//     </Grid>
+
+//     <Grid item xs={12} sm={6} md={4} lg={3} xl={3}>
+//       {location.pathname !== "/products" &&
+//         <TextField
+//           type="search"
+//           onKeyDown={(e) => {
+//             if (e.key === "Enter") {
+//               e.preventDefault();
+//               searchOnProducts(e.currentTarget.textContent);
+//             }
+//           }}
+//           placeholder={languageStore.currentLanguage.SearchBarText}
+//           className="me-2"
+//           aria-label="Search"
+//         />
+//       }
+//       <Drawer anchor='right'>
+//         <CartDrawer />
+//       </Drawer>
+//     </Grid>
+//   </Grid>
+// </AppBar>
+

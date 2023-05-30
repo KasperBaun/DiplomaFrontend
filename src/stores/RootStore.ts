@@ -53,7 +53,7 @@ export class RootStore implements IMobXContext {
         // Instantiate stores here
         this.languageStore = LanguageStore.GetInstance(this);
         this.webshopStore = WebshopStore.GetInstance(this, this.apiService);
-        this.basketStore = BasketStore.GetInstance(this);
+        this.basketStore = BasketStore.GetInstance(this, this.apiService);
         this.authStore = AuthStore.GetInstance(this, this.authService);
         this.backofficeStore = BackofficeStore.GetInstance(this, this.apiService);
         this.sniperStore = SniperStore.GetInstance(this, this.apiService);
@@ -64,16 +64,18 @@ export class RootStore implements IMobXContext {
     }
 
     private loadLanguageStore(): Promise<boolean> {
-        runInAction(() => { this.languageStoreLoading = true; });
-        return new Promise((resolve) => {
-            this.languageStore.init().then((loaded) => {
-                runInAction(() => {
-                    this.languageStoreLoaded = loaded;
-                    this.languageStoreLoading = false;
-                    resolve(loaded);
+        if (!this.languageStoreLoading && !this.languageStoreLoaded) {
+            runInAction(() => { this.languageStoreLoading = true; });
+            return new Promise((resolve) => {
+                this.languageStore.init().then((loaded) => {
+                    runInAction(() => {
+                        this.languageStoreLoaded = loaded;
+                        this.languageStoreLoading = false;
+                        resolve(loaded);
+                    })
                 })
             })
-        })
+        }
     }
 
     public get isBackofficeLoaded(): boolean {

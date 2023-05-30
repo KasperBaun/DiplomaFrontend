@@ -1,64 +1,113 @@
-import { Col, Container, Row, Table } from "react-bootstrap";
-import { ShippingProgress } from "./components/ShippingProgress";
-import { useParams } from "react-router-dom";
 import MobXContext from "@stores/MobXContext";
-import { useContext, useEffect, useState } from "react";
-import LoadingLion from "@components/loading/LoadingLion";
-import { Payment } from "@models/Payment";
-import { Order } from "@models/Order";
-import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
 import { observer } from "mobx-react-lite";
+import { useContext } from "react";
+import { ShippingProgress } from "./components/ShippingProgress";
+import { Box, Container, Grid, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 
 
 export const ConfirmationPage = observer(() => {
-    let { id } = useParams();
-    const [payment, setPayment] = useState<Payment>();
-    const [order, setOrder] = useState<Order>();
 
-    const [preOrder, setPreOrder] = useState<CreateOrderDTO>();
-    const [confirmation, setConfirmation] = useState<Order>();
-    const { languageStore, webshopStore, basketStore } = useContext(MobXContext);
-    let productIds: number[] = [];
+    const { basketStore, languageStore } = useContext(MobXContext);
 
-    let totalPrice = 0;
-
-    basketStore.Basket.map((item) => {
-        totalPrice += item.currentPrice;
-        productIds.push(item.id);
-    });
-
-    useEffect(() => {
-        setPreOrder({
-            paymentForm: webshopStore.PaymentForm,
-            customer: webshopStore.Customer,
-            productItemsId: productIds,
-            totalPrice: totalPrice,
-        });
-    }, [basketStore.Basket, webshopStore.PaymentForm, webshopStore.Customer, totalPrice]);
-
-    const createOrder = async () => {
-        return await webshopStore.createOrder(preOrder);
-    };
-
-    useEffect(() => {
-        createOrder().then((response) => {
-            setConfirmation(response);
-        });
-
-        // get order from database
-    }, [id, createOrder]);
-
-    if (webshopStore.Customer && webshopStore.PaymentForm && order !== undefined) {
+    if (basketStore.OrderCreated) {
+        // basketStore.resetBasket();
         return (
+            <Container>
+                <Grid container style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>
+                    <Grid item xs={12}><Typography variant="h1">{languageStore.currentLanguage.thankYou}!</Typography></Grid>
+                    <Grid item xs={12}><Typography variant="h3">{languageStore.currentLanguage.yourOrder} {"# " + basketStore.Order.id} {languageStore.currentLanguage.hasBeenPlaced}</Typography></Grid>
+                    <Grid item xs={12}><Typography variant="h5">{languageStore.currentLanguage.confirmationEmailHasBeenSentTo} {basketStore.Order.customer.email}</Typography></Grid>
+                </Grid>
+
+                <Box display="flex" justifyContent="center" m={1} p={1}>
+                    <ShippingProgress
+                        customer={basketStore.Order.customer}
+                        payment={basketStore.Order.payment}
+                        deliveryMethod={basketStore.Order.deliveryMethod ? basketStore.Order.deliveryMethod : "Afhent"}
+                        deliveryStatus={basketStore.Order.deliveryStatus ? basketStore.Order.deliveryStatus : "Afventer"}
+                    />
+                </Box>
+
+                <Grid container justifyContent="center" sx={{ marginTop: '1rem' }} spacing={2}>
+                    <Grid item xs={8}>
+                        <Paper sx={{ padding: '1rem' }}>
+                            <Typography variant="h3">{languageStore.currentLanguage.orderList}</Typography>
+                            <TableContainer >
+                                <Table>
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>{languageStore.currentLanguage.product}</TableCell>
+                                            <TableCell>{languageStore.currentLanguage.modelNumber}</TableCell>
+                                            <TableCell>{languageStore.currentLanguage.price}</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {basketStore.Basket.map((item) => {
+                                            return (
+                                                <TableRow key={item.id}>
+                                                    <TableCell>{item.product.name}</TableCell>
+                                                    <TableCell>{item.product.modelNumber}</TableCell>
+                                                    <TableCell>{item.currentPrice}</TableCell>
+                                                </TableRow>
+                                            );
+                                        })}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </Paper>
+                    </Grid>
+
+                    <Grid item xs={4}>
+                        <Paper sx={{ padding: '1rem' }}>
+                            <Typography variant="h3">{languageStore.currentLanguage.orderSummary}</Typography>
+                            <hr />
+                            <Grid container>
+                                <Grid item xs={10}><Typography>{languageStore.currentLanguage.subTotal}</Typography></Grid>
+                                <Grid item xs={2}>{basketStore.getTotal(basketStore.Order.productItems)}</Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={10}><Typography>{languageStore.currentLanguage.shippingAndHandling}</Typography></Grid>
+                                <Grid item xs={2}>{ExtentionMethods.formatPrice(50, languageStore.getCurrentLanguageCode(), 'DKK')} </Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={10}><Typography>{languageStore.currentLanguage.vat25}</Typography></Grid>
+                                <Grid item xs={2}>{basketStore.getVAT(basketStore.Order.productItems)}</Grid>
+                            </Grid>
+                            <Grid container>
+                                <Grid item xs={10}><Typography fontWeight={'bold'}>{languageStore.currentLanguage.total}</Typography></Grid>
+                                <Grid item xs={2}><Typography fontWeight={'bold'}>{basketStore.getTotal(basketStore.Order.productItems, 50)}</Typography></Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Container>
+        );
+    }
+    else {
+        return (
+            <Container >
+                <Grid container display='flex' justifyContent='center'>
+                    <Typography variant="h4">
+                        No order is being processed at the moment
+                    </Typography>
+                </Grid>
+            </Container>
+        )
+    }
+});
+
+/*
+return (
             <Container>
                 <Row style={{ textAlign: "center", margin: "1rem", padding: "1rem" }}>
                     <Col md={12}><h1>Thank you!</h1></Col>
-                    <Col md={12}><h3>Your order {"O" + order.paymentId + "" + order.paymentId + "" + order.orderElements.length} has been placed!</h3></Col>
-                    <Col md={12}><h5>Confirmation email has been sent to {webshopStore.Customer.email}</h5></Col>
+                    <Col md={12}><h3>Your order {"O" + basketStore.Order.paymentId + "" + basketStore.Order.paymentId + "" + basketStore.Order.productItems ? basketStore.Order.productItems.length : 0} has been placed!</h3></Col>
+                    <Col md={12}><h5>Confirmation email has been sent to {basketStore.Customer.email}</h5></Col>
                 </Row>
                 <Row style={{ justifyContent: "center" }}>
-                    <ShippingProgress customer={webshopStore.Customer} deliveryMethod={webshopStore.PaymentForm.deliveryMethod ? "Afhent" : ""} />
+                    <ShippingProgress customer={basketStore.Customer} deliveryMethod={basketStore.Order.deliveryStatus ? "Afhent" : ""} />
                 </Row>
                 <Row style={{ justifyContent: "center" }}>
                     <Col md={8}>
@@ -98,7 +147,7 @@ export const ConfirmationPage = observer(() => {
                                 <p>Subtotal </p>
                             </Col>
                             <Col md={2}>
-                                {totalPrice} DKK
+                                {basketStore.getTotal()} DKK
                             </Col>
                         </Row>
                         <Row>
@@ -114,7 +163,7 @@ export const ConfirmationPage = observer(() => {
                                 <p>Heraf Moms 25%</p>
                             </Col>
                             <Col md={2}>
-                                {(totalPrice * 0.25)} DKK
+                                {basketStore.getVAT()}
                             </Col>
                         </Row>
                         <Row>
@@ -129,8 +178,4 @@ export const ConfirmationPage = observer(() => {
                 </Row>
             </Container>
         );
-    }
-    else {
-        <LoadingLion />
-    }
-});
+        */

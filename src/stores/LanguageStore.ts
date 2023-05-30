@@ -79,8 +79,12 @@ export class LanguageStore {
         return this.locales.get(this._currentLanguage);
     }
 
-    public getCurrentLanguageCode(): string {
-        return this._currentLanguage;
+    public getCurrentLanguageCode(): "da-DK" | "en-US" {
+        if (this._currentLanguage === "da-DK") {
+            return "da-DK"
+        } else {
+            return "en-US"
+        }
     }
 
     public getCurrency(): string {

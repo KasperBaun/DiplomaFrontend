@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MobXContext from "@stores/MobXContext";
 import { useContext } from "react";
 import { observer } from "mobx-react-lite";
@@ -11,6 +11,47 @@ export const Footer: React.FC = observer(function Footer() {
 
   const { languageStore } = useContext(MobXContext);
   let year = new Date().getFullYear();
+  const [currentActivePath, setCurrentActivePath] = useState<string>("");
+
+  const CustomNavLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
+
+    const { url, value, target } = props;
+
+    return (
+      <NavLink
+        to={url}
+        style={({ isActive/*, isPending*/ }) => {
+          let result = HeaderLinkStyling;
+
+          if (isActive) {
+            result = ActiveHeaderLinkCSS;
+          }
+
+          result = {
+            ...result,
+          };
+
+          return result;
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = "#dc8665";
+        }}
+        onMouseLeave={(e) => {
+          if (!(currentActivePath === url)) {
+            e.currentTarget.style.color = 'white';
+          }
+        }}
+        onClick={() => {
+          setCurrentActivePath(url);
+        }}
+        target={target}
+        rel="norefferer"
+        color={Constants.primaryTextColor}
+      >
+        {value}
+      </NavLink>
+    )
+  }
 
   return (
 
@@ -70,6 +111,7 @@ const CustomLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
       sx={{
         color: Constants.primaryTextColor,
         textDecoration: 'none',
+        fontSize: '16px',
         '&:hover': {
           color: "#dc8665"
         },
@@ -80,37 +122,23 @@ const CustomLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
   )
 }
 
-const CustomNavLink: React.FC<CustomLinkProps> = (props: CustomLinkProps) => {
-
-  const { url, value, target } = props;
-
-  return (
-    <NavLink
-      to={url}
-      className={({ isActive, isPending }) => {
-        return navLinkStyling(isActive, isPending)
-      }}
-      target={target}
-      rel="norefferer"
-      color={Constants.primaryTextColor}
-    >
-      {value}
-    </NavLink>
-  )
-}
-
-const navLinkStyling = (isActive: boolean, isPending: boolean): string => {
-  let result = 'header-links';
-  if (isActive) {
-    result += ' active';
-
-  } else {
-    result += ' inactive';
-  }
-  return result;
-}
-
 const iconStyling: React.CSSProperties = {
   height: '28px',
   width: '28px'
 };
+
+const HeaderLinkStyling: React.CSSProperties = {
+  color: 'white',
+  paddingRight: '10px',
+  display: 'inline-block',
+  lineHeight: '1.8',
+  fontWeight: '300',
+  fontSize: '16px',
+  textDecoration: 'none',
+  cursor: 'pointer',
+}
+
+const ActiveHeaderLinkCSS: React.CSSProperties = {
+  ...HeaderLinkStyling,
+  color: '#dc8665',
+}

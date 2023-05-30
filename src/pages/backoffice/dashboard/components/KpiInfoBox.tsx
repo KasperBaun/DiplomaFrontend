@@ -32,11 +32,11 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
     let inventoryTurnoverRate = 0;
     let aov = 0;
     for (const order of ordersForYear) {
-        for (const orderElement of order.orderElements) {
-            aov += orderElement.productItem.currentPrice;
+        for (const productItem of order.productItems) {
+            aov += productItem.currentPrice;
             inventorySoldCount += 1;
-            const soldDate = orderElement.productItem.soldDate;
-            const createdDate = orderElement.productItem.createdDate;
+            const soldDate = productItem.soldDate;
+            const createdDate = productItem.createdDate;
             const daysBetween = (soldDate.getTime() - createdDate.getTime()) / (1000 * 3600 * 24);
             inventoryTurnoverRate += daysBetween;
         }

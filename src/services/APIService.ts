@@ -20,6 +20,7 @@ import { OrderElements } from "@models/OrderElements";
 import { OrderDTO } from "@models/DTO/OrderDTO";
 import { Customer } from "@models/Customer";
 import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
+import { DiscountCode } from "@models/DiscountCode";
 
 export class APIService implements IAPIService {
 
@@ -35,6 +36,9 @@ export class APIService implements IAPIService {
         if (Constants.loggingEnabled) {
             console.log(`${this.prefix} initialized!`, this.color);
         }
+    }
+    async getDiscountCodes(): Promise<DiscountCode[]> {
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Payment/DiscountCodes`, "DiscountCodes");
     }
 
     /* Backoffice */

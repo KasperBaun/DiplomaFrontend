@@ -145,6 +145,41 @@ export class ENLocale implements ILocale {
   updateSubcategory = "Update Subcategory";
   chooseCategory = "Choose category";
   showing = "Showing";
+  back = "back";
+  country = "Country";
+  state = "State";
+  shippingAddress = "Shipping address";
+  paymentDetails = "Payment details";
+  reviewOrder = "Review order";
+  thankYouForYourOrder = "Thank you for your order";
+  firstNameShouldOnlyBeCharacters = "First name should only be characters";
+  lastNameShouldOnlyBeCharacters = "Last name should only be characters";
+  addressCannotBeEmpty = "Address can not be empty";
+  cityCannotBeEmpty = "City can not be empty";
+  emailNotCorrect = "Email must be in the format example@example.com";
+  phoneNotCorrect = "Phone can only contain numbers";
+  postcodeErrorMessage = "Postcode can only contain numbers";
+  countryErrorMessage = "Country can only contain letters";
+  next = "Next";
+  placeOrder = "Place order";
+  noItemsInBasket = "No items in basket!";
+  shipping = "Shipping";
+  orderSummary = "Order summary";
+  method = "Method";
+  thankYou = "Thank you";
+  yourOrder = "Your order";
+  hasBeenPlaced = "has been placed";
+  confirmationEmailHasBeenSentTo = "Confirmation email has been sent to";
+  billingDetails = "Billing details";
+  shippingMethod = "Shipping Method";
+  orderList = "Order list";
+  shippingAndHandling = "Shipping and handling";
+  vat25 = "VAT (Value Added Tax) 25%";
+  estimatedDeliveryTime ="Expected delivery time is 4-5 days";
+  selectDelivery = "Select delivery method";
+  delivery = "Delivery";
+  selectPaymentMethod ="Select payment method";
+  status = "Status";
 
   // Months
   january = "January";
@@ -335,6 +370,7 @@ export class ENLocale implements ILocale {
   CheckoutFormDeliveryOptionCollectLabel = "Collect at store";
   CheckoutFormDeliveryOptionSendLabel = "Ship to Billing Address";
   CheckoutFormSubmitButton = "Continue to payment";
+  cardNumber = "Card number";
 
   CheckoutPaymentWidgetPayButtonText = "Pay";
   CheckoutPaymentWidgetPayFormMPLabel = "Phone number";
