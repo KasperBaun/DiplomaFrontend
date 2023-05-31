@@ -11,7 +11,6 @@ import { ProductDTO } from '@models/DTO/ProductDTO';
 import { ProductItemDTO } from '@models/DTO/ProductItemDTO';
 import { ProductItemWeb } from '@models/ProductItemWeb';
 
-
 export class WebshopStore {
     private static _Instance: WebshopStore;
     private rootStore: RootStore;

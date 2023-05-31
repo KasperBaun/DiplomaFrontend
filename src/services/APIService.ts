@@ -16,7 +16,6 @@ import { ProductItemDetails } from "@models/ProductItemDetails";
 import { Image } from '@models/Image';
 import { PriceHistory } from "@models/PriceHistory";
 import { ProductItemDTO } from "@models/DTO/ProductItemDTO";
-import { OrderElements } from "@models/OrderElements";
 import { OrderDTO } from "@models/DTO/OrderDTO";
 import { Customer } from "@models/Customer";
 import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
@@ -54,9 +53,6 @@ export class APIService implements IAPIService {
     }
     async getPriceHistories(): Promise<PriceHistory[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/PriceHistory`, "PriceHistories");
-    }
-    async getOrderElements(): Promise<OrderElements[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Backoffice/OrderElements`, "OrderElements");
     }
 
     /* Product Items */

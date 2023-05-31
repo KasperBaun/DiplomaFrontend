@@ -9,7 +9,6 @@ import { PriceHistory } from "@models/PriceHistory";
 import { ProductItemDTO } from "@models/DTO/ProductItemDTO";
 import { OrderDTO } from "@models/DTO/OrderDTO";
 import { Order } from "@models/Order";
-import { OrderElements } from "@models/OrderElements";
 import { CreateOrderDTO } from "@models/DTO/CreateOrderDTO";
 import { DiscountCode } from "@models/DiscountCode";
 
@@ -43,7 +42,6 @@ export interface IAPIService {
     getPriceHistories(): Promise<PriceHistory[]>;
 
     getOrders(): Promise<OrderDTO[]>;
-    getOrderElements(): Promise<OrderElements[]>;
     createOrder(order: CreateOrderDTO): Promise<Order>;
     updateOrder(order: Order): Promise<Order>;
     deleteOrder(id: number): Promise<void>;

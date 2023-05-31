@@ -63,19 +63,19 @@ export const ConfirmationPage = observer(() => {
                         <Paper sx={{ padding: '1rem' }}>
                             <Typography variant="h3">{languageStore.currentLanguage.orderSummary}</Typography>
                             <hr />
-                            <Grid container>
+                            <Grid container sx={{ paddingRight: '1rem' }}>
                                 <Grid item xs={10}><Typography>{languageStore.currentLanguage.subTotal}</Typography></Grid>
                                 <Grid item xs={2}>{basketStore.getTotal(basketStore.Order.productItems)}</Grid>
                             </Grid>
-                            <Grid container>
+                            <Grid container sx={{ paddingRight: '1rem' }}>
                                 <Grid item xs={10}><Typography>{languageStore.currentLanguage.shippingAndHandling}</Typography></Grid>
                                 <Grid item xs={2}>{ExtentionMethods.formatPrice(50, languageStore.getCurrentLanguageCode(), 'DKK')} </Grid>
                             </Grid>
-                            <Grid container>
+                            <Grid container sx={{ paddingRight: '1rem' }}>
                                 <Grid item xs={10}><Typography>{languageStore.currentLanguage.vat25}</Typography></Grid>
                                 <Grid item xs={2}>{basketStore.getVAT(basketStore.Order.productItems)}</Grid>
                             </Grid>
-                            <Grid container>
+                            <Grid container sx={{ paddingRight: '1rem' }}>
                                 <Grid item xs={10}><Typography fontWeight={'bold'}>{languageStore.currentLanguage.total}</Typography></Grid>
                                 <Grid item xs={2}><Typography fontWeight={'bold'}>{basketStore.getTotal(basketStore.Order.productItems, 50)}</Typography></Grid>
                             </Grid>

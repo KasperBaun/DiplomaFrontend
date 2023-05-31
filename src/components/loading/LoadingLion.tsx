@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Constants } from "../../utils/Constants"
 import { CircularProgress, Container } from "@mui/material";
 import LionLogo from "@components/svgs/LionLogo";
 
@@ -22,9 +21,9 @@ export const LoadingLion: React.FC<LoadingLionProps> = (props: LoadingLionProps)
             height: '100vh',
         }} >
             <LionLogo color={props.color} />
-            {props.loadingText &&
-                <h2 style={{ color: Constants.primaryColor }} >{props.loadingText}</h2>
-            }
+            {/* {props.loadingText &&
+                <h3 style={{ color: Constants.primaryColor }} >{props.loadingText}</h3>
+            } */}
             <CircularProgress
                 size={size}
                 sx={{

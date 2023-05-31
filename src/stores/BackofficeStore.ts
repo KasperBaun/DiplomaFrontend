@@ -15,7 +15,6 @@ import { ProductItemDTO } from '@models/DTO/ProductItemDTO';
 import { ProductItemDetails } from '@models/ProductItemDetails';
 import { Payment } from '@models/Payment';
 import { Order } from '@models/Order';
-import { OrderElements } from '@models/OrderElements';
 import { OrderDTO } from '@models/DTO/OrderDTO';
 import { ChartData } from '@models/types/ChartData';
 import { Notification } from '@models/types/Notification';
@@ -43,7 +42,6 @@ export class BackofficeStore {
     private _pricehistories: PriceHistory[] = [];
     private _payments: Payment[] = [];
     private _orders: Order[] = [];
-    private _orderElements: OrderElements[] = [];
     private months: string[] = [];
     private _bestSellingProducts: Product[] = [];
     private _discountCodes: DiscountCode[] = [];
@@ -130,14 +128,11 @@ export class BackofficeStore {
 
         const payments = await this.apiService.getPayments()
         const orderDTOs: OrderDTO[] = await this.apiService.getOrders();
-        let orderElements: OrderElements[] = await this.apiService.getOrderElements();
-        orderElements = this.mapOrderElementsToProductItems(orderElements, this.productItems);
         const orders = this.generateOrders(orderDTOs, this.productItems, payments, discountCodes);
 
 
         runInAction(() => {
             this._payments = payments;
-            this._orderElements = orderElements;
             this._orders = orders;
         })
         this.reset();
@@ -204,21 +199,21 @@ export class BackofficeStore {
         return orders;
     }
 
-    private mapOrderElementsToProductItems(orderElementsDTO: OrderElements[], productItems: ProductItem[]): OrderElements[] {
-        const orderElements: OrderElements[] = [];
-        for (let orderElementDTO of orderElementsDTO) {
-            const productItem = productItems.find(pi => pi.id === orderElementDTO.productItemId);
-            if (productItem) {
-                const orderElement: OrderElements = new OrderElements();
-                orderElement.id = orderElementDTO.id;
-                orderElement.orderId = orderElementDTO.orderId;
-                orderElement.productItemId = orderElementDTO.productItemId;
-                orderElement.productItem = productItem;
-                orderElements.push(orderElement);
-            }
-        }
-        return orderElements;
-    }
+    // private mapOrderElementsToProductItems(orderElementsDTO: OrderElements[], productItems: ProductItem[]): OrderElements[] {
+    //     const orderElements: OrderElements[] = [];
+    //     for (let orderElementDTO of orderElementsDTO) {
+    //         const productItem = productItems.find(pi => pi.id === orderElementDTO.productItemId);
+    //         if (productItem) {
+    //             const orderElement: OrderElements = new OrderElements();
+    //             orderElement.id = orderElementDTO.id;
+    //             orderElement.orderId = orderElementDTO.orderId;
+    //             orderElement.productItemId = orderElementDTO.productItemId;
+    //             orderElement.productItem = productItem;
+    //             orderElements.push(orderElement);
+    //         }
+    //     }
+    //     return orderElements;
+    // }
 
     public get Orders(): Order[] {
         return this._orders;
