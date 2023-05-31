@@ -55,7 +55,7 @@ export const ImageGallery: React.FC<ImageGalleryProps> = observer((props: ImageG
   return (
     <Grid container display={'flex'}>
       <Grid item lg={3}>
-        <div className="small-images">
+        <div >
           <img src={image1} key={"1productImgGalSelImg"} onClick={() => handleClick(1)} className={image1Clicked ? "small-images clicked" : "small-images"} alt="" />
           <img src={image2} key={"2productImgGalSelImg"} onClick={() => handleClick(2)} className={image2Clicked ? "small-images clicked" : "small-images"} alt="" />
           <img src={image3} key={"3productImgGalSelImg"} onClick={() => handleClick(3)} className={image3Clicked ? "small-images clicked" : "small-images"} alt="" />
@@ -63,8 +63,8 @@ export const ImageGallery: React.FC<ImageGalleryProps> = observer((props: ImageG
         </div>
       </Grid>
       <Grid item lg={9}>
-        <div className="big-image">
-          <img src={mainImage} key={"MainproductImgGalSelImg"} className="big-image" alt="" />
+        <div >
+          <img src={mainImage} key={"MainproductImgGalSelImg"} alt="" />
         </div>
       </Grid>
     </Grid>

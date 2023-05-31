@@ -30,7 +30,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ navPaths }: MobileNavProps
                 edge="start"
                 color="inherit"
                 aria-label="open drawer"
-                sx={{ }}
                 onClick={handleClick}
                 id="toggle-navigation"
                 aria-controls={open ? 'navigation-menu' : undefined}

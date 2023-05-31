@@ -74,7 +74,6 @@ export class BasketStore {
             this._basket.push(item);
         }
         else {
-            // TODO : Make a warning:
             alert('Item is already in the basket');
         }
         // Set local storage language setting
@@ -126,7 +125,6 @@ export class BasketStore {
     public updateOrder = (): void => {
         runInAction(() => {
             this._orderDTO.customer = this._customer;
-            console.log("Order updated successfully");
         })
     }
 
@@ -150,7 +148,6 @@ export class BasketStore {
     }
 
     public createOrder = async (): Promise<void> => {
-        console.log("OrderDTO state:", this._orderDTO);
         if (this._basket.length === 0) {
             alert("No items in basket!");
             return;
@@ -159,7 +156,6 @@ export class BasketStore {
             this._orderDTO.productItemIds = [];
         }
         for (var productItem of this._basket) {
-            console.log("po id:", productItem.id);
             this._orderDTO.productItemIds.push(productItem.id);
         }
         const result = await this._apiService.createOrder(this._orderDTO);
@@ -167,7 +163,6 @@ export class BasketStore {
             runInAction(() => {
                 this._order = result;
                 this._orderCreated = true;
-                console.log("Order created", result);
             })
         } else {
             alert("Failed to create order. No money has been paid. Please try again later.");
