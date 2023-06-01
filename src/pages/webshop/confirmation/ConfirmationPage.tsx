@@ -4,10 +4,6 @@ import { useContext, useEffect, useState } from "react";
 import { ShippingProgress } from "./components/ShippingProgress";
 import { Box, Container, Grid, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, List } from '@mui/material';
 import { ExtentionMethods } from "@utils/ExtentionMethods";
-import Basket from "@models/Basket";
-import { ProductItemWeb } from "@models/ProductItemWeb";
-
-
 
 export const ConfirmationPage = observer(() => {
 

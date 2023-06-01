@@ -86,23 +86,6 @@ export const ProductPage: React.FC = observer(() => {
           </Grid>
 
 
-
-          {/* 
-          <Grid item sx={{ height: '50%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}  >
-            <Grid item>
-              <Typography variant="h3" fontWeight={'bold'} color={Constants.primaryColor}>Similar items</Typography>
-            </Grid>
-            <Grid item display={'flex'} justifyContent={'center'} flexDirection={'row'}>
-              {matchingProductItems.map(p => {
-                return (
-                  <Grid item display={'flex'} justifyContent={'center'}>
-                    <ProductCardWeb data={p} key={"p" + p.id} />
-                  </Grid>
-                )
-              })}
-            </Grid>
-
-          </Grid> */}
         </Grid>
 
       </Grid >
