@@ -12,7 +12,7 @@ export const ProductPage: React.FC = observer(() => {
   let { id } = useParams();
   const product = (webshopStore.getProductItem(Number(id)));
   function handleClick() { basketStore.addToBasket(product, languageStore); }
-  const imageUrlArray: string[] = product.images.map(i => i.url);
+  let imageUrlArray: string[] = product.images.map(i => i.url);
   const [largeImageUrl, setLargeImageUrl] = useState(imageUrlArray[0]);
 
   const smallImageStyling: React.CSSProperties = {
@@ -42,6 +42,9 @@ export const ProductPage: React.FC = observer(() => {
               style={{ display: 'flex', maxWidth: '100%', maxHeight: '100%', borderRadius: '5px' }}
               src={`${largeImageUrl}?w=300&h=250&fit=crop&auto=format`}
               alt={largeImageUrl}
+              onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                setLargeImageUrl( 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png') // Replace 'placeholder.jpg' with the path to your placeholder image
+              }}
             />
           </Grid>
           <Grid item display={'flex'} justifyContent={'center'}>
@@ -70,6 +73,7 @@ export const ProductPage: React.FC = observer(() => {
                     loading="lazy"
 
                     onClick={() => setLargeImageUrl(item)}
+                    
                   />
                 </ImageListItem>
               ))}

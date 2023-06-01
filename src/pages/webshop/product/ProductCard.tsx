@@ -54,7 +54,10 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
         image={productItem.images[0].url || "https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png"} // assuming the first URL in the array is the main image
         alt={productItem.product.name}
         style={{ objectFit: "cover" }}
-      />
+        onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+          e.currentTarget.src = 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png'; // Replace 'placeholder.jpg' with the path to your placeholder image
+        }}
+        />
       <CardContent>
         <Grid container display={'flex'}>
           <Grid item xs={12}>
