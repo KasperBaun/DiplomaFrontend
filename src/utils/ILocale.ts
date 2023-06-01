@@ -200,6 +200,11 @@ export interface ILocale {
   deleteCategoryFailedMessage: string;
   ProductCommaSeperatedText: string;
 
+  // Alerts
+  alertNoProuductsInCat: string; 
+  alreadyInBasket: string; 
+  nothingInBasket: string; 
+
   // BasketPage: 
   yourBasket: string;
   yourTotal: string;

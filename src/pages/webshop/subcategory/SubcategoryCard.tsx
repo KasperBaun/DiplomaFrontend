@@ -15,12 +15,17 @@ export const SubcategoryCard: React.FC<SubcategoryCardProps> = (props: Subcatego
     const { languageStore, webshopStore } = useContext<IMobXContext>(MobXContext);
     const translater = new Translater();
     const handleOnCardClicked = () => {
-        onCardClicked(props.subcategory.id);
+
+        if (subcategoryProductsCount > 0 ){
+
+            onCardClicked(props.subcategory.id);
+        }
+        else alert(languageStore.currentLanguage.alertNoProuductsInCat); 
     }
     const subcategoryProductsCount: number = webshopStore.getProductItemsInSubcategory(subcategory.id) ? webshopStore.getProductItemsInSubcategory(subcategory.id).length : 0;
     const productsText: string = subcategoryProductsCount === 1 ? languageStore.currentLanguage.product.toLowerCase() : languageStore.currentLanguage.products.toLowerCase();
     const subcategoryProductsCountTitle: string = subcategoryProductsCount + " " + productsText;
-
+    
     return (
         <Card sx={{
             width: '300px',
@@ -30,7 +35,8 @@ export const SubcategoryCard: React.FC<SubcategoryCardProps> = (props: Subcatego
             '&:hover': {
                 boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.6)",
                 cursor: "pointer"
-            }
+            },
+            ...(subcategoryProductsCount === 0 && { filter: 'grayscale(100%)' }) // Add greyfilter if there is no products
         }} onClick={handleOnCardClicked}>
 
             <CardMedia
