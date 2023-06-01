@@ -11,6 +11,9 @@ import { APIService } from '@services/APIService';
 import { Payment } from '@models/Payment';
 import { ExtentionMethods } from '@utils/ExtentionMethods';
 import { ProductItem } from '@models/ProductItem';
+import { useContext } from 'react';
+import MobXContext, { IMobXContext } from './MobXContext';
+import { LanguageStore } from './LanguageStore';
 
 
 export class BasketStore {
@@ -68,13 +71,14 @@ export class BasketStore {
     }
 
 
-    public addToBasket(item: ProductItemWeb): void {
+    public addToBasket(item: ProductItemWeb, languageStore: LanguageStore): void {
+        
 
         if ((this._basket.indexOf(item)) === -1) {
             this._basket.push(item);
         }
         else {
-            alert('Item is already in the basket');
+            alert(languageStore.currentLanguage.alreadyInBasket); 
         }
         // Set local storage language setting
         // sessionStorage.setItem('basket', JSON.stringify(items));
