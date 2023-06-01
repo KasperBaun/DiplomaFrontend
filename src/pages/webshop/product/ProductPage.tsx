@@ -43,7 +43,7 @@ export const ProductPage: React.FC = observer(() => {
               src={`${largeImageUrl}?w=300&h=250&fit=crop&auto=format`}
               alt={largeImageUrl}
               onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                setLargeImageUrl( 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png') // Replace 'placeholder.jpg' with the path to your placeholder image
+                setLargeImageUrl( 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png') // Error picture
               }}
             />
           </Grid>

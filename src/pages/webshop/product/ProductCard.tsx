@@ -55,7 +55,7 @@ export const ProductCardWeb: React.FC<ProductCardWebProps> = function MyCard(pro
         alt={productItem.product.name}
         style={{ objectFit: "cover" }}
         onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-          e.currentTarget.src = 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png'; // Replace 'placeholder.jpg' with the path to your placeholder image
+          e.currentTarget.src = 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png'; // error picture
         }}
         />
       <CardContent>

@@ -62,8 +62,12 @@ export const HomePage: React.FC = observer(function HomePage() {
                                             src={
                                                 product.images[0]?.url
                                                     ? product.images[0]?.url
-                                                    : 'https://via.placeholder.com/300x300.png?text=No+image'
+                                                    : 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png'
                                             }
+                                            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                                e.currentTarget.src = 'https://www.transactis.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png'; // Picture on error
+                                              }}
+                                            
                                             alt={product.product.name}
                                             style={{
                                                 objectFit: 'cover',
