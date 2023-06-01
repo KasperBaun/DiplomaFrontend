@@ -11,7 +11,7 @@ export const ProductPage: React.FC = observer(() => {
 
   let { id } = useParams();
   const product = (webshopStore.getProductItem(Number(id)));
-  function handleClick() { basketStore.addToBasket(product); }
+  function handleClick() { basketStore.addToBasket(product, languageStore); }
   const imageUrlArray: string[] = product.images.map(i => i.url);
   const [largeImageUrl, setLargeImageUrl] = useState(imageUrlArray[0]);
 
