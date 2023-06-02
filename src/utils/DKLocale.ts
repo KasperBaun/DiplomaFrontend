@@ -206,6 +206,10 @@ export class DKLocale implements ILocale {
   selectPaymentMethod = "Vælg betalingsmetode";
   status = "Status";
 
+  // alerts: 
+  alertNoProuductsInCat = "Der er på nuværende tidspunkt ikke nogen produkter i kategorien, prøv igen senere"
+  alreadyInBasket = "Produktet er allerede i kurven"; 
+  nothingInBasket = "Ingen produkter i kurven!"
 
   // AboutUS page
   company_description1 = "Vores fysiske butik ligger på Gammel Kongevej 94a, 1850 Frederiksberg.";

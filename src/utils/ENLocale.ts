@@ -297,6 +297,10 @@ export class ENLocale implements ILocale {
   createSubCategoryUpdateSuccessMessage = "Successfully updated subcategory";
   createSubCategoryUpdateFailedMessage = "Error. Could not update subcategory";
 
+  // alerts: 
+  alertNoProuductsInCat = "There is currently no products in this category, try again later"
+  alreadyInBasket = "Item is already in the basket"; 
+  nothingInBasket = "No items in basket!"
 
   // Analysis
   AnalysisTitle = "Gold and Silver";
