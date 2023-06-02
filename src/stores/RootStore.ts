@@ -19,6 +19,7 @@ export class RootStore implements IMobXContext {
     private color: string = ComponentLoggingConfig.DarkBlueviolet;
     private apiService: APIService;
     private authService: AuthService;
+    private apiUrl: string = Constants.apiBaseUrl;
     rootStore: RootStore = this;
 
     /* Loading states */
@@ -47,8 +48,8 @@ export class RootStore implements IMobXContext {
             console.log(`${this.prefix} constructor called`, this.color)
         }
         // Create API with baseUrl from constants
-        this.apiService = new APIService(Constants.apiBaseUrl);
-        this.authService = new AuthService(Constants.apiBaseUrl);
+        this.apiService = new APIService(this.apiUrl);
+        this.authService = new AuthService(this.apiUrl);
 
         // Instantiate stores here
         this.languageStore = LanguageStore.GetInstance(this);
