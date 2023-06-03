@@ -11,7 +11,6 @@ type Props = {
 
 export const SniperImageModal = ({ imageUrl, handleClose, show }: Props) => {
 
-
     return (
         <Dialog open={show} onClose={handleClose} fullWidth maxWidth="md">
             <IconButton edge="end" color="inherit" onClick={handleClose} aria-label="close">

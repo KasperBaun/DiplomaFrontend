@@ -170,12 +170,6 @@ export class APIService implements IAPIService {
         return await this.crudHelper.readSingle(this.apiBaseUrl + "/Payment/" + id, "Payment");
     }
 
-
-    /* Sniper */
-    async getSniping(searchValue: string): Promise<SniperModel[]> {
-        return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?arg=" + searchValue, "SniperModel")
-    }
-
     /* Customers */
     async getCustomers(): Promise<Customer[]> {
         return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Customer`, "Customers");
@@ -183,5 +177,10 @@ export class APIService implements IAPIService {
 
     async createCustomer(customer: Customer): Promise<Customer> {
         return await this.crudHelper.create(`${this.apiBaseUrl}/Customer`, "Customer", customer);
+    }
+
+    /* Sniper */
+    async getSniping(searchValue: string): Promise<SniperModel[]> {
+        return await this.crudHelper.readMultiple(this.apiBaseUrl + "/Sniper?arg=" + searchValue , "SniperModel")
     }
 }

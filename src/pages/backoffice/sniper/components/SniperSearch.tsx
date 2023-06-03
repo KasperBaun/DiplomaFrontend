@@ -64,8 +64,6 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
     onSnipeComplete(snipedResults);
   }
 
-
-
   return (
     <Container>
       <Box style={{ textAlign: 'center', marginBottom: 3 }}>
@@ -86,9 +84,16 @@ export const SniperSearch: React.FC<SniperSearchProps> = observer(({ onSnipeComp
               shrink: true,
             }}
             onChange={(event) => {
+              event.preventDefault();
               let temp = event.target.value;
               setSearchValue(temp);
             }}
+            onKeyDown={((event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                handleOnSubmitClicked();
+              }
+            })}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
