@@ -80,7 +80,14 @@ export class SniperStore {
     }
 
     public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
-
+        const startNotification: Notification = {
+            message: this.rootStore.languageStore.currentLanguage.sniperStarted,
+            action: () => navigateTo(4),
+            actionMessage: this.rootStore.languageStore.currentLanguage.show
+        }
+        runInAction(() => {
+            this.rootStore.backofficeStore.addNotification(startNotification);
+        })
         this._isSniping = true;
         await this.rootStore.sniperStore.SnipeMultiple(products);
         const notification: Notification = {

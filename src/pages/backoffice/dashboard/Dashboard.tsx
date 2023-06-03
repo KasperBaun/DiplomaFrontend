@@ -1,6 +1,6 @@
 import MobXContext from "@stores/MobXContext";
 import { Box, Button, FormControl, Grid, InputLabel, Link, MenuItem, Select, Typography } from "@mui/material";
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from "react";
 import { RecentSalesList } from "@backoffice/sales/components/RecentSales";
 import { observer } from "mobx-react-lite";
 import { RevenueInfoBox } from "./components/RevenueInfoBox";
@@ -35,6 +35,12 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
         // Only 5 items since it takes 15-20 seconds for each..
         sniperStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 5), props.setNavKey);
     }
+
+    useEffect(() => {
+        if (!sniperStore.isSniping) {
+            handleOnStartSniperClicked();
+        }
+    }, [])
 
     const spacing = 2;
     const worstSellingProducts = backofficeStore.ProductItems.filter(p => p.sold === false).sort((a, b) => a.createdDate.getTime() - b.createdDate.getTime()).slice(0, 20).map(p => p.product);

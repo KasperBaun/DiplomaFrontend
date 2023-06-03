@@ -5,6 +5,8 @@ import { SnipedTable } from "./SnipedTable";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { FiberNew } from "@mui/icons-material";
 import { runInAction } from "mobx";
+import MobXContext from "@stores/MobXContext";
+import { useContext } from "react";
 
 
 type SniperAccordionProps = {
@@ -13,6 +15,8 @@ type SniperAccordionProps = {
 }
 
 export const SniperAccordion: React.FC<SniperAccordionProps> = observer(({ result, idx }: SniperAccordionProps) => {
+
+    const { languageStore } = useContext(MobXContext);
 
     const handleAccordionChange = () => runInAction(() => {
         result.open = !result.open
@@ -37,10 +41,15 @@ export const SniperAccordion: React.FC<SniperAccordionProps> = observer(({ resul
                 </Typography>
             </AccordionSummary>
             <AccordionDetails key={"accdetails" + result.product.name + idx}>
-                <SnipedTable
-                    results={result.sniperResult}
-                    key={"snipedTable" + result.product.name + idx}
-                />
+                {result.sniperResult.length === 0 &&
+                    <p>{languageStore.currentLanguage.noResults}</p>
+                }
+                {result.sniperResult.length > 0 &&
+                    <SnipedTable
+                        results={result.sniperResult}
+                        key={"snipedTable" + result.product.name + idx}
+                    />
+                }
             </AccordionDetails>
         </Accordion>
     )
