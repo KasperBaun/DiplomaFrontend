@@ -25,10 +25,7 @@ export const ProductDialog = observer((props: ProductDialogProps) => {
         <DialogContent>
           <Grid container spacing={2}>
             <Grid item lg={6}>
-              <ImageGallery key={"productImgGal" + product.id} imageURLs={product.images.map(img => img.url)} />
-            </Grid>
-            <Grid item lg={6}>
-              {/* <ProductDescription source={"backoffice"} key={"productDes" + product.id} Iproduct={product} /> */}
+              <img src={product.images[0].url} alt={product.product.name} />
             </Grid>
           </Grid>
         </DialogContent>

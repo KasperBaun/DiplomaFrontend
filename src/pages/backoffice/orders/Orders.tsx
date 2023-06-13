@@ -37,7 +37,7 @@ export const Orders = observer(({ displayItemsAmount }: OrdersProps) => {
             <TableCell sx={tableCellStyling} ><b><u>
                 {order.productItems.map((element, index) => (
                     <div style={{ display: "flex", justifyContent: "space-between" }} key={index} onClick={() => handleOnProductClick(element.id)}>
-                        <b><u>{element.id} {","}</u></b>
+                        <b><u>{element.id}</u></b>
                     </div>))
                 }</u></b>
             </TableCell>
