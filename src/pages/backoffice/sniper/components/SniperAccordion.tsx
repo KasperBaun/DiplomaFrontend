@@ -41,10 +41,10 @@ export const SniperAccordion: React.FC<SniperAccordionProps> = observer(({ resul
                 </Typography>
             </AccordionSummary>
             <AccordionDetails key={"accdetails" + result.product.name + idx}>
-                {result.sniperResult.length === 0 &&
+                {result?.sniperResult?.length === 0 &&
                     <p>{languageStore.currentLanguage.noResults}</p>
                 }
-                {result.sniperResult.length > 0 &&
+                {result?.sniperResult?.length > 0 &&
                     <SnipedTable
                         results={result.sniperResult}
                         key={"snipedTable" + result.product.name + idx}

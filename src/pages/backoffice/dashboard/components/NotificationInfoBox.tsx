@@ -16,8 +16,8 @@ export const NotificationInfoBox = observer(() => {
                             {notification.message}{
                                 notification.action &&
                                 <Button variant="contained" onClick={() => {
-                                    backofficeStore.removeNotification(notification);
                                     notification.action();
+                                    backofficeStore.removeNotification(notification);
                                 }} key={"notif" + index} >
                                     {languageStore.currentLanguage.show}
                                 </Button>
