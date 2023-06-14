@@ -2,7 +2,7 @@ import MobXContext from "@stores/MobXContext";
 import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState } from "react";
 import { ShippingProgress } from "./components/ShippingProgress";
-import { Box, Container, Grid, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, List } from '@mui/material';
+import { Box, Container, Grid, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import { ExtentionMethods } from "@utils/ExtentionMethods";
 
 export const ConfirmationPage = observer(() => {

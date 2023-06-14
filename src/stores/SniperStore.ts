@@ -52,12 +52,12 @@ export class SniperStore {
         return this.loaded;
     }
 
-    public async GetSniping(searchValue: string): Promise<SniperModel[]> {
+    public GetSniping = async (searchValue: string): Promise<SniperModel[]> => {
         this._sniperData = await this.apiService.getSniping(searchValue);
         return this._sniperData;
     }
 
-    public async SnipeMultiple(products: Product[]): Promise<void> {
+    public SnipeMultiple = async (products: Product[]): Promise<void> => {
         for (let i = 0; i < products.length; i++) {
             let sniperResult: SniperResult = {
                 product: products[i],
@@ -73,13 +73,13 @@ export class SniperStore {
         return this._sniperResults;
     }
 
-    public addSniperResult(sniperResult: SniperResult): void {
+    public addSniperResult = (sniperResult: SniperResult): void => {
         runInAction(() => {
             this._sniperResults.push(sniperResult);
         });
     }
 
-    public async startSniper(products: Product[], navigateTo: (key: number) => void): Promise<void> {
+    public startSniper = async (products: Product[], navigateTo: (key: number) => void): Promise<void> => {
         const startNotification: Notification = {
             message: this.rootStore.languageStore.currentLanguage.sniperStarted,
             action: () => navigateTo(4),

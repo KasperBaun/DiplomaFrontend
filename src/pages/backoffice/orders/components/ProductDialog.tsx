@@ -1,7 +1,6 @@
 import { Dialog, DialogContent, DialogTitle, Grid } from "@mui/material";
 import { LanguageStore } from "@stores/LanguageStore";
 import MobXContext from "@stores/MobXContext";
-import ImageGallery from "@webshop/product/ImageGallery";
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 
