@@ -32,7 +32,19 @@ export class LanguageStore {
         runInAction(() => {
             // Reads values from localstorage to determine previously set preffered language by user ->
             // If no preffered language was set by user -> default to da-DK locale
-            this._previousLanguageSet = localStorage['locale'];
+            let prevLang = localStorage['locale'];
+
+            /* Ugly hotfix to account for locale-change in browsers that have previously stored old value */
+            if (prevLang === "da_DK") {
+                prevLang = "da-DK";
+            }
+            if (prevLang === "en_US") {
+                prevLang = "en-US";
+            }
+
+            /* Please delete after a while */
+
+            this._previousLanguageSet = prevLang;
             this.setCurrentLanguage(this._previousLanguageSet ? this._previousLanguageSet : 'da-DK');
             this.loaded = true;
         })
