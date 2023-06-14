@@ -150,6 +150,7 @@ export interface ILocale {
   delivery: string;
   selectPaymentMethod: string;
   status: string;
+  noResults: string;
 
   // Months
   january: string;

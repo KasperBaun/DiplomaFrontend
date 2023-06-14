@@ -205,10 +205,11 @@ export class DKLocale implements ILocale {
   delivery = "Levering";
   selectPaymentMethod = "Vælg betalingsmetode";
   status = "Status";
+  noResults = "Ingen resultater";
 
   // alerts: 
   alertNoProuductsInCat = "Der er på nuværende tidspunkt ikke nogen produkter i kategorien, prøv igen senere"
-  alreadyInBasket = "Produktet er allerede i kurven"; 
+  alreadyInBasket = "Produktet er allerede i kurven";
   nothingInBasket = "Ingen produkter i kurven!"
 
   // AboutUS page

@@ -180,6 +180,7 @@ export class ENLocale implements ILocale {
   delivery = "Delivery";
   selectPaymentMethod ="Select payment method";
   status = "Status";
+  noResults = "No results";
 
   // Months
   january = "January";
