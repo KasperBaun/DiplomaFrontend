@@ -677,7 +677,7 @@ export class BackofficeStore {
         return this._displayedProductItems;
     }
 
-    public setSearchText(value: string): void {
+    public setSearchText = (value: string): void => {
         runInAction(() => {
             this._searchText = value;
         });
