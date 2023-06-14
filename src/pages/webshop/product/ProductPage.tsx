@@ -18,6 +18,8 @@ export const ProductPage: React.FC = observer(() => {
   const smallImageStyling: React.CSSProperties = {
     borderRadius: '5px',
     transition: "box-shadow 0.2s ease-in-out",
+    maxWidth: "33%",
+    maxHeight: "33%"
   }
   const selectedSmallImageStyling: React.CSSProperties = {
     ...smallImageStyling,

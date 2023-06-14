@@ -38,6 +38,8 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
         filterBySubcategory,
         reset,
         showSearchBar,
+        searchText,
+        setSearchText,
     } = props;
 
     /* Define state for products and selected category & subcategory - Inject stores */
@@ -82,8 +84,8 @@ export const ProductSearch: React.FC<ProductSearchProps> = observer(function Pro
                 sx={gridItemStyling}
             >
                 <ProductSearchBar
-                    searchText={props.searchText}
-                    setSearchText={props.setSearchText}
+                    searchText={searchText}
+                    setSearchText={setSearchText}
                     showSearchBar={showSearchBar}
                     onSearchTextChanged={handleSearchTextChanged}
                     style={{ width: '100%' }}
