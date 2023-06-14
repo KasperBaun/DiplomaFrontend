@@ -36,11 +36,11 @@ export const Dashboard: React.FC<DashboardProps> = observer((props: DashboardPro
         sniperStore.startSniper(backofficeStore.BestSellingProducts.slice(0, 5), props.setNavKey);
     }
 
-    // useEffect(() => {
-    //     if (!sniperStore.isSniping && sniperStore.SniperResults.length === 0) {
-    //         handleOnStartSniperClicked();
-    //     }
-    // }, [])
+    useEffect(() => {
+        if (!sniperStore.isSniping && sniperStore.SniperResults.length === 0) {
+            handleOnStartSniperClicked();
+        }
+    }, [])
 
     const spacing = 2;
     const worstSellingProducts = backofficeStore.ProductItems.filter(p => p.sold === false).sort((a, b) => a.createdDate.getTime() - b.createdDate.getTime()).slice(0, 20).map(p => p.product);
