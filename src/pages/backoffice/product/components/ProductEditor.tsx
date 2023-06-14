@@ -1,7 +1,7 @@
 import { ConfirmDeleteDialog } from "@backoffice/category/components/ConfirmDeleteDialog";
 import { ProductItem } from "@models/ProductItem";
 import { ProductDetails } from "./ProductDetails";
-import { ImageGallery } from "@webshop/product/ImageGallery";
+import SimpleImageSlider from "react-simple-image-slider";
 import MobXContext from "@stores/MobXContext";
 import { Alert, Button, Container, Grid, IconButton, ImageList, ImageListItem, ImageListItemBar, Paper, Snackbar, Typography } from "@mui/material";
 import { useContext, useState } from "react";
@@ -82,12 +82,21 @@ export const ProductEditor: React.FC<ProductEditorProps> = observer((props: Prod
                             <Headline copy={props.copy} create={props.create} languageStore={languageStore} productItem={productItem} color={Constants.primaryColor} />
                         </Grid>
 
-                        <Grid item xs={12} md={6} >
-                            <ImageGallery imageURLs={productItem.images.map(i => i.url)} />
+                        <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                            {/* Picture render size: 630 × 840 * 0.85 <-- Quickfix that does not scale*/}
+                            <SimpleImageSlider
+                                width={535.5}
+                                height={714}
+                                style={{marginTop:"1rem", marginLeft: "1rem"}}
+                                images={productItem.images}
+                                showBullets={true}
+                                showNavs={true}
+                            />                     
+                            {/* <ImageGallery imageURLs={productItem.images.map(i => i.url)} /> */}
                             {/* <ProductImages images={productItem.images} /> */}
                         </Grid>
 
-                        <Grid item xs={12} md={6} >
+                        <Grid item xs={12} md={12} lg={6}>
                             <ProductDetails productItem={productItem} />
                         </Grid>
 
