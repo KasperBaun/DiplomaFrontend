@@ -29,6 +29,9 @@
 		<None Update="Data\images.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+		<None Update="Data\orderelements.json">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
 		<None Update="Data\_OLD\OLD_categories.json">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>

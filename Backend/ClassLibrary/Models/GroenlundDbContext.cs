@@ -46,7 +46,7 @@ namespace ClassLibrary.Models
                 throw new InvalidOperationException(detailedMessage);
             }
 
-            Console.WriteLine($"The environment variable '{variableName}' is set to: \"{connectionString}\"");
+            Console.WriteLine($"The environment variable '{variableName}' is set to: \"{connectionString}\"\n");
 
             if (!optionsBuilder.IsConfigured)
             {
