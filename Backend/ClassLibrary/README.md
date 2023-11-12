@@ -11,9 +11,9 @@ dotnet tool install --global dotnet-ef
 ## Guide
 1. Create a user and MySQL database and save the username + password.
 ```mysql
-CREATE USER 'dbadmin'@'%' IDENTIFIED BY '100%Kaffe!';
-CREATE DATABASE groenlund;
-GRANT ALL PRIVILEGES ON groenlund.* TO 'dbadmin'@'%';
+CREATE USER 'dbadmin'@'%' IDENTIFIED BY 'B1gS3CR3T!';
+CREATE DATABASE databasename;
+GRANT ALL PRIVILEGES ON databasename.* TO 'dbadmin'@'%';
 FLUSH PRIVILEGES;
 ```
 
@@ -21,7 +21,7 @@ FLUSH PRIVILEGES;
 3. Open a command prompt in the root and create a system variable with the connection string to the database by running the following code. Replace the values with your actual details.
 
 ```bash
-setx GroenlundDBConnection "Server=89.150.142.89;Database=groenlund;User=dbadmin;Password=100%Kaffe!;"
+setx GroenlundDBConnection "Server=localhost;Database=databasename;User=dbadmin;Password=B1gS3CR3T!;"
 ```
 **Important** - Close the command prompt after creating the system variable.
 
