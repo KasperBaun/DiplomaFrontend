@@ -19,7 +19,7 @@ export class RootStore implements IMobXContext {
     private color: string = ComponentLoggingConfig.DarkBlueviolet;
     private apiService: APIService;
     private authService: AuthService;
-    private apiUrl: string = Constants.apiBaseUrl;
+    private apiUrl: string = Constants.localApiUrl;
     rootStore: RootStore = this;
 
     /* Loading states */
