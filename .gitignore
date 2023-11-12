@@ -1,0 +1,56 @@
+./Backend/API/
+    obj/
+    bin/
+    config/
+    DesignTimeBuild/
+    
+./Backend/ClassLibrary/
+    obj/
+    bin/
+    bin/Debug/net6.0
+    bin/Release/net6.0
+    bin/Release/net7.0
+
+./Backend/WebScraper/
+    obj/
+    bin/
+    bin/Debug/net6.0
+    bin/Release/net6.0
+    bin/Release/net7.0
+
+./Backend/DataMigration/
+    obj/
+    bin/
+    bin/Release/net6.0
+
+./Backend/
+    vs/
+    .vs
+    obj/Debug/.AssemblyReference.cache
+    obj/Debug/
+
+.vs/*
+
+# Frontend .gitignore
+
+# dependencies
+/Frontend/node_modules/
+/Frontend/.pnp
+/Frontend/.pnp.js
+
+# testing
+/Frontend/coverage/
+
+# production
+/Frontend/build/
+
+# misc
+/Frontend/.DS_Store
+/Frontend/.env.local
+/Frontend/.env.development.local
+/Frontend/.env.test.local
+/Frontend/.env.production.local
+
+/Frontend/npm-debug.log*
+/Frontend/yarn-debug.log*
+/Frontend/yarn-error.log*
