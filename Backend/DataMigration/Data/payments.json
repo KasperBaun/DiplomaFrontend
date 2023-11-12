@@ -1,0 +1,3334 @@
+[
+  {
+    "Id": 1,
+    "DatePaid": "2020-05-08T00:00:00",
+    "Amount": 59250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 2,
+    "DatePaid": "2021-12-31T00:00:00",
+    "Amount": 244750.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 3,
+    "DatePaid": "2022-06-20T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 4,
+    "DatePaid": "2019-01-25T00:00:00",
+    "Amount": 387000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 5,
+    "DatePaid": "2020-07-16T00:00:00",
+    "Amount": 49000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 6,
+    "DatePaid": "2019-12-14T00:00:00",
+    "Amount": 49000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 7,
+    "DatePaid": "2020-05-19T00:00:00",
+    "Amount": 101500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 8,
+    "DatePaid": "2022-04-26T00:00:00",
+    "Amount": 155400.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 9,
+    "DatePaid": "2019-02-20T00:00:00",
+    "Amount": 100500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 10,
+    "DatePaid": "2020-01-17T00:00:00",
+    "Amount": 136500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 11,
+    "DatePaid": "2019-11-25T00:00:00",
+    "Amount": 162000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 12,
+    "DatePaid": "2023-05-19T00:00:00",
+    "Amount": 226000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 13,
+    "DatePaid": "2020-06-17T00:00:00",
+    "Amount": 105000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 14,
+    "DatePaid": "2022-03-20T00:00:00",
+    "Amount": 15000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 15,
+    "DatePaid": "2022-05-13T00:00:00",
+    "Amount": 254100.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 16,
+    "DatePaid": "2019-04-01T00:00:00",
+    "Amount": 115375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 17,
+    "DatePaid": "2019-03-29T00:00:00",
+    "Amount": 103950.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 18,
+    "DatePaid": "2022-02-06T00:00:00",
+    "Amount": 8750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 19,
+    "DatePaid": "2021-10-05T00:00:00",
+    "Amount": 242000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 20,
+    "DatePaid": "2021-08-19T00:00:00",
+    "Amount": 59000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 21,
+    "DatePaid": "2020-08-02T00:00:00",
+    "Amount": 161750.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 22,
+    "DatePaid": "2019-04-14T00:00:00",
+    "Amount": 217500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 23,
+    "DatePaid": "2019-04-13T00:00:00",
+    "Amount": 2750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 24,
+    "DatePaid": "2022-07-18T00:00:00",
+    "Amount": 16750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 25,
+    "DatePaid": "2019-12-14T00:00:00",
+    "Amount": 76500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 26,
+    "DatePaid": "2021-05-27T00:00:00",
+    "Amount": 299250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 27,
+    "DatePaid": "2022-11-25T00:00:00",
+    "Amount": 10000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 28,
+    "DatePaid": "2021-02-25T00:00:00",
+    "Amount": 274750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 29,
+    "DatePaid": "2020-08-02T00:00:00",
+    "Amount": 273350.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 30,
+    "DatePaid": "2019-08-01T00:00:00",
+    "Amount": 130000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 31,
+    "DatePaid": "2022-04-24T00:00:00",
+    "Amount": 83750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 32,
+    "DatePaid": "2022-04-01T00:00:00",
+    "Amount": 550000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 33,
+    "DatePaid": "2021-12-04T00:00:00",
+    "Amount": 50700.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 34,
+    "DatePaid": "2021-10-06T00:00:00",
+    "Amount": 214500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 35,
+    "DatePaid": "2019-06-25T00:00:00",
+    "Amount": 594750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 36,
+    "DatePaid": "2021-11-14T00:00:00",
+    "Amount": 93500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 37,
+    "DatePaid": "2020-07-14T00:00:00",
+    "Amount": 244000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 38,
+    "DatePaid": "2023-09-14T00:00:00",
+    "Amount": 34500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 39,
+    "DatePaid": "2020-09-03T00:00:00",
+    "Amount": 31250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 40,
+    "DatePaid": "2019-09-25T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 41,
+    "DatePaid": "2023-05-08T00:00:00",
+    "Amount": 19500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 42,
+    "DatePaid": "2021-11-21T00:00:00",
+    "Amount": 64500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 43,
+    "DatePaid": "2023-05-16T00:00:00",
+    "Amount": 43875.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 44,
+    "DatePaid": "2023-06-03T00:00:00",
+    "Amount": 1014000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 45,
+    "DatePaid": "2023-05-14T00:00:00",
+    "Amount": 702950.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 46,
+    "DatePaid": "2020-07-29T00:00:00",
+    "Amount": 70000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 47,
+    "DatePaid": "2022-10-17T00:00:00",
+    "Amount": 41250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 48,
+    "DatePaid": "2021-03-21T00:00:00",
+    "Amount": 67500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 49,
+    "DatePaid": "2021-04-20T00:00:00",
+    "Amount": 43500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 50,
+    "DatePaid": "2019-08-25T00:00:00",
+    "Amount": 164500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 51,
+    "DatePaid": "2023-11-01T00:00:00",
+    "Amount": 180000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 52,
+    "DatePaid": "2020-10-28T00:00:00",
+    "Amount": 88000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 53,
+    "DatePaid": "2021-09-26T00:00:00",
+    "Amount": 16900.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 54,
+    "DatePaid": "2022-08-23T00:00:00",
+    "Amount": 85750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 55,
+    "DatePaid": "2020-01-12T00:00:00",
+    "Amount": 58500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 56,
+    "DatePaid": "2019-03-24T00:00:00",
+    "Amount": 71750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 57,
+    "DatePaid": "2020-05-16T00:00:00",
+    "Amount": 29500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 58,
+    "DatePaid": "2022-10-25T00:00:00",
+    "Amount": 67500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 59,
+    "DatePaid": "2020-05-25T00:00:00",
+    "Amount": 32200.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 60,
+    "DatePaid": "2021-05-14T00:00:00",
+    "Amount": 403000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 61,
+    "DatePaid": "2022-07-18T00:00:00",
+    "Amount": 181250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 62,
+    "DatePaid": "2023-10-22T00:00:00",
+    "Amount": 1283975.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 63,
+    "DatePaid": "2021-12-08T00:00:00",
+    "Amount": 145125.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 64,
+    "DatePaid": "2022-09-06T00:00:00",
+    "Amount": 59250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 65,
+    "DatePaid": "2021-10-08T00:00:00",
+    "Amount": 44750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 66,
+    "DatePaid": "2023-09-10T00:00:00",
+    "Amount": 45500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 67,
+    "DatePaid": "2023-04-03T00:00:00",
+    "Amount": 188750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 68,
+    "DatePaid": "2023-01-12T00:00:00",
+    "Amount": 40000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 69,
+    "DatePaid": "2022-04-06T00:00:00",
+    "Amount": 83500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 70,
+    "DatePaid": "2022-02-25T00:00:00",
+    "Amount": 185000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 71,
+    "DatePaid": "2019-11-20T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 72,
+    "DatePaid": "2023-10-03T00:00:00",
+    "Amount": 82000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 73,
+    "DatePaid": "2022-08-26T00:00:00",
+    "Amount": 25375.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 74,
+    "DatePaid": "2020-05-14T00:00:00",
+    "Amount": 300000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 75,
+    "DatePaid": "2022-07-26T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 76,
+    "DatePaid": "2020-04-12T00:00:00",
+    "Amount": 359450.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 77,
+    "DatePaid": "2019-02-02T00:00:00",
+    "Amount": 32750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 78,
+    "DatePaid": "2019-10-23T00:00:00",
+    "Amount": 99125.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 79,
+    "DatePaid": "2019-12-31T00:00:00",
+    "Amount": 72000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 80,
+    "DatePaid": "2021-01-29T00:00:00",
+    "Amount": 91000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 81,
+    "DatePaid": "2019-10-09T00:00:00",
+    "Amount": 86250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 82,
+    "DatePaid": "2020-02-26T00:00:00",
+    "Amount": 2250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 83,
+    "DatePaid": "2022-09-12T00:00:00",
+    "Amount": 99000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 84,
+    "DatePaid": "2021-11-29T00:00:00",
+    "Amount": 81125.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 85,
+    "DatePaid": "2022-08-23T00:00:00",
+    "Amount": 133250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 86,
+    "DatePaid": "2021-02-01T00:00:00",
+    "Amount": 330000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 87,
+    "DatePaid": "2019-02-02T00:00:00",
+    "Amount": 283500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 88,
+    "DatePaid": "2022-09-18T00:00:00",
+    "Amount": 167250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 89,
+    "DatePaid": "2022-06-17T00:00:00",
+    "Amount": 4500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 90,
+    "DatePaid": "2021-01-18T00:00:00",
+    "Amount": 25500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 91,
+    "DatePaid": "2019-01-23T00:00:00",
+    "Amount": 142450.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 92,
+    "DatePaid": "2021-07-11T00:00:00",
+    "Amount": 118125.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 93,
+    "DatePaid": "2020-08-21T00:00:00",
+    "Amount": 332000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 94,
+    "DatePaid": "2021-03-25T00:00:00",
+    "Amount": 115500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 95,
+    "DatePaid": "2022-12-29T00:00:00",
+    "Amount": 34775.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 96,
+    "DatePaid": "2020-03-14T00:00:00",
+    "Amount": 55625.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 97,
+    "DatePaid": "2022-09-04T00:00:00",
+    "Amount": 103200.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 98,
+    "DatePaid": "2021-10-03T00:00:00",
+    "Amount": 273750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 99,
+    "DatePaid": "2022-08-18T00:00:00",
+    "Amount": 25000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 100,
+    "DatePaid": "2023-02-23T00:00:00",
+    "Amount": 362000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 101,
+    "DatePaid": "2023-07-04T00:00:00",
+    "Amount": 8000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 102,
+    "DatePaid": "2019-01-26T00:00:00",
+    "Amount": 231000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 103,
+    "DatePaid": "2021-11-09T00:00:00",
+    "Amount": 105000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 104,
+    "DatePaid": "2022-12-08T00:00:00",
+    "Amount": 713250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 105,
+    "DatePaid": "2021-05-27T00:00:00",
+    "Amount": 3625.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 106,
+    "DatePaid": "2019-08-19T00:00:00",
+    "Amount": 459000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 107,
+    "DatePaid": "2019-03-05T00:00:00",
+    "Amount": 11250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 108,
+    "DatePaid": "2021-03-19T00:00:00",
+    "Amount": 401250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 109,
+    "DatePaid": "2022-10-20T00:00:00",
+    "Amount": 90750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 110,
+    "DatePaid": "2019-09-22T00:00:00",
+    "Amount": 185500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 111,
+    "DatePaid": "2021-05-19T00:00:00",
+    "Amount": 72000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 112,
+    "DatePaid": "2020-07-31T00:00:00",
+    "Amount": 325500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 113,
+    "DatePaid": "2021-07-06T00:00:00",
+    "Amount": 444000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 114,
+    "DatePaid": "2022-04-13T00:00:00",
+    "Amount": 76500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 115,
+    "DatePaid": "2021-09-03T00:00:00",
+    "Amount": 245000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 116,
+    "DatePaid": "2022-01-08T00:00:00",
+    "Amount": 64500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 117,
+    "DatePaid": "2021-10-15T00:00:00",
+    "Amount": 292400.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 118,
+    "DatePaid": "2023-03-06T00:00:00",
+    "Amount": 74250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 119,
+    "DatePaid": "2022-11-23T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 120,
+    "DatePaid": "2022-07-24T00:00:00",
+    "Amount": 164250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 121,
+    "DatePaid": "2021-11-02T00:00:00",
+    "Amount": 108625.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 122,
+    "DatePaid": "2023-10-09T00:00:00",
+    "Amount": 170000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 123,
+    "DatePaid": "2020-05-28T00:00:00",
+    "Amount": 105000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 124,
+    "DatePaid": "2023-02-19T00:00:00",
+    "Amount": 180000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 125,
+    "DatePaid": "2020-09-22T00:00:00",
+    "Amount": 167475.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 126,
+    "DatePaid": "2021-02-25T00:00:00",
+    "Amount": 34000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 127,
+    "DatePaid": "2019-05-04T00:00:00",
+    "Amount": 862750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 128,
+    "DatePaid": "2020-11-18T00:00:00",
+    "Amount": 28500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 129,
+    "DatePaid": "2020-07-02T00:00:00",
+    "Amount": 57500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 130,
+    "DatePaid": "2023-01-13T00:00:00",
+    "Amount": 288000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 131,
+    "DatePaid": "2022-06-28T00:00:00",
+    "Amount": 352500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 132,
+    "DatePaid": "2022-03-17T00:00:00",
+    "Amount": 245600.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 133,
+    "DatePaid": "2019-04-04T00:00:00",
+    "Amount": 242125.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 134,
+    "DatePaid": "2021-04-12T00:00:00",
+    "Amount": 37125.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 135,
+    "DatePaid": "2020-01-09T00:00:00",
+    "Amount": 11850.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 136,
+    "DatePaid": "2020-10-29T00:00:00",
+    "Amount": 349195.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 137,
+    "DatePaid": "2019-04-12T00:00:00",
+    "Amount": 43500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 138,
+    "DatePaid": "2019-02-10T00:00:00",
+    "Amount": 460000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 139,
+    "DatePaid": "2019-07-11T00:00:00",
+    "Amount": 56250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 140,
+    "DatePaid": "2023-01-10T00:00:00",
+    "Amount": 468750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 141,
+    "DatePaid": "2022-12-22T00:00:00",
+    "Amount": 73125.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 142,
+    "DatePaid": "2021-09-13T00:00:00",
+    "Amount": 39375.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 143,
+    "DatePaid": "2023-01-10T00:00:00",
+    "Amount": 91350.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 144,
+    "DatePaid": "2023-05-10T00:00:00",
+    "Amount": 26250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 145,
+    "DatePaid": "2022-12-27T00:00:00",
+    "Amount": 81000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 146,
+    "DatePaid": "2022-10-01T00:00:00",
+    "Amount": 14500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 147,
+    "DatePaid": "2022-03-02T00:00:00",
+    "Amount": 242500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 148,
+    "DatePaid": "2023-09-02T00:00:00",
+    "Amount": 82250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 149,
+    "DatePaid": "2021-06-05T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 150,
+    "DatePaid": "2019-12-27T00:00:00",
+    "Amount": 440625.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 151,
+    "DatePaid": "2021-12-05T00:00:00",
+    "Amount": 234375.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 152,
+    "DatePaid": "2020-05-21T00:00:00",
+    "Amount": 49400.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 153,
+    "DatePaid": "2022-03-25T00:00:00",
+    "Amount": 90000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 154,
+    "DatePaid": "2021-01-08T00:00:00",
+    "Amount": 21250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 155,
+    "DatePaid": "2022-03-10T00:00:00",
+    "Amount": 170000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 156,
+    "DatePaid": "2023-02-03T00:00:00",
+    "Amount": 124000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 157,
+    "DatePaid": "2020-04-23T00:00:00",
+    "Amount": 112000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 158,
+    "DatePaid": "2021-06-14T00:00:00",
+    "Amount": 123750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 159,
+    "DatePaid": "2020-01-09T00:00:00",
+    "Amount": 33750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 160,
+    "DatePaid": "2020-05-11T00:00:00",
+    "Amount": 269500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 161,
+    "DatePaid": "2021-06-04T00:00:00",
+    "Amount": 175500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 162,
+    "DatePaid": "2021-05-28T00:00:00",
+    "Amount": 33500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 163,
+    "DatePaid": "2019-04-13T00:00:00",
+    "Amount": 364000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 164,
+    "DatePaid": "2021-03-04T00:00:00",
+    "Amount": 4375.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 165,
+    "DatePaid": "2023-04-12T00:00:00",
+    "Amount": 446250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 166,
+    "DatePaid": "2020-07-12T00:00:00",
+    "Amount": 326000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 167,
+    "DatePaid": "2021-02-08T00:00:00",
+    "Amount": 10000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 168,
+    "DatePaid": "2021-04-01T00:00:00",
+    "Amount": 79750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 169,
+    "DatePaid": "2022-09-04T00:00:00",
+    "Amount": 54000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 170,
+    "DatePaid": "2022-02-02T00:00:00",
+    "Amount": 226000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 171,
+    "DatePaid": "2019-12-08T00:00:00",
+    "Amount": 99500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 172,
+    "DatePaid": "2021-10-22T00:00:00",
+    "Amount": 27125.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 173,
+    "DatePaid": "2023-06-07T00:00:00",
+    "Amount": 119250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 174,
+    "DatePaid": "2020-05-13T00:00:00",
+    "Amount": 216000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 175,
+    "DatePaid": "2022-12-15T00:00:00",
+    "Amount": 178125.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 176,
+    "DatePaid": "2022-09-27T00:00:00",
+    "Amount": 392000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 177,
+    "DatePaid": "2021-11-15T00:00:00",
+    "Amount": 667250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 178,
+    "DatePaid": "2019-12-02T00:00:00",
+    "Amount": 85250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 179,
+    "DatePaid": "2022-05-17T00:00:00",
+    "Amount": 206500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 180,
+    "DatePaid": "2022-07-04T00:00:00",
+    "Amount": 292000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 181,
+    "DatePaid": "2019-11-22T00:00:00",
+    "Amount": 64500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 182,
+    "DatePaid": "2021-03-22T00:00:00",
+    "Amount": 12300.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 183,
+    "DatePaid": "2022-11-24T00:00:00",
+    "Amount": 90375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 184,
+    "DatePaid": "2020-01-31T00:00:00",
+    "Amount": 170000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 185,
+    "DatePaid": "2022-10-07T00:00:00",
+    "Amount": 13250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 186,
+    "DatePaid": "2022-08-10T00:00:00",
+    "Amount": 340000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 187,
+    "DatePaid": "2021-11-03T00:00:00",
+    "Amount": 78000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 188,
+    "DatePaid": "2023-09-23T00:00:00",
+    "Amount": 236100.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 189,
+    "DatePaid": "2020-04-12T00:00:00",
+    "Amount": 31225.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 190,
+    "DatePaid": "2021-07-31T00:00:00",
+    "Amount": 129750.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 191,
+    "DatePaid": "2020-04-21T00:00:00",
+    "Amount": 29250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 192,
+    "DatePaid": "2020-10-07T00:00:00",
+    "Amount": 106250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 193,
+    "DatePaid": "2019-12-23T00:00:00",
+    "Amount": 435000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 194,
+    "DatePaid": "2020-05-10T00:00:00",
+    "Amount": 90025.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 195,
+    "DatePaid": "2019-10-28T00:00:00",
+    "Amount": 15000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 196,
+    "DatePaid": "2021-09-05T00:00:00",
+    "Amount": 34500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 197,
+    "DatePaid": "2022-12-07T00:00:00",
+    "Amount": 291500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 198,
+    "DatePaid": "2023-03-27T00:00:00",
+    "Amount": 169000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 199,
+    "DatePaid": "2021-08-29T00:00:00",
+    "Amount": 212800.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 200,
+    "DatePaid": "2019-11-04T00:00:00",
+    "Amount": 22500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 201,
+    "DatePaid": "2020-12-24T00:00:00",
+    "Amount": 319550.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 202,
+    "DatePaid": "2019-03-04T00:00:00",
+    "Amount": 27500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 203,
+    "DatePaid": "2019-05-17T00:00:00",
+    "Amount": 110000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 204,
+    "DatePaid": "2023-08-15T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 205,
+    "DatePaid": "2023-07-29T00:00:00",
+    "Amount": 30000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 206,
+    "DatePaid": "2020-12-31T00:00:00",
+    "Amount": 170000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 207,
+    "DatePaid": "2020-07-29T00:00:00",
+    "Amount": 180000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 208,
+    "DatePaid": "2019-04-16T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 209,
+    "DatePaid": "2021-01-15T00:00:00",
+    "Amount": 62965.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 210,
+    "DatePaid": "2022-06-10T00:00:00",
+    "Amount": 36500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 211,
+    "DatePaid": "2019-07-09T00:00:00",
+    "Amount": 127500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 212,
+    "DatePaid": "2023-05-15T00:00:00",
+    "Amount": 371000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 213,
+    "DatePaid": "2021-02-04T00:00:00",
+    "Amount": 871000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 214,
+    "DatePaid": "2021-12-23T00:00:00",
+    "Amount": 110500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 215,
+    "DatePaid": "2019-05-24T00:00:00",
+    "Amount": 141375.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 216,
+    "DatePaid": "2020-03-06T00:00:00",
+    "Amount": 138600.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 217,
+    "DatePaid": "2021-10-28T00:00:00",
+    "Amount": 57000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 218,
+    "DatePaid": "2022-07-27T00:00:00",
+    "Amount": 69375.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 219,
+    "DatePaid": "2022-11-17T00:00:00",
+    "Amount": 201000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 220,
+    "DatePaid": "2019-07-03T00:00:00",
+    "Amount": 132000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 221,
+    "DatePaid": "2022-06-19T00:00:00",
+    "Amount": 51000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 222,
+    "DatePaid": "2022-08-16T00:00:00",
+    "Amount": 43500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 223,
+    "DatePaid": "2019-12-28T00:00:00",
+    "Amount": 804650.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 224,
+    "DatePaid": "2021-07-01T00:00:00",
+    "Amount": 105875.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 225,
+    "DatePaid": "2021-11-06T00:00:00",
+    "Amount": 215600.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 226,
+    "DatePaid": "2020-02-18T00:00:00",
+    "Amount": 51000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 227,
+    "DatePaid": "2019-08-15T00:00:00",
+    "Amount": 885000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 228,
+    "DatePaid": "2020-06-09T00:00:00",
+    "Amount": 174625.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 229,
+    "DatePaid": "2020-01-30T00:00:00",
+    "Amount": 13000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 230,
+    "DatePaid": "2019-06-07T00:00:00",
+    "Amount": 77500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 231,
+    "DatePaid": "2022-12-01T00:00:00",
+    "Amount": 155250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 232,
+    "DatePaid": "2020-05-19T00:00:00",
+    "Amount": 180000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 233,
+    "DatePaid": "2022-02-23T00:00:00",
+    "Amount": 216000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 234,
+    "DatePaid": "2022-03-12T00:00:00",
+    "Amount": 171000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 235,
+    "DatePaid": "2019-12-17T00:00:00",
+    "Amount": 127500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 236,
+    "DatePaid": "2021-11-02T00:00:00",
+    "Amount": 131750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 237,
+    "DatePaid": "2019-08-26T00:00:00",
+    "Amount": 482375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 238,
+    "DatePaid": "2022-02-21T00:00:00",
+    "Amount": 23650.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 239,
+    "DatePaid": "2022-12-07T00:00:00",
+    "Amount": 150000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 240,
+    "DatePaid": "2023-07-01T00:00:00",
+    "Amount": 106500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 241,
+    "DatePaid": "2021-01-12T00:00:00",
+    "Amount": 247500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 242,
+    "DatePaid": "2020-11-15T00:00:00",
+    "Amount": 383460.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 243,
+    "DatePaid": "2023-05-13T00:00:00",
+    "Amount": 290500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 244,
+    "DatePaid": "2020-06-15T00:00:00",
+    "Amount": 22500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 245,
+    "DatePaid": "2022-10-27T00:00:00",
+    "Amount": 12000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 246,
+    "DatePaid": "2023-04-10T00:00:00",
+    "Amount": 156250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 247,
+    "DatePaid": "2022-08-05T00:00:00",
+    "Amount": 413000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 248,
+    "DatePaid": "2021-04-29T00:00:00",
+    "Amount": 186250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 249,
+    "DatePaid": "2019-02-22T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 250,
+    "DatePaid": "2022-10-27T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 251,
+    "DatePaid": "2020-02-28T00:00:00",
+    "Amount": 67025.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 252,
+    "DatePaid": "2022-06-29T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 253,
+    "DatePaid": "2022-04-24T00:00:00",
+    "Amount": 334750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 254,
+    "DatePaid": "2021-10-28T00:00:00",
+    "Amount": 59250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 255,
+    "DatePaid": "2019-03-14T00:00:00",
+    "Amount": 201500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 256,
+    "DatePaid": "2021-08-22T00:00:00",
+    "Amount": 20750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 257,
+    "DatePaid": "2020-12-17T00:00:00",
+    "Amount": 132000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 258,
+    "DatePaid": "2020-09-08T00:00:00",
+    "Amount": 73500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 259,
+    "DatePaid": "2023-04-14T00:00:00",
+    "Amount": 53475.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 260,
+    "DatePaid": "2021-02-06T00:00:00",
+    "Amount": 118000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 261,
+    "DatePaid": "2021-02-05T00:00:00",
+    "Amount": 131250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 262,
+    "DatePaid": "2022-05-06T00:00:00",
+    "Amount": 107500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 263,
+    "DatePaid": "2022-01-20T00:00:00",
+    "Amount": 51800.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 264,
+    "DatePaid": "2021-06-05T00:00:00",
+    "Amount": 52000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 265,
+    "DatePaid": "2022-12-15T00:00:00",
+    "Amount": 40000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 266,
+    "DatePaid": "2023-07-31T00:00:00",
+    "Amount": 35000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 267,
+    "DatePaid": "2022-01-22T00:00:00",
+    "Amount": 58000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 268,
+    "DatePaid": "2023-11-07T00:00:00",
+    "Amount": 198750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 269,
+    "DatePaid": "2023-10-01T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 270,
+    "DatePaid": "2019-03-20T00:00:00",
+    "Amount": 123200.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 271,
+    "DatePaid": "2019-09-27T00:00:00",
+    "Amount": 243675.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 272,
+    "DatePaid": "2023-05-28T00:00:00",
+    "Amount": 120375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 273,
+    "DatePaid": "2021-04-17T00:00:00",
+    "Amount": 34375.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 274,
+    "DatePaid": "2021-06-22T00:00:00",
+    "Amount": 17000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 275,
+    "DatePaid": "2021-07-13T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 276,
+    "DatePaid": "2021-08-09T00:00:00",
+    "Amount": 148125.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 277,
+    "DatePaid": "2023-10-28T00:00:00",
+    "Amount": 442800.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 278,
+    "DatePaid": "2023-10-19T00:00:00",
+    "Amount": 159750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 279,
+    "DatePaid": "2021-08-29T00:00:00",
+    "Amount": 141000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 280,
+    "DatePaid": "2020-01-20T00:00:00",
+    "Amount": 36000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 281,
+    "DatePaid": "2021-08-23T00:00:00",
+    "Amount": 60750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 282,
+    "DatePaid": "2022-01-24T00:00:00",
+    "Amount": 216000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 283,
+    "DatePaid": "2022-03-19T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 284,
+    "DatePaid": "2020-06-15T00:00:00",
+    "Amount": 57600.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 285,
+    "DatePaid": "2023-01-26T00:00:00",
+    "Amount": 135000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 286,
+    "DatePaid": "2021-11-26T00:00:00",
+    "Amount": 46250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 287,
+    "DatePaid": "2023-11-11T00:00:00",
+    "Amount": 342000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 288,
+    "DatePaid": "2022-07-21T00:00:00",
+    "Amount": 271250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 289,
+    "DatePaid": "2022-06-03T00:00:00",
+    "Amount": 57500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 290,
+    "DatePaid": "2019-06-05T00:00:00",
+    "Amount": 135750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 291,
+    "DatePaid": "2020-07-02T00:00:00",
+    "Amount": 106500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 292,
+    "DatePaid": "2023-06-05T00:00:00",
+    "Amount": 60000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 293,
+    "DatePaid": "2021-10-13T00:00:00",
+    "Amount": 74690.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 294,
+    "DatePaid": "2023-08-10T00:00:00",
+    "Amount": 40000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 295,
+    "DatePaid": "2019-05-06T00:00:00",
+    "Amount": 1371000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 296,
+    "DatePaid": "2020-06-17T00:00:00",
+    "Amount": 62000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 297,
+    "DatePaid": "2021-07-26T00:00:00",
+    "Amount": 198000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 298,
+    "DatePaid": "2019-05-12T00:00:00",
+    "Amount": 38500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 299,
+    "DatePaid": "2021-10-03T00:00:00",
+    "Amount": 167050.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 300,
+    "DatePaid": "2020-11-22T00:00:00",
+    "Amount": 21600.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 301,
+    "DatePaid": "2023-05-02T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 302,
+    "DatePaid": "2022-05-04T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 303,
+    "DatePaid": "2019-10-07T00:00:00",
+    "Amount": 94000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 304,
+    "DatePaid": "2020-06-12T00:00:00",
+    "Amount": 130500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 305,
+    "DatePaid": "2023-07-24T00:00:00",
+    "Amount": 177500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 306,
+    "DatePaid": "2022-10-17T00:00:00",
+    "Amount": 43875.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 307,
+    "DatePaid": "2021-12-01T00:00:00",
+    "Amount": 17500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 308,
+    "DatePaid": "2021-09-02T00:00:00",
+    "Amount": 42000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 309,
+    "DatePaid": "2023-03-04T00:00:00",
+    "Amount": 67500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 310,
+    "DatePaid": "2020-09-23T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 311,
+    "DatePaid": "2020-01-02T00:00:00",
+    "Amount": 65000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 312,
+    "DatePaid": "2022-01-16T00:00:00",
+    "Amount": 31500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 313,
+    "DatePaid": "2020-06-15T00:00:00",
+    "Amount": 28000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 314,
+    "DatePaid": "2020-10-30T00:00:00",
+    "Amount": 160000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 315,
+    "DatePaid": "2021-12-11T00:00:00",
+    "Amount": 234000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 316,
+    "DatePaid": "2023-02-06T00:00:00",
+    "Amount": 93625.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 317,
+    "DatePaid": "2022-07-16T00:00:00",
+    "Amount": 211750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 318,
+    "DatePaid": "2022-10-29T00:00:00",
+    "Amount": 211365.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 319,
+    "DatePaid": "2021-06-20T00:00:00",
+    "Amount": 97500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 320,
+    "DatePaid": "2019-03-24T00:00:00",
+    "Amount": 70000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 321,
+    "DatePaid": "2021-05-29T00:00:00",
+    "Amount": 281050.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 322,
+    "DatePaid": "2022-02-08T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 323,
+    "DatePaid": "2020-08-15T00:00:00",
+    "Amount": 177750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 324,
+    "DatePaid": "2023-09-18T00:00:00",
+    "Amount": 160125.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 325,
+    "DatePaid": "2022-02-15T00:00:00",
+    "Amount": 113575.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 326,
+    "DatePaid": "2022-11-22T00:00:00",
+    "Amount": 20000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 327,
+    "DatePaid": "2020-08-10T00:00:00",
+    "Amount": 88000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 328,
+    "DatePaid": "2020-05-16T00:00:00",
+    "Amount": 654500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 329,
+    "DatePaid": "2023-01-12T00:00:00",
+    "Amount": 68000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 330,
+    "DatePaid": "2020-09-11T00:00:00",
+    "Amount": 92750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 331,
+    "DatePaid": "2023-01-04T00:00:00",
+    "Amount": 93450.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 332,
+    "DatePaid": "2020-06-09T00:00:00",
+    "Amount": 121275.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 333,
+    "DatePaid": "2019-04-16T00:00:00",
+    "Amount": 442750.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 334,
+    "DatePaid": "2019-04-18T00:00:00",
+    "Amount": 4600.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 335,
+    "DatePaid": "2023-08-29T00:00:00",
+    "Amount": 38250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 336,
+    "DatePaid": "2021-03-10T00:00:00",
+    "Amount": 136250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 337,
+    "DatePaid": "2019-12-13T00:00:00",
+    "Amount": 22000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 338,
+    "DatePaid": "2021-10-02T00:00:00",
+    "Amount": 11750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 339,
+    "DatePaid": "2023-08-21T00:00:00",
+    "Amount": 205625.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 340,
+    "DatePaid": "2020-01-29T00:00:00",
+    "Amount": 330000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 341,
+    "DatePaid": "2021-10-05T00:00:00",
+    "Amount": 14375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 342,
+    "DatePaid": "2022-12-12T00:00:00",
+    "Amount": 73125.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 343,
+    "DatePaid": "2019-09-04T00:00:00",
+    "Amount": 327165.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 344,
+    "DatePaid": "2022-01-08T00:00:00",
+    "Amount": 53625.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 345,
+    "DatePaid": "2021-09-13T00:00:00",
+    "Amount": 90000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 346,
+    "DatePaid": "2020-09-22T00:00:00",
+    "Amount": 465000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 347,
+    "DatePaid": "2023-08-07T00:00:00",
+    "Amount": 163625.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 348,
+    "DatePaid": "2023-01-18T00:00:00",
+    "Amount": 56500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 349,
+    "DatePaid": "2023-06-10T00:00:00",
+    "Amount": 63980.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 350,
+    "DatePaid": "2022-09-20T00:00:00",
+    "Amount": 280000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 351,
+    "DatePaid": "2020-07-14T00:00:00",
+    "Amount": 294000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 352,
+    "DatePaid": "2022-01-03T00:00:00",
+    "Amount": 35500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 353,
+    "DatePaid": "2023-04-27T00:00:00",
+    "Amount": 194425.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 354,
+    "DatePaid": "2019-01-25T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 355,
+    "DatePaid": "2020-03-26T00:00:00",
+    "Amount": 653125.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 356,
+    "DatePaid": "2023-07-22T00:00:00",
+    "Amount": 15625.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 357,
+    "DatePaid": "2022-08-27T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 358,
+    "DatePaid": "2023-01-08T00:00:00",
+    "Amount": 216750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 359,
+    "DatePaid": "2019-01-10T00:00:00",
+    "Amount": 7300.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 360,
+    "DatePaid": "2023-03-13T00:00:00",
+    "Amount": 36250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 361,
+    "DatePaid": "2023-08-06T00:00:00",
+    "Amount": 74250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 362,
+    "DatePaid": "2022-08-03T00:00:00",
+    "Amount": 10500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 363,
+    "DatePaid": "2021-09-25T00:00:00",
+    "Amount": 93875.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 364,
+    "DatePaid": "2022-06-01T00:00:00",
+    "Amount": 717750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 365,
+    "DatePaid": "2023-01-11T00:00:00",
+    "Amount": 72150.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 366,
+    "DatePaid": "2021-05-03T00:00:00",
+    "Amount": 26000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 367,
+    "DatePaid": "2022-01-22T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 368,
+    "DatePaid": "2020-05-15T00:00:00",
+    "Amount": 384000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 369,
+    "DatePaid": "2020-12-25T00:00:00",
+    "Amount": 28750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 370,
+    "DatePaid": "2020-07-31T00:00:00",
+    "Amount": 112000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 371,
+    "DatePaid": "2023-05-12T00:00:00",
+    "Amount": 157625.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 372,
+    "DatePaid": "2020-12-30T00:00:00",
+    "Amount": 294000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 373,
+    "DatePaid": "2019-10-25T00:00:00",
+    "Amount": 106750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 374,
+    "DatePaid": "2020-02-12T00:00:00",
+    "Amount": 44700.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 375,
+    "DatePaid": "2022-09-14T00:00:00",
+    "Amount": 135000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 376,
+    "DatePaid": "2023-05-20T00:00:00",
+    "Amount": 202000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 377,
+    "DatePaid": "2021-06-08T00:00:00",
+    "Amount": 75000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 378,
+    "DatePaid": "2020-03-01T00:00:00",
+    "Amount": 66500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 379,
+    "DatePaid": "2023-05-01T00:00:00",
+    "Amount": 45000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 380,
+    "DatePaid": "2019-04-16T00:00:00",
+    "Amount": 57500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 381,
+    "DatePaid": "2022-11-16T00:00:00",
+    "Amount": 320250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 382,
+    "DatePaid": "2021-10-30T00:00:00",
+    "Amount": 31000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 383,
+    "DatePaid": "2019-02-08T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 384,
+    "DatePaid": "2019-06-27T00:00:00",
+    "Amount": 91250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 385,
+    "DatePaid": "2022-06-08T00:00:00",
+    "Amount": 195000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 386,
+    "DatePaid": "2021-05-20T00:00:00",
+    "Amount": 256875.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 387,
+    "DatePaid": "2022-06-18T00:00:00",
+    "Amount": 240000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 388,
+    "DatePaid": "2019-09-11T00:00:00",
+    "Amount": 81575.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 389,
+    "DatePaid": "2019-01-31T00:00:00",
+    "Amount": 11625.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 390,
+    "DatePaid": "2021-02-06T00:00:00",
+    "Amount": 18000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 391,
+    "DatePaid": "2022-06-25T00:00:00",
+    "Amount": 77000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 392,
+    "DatePaid": "2020-03-13T00:00:00",
+    "Amount": 15000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 393,
+    "DatePaid": "2023-09-30T00:00:00",
+    "Amount": 181250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 394,
+    "DatePaid": "2019-01-24T00:00:00",
+    "Amount": 468000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 395,
+    "DatePaid": "2019-09-26T00:00:00",
+    "Amount": 35875.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 396,
+    "DatePaid": "2021-11-07T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 397,
+    "DatePaid": "2020-06-22T00:00:00",
+    "Amount": 308000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 398,
+    "DatePaid": "2022-04-06T00:00:00",
+    "Amount": 277920.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 399,
+    "DatePaid": "2022-01-26T00:00:00",
+    "Amount": 41250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 400,
+    "DatePaid": "2021-05-27T00:00:00",
+    "Amount": 71750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 401,
+    "DatePaid": "2021-12-12T00:00:00",
+    "Amount": 140000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 402,
+    "DatePaid": "2019-03-18T00:00:00",
+    "Amount": 50000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 403,
+    "DatePaid": "2022-09-27T00:00:00",
+    "Amount": 123250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 404,
+    "DatePaid": "2020-09-15T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 405,
+    "DatePaid": "2021-01-10T00:00:00",
+    "Amount": 69750.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 406,
+    "DatePaid": "2021-05-08T00:00:00",
+    "Amount": 266500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 407,
+    "DatePaid": "2022-02-09T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 408,
+    "DatePaid": "2023-03-21T00:00:00",
+    "Amount": 485875.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 409,
+    "DatePaid": "2019-12-20T00:00:00",
+    "Amount": 276250.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 410,
+    "DatePaid": "2023-03-16T00:00:00",
+    "Amount": 307500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 411,
+    "DatePaid": "2023-03-21T00:00:00",
+    "Amount": 67500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 412,
+    "DatePaid": "2022-01-07T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 413,
+    "DatePaid": "2023-07-20T00:00:00",
+    "Amount": 30300.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 414,
+    "DatePaid": "2022-07-22T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 415,
+    "DatePaid": "2021-01-29T00:00:00",
+    "Amount": 196875.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 416,
+    "DatePaid": "2022-04-27T00:00:00",
+    "Amount": 174250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 417,
+    "DatePaid": "2022-04-27T00:00:00",
+    "Amount": 83125.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 418,
+    "DatePaid": "2021-07-31T00:00:00",
+    "Amount": 138750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 419,
+    "DatePaid": "2020-05-04T00:00:00",
+    "Amount": 93000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 420,
+    "DatePaid": "2019-09-06T00:00:00",
+    "Amount": 243000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 421,
+    "DatePaid": "2019-04-01T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 422,
+    "DatePaid": "2019-01-13T00:00:00",
+    "Amount": 25500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 423,
+    "DatePaid": "2020-02-12T00:00:00",
+    "Amount": 411950.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 424,
+    "DatePaid": "2019-05-16T00:00:00",
+    "Amount": 110500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 425,
+    "DatePaid": "2019-08-02T00:00:00",
+    "Amount": 35695.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 426,
+    "DatePaid": "2023-07-08T00:00:00",
+    "Amount": 279000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 427,
+    "DatePaid": "2021-03-11T00:00:00",
+    "Amount": 179375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 428,
+    "DatePaid": "2023-10-18T00:00:00",
+    "Amount": 608000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 429,
+    "DatePaid": "2019-12-28T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 430,
+    "DatePaid": "2023-01-17T00:00:00",
+    "Amount": 60000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 431,
+    "DatePaid": "2021-05-05T00:00:00",
+    "Amount": 61875.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 432,
+    "DatePaid": "2021-04-19T00:00:00",
+    "Amount": 30320.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 433,
+    "DatePaid": "2022-12-21T00:00:00",
+    "Amount": 87000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 434,
+    "DatePaid": "2020-05-13T00:00:00",
+    "Amount": 68625.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 435,
+    "DatePaid": "2022-11-19T00:00:00",
+    "Amount": 167700.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 436,
+    "DatePaid": "2019-07-27T00:00:00",
+    "Amount": 430625.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 437,
+    "DatePaid": "2019-05-14T00:00:00",
+    "Amount": 50000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 438,
+    "DatePaid": "2020-08-28T00:00:00",
+    "Amount": 255500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 439,
+    "DatePaid": "2019-02-14T00:00:00",
+    "Amount": 330300.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 440,
+    "DatePaid": "2023-03-11T00:00:00",
+    "Amount": 236500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 441,
+    "DatePaid": "2020-06-08T00:00:00",
+    "Amount": 137500.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 442,
+    "DatePaid": "2021-04-12T00:00:00",
+    "Amount": 8500.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 443,
+    "DatePaid": "2021-01-08T00:00:00",
+    "Amount": 89000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 444,
+    "DatePaid": "2020-01-07T00:00:00",
+    "Amount": 130000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 445,
+    "DatePaid": "2021-08-12T00:00:00",
+    "Amount": 19000.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 446,
+    "DatePaid": "2023-07-28T00:00:00",
+    "Amount": 82500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 447,
+    "DatePaid": "2019-01-12T00:00:00",
+    "Amount": 144375.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 448,
+    "DatePaid": "2020-11-23T00:00:00",
+    "Amount": 68750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 449,
+    "DatePaid": "2019-12-09T00:00:00",
+    "Amount": 437750.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 450,
+    "DatePaid": "2023-03-16T00:00:00",
+    "Amount": 246750.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 451,
+    "DatePaid": "2023-08-08T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 452,
+    "DatePaid": "2022-10-24T00:00:00",
+    "Amount": 0.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 453,
+    "DatePaid": "2019-08-20T00:00:00",
+    "Amount": 118625.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 454,
+    "DatePaid": "2020-11-01T00:00:00",
+    "Amount": 93000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 455,
+    "DatePaid": "2023-01-09T00:00:00",
+    "Amount": 462500.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 456,
+    "DatePaid": "2019-09-09T00:00:00",
+    "Amount": 550375.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 457,
+    "DatePaid": "2019-07-20T00:00:00",
+    "Amount": 284375.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 458,
+    "DatePaid": "2023-02-27T00:00:00",
+    "Amount": 191750.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 459,
+    "DatePaid": "2023-02-16T00:00:00",
+    "Amount": 3050.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 460,
+    "DatePaid": "2023-06-04T00:00:00",
+    "Amount": 102000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 461,
+    "DatePaid": "2023-07-01T00:00:00",
+    "Amount": 10500.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 462,
+    "DatePaid": "2022-09-16T00:00:00",
+    "Amount": 44000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 463,
+    "DatePaid": "2022-08-31T00:00:00",
+    "Amount": 131000.0,
+    "Approved": 1,
+    "Method": "Bank Transfer"
+  },
+  {
+    "Id": 464,
+    "DatePaid": "2021-04-07T00:00:00",
+    "Amount": 48000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 465,
+    "DatePaid": "2021-07-12T00:00:00",
+    "Amount": 170000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 466,
+    "DatePaid": "2023-05-24T00:00:00",
+    "Amount": 18000.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 467,
+    "DatePaid": "2022-07-16T00:00:00",
+    "Amount": 15250.0,
+    "Approved": 1,
+    "Method": "MobilePay"
+  },
+  {
+    "Id": 468,
+    "DatePaid": "2020-07-02T00:00:00",
+    "Amount": 112000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 469,
+    "DatePaid": "2023-09-17T00:00:00",
+    "Amount": 61250.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 470,
+    "DatePaid": "2020-04-21T00:00:00",
+    "Amount": 137375.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 471,
+    "DatePaid": "2021-06-09T00:00:00",
+    "Amount": 23700.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  },
+  {
+    "Id": 472,
+    "DatePaid": "2019-11-16T00:00:00",
+    "Amount": 59250.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 473,
+    "DatePaid": "2019-05-15T00:00:00",
+    "Amount": 279125.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 474,
+    "DatePaid": "2020-03-29T00:00:00",
+    "Amount": 158000.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 475,
+    "DatePaid": "2021-03-19T00:00:00",
+    "Amount": 60750.0,
+    "Approved": 1,
+    "Method": "PayPal"
+  },
+  {
+    "Id": 476,
+    "DatePaid": "2019-02-06T00:00:00",
+    "Amount": 43125.0,
+    "Approved": 1,
+    "Method": "Stripe"
+  }
+]

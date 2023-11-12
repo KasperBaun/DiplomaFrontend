@@ -1,0 +1,58 @@
+[
+  {
+    "Id": 1,
+    "Name": "Stel|Dinnerware",
+    "Order": 1,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_e642aedf542842e89fd20db88e797168~mv2.png/v1/fill/w_630,h_840,al_c,q_90,usm_0.66_1.00_0.01/c38ac4_e642aedf542842e89fd20db88e797168~mv2.webp",
+    "Description": "Spisestel & Kaffestel | Dinnerware & Coffee sets"
+  },
+  {
+    "Id": 2,
+    "Name": "Steldele|Dinnerware parts",
+    "Order": 2,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_e3642da27bd04b74ae23d53df8aa4994~mv2.jpeg/v1/fill/w_630,h_840,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_e3642da27bd04b74ae23d53df8aa4994~mv2.webp",
+    "Description": "Steldele | Dinnerware parts"
+  },
+  {
+    "Id": 3,
+    "Name": "Figurer|Figurines",
+    "Order": 3,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_34607dffac0344ffafe0bd238b8ba470~mv2.png/v1/fill/w_630,h_840,al_c,q_90,usm_0.66_1.00_0.01/c38ac4_34607dffac0344ffafe0bd238b8ba470~mv2.webp",
+    "Description": "Figurer & Skulpturer | Figurines & Sculptures"
+  },
+  {
+    "Id": 4,
+    "Name": "Keramik|Ceramics",
+    "Order": 4,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_9685fe1680ab4d798d7cfa5f5530a8a4~mv2.png/v1/fill/w_702,h_840,al_c,q_90,usm_0.66_1.00_0.01/c38ac4_9685fe1680ab4d798d7cfa5f5530a8a4~mv2.webp",
+    "Description": "Keramik og Stentøj | Ceramics and Stonework"
+  },
+  {
+    "Id": 5,
+    "Name": "Guld & Sølv|Gold & Silver",
+    "Order": 5,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_89e58a717b534e04b20a52cbde74291f~mv2.jpeg/v1/fill/w_630,h_840,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_89e58a717b534e04b20a52cbde74291f~mv2.webp",
+    "Description": "Guld, Sølvtøj, Guldsmykker og Sølvsmykker | Silverware and Silver trinkets"
+  },
+  {
+    "Id": 6,
+    "Name": "Bestik|Cutlery",
+    "Order": 6,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_c15193046be84d38a7b5adc14b93488e~mv2.jpeg/v1/fill/w_630,h_840,al_c,q_85,usm_0.66_1.00_0.01/c38ac4_c15193046be84d38a7b5adc14b93488e~mv2.webp",
+    "Description": "Bestik | Cutlery"
+  },
+  {
+    "Id": 7,
+    "Name": "Platter|Plaques",
+    "Order": 7,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_2b6cfee2a10e467d94bac733a0d1a0ff~mv2.png/v1/fill/w_630,h_840,al_c,q_90,usm_0.66_1.00_0.01/c38ac4_2b6cfee2a10e467d94bac733a0d1a0ff~mv2.webp",
+    "Description": "Platter | Plaques and Plates"
+  },
+  {
+    "Id": 8,
+    "Name": "Glas|Glass",
+    "Order": 8,
+    "ImageUrl": "https://static.wixstatic.com/media/c38ac4_b5fa5df134014aecbfa45e083e0757f7~mv2.png/v1/fill/w_624,h_840,al_c,q_90,usm_0.66_1.00_0.01/c38ac4_b5fa5df134014aecbfa45e083e0757f7~mv2.webp",
+    "Description": "Glas | Glass"
+  }
+]
