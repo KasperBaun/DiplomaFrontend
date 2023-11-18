@@ -55,43 +55,40 @@ export const Backoffice: React.FC = observer(() => {
     if (!rootStore.isBackofficeLoaded) {
         return <LoadingLion color={theme.palette.primary.main} />
     }
-    else {
 
-
-        return (
-            <Box sx={{ display: "flex" }}>
-                <Box
-                    component="nav"
-                    sx={{
-                        flexShrink: 0
-                    }}
-                >
-                    <Sidebar
-                        sidebarOpen={sidebarOpen}
-                        setNavKey={setActiveNavKey}
-                    />
-                </Box>
-                <Box
-                    component="main"
-                    sx={{
-                        flexGrow: 1,
-                        backgroundColor: ColorConfigs.mainBg
-                    }}
-                >
-                    <Stack>
-                        <Item>
-                            <Topbar
-                                sidebarOpen={sidebarOpen}
-                                setSidebarOpen={handleToggleSidebarOpenClicked}
-                                navigateTo={setActiveNavKey}
-                            />
-                        </Item>
-                        <Item>
-                            {navSwitch()}
-                        </Item>
-                    </Stack>
-                </Box>
-            </Box >
-        );
-    }
+    return (
+        <Box sx={{ display: "flex" }}>
+            <Box
+                component="nav"
+                sx={{
+                    flexShrink: 0
+                }}
+            >
+                <Sidebar
+                    sidebarOpen={sidebarOpen}
+                    setNavKey={setActiveNavKey}
+                />
+            </Box>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    backgroundColor: ColorConfigs.mainBg
+                }}
+            >
+                <Stack>
+                    <Item>
+                        <Topbar
+                            sidebarOpen={sidebarOpen}
+                            setSidebarOpen={handleToggleSidebarOpenClicked}
+                            navigateTo={setActiveNavKey}
+                        />
+                    </Item>
+                    <Item>
+                        {navSwitch()}
+                    </Item>
+                </Stack>
+            </Box>
+        </Box >
+    );
 });

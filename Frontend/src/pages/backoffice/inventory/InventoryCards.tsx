@@ -7,6 +7,7 @@ import { useContext } from "react";
 export const InventoryCards = observer(() => {
 
     const { backofficeStore, languageStore } = useContext(MobXContext);
+    return <></>;
 
     if (backofficeStore.categoryProducts) {
         return (

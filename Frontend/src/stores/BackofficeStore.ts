@@ -116,13 +116,13 @@ export class BackofficeStore {
             this._productMap = this.createProductMap(this._products);
         });
         const productItemDTOs: ProductItemDTO[] = await this.apiService.getProductItemDTOs();
-        const productItemDetails: ProductItemDetails[] = await this.apiService.getProductItemDetails();
-        const categoryProductViews: CategoryProductView[] = await this.apiService.getCategoryProducts();
+        // const productItemDetails: ProductItemDetails[] = await this.apiService.getProductItemDetails();
+        // const categoryProductViews: CategoryProductView[] = await this.apiService.getCategoryProducts();
         runInAction(() => {
             this._productItems = this.generateProductItems(productItemDTOs, this._productMap);
             this._productItemMap = this.createProductItemsMap(this.productItems);
-            this.productItemDetails = productItemDetails;
-            this.categoryProducts = categoryProductViews;
+            // this.productItemDetails = productItemDetails;
+            // this.categoryProducts = categoryProductViews;
 
         });
 

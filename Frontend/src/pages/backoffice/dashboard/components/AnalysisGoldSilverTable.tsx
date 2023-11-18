@@ -12,6 +12,8 @@ import { useContext } from "react";
 export const SilverAndGold = observer(() => {
     const { languageStore, backofficeStore } = useContext(MobXContext);
 
+    return <></>;
+
     if (backofficeStore.productItemDetails) {
         let totalWeightGuld = 0;
         let totalWeightSoelv = 0;
