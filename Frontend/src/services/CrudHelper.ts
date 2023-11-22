@@ -2,168 +2,88 @@ import { ComponentLoggingConfig } from "@utils/ComponentLoggingConfig";
 import { ICrudHelper } from "./ICrudHelper";
 
 export class CrudHelper implements ICrudHelper {
-
-    private prefix: string = `%c[CrudHelper]`;
+    private prefix: string = `[CrudHelper]`;
     private color: string = ComponentLoggingConfig.Lightkhaki;
-    private loggingEnabled: boolean = false;
+    private loggingEnabled: boolean;
     private headers: HeadersInit = {
-        'content-type': 'application/json',
-        'access-control-allow-origin': '*'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
     };
     private mode: RequestMode = 'cors';
 
-    constructor(_loggingEnabled: boolean) {
-        this.loggingEnabled = _loggingEnabled;
-        if (this.loggingEnabled) {
-            console.log(`${this.prefix} initialized!`, this.color);
+    constructor(loggingEnabled: boolean) {
+        this.loggingEnabled = loggingEnabled;
+        this.log(`initialized!`);
+    }
+
+    private getPastTense(method: string): string {
+        switch (method.toLowerCase()) {
+            case 'post': return 'created';
+            case 'get': return 'retrieved';
+            case 'put': return 'updated';
+            case 'delete': return 'deleted';
+            default: return method.toLowerCase();
         }
     }
-    async create<T>(apiUrl: string, objectName: string, object: T): Promise<T> {
-        const t1 = performance.now();
+
+    private log(message: string): void {
         if (this.loggingEnabled) {
-            console.log(`${this.prefix} attempting to create ${objectName}`, this.color);
-        }
-
-        try {
-            //console.log(`${this.prefix} apiUrl ${apiUrl}`, this.color);
-            const response = await fetch(`${apiUrl}`, {
-                method: 'POST',
-                body: JSON.stringify(object),
-                headers: this.headers,
-                mode: this.mode
-            });
-
-            console.log(`${this.prefix} response ${response}`, this.color);
-
-            if (response.ok) {
-                if (this.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully created ${objectName}`, t1, t2, this.color);
-                }
-                return response.json() as T;
-            } else {
-                console.log(`${this.prefix} failed creating ${objectName}. Status: ${response.status} ${response.statusText}`, this.color);
-                return null;
-            }
-        } catch (error) {
-            console.error("Error", error);
+            console.log(`%c${this.prefix} ${message}`, `color: ${this.color};`);
         }
     }
-    async update<T>(apiUrl: string, objectName: string, object: T): Promise<T> {
+
+    private async request<T>(apiUrl: string, method: string, objectName: string, body?: T): Promise<T> {
         const t1 = performance.now();
-        if (this.loggingEnabled) {
-            console.log(`${this.prefix} attempting to update ${objectName}`, this.color);
-        }
+        this.log(`attempting to ${method.toLowerCase()} ${objectName}`);
 
         try {
-            const response = await fetch(`${apiUrl}`, {
-                method: 'PUT',
-                body: JSON.stringify(object),
+            const response = await fetch(apiUrl, {
+                method,
+                body: body ? JSON.stringify(body) : undefined,
                 headers: this.headers,
                 mode: this.mode
             });
 
             if (response.ok) {
-                if (this.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully updated ${objectName}`, t1, t2, this.color);
-                }
-                return await response.json() as T;
-            } else {
-                console.log(`${this.prefix} failed updating ${objectName}. Status: ${response.status} ${response.statusText}`, this.color);
-                return null;
-            }
-        } catch (error) {
-            console.error("Error", error);
-        }
-    }
-    async delete(apiUrl: string, objectName: string): Promise<void> {
-        const t1 = performance.now();
-        if (this.loggingEnabled) console.log(`${this.prefix} attempting to delete ${objectName}`, this.color);
+                const t2 = performance.now();
+                const pastTenseMethod = this.getPastTense(method);
+                const message = `Status: (${response.status}) StatusMessage: (${response.statusText}) - successfully ${pastTenseMethod} ${objectName}`;
+                ComponentLoggingConfig.printPerformanceMessage(`%c${this.prefix} ${message}`, t1, t2, `color: ${this.color};`);
 
-        try {
-            const response = await fetch(`${apiUrl}`,
-                {
-                    method: 'DELETE',
-                    headers: this.headers,
-                    mode: this.mode
-
-                });
-            if (response.ok) {
-                if (this.loggingEnabled) {
-                    const t2 = performance.now();
-                    ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully deleted ${objectName}`, t1, t2, this.color);
+                // Check if the response has content to parse as JSON
+                const contentType = response.headers.get('Content-Type');
+                if (contentType && contentType.includes('application/json')) {
+                    return response.json();
+                } else {
+                    return method === 'DELETE' ? undefined : null;
                 }
-                return;
             } else {
-                console.log(`${this.prefix} failed deleting ${objectName} from API. Status: ${response.status} ${response.statusText}`, this.color);
+                this.log(`failed ${method.toLowerCase()}ing ${objectName}. Status: ${response.status} ${response.statusText}`);
                 return;
             }
         } catch (error) {
-            console.error(error);
+            throw new Error(`CrudHelper Error: ${error}`);
         }
     }
-    async readMultiple<T>(apiUrl: string, objectName: string): Promise<T[]> {
-        const t1 = performance.now();
-        if (this.loggingEnabled) console.log(`${this.prefix} fetching ${objectName}`, this.color);
 
-        try {
-            const response = await fetch(`${apiUrl}`,
-                {
-                    method: 'GET',
-                    headers: this.headers,
-                    mode: this.mode
-                });
-            if (response.ok || response.status === 200) {
-                try {
-                    const data = await response.json();
-                    if (this.loggingEnabled) {
-                        const t2 = performance.now();
-                        ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully fetched ${objectName}`, t1, t2, this.color);
-                    }
-                    return data as T[];
-                } catch (err) {
-                    console.error('error', err);
-                    return [];
-                }
-            } else {
-                console.log(`${this.prefix} failed fetching ${objectName} from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return [];
-            }
-        } catch (error) {
-            console.error(error);
-        }
+
+    create<T>(apiUrl: string, objectName: string, object: T): Promise<T> {
+        return this.request(apiUrl, 'POST', objectName, object);
     }
-    async readSingle<T>(apiUrl: string, objectName: string): Promise<T> {
-        const t1 = performance.now();
-        if (this.loggingEnabled) console.log(`${this.prefix} fetching ${objectName}`, this.color);
 
-        try {
-            const response = await fetch(`${apiUrl}`,
-                {
-                    method: 'GET',
-                    headers: this.headers,
-                    mode: this.mode
+    update<T>(apiUrl: string, objectName: string, object: T): Promise<T> {
+        return this.request(apiUrl, 'PUT', objectName, object);
+    }
 
-                });
-            if (response.ok) {
-                try {
-                    const data = await response.json();
-                    if (this.loggingEnabled) {
-                        const t2 = performance.now();
-                        ComponentLoggingConfig.printPerformanceMessage(`${this.prefix} Status: (${response.status}) Statusmessage: (${response.statusText}) - successfully fetched ${objectName}`, t1, t2, this.color);
-                    }
-                    return data as T;
-                } catch (err) {
-                    console.error('error', err);
-                    return null;
-                }
-            } else {
-                console.error(`${this.prefix} failed fetching ${objectName} from API. Status: ${response.status} ${response.statusText}`, this.color);
-                return null;
-            }
-        } catch (error) {
-            console.error(error);
-        }
+    delete(apiUrl: string, objectName: string): Promise<void> {
+        return this.request(apiUrl, 'DELETE', objectName);
+    }
+
+    readMultiple<T>(apiUrl: string, objectName: string): Promise<T[]> {
+        return this.request(apiUrl, 'GET', objectName);
+    }
+
+    readSingle<T>(apiUrl: string, objectName: string): Promise<T> {
+        return this.request(apiUrl, 'GET', objectName);
     }
 }
