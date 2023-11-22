@@ -27,16 +27,19 @@ export const ProductsTable: React.FC<ProductsTableProps> = observer(({ products 
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {products.map((product) => (
-                            <TableRow key={product.id}>
-                                <TableCell>{product.name}</TableCell>
-                                <TableCell>{product.modelNumber}</TableCell>
-                                <TableCell>{product.manufacturer}</TableCell>
-                                <TableCell>{product.material ? languageStore.currentLanguage.getMaterialType(product.material) : ''}</TableCell>
-                                <TableCell>{product.design}</TableCell>
-                                <TableCell>{product.dimension}</TableCell>
-                            </TableRow>
-                        ))}
+                        {products.map((product) => {
+                            console.log("ProductsTable.tsx product.id: ", product.id);
+                            return (
+                                <TableRow key={product.id}>
+                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.modelNumber}</TableCell>
+                                    <TableCell>{product.manufacturer}</TableCell>
+                                    <TableCell>{product.material ? languageStore.currentLanguage.getMaterialType(product.material) : ''}</TableCell>
+                                    <TableCell>{product.design}</TableCell>
+                                    <TableCell>{product.dimension}</TableCell>
+                                </TableRow>
+                            )
+                        })}
                     </TableBody>
                 </Table>
             </TableContainer>

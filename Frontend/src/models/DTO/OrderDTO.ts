@@ -8,5 +8,5 @@ export class OrderDTO {
     totalPrice: number;
     active: Boolean;
     createdDate: Date;
-    productItemIds: number[];
+    orderElementIDs: number[];
 }

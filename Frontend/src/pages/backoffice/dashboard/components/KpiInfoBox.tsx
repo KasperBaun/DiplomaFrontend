@@ -37,7 +37,7 @@ export const KpiInfoBox: React.FC<KpiInfoBoxProps> = observer(({ year }: KpiInfo
             inventorySoldCount += 1;
             const soldDate = productItem.soldDate;
             const createdDate = productItem.createdDate;
-            const daysBetween = (soldDate.getTime() - createdDate.getTime()) / (1000 * 3600 * 24);
+            const daysBetween = (soldDate?.getTime() ?? 0 - createdDate.getTime()) / (1000 * 3600 * 24);
             inventoryTurnoverRate += daysBetween;
         }
     }

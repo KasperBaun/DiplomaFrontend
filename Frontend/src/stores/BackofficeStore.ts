@@ -187,8 +187,8 @@ export class BackofficeStore {
             order.active = orderDTO.active;
             order.productItems = [];
             order.createdDate = new Date(orderDTO.createdDate);
-            for (let productItemId of orderDTO.productItemIds) {
-                const productItem = productItems.find(oe => oe.id === productItemId);
+            for (let orderElementID of orderDTO.orderElementIDs) {
+                const productItem = productItems.find(oe => oe.id === orderElementID);
                 if (productItem) {
                     order.productItems.push(productItem);
                 }
@@ -369,8 +369,8 @@ export class BackofficeStore {
         const productItems: ProductItem[] = [];
         for (const productItemDTO of productItemDTOs) {
 
-            const poImages: Image[] = this._images.filter(img => img.productItemId === productItemDTO.id);
-            const poPriceHistory: PriceHistory[] = this._pricehistories.filter(ph => ph.productItemId === productItemDTO.id);
+            const poImages: Image[] = this._images?.filter(img => img.productItemId === productItemDTO.id);
+            const poPriceHistory: PriceHistory[] = this._pricehistories?.filter(ph => ph.productItemId === productItemDTO.id);
             const createdDate = productItemDTO.createdDate ? new Date(productItemDTO.createdDate) : undefined;
             const soldDate = productItemDTO.soldDate ? new Date(productItemDTO.soldDate) : undefined;
 

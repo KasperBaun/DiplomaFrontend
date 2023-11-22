@@ -37,7 +37,7 @@ export class APIService implements IAPIService {
         }
     }
     async getDiscountCodes(): Promise<DiscountCode[]> {
-        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/Payment/DiscountCodes`, "DiscountCodes");
+        return await this.crudHelper.readMultiple(`${this.apiBaseUrl}/DiscountCode`, "DiscountCodes");
     }
 
     /* Backoffice */

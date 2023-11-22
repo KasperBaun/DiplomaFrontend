@@ -7,9 +7,7 @@ function App() {
   const rootStore = new RootStore();
   return (
     <MobXContext.Provider value={rootStore} key={"RootStore"}>
-      <React.StrictMode>
-        <Routing />
-      </React.StrictMode>
+      <Routing />
     </MobXContext.Provider>
   );
 }
